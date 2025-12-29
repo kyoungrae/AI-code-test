@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.auth.authuser.AuthUserMapper">
+    <select id="SELECT_USER_INFO" resultType="com.system.auth.authuser.AuthUser">
+        SELECT
+           id, email, password, role, user_id, office_code, system_create_userid, system_create_date, system_update_date, system_update_userid, user_name, tel, address, address_detail, postal_code, uuid
+        FROM COMMON_USER
+        where email = #{email}
+    </select>
+    <select id="SELECT_NEXT_TOKEN_ID" resultType="int">
+        SELECT nextval('TOKEN_SEQ')
+    </select>
+    <insert id="INSERT_USER_INFO" parameterType="com.system.auth.authuser.AuthUser">
+        INSERT INTO COMMON_USER (
+            id,
+            password,
+            email,
+            system_create_date,
+        <trim prefixOverrides=",">
+            <if test="user_name != null">, user_name</if>
+            <if test="tel != null">, tel</if>
+            <if test="address != null">, address</if>
+            <if test="address_detail != null">, address_detail</if>
+            <if test="postal_code != null">, postal_code</if>
+            <if test="uuid != null">, uuid</if>
+            <if test="role != null">, role</if>
+            <if test="office_code != null">, office_code</if>
+            <if test="system_create_userid != null">, system_create_userid</if>
+        </trim>
+        ) VALUES (
+            #{id},
+            #{password},
+            #{email},
+            NOW(),
+        <trim prefixOverrides=",">
+            <if test="user_name != null">, #{user_name}</if>
+            <if test="tel != null">, #{tel}</if>
+            <if test="address != null">, #{address}</if>
+            <if test="address_detail != null">, #{address_detail}</if>
+            <if test="postal_code != null">, #{postal_code}</if>
+            <if test="uuid != null">, #{uuid}</if>
+            <if test="role != null">, #{role}</if>
+            <if test="office_code != null">, #{office_code}</if>
+            <if test="system_create_userid != null">, #{system_create_userid}</if>
+        </trim>
+        )
+    </insert>
+</mapper>

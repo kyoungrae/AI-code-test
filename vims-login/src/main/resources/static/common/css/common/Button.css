@@ -1,0 +1,21 @@
+*{
+    --btn-width : 70px;
+    --btn-height : 30px;
+    --btn-border-radius : 10px;
+    --btn-background-color-white : #ffffff;
+}
+button[data-file-upload-btn]{
+    width: 30px;
+    height: var(--btn-height);
+    border:1px solid #eaeaea;
+    cursor: pointer;
+    border-radius : var(--btn-border-radius);
+    background-image: url("../../img/file_upload.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+button[data-file-upload-btn]:hover{
+}
+input[data-file-upload-uuid]{
+    display: none;
+}

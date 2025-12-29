@@ -1,0 +1,867 @@
+<article class="gi-article-content gi-col-98 gi-row-100">
+    <section class="gi-col-100 gi-row-100">
+        <header class="gi-flex gi-flex-center gi-col-10">
+            <h1 class="gi-page-title">공통코드 설정</h1>
+        </header>
+        <article class=" gi-col-90 gi-row-100">
+            <!--      그리드 영역      -->
+            <div class="gi-row-100 gi-col-90 gi-flex">
+                <div class="gi-row-50 gi-col-90">
+                    <!--      검색기능 영역      -->
+                    <div class="gi-row-100 gi-col-35px  gi-flex">
+                        <div id="search-area" class="gi-col-100 gi-padding-left-right-20px gi-flex">
+                            <div class="gi-row-100 gi-flex gi-flex-space-around">
+                                <!--      검색설정 영역      -->
+                                <div class="gi-row-60 gi-flex gi-grid-gap-10px">
+                                    <div class="gi-row-35 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center" data-focus-line="false">
+                                        <label for="searchDesc1" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false" >그룹아이디</label>
+                                        <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchDesc1" name="searchDesc1" data-focus-input-text-align="center" autocomplete="off"/>
+                                    </div>
+                                    <div class="gi-row-35 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center" data-focus-line="false">
+                                        <label for="searchDesc1-1" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false" >그룹명</label>
+                                        <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchDesc1-1" name="searchDesc1-1" data-focus-input-text-align="center" autocomplete="off"/>
+                                    </div>
+                                    <div class="gi-row-30 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center" data-focus-line="false">
+                                        <label for="searchDesc1-2" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false" >사용여부</label>
+                                        <input gi-selectbox data-selectbox-field="USE_YN" class="gi-input gi-margin-1px" data-required="false" type="text" id="searchDesc1-2" name="searchDesc1-2" data-focus-input-text-align="center" autocomplete="off"/>
+                                    </div>
+                                </div>
+                                <!--/     검색설정 영역      -->
+                                <!--     조회 버튼 영역      -->
+
+                                <div class="gi-row-25 gi-col-100 ">
+                                    <div class="gi-btn-section gi-col-100 gi-margin-left-2">
+                                        <!--                            <button id="more-btn" class="gi-btn-more  gi-input-container-box-shadow" type="button"><i class="fa-solid fa-gear gi-row-30px"></i>더보기</button>-->
+                                        <button id="reset-btn" class="gi-btn-reset  gi-input-container-box-shadow" type="button"><i class="fa-solid fa-rotate-right gi-row-30px"></i>초기화</button>
+                                    </div>
+                                </div>
+                                <div class="gi-row-15 gi-col-100 ">
+                                    <div class="gi-btn-section gi-row-40 gi-col-100  ">
+                                        <button id="search-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow" type="button">조회</button>
+                                    </div>
+                                </div>
+                                <!--/     조회 버튼 영역      -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--/     검색기능 영역      -->
+                    <div id="gi-Grid"></div>
+                    <div id="register-area1" class="gi-col-25px gi-padding-left-right-20px gi-flex">
+                        <div class="gi-row-100 gi-flex gi-flex-space-around">
+                            <div class="gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
+                                <div class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
+                                    <button id="register-btn1" class="gi-btn" type="button" gi-popup-open-id="gi-group_code_register-popup">그룹코드 추가</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gi-row-50 gi-col-90">
+                    <!--      검색기능 영역      -->
+                    <div class="gi-row-100 gi-col-35px  gi-flex">
+                        <div id="search-area2" class="gi-col-100 gi-row-100 gi-flex gi-margin-left-2">
+                            <div class="gi-row-100 gi-flex gi-flex-space-around">
+                            <!--      검색설정 영역      -->
+                                <div class="gi-row-30 gi-col-100 gi-input-container gi-input-container-box-shadow  " data-focus-line="false">
+                                    <label for="searchDesc2" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false" >사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" class="gi-input  gi-margin-1px" data-required="false" type="text" id="searchDesc2" name="searchDesc2" data-focus-input-text-align="center" autocomplete="off"/>
+                                </div>
+                                <!--/     검색설정 영역      -->
+                                <!--     조회 버튼 영역      -->
+                                <div class="gi-row-55 gi-col-100">
+                                    <div class="gi-btn-section gi-col-100 gi-margin-left-2">
+                                        <button id="reset-btn2" class="gi-btn-reset  gi-input-container-box-shadow" type="button"><i class="fa-solid fa-rotate-right gi-row-30px"></i>초기화</button>
+                                    </div>
+                                </div>
+                                <div class="gi-row-15 gi-col-100">
+                                    <div class="gi-btn-section  gi-col-100">
+                                        <button id="search-btn2" class="gi-btn-search gi-row-40px gi-input-container-box-shadow" type="button">조회</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/     조회 버튼 영역      -->
+                        </div>
+                    </div>
+                    <!--/     검색기능 영역      -->
+                    <div id="gi-Grid2" class="gi-Grid"></div>
+                    <div id="register-area2" class="gi-hidden gi-col-25px gi-padding-left-right-20px gi-flex">
+                        <div class="gi-row-100 gi-flex gi-flex-space-around">
+                            <div class="gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
+                                <div class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
+                                    <button id="register-btn2" class="gi-btn" type="button" gi-popup-open-id="gi-code_register-popup">코드 추가</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+<!-- common_group_code 팝업 영역-->
+<article id="gi-group_code_register-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body">
+        <div class="gi-popup-header">
+            <span>공통 그룹코드 등록</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="commonGroupCodeRegister" class="gi-row-100">
+                    <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹아이디</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_id1" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    <input data-field="group_id" id="group_id1" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹명</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_name1" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹명</label>
+                                    <input data-field="group_name" id="group_name1" name="group_name" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>사용여부</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="use_yn1" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn1" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="commonGroUpCodeRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
+                <button class="gi-popup-close-btn" type="button">닫기</button>
+            </div>
+        </div>
+    </div>
+</article>
+<article id="gi-group_code_update-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body">
+        <div class="gi-popup-header">
+            <span>공통 그룹코드 수정</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="commonGroupCodeUpdate" class="gi-row-100">
+                    <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹아이디</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_group_id1" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    <input data-gi-tag-disabled data-field="group_id" id="update_group_id1" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹명</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_group_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹명</label>
+                                    <input data-gi-tag-disabled data-field="group_name" id="update_group_name" name="group_name" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>사용여부</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_group_use_yn" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="update_group_use_yn" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="commonCodeGroupUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
+                <button class="gi-popup-close-btn" type="button">닫기</button>
+            </div>
+        </div>
+    </div>
+</article>
+<!--/ common_group_code 팝업 영역-->
+<!-- common_code 팝업 영역-->
+<article id="gi-code_register-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body">
+        <div class="gi-popup-header">
+            <span>공통코드 등록</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="commonCodeRegister" class="gi-row-100">
+                    <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹아이디</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_id2" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    <input data-gi-tag-disabled data-field="group_id" id="group_id2" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>코드아이디</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="code_id" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">코드아이디</label>
+                                    <input data-field="code_id" id="code_id" name="code_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>코드명</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="code_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">코드명</label>
+                                    <input data-field="code_name" id="code_name" name="code_name" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>사용여부</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="use_yn2" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn2" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="commonCodeRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
+                <button class="gi-popup-close-btn" type="button">닫기</button>
+            </div>
+        </div>
+    </div>
+</article>
+<article id="gi-code_update-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body">
+        <div class="gi-popup-header">
+            <span>공통코드 수정</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="commonCodeUpdate" class="gi-row-100">
+                    <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹아이디</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_group_id" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    <input data-gi-tag-disabled data-field="group_id" id="update_group_id" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>코드아이디</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_code_id" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">코드아이디</label>
+                                    <input data-gi-tag-disabled data-field="code_id" id="update_code_id" name="code_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>순서</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_code_number" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">순서</label>
+                                    <input data-field="code_number" id="update_code_number" name="code_number" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>코드명</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_code_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">코드명</label>
+                                    <input data-field="code_name" id="update_code_name" name="code_name" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>사용여부</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_use_yn" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="update_use_yn" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="commonCodeUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
+                <button class="gi-popup-close-btn" type="button">닫기</button>
+            </div>
+        </div>
+    </div>
+</article>
+<!--/ common_code 팝업 영역-->
+<script type="text/javascript">
+    var PRGMID = "commonCodeGroupList";	//page id
+    var COMMON_CODE_GROUP_PRGMID ="commonGroupCodeRegister" ;
+    var COMMON_CODE_PRGMID ="commonCodeRegister" ;
+    var COMMON_CODE_UPDATE_PRGMID ="commonCodeUpdate" ;
+    var COMMON_CODE_GROUP_UPDATE_PRGMID ="commonGroupCodeUpdate" ;
+    var data_binding = new dataBinding();
+    var common_popup = new popup();
+    var global_group_id = "";
+    init();
+    function init(){
+        //페이지 초기설정
+        new PageInit();
+
+        //초기화
+        resetEvent();
+        //데이터 조회
+        findByCommonCodeGroupList();
+        findByCommonCodeList();
+        setTimeout(function(){
+            //클릭 이벤트
+            clickEvent();
+        },500);
+    }
+
+    function resetEvent(){
+        //검색영역 값 초기화
+        $("#search-area input").val("");
+        $("#search-area select").val("");
+        $("#register-area2").addClass("gi-hidden");
+        commonTag.inputTagReset($(".gi-input"));
+    }
+
+    function resetEvent2(){
+        //검색영역2 값 초기화
+        $("#search-area2 input").val("");
+        $("#search-area2 select").val("");
+        $("#commonCodeRegister input").val("");
+        $("#register-area2").addClass("gi-hidden");
+
+        commonTag.inputTagReset($(".gi-input"));
+    }
+
+    //클릭 이벤트
+    function clickEvent(){
+        // 초기화버튼 클릭 이벤트
+        $("#reset-btn").click(function(){
+            resetEvent();
+            findByCommonCodeGroupList();
+        });
+        //조회버튼 클릭 이벤트
+        $("#search-btn").click(function(){
+            findByCommonCodeGroupList();
+        });
+
+        //공통 그룹코드 등록버튼 클릭 이벤트
+        $("#commonGroUpCodeRegister-btn").click(function(){
+            commonCodeGroupRegister();
+        })
+        //공통 코드 등록버튼 클릭 이벤트
+        $("#commonCodeRegister-btn").click(function(){
+            commonCodeRegister();
+        })
+        //공통 코드 수정버튼 클릭 이벤트
+        $("#commonCodeUpdate-btn").click(function(){
+            commonCodeUpdate();
+        })
+        //공통 그룹코드 수정버튼 클릭 이벤트
+        $("#commonCodeGroupUpdate-btn").click(function(){
+            commonCodeGroupUpdate();
+        })
+    }
+    function findByCommonCodeGroupList(page,range,sortId,sortOrder) {
+        //default page
+        if(!formUtil.checkEmptyValue(page)) page = 1;
+        //default range(row)
+        if(!formUtil.checkEmptyValue(range)) range = 10;
+
+        let url = "/cms/common/commonCodeGroup/findPage";
+        let param = {
+            page_no:page,
+            row_range : range
+        };
+        // 검색조건 설정 (추가해서 사용)
+        let cont1 = $("#searchDesc1").val();
+        let cont2 = $("#from_date").val();
+        let cont3 = $("#to_date").val();
+        let cont4 = $("#searchDesc1-1").val();
+        let cont5 = $("#searchDesc1-2").val();
+        if(formUtil.checkEmptyValue(cont1)) param._group_id = cont1;
+        if(formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+        if(formUtil.checkEmptyValue(cont3)) param.to_date   = cont3;
+        if(formUtil.checkEmptyValue(cont4)) param._group_name   = cont4;
+        if(formUtil.checkEmptyValue(cont5)) param.use_yn   = cont5;
+
+        // 정렬조건추가 (기준id, 순서)
+        if(formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+        if(formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+
+                // 그리드 헤더 설정
+                let commonCodeGroup_menuGrid_header = {
+                    title : "공통코드그룹 목록",
+                    list:[
+                        {HEADER:"No",  ID:"no",   WIDTH:"10",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"그룹아이디",  ID:"group_id",  WIDTH:"45",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
+                        {HEADER:"그룹명",  ID:"group_name",  WIDTH:"30",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
+                        {HEADER:"생성일",  ID:"system_create_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:true},
+                        {HEADER:"생성자ID",  ID:"system_create_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:true},
+                        {HEADER:"수정일",  ID:"system_update_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:true},
+                        {HEADER:"수정자ID",  ID:"system_update_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:true},
+                        {HEADER:"사용여부",  ID:"use_yn",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",COMMON_CODE_GROUP_ID:"USE_YN",HIDDEN:false},
+                        {HEADER:"수정",  ID:"update_group_code_btn",  WIDTH:"15",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"삭제",  ID:"delete_group_code_btn",  WIDTH:"15",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false}
+                    ]
+                }
+                //그리드 생성 <div id="gi-Grid"></div>
+                let commonCodeGroup_menu_grid =  formUtil.giGrid(commonCodeGroup_menuGrid_header,paging,page,"gi-Grid");
+
+                //그리드 데이터 설정
+                commonCodeGroup_menu_grid.DataSet(data);
+
+                //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+                commonCodeGroup_menu_grid.pagingSet(findByCommonCodeGroupList);
+
+                //그리드 내부의 수정 버튼 클릭 이벤트 설정
+                commonCodeGroup_menu_grid.updateBtnClick(commonCodeGroupUpdateSetting,"update_group_code_btn");
+
+                //그리드 내부의 삭제 버튼 클릭 이벤트 설정
+                commonCodeGroup_menu_grid.deleteBtnClick(commonCodeGroupDelete,"delete_group_code_btn");
+
+                //그리드 row 선택 이벤트 설정
+                commonCodeGroup_menu_grid.rowClick(rowClickEvent);
+                function rowClickEvent(rows){
+                    global_group_id = rows.group_id;
+                    $("#register-area2").removeClass("gi-hidden");
+                    data_binding.setDataForm("gi-code_register-popup",rows);
+                    // common_popup.popupSetData("gi-code_register-popup",rows);
+                    findByCommonCodeList('','','','',rows.group_id);
+                }
+            } else {
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error);
+        })
+    }
+    async function commonCodeGroupDelete(deleteParamDataList){
+        let url = "/cms/common/commonCodeGroup/remove";
+        let data = deleteParamDataList;
+        // console.log(data);
+        let param ={
+            group_id : data.group_id,
+            group_name : data.group_name
+        }
+        if(await commonCodeGroupDeleteCheckValidation(param)){
+            axios.post(url, param).then(response =>{
+                let status = response.status;
+                if(status === 200){
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+                    findByCommonCodeGroupList();
+                }else{
+                    formUtil.alertPopup("response status is :" + status);
+                }
+            }).catch(error => {
+                formUtil.alertPopup(error +"");
+            })
+        }else{
+            formUtil.alertPopup(Message.Label.Array["COMMON_CODE_GROUP.CHECK.COMMON_CODE_EXIT"]);
+        }
+    }
+    function commonCodeDelete(deleteParamDataList){
+        let url = "/cms/common/commonCode/remove";
+        let data = deleteParamDataList;
+        let flag = false;
+        // console.log(data);
+        let param ={
+            group_id : data.group_id,
+            code_id : data.code_id
+        }
+        axios.post(url, param).then(response =>{
+            let status = response.status;
+            if(status === 200){
+                formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+                findByCommonCodeList("","","","",data.group_id);
+            }else{
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error +"");
+        })
+    }
+
+    function findByCommonCodeList(page,range,sortId,sortOrder,groupId) {
+        //default page
+        if(!formUtil.checkEmptyValue(page)) page = 1;
+        //default range(row)
+        if(!formUtil.checkEmptyValue(range)) range = 10;
+
+        let url = "/cms/common/commonCode/findPage";
+        let param = {
+            page_no:page,
+            row_range : range
+        };
+        // 검색조건 설정 (추가해서 사용)
+        let cont1 = $("#searchDesc1").val();
+        let cont2 = $("#from_date").val();
+        let cont3 = $("#to_date").val();
+        let cont4 = global_group_id;
+        let cont5 = $("#searchDesc2").val();
+        if(formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+        if(formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+        if(formUtil.checkEmptyValue(cont3)) param.to_date   = cont3;
+        if(formUtil.checkEmptyValue(cont4)) param.group_id   = cont4;
+        if(formUtil.checkEmptyValue(cont5)) param.use_yn   = cont5;
+
+        // 정렬조건추가 (기준id, 순서)
+        if(formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+        if(formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+
+                // 그리드 헤더 설정
+                let commonCode_menuGrid_header = {
+                    title : "공통코드 목록",
+                    list:[
+                        {HEADER:"No",  ID:"no",   WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"순서",  ID:"code_number",  WIDTH:"10",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"코드ID",  ID:"code_id",  WIDTH:"10",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"그룹ID",  ID:"group_id",  WIDTH:"25",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"그룹명",  ID:"code_name",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"사용여부",  ID:"use_yn",  WIDTH:"10",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",COMMON_CODE_GROUP_ID:"USE_YN",HIDDEN:false},
+                        {HEADER:"수정",  ID:"update_code_btn",  WIDTH:"10",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"삭제",  ID:"delete_code_btn",  WIDTH:"10",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+
+                        {HEADER:"생성일",  ID:"system_create_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"생성자ID",  ID:"system_create_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"수정일",  ID:"system_update_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"수정자ID",  ID:"system_update_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"상세",  ID:"detail_btn",  WIDTH:"15",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true}
+                    ]
+                }
+                //그리드 생성 <div id="gi-Grid"></div>
+                let commonCode_menu_grid = formUtil.giGrid(commonCode_menuGrid_header,paging,page,"gi-Grid2");
+
+
+                if(!formUtil.checkEmptyValue(global_group_id)){
+                    commonCode_menu_grid.DataSet();
+                }else{
+                    //그리드 데이터 설정
+                    commonCode_menu_grid.DataSet(data);
+                }
+
+                //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+                commonCode_menu_grid.pagingSet(findByCommonCodeList);
+
+                //그리드 내부의 삭제 버튼 클릭 이벤트 설정
+                commonCode_menu_grid.deleteBtnClick(commonCodeDelete,"delete_code_btn");
+
+                //그리드 내부의 수정 버튼 클릭 이벤트 설정
+                commonCode_menu_grid.updateBtnClick(commonCodeUpdateSetting,"update_code_btn");
+
+                $("#search-btn2").off().on("click",function(){
+                    findByCommonCodeList("","","","",groupId);
+                });
+                $("#reset-btn2").off().on("click",function(){
+                    resetEvent2();
+                    findByCommonCodeList();
+                });
+            } else {
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error);
+        })
+    }
+    async function findByCommonCodeLength(cont){
+        let url = "common/common/commonCode/find";
+        let param ={
+            group_id : cont.group_id
+        };
+        let dataLength;
+        return new Promise(resolve => {
+            axios.post(url, param).then(response =>{
+                let data = response.data;
+                dataLength = data.length;
+                resolve(dataLength);
+            }).catch(error =>{
+                formUtil.alertPopup(error +"");
+            })
+        })
+    }
+    function commonCodeGroupUpdateSetting(cont){
+        $("#gi-group_code_update-popup").attr("data-popup-open","true");
+        $("#gi-group_code_update-popup #update_group_id1").val(cont.group_id);
+        $("#gi-group_code_update-popup #update_group_name").val(cont.group_name);
+        data_binding.setDataSelectBox("update_group_use_yn",cont.use_yn);
+    }
+    function commonCodeUpdateSetting(cont){
+        $("#gi-code_update-popup").attr("data-popup-open","true");
+        $("#gi-code_update-popup #update_group_id").val(cont.group_id);
+        $("#gi-code_update-popup #update_code_id").val(cont.code_id);
+        $("#gi-code_update-popup #update_code_name").val(cont.code_name);
+        $("#gi-code_update-popup #update_code_number").val(cont.code_number);
+
+        data_binding.setDataSelectBox("update_use_yn",cont.use_yn);
+    }
+
+    function commonCodeGroupRegister(){
+        let flag =  commonCodeGroupCheckValidation();
+        if(flag){
+            let data = new dataBinding().getData(COMMON_CODE_GROUP_PRGMID);
+            let url = "/cms/common/commonCodeGroup/register";
+            // console.log(data);
+            let param = {
+
+                group_id : data.group_id ,
+                group_name : data.group_name ,
+                use_yn : data.use_yn
+            };
+            axios.post(url,param).then(response =>{
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    common_popup.close("gi-group_code_register-popup");
+                    findByCommonCodeGroupList();
+                } else {
+                    resetEvent();
+                    formUtil.alertPopup("response status is :" + status);
+                }
+            }).catch(error => {
+                resetEvent();
+                formUtil.alertPopup(error);
+            })
+        }
+    }
+    function commonCodeRegister(){
+        let flag =  commonCodeCheckValidation();
+        if(flag){
+            let data = new dataBinding().getData(COMMON_CODE_PRGMID);
+            let url = "/cms/common/commonCode/register";
+            // console.log(data);
+            let param = {
+
+                group_id : data.group_id ,
+                code_id : data.code_id,
+                code_name : data.code_name ,
+                use_yn : data.use_yn
+            };
+            axios.post(url,param).then(response =>{
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    common_popup.close("gi-code_register-popup");
+                    findByCommonCodeList("","","","",data.group_id);
+                } else {
+                    resetEvent();
+                    formUtil.alertPopup("response status is :" + status);
+                }
+            }).catch(error => {
+                resetEvent();
+                formUtil.alertPopup(error);
+            })
+        }
+    }
+    function commonCodeUpdate(){
+        let flag =  commonCodeUpdateCheckValidation();
+        if(flag){
+            let data = new dataBinding().getData(COMMON_CODE_UPDATE_PRGMID);
+            let url = "/cms/common/commonCode/update";
+            // console.log(data);
+            let param = {
+
+                group_id : data.group_id ,
+                code_id : data.code_id,
+                code_name : data.code_name ,
+                use_yn : data.use_yn,
+                code_number : data.code_number
+            };
+            axios.post(url,param).then(response =>{
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                    common_popup.close("gi-code_update-popup");
+                    findByCommonCodeList("","","","",data.group_id);
+                } else {
+                    resetEvent();
+                    formUtil.alertPopup("response status is :" + status);
+                }
+            }).catch(error => {
+                resetEvent();
+                formUtil.alertPopup(error);
+            })
+        }
+    }
+    function commonCodeGroupUpdate(){
+        let flag =  commonCodeGroupUpdateCheckValidation();
+        if(flag){
+            let data = new dataBinding().getData(COMMON_CODE_GROUP_UPDATE_PRGMID);
+            let url = "/cms/common/commonCodeGroup/update";
+            // console.log(data);
+            let param = {
+                group_id : data.group_id ,
+                code_name : data.code_name ,
+                use_yn : data.use_yn
+            };
+            axios.post(url,param).then(response =>{
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                    common_popup.close("gi-group_code_update-popup");
+                    findByCommonCodeGroupList();
+                } else {
+                    resetEvent();
+                    formUtil.alertPopup("response status is :" + status);
+                }
+            }).catch(error => {
+                resetEvent();
+                formUtil.alertPopup(error);
+            })
+        }
+    }
+    function commonCodeGroupCheckValidation(){
+        let flag = false;
+
+        let validation = [];
+        validation.formId = COMMON_CODE_GROUP_PRGMID;
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
+            if($(item).data("field")){
+                let messageId = $(item).data("field").toUpperCase();
+                let message = Message.Label.Array["COMMON_CODE_GROUP.CHECK."+messageId];
+                validation.push({id:item.id,message:message});
+            }
+        });
+        if(formUtil.validationCheck(validation)){
+            flag = true;
+        }
+        return flag;
+    }
+    function commonCodeCheckValidation(){
+        let flag = false;
+
+        let validation = [];
+        validation.formId = COMMON_CODE_PRGMID;
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
+            if($(item).data("field")){
+                let messageId = $(item).data("field").toUpperCase();
+                let message = Message.Label.Array["COMMON_CODE.CHECK."+messageId];
+                validation.push({id:item.id,message:message});
+            }
+        });
+        if(formUtil.validationCheck(validation)){
+            flag = true;
+        }
+        return flag;
+    }
+    function commonCodeUpdateCheckValidation(){
+        let flag = false;
+
+        let validation = [];
+        validation.formId = COMMON_CODE_UPDATE_PRGMID;
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
+            if($(item).data("field")){
+                let messageId = $(item).data("field").toUpperCase();
+                let message = Message.Label.Array["COMMON_CODE.CHECK."+messageId];
+                validation.push({id:item.id,message:message});
+            }
+        });
+        if(formUtil.validationCheck(validation)){
+            flag = true;
+        }
+        return flag;
+    }
+    function commonCodeGroupUpdateCheckValidation(){
+        let flag = false;
+
+        let validation = [];
+        validation.formId = COMMON_CODE_GROUP_UPDATE_PRGMID;
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
+            if($(item).data("field")){
+                let messageId = $(item).data("field").toUpperCase();
+                let message = Message.Label.Array["COMMON_CODE_GROUP.CHECK."+messageId];
+                validation.push({id:item.id,message:message});
+            }
+        });
+        if(formUtil.validationCheck(validation)){
+            flag = true;
+        }
+        return flag;
+    }
+    async function commonCodeGroupDeleteCheckValidation(param){
+        let flag = true;
+        let dataLength = await findByCommonCodeLength(param);
+        if(dataLength > 0) flag = false;
+        return flag;
+    }
+</script>

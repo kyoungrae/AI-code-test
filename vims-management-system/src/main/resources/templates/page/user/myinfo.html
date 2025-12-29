@@ -1,0 +1,458 @@
+<style>
+    .test{
+        font-weight: bold;
+    }
+</style>
+<article class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100">
+        <header class="gi-flex gi-flex-center gi-col-10">
+            <h1 class="gi-page-title">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.TITLE"]</h1>
+        </header>
+        <article class="gi-col-90 gi-row-100 gi-grid gi-grid-template-rows-9fr-1fr gi-grid-gap-10px-10px">
+            <!--      업데이트 영역      -->
+            <form id="inspectionEquipmentModelTypeModify" class="gi-row-100 gi-col-100 gi-overflow">
+                <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                    <div class="gi-flex gi-flex-direction-column gi-flex-center gi-flex-justify-content-space-around gi-margin-bottom-20px">
+                        <div class="user_icon_layout_body">
+                            <div class="user_icon_layout">
+                                <div class="userIcon"></div>
+                            </div>
+                            <div class="add_user_img-btn-section">
+                                <button id="imgFileUpload" class="add_user_img-btn" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title gi-grid-input-edge-left-top">
+                            <span>[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_INFO"]</span>
+                        </div>
+                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-1fr">
+                            <input data-field="id" id="id" name="id" class="gi-input gi-hidden"/>
+                            <input data-field="uuid" id="uuid" name="uuid" class="gi-input gi-hidden"/>
+
+                            <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                <label for="user_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_NAME"]</label>
+                                <input data-field="user_name" id="user_name" name="user_name" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="100"/>
+                            </div>
+                            <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center gi-grid-input-edge-right-top">
+                                <label for="tel" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_PHONE_NUMBER"]</label>
+                                <input data-field="tel" id="tel" name="tel" class="gi-input" data-focus-span-text-align="default" autocomplete="off" gi-format-check="phone_number"/>
+                            </div>
+                            <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                <label for="email" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_EMAIL"]</label>
+                                <input data-field="email" id="email" name="email" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" data-gi-tag-disabled/>
+                            </div>
+                            <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                <label for="user_id" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_ID"]</label>
+                                <input data-field="user_id" id="user_id" name="user_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" data-gi-tag-disabled/>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                    <label for="address" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_ADDRESS"] </label>
+                                    <input data-field="address" id="address" name="address" class="gi-input" data-focus-span-text-align="default" autocomplete="off" data-gi-tag-disabled/>
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class=" gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr">
+                                    <div class="gi-grid gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                        <button id="address-btn" class="gi-input-btn" type="button" gi-address>검색</button>
+                                    </div>
+                                    <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                        <label for="address_detail" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_ADDRESS_DETAIL"] </label>
+                                        <input data-field="address_detail" id="address_detail" name="address_detail" class="gi-input" data-focus-span-text-align="default" autocomplete="off" gi-maxlength="100"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-hidden">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                    <label for="postal_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_POSTAL_CODE"]s</label>
+                                    <input data-field="postal_code" id="postal_code" name="postal_code" class="gi-input" data-focus-span-text-align="default" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title">
+                            <span>[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_ROLE"]</span>
+                        </div>
+                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-rows-repeat-2-1fr">
+                            <div class="gi-row-100 gi-col-100" style="max-height:50px;">
+                                <div id="user-group-div" class="gi-overflow gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-col-100 gi-flex-wrap"></div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-2fr-2fr">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                    <label for="office_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_OFFICE_NAME"]</label>
+                                    <input data-field="office_name" id="office_name" name="office_name" class="gi-input" data-focus-span-text-align="default" autocomplete="off" data-gi-tag-disabled/>
+                                </div>
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                    <label for="office_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_OFFICE_CODE"]</label>
+                                    <input data-field="office_code" id="office_code" name="office_code" class="gi-input" data-focus-span-text-align="default" autocomplete="off" data-gi-tag-disabled/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title gi-grid-input-edge-left-bottom">
+                            <span>[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_UPDATE_DATE"]</span>
+                        </div>
+                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-2fr-2fr">
+                            <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                                <label for="system_create_date" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_CREATE_DATE"]</label>
+                                <input data-field="system_create_date" id="system_create_date" name="system_create_date" class="gi-input" data-focus-span-text-align="default" autocomplete="off" data-gi-tag-disabled/>
+                            </div>
+                            <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center gi-grid-input-edge-right-bottom">
+                                <label for="system_update_date" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_LAST_UPDATE_DATE"]</label>
+                                <input data-field="system_update_date" id="system_update_date" name="system_update_date" class="gi-input" data-focus-span-text-align="default" autocomplete="off" data-gi-tag-disabled/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--/     업데이트 영역      -->
+            <!--      버튼 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-overflow-scroll">
+                <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                    <button id="change-password-btn" class="gi-btn-blue" type="button">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_PASSWORD_CHANGE"]</button>
+                    <button id="modify-btn" class="gi-btn-blue" type="button">[Page.Message].Message.Label.Array["SAVE_BTN"]</button>
+                </div>
+            </div>
+            <!--/     버튼 영역      -->
+        </article>
+    </section>
+</article>
+<!--NOTE: 비밀번호 변경 팝업-->
+<article id="change-password-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="width: 350px !important; height: auto !important; min-height: 300px; padding:10px;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_PASSWORD_CHANGE"]</span>
+        </div>
+        <div class="password-policy-section gi-row-90 gi-flex gi-flex-wrap" style="color:red; font-size:12px;"></div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <form id="commonUserPasswordChange" class="gi-row-100 gi-col-90">
+                <div id="update-area_popup" class="gi-padding-left-right-20px gi-gird gi-grid-center">
+                    <div class="gi-row-80 gi-grid gi-grid-template-rows-repeat-1-1fr">
+                        <div class="gi-row-100 gi-input-container gi-flex gi-flex-center">
+                            <label for="popup_before_password" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_BEFORE_PASSWORD"]</label>
+                            <input type="password" data-field="popup_before_password" id="popup_before_password" name="popup_before_password" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                        </div>
+                        <div class="gi-row-100 gi-input-container gi-flex gi-flex-center border-top-dotted-gray">
+                            <label for="popup_new_password" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_AFTER_PASSWORD"]</label>
+                            <input type="password" data-field="popup_new_password" id="popup_new_password" name="popup_new_password" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                        </div>
+                        <div class="gi-row-100 gi-input-container gi-flex gi-flex-center border-top-dotted-gray">
+                            <label for="popup_new_password_confirm" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_USER.MYINFO.MY_AFTER_PASSWORD_CONFIRM"]</label>
+                            <input type="password" data-field="popup_new_password_confirm" id="popup_new_password_confirm" name="popup_new_password_confirm" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--/      팝업내용 삽입 영역      -->
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button type="button" class="gi-btn-blue popup_success_btn">[Page.Message].Message.Label.Array["CONFIRM"]</button>
+                <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CANCEL"]</button>
+            </div>
+        </div>
+    </div>
+</article>
+<script type="text/javascript">
+    var PRGMID = "inspectionEquipmentModelTypeModify";	//page id
+    var data_binding = new dataBinding();
+    var common_popup = new popup();
+    init();
+
+
+    function init() {
+        new PageInit();
+        //초기화
+        resetEvent();
+        dataSetting();
+        setTimeout(function () {
+            //클릭 이벤트
+            clickEvent();
+        });
+    }
+
+    async function dataSetting() {
+        const userInfo = await findUserData();
+
+        let data_binding = new dataBinding();
+        data_binding.setDataForm(PRGMID, userInfo.user);
+
+        bindUserGroup(userInfo.userGroups);
+        // findImgFile();
+
+        let data = data_binding.getData(PRGMID);
+
+        //초기 값 셋팅
+        initValueSetting(data);
+
+        function bindUserGroup(userGroups) {
+            let userGroupHtml = '';
+            userGroups.forEach((group) => {
+                if(formUtil.checkEmptyValue(group.group_name)){
+                    userGroupHtml += "<span class='gi-tag-gray'>" + group.group_name + "</span>";
+                }
+            });
+
+            $("#user-group-div").html(userGroupHtml);
+        }
+    }
+
+    //NOTE: 유저 정보 조회
+    async function findUserData() {
+        try {
+            const email = JwtUtils.getUserEmailFromJWT();
+
+            const [userResponse, userGroupsResponse] = await Promise.all([
+                axios.post('/cms/common/commonUser/find', {email}),
+                axios.post('/cms/common/commonUserGroup/find', {user_email: email})
+            ]);
+
+            return {
+                user: userResponse.data[0],
+                userGroups: userGroupsResponse.data
+            };
+        } catch (error) {
+            formUtil.alertPopup(error);
+            throw error;
+        }
+    }
+
+    function resetEvent() {
+        //데이터 호출 후 이벤트 재설정
+    }
+
+    //클릭 이벤트
+    function clickEvent() {
+        //NOTE: 수정 버튼 클릭 이벤트
+        $("#modify-btn").click(function () {
+            formUtil.popup("modify_user_info-btn",Message.Label.Array["CONFIRM.SAVE"], modify);
+        });
+
+        $("#change-password-btn").click(async function () {
+            let data = await findSiteConfigInPasswordPolicy();
+            if(data){
+                setPasswordPolicyInPopupSection(data);
+            }
+            await changePasswordValidation();
+        });
+    }
+
+    function initValueSetting(data) {
+        // formUtil.createImgFileUpload("imgFileUpload", "/common/file/commonFileDetail", {FOLDER_NAME: "userImgFolder"}, modifyUserImage);
+    }
+
+    function modify() {
+        if(checkValidation()){
+            let data = new dataBinding().getData(PRGMID);
+            let url = "/cms/common/commonUser/update";
+            let param = {
+                id: data.id,
+                user_name: data.user_name,
+                tel: data.tel,
+                address: data.address,
+                address_detail: data.address_detail,
+                postal_code: data.postal_code,
+            };
+            axios.post(url, param).then(response => {
+                let status = response.status;
+                if (status === 200) {
+                    (new GiFormatCheck).resetToggleIcon();
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                } else {
+                    formUtil.alertPopup("response status is :" + status);
+                }
+            }).catch(error => {
+                formUtil.alertPopup(error);
+            })
+        }
+    }
+    // NOTE: 유효성 검사
+    function checkValidation() {
+        let flag = false;
+
+        let validation = [];
+        validation.formId = PRGMID;
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
+            if ($(item).data("field")) {
+                let messageId = $(item).data("field").toUpperCase();
+                let message = Message.Label.Array["COMMON_USER.CHECK." + messageId];
+                validation.push({id: item.id, message: message});
+            }
+        });
+        if (formUtil.validationCheck(validation)) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    //NOTE : 비밀번호 변경 검사 로직
+    async function changePasswordValidation() {
+        $("#change-password-popup").attr("data-popup-open","true");
+        $(".popup_success_btn")
+            .off("click.changePopupUpdateClickEventHandler")
+            .on("click.changePopupUpdateClickEventHandler",changePopupUpdateClickEventHandler);
+
+        function changePopupUpdateClickEventHandler(){
+            let data = data_binding.getData("commonUserPasswordChange");
+                const beforePassword = data.popup_before_password;
+                const newPassword = data.popup_new_password;
+                const newPasswordConfirm = data.popup_new_password_confirm;
+
+            if (!beforePassword || !newPassword || !newPasswordConfirm) {
+                console.log(1)
+                const message = Message.Label.Array["COMMON_USER.CHECK.PASSWORD"];
+                formUtil.alertPopup(message);
+                return false;
+            }
+            if (newPassword !== newPasswordConfirm) {
+                console.log(2)
+                const message = Message.Label.Array["COMMON_USER.MYINFO.CHECK_PASSWORD_DOUBLE_CHECK"]
+                formUtil.alertPopup(message);
+                return false;
+            }
+            if (beforePassword === newPassword) {
+                console.log(3)
+                const message = Message.Label.Array["FAIL.SAME.PASSWORD"];
+                formUtil.alertPopup(message);
+                return false;
+            }
+            let cont ={
+                beforePassword : beforePassword,
+                newPassword : newPassword,
+                newPasswordConfirm : newPasswordConfirm
+            }
+            changePassword(cont);
+        }
+    }
+    //NOTE: 비밀번호 변경 API
+    function changePassword(cont){
+        const url = "/cms/common/commonUser/changePassword";
+        const param = {
+            before_password: cont.beforePassword,
+            password: cont.newPassword,
+            email: JwtUtils.getUserEmailFromJWT()
+        };
+        axios.post(url, param).then(response =>{
+            console.log(response)
+            if(response.status === 200){
+                formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                common_popup.close("change-password-popup");
+            }
+        }).catch(error =>{
+            formUtil.alertPopup(error.response.data);
+        })
+    }
+    //NOTE: 비밀번호변경 정책 조회
+    function findSiteConfigInPasswordPolicy(){
+        return new Promise((resolve, reject) =>{
+            let url = "/cms/common/commonSiteConfig/find";
+            let param ={
+                config_group_id : "PASSWORD_POLICY",
+                use_yn : "1"
+            }
+            axios.post(url, param).then(response =>{
+                let status = response.status;
+                if(status === 200){
+                    if(response.data.length > 0){
+                        let data = response.data;
+                        resolve(data);
+                    }else{
+                        resolve(false);
+                    }
+                }
+            }).catch(error =>{
+                formUtil.alertPopup(error.response.data);
+            })
+        })
+    }
+    //NOTE: 팝업안에 비밀번호 정책 공시
+    function setPasswordPolicyInPopupSection(cont){
+        let contents = '';
+        cont.map((item,i)=>{
+            contents += '<div class="gi-row-50"><span class="test">['+(i+1)+']'+item.description+" : "+item.config_value+'</span></div>'
+        })
+        $(".password-policy-section").html(contents);
+    }
+
+    // function modifyUserImage() {
+    //     let flag = checkValidation();
+    //     if (flag) {
+    //         let data = new dataBinding().getData(PRGMID);
+    //         let url = "/common/common/commonUser/update";
+    //         let param = {
+    //             id: data.id,
+    //             uuid: data.uuid,
+    //         };
+    //         axios.post(url, param).then(response => {
+    //             let status = response.status;
+    //             if (status === 200) {
+    //                 formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+    //
+    //                 findImgFile();
+    //             } else {
+    //                 formUtil.alertPopup("response status is :" + status);
+    //             }
+    //         }).catch(error => {
+    //             formUtil.alertPopup(error);
+    //         })
+    //     }
+    // }
+
+
+    // function findImgFile() {
+    //     let url = "/common/file/commonFileDetail/find";
+    //     let param = {
+    //         uuid: $('#uuid').val()
+    //     }
+    //     axios.post(url, param).then(response => {
+    //         let status = response.status;
+    //         if (status === 200) {
+    //             if (formUtil.checkEmptyValue(response.data)) {
+    //                 let data = response.data[0];
+    //                 let filePath = data.file_path;
+    //                 let fileId = data.file_id + "." + data.file_extension;
+    //                 let cont = {
+    //                     path: filePath,
+    //                     file_id: fileId
+    //                 }
+    //                 findFileManagerGetImg(cont);
+    //             }
+    //         }
+    //     }).catch(error => {
+    //         formUtil.alertPopup(error + "");
+    //     })
+    // }
+
+    // function findFileManagerGetImg(data) {
+    //     let url = "/fileManager/searchImg";
+    //     let param = {
+    //         file_path: data.path + "/",
+    //         file_id: data.file_id
+    //     }
+    //     axios.post(url, param).then(response => {
+    //         let status = response.status;
+    //         if (status === 200) {
+    //             if (formUtil.checkEmptyValue(response.data)) {
+    //                 let data = response.data;
+    //                 $(".userIcon").css("background-image", "url('" + data + "')");
+    //
+    //                 setImageSource(data);
+    //
+    //                 $('#formUtil_fileUpload').empty(); // TODO
+    //             }
+    //         }
+    //     }).catch(error => {
+    //         formUtil.alertPopup(error + "");
+    //     })
+    // }
+
+    // function setImageSource(url) {
+    //     $('#user-image').attr('src', url);
+    // }
+</script>

@@ -1,0 +1,73 @@
+server:
+    port: 8083
+    servlet:
+        context-path: /
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+
+spring:
+    profiles:
+        active: local
+
+mybatis:
+    config-location: classpath:/mybatis-config.xml
+    mapper-locations: classpath:/mybatis/**/*.xml
+
+---
+
+spring:
+    jackson:
+        property-naming-strategy: LOWER_CAMEL_CASE
+    datasource:
+        # OracleDB JDBC URL
+#        url: jdbc:log4jdbc:oracle:thin:@192.168.0.140:11521:orcl
+#        username: vims2
+#        password: oracle12c$vims2#
+#        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+        # MariaDB JDBC URL
+        url: jdbc:mariadb://192.168.0.232:3306/MVIMS
+        username: mvims
+        password: 1234   # 비밀번호가 그대로라면 유지, 아니면 MariaDB용으로 변경
+        driver-class-name: org.mariadb.jdbc.Driver
+
+        hikari:
+                maximum-pool-size: 10
+                idle-timeout: 300000         # 5분
+                max-lifetime: 1800000        # 30분 (DB 커넥션 타임아웃보다 짧게)
+                connection-timeout: 30000
+
+    jpa:
+        show-sql: false
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: none
+                format_sql: true
+                use_sql_comments: false  # SQL 주석을 비활성화하여 주석 없이 출력
+#        database: oracle
+#        database-platform: org.hibernate.dialect.Oracle12cDialect
+        database: mysql
+        database-platform: org.hibernate.dialect.MariaDB103Dialect
+    thymeleaf:
+        cache: false
+        check-template-location: true
+        prefix: classpath:/templates/
+        suffix: .html
+    devtools:
+        livereload:
+            enabled: true
+        restart:
+            enabled: true
+    messages:
+        basename : exceptionMessage
+        encoding : UTF-8
+logging:
+    level:
+        root: INFO
+        com.*: DEBUG
+        org.apache.ibatis: DEBUG
+        java.sql: DEBUG
+        org.springframework.jdbc: DEBUG

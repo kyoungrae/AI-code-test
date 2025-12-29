@@ -1,0 +1,705 @@
+<style>
+    #gi-Grid1 > figure > div.gi-article-content{
+        max-height: 90%;
+    }
+</style>
+<article class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100">
+        <header class="gi-flex gi-flex-center gi-col-10">
+            <h1 class="gi-page-title">[Page.Message].Message.Label.Array["COMMON_GROUP.TITLE_LIST"]</h1>
+        </header>
+        <article class=" gi-col-90 gi-row-100">
+
+            <!--      검색기능 영역      -->
+            <div id="search-area" class="gi-col-35px gi-padding-left-right-20px gi-flex">
+                <div class="gi-row-100 gi-flex gi-flex-space-around">
+                    <!--      검색설정 영역      -->
+                    <div class="gi-row-20">
+                        <div class="gi-input-container gi-input-container-box-shadow gi-flex gi-col-100 " data-focus-line="false">
+                            <label for="searchDesc1" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false" >그룹이름</label>
+                            <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchDesc1" name="searchDesc1" data-focus-input-text-align="center" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <!--/     검색설정 영역      -->
+                    <!--      더보기,초기화 버튼 영역      -->
+                    <div class="gi-col-100 gi-flex gi-flex-align-items-center">
+                        <div class="gi-btn-section gi-input-container gi-col-100 gi-flex gi-flex-justify-content-space-evenly">
+                            <button id="search-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow" type="button">조회</button>
+                        </div>
+                    </div>
+                    <!--/     더보기,초기화 버튼 영역      -->
+                    <!--     조회 버튼 영역      -->
+                    <div class="gi-row-70 gi-col-100 gi-flex  gi-flex-justify-content-flex-end ">
+                        <div class="gi-btn-section gi-input-container gi-row-40 gi-col-100 gi-flex  gi-flex-justify-content-flex-end">
+                            <button id="reset-btn" class="gi-btn-reset  gi-input-container-box-shadow" type="button"><i class="fa-solid fa-rotate-right gi-row-30px"></i>초기화</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/     검색기능 영역      -->
+            <!--      그리드 영역      -->
+            <div class="gi-row-100 gi-col-90 gi-flex">
+                <div class="gi-row-50 gi-col-100">
+                    <div id="gi-Grid1" class="gi-Grid"></div>
+                    <div class="gi-row-100">
+                        <div class="gi-btn-section gi-row-100 gi-float-right gi-padding-left-right-20px gi-flex gi-flex-justify-content-flex-end">
+                            <button id="insert_group-btn" class="gi-btn gi-float-right gi-col-30px" gi-popup-open-id="gi-common_group_register-popup" type="button">그룹등록</button>
+                            <button id="insert_child_group-btn" class="gi-btn gi-float-right gi-col-30px gi-hidden" gi-popup-open-id="gi-common_group_register-popup" type="button">하위그룹등록</button>
+                        </div>
+                    </div>
+                </div>
+                <!--      등록버튼 영역      -->
+                <div class="gi-row-50 gi-col-100 gi-padding-18px">
+                    <div id="gi-Grid2" class="gi-Grid"></div>
+                    <div class="gi-row-100">
+                        <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
+                            <button id="insert_user_group-btn" class="gi-btn gi-float-right gi-hidden gi-col-30px" gi-popup-open-id="gi-common_user_group_register-popup" type="button">[Page.Message].Message.Label.Array["COMMON_USER_GROUP.REGISTER_GROUP_USER_BTN"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/     그리드 영역      -->
+        </article>
+    </section>
+</article>
+<!--NOTE: 그룹등록 팝업-->
+<article id="gi-common_group_register-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body gi-row-30-important" style="height: 350px !important;">
+        <div class="gi-popup-header">
+            <span>그룹등록</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="commonGroupRegister" class="gi-row-100">
+                    <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div id="top_group_id-layout" class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="top_group_id" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">상위그룹아이디</label>
+                                    <input data-gi-tag-disabled data-field="top_group_id" id="top_group_id" name="top_group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_id" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    <input  data-field="group_id" id="group_id" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹이름</label>
+                                    <input data-field="group_name" id="group_name" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_level" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹레벨</label>
+                                    <input data-gi-tag-disabled data-field="group_level" id="group_level" name="group_level" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="use_yn" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="commonGroupRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
+                <button class="gi-popup-close-btn" type="button">닫기</button>
+            </div>
+        </div>
+    </div>
+</article>
+<!--NOTE: 그룹수정 팝업-->
+<article id="gi-common_group_update-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body gi-row-30-important" style="height: 300px !important;">
+        <div class="gi-popup-header">
+            <span>그룹수정</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="commonGroupUpdate" class="gi-row-100">
+                    <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+
+                        <div class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹아이디</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_id-update" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    <input data-gi-tag-disabled data-field="group_id" id="group_id-update" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>그룹이름</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="group_name-update" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">그룹이름</label>
+                                    <input data-field="group_name" id="group_name-update" name="group_id" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>사용여부</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="use_yn-update" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn-update" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="commonGroupUpdate-btn" class="gi-popup-register-btn" type="button">수정</button>
+                <button class="gi-popup-close-btn" type="button">닫기</button>
+            </div>
+        </div>
+    </div>
+</article>
+<!--NOTE: 그룹 사용자 등록 팝업-->
+<article id="gi-common_user_group_register-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="height: 700px !important;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["COMMON_USER_GROUP.REGISTER_GROUP_USER_BTN"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+                <form id="commonUserGroupRegister" class="gi-row-100 gi-col-90">
+                    <div id="search-area_popup" class="gi-col-35px gi-padding-left-right-20px gi-flex">
+                        <div class="gi-row-40 gi-col-100 gi-input-container gi-input-container-box-shadow gi-margin-left-2 gi-flex gi-flex-center" data-focus-line="false">
+                            <label for="user_id-search" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false" >사용자 아이디</label>
+                            <input class="gi-input gi-margin-1px " data-required="false" type="text" id="user_id-search" name="user_id-search" data-focus-input-text-align="center" autocomplete="off"/>
+                        </div>
+                        <div class="gi-row-48 gi-col-100"></div>
+                        <div class="gi-row-12 gi-col-100">
+                            <div class="gi-btn-section  gi-col-100">
+                                <button id="user_id-search-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow" type="button">조회</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gi-row-100 gi-col-100 gi-min-col-300px">
+                        <div id="gi-Grid3" class="gi-Grid"></div>
+                    </div>
+                    <div class="gi-row-100 gi-col-85 gi-hidden">
+                        <input data-gi-tag-disabled data-field="group_id" name="group_id" class="gi-input gi-hidden"/>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+            <div class="gi-popup-footer">
+                <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+    <!--                <button id="commonUserGroupRegister-btn" class="gi-popup-register-btn" type="button">등록</button>-->
+                    <button class="gi-popup-close-btn" type="button">닫기</button>
+                </div>
+            </div>
+        </div>
+</article>
+<script type="text/javascript">
+    var PRGMID = "commonGroupList";	//page id
+    var data_binding = new dataBinding();
+    var common_popup = new popup();
+    var COMMON_GROUP_REGISTER_PRGMID = "gi-common_group_register-popup";
+    var COMMON_GROUP_UPDATE_PRGMID = "gi-common_group_update-popup";
+    var COMMON_USER_GROUP_REGISTER_PRGMID = "gi-common_user_group_register-popup";
+    var groupId = null;
+    init();
+    function init(){
+
+
+        //페이지 초기설정
+        new PageInit();
+
+        //초기화
+        resetEvent();
+
+        //데이터 조회
+        findByCommonGroupList();
+        findByCommonUserGroupList();
+
+        setTimeout(function(){
+            //클릭 이벤트
+            clickEvent();
+        });
+    }
+
+    function resetEvent(){
+        groupId = null;
+        //검색영역 값 초기화
+        $("#search-area input").val("");
+        $("#search-area select").val("");
+    }
+    function fnReset(){
+        groupId = null;
+        findByCommonGroupList();
+        findByCommonUserGroupList();
+        $("#insert_child_group-btn").addClass("gi-hidden");
+        $("#insert_user_group-btn").addClass("gi-hidden");
+    }
+    //클릭 이벤트
+    function clickEvent(){
+        // 초기화버튼 클릭 이벤트
+        $(".gi-btn-reset").click(function(){
+            resetEvent();
+            fnReset();
+        });
+        //조회버튼 클릭 이벤트
+        $("#search-btn").click(function(){
+            findByCommonGroupList();
+        });
+
+        //그룹등록 버튼
+        $("#insert_group-btn").click(function(){
+            $("#group_level").val("0");
+            commonTag.inputTagReset($("#group_level"));
+            commonTag.inputTagReset($("#top_group_id"));
+            $("#top_group_id").val("-");
+            $("#top_group_id-layout").addClass("gi-hidden");
+            $("#top_group_id").attr("data-required",false);
+        });
+        //그룹등록 팝업 등록 버튼
+        $("#commonGroupRegister-btn").off("click.").on("click.",function(){
+            commonGroupRegisterBtnClickEventHandler();
+        })
+
+        $("#user_id-search-btn").off("click").on("click",function(){
+            let data = data_binding.getData("commonUserGroupRegister");
+            findByCommonUserList('','','','',data.group_id);
+        })
+
+    }
+    function commonGroupRegisterBtnClickEventHandler(){
+
+        let data = data_binding.getData("gi-common_group_register-popup");
+        if(registerCommonGroupValidationCheck()){
+            registerCommonGroup(data);
+        }
+    }
+    function findByCommonGroupList(page,range,sortId,sortOrder) {
+        let url = "/cms/common/commonGroup/find";
+        let param = {
+        };
+        // 검색조건 설정 (추가해서 사용)
+        let cont1 = $("#searchDesc1").val();
+        if(formUtil.checkEmptyValue(cont1)) param._group_name = cont1;
+
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                let data = response.data;
+
+                // 그리드 헤더 설정
+                let commonGroup_menuGrid_header = {
+                    title : "그룹아이디 목록",
+                    list:[
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_NAME"]',  ID:"group_name",  WIDTH:"25",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
+                        {HEADER:"상위그룹ID",  ID:"top_group_id",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_ID"]',  ID:"group_id",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_LEVEL"]',  ID:"group_level",  WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.USE_YN"]',  ID:"use_yn",  WIDTH:"10",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",COMMON_CODE_GROUP_ID:"USE_YN",HIDDEN:false},
+                        {HEADER:'[Page.Message].Message.Label.Array["MODIFY_BTN"]',  ID:"update_btn",  WIDTH:"10",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:'[Page.Message].Message.Label.Array["DELETE_BTN"]',  ID:"delete_btn",  WIDTH:"10",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+
+                        {HEADER:"No",  ID:"no",   WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.SYSTEM_CREATE_DATE"]',  ID:"system_create_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.SYSTEM_CREATE_USERID"]',  ID:"system_create_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:true},
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.SYSTEM_UPDATE_DATE"]',  ID:"system_update_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.SYSTEM_UPDATE_USERID"]',  ID:"system_update_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true}
+                    ]
+                }
+                //그리드 생성 <div id="gi-Grid"></div>
+                let commonGroup_menu_grid = formUtil.giGridHierarchy(commonGroup_menuGrid_header,"","","gi-Grid1");
+
+                commonGroup_menu_grid.HierarchyOption({level_column:"group_level",parent_depth_column:"group_id",child_depth_column:"top_group_id"});
+                //그리드 데이터 설정
+                commonGroup_menu_grid.DataSet(data);
+
+                commonGroup_menu_grid.updateBtnClick(updatePopupCommonGroup,"update_btn");
+                commonGroup_menu_grid.deleteBtnClick(removeCommonGroup,"delete_btn");
+
+                //그리드 row 선택 이벤트 설정
+                commonGroup_menu_grid.rowClick(commonGroupRowClickEvent);
+
+                function commonGroupRowClickEvent(rows,e){
+                    let clickFlag = $(e.currentTarget).hasClass("gi-grid-list-select");
+                    let insertUserGroupBtn = $("#insert_user_group-btn");
+                    let insertChildGroupBtn = $("#insert_child_group-btn");
+                    if(clickFlag){
+                        groupId = rows.group_id;
+                        findByCommonUserGroupList();
+                        //NOTE: 사용자 등록 버튼 활성화
+                        insertUserGroupBtn.removeClass("gi-hidden");
+                        insertUserGroupBtn.off("click.insertUserGroupBtnClickEventHandler")
+                            .on("click.insertUserGroupBtnClickEventHandler",insertUserGroupBtnClickEventHandler);
+
+                        if(rows.group_level === "0"){
+                            topLevelGroupRowsClickEventHandler(true);
+                        }else{
+                            topLevelGroupRowsClickEventHandler(false);
+                        }
+                    }else{
+                        groupId = null;
+                        findByCommonUserGroupList();
+                        //NOTE: 사용자 등록 버튼 비활성화
+                        insertUserGroupBtn.addClass("gi-hidden");
+                        insertUserGroupBtn.off("click.insertUserGroupBtnClickEventHandler");
+                        topLevelGroupRowsClickEventHandler(false);
+                    }
+                    function insertUserGroupBtnClickEventHandler(){
+                        findByCommonUserList(null,null,null,null,groupId);
+                    }
+                    function topLevelGroupRowsClickEventHandler(flag){
+                        if(flag){
+                            insertChildGroupBtn.removeClass("gi-hidden");
+                            insertChildGroupBtn.off("click.insertChildGroupBtnClickEventHandler")
+                                .on("click.insertChildGroupBtnClickEventHandler",insertChildGroupBtnClickEventHandler);
+                        }else{
+                            insertChildGroupBtn.addClass("gi-hidden");
+                            insertChildGroupBtn.off("click.insertChildGroupBtnClickEventHandler");
+                        }
+                    }
+                    function insertChildGroupBtnClickEventHandler(){
+                        $("#top_group_id-layout").removeClass("gi-hidden");
+                        $("#group_level").val("1");
+                        $("#top_group_id").val(rows.group_id);
+                        $("#top_group_id").attr("data-required",true);
+                        commonTag.inputTagReset($(".gi-input"));
+                    }
+                }
+            } else {
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error);
+        })
+    }
+    function findByCommonUserGroupList(page,range,sortId,sortOrder) {
+        //default page
+        if(!formUtil.checkEmptyValue(page)) page = 1;
+        //default range(row)
+        if(!formUtil.checkEmptyValue(range)) range = 10;
+
+        let url = "/cms/common/commonUserGroup/findPage";
+        let param = {
+            page_no:page,
+            row_range : range,
+            offset: (page-1) * range
+        };
+        // 검색조건 설정 (추가해서 사용)
+        let cont1 = $("#searchDesc1").val();
+        let cont2 = $("#from_date").val();
+        let cont3 = $("#to_date").val();
+
+        if(formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+        if(formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+        if(formUtil.checkEmptyValue(cont3)) param.to_date   = cont3;
+        if(formUtil.checkEmptyValue(groupId)) param.group_id   = groupId;
+
+        // 정렬조건추가 (기준id, 순서)
+        if(formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+        if(formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+                // 그리드 헤더 설정
+                let commonUserGroup_menuGrid_header = {
+                    title : "사용자그룹목록",
+                    list:[
+                        {HEADER:"No",  ID:"no",   WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"그룹아이디",  ID:"group_id",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"email",  ID:"user_email",  WIDTH:"25",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"사용자 ID",  ID:"user_id",  WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"소속",  ID:"office_name",  WIDTH:"25",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"삭제",  ID:"userGroupDelete_btn",  WIDTH:"10",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+
+                        {HEADER:"소속코드",  ID:"office_code",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"ID",  ID:"id",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"작성일자",  ID:"system_create_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"작성자ID",  ID:"system_create_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"수정일자",  ID:"system_update_date",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"수정자ID",  ID:"system_update_userid",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true}
+                    ]
+                }
+                //그리드 생성 <div id="gi-Grid"></div>
+                let commonUserGroup_menu_grid = formUtil.giGrid(commonUserGroup_menuGrid_header,paging,page,"gi-Grid2");
+
+                if(formUtil.checkEmptyValue(groupId)){
+                    commonUserGroup_menu_grid.DataSet(data);
+                }else{
+                    commonUserGroup_menu_grid.DataSet();
+                }
+
+
+                //그리드 row 개수 변s경 및 페이징 버튼 이벤트 설정
+                commonUserGroup_menu_grid.pagingSet(findByCommonUserGroupList);
+                //그리스 내부의 header click 정렬 이벤트 설정
+                commonUserGroup_menu_grid.sortDataSet(findByCommonUserGroupList);
+
+                commonUserGroup_menu_grid.deleteBtnClick(removeCommonUserGroup,"userGroupDelete_btn");
+
+            } else {
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error);
+        })
+    }
+    function findByCommonUserList(page,range,sortId,sortOrder) {
+        //default page
+        if(!formUtil.checkEmptyValue(page)) page = 1;
+        //default range(row)
+        if(!formUtil.checkEmptyValue(range)) range = 10;
+
+        let url = "/cms/common/commonUserGroup/findJoinCommonUserGroupPage";
+        let param = {
+            page_no:page,
+            row_range : range,
+            offset:(page-1)*range
+        };
+        // 검색조건 설정 (추가해서 사용)
+        let cont1 = $("#searchDesc1").val();
+        let cont2 = $("#from_date").val();
+        let cont3 = $("#to_date").val();
+        let cont4 = $("#user_id-search").val();
+        if(formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+        if(formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+        if(formUtil.checkEmptyValue(cont3)) param.to_date   = cont3;
+        if(formUtil.checkEmptyValue(groupId)) param.group_id   = groupId;
+        if(formUtil.checkEmptyValue(cont4)) param.user_id   = cont4;
+
+        // 정렬조건추가 (기준id, 순서)
+        if(formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+        if(formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+                // 그리드 헤더 설정
+                let commonUser_menuGrid_header = {
+                    title : "사용자등록",
+                    list:[
+                        {HEADER:"No",  ID:"no",   WIDTH:"7",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"이메일",  ID:"user_email",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"사용자 아이디",  ID:"user_id",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                        {HEADER:"등록",  ID:"register_btn",  WIDTH:"15",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+
+                        {HEADER:"ID",  ID:"id",  WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"소속코드",  ID:"office_code",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"역할",  ID:"role",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
+                        {HEADER:"시퀀스 아이디",  ID:"id",  WIDTH:"40",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true}
+                    ]
+                }
+                //그리드 생성 <div id="gi-Grid"></div>
+                let commonUser_grid = formUtil.giGrid(commonUser_menuGrid_header,paging,page,"gi-Grid3");
+                //let commonUser_menu_grid = formUtil.giGridHierarchy(commonUser_menuGrid_header,paging,page);
+                //commonUser_menu_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
+
+                //그리드 데이터 설정
+                if(formUtil.checkEmptyValue(groupId)){
+                    commonUser_grid.DataSet(data);
+                }else{
+                    commonUser_grid.DataSet();
+                }
+
+                //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+                commonUser_grid.pagingSet(findByCommonUserList);
+
+                //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                commonUser_grid.detailBtnClick(registerCommonUserGroupPopup,"register_btn");
+
+                //그리스 내부의 header click 정렬 이벤트 설정
+                // commonUser_grid.sortDataSet(findByCommonUserList);
+
+                //그리드 row 선택 이벤트 설정
+                // commonUser_grid.rowClick(commonUserRowClickEvent);
+                // function commonUserRowClickEvent(rows){
+                //     console.log(rows);
+                // }
+            } else {
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error);
+        })
+    }
+    function registerCommonUserGroupPopup(data){
+        registerCommonUserGroup(data);
+    }
+    function registerCommonUserGroup(data){
+        let url = "/cms/common/commonUserGroup/register";
+        let param ={
+            id : data.id,
+            group_id : groupId,
+            user_email : data.user_email,
+            user_id : data.user_id,
+            office_code : data.office_code
+        };
+        axios.post(url , param).then(response=>{
+            let status = response.status;
+            if(status === 200){
+                formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                findByCommonUserList();
+                findByCommonUserGroupList();
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error.response.data + "");
+        })
+    }
+    function registerCommonGroup(data){
+        let url = "/cms/common/commonGroup/register";
+        let param = {
+            group_id : data.group_id,
+            group_name : data.group_name,
+            group_level : data.group_level,
+            top_group_id : data.top_group_id,
+            use_yn : data.use_yn
+        };
+        axios.post(url , param).then(response =>{
+            let status = response.status;
+            if(status === 200){
+                formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                groupId = null;
+                findByCommonGroupList();
+                findByCommonUserGroupList();
+                $("#insert_child_group-btn").addClass("gi-hidden");
+                $("#insert_user_group-btn").addClass("gi-hidden");
+                common_popup.close("gi-common_group_register-popup");
+            }
+        }).catch(error =>{
+            formUtil.alertPopup(error.response.data);
+        })
+    }
+    function updatePopupCommonGroup(data){
+        $("#"+COMMON_GROUP_UPDATE_PRGMID).attr("data-popup-open",true);
+        data_binding.setDataForm("commonGroupUpdate",data);
+        data_binding.setDataSelectBox("use_yn-update",data.use_yn);
+        $("#commonGroupUpdate-btn").off("click.updateCommonGroup").on("click.updateCommonGroup",function(){
+            let param = data_binding.getData(COMMON_GROUP_UPDATE_PRGMID);
+            updateCommonGroup(param);
+        })
+    }
+    function updateCommonGroup(data){
+        let url = "/cms/common/commonGroup/update";
+        let param ={
+            group_id : data.group_id,
+            group_name : data.group_name,
+            use_yn : data.use_yn
+        }
+        axios.post(url , param).then(response =>{
+            let status = response.status;
+            if(status === 200){
+                formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                fnReset();
+                common_popup.close(COMMON_GROUP_UPDATE_PRGMID);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error + "");
+        })
+
+    }
+    async function removeCommonGroup(data){
+        let flag = await findByExistCommonUserGroup(data);
+        if(flag){
+            let url = "/cms/common/commonGroup/remove";
+            let param = {
+                group_id : data.group_id
+            };
+            axios.post(url, param).then(response =>{
+                let status = response.status;
+                if(status === 200){
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+                    findByCommonGroupList();
+                }
+            }).catch(error =>{
+                formUtil.alertPopup(error.response.data);
+            })
+        }else{
+            formUtil.alertPopup(Message.Label.Array["COMMON_GROUP.CHECK.GROUP_USER_CONTAIN"]);
+        }
+    }
+
+    function registerCommonGroupValidationCheck(){
+        let flag = false;
+
+        let validation = [];
+        validation.formId = COMMON_GROUP_REGISTER_PRGMID;
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
+            if($(item).data("field")){
+                let messageId = $(item).data("field").toUpperCase();
+                let message = Message.Label.Array["COMMON_GROUP.CHECK."+messageId];
+                validation.push({id:item.id,message:message});
+            }
+        });
+        if(formUtil.validationCheck(validation)){
+            flag = true;
+        }
+        return flag;
+    }
+    async function findByExistCommonUserGroup(data){
+        return new Promise(resolve=>{
+            let url = "/cms/common/commonUserGroup/find";
+            let param = {
+                group_id : data.group_id
+            };
+            axios.post(url , param).then(response =>{
+                let status = response.status;
+                if(status === 200){
+                    if(response.data.length > 0){
+                        return resolve(false);
+                    }else{
+                        return resolve(true);
+                    }
+                }
+            }).catch(error =>{
+                formUtil.alertPopup(error + "");
+            })
+        })
+    }
+    function removeCommonUserGroup(data){
+        let url = "/cms/common/commonUserGroup/remove";
+        let param = {
+            id :data.id,
+            group_id : data.group_id,
+            user_email : data.user_email,
+            user_id : data.user_id
+        };
+        axios.post(url , param).then(response =>{
+            let status = response.status;
+            if(status === 200){
+                formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+                findByCommonUserGroupList();
+            }
+        }).catch(error =>{
+            formUtil.alertPopup(error + "");
+        })
+    }
+</script>

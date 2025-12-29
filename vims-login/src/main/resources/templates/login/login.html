@@ -1,0 +1,493 @@
+<style>
+    #remember_email_label, #find-pw-btn {
+        font-size: 0.8rem;
+        color: #888888;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+
+<!--  공통으로 묶어야 하는 부분  -->
+    <link rel="stylesheet" href="/common/css/common/FormUtility.css">
+    <link rel="stylesheet" href="/common/css/common/Common.css">
+    <script type="text/javascript" src="/common/js/jquery/jquery3.6.0.js"></script>
+    <script type="text/javascript" src="/common/js/common/FormUtility.js"></script>
+    <script type="text/javascript" src="/common/js/common/CommonTag.js"></script>
+    <script type="text/javascript" src="/common/js/common/Common.js"></script>
+    <script type="text/javascript" src="/common/js/common/Message.js"></script>
+    <script type="text/javascript" src="/common/js/axios/axios.js"></script>
+    <title>Login</title>
+<!--  공통으로 묶어야 하는 부분  -->
+
+</head>
+<body>
+    <div class="gi-main-body gi-flex-column gi-flex-center">
+        <main class="gi-login-main gi-flex gi-flex-center">
+            <nav class="gi-login-nav gi-flex gi-flex-center">
+                <header>
+                    <img src="common/img/GI2.png" width="150">
+                </header>
+            </nav>
+            <section class="gi-login-form-section gi-flex gi-flex-column gi-flex-center">
+                <form id="loginForm" class="gi-row-100 gi-col-80 gi-flex gi-flex-column gi-flex-center">
+                    <div class="gi-col-25 gi-row-100">
+                        <div class="gi-input-container gi-flex gi-flex-center" data-focus-line="false">
+                            <label class="gi-input-label" data-focus-label="false" data-required="true" for="email">email</label>
+                            <input class="gi-input gi-margin-1px" data-required="true" type="text" id="email" name="email" autocomplete="off"  data-focus-input-text-align="default"/>
+                        </div>
+                    </div>
+                    <div class="gi-col-25 gi-row-100">
+                        <div class="gi-input-container gi-flex gi-flex-center" data-focus-line="false">
+                            <label class="gi-input-label" data-focus-label="false" data-required="true" for="password">password</label>
+                            <input class="gi-input gi-margin-1px" data-required="true" type="password" id="password" name="password" autocomplete="off"  data-focus-input-text-align="default"/>
+                        </div>
+                    </div>
+                    <div class="gi-col-10 gi-row-100 gi-margin-top-1 gi-font-size-15px">
+                        <div class="gi-col-100 gi-input-container gi-flex gi-flex-justify-content-space-between" data-focus-line="false">
+                            <div class="gi-row-100 gi-flex gi-flex-center" style="height:var(--default-input-height)">
+                                <input type="checkbox" id="remember_email" name="remember_email" class="gi-margin-left-4 gi-input gi-cursor-pointer" data-required="false" autocomplete="off"/>
+                                <label id="remember_email_label" for="remember_email" class="gi-row-70 gi-margin-left-2 gi-cursor-pointer">로그인 유지</label>
+
+                                <span class="gi-margin-right-3">
+                                    <a id="find-pw-btn" class="gi-row-30 gi-login-forgot-password  gi-cursor-pointer" gi-popup-open-id="gi-popup2">비밀번호 찾기</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="gi-col-20 gi-row-100">
+                    <div class="gi-btn-section gi-flex gi-flex-space-around gi-col-60">
+                        <button class="gi-btn gi-row-15 gi-col-100" id="checkLogin" type="button">LOGIN</button>
+<!--                        <button class="gi-btn gi-row-15 gi-col-100" id="add_userInfo" type="button">쿠키등록</button>-->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+<article id="gi-popup2" class="gi-popup login-page" data-popup-open="false">
+    <div class="gi-popup-body login-page">
+        <div class="gi-popup-header">
+            <span>비밀번호 초기화</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="loginPageAuthenticationForm" class="gi-row-100">
+                    <div class="gi-padding-30px gi-grid gi-grid-justify-items-center gi-grid-align-items-center">
+                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>email</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="authenticationTarget" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">email</label>
+                                    <input data-field="authenticationTarget" id="authenticationTarget" name="authenticationTarget" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="500"/>
+                                    <span class="authentication-timer gi-margin-right-3"></span>
+                                </div>
+                                <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
+                                    <button id="send-number-btn" class="gi-input-btn" type="button">인증번호 전송</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>인증번호</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="authenticationNumber" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">인증번호</label>
+                                    <input data-field="authenticationNumber" id="authenticationNumber" name="authenticationNumber" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="6" inputNumberOnly/>
+                                </div>
+                                <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
+                                    <button id="number-check-btn" class="gi-input-btn" type="button">인증번호 확인</button>
+                                </div>
+                            </div>
+                            <span class="authentication-check-message gi-font-size-13px"></span>
+                        </div>
+                    </div>
+                </form>
+
+                <form id="loginPagePasswordInitializeForm" class="gi-row-100">
+                    <div class="gi-padding-30px gi-grid gi-grid-justify-items-center gi-grid-align-items-center">
+                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>새 비밀번호</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="changePassword" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">4~12자리 영문 대소문자,숫자,특수문자 조합</label>
+                                    <input data-field="changePassword" id="changePassword" name="changePassword" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="12" type="password"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                                <span>새 비밀번호 확인</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="changePasswordCheck" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">비밀번호 확인</label>
+                                    <input data-field="changePasswordCheck" id="changePasswordCheck" name="changePasswordCheck" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="12" type="password"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="initialize-btn" class="gi-popup-register-btn gi-hidden" type="button">비밀번호 초기화</button>
+                <button id="confirm-btn" class="gi-popup-register-btn gi-hidden" type="button">적용</button>
+                <button id="popup-close-btn" class="gi-popup-close-btn" type="button">닫기</button>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- 공통 footer 로 묶어야 하는 부분 -->
+<article id="commonTag">
+    <div class="confirm"></div>
+    <div class="alertPopupBody"></div>
+    <div class="showMessage"></div>
+    <div id="loadingScreenBody" class="">
+        <div id="screenBody" class=""></div>
+    </div>
+    <div id="formUtil_fileUpload"></div>
+    <div id="formUtil_uncutFileUpload"></div>
+</article>
+<!-- 공통 footer 로 묶어야 하는 부분 -->
+</html>
+<script>
+    let formUtil = new FormUtility();
+    let commonTag = new CommonTag();
+    let authenticationNumber = null;
+    let authenticationTimer = null;
+    init();
+    function init(){
+        new PageInit();
+        clickEvent();
+        $("body").addClass('animate-content-end');
+        getEmailCookie();
+    }
+    function clickEvent(){
+        $("#add_userInfo").click(function(){
+            addUser();
+        });
+        $("#checkLogin").click(function(){
+            let validation = [];
+                validation.formId = "loginForm";
+                validation[0] ={id :"email",message : Message.Label.Array["CHECK.ID"]};
+                validation[1] ={id :"password",message : Message.Label.Array["CHECK.PWD"]};
+            if(formUtil.validationCheck(validation)){
+                login();
+            }
+        });
+        $("#send-number-btn").on("click", function (){
+            sendAuthenticationEmail();
+        });
+        // $("#find-pw-btn").on("click", function (){
+        //    if(formUtil.checkEmptyValue($("#email").val())){
+        //        $("#authenticationTarget").val($("#email").val());
+        //        $("#authenticationTarget").siblings("label").attr("data-focus-label", true);
+        //    }
+        // });
+
+        // $("#number-check-btn").on("click", function (){
+        //     let timeRemaining = parseInt($(".authentication-timer").text().replaceAll(":", ""));
+        //     let disabledTag = ['authenticationNumber', 'number-check-btn'];
+        //     let checkResult = $("#authentication-check-message");
+        //
+        //     if(formUtil.checkEmptyValue(authenticationNumber)){
+        //         if(timeRemaining === 0){
+        //             $(".authentication-check-message").text("인증시간이 만료되었습니다.");
+        //         }else{
+        //             checkResult.removeClass("gi-hidden");
+        //             if(authenticationNumber === $("#authenticationNumber").val()){
+        //                 $(".authentication-check-message").text("인증되었습니다.");
+        //                 $(".authentication-check-message").addClass("success");
+        //                 $(".authentication-timer").addClass("hidden");
+        //                 clearInterval(authenticationTimer);
+        //                 commonTag.tagDisabled(true, disabledTag);
+        //                 $("#initialize-btn").removeClass("gi-hidden");
+        //             }else{
+        //                 $(".authentication-check-message").text("잘못된 인증번호입니다.");
+        //             }
+        //         }
+        //     } else {
+        //         $(".authentication-check-message").text("인증번호가 전송되지 않았습니다.");
+        //     }
+        // });
+
+        $("#popup-close-btn").on("click", function (){
+            popupInit();
+        });
+
+        $("#initialize-btn").on("click", function (){
+            $("#loginPageAuthenticationForm").addClass("invisible");
+            $("#loginPagePasswordInitializeForm").addClass("visible");
+
+            $(".authentication-timer").text("");
+            $(".authentication-check-message").removeClass("success").text("");
+            $("initialize-btn").addClass("gi-hidden")
+
+            // 버튼 enable/disbled
+            $(this).addClass("gi-hidden");
+            $("#confirm-btn").removeClass("gi-hidden");
+        });
+
+        $("#confirm-btn").on("click", async function (){
+            let validateUrl = "/common/common/commonUser/validatePasswordPolicy";
+            let initializeUrl = "/common/common/commonUser/initializePassword";
+            let newPassword = $("#changePassword").val();
+            let newPasswordCheck = $("#changePasswordCheck").val();
+
+            if(!formUtil.checkEmptyValue(newPassword)){
+                const message = Message.Label.Array["CHECK.INPUT.PASSWORD"];
+                formUtil.showMessage(message);
+                return false;
+            }
+
+            if(!formUtil.checkEmptyValue(newPasswordCheck)){
+                const message = Message.Label.Array["CHECK.INPUT.PASSWORD_CHECK"];
+                formUtil.showMessage(message);
+                return false;
+            }
+
+            if(newPassword !== newPasswordCheck){
+                const message = Message.Label.Array["FAIL.COMPARE.PASSWORD"];
+                formUtil.showMessage(message);
+                return false;
+            }
+
+            if (!await validatePassword(validateUrl, newPassword)) return false;
+
+            let param = {
+                email: $("#authenticationTarget").val(),
+                password: newPassword
+            };
+
+            try {
+                const response = await axios.post(initializeUrl, param);
+                if (response.status === 200) {
+                    const message = Message.Label.Array["COMPLETE.UPDATE"]
+                    formUtil.showMessage(message);
+
+                    // 팝업 초기화 처리
+                    $("#popup-close-btn").trigger("click");
+                }
+            } catch (error) {
+                const errorData = error.response?.data;
+                console.log(error);
+                formUtil.alertPopup(errorData || error.message || error);
+            }
+        });
+    }
+    function addUser(){
+        let cont  = {
+            user_id : "go66go66",
+            email : "go66go66@giens.co.kr",
+            password : "1234"
+        }
+        let url = "/api/v1/auth/register";
+        axios.post(url , cont).then(response =>{
+            let data = response.data;
+            formUtil.alertPopup("등록완료");
+        }).catch(error =>{
+            formUtil.alertPopup(""+error);
+        })
+    }
+    // 로그인 함수
+    function login() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let cont = {
+            email: email,
+            password: password
+        };
+        let url = "/login";
+
+        axios.post(url, cont).then(response => {
+                new session().setItem("userInfo", {
+                    email: email,
+                });
+                new session().setItem("recentPage", {url: '/index/index'}); //main으로 연결
+                let redirectUrl = response.data.redirectUrl;
+                setEmailCookie();
+                requestPageRedirect(redirectUrl);
+            }).catch(error => {
+                formUtil.alertPopup(Message.Label.Array["FAIL.IDPWD"]);
+        })
+    }
+
+    // 페이지 리디렉션 함수
+    function requestPageRedirect(redirectUrl) {
+        $("body").removeClass('animate-content-end');
+        setTimeout(function(){
+            $("body").addClass('animate-content-start');
+            window.location.href = redirectUrl;
+        },100);
+    }
+
+    function setEmailCookie(){
+        let url = "/common/setEmailCookie";
+        let email = $("#email").val();
+        let rememberMe = $("#remember_email").prop("checked");
+        let requestParam = {
+            email : email,
+            isChecked : rememberMe
+        }
+
+        axios.post(url, requestParam).then(response => {
+        }).catch(error => {
+            console.error("이메일 저장 실패:", error.response?.data?.error || error.message);
+        });
+    }
+
+    function getEmailCookie() {
+        let url = "/common/getEmailCookie";
+        axios.get(url).then(response => {
+            let email= response.data.email;
+            if(formUtil.checkEmptyValue(email)){
+                $("#email").val(email);
+                $("#email").siblings("label").attr("data-focus-label", true);
+                $("#remember_email").prop("checked", true);
+            }
+        });
+    }
+
+    function generateRandomNumber() {
+        let number = Math.floor(Math.random() * 1000000).toString();
+        return number.padStart(6, "0");
+    }
+
+    function sendAuthenticationEmail() {
+        let url = "/common/mail/sendMail";
+        let targetEmail = [$("#authenticationTarget").val()];
+        let timer = $(".authentication-timer");
+
+        $(".authentication-check-message").text("");
+        authenticationNumber = generateRandomNumber();
+        let content = authenticationMailTemplate();
+        let authenticationInfo = {
+            title: "[giens] 인증코드 발송",
+            content: content,
+            email_list : targetEmail
+        }
+        let disabledTag = ['authenticationTarget', 'send-number-btn'];
+
+        timer.removeClass("hidden");
+        startCountdownTimer(180, timer, expiredMessage);
+
+        commonTag.tagDisabled(true, disabledTag);
+
+        axios.post(url, authenticationInfo).then(response => {
+            let status = response.status;
+            console.log(status);
+            if(status === 200){
+            }else{
+                // custom alert 적용 필요
+                formUtil.showMessage("인증번호 전송 실패");
+                commonTag.tagDisabled(true, disabledTag);
+            }
+        });
+    }
+
+    function expiredMessage(){
+        let target = $(".authentication-check-message");
+        let enableTags = ['authenticationTarget', 'send-number-btn'];
+        target.removeClass("gi-hidden");
+        target.text("인증번호가 만료되었습니다.");
+        commonTag.tagDisabled(false, enableTags);
+    }
+
+    function startCountdownTimer(second, element, callback) {
+        let timeLeft = second;
+        let timerElement = element;
+        element.empty();
+
+        authenticationTimer = setInterval(() => {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            let time = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+            let elementType = element.prop("tagName") === "SPAN";
+
+            elementType ? timerElement.text(time) : timerElement.val(time);
+
+            if (timeLeft === 0) {
+                clearInterval(authenticationTimer);
+                if(typeof callback === "function"){
+                    callback();
+                }
+            }
+            timeLeft--;
+        }, 1000);
+    }
+
+    function popupInit(){
+        let loginPageAuthenticationFormInputs = $("#loginPageAuthenticationForm input");
+        let loginPagePasswordInitializeFormInputs = $("#loginPagePasswordInitializeForm input");
+        let initializeBtn = $("#initialize-btn");
+
+        // 인증번호 초기화
+        authenticationNumber = null;
+
+        // 인증 타이머 초기화
+        clearInterval(authenticationTimer);
+
+        // 비활성화 버튼/input 활성화
+        let enableTags = ['authenticationTarget', 'send-number-btn', 'authenticationNumber', 'number-check-btn'];
+        commonTag.tagDisabled(false, enableTags);
+
+        // 인증 관련 메시지 초기화
+        $(".authentication-timer").text("");
+        $(".authentication-check-message").removeClass("success").text("");
+
+        // 입력된 인증정보 초기화
+        $("#authenticationTarget").val("");
+        $("#authenticationNumber").val("");
+
+        // 비밀번호 초기화 폼 버튼 비활성화
+        if(!initializeBtn.hasClass("gi-hidden")) initializeBtn.addClass("gi-hidden");
+
+        // 팝업 폼 초기화(default : loginPageAuthenticationForm)
+        $("#loginPageAuthenticationForm").removeClass("invisible");
+        $("#loginPagePasswordInitializeForm").removeClass("visible");
+
+        // 폼 별 input 입력 초기화
+        loginPageAuthenticationFormInputs.each(function (){
+            $(this).val("");
+        })
+
+        loginPagePasswordInitializeFormInputs.each(function (){
+            $(this).val("");
+        })
+
+        // 적용 버튼 비활성화
+        $("#confirm-btn").addClass("gi-hidden");
+    }
+
+    function authenticationMailTemplate(){
+        let html = "";
+
+        html += "<div class='gi-row-100 gi-col-100'>"
+             +      "<div class='gi-row-100 gi-mail-logo-area'>"
+             +          "<a class='gi-mail-logo'></a>"
+             +      "</div>"
+             +      "<div class='gi-row-100 gi-mail-content-area'>"
+             +          "<div class='gi-row-100 gi-mail-content'>"
+             +              "[giens] 이메일 인증코드<br>"
+             +              "비밀번호 초기화를 위한 인증 코드를 발송하였습니다.<br>"
+             +              "아래의 인증 코드를 인증번호에 입력해주시기 바랍니다.<br>"
+             +           "<span>" + authenticationNumber + "</span>"
+             +          "</div>"
+             +      "</div>";
+
+        return html;
+    }
+
+</script>
