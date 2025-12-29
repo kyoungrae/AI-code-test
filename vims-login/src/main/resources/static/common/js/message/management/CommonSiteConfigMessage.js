@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 Message.Label.Array["COMMON_SITE_CONFIG.TITLE_DETAIL"] = "시스템 설정 상세";
 Message.Label.Array["COMMON_SITE_CONFIG.TITLE_LIST"] = "시스템 설정";
 Message.Label.Array["COMMON_SITE_CONFIG.TITLE_MODIFY"] = "시스템 설정 수정";

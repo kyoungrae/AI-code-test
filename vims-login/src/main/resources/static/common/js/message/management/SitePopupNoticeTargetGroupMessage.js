@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.NOTICE_ID"] = "(을)를 입력해 주세요";
 Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.GROUP_ID"] = "(을)를 입력해 주세요";

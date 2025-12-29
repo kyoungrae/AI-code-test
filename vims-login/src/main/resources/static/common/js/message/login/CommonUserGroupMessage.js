@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["COMMON_USER_GROUP.CHECK.GROUP_ID"] = "그룹아이디(을)를 입력해 주세요";
 Message.Label.Array["COMMON_USER_GROUP.CHECK.USER_EMAIL"] = "사용자 email(을)를 입력해 주세요";

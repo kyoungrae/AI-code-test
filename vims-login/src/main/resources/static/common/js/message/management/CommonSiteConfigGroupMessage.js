@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 Message.Label.Array["COMMON_SITE_CONFIG_GROUP.TITLE_DETAIL"] = " 상세";
 Message.Label.Array["COMMON_SITE_CONFIG_GROUP.TITLE_LIST"] = " 목록";
 Message.Label.Array["COMMON_SITE_CONFIG_GROUP.TITLE_MODIFY"] = " 수정";

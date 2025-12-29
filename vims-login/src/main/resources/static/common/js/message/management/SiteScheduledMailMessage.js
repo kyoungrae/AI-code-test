@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["SITE_SCHEDULED_MAIL.CHECK.MAIL_ID"] = "메일ID(SEQ)(을)를 입력해 주세요";
 Message.Label.Array["SITE_SCHEDULED_MAIL.CHECK.TITLE"] = "메일제목(을)를 입력해 주세요";

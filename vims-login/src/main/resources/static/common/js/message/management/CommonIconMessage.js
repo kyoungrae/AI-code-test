@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 Message.Label.Array["COMMON_ICON.TITLE_DETAIL"] = "아이콘 상세";
 Message.Label.Array["COMMON_ICON.TITLE_LIST"] = "아이콘 목록";
 Message.Label.Array["COMMON_ICON.TITLE_MODIFY"] = "아이콘 수정";

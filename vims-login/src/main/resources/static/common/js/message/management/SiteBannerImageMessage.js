@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 Message.Label.Array["SITE_BANNER_IMAGE.CONFIRM.ON"] = "해당 배너를 활성화 하시겠습니까?";
 Message.Label.Array["SITE_BANNER_IMAGE.CONFIRM.OFF"] = "해당 배너를 비활성화 하시겠습니까?";
 Message.Label.Array["SITE_BANNER_IMAGE.COMPLETE.CHANGE_USE"] = "상태변경 완료";

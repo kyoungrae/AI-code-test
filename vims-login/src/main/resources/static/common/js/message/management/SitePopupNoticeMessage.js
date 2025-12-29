@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["SITE_POPUP_NOTICE.CHECK.ESSENTIAL"] = "수평위치, 수직위치, 너비, 높이(을)를</br>모두 입력해 주세요";
 Message.Label.Array["SITE_POPUP_NOTICE.CHECK.TARGET_GROUP"] = "대상그룹을 1개 이상 지정해 주세요";

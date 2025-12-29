@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["COMMON_OFFICE.CHECK.TOP_OFFICE_CODE"] = "최상위 코드(을)를 입력해 주세요";
 Message.Label.Array["COMMON_OFFICE.CHECK.OFFICE_NAME"] = "기관명(을)를 입력해 주세요";

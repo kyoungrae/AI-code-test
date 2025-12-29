@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["SITE_CONFIG.CHECK.NEW_CONFIG_GROUP_ID"] = "새 설정그룹(을)를 입력해 주세요";
 Message.Label.Array["SITE_CONFIG.VALID.CONFIG_GROUP_ID"] = "이미 등록된 설정그룹입니다.";

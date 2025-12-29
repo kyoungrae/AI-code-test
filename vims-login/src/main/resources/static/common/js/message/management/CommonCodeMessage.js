@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["COMMON_CODE.CHECK.CODE_ID"] = "하위코드(을)를 입력해 주세요";
 Message.Label.Array["COMMON_CODE.CHECK.GROUP_ID"] = "상위코드(코드그룹)(을)를 입력해 주세요";

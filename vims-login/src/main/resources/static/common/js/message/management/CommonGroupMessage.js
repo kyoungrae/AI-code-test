@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 Message.Label.Array["COMMON_GROUP.TITLE_DETAIL"] = "그룹상세";
 Message.Label.Array["COMMON_GROUP.TITLE_LIST"] = "그룹설정";
 Message.Label.Array["COMMON_GROUP.TITLE_MODIFY"] = "그룹수정";

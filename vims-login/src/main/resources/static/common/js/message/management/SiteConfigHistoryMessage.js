@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["SITE_CONFIG_HISTORY.CHECK.CONFIG_GROUP_ID"] = "설정그룹ID(을)를 입력해 주세요";
 Message.Label.Array["SITE_CONFIG_HISTORY.CHECK.CONFIG_KEY"] = "설정 키(을)를 입력해 주세요";

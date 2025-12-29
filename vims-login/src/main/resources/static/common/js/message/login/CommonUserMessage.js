@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 Message.Label.Array["COMMON_USER.TITLE_DETAIL"] = "사용자관리 상세";
 Message.Label.Array["COMMON_USER.TITLE_LIST"] = "사용자관리 목록";
 Message.Label.Array["COMMON_USER.TITLE_MODIFY"] = "사용자관리 수정";

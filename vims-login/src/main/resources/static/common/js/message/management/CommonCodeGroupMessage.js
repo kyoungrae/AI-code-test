@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 
 Message.Label.Array["COMMON_CODE_GROUP.CHECK.GROUP_ID"] = "그룹아이디(을)를 입력해 주세요";
 Message.Label.Array["COMMON_CODE_GROUP.CHECK.GROUP_NAME"] = "그룹명(을)를 입력해 주세요";

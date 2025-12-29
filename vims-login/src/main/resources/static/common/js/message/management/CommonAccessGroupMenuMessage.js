@@ -1,6 +1,6 @@
-<!--const Message = {};-->
-<!--Message.Label = {};-->
-<!--Message.Label.Array = {};-->
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
 Message.Label.Array["COMMON_ACCESS_GROUP_MENU.TITLE_DETAIL"] = "메뉴권한그룹 상세";
 Message.Label.Array["COMMON_ACCESS_GROUP_MENU.TITLE_LIST"] = "메뉴권한그룹 목록";
 Message.Label.Array["COMMON_ACCESS_GROUP_MENU.TITLE_MODIFY"] = "메뉴권한그룹 수정";
