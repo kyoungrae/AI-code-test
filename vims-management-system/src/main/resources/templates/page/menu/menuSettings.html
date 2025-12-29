@@ -1,5 +1,5 @@
 <style>
-    .gi-popup-body{
+    .gi-popup-body {
         height: 450px !important;
     }
 </style>
@@ -17,9 +17,12 @@
             <!--/     그리드 영역      -->
             <!--      추가버튼 영역      -->
             <div class="gi-row-100 gi-col-30px">
-                <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px gi-flex gi-flex-justify-content-flex-end">
-                    <button id="menu_depth0_register_btn" class="gi-btn gi-float-right" type="button">[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_MENU_CODE"]</button>
-                    <button id="menu_depth_register_btn" class="gi-btn gi-float-right gi-hidden" type="button">[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_SUB_MENU_CODE"]</button>
+                <div
+                    class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px gi-flex gi-flex-justify-content-flex-end">
+                    <button id="menu_depth0_register_btn" class="gi-btn gi-float-right"
+                        type="button">[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_MENU_CODE"]</button>
+                    <button id="menu_depth_register_btn" class="gi-btn gi-float-right gi-hidden"
+                        type="button">[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_SUB_MENU_CODE"]</button>
                 </div>
             </div>
             <!--/     추가버튼 영역      -->
@@ -35,60 +38,104 @@
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-auto gi-flex gi-flex-center">
                 <form id="commonMenuRegister" class="gi-row-100 gi-grid gi-grid-justify-items-center">
-                    <div class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container gi-hidden">
+                    <div
+                        class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container gi-hidden">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_top_menu_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"]</label>
-                                    <input data-gi-tag-disabled data-field="top_menu_code" id="register_top_menu_code" name="top_menu_code" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_top_menu_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"]</label>
+                                    <input data-gi-tag-disabled data-field="top_menu_code" id="register_top_menu_code"
+                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                         </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]</label>
-                                    <input data-field="menu_name" id="register_menu_name" name="menu_name_kr" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_menu_name" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]</label>
+                                    <input data-field="menu_name" id="register_menu_name" name="menu_name_kr"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]</label>
-                                    <input data-field="menu_code" id="register_menu_code" name="menu_code" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_prgm_url" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.PRGM_URL"]</label>
-                                    <input data-field="prgm_url" id="register_prgm_url" name="prgm_url" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_url" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.URL"]</label>
-                                    <input data-field="url" id="register_url" name="url" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_menu_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]</label>
+                                    <input data-field="menu_code" id="register_menu_code" name="menu_code"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                         </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_number" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NUMBER"]</label>
-                                    <input inputNumberOnly maxlength="1" data-field="menu_number" id="register_menu_number" name="menu_number" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_prgm_url" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.PRGM_URL"]</label>
+                                    <input data-field="prgm_url" id="register_prgm_url" name="prgm_url" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_use_yn" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="register_use_yn" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_url" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.URL"]</label>
+                                    <input data-field="url" id="register_url" name="url" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_menu_number" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NUMBER"]</label>
+                                    <input inputNumberOnly maxlength="1" data-field="menu_number"
+                                        id="register_menu_number" name="menu_number" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_level" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_LEVEL"]</label>
-                                    <input inputNumberOnly data-gi-tag-disabled data-field="menu_level" id="register_menu_level" name="menu_level" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" maxlength="1"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_use_yn" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
+                                        id="register_use_yn" name="use_yn" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_menu_level" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_LEVEL"]</label>
+                                    <input inputNumberOnly data-gi-tag-disabled data-field="menu_level"
+                                        id="register_menu_level" name="menu_level" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        maxlength="1" />
                                 </div>
                             </div>
                         </div>
@@ -98,9 +145,12 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="menuRegister-btn" class="gi-popup-update-btn" type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
-                <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+            <div
+                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="menuRegister-btn" class="gi-popup-update-btn"
+                    type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+                <button class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
             </div>
         </div>
     </div>
@@ -115,60 +165,104 @@
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-auto gi-flex gi-flex-center">
                 <form id="commonMenuDepthRegister" class="gi-row-100 gi-grid gi-grid-justify-items-center">
-                    <div class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
+                    <div
+                        class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_top_menu_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"]</label>
-                                    <input data-gi-tag-disabled data-field="top_menu_code" id="register_depth_top_menu_code" name="top_menu_code" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_top_menu_code" class="gi-input-label"
+                                        data-focus-label="true" data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"]</label>
+                                    <input data-gi-tag-disabled data-field="top_menu_code"
+                                        id="register_depth_top_menu_code" name="top_menu_code" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                         </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]</label>
-                                    <input data-field="menu_name_kr" id="register_depth_menu_name" name="menu_name_kr" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_menu_name" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]</label>
+                                    <input data-field="menu_name_kr" id="register_depth_menu_name" name="menu_name_kr"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]</label>
-                                    <input data-field="menu_code" id="register_depth_menu_code" name="menu_code" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_prgm_url" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="false">[Page.Message].Message.Label.Array["COMMON_MENU.PRGM_URL"]</label>
-                                    <input data-field="prgm_url" id="register_depth_prgm_url" name="prgm_url" class="gi-input" data-focus-span-text-align="default" data-required="false" autocomplete="off"/>
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_url" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.URL"]</label>
-                                    <input data-field="url" id="register_depth_url" name="url" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_menu_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]</label>
+                                    <input data-field="menu_code" id="register_depth_menu_code" name="menu_code"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                         </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_number" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">메뉴순서</label>
-                                    <input inputNumberOnly maxlength="1" data-field="menu_number" id="register_depth_menu_number" name="menu_number" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_prgm_url" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="false">[Page.Message].Message.Label.Array["COMMON_MENU.PRGM_URL"]</label>
+                                    <input data-field="prgm_url" id="register_depth_prgm_url" name="prgm_url"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="false"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_use_yn" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="register_depth_use_yn" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_url" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_MENU.URL"]</label>
+                                    <input data-field="url" id="register_depth_url" name="url" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_menu_number" class="gi-input-label"
+                                        data-focus-label="true" data-focus-label-text-align="default"
+                                        data-required="true">메뉴순서</label>
+                                    <input inputNumberOnly maxlength="1" data-field="menu_number"
+                                        id="register_depth_menu_number" name="menu_number" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_level" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">메뉴레벨</label>
-                                    <input inputNumberOnly data-gi-tag-disabled data-field="menu_level" id="register_depth_menu_level" name="menu_level" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" maxlength="1"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_use_yn" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
+                                        id="register_depth_use_yn" name="use_yn" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="register_depth_menu_level" class="gi-input-label"
+                                        data-focus-label="true" data-focus-label-text-align="default"
+                                        data-required="true">메뉴레벨</label>
+                                    <input inputNumberOnly data-gi-tag-disabled data-field="menu_level"
+                                        id="register_depth_menu_level" name="menu_level" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        maxlength="1" />
                                 </div>
                             </div>
                         </div>
@@ -178,7 +272,8 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+            <div
+                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
                 <button id="menuDepthRegister-btn" class="gi-popup-update-btn" type="button">등록</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
@@ -195,78 +290,125 @@
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-auto gi-flex gi-flex-center">
                 <form id="commonMenuUpdate" class="gi-row-100 gi-grid gi-grid-justify-items-center">
-                    <div class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container gi-hidden">
+                    <div
+                        class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container gi-hidden">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_top_menu_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">상위메뉴코드</label>
-                                    <input data-gi-tag-disabled data-field="top_menu_code" id="update_top_menu_code" name="top_menu_code" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_top_menu_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">상위메뉴코드</label>
+                                    <input data-gi-tag-disabled data-field="top_menu_code" id="update_top_menu_code"
+                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                         </div>
-                        <div id="menu_icon_layout" class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-1fr gi-grid-rows-container">
+                        <div id="menu_icon_layout"
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_icon" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="false">메뉴아이콘</label>
-                                    <input data-gi-tag-disabled data-field="menu_icon" id="update_menu_icon" name="top_menu_code" class="gi-input" data-focus-span-text-align="default" data-required="false" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_menu_icon" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="false">메뉴아이콘</label>
+                                    <input data-gi-tag-disabled data-field="menu_icon" id="update_menu_icon"
+                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="false" autocomplete="off" />
                                 </div>
                             </div>
-                            <div class="gi-btn-section gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                                <button id="update_popup_delete_icon-btn" class="gi-btn gi-row-100" type="button">아이콘 삭제</button>
-                                <button id="update_popup_icon-btn" class="gi-btn gi-row-100" type="button" gi-popup-open-id="update_popup_icon_pack">아이콘 설정</button>
+                            <div
+                                class="gi-btn-section gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                                <button id="update_popup_delete_icon-btn" class="gi-btn gi-row-100" type="button">아이콘
+                                    삭제</button>
+                                <button id="update_popup_icon-btn" class="gi-btn gi-row-100" type="button"
+                                    gi-popup-open-id="update_popup_icon_pack">아이콘 설정</button>
                             </div>
                         </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_name" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">메뉴명</label>
-                                    <input data-field="menu_name_kr" id="update_menu_name" name="menu_name_kr" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_menu_name" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">메뉴명</label>
+                                    <input data-field="menu_name_kr" id="update_menu_name" name="menu_name_kr"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_code" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">메뉴코드</label>
-                                    <input data-gi-tag-disabled data-field="menu_code" id="update_menu_code" name="menu_code" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_prgm_url" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="false">API 경로</label>
-                                    <input data-field="prgm_url" id="update_prgm_url" name="prgm_url" class="gi-input" data-focus-span-text-align="default" data-required="false" autocomplete="off"/>
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_url" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">경로</label>
-                                    <input data-field="url" id="update_url" name="url" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_menu_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">메뉴코드</label>
+                                    <input data-gi-tag-disabled data-field="menu_code" id="update_menu_code"
+                                        name="menu_code" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                         </div>
-                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_use_yn" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">사용여부</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="update_use_yn" name="use_yn" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_prgm_url" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="false">API 경로</label>
+                                    <input data-field="prgm_url" id="update_prgm_url" name="prgm_url" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="false" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_number" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">메뉴순서</label>
-                                    <input inputNumberOnly maxlength="1" data-field="menu_number" id="update_menu_number" name="menu_number" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_url" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">경로</label>
+                                    <input data-field="url" id="update_url" name="url" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
+                                        id="update_use_yn" name="use_yn" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_level" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">메뉴레벨</label>
-                                    <input inputNumberOnly data-field="menu_level" id="update_menu_level" name="menu_level" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" maxlength="1"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_menu_number" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">메뉴순서</label>
+                                    <input inputNumberOnly maxlength="1" data-field="menu_number"
+                                        id="update_menu_number" name="menu_number" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_menu_level" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">메뉴레벨</label>
+                                    <input inputNumberOnly data-field="menu_level" id="update_menu_level"
+                                        name="menu_level" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" maxlength="1" />
                                 </div>
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-hidden">
-                                <div class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_sequence" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">메뉴고유번호</label>
-                                    <input inputNumberOnly data-field="menu_sequence" id="update_menu_sequence" name="menu_sequence" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" maxlength="1"/>
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="update_menu_sequence" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">메뉴고유번호</label>
+                                    <input inputNumberOnly data-field="menu_sequence" id="update_menu_sequence"
+                                        name="menu_sequence" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" maxlength="1" />
                                 </div>
                             </div>
                         </div>
@@ -276,7 +418,8 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+            <div
+                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
                 <button id="menuUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
@@ -291,12 +434,19 @@
         </div>
         <div id="search-area" class="gi-row-100 gi-col-35px gi-flex gi-grid-gap-10px" style="padding: 0 20px;">
             <!--      검색설정 영역      -->
-            <div class="gi-row-35 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center" data-focus-line="false">
-                <label for="search_icon_class" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false">[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]</label>
-                <input class="gi-input gi-margin-1px" data-required="false" type="text" id="search_icon_class" name="icon_class" data-focus-input-text-align="center" autocomplete="off"/>
+            <div class="gi-row-35 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
+                data-focus-line="false">
+                <label for="search_icon_class" class="gi-input-label" data-focus-label="false"
+                    data-focus-label-text-align="center"
+                    data-required="false">[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]</label>
+                <input class="gi-input gi-margin-1px" data-required="false" type="text" id="search_icon_class"
+                    name="icon_class" data-focus-input-text-align="center" autocomplete="off" />
             </div>
-            <button id="reset-btn" class="gi-btn-reset gi-input-container-box-shadow" type="button"><i class="fa-solid fa-rotate-right gi-row-30px"></i>[Page.Message].Message.Label.Array["BUTTON.RESET"]</button>
-            <button id="search_icon_class-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow" type="button" style="margin-left: auto; margin-right: 0;">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+            <button id="reset-btn" class="gi-btn-reset gi-input-container-box-shadow" type="button"><i
+                    class="fa-solid fa-rotate-right gi-row-30px"></i>[Page.Message].Message.Label.Array["BUTTON.RESET"]</button>
+            <button id="search_icon_class-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow"
+                type="button"
+                style="margin-left: auto; margin-right: 0;">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
         </div>
         <div class="gi-popup-contents gi-overflow-scroll">
             <!--      팝업내용 삽입 영역      -->
@@ -306,7 +456,8 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer" style="height: 10% !important;">
-            <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+            <div
+                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
                 <button id="btn" class="gi-popup-update-btn" type="button">수정</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
@@ -325,7 +476,7 @@
 
     init();
 
-    function init(){
+    function init() {
         //페이지 초기설정
         new PageInit();
 
@@ -335,13 +486,13 @@
         //데이터 조회
         findByCommonCodeMenuList();
 
-        setTimeout(function(){
+        setTimeout(function () {
             //클릭 이벤트
             clickEvent();
         });
     }
 
-    function resetEvent(){
+    function resetEvent() {
         //검색영역 값 초기화
         $("#search-area input").val("");
         $("#search-area select").val("");
@@ -351,40 +502,40 @@
     }
 
     //클릭 이벤트
-    function clickEvent(){
+    function clickEvent() {
         // 초기화버튼 클릭 이벤트
-        $(".gi-btn-reset").click(function(){
+        $(".gi-btn-reset").click(function () {
             resetEvent();
             // findByCommonCodeMenuList();
         });
         //조회버튼 클릭 이벤트
-        $("#search-btn").click(function(){
+        $("#search-btn").click(function () {
             // findByCommonCodeMenuList();
         });
 
-        $("#menu_depth0_register_btn").click(function(){
+        $("#menu_depth0_register_btn").click(function () {
             menuRegisterSetting();
         })
-        $("#menuRegister-btn").click(function(){
+        $("#menuRegister-btn").click(function () {
             commonMenuRegister();
         })
-        $("#menu_depth_register_btn").click(function(){
+        $("#menu_depth_register_btn").click(function () {
             menuDepthRegisterSetting();
         })
-        $("#update_popup_icon-btn").click(function(){
+        $("#update_popup_icon-btn").click(function () {
             findByCommonIconList();
         })
-        $("#search_icon_class-btn").click(function(){
+        $("#search_icon_class-btn").click(function () {
             findByCommonIconList();
         })
     }
-    function findByCommonCodeMenuList(page,range,sortId,sortOrder) {
+    function findByCommonCodeMenuList(page, range, sortId, sortOrder) {
         let url = "/cms/common/commonMenu/findHierarchy";
         let param = {
         };
         // 검색조건 설정 (추가해서 사용)
         let cont1 = $("#menu_name").val();
-        if(formUtil.checkEmptyValue(cont1)) param.menu_name = cont1;
+        if (formUtil.checkEmptyValue(cont1)) param.menu_name = cont1;
         // 정렬조건추가 (기준id, 순서)
         param.sort_id = "menu_name_kr";
         param.sort_order = "ASC";
@@ -396,85 +547,85 @@
 
                 // 그리드 헤더 설정
                 let menuGrid = {
-                    title : '[Page.Message].Message.Label.Array["COMMON_MENU.TITLE"]',
-                    list:[
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]',      ID:"menu_name_kr",     WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]',     ID:"menu_code",    WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.MENU_LEVEL"]',     ID:"menu_level",   WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NUMBER"]',     ID:"menu_number",  WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"]', ID:"top_menu_code",WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.PRGM_URL"]',     ID:"prgm_url",      WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.URL"]',         ID:"url",          WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ICON.ICON_VIEW"]',  ID:'icon_view',  WIDTH:'10',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]',     ID:"menu_icon",        WIDTH:"7",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]',     ID:"use_yn",        WIDTH:"7",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",COMMON_CODE_GROUP_ID:"USE_YN",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["MODIFY_BTN"]',        ID:"update_menu_btn",     WIDTH:"5",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["DELETE_BTN"]',        ID:"delete_menu_btn",     WIDTH:"5",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
+                    title: '[Page.Message].Message.Label.Array["COMMON_MENU.TITLE"]',
+                    list: [
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]', ID: "menu_name_kr", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]', ID: "menu_code", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_LEVEL"]', ID: "menu_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NUMBER"]', ID: "menu_number", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"]', ID: "top_menu_code", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.PRGM_URL"]', ID: "prgm_url", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.URL"]', ID: "url", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_VIEW"]', ID: 'icon_view', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]', ID: "menu_icon", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]', ID: "use_yn", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["MODIFY_BTN"]', ID: "update_menu_btn", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: "delete_menu_btn", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         // {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"]',ID:"access_right_group",     WIDTH:"5",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",VISIBLE_OPTION_BTN:{"menu_level":"0"},HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"]',ID:"access_right_group",     WIDTH:"5",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",VISIBLE_OPTION_BTN:[{"menu_level":"0"},{"menu_level":"1"}],HIDDEN:false},
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"]', ID: "access_right_group", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "menu_level": "0" }, { "menu_level": "1" }], HIDDEN: false },
 
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.MENU_SEQUENCE"]',  ID:"menu_sequence",  WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME_EN"]',      ID:"menu_name_en",     WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME_MN"]',      ID:"menu_name_mn",     WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"left",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]',     ID:"use_yn",        WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:"No",         ID:"no",              WIDTH:"7",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_DATE"]',     ID:"system_create_date",   WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_USERID"]',     ID:"system_create_userid", WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_DATE"]',     ID:"system_update_date",   WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_USERID"]',     ID:"system_update_userid", WIDTH:"15",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true}
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_SEQUENCE"]', ID: "menu_sequence", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME_EN"]', ID: "menu_name_en", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME_MN"]', ID: "menu_name_mn", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]', ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: "No", ID: "no", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_DATE"]', ID: "system_create_date", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_USERID"]', ID: "system_create_userid", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_DATE"]', ID: "system_update_date", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_USERID"]', ID: "system_update_userid", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let menu_grid = formUtil.giGridHierarchy(menuGrid,"","","gi-Grid");
+                let menu_grid = formUtil.giGridHierarchy(menuGrid, "", "", "gi-Grid");
                 //계층 구조 기준컬럼명 설정
-                menu_grid.HierarchyOption({level_column:"menu_level",parent_depth_column:"menu_code",child_depth_column:"top_menu_code"});
+                menu_grid.HierarchyOption({ level_column: "menu_level", parent_depth_column: "menu_code", child_depth_column: "top_menu_code" });
                 //그리드 데이터 설정
-                data.map((item,i) =>{
-                    data[i]["icon_view"] = "<i class='fa-solid "+item.menu_icon+"'></i>";
+                data.map((item, i) => {
+                    data[i]["icon_view"] = "<i class='fa-solid " + item.menu_icon + "'></i>";
                 })
                 menu_grid.DataSet(data);
                 //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
-                menu_grid.updateBtnClick(menuUpdateSetting,"update_menu_btn");
-                menu_grid.deleteBtnClick(commonMenuDelete,"delete_menu_btn");
+                menu_grid.updateBtnClick(menuUpdateSetting, "update_menu_btn");
+                menu_grid.deleteBtnClick(commonMenuDelete, "delete_menu_btn");
 
                 //그리스 내부의 header click 정렬 이벤트 설정
                 //menu_grid.sortDataSet(findByCommonCodeMenuList);
 
-                menu_grid.sideOpenBtnClick("access_group_grid","access_right_group");
-                menu_grid.detailBtnClick(accessGroupStatus,"access_right_group");
+                menu_grid.sideOpenBtnClick("access_group_grid", "access_right_group");
+                menu_grid.detailBtnClick(accessGroupStatus, "access_right_group");
                 menu_grid.gridColumResize("gi-Grid");
                 //그리드 row 선택 이벤트 설정
                 menu_grid.rowClick(rowClickEvent);
-                function rowClickEvent(rows,e){
+                function rowClickEvent(rows, e) {
                     let clickFlag = $(e.currentTarget).hasClass("gi-grid-list-select");
 
                     let sideGridOpenFlag = $("#access_group_grid").attr("data-side-grid-open");
-                    if(clickFlag){
-                        if(sideGridOpenFlag === "true"){
+                    if (clickFlag) {
+                        if (sideGridOpenFlag === "true") {
                             let accessGroupBtnActive = $(e.currentTarget).find("li[data-field='access_right_group']").children().length > 0;
-                            if(accessGroupBtnActive){
-                                findByCommonGroupList(null,null,null,null,rows);
-                                findByCommonAccessGroupMenuList(null,null,null,null,rows);
-                            }else{
-                                findByCommonGroupList(null,null,null,null,null);
-                                findByCommonAccessGroupMenuList(null,null,null,null,null);
+                            if (accessGroupBtnActive) {
+                                findByCommonGroupList(null, null, null, null, rows);
+                                findByCommonAccessGroupMenuList(null, null, null, null, rows);
+                            } else {
+                                findByCommonGroupList(null, null, null, null, null);
+                                findByCommonAccessGroupMenuList(null, null, null, null, null);
                             }
                         }
-                        if(rows.menu_level !== "2"){
+                        if (rows.menu_level !== "2") {
                             $("#menu_depth_register_btn").removeClass("gi-hidden");
                             rowClickData = rows;
-                            if(rows.menu_level === "1"){
-                                $("#register_depth_prgm_url").attr("data-required","true");
-                                $("label[for='register_depth_prgm_url']").attr("data-required","true");
+                            if (rows.menu_level === "1") {
+                                $("#register_depth_prgm_url").attr("data-required", "true");
+                                $("label[for='register_depth_prgm_url']").attr("data-required", "true");
                             }
-                            $("#menuDepthRegister-btn").off("click").on("click",function(){
+                            $("#menuDepthRegister-btn").off("click").on("click", function () {
                                 commonMenuDepthRegister();
                             })
-                        }else{
+                        } else {
                             $("#menu_depth_register_btn").addClass("gi-hidden");
                             rowClickData = rows;
                         }
-                    }else{
+                    } else {
                         $("#menu_depth_register_btn").addClass("gi-hidden");
                     }
                 }
@@ -485,21 +636,21 @@
             formUtil.alertPopup(error);
         })
     }
-    async function accessGroupStatus(data){
+    async function accessGroupStatus(data) {
         let htmlSource =
-             '<div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-rows-repeat-2-1fr">'
-            +'  <div class="gi-row-100 gi-grid gi-col-360px">'
-            +'    <span class="gi-text-align-center">그룹 목록</span>'
-            +'    <div id="gi-Grid2" class="gi-Grid gi-row-100"></div>'
-            +'  </div>'
-            +'  <div class="gi-row-100 gi-grid gi-col-400px">'
-            +'    <span class="gi-text-align-center">권한 적용 그룹 목록</span>'
-            +'    <div id="gi-Grid3" class="gi-Grid gi-row-100"></div>'
-            +'  </div>'
-            +'</div>';
+            '<div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-rows-repeat-2-1fr">'
+            + '  <div class="gi-row-100 gi-grid gi-col-360px">'
+            + '    <span class="gi-text-align-center">그룹 목록</span>'
+            + '    <div id="gi-Grid2" class="gi-Grid gi-row-100"></div>'
+            + '  </div>'
+            + '  <div class="gi-row-100 gi-grid gi-col-400px">'
+            + '    <span class="gi-text-align-center">권한 적용 그룹 목록</span>'
+            + '    <div id="gi-Grid3" class="gi-Grid gi-row-100"></div>'
+            + '  </div>'
+            + '</div>';
         await $("#access_group_grid").append(htmlSource);
-        await findByCommonGroupList(null,null,null,null,data);
-        await findByCommonAccessGroupMenuList(null,null,null,null,data);
+        await findByCommonGroupList(null, null, null, null, data);
+        await findByCommonAccessGroupMenuList(null, null, null, null, data);
     }
     /**
      * NOTE : 그룹 목록
@@ -509,42 +660,42 @@
      * @param sortOrder
      * @param cont
      */
-    function findByCommonGroupList(page,range,sortId,sortOrder,cont) {
+    function findByCommonGroupList(page, range, sortId, sortOrder, cont) {
         let url = "/cms/common/commonGroup/findNotExistsCommonAccessGroupMenu";
         let param = {
         };
         // 검색조건 설정 (추가해서 사용)
-        if(cont !== null) if(formUtil.checkEmptyValue(cont.menu_code)) param.menu_code = cont.menu_code;
+        if (cont !== null) if (formUtil.checkEmptyValue(cont.menu_code)) param.menu_code = cont.menu_code;
         axios.post(url, param).then(response => {
             let status = response.status;
             if (status === 200) {
                 let data = response.data;
                 // 그리드 헤더 설정
                 let commonGroup_menuGrid_header = {
-                    title : "그룹아이디 목록",
-                    list:[
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_NAME"]',  ID:"group_name",  WIDTH:"30",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.TOP_GROUP_ID"]',  ID:"top_group_id",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_ID"]',  ID:"group_id",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.USE_YN"]',  ID:"use_yn",  WIDTH:"20",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",COMMON_CODE_GROUP_ID:"USE_YN",HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_LEVEL"]',  ID:"group_level",  WIDTH:"5",TYPE:"text",FONT_SIZE:"12px",TEXT_ALIGN:"center",HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["REGISTER_BTN"]',  ID:"register_btn",  WIDTH:"10",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",VISIBLE_OPTION_BTN:{"group_level":"0"},HIDDEN:false},
+                    title: "그룹아이디 목록",
+                    list: [
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_NAME"]', ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.TOP_GROUP_ID"]', ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_ID"]', ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.USE_YN"]', ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_LEVEL"]', ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["REGISTER_BTN"]', ID: "register_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: { "group_level": "0" }, HIDDEN: false },
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let commonGroup_menu_grid = formUtil.giGridHierarchy(commonGroup_menuGrid_header,null,null,"gi-Grid2");
+                let commonGroup_menu_grid = formUtil.giGridHierarchy(commonGroup_menuGrid_header, null, null, "gi-Grid2");
 
-                commonGroup_menu_grid.HierarchyOption({level_column:"group_level",parent_depth_column:"group_id",child_depth_column:"top_group_id"});
+                commonGroup_menu_grid.HierarchyOption({ level_column: "group_level", parent_depth_column: "group_id", child_depth_column: "top_group_id" });
                 //그리드 데이터 설정
-                if(cont !== null){
+                if (cont !== null) {
                     commonGroup_menu_grid.DataSet(data);
-                }else{
+                } else {
                     commonGroup_menu_grid.DataSet();
                 }
 
-                commonGroup_menu_grid.detailBtnClick(registerAccessGroupInMenu,"register_btn");
+                commonGroup_menu_grid.detailBtnClick(registerAccessGroupInMenu, "register_btn");
                 commonGroup_menu_grid.gridColumResize("gi-Grid2");
-                function registerAccessGroupInMenu(row){
+                function registerAccessGroupInMenu(row) {
                     row["menu_code"] = cont.menu_code;
                     accessGroupInMenuRegister(row);
                 }
@@ -556,20 +707,20 @@
             formUtil.alertPopup(error);
         })
     }
-    function accessGroupInMenuRegister(row){
+    function accessGroupInMenuRegister(row) {
         let flag = true;
-        if(flag){
+        if (flag) {
             let url = "/cms/common/commonAccessGroupMenu/register";
             let param = {
-                menu_code : row.menu_code,
-                access_rights_group_id : row.group_id
+                menu_code: row.menu_code,
+                access_rights_group_id: row.group_id
             };
-            axios.post(url,param).then(response =>{
+            axios.post(url, param).then(response => {
                 let status = response.status;
                 if (status === 200) {
                     formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
-                    findByCommonGroupList(null,null,null,null,row);
-                    findByCommonAccessGroupMenuList(null,null,null,null,row);
+                    findByCommonGroupList(null, null, null, null, row);
+                    findByCommonAccessGroupMenuList(null, null, null, null, row);
                     findByMenuList();
                 } else {
                     formUtil.alertPopup("response status is :" + status);
@@ -588,22 +739,22 @@
      * @param sortOrder
      * @param cont
      */
-    function findByCommonAccessGroupMenuList(page,range,sortId,sortOrder,cont) {
+    function findByCommonAccessGroupMenuList(page, range, sortId, sortOrder, cont) {
         //default page
-        if(!formUtil.checkEmptyValue(page)) page = 1;
+        if (!formUtil.checkEmptyValue(page)) page = 1;
         //default range(row)
-        if(!formUtil.checkEmptyValue(range)) range = 10;
+        if (!formUtil.checkEmptyValue(range)) range = 10;
 
         let url = "/cms/common/commonAccessGroupMenu/findPage";
         let param = {
-            page_no:page,
-            row_range : range,
-            offset: (page-1) * range
+            page_no: page,
+            row_range: range,
+            offset: (page - 1) * range
         };
-        if(cont !== null) if(formUtil.checkEmptyValue(cont.menu_code)) param.menu_code = cont.menu_code;
+        if (cont !== null) if (formUtil.checkEmptyValue(cont.menu_code)) param.menu_code = cont.menu_code;
         // 정렬조건추가 (기준id, 순서)
-        if(formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
-        if(formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+        if (formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+        if (formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
 
         axios.post(url, param).then(response => {
             let status = response.status;
@@ -613,22 +764,22 @@
 
                 // 그리드 헤더 설정
                 let commonAccessGroupMenu_menuGrid_header = {
-                    title : '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.TITLE"]',
-                    list:[
-                        {HEADER:'No',  ID:'no',   WIDTH:'7',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.MENU_CODE"]',  ID:'menu_code',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.ACCESS_RIGHTS_GROUP_ID"]',  ID:'access_rights_group_id',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_DATE"]',  ID:'system_create_date',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_USERID"]',  ID:'system_create_userid',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_DATE"]',  ID:'system_update_date',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_USERID"]',  ID:'system_update_userid',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["DELETE_BTN"]',  ID:'delete_btn',  WIDTH:'15',TYPE:'button',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false}
-                        <!--{HEADER:'사이드 그리드',  ID:'sideGridOpen_btn',  WIDTH:'15',TYPE:'button',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false}-->
-                        <!--{HEADER:'checkbox',  ID:'checkbox',  WIDTH:'25',TYPE:'checkbox',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},-->
+                    title: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.TITLE"]',
+                    list: [
+                        { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.MENU_CODE"]', ID: 'menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.ACCESS_RIGHTS_GROUP_ID"]', ID: 'access_rights_group_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_DATE"]', ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_USERID"]', ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_DATE"]', ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_USERID"]', ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let commonAccessGroupMenu_menu_grid = formUtil.giGrid(commonAccessGroupMenu_menuGrid_header,paging,page,"gi-Grid3");
+                let commonAccessGroupMenu_menu_grid = formUtil.giGrid(commonAccessGroupMenu_menuGrid_header, paging, page, "gi-Grid3");
 
                 //그리드 하이라키 구조로 변경
                 //let commonAccessGroupMenu_menu_grid = formUtil.giGridHierarchy(commonAccessGroupMenu_menuGrid_header,paging,page);
@@ -638,9 +789,9 @@
                 //commonAccessGroupMenu_menu_grid.sideOpenBtnClick("gi-Grid-side","sideGridOpen_btn");
 
                 //그리드 데이터 설정
-                if(cont !== null){
+                if (cont !== null) {
                     commonAccessGroupMenu_menu_grid.DataSet(data);
-                }else{
+                } else {
                     commonAccessGroupMenu_menu_grid.DataSet();
                 }
                 //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
@@ -649,13 +800,13 @@
                 //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
                 // commonAccessGroupMenu_menu_grid.detailBtnClick(redirectDetailPage,"detail_btn");
 
-                commonAccessGroupMenu_menu_grid.deleteBtnClick(deleteCommonAccessGroupId,"delete_btn");
+                commonAccessGroupMenu_menu_grid.deleteBtnClick(deleteCommonAccessGroupId, "delete_btn");
 
                 //그리스 내부의 header click 정렬 이벤트 설정
                 commonAccessGroupMenu_menu_grid.sortDataSet(findByCommonAccessGroupMenuList);
                 commonAccessGroupMenu_menu_grid.gridColumResize("gi-Grid3");
 
-                function deleteCommonAccessGroupId(row){
+                function deleteCommonAccessGroupId(row) {
                     commonAccessGroupIdRemove(row);
                 }
             } else {
@@ -666,80 +817,80 @@
         })
     }
     //NOTE: 메뉴 등록 팝업 데이터 설정
-    function menuRegisterSetting(){
-        $("#gi-menu_register-popup").attr("data-popup-open","true");
+    function menuRegisterSetting() {
+        $("#gi-menu_register-popup").attr("data-popup-open", "true");
         $("#register_top_menu_code").val("-");
 
         $("#register_menu_level").val("0");
-        $("#register_prgm_url").attr("data-required","false");
-        $("label[for='register_prgm_url']").attr("data-required","false");
+        $("#register_prgm_url").attr("data-required", "false");
+        $("label[for='register_prgm_url']").attr("data-required", "false");
         inputTageReset.commonTagSettings();
     }
-    function menuDepthRegisterSetting(){
-        $("#gi-menuDepth_register-popup").attr("data-popup-open","true");
+    function menuDepthRegisterSetting() {
+        $("#gi-menuDepth_register-popup").attr("data-popup-open", "true");
         $("#register_depth_top_menu_code").val(rowClickData.menu_code);
-        $("#register_depth_menu_level").val((parseInt(rowClickData.menu_level)+1)+"");
+        $("#register_depth_menu_level").val((parseInt(rowClickData.menu_level) + 1) + "");
 
         inputTageReset.commonTagSettings();
     }
 
     //NOTE: 메뉴 수정 팝업 데이터 설정
-    function menuUpdateSetting(cont){
-        $("#gi-menu_update-popup").attr("data-popup-open","true");
-        data_binding.setDataSelectBox("update_use_yn",cont.use_yn);
-        data_binding.setDataForm("gi-menu_update-popup",cont);
-        $("#update_popup_delete_icon-btn").off("click").on("click",function(){
+    function menuUpdateSetting(cont) {
+        $("#gi-menu_update-popup").attr("data-popup-open", "true");
+        data_binding.setDataSelectBox("update_use_yn", cont.use_yn);
+        data_binding.setDataForm("gi-menu_update-popup", cont);
+        $("#update_popup_delete_icon-btn").off("click").on("click", function () {
             $("#update_menu_icon").val("");
         })
-        if(cont.menu_level !== "0"){
+        if (cont.menu_level !== "0") {
             $("#menu_icon_layout").addClass("gi-hidden");
             $("#update_menu_icon").val("");
-            if(cont.menu_level !== "1"){
-                $("#update_prgm_url").attr("data-required","true");
-                $("label[for='update_prgm_url']").attr("data-required","true");
-            }else{
-                $("#update_prgm_url").attr("data-required","false");
-                $("label[for='update_prgm_url']").attr("data-required","false");
+            if (cont.menu_level !== "1") {
+                $("#update_prgm_url").attr("data-required", "true");
+                $("label[for='update_prgm_url']").attr("data-required", "true");
+            } else {
+                $("#update_prgm_url").attr("data-required", "false");
+                $("label[for='update_prgm_url']").attr("data-required", "false");
             }
-        }else{
+        } else {
             $("#menu_icon_layout").removeClass("gi-hidden");
-            $("#update_prgm_url").attr("data-required","false");
-            $("label[for='update_prgm_url']").attr("data-required","false");
+            $("#update_prgm_url").attr("data-required", "false");
+            $("label[for='update_prgm_url']").attr("data-required", "false");
         }
-        $("#menuUpdate-btn").off("click.menuUpdateBtnClickEventHandler").on("click.menuUpdateBtnClickEventHandler",menuUpdateBtnClickEventHandler);
-        function menuUpdateBtnClickEventHandler(){
+        $("#menuUpdate-btn").off("click.menuUpdateBtnClickEventHandler").on("click.menuUpdateBtnClickEventHandler", menuUpdateBtnClickEventHandler);
+        function menuUpdateBtnClickEventHandler() {
             commonMenuUpdate();
         }
     }
     /**
      * NOTE: 상위메뉴등록
      */
-    function commonMenuRegister(){
-        let flag =  checkRegisterPopupValidation();
-        if(flag){
+    function commonMenuRegister() {
+        let flag = checkRegisterPopupValidation();
+        if (flag) {
             let url = "/cms/common/commonMenu/register"
             let data = new dataBinding().getData(COMMON_MENU_REGISTER_PRGMID);
             let param = {
-                menu_code : data.menu_code,
-                menu_name_kr : data.menu_name,
-                menu_number : data.menu_number,
-                menu_level : data.menu_level,
-                top_menu_code : data.top_menu_code,
-                url : data.url,
-                prgm_url : data.prgm_url,
-                use_yn : data.use_yn
+                menu_code: data.menu_code,
+                menu_name_kr: data.menu_name,
+                menu_number: data.menu_number,
+                menu_level: data.menu_level,
+                top_menu_code: data.top_menu_code,
+                url: data.url,
+                prgm_url: data.prgm_url,
+                use_yn: data.use_yn
             };
 
-            axios.post(url, param).then(response =>{
-                if(response.status === 200){
+            axios.post(url, param).then(response => {
+                if (response.status === 200) {
                     formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close("gi-menu_register-popup");
                     findByCommonCodeMenuList();
                     findByMenuList();
-                }else{
+                } else {
                     formUtil.showMessage(Message.Label.Array["FAIL.INSERT"])
                 }
-            }).catch(error =>{
+            }).catch(error => {
                 formUtil.alertPopup(error.response.data);
             })
         }
@@ -748,32 +899,32 @@
     /**
      * NOTE: 하위메뉴등록
      */
-    function commonMenuDepthRegister(){
-        let flag =  checkValidation(COMMON_MENU_DEPTH_REGISTER_PRGMID);
-        if(flag){
+    function commonMenuDepthRegister() {
+        let flag = checkValidation(COMMON_MENU_DEPTH_REGISTER_PRGMID);
+        if (flag) {
             let url = "/cms/common/commonMenu/register"
             let data = new dataBinding().getData(COMMON_MENU_DEPTH_REGISTER_PRGMID);
             let param = {
-                menu_code : data.menu_code,
-                menu_name_kr : data.menu_name_kr,
-                menu_number : data.menu_number,
-                menu_level : data.menu_level,
-                top_menu_code : data.top_menu_code,
-                url : data.url,
-                prgm_url : data.prgm_url,
-                use_yn : data.use_yn
+                menu_code: data.menu_code,
+                menu_name_kr: data.menu_name_kr,
+                menu_number: data.menu_number,
+                menu_level: data.menu_level,
+                top_menu_code: data.top_menu_code,
+                url: data.url,
+                prgm_url: data.prgm_url,
+                use_yn: data.use_yn
             };
 
-            axios.post(url, param).then(response =>{
-                if(response.status === 200){
+            axios.post(url, param).then(response => {
+                if (response.status === 200) {
                     formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close("gi-menuDepth_register-popup");
                     findByCommonCodeMenuList();
                     findByMenuList();
-                }else{
+                } else {
                     formUtil.showMessage(Message.Label.Array["FAIL.INSERT"])
                 }
-            }).catch(error =>{
+            }).catch(error => {
                 formUtil.alertPopup(error.response.data);
             })
         }
@@ -781,32 +932,32 @@
     /**
      * NOTE: 메뉴 업데이트 API
      */
-    function commonMenuUpdate(){
-        if(menuModifyCheckValidation(COMMON_MENU_UPDATE_PRGMID)){
+    function commonMenuUpdate() {
+        if (menuModifyCheckValidation(COMMON_MENU_UPDATE_PRGMID)) {
             let data = new dataBinding().getData(COMMON_MENU_UPDATE_PRGMID);
             let url = "/cms/common/commonMenu/update";
             let param = {
-                menu_code :data.menu_code ,
-                menu_name_kr :data.menu_name_kr ,
-                menu_number :data.menu_number ,
-                menu_level :data.menu_level ,
-                top_menu_code :data.top_menu_code ,
-                url :data.url ,
-                prgm_url : data.prgm_url,
-                use_yn :data.use_yn,
-                menu_sequence : data.menu_sequence,
-                menu_icon : data.menu_icon
+                menu_code: data.menu_code,
+                menu_name_kr: data.menu_name_kr,
+                menu_number: data.menu_number,
+                menu_level: data.menu_level,
+                top_menu_code: data.top_menu_code,
+                url: data.url,
+                prgm_url: data.prgm_url,
+                use_yn: data.use_yn,
+                menu_sequence: data.menu_sequence,
+                menu_icon: data.menu_icon
             };
-            axios.post(url, param).then(response =>{
-                if(response.status === 200){
+            axios.post(url, param).then(response => {
+                if (response.status === 200) {
                     formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
                     common_popup.close("gi-menu_update-popup");
                     findByCommonCodeMenuList();
                     findByMenuList();
-                }else{
+                } else {
                     formUtil.showMessage(Message.Label.Array["FAIL.UPDATE"]);
                 }
-            }).catch(error =>{
+            }).catch(error => {
                 formUtil.alertPopup(error + "");
             })
         }
@@ -815,24 +966,24 @@
      * NOTE: 메뉴 ROW DATA 삭제
      * @param cont
      */
-    function commonMenuDelete(cont){
+    function commonMenuDelete(cont) {
         let data = cont;
         let url = "/cms/common/commonMenu/removeMenuCode";
         let param = {
-            menu_code : data.menu_code,
+            menu_code: data.menu_code,
             menu_sequence: data.menu_sequence
         };
-        axios.post(url, param).then(response =>{
+        axios.post(url, param).then(response => {
             formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
             findByCommonCodeMenuList();
             findByMenuList();
-        }).catch(error =>{
+        }).catch(error => {
             formUtil.alertPopup(error.response.data);
         })
     }
-    function checkRegisterPopupValidation(){
+    function checkRegisterPopupValidation() {
         let flag = false;
-        let validation = $('#'+COMMON_MENU_REGISTER_PRGMID+' [data-required="true"]')
+        let validation = $('#' + COMMON_MENU_REGISTER_PRGMID + ' [data-required="true"]')
             .filter((_, el) => formUtil.checkEmptyValue(el.id))
             .map((_, el) => ({
                 id: el.id,
@@ -844,73 +995,73 @@
         }
         return flag;
     }
-    function checkValidation(ID){
+    function checkValidation(ID) {
         let flag = false;
 
         let validation = [];
         validation.formId = ID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
-            if($(item).data("field")){
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
+            if ($(item).data("field")) {
                 let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COMMON_GROUP.CHECK."+messageId];
-                validation.push({id:item.id,message:message});
+                let message = Message.Label.Array["COMMON_GROUP.CHECK." + messageId];
+                validation.push({ id: item.id, message: message });
             }
         });
-        if(formUtil.validationCheck(validation)){
+        if (formUtil.validationCheck(validation)) {
             flag = true;
         }
         return flag;
     }
     //NOTE: 메뉴 수정 유효성 검사
-    function menuModifyCheckValidation(ID){
+    function menuModifyCheckValidation(ID) {
         let flag = false;
 
         let validation = [];
         validation.formId = ID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
-            if($(item).data("field")){
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
+            if ($(item).data("field")) {
                 let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COMMON_MENU.CHECK."+messageId];
-                validation.push({id:item.id,message:message});
+                let message = Message.Label.Array["COMMON_MENU.CHECK." + messageId];
+                validation.push({ id: item.id, message: message });
             }
         });
-        if(formUtil.validationCheck(validation)){
+        if (formUtil.validationCheck(validation)) {
             flag = true;
         }
         return flag;
     }
     //NOTE: 권한 적용 그룹 목록 Group_id 삭제
-    function commonAccessGroupIdRemove(cont){
+    function commonAccessGroupIdRemove(cont) {
         let url = "/cms/common/commonAccessGroupMenu/remove";
         let param = {
-            menu_code : cont.menu_code,
-            access_rights_group_id : cont.access_rights_group_id
+            menu_code: cont.menu_code,
+            access_rights_group_id: cont.access_rights_group_id
         }
-        axios.post(url, param).then(response =>{
-            if(response.status === 200){
+        axios.post(url, param).then(response => {
+            if (response.status === 200) {
                 formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
-                findByCommonGroupList(null,null,null,null,cont);
-                findByCommonAccessGroupMenuList(null,null,null,null,cont);
+                findByCommonGroupList(null, null, null, null, cont);
+                findByCommonAccessGroupMenuList(null, null, null, null, cont);
                 findByMenuList();
             }
-        }).catch(error =>{
+        }).catch(error => {
             formUtil.alertPopup(error.response.data);
         })
     }
-    function findByCommonIconList(page,range,sortId,sortOrder) {
+    function findByCommonIconList(page, range, sortId, sortOrder) {
         //default page
-        if(!formUtil.checkEmptyValue(page)) page = 1;
+        if (!formUtil.checkEmptyValue(page)) page = 1;
         //default range(row)
-        if(!formUtil.checkEmptyValue(range)) range = 10;
+        if (!formUtil.checkEmptyValue(range)) range = 10;
 
         let url = "/cms/common/commonIcon/findPage";
         let param = {
-            page_no:page,
-            row_range : range,
-            offset: (page-1) * range
+            page_no: page,
+            row_range: range,
+            offset: (page - 1) * range
         };
 
-        if(formUtil.checkEmptyValue($("#search_icon_class").val())) param._icon_class =  $("#search_icon_class").val();
+        if (formUtil.checkEmptyValue($("#search_icon_class").val())) param._icon_class = $("#search_icon_class").val();
 
         axios.post(url, param).then(response => {
             let status = response.status;
@@ -920,21 +1071,21 @@
 
                 // 그리드 헤더 설정
                 let commonIcon_menuGrid_header = {
-                    title : '[Page.Message].Message.Label.Array["COMMON_ICON.TITLE"]',
-                    list:[
-                        {HEADER:'No',  ID:'no',   WIDTH:'7',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CODE"]',  ID:'icon_code',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ICON.ICON_VIEW"]',  ID:'icon_view',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ICON.ICON_NAME"]',  ID:'icon_name',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:true},
-                        {HEADER:'[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]',  ID:'icon_class',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},
-                        {HEADER:'[Page.Message].Message.Label.Array["SELECT_BTN"]',  ID:'select_btn',  WIDTH:'15',TYPE:'button',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false}
-                        <!--{HEADER:'사이드 그리드',  ID:'sideGridOpen_btn',  WIDTH:'15',TYPE:'button',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false}-->
-                        <!--{HEADER:'checkbox',  ID:'checkbox',  WIDTH:'25',TYPE:'checkbox',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},-->
+                    title: '[Page.Message].Message.Label.Array["COMMON_ICON.TITLE"]',
+                    list: [
+                        { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CODE"]', ID: 'icon_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_VIEW"]', ID: 'icon_view', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_NAME"]', ID: 'icon_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]', ID: 'icon_class', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SELECT_BTN"]', ID: 'select_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false }
                     ]
                 }
-                let commonIcon_menu_grid = formUtil.giGrid(commonIcon_menuGrid_header,paging,page,"gi-icon-grid");
-                data.map((item,i) =>{
-                    data[i]["icon_view"] = "<i class='fa-solid "+item.icon_class+"'></i>";
+                let commonIcon_menu_grid = formUtil.giGrid(commonIcon_menuGrid_header, paging, page, "gi-icon-grid");
+                data.map((item, i) => {
+                    data[i]["icon_view"] = "<i class='fa-solid " + item.icon_class + "'></i>";
                 })
                 //그리드 데이터 설정
                 commonIcon_menu_grid.DataSet(data);
@@ -943,11 +1094,11 @@
                 commonIcon_menu_grid.pagingSet(findByCommonIconList);
 
                 //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
-                commonIcon_menu_grid.detailBtnClick(selectMenuIconPopup,"select_btn");
+                commonIcon_menu_grid.detailBtnClick(selectMenuIconPopup, "select_btn");
 
                 //그리스 내부의 header click 정렬 이벤트 설정
                 commonIcon_menu_grid.sortDataSet(findByCommonIconList);
-                function selectMenuIconPopup(rows){
+                function selectMenuIconPopup(rows) {
                     $("#update_menu_icon").val(rows.icon_class);
                     common_popup.close("update_popup_icon_pack");
                     inputTageReset.commonTagSettings();
