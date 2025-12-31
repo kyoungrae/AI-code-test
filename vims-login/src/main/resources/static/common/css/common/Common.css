@@ -10,25 +10,22 @@
 }
 
 ::-webkit-scrollbar-track {
-    border-radius: 0.125rem;
-    background-color: unset
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar {
-    width: 0.20rem;
-    height: 0.15rem;
-    border-radius: 0.125rem;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 0.125rem;
-    background-color: #e5e5e5;
+    border-radius: 4px;
+    background-color: #CBD5E1;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     cursor: pointer;
-    border-radius: 0.125rem;
-    background-color: #a1a1a1;
+    background-color: #94A3B8;
 }
 
 * {
@@ -37,45 +34,45 @@
     font-family: 'Pretendard-Regular', sans-serif;
     box-sizing: border-box;
 
-    --default-input-height: 50px;
+    --default-input-height: 44px;
     --logo-image: url("../../img/GI.png");
 
-    --border-radius-btn: 10px;
-    --border-radius-grid-btn: 5px;
-    --border-radius-header: 10px;
-    --border-radius-article: 18px;
-    --border-layout: 1px solid #a9a9a9;
-    --border-grid-input-edge: 15px;
+    --border-radius-btn: 8px;
+    --border-radius-grid-btn: 6px;
+    --border-radius-header: 12px;
+    --border-radius-article: 16px;
+    --border-layout: 1px solid #E2E8F0;
+    --border-grid-input-edge: 12px;
 
     --height-100vh: 100vh;
     --width-section-btn: 100%;
     --heigth-section-btn: 100%;
-    --padding-btn: 1px 10px 1px 10px;
-    --padding-icon-btn: 1px 20px 1px 10px;
+    --padding-btn: 0.5rem 1rem;
+    --padding-icon-btn: 0.5rem 1.25rem 0.5rem 0.75rem;
 
-    --main-background-color: rgba(171, 171, 171, 0.13);
-    --main-background-header-color: #080825;
+    --main-background-color: #F8FAFC;
+    --main-background-header-color: #1E293B;
 
-    --background-color-btn-red: #ff7575;
-    --background-color-btn-blue: #33b3f7;
-    --background-color-btn-back: #021453;
-    --background-color-btn-file-upload: #021453;
-    --background-color-btn-green: #5ee16a;
-    --background-color-btn-gray: #8b8b8b;
-    --background-color-btn-yellow: #efc977;
+    --background-color-btn-red: #EF4444;
+    --background-color-btn-blue: #3B82F6;
+    --background-color-btn-back: #1F2937;
+    --background-color-btn-file-upload: #1F2937;
+    --background-color-btn-green: #10B981;
+    --background-color-btn-gray: #6B7280;
+    --background-color-btn-yellow: #F59E0B;
 
-    --background-color-input-btn-hover: #a9a9a9;
-    --background-color-btn-red-hover: #a93232;
-    --background-color-btn-blue-hover: #1a84b7;
-    --background-color-btn-back-hover: #e8b129;
-    --background-color-btn-green-hover: #1dab2b;
-    --background-color-btn-gray-hover: #4b4b4b;
+    --background-color-input-btn-hover: #9CA3AF;
+    --background-color-btn-red-hover: #DC2626;
+    --background-color-btn-blue-hover: #2563EB;
+    --background-color-btn-back-hover: #111827;
+    --background-color-btn-green-hover: #059669;
+    --background-color-btn-gray-hover: #4B5563;
     --background-text-color-btn-gray-hover: #ffffff;
-    --background-color-btn-yellow-hover: #1644b0;
-    --background-color-btn-light-gray: #f1f1f1;
+    --background-color-btn-yellow-hover: #D97706;
+    --background-color-btn-light-gray: #F3F4F6;
 
-    --color-calendar-holiyday: #ff1c1c;
-    --grid-row-selector-height: 25px;
+    --color-calendar-holiyday: #EF4444;
+    --grid-row-selector-height: 32px;
 }
 
 /* ======================================================================================================== position 영역*/
@@ -6909,12 +6906,14 @@
 }
 
 .gi-input-container-box-shadow {
-    box-shadow: 0px 0px 3px #00000033;
+    box-shadow: none;
+    border: 1px solid #E2E8F0;
     border-radius: var(--border-radius-header);
 }
 
 .gi-select-container-box-shadow {
-    box-shadow: 0px 0px 3px #00000033;
+    box-shadow: none;
+    border: 1px solid #E2E8F0;
     border-radius: var(--border-radius-header);
 }
 
@@ -6942,9 +6941,9 @@
     position: absolute;
     top: var(--input-height);
     height: 2px;
-    background-color: #53859794;
+    background-color: var(--background-color-btn-blue);
     transform-origin: center;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     transform: scaleX(0);
 }
@@ -6954,9 +6953,9 @@
     position: absolute;
     top: var(--input-height);
     height: 2px;
-    background-color: #53859794;
+    background-color: var(--background-color-btn-blue);
     transform-origin: center;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     transform: scaleX(0);
 }
@@ -19747,6 +19746,8 @@ html {
     height: 100%;
     overflow: visible;
     background-color: var(--main-background-header-color);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    /* Modern Shadow */
     /*padding-right: 4px;*/
     transform: translateX(0);
     transition: transform 0.5s ease-in-out;
@@ -19825,7 +19826,7 @@ html {
     left: 0;
     width: 2px;
     height: calc(100% + 5px);
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* 가로 연결선 */
@@ -19836,7 +19837,7 @@ html {
     left: 0;
     width: 11px;
     height: 2px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .gi-side-nav-menu-level:last-child>.gi-side-nav-menu-item.child:last-child::before {
@@ -19944,7 +19945,7 @@ html {
     transform: rotate(-180deg);
 }
 
-.gi-side-nav-toggle-icon {}
+
 
 .gi-side-nav-toggle-image {
     filter: invert(85%) sepia(0%) saturate(0%) hue-rotate(0deg);
@@ -20185,10 +20186,26 @@ a.gi-search-menu-title:active {
 }
 
 .gi-grid-list {
-    /*margin: 10px 0 ;*/
+    margin-bottom: 5px;
     padding: 10px 0;
     box-sizing: border-box;
 }
+
+.gi-grid-list-header>li,
+.gi-grid-list>li {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.gi-grid-list-header>li.hidden,
+.gi-grid-list>li.hidden,
+.gi-grid-list-header>li.gi-hidden,
+.gi-grid-list>li.gi-hidden {
+    display: none !important;
+}
+
 
 #gi-grid-list-body {
     height: calc(100% - var(--grid-row-selector-height));
@@ -20269,44 +20286,85 @@ a.gi-search-menu-title:active {
 
 .gi-grid-hierarchy-depth0 {
     font-weight: bolder;
-    text-shadow: 0px 0px #000000;
+    display: flex;
+    align-items: center;
 }
 
 .gi-grid-hierarchy-depth0::before {
     content: "";
-    /*background-image: url(../../img/rectangle.png);*/
     background-image: url(../../img/circle.png);
     position: relative;
-    width: 15px;
-    display: flex;
-    justify-content: flex-end;
-    background-repeat: no-repeat;
-    background-size: 12px 12px;
-    background-position-x: right;
-}
-
-.gi-grid-hierarchy-depth1::before {
-    content: "";
-    background-image: url(../../img/hierarchy.png);
-    position: relative;
     width: 20px;
+    height: 100%;
     display: flex;
-    justify-content: flex-end;
     background-repeat: no-repeat;
-    background-size: 10px 10px;
-    background-position-x: right;
+    background-size: 8px 8px;
+    background-position: center;
+    flex-shrink: 0;
 }
 
+.gi-grid-hierarchy-depth1,
+.gi-grid-hierarchy-depth2 {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.gi-grid-hierarchy-depth1::before,
 .gi-grid-hierarchy-depth2::before {
     content: "";
-    background-image: url(../../img/hierarchy.png);
     position: relative;
-    width: 40px;
-    display: flex;
-    justify-content: flex-end;
-    background-repeat: no-repeat;
-    background-size: 10px 10px;
-    background-position-x: right;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Level 1 Lines */
+.gi-grid-hierarchy-depth1::before {
+    width: 25px;
+    height: calc(100% + 5px);
+    /* Matches margin-bottom of .gi-grid-list */
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 12px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth1.gi-grid-hierarchy-last::before {
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 50% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 12px 50% / 12px 1px no-repeat;
+}
+
+/* Level 2 Lines */
+.gi-grid-hierarchy-depth2::before {
+    width: 45px;
+    height: calc(100% + 5px);
+    background:
+        /* Parent Line */
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
+        /* Self Line */
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 100% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth2.gi-grid-hierarchy-parent-last::before {
+    /* Hide parent vertical line part below the horizontal branch if needed, but usually we just hide the whole parent trail */
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 100% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth2.gi-grid-hierarchy-last::before {
+    /* Truncate self vertical line */
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 50% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth2.gi-grid-hierarchy-parent-last.gi-grid-hierarchy-last::before {
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 50% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
 }
 
 .gi-grid-border {
@@ -20319,10 +20377,7 @@ a.gi-search-menu-title:active {
     /*border:2px solid #ee00ff;*/
 }
 
-.gi-grid-border> :first-child {
-    /*border-bottom:1px solid #d0d0d0;*/
-    /*border:2px solid #ff0099;*/
-}
+
 
 .gi-grid-border> :last-child {
     border-top: 1px solid #d0d0d0 !important;
@@ -20510,7 +20565,7 @@ a.gi-search-menu-title:active {
     text-decoration: none;
 }
 
-.menu-open[data-border-animation="true"] {}
+
 
 .gi-menu-sub {
     background-color: #FFFFFF00;
@@ -20553,7 +20608,7 @@ a.gi-search-menu-title:active {
 .gi-login-main {
     border-radius: 25px;
     background-color: #ffffff;
-    box-shadow: 8px 12px 22px #000000de;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     overflow: hidden;
     width: 45%;
     height: 30%;
@@ -21576,4 +21631,175 @@ input.gi-switch:checked::before {
 
 [gi-slider-next] {
     right: 0px;
+}
+
+/* ======================================================================================================== Modern Design Overrides Link Fix Final 4 */
+
+/* 1. GRID CONTAINER SPACING FIX */
+/* Remove any default browser margins/paddings from the list rows to reduce gaps */
+ul.gi-grid-list {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 2. GRID ROW HEIGHT FIX - ULTRA COMPACT */
+/* User requested tighter spacing. 24px is the absolute minimum to fit a 20px button comfortably. */
+ul.gi-grid-list>li.gi-col-16px {
+    height: auto !important;
+    min-height: 24px !important;
+    /* Reduced from 30px to 24px */
+    padding: 0 !important;
+}
+
+/* 3. CENTER ALIGN ONLY BUTTON CELLS - Fix for Hierarchy Lines */
+/* Only align button cells to center so tree lines in other cells don't break */
+ul.gi-grid-list>li[data-field*="btn"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* 4. MAIN BUTTONS (Large) */
+button[class*="gi-btn"],
+a[class*="gi-btn"],
+input[type="button"][class*="gi-btn"],
+input[type="submit"][class*="gi-btn"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 500 !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid transparent !important;
+    border-radius: 6px !important;
+    letter-spacing: normal !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 0.25rem 1rem !important;
+    line-height: normal !important;
+    min-height: 36px;
+    height: auto !important;
+}
+
+/* 5. GRID BUTTONS (Ultra Compact 20px) */
+/* Tiny buttons to fit in the 24px row without clipping */
+.gi-grid-btn,
+.gi-grid-modify-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 500 !important;
+    border-radius: 3px !important;
+    letter-spacing: normal !important;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+    /* Cleaner look for dense grid */
+
+    height: 20px !important;
+    /* 20px Height */
+    padding: 0 6px !important;
+    font-size: 11px !important;
+    margin: 0 2px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+}
+
+/* Specific Colors */
+.gi-grid-btn {
+    /* Delete/Normal Button */
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #475569 !important;
+}
+
+.gi-grid-btn:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+    color: #0f172a !important;
+}
+
+.gi-grid-modify-btn {
+    /* Modify Button */
+    background-color: #FFF7ED !important;
+    border: 1px solid #FFEDD5 !important;
+    color: #C2410C !important;
+}
+
+.gi-grid-modify-btn:hover {
+    background-color: #FFEDD5 !important;
+    border-color: #FB923C !important;
+}
+
+/* Reset for Containers */
+div[class*="gi-btn"],
+span[class*="gi-btn"] {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    transform: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* Hover State */
+button[class*="gi-btn"]:hover,
+a[class*="gi-btn"]:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+    transform: translateY(-1px) !important;
+    filter: brightness(1.02) !important;
+}
+
+/* Active State */
+button[class*="gi-btn"]:active,
+a[class*="gi-btn"]:active,
+.gi-grid-btn:active,
+.gi-grid-modify-btn:active {
+    transform: translateY(0) !important;
+    box-shadow: none !important;
+}
+
+/* 4. INPUTS */
+.gi-input-container,
+.gi-select-container {
+    background-color: #ffffff;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hide underline animation */
+.gi-input-container::after,
+.gi-select-container::after {
+    display: none !important;
+}
+
+/* Focus State */
+.gi-input-container:focus-within,
+.gi-select-container:focus-within {
+    border-color: var(--background-color-btn-blue) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* 5. PAGING / DROPDOWN */
+.gi-grid-row-selector {
+    background-color: #ffffff !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 6px !important;
+    padding: 0 8px !important;
+    font-size: 13px;
+    height: 32px !important;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.gi-grid-row-selector:focus {
+    outline: none;
+    border-color: var(--background-color-btn-blue) !important;
+}
+
+/* Layout */
+.gi-main2,
+.gi-main-content {
+    background-color: var(--main-background-color);
 }
