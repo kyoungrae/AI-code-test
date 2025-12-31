@@ -1,6 +1,7 @@
 package com.system.common.util.message;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Component;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +23,9 @@ import java.util.regex.Pattern;
 public class MessageService {
     private final Map<String, Map<String, String>> messageCache = new HashMap<>();
 
+    @Value("${message.gateway.url:}")
+    private String gatewayUrl; // 예: http://localhost:8080
+
     @PostConstruct
     public void init() {
         loadAllMessages("ko");
@@ -28,10 +34,49 @@ public class MessageService {
     }
 
     private void loadAllMessages(String locale) {
-        for (String baseName : getJsFiles()) {
+        List<String> jsFiles = getJsFiles();
+
+        // 로컬에 파일이 없으면 기본 메시지 파일 목록 사용 (Gateway를 통해 로드하기 위해)
+        if (jsFiles.isEmpty()) {
+            System.out.println("⚠️  로컬 리소스에서 JS 파일을 찾을 수 없습니다. Gateway를 통해 기본 메시지 파일들을 시도합니다.");
+            jsFiles = getDefaultMessageFiles();
+        }
+
+        for (String baseName : jsFiles) {
             String fileName = locale.equals("en") ? baseName + ".en.js" : baseName + ".js";
             loadMessagesFromFile(fileName, locale);
         }
+    }
+
+    // 기본 메시지 파일 목록 (Gateway를 통해 로드할 파일들)
+    private List<String> getDefaultMessageFiles() {
+        List<String> defaultFiles = new ArrayList<>();
+        defaultFiles.add("Message"); // common/Message.js
+        // management 관련 메시지들
+        defaultFiles.add("CommonMenuMessage");
+        defaultFiles.add("CommonIconMessage");
+        defaultFiles.add("CommonGroupMessage");
+        defaultFiles.add("CommonUserMessage");
+        defaultFiles.add("CommonCodeMessage");
+        defaultFiles.add("CommonCodeGroupMessage");
+        defaultFiles.add("CommonAccessGroupMenuMessage");
+        defaultFiles.add("CommonAccessGroupMenuListMessage");
+        defaultFiles.add("CommonUserGroupMessage");
+        defaultFiles.add("CommonOfficeMessage");
+        defaultFiles.add("CommonSiteConfigMessage");
+        defaultFiles.add("CommonSiteConfigGroupMessage");
+        defaultFiles.add("IndexMessage");
+        defaultFiles.add("SiteBannerImageMessage");
+        defaultFiles.add("SiteConfigHistoryMessage");
+        defaultFiles.add("SiteConfigMessage");
+        defaultFiles.add("SitePopupNoticeMessage");
+        defaultFiles.add("SitePopupNoticeTargetGroupMessage");
+        defaultFiles.add("SiteScheduledMailMessage");
+        defaultFiles.add("SiteScheduledMailTargetGroupMessage");
+        defaultFiles.add("SiteSentMailManagementMessage");
+
+        System.out.println("📋 기본 메시지 파일 목록: " + defaultFiles.size() + "개");
+        return defaultFiles;
     }
 
     // JS 파일 목록을 동적으로 조회
@@ -97,8 +142,54 @@ public class MessageService {
             }
         }
 
+        // 로컬에서 찾지 못하면 Gateway URL을 통해 시도
+        if (gatewayUrl != null && !gatewayUrl.isEmpty()) {
+            System.out.println("  → Gateway를 통해 메시지 로드 시도: " + fileName);
+            if (loadMessagesFromGateway(fileName, locale)) {
+                return;
+            }
+        }
+
         // 파일을 찾을 수 없으면 경고 메시지 출력
         System.err.println("  ✗ 경고: " + fileName + " 파일을 어떤 경로에서도 찾을 수 없습니다.");
+    }
+
+    // Gateway URL을 통해 메시지를 로드하는 함수
+    private boolean loadMessagesFromGateway(String fileName, String locale) {
+        String[] gatewayPaths = {
+                "/common/js/common/" + fileName,
+                "/common/js/message/" + fileName,
+                "/common/js/message/login/" + fileName,
+                "/common/js/message/management/" + fileName,
+                "/common/js/message/fms/" + fileName,
+                "/common/js/message/gateway/" + fileName
+        };
+
+        for (String path : gatewayPaths) {
+            String fullUrl = gatewayUrl + path;
+            try {
+                System.out.println("    Gateway URL 시도: " + fullUrl);
+                URL url = new URL(fullUrl);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+
+                int responseCode = conn.getResponseCode();
+                if (responseCode == 200) {
+                    try (InputStream inputStream = conn.getInputStream()) {
+                        System.out.println("  ✓ Gateway에서 파일 로드 성공: " + fullUrl);
+                        parseAndCacheMessages(inputStream, locale);
+                        return true;
+                    }
+                } else {
+                    System.err.println("    ✗ HTTP " + responseCode + ": " + fullUrl);
+                }
+            } catch (Exception e) {
+                System.err.println("    ✗ Gateway 로드 실패: " + fullUrl + " - " + e.getMessage());
+            }
+        }
+        return false;
     }
 
     // 리소스 경로 반환

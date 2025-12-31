@@ -547,32 +547,32 @@
 
                 // 그리드 헤더 설정
                 let menuGrid = {
-                    title: '[Page.Message].Message.Label.Array["COMMON_MENU.TITLE"]',
+                    title: Message.Label.Array["COMMON_MENU.TITLE"],
                     list: [
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]', ID: "menu_name_kr", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]', ID: "menu_code", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_LEVEL"]', ID: "menu_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NUMBER"]', ID: "menu_number", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"]', ID: "top_menu_code", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.PRGM_URL"]', ID: "prgm_url", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.URL"]', ID: "url", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_VIEW"]', ID: 'icon_view', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]', ID: "menu_icon", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]', ID: "use_yn", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["MODIFY_BTN"]', ID: "update_menu_btn", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: "delete_menu_btn", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        // {HEADER:'[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"]',ID:"access_right_group",     WIDTH:"5",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",VISIBLE_OPTION_BTN:{"menu_level":"0"},HIDDEN:false},
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"]', ID: "access_right_group", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "menu_level": "0" }, { "menu_level": "1" }], HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME"], ID: "menu_name_kr", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_MENU.MENU_CODE"], ID: "menu_code", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_MENU.MENU_LEVEL"], ID: "menu_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NUMBER"], ID: "menu_number", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"], ID: "top_menu_code", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_MENU.PRGM_URL"], ID: "prgm_url", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_MENU.URL"], ID: "url", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_ICON.ICON_VIEW"], ID: 'icon_view', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_ICON.ICON_CLASS"], ID: "menu_icon", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_MENU.USE_YN"], ID: "use_yn", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: Message.Label.Array["MODIFY_BTN"], ID: "update_menu_btn", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["DELETE_BTN"], ID: "delete_menu_btn", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        // {HEADER: Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"],ID:"access_right_group",     WIDTH:"5",TYPE:"button",FONT_SIZE:"12px",TEXT_ALIGN:"center",VISIBLE_OPTION_BTN:{"menu_level":"0"},HIDDEN:false},
+                        { HEADER: Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"], ID: "access_right_group", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "menu_level": "0" }, { "menu_level": "1" }], HIDDEN: false },
 
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_SEQUENCE"]', ID: "menu_sequence", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME_EN"]', ID: "menu_name_en", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME_MN"]', ID: "menu_name_mn", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.USE_YN"]', ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.MENU_SEQUENCE"], ID: "menu_sequence", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME_EN"], ID: "menu_name_en", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME_MN"], ID: "menu_name_mn", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.USE_YN"], ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: "No", ID: "no", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_DATE"]', ID: "system_create_date", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_USERID"]', ID: "system_create_userid", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_DATE"]', ID: "system_update_date", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_USERID"]', ID: "system_update_userid", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
+                        { HEADER: Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_DATE"], ID: "system_create_date", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.SYSTEM_CREATE_USERID"], ID: "system_create_userid", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_DATE"], ID: "system_update_date", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_MENU.SYSTEM_UPDATE_USERID"], ID: "system_update_userid", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
@@ -674,12 +674,12 @@
                 let commonGroup_menuGrid_header = {
                     title: "그룹아이디 목록",
                     list: [
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_NAME"]', ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.TOP_GROUP_ID"]', ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_ID"]', ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.USE_YN"]', ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_GROUP.GROUP_LEVEL"]', ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["REGISTER_BTN"]', ID: "register_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: { "group_level": "0" }, HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_GROUP.TOP_GROUP_ID"], ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_GROUP.GROUP_ID"], ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_GROUP.USE_YN"], ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_GROUP.GROUP_LEVEL"], ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["REGISTER_BTN"], ID: "register_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: { "group_level": "0" }, HIDDEN: false },
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
@@ -764,16 +764,16 @@
 
                 // 그리드 헤더 설정
                 let commonAccessGroupMenu_menuGrid_header = {
-                    title: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.TITLE"]',
+                    title: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.TITLE"],
                     list: [
                         { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.MENU_CODE"]', ID: 'menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.ACCESS_RIGHTS_GROUP_ID"]', ID: 'access_rights_group_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_DATE"]', ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_USERID"]', ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_DATE"]', ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_USERID"]', ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.MENU_CODE"], ID: 'menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.ACCESS_RIGHTS_GROUP_ID"], ID: 'access_rights_group_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_CREATE_USERID"], ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_DATE"], ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_USERID"], ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false }
                     ]

@@ -7,6 +7,11 @@ server:
             enabled: true
             force: true
 
+# Message Gateway 설정 - vims-login의 메시지 파일을 gateway를 통해 로드
+message:
+    gateway:
+        url: http://localhost:8080
+
 spring:
     profiles:
         active: local
