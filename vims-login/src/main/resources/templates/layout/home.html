@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,14 +11,6 @@
     <link rel="stylesheet" href="/common/css/common/api.css">
 
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/brands.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/fontawesome.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/regular.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/solid.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/svg-with-js.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/v4-font-face.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/v4-shims.css">
-    <link rel="stylesheet" href="/assets/fontawesome/css/v5-font-face.css">
 
     <script type="text/javascript" src="/common/js/jquery/jquery3.6.0.js"></script>
     <script type="text/javascript" src="/common/js/common/FormUtility.js"></script>
@@ -32,7 +25,8 @@
     <script type="text/javascript" src="/common/js/messageConfig.js"></script>
 
     <!-- kakao 지도 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08b7a9bdd253ada6f1d65275b08aec58&libraries=services"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=08b7a9bdd253ada6f1d65275b08aec58&libraries=services"></script>
 
     <!-- kakao 주소검색 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -42,72 +36,69 @@
     <link href="/assets/quill/quill.snow.css" rel="stylesheet">
     <script src="/assets/quill/image-resize.min.js"></script>
 </head>
-    <body>
-        <main class="gi-main2">
-            <nav class="gi-side-nav expand">
-                <div class="gi-side-nav-toggle-button-area">
-                    <span class="gi-side-nav-toggle-button">
-                        <i class="gi-cursor-pointer fa-inverse fa-solid fa-angles-left gi-side-nav-toggle-icon"></i>
-                    </span>
-                </div>
-                <div class="gi-row-100 gi-side-nav-logo-area">
-                    <a href="" id="gi-logo2" class="gi-side-nav-logo"></a>
-                </div>
-                <div class="gi-row-90">
-                    <ul class="gi-ul gi-flex gi-flex-justify-content-space-evenly" id="menu">
-                        <!--메뉴삽입영역-->
-                    </ul>
-                </div>
-                <div class="gi-home-setting"></div>
-                <!-- 여기에 search, 유저 영역 추가 -->
-                <article class="gi-col-auto side-nav-profile-container collapsed">
-                    <div class="side-nav-profile-dropdown">
-                        <div class="side-nav-profile-trigger">
-                            <div class="profile-info-frame">
-                                <img id="user-image" class="profile-picture" src="/common/img/userIcon.png" alt="user image"/>
-                                <div class="profile-info">
-                                    <span class="profile-name"><span id="user-name-span"></span> 님</span>
-                                    <span class="profile-name "><span id="office-name-span"></span></span>
-                                </div>
+
+<body>
+    <main class="gi-main2">
+        <nav class="gi-side-nav expand">
+            <div class="gi-side-nav-toggle-button-area">
+                <span class="gi-side-nav-toggle-button">
+                    <i class="gi-cursor-pointer fa-inverse fa-solid fa-angles-left gi-side-nav-toggle-icon"></i>
+                </span>
+            </div>
+            <div class="gi-row-100 gi-side-nav-logo-area">
+                <a href="" id="gi-logo2" class="gi-side-nav-logo"></a>
+            </div>
+            <div class="gi-row-90">
+                <ul class="gi-ul gi-flex gi-flex-justify-content-space-evenly" id="menu">
+                    <!--메뉴삽입영역-->
+                </ul>
+            </div>
+            <div class="gi-home-setting"></div>
+            <!-- 여기에 search, 유저 영역 추가 -->
+            <article class="gi-col-auto side-nav-profile-container collapsed">
+                <div class="side-nav-profile-dropdown">
+                    <div class="side-nav-profile-trigger">
+                        <div class="profile-info-frame">
+                            <img id="user-image" class="profile-picture" src="/common/img/userIcon.png"
+                                alt="user image" />
+                            <div class="profile-info">
+                                <span class="profile-name"><span id="user-name-span"></span> 님</span>
+                                <span class="profile-name "><span id="office-name-span"></span></span>
                             </div>
-                            <span class="profile-name"><i class="fas fa-angle-right gi-margin-5px"></i></span>
                         </div>
-                        <div class="dropdown-menu">
-                            <a id="myinfo-btn" href="#"><i class="fa-regular fa-user"></i><span>내 정보 수정</span></a>
-                            <hr/>
-                            <a id="logout-btn" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>로그아웃</span></a>
-                        </div>
+                        <span class="profile-name"><i class="fas fa-angle-right gi-margin-5px"></i></span>
                     </div>
-                </article>
-                <article class="gi-home-setting-article gi-hidden slide-drop-down">
-                    <label class="gi-row-100">
-                        <select class="gi-select" style="border: 1px solid #a7a7a7 !important; border-radius: 8px;">
-                            <option>Language</option>
-                            <option value="en">English</option>
-                            <option value="mo">Монгол хэл</option>
-                            <option value="ko">한국어</option>
-                        </select>
-                    </label>
-                </article>
-
-                <div class="gi-row-100 gi-col-6 gi-margin-top-5 search-menu-container">
-                    <div class="gi-row-90 gi-col-60 gi-flex gi-flex-center search-menu-area">
-                        <img id="search" class="gi-search-icon-image" src="/common/img/search.svg" alt="user image"/>
-                        <input data-field="search_menu_name" id="search_menu_name" name="search_menu_name" class="gi-input" autocomplete="off" placeholder="Search" style="font-size:0.8rem"/>
+                    <div class="dropdown-menu">
+                        <a id="myinfo-btn" href="#"><i class="fa-regular fa-user"></i><span>내 정보 수정</span></a>
+                        <hr />
+                        <a id="logout-btn" href="#"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i><span>로그아웃</span></a>
                     </div>
-                    <div class="gi-row-100 gi-search-menu-result-area"></div>
                 </div>
+            </article>
+            <article class="gi-home-setting-article gi-hidden slide-drop-down">
+                <label class="gi-row-100">
+                    <select class="gi-select" style="border: 1px solid #a7a7a7 !important; border-radius: 8px;">
+                        <option>Language</option>
+                        <option value="en">English</option>
+                        <option value="mo">Монгол хэл</option>
+                        <option value="ko">한국어</option>
+                    </select>
+                </label>
+            </article>
 
-                <div class="gi-row-100 gi-col-70" id="side_nav_menu_container">
-                    <ul class="gi-row-98 gi-col-100 gi-overflow gi-ul" id="side_nav_menu"></ul>
-                </div>
-                <div class="gi-row-100 gi-col-auto gi-margin-top-5 scroll-check-icon">
-                    <i class="fa-solid fa-beat-fade fa-angles-down"></i>
-                </div>
-            </nav>
-            <section id="gi-road-content" class="gi-main-content gi-col-100 gi-row-100 gi-flex gi-side-nav-toggle expand" data-animation="false" data-side-nav-toggle-area></section>
-        </main>
-    </body>
+            <div class="gi-row-100 gi-col-70" id="side_nav_menu_container">
+                <ul class="gi-row-98 gi-col-100 gi-overflow gi-ul" id="side_nav_menu"></ul>
+            </div>
+            <div class="gi-row-100 gi-col-auto gi-margin-top-5 scroll-check-icon">
+                <i class="fa-solid fa-beat-fade fa-angles-down"></i>
+            </div>
+        </nav>
+        <section id="gi-road-content" class="gi-main-content gi-col-100 gi-row-100 gi-flex gi-side-nav-toggle expand"
+            data-animation="false" data-side-nav-toggle-area></section>
+    </main>
+</body>
+
 </html>
 <article id="commonTag">
     <div class="confirm"></div>
@@ -137,7 +128,7 @@
         findByMenuList();
         findUserName();
     }
-    function layoutClickEvent(){
+    function layoutClickEvent() {
         /**
          * NOTE: 프로필 사이드네비 OPEN
          * */
@@ -149,9 +140,9 @@
         /**
          * NOTE: 로그아웃 버튼 이벤트
          */
-        $("#logout-btn").off().on("click",function(){
+        $("#logout-btn").off().on("click", function () {
             $("body").removeClass('animate-content-end');
-            setTimeout(function(){
+            setTimeout(function () {
                 $("body").addClass('animate-content-start');
                 window.location.href = "/api/v1/auth/logout";
             });
@@ -159,12 +150,12 @@
     }
 
     //NOTE : 내정보 메뉴 이벤트
-    function dropDownMenu(flag){
-        if(flag === "open"){
+    function dropDownMenu(flag) {
+        if (flag === "open") {
             $(".dropdown-menu").stop(true, true).slideToggle(150).css("display", "flex");
             $(".side-nav-profile-dropdown").toggleClass("active");
             $(".side-nav-profile-trigger").toggleClass("active");
-        }else if(flag === "close"){
+        } else if (flag === "close") {
             $(".dropdown-menu").stop(true, true).slideToggle(150).css("display", "none");
             $(".side-nav-profile-dropdown").removeClass("active");
             $(".side-nav-profile-trigger").removeClass("active");
@@ -174,7 +165,7 @@
         const email = JwtUtils.getUserEmailFromJWT();
         const url = "/cms/common/commonUser/find";
 
-        axios.post(url, {email}).then(response => {
+        axios.post(url, { email }).then(response => {
             const data = response.data[0];
             $('#user-name-span').text(data.user_name).css('font-size', '1rem');
             $('#office-name-span').text(data.office_name).css('font-size', '0.8rem');
@@ -186,8 +177,8 @@
     /**
      * NOTE: 메뉴바 OPEN,CLOSE EVENT(노출 or 숨김)
      */
-    function sideNaveOpenCloseEvent(){
-        let giSideNavToggleButtonArea =$(".gi-side-nav-toggle-button-area");
+    function sideNaveOpenCloseEvent() {
+        let giSideNavToggleButtonArea = $(".gi-side-nav-toggle-button-area");
         /**
          * NOTE: BTN HOVER EVENT
          */
@@ -200,10 +191,10 @@
             }
         );
 
-        giSideNavToggleButtonArea.on("click", function (){
+        giSideNavToggleButtonArea.on("click", function () {
             let $toggleButton = $(this);
 
-            if($toggleButton.hasClass("collapsed")){
+            if ($toggleButton.hasClass("collapsed")) {
                 $toggleButton.removeClass("collapsed");
                 $(".main-nav-menu").removeClass("visible");
                 $(".gi-main-nav-logo-area").removeClass("visible");
@@ -218,8 +209,8 @@
             let mainArea = $("[data-side-nav-toggle-area]");
 
             // sideNav, mainArea handling
-            mainArea.each(function (){
-                if($(this).hasClass("expand")){
+            mainArea.each(function () {
+                if ($(this).hasClass("expand")) {
                     $(this).removeClass("expand");
                     $(this).addClass("collapsed");
                 } else {
@@ -236,12 +227,12 @@
     /**
      * NOTE : 메뉴데이터 조회
      */
-    function findByMenuList(){
+    function findByMenuList() {
         let url = "/cms/common/commonMenu/findAccessRightGroupForMenu";
         let param = {};
-        axios.post(url,param).then(response => {
+        axios.post(url, param).then(response => {
             let status = response.status;
-            if(status === 200){
+            if (status === 200) {
                 let data = response.data;
                 let sideNavMenuList1Depth = [];
                 let sideNavMenuList2Depth = [];
@@ -253,46 +244,46 @@
                 data.sort((a, b) => parseInt(a.menu_level) - parseInt(b.menu_level));
 
                 data.map((item) => {
-                    if(!formUtil.checkEmptyValue(item.menu_level)) {
+                    if (!formUtil.checkEmptyValue(item.menu_level)) {
                         formUtil.alertPopup("item.menu_level is undefined");
                         return false;
                     }
 
-                    switch (item.menu_level){
-                        case '0' :
+                    switch (item.menu_level) {
+                        case '0':
                             sideNavMenuList1Depth.push({
-                                menu_code : item.menu_code,
-                                top_menu_code : item.top_menu_code,
-                                menu_name : item.menu_name_kr,
-                                menu_level : item.menu_level,
-                                url : item.URL,
-                                menu_icon : item.menu_icon,
-                                menu_number : item.menu_number
+                                menu_code: item.menu_code,
+                                top_menu_code: item.top_menu_code,
+                                menu_name: item.menu_name_kr,
+                                menu_level: item.menu_level,
+                                url: item.URL,
+                                menu_icon: item.menu_icon,
+                                menu_number: item.menu_number
                             });
                             break;
 
-                        case '1' :
+                        case '1':
                             sideNavMenuList2Depth.push({
-                                menu_code : item.menu_code,
-                                top_menu_code : item.top_menu_code,
-                                menu_name : item.menu_name_kr,
-                                menu_level : item.menu_level,
-                                url : item.url,
-                                menu_icon : item.menu_icon,
-                                menu_number : item.menu_number
+                                menu_code: item.menu_code,
+                                top_menu_code: item.top_menu_code,
+                                menu_name: item.menu_name_kr,
+                                menu_level: item.menu_level,
+                                url: item.url,
+                                menu_icon: item.menu_icon,
+                                menu_number: item.menu_number
                             });
                             break;
 
-                        case '2' :
+                        case '2':
                             sideNavMenuList3Depth.push({
-                                menu_code : item.menu_code,
-                                top_menu_code : item.top_menu_code,
-                                menu_name : item.menu_name_kr,
-                                menu_level : item.menu_level,
-                                url : item.url,
-                                prgm_url : item.prgm_url,
-                                menu_icon : item.menu_icon,
-                                menu_number : item.menu_number
+                                menu_code: item.menu_code,
+                                top_menu_code: item.top_menu_code,
+                                menu_name: item.menu_name_kr,
+                                menu_level: item.menu_level,
+                                url: item.url,
+                                prgm_url: item.prgm_url,
+                                menu_icon: item.menu_icon,
+                                menu_number: item.menu_number
                             });
                             break;
                     }
@@ -307,7 +298,7 @@
                         menu_name: item.menu_name_kr,
                         menu_level: item.menu_level,
                         url: item.url,
-                        menu_icon : item.menu_icon,
+                        menu_icon: item.menu_icon,
                         children: [] // 하위 메뉴를 담을 배열
                     };
 
@@ -330,65 +321,65 @@
                 $("#side_nav_menu").html(sideNavMenuHtml);
                 sideNavTitleClick();
                 existsNavSelected();
-            }else{
-                formUtil.alertPopup("response status is :"+status);
+            } else {
+                formUtil.alertPopup("response status is :" + status);
             }
-        }).catch(error =>{
+        }).catch(error => {
             formUtil.alertPopup(error);
         })
     }
 
     //NOTE : 사이드 네비 메뉴리스트 생성
-    function createSideNavMenuList(sideNavMenuList1Depth, sideNavMenuList2Depth, sideNavMenuList3Depth){
+    function createSideNavMenuList(sideNavMenuList1Depth, sideNavMenuList2Depth, sideNavMenuList3Depth) {
         let sideNavMenuHtml = "";
 
         sideNavMenuList1Depth.map(menu1 => {
-            sideNavMenuHtml +=  "<li class='gi-side-nav-menu-item gi-margin-bottom-26px'>"
-                +      "<a href='#' class='gi-side-nav-title collapsed' data-menu-level='" + menu1.menu_level + "' data-menu-code='" + menu1.menu_code + "'>"
-                +      "<i class='fa-inverse gi-side-nav-title-icon fa-solid " + menu1.menu_icon + "'></i>"
-                +          "<span>" + menu1.menu_name + "</span>"
-                +          "<span class='fa-solid fa-angle-right'></span>"
-                +      "</a>";
+            sideNavMenuHtml += "<li class='gi-side-nav-menu-item gi-margin-bottom-26px'>"
+                + "<a href='#' class='gi-side-nav-title collapsed' data-menu-level='" + menu1.menu_level + "' data-menu-code='" + menu1.menu_code + "'>"
+                + "<i class='fa-inverse gi-side-nav-title-icon fa-solid " + menu1.menu_icon + "'></i>"
+                + "<span>" + menu1.menu_name + "</span>"
+                + "<span class='fa-solid fa-angle-right'></span>"
+                + "</a>";
 
-            if(formUtil.checkEmptyValue(sideNavMenuList2Depth)){
+            if (formUtil.checkEmptyValue(sideNavMenuList2Depth)) {
                 sideNavMenuList2Depth.map(menu2 => {
                     let list2Depth = "";
-                    if(menu1.menu_code === menu2.top_menu_code){
-                        list2Depth +=   "<ul class='gi-side-nav-menu-level'>"
-                            +       "<li class='gi-side-nav-menu-item child'>"
-                            +           "<a href='#' class='gi-margin-left-5 gi-side-nav-title collapsed' data-menu-level='" + menu2.menu_level + "' data-menu-code='" + menu2.menu_code + "'>"
-                            +               "<span>" + menu2.menu_name + "</span>"
-                            +               "<span class='fa-solid fa-angle-right'></span>"
-                            +           "</a>";
+                    if (menu1.menu_code === menu2.top_menu_code) {
+                        list2Depth += "<ul class='gi-side-nav-menu-level'>"
+                            + "<li class='gi-side-nav-menu-item child'>"
+                            + "<a href='#' class='gi-margin-left-5 gi-side-nav-title collapsed' data-menu-level='" + menu2.menu_level + "' data-menu-code='" + menu2.menu_code + "'>"
+                            + "<span>" + menu2.menu_name + "</span>"
+                            + "<span class='fa-solid fa-angle-right'></span>"
+                            + "</a>";
 
-                        if(formUtil.checkEmptyValue(sideNavMenuList3Depth)){
+                        if (formUtil.checkEmptyValue(sideNavMenuList3Depth)) {
                             let list3Depth = "<ul class='gi-side-nav-menu-level'>";
                             sideNavMenuList3Depth.map(menu3 => {
-                                if(menu2.menu_code === menu3.top_menu_code){
-                                    list3Depth +=   "<li class='gi-margin-left-5 gi-side-nav-menu-item child'>"
-                                        +       "<a href='#' class='sideNavPageLoad gi-side-nav-title' data-prgm-url='"+menu3.prgm_url+"' data-page-name='" + menu3.url + "' data-menu-level='" + menu3.menu_level + "' data-menu-code='" + menu3.menu_code + "'>"
-                                        +           "<span>" + menu3.menu_name + "</span>"
-                                        +       "</a>"
-                                        +   "</li>";
+                                if (menu2.menu_code === menu3.top_menu_code) {
+                                    list3Depth += "<li class='gi-margin-left-5 gi-side-nav-menu-item child'>"
+                                        + "<a href='#' class='sideNavPageLoad gi-side-nav-title' data-prgm-url='" + menu3.prgm_url + "' data-page-name='" + menu3.url + "' data-menu-level='" + menu3.menu_level + "' data-menu-code='" + menu3.menu_code + "'>"
+                                        + "<span>" + menu3.menu_name + "</span>"
+                                        + "</a>"
+                                        + "</li>";
                                 }
                             });
-                            list3Depth  +=  "</ul>";
-                            list2Depth +=   list3Depth
-                                +   "</li>"
-                                +   "</ul>";
+                            list3Depth += "</ul>";
+                            list2Depth += list3Depth
+                                + "</li>"
+                                + "</ul>";
                         }
                         sideNavMenuHtml += list2Depth;
                     }
                 });
             }
-            sideNavMenuHtml +=   "</li>";
+            sideNavMenuHtml += "</li>";
         });
 
         return sideNavMenuHtml;
     }
     //NOTE : 사이드 네비게이션 타이틀 클릭 이벤트
-    function sideNavTitleClick(){
-        $('.gi-side-nav-title').off("click").on('click', function(e) {
+    function sideNavTitleClick() {
+        $('.gi-side-nav-title').off("click").on('click', function (e) {
             e.preventDefault();
 
             let $this = $(this);
@@ -399,16 +390,16 @@
             // 비활성화 된 메뉴 클릭 시
             if (!$this.hasClass("active")) {
                 // 그 중 최하위 메뉴 버튼을 클릭했을 때
-                if($this.hasClass("sideNavPageLoad")){
+                if ($this.hasClass("sideNavPageLoad")) {
                     // 세션에 저장된 url 없을 수가 없다 이제는!
-                    if($this.data("page-name") === recentPage.toString){
+                    if ($this.data("page-name") === recentPage.toString) {
                         // 세션에 저장된 url과 버튼 url이 동일하면 그냥 화면 다시 로드 처리
-                    }else{
+                    } else {
                         // 현재 url 과 동일하지 않을 경우(다른 메뉴 버튼인 경우)
                         // 현재 선택한 버튼이 포함된 메뉴 그룹만 제외하고 나머지는 모두 비활성화 처리
                         let liButtonList = $("#side_nav_menu > li").not($this.parents("li").last());
 
-                        liButtonList.each(function (){
+                        liButtonList.each(function () {
                             let $button = $(this);
                             $button.find("a:not(.sideNavPageLoad)").removeClass("active").addClass("collapsed");
                             $button.find("a.sideNavPageLoad").removeClass("active page");
@@ -422,9 +413,9 @@
                         // 그 다음 현재 클릭한 버튼의 level2와 다른 level2 들은 모두 비활성화 처리
                         let anotherLevel2 = $this.parents("li").last().children("ul").not(currentLevel2);
 
-                        anotherLevel2.each(function (){
+                        anotherLevel2.each(function () {
                             let menuLevel2 = $(this).children("li").children("a");
-                            if(menuLevel2.hasClass("active")){
+                            if (menuLevel2.hasClass("active")) {
                                 menuLevel2.removeClass("active").addClass("collapsed");
                                 menuLevel2.nextAll(".gi-side-nav-menu-level").stop(true, true).slideUp(150);
                             }
@@ -434,10 +425,10 @@
                         $this.addClass("active page");
                         let url = $this.data("page-name");
                         let prgmUrl = $this.data("prgm-url");
-                        let urlInfo = { url : url }
+                        let urlInfo = { url: url }
                         common_session.setItem("recentPage", urlInfo);
                         common_session.setItem("activatedMenu", urlInfo);
-                        formUtil.apiLoadContent(prgmUrl,url, $this.text());
+                        formUtil.apiLoadContent(prgmUrl, url, $this.text());
                     }
                 } else {
                     // 메뉴 노출처리 시에는 첫 번째 메뉴와 두 번째 메뉴는 기본 처리 외 부가적인 처리가 필요 없다.
@@ -446,22 +437,22 @@
                 }
             } else {
                 // 활성화 된 로드 버튼 클릭 시
-                if($this.hasClass("sideNavPageLoad")){
+                if ($this.hasClass("sideNavPageLoad")) {
                     let url = $this.data("page-name");
                     let prgmUrl = $this.data("prgm-url");
-                    let urlInfo = { url : url }
+                    let urlInfo = { url: url }
                     common_session.setItem("recentPage", urlInfo);
                     common_session.setItem("activatedMenu", urlInfo);
-                    formUtil.apiLoadContent(prgmUrl,url, $this.text());
+                    formUtil.apiLoadContent(prgmUrl, url, $this.text());
                 } else {
                     // 활성화 된 최상위 메뉴 클릭 시
-                    if(menuLevel.toString() === "0"){
+                    if (menuLevel.toString() === "0") {
                         let allSubMenu = $this.closest('li').find('ul');
 
                         // 첫번째 메뉴 버튼이면서 하위 로드 버튼이 활성화 되어있을 때
-                        if($this.parent("li").find("a.active.page").length > 0){
+                        if ($this.parent("li").find("a.active.page").length > 0) {
                             // 하위 메뉴 버튼과 영역들은 숨김 처리하지만 로드 버튼 비활성화 처리는 하지 않는다.
-                            allSubMenu.each(function(i, subMenu) {
+                            allSubMenu.each(function (i, subMenu) {
                                 let $menu = $(subMenu);
                                 $menu.stop(true, true).slideUp(150);
                                 $menu.find("a:not(.sideNavPageLoad)").removeClass("active").addClass("collapsed");
@@ -470,7 +461,7 @@
                         } else {
                             // 첫번째 메뉴 버튼이면서 하위 로드 버튼이 활성화 되어있지 않을 때
                             // 하위 메뉴 버튼과 영역들을 숨김 처리하면서 비활성화 처리도 한다.
-                            allSubMenu.each(function(i, subMenu) {
+                            allSubMenu.each(function (i, subMenu) {
                                 let $menu = $(subMenu);
                                 $menu.stop(true, true).slideUp(150);
                                 $menu.find(".gi-side-nav-title").removeClass("active");
@@ -480,10 +471,10 @@
                     } else {
                         // 활성화 된 두번째 메뉴 버튼 일때는 하위 ul 숨김처리하고 비활성화(remove active) 처리
                         // 만약 하위에 활성화 된 버튼이 있다면 해당 버튼은 비활성화 하지않는다.
-                        if($this.parent("li").find("a.active.page").length > 0){
+                        if ($this.parent("li").find("a.active.page").length > 0) {
                             $this.removeClass("active").addClass("collapsed");
                             $currentSubMenu.stop(true, true).slideUp(150);
-                        }else{
+                        } else {
                             $this.removeClass("active").addClass("collapsed");
                             $currentSubMenu.stop(true, true).slideUp(150);
                         }
@@ -495,7 +486,7 @@
     function existsNavSelected() {
         let recentPage = common_session.getItem("recentPage").url;
 
-        if(formUtil.checkEmptyValue(recentPage) && recentPage !== "/index/index" && recentPage !== "/common/myinfo"){
+        if (formUtil.checkEmptyValue(recentPage) && recentPage !== "/index/index" && recentPage !== "/common/myinfo") {
             let $activatedMenu = $("[data-page-name='" + recentPage.toString() + "']");
             let menuLevel1 = $activatedMenu.parents("li").last().children("a");
             let menuLevel2 = $activatedMenu.closest("ul").closest("li").children("a");
@@ -503,10 +494,10 @@
             menuLevel1.trigger("click");
             menuLevel2.trigger("click");
             $activatedMenu.addClass("active page");
-        }else{
+        } else {
             let allLiButtonList = $("#side_nav_menu > li");
 
-            allLiButtonList.each(function (){
+            allLiButtonList.each(function () {
                 let $button = $(this);
                 $button.find("a:not(.sideNavPageLoad)").removeClass("active").addClass("collapsed");
                 $button.find("a.sideNavPageLoad").removeClass("active page");
@@ -515,42 +506,42 @@
         }
     }
     //NOTE: 내정보 수정
-    $("#myinfo-btn").off("click").on("click",function(e){
+    $("#myinfo-btn").off("click").on("click", function (e) {
         e.preventDefault();
         let url = "/user/myinfo";
         dropDownMenu("close");
-        formUtil.apiLoadContent("cms",url,"");
+        formUtil.apiLoadContent("cms", url, "");
         allCloseMenuTitle();
     });
     //NOTE: 모든 매뉴 닫기
-    function allCloseMenuTitle(){
+    function allCloseMenuTitle() {
         let sideNavTitleVolume = $(".gi-side-nav-menu-item").find(".gi-side-nav-title");
         let sideNavMenuLevelVolume = $(".gi-side-nav-menu-item").find(".gi-side-nav-menu-level");
-        sideNavTitleVolume.map((index,item) =>{
-            if($(item).hasClass("active")){
+        sideNavTitleVolume.map((index, item) => {
+            if ($(item).hasClass("active")) {
                 $(item).removeClass("active");
                 $(item).addClass("collapsed");
             }
 
-            if($(item).hasClass("page")){
+            if ($(item).hasClass("page")) {
                 $(item).removeClass("page");
             }
         })
-        sideNavMenuLevelVolume.map((index,item)=>{
-            $(item).css("display","none");
+        sideNavMenuLevelVolume.map((index, item) => {
+            $(item).css("display", "none");
         })
     }
 
     //NOTE: DropDownMenu를 제외한 부분을 클릭하면 DropDownMenu 비활성화 처리
-    function isDropMenuOpenSetClose(){
+    function isDropMenuOpenSetClose() {
         let flag = $(".side-nav-profile-dropdown").hasClass("active");
-        if(flag){
+        if (flag) {
             $(document).off("click.unOtherAreaClickEventHandler").on("click.unOtherAreaClickEventHandler", function (e) {
                 unOtherAreaClickEventHandler(e);
             });
 
         }
-        function unOtherAreaClickEventHandler(e){
+        function unOtherAreaClickEventHandler(e) {
             if (!$(e.target).closest(".dropdown-menu , .side-nav-profile-dropdown").length) {
                 dropDownMenu("close");
             }
