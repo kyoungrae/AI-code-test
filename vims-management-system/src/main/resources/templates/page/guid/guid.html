@@ -152,6 +152,33 @@
             font-weight: 500;
         }
 
+        .tree-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+
+        .tree-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .tree-btn:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
         .func-item i {
             font-size: 0.8rem;
             color: #a78bfa;
@@ -353,6 +380,14 @@
                     <i class="fa-solid fa-search"></i>
                     <input type="text" id="guidSearchInput" placeholder="Search functions...">
                 </div>
+                <div class="tree-controls">
+                    <button class="tree-btn" id="guidExpandAll">
+                        <i class="fa-solid fa-angles-down"></i> Expand All
+                    </button>
+                    <button class="tree-btn" id="guidCollapseAll">
+                        <i class="fa-solid fa-angles-up"></i> Collapse All
+                    </button>
+                </div>
             </div>
 
             <div class="function-list" id="guidFunctionList">
@@ -449,7 +484,10 @@
                 filePath: document.getElementById('guidFilePath'),
                 codeContainer: document.getElementById('guidCodeContainer'),
                 codeViewer: document.getElementById('guidCodeViewer'),
-                lineHighlight: document.getElementById('guidLineHighlight')
+                lineHighlight: document.getElementById('guidLineHighlight'),
+
+                expandBtn: document.getElementById('guidExpandAll'),
+                collapseBtn: document.getElementById('guidCollapseAll')
             };
 
             // Initialize
@@ -460,6 +498,8 @@
                 if (els.searchInput) {
                     els.searchInput.onkeyup = (e) => filterFunctions(e.target.value);
                 }
+                if (els.expandBtn) els.expandBtn.onclick = () => toggleAll(false);
+                if (els.collapseBtn) els.collapseBtn.onclick = () => toggleAll(true);
 
                 // Load Data immediately
                 loadData();
@@ -644,6 +684,17 @@
                         group.classList.remove('collapsed'); // Auto expand on search
                     } else {
                         group.style.display = 'none';
+                    }
+                });
+            }
+
+            function toggleAll(collapse) {
+                const groups = document.querySelectorAll('.file-group');
+                groups.forEach(group => {
+                    if (collapse) {
+                        group.classList.add('collapsed');
+                    } else {
+                        group.classList.remove('collapsed');
                     }
                 });
             }
