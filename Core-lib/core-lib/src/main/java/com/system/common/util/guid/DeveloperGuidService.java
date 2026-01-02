@@ -1,10 +1,11 @@
 package com.system.common.util.guid;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -22,48 +23,72 @@ import java.util.regex.Pattern;
 @Service
 public class DeveloperGuidService {
 
-    /**
-     * 지정된 경로의 JavaScript 파일들을 스캔하여 JSDoc 주석 및 소스 코드를 추출
-     * 
-     * @param pattern 파일 패턴 (예: "classpath:static/common/js/common/.js")
-     * @return JSDoc 정보
-     *         리스트 및
-     *         전체 파일 내용
-     */
-
-    public List<Map<String, Object>> parseJavaScriptFiles(String pattern) {
+    public List<Map<String, Object>> parseJavaScriptFiles(String locationPattern) {
         List<Map<String, Object>> guidList = new ArrayList<>();
+        System.out.println(">>> [DeveloperGuide] Parsing Start. Pattern: " + locationPattern);
 
         try {
-            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-            Resource[] resources = resolver.getResources(pattern);
-
-            for (Resource resource : resources) {
-                String fileName = resource.getFilename();
-                if (fileName != null && fileName.endsWith(".js")) {
-                    String fileContent = readFileContent(resource);
-                    List<Map<String, Object>> functions = parseJSDocFromString(fileContent);
-
-                    if (!functions.isEmpty() || !fileContent.isEmpty()) {
-                        Map<String, Object> fileInfo = new HashMap<>();
-                        fileInfo.put("fileName", fileName);
-                        fileInfo.put("filePath", resource.getURL().getPath());
-                        fileInfo.put("src", fileContent);
-                        fileInfo.put("functions", functions);
-                        guidList.add(fileInfo);
-                    }
+            if (locationPattern.startsWith("file:") && !locationPattern.contains("*")) {
+                String rootPathStr = locationPattern.substring(5);
+                File rootDir = new File(rootPathStr);
+                if (rootDir.exists() && rootDir.isDirectory()) {
+                    recursiveScan(rootDir, guidList);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        System.out.println(">>> [DeveloperGuide] Parsing Finished. Total files found: " + guidList.size());
         return guidList;
     }
 
-    /**
-     * 리소스에서 파일 내용을 문자열로 읽어옴
-     */
+    private void recursiveScan(File directory, List<Map<String, Object>> guidList) {
+        File[] files = directory.listFiles();
+        if (files == null)
+            return;
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                String dirName = file.getName();
+                if (dirName.startsWith(".") || dirName.equals("target") || dirName.equals("node_modules"))
+                    continue;
+                recursiveScan(file, guidList);
+            } else {
+                String path = file.getAbsolutePath().replace("\\", "/");
+                // 수정: 요청하신대로 common/js/common 폴더 내의 파일만 스캔 (하위 폴더 포함)
+                if (path.endsWith(".js") && path.contains("/common/js/common")) {
+                    System.out.println(">>> [DeveloperGuide] Found JS File: " + path);
+                    FileSystemResource resource = new FileSystemResource(file);
+                    processResource(resource, guidList);
+                }
+            }
+        }
+    }
+
+    private void processResource(Resource resource, List<Map<String, Object>> guidList) {
+        try {
+            String fileName = resource.getFilename();
+            String fileContent = readFileContent(resource);
+            List<Map<String, Object>> functions = parseJSDocFromString(fileContent);
+
+            if (!functions.isEmpty() || !fileContent.isEmpty()) {
+                Map<String, Object> fileInfo = new HashMap<>();
+                fileInfo.put("fileName", fileName);
+                try {
+                    fileInfo.put("filePath", resource.getURL().getPath());
+                } catch (Exception e) {
+                    fileInfo.put("filePath", fileName);
+                }
+                fileInfo.put("src", fileContent);
+                fileInfo.put("functions", functions);
+                guidList.add(fileInfo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private String readFileContent(Resource resource) {
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(
@@ -78,55 +103,108 @@ public class DeveloperGuidService {
         return content.toString();
     }
 
-    /**
-     * 문자열 컨텐츠에서 JSDoc 주석을 파싱하고 라인 번호 추출
-     */
     private List<Map<String, Object>> parseJSDocFromString(String content) {
         List<Map<String, Object>> functions = new ArrayList<>();
 
-        // JSDoc 패턴: /** ... */
         Pattern jsdocPattern = Pattern.compile("/\\*\\*([^*]|\\*(?!/))*\\*/", Pattern.DOTALL);
         Matcher matcher = jsdocPattern.matcher(content);
 
         while (matcher.find()) {
             String jsdoc = matcher.group();
-            int startFilter = matcher.start();
+            int startIdx = matcher.start();
+            int endIdx = matcher.end();
 
-            // 라인 번호 계산 (1-based)
             int lineNumber = 1;
-            for (int i = 0; i < startFilter; i++) {
-                if (content.charAt(i) == '\n') {
+            for (int i = 0; i < startIdx; i++) {
+                if (content.charAt(i) == '\n')
                     lineNumber++;
-                }
             }
 
             Map<String, Object> functionInfo = parseJSDocComment(jsdoc);
 
-            if (functionInfo != null && !functionInfo.isEmpty()) {
-                functionInfo.put("lineNumber", lineNumber);
-                functions.add(functionInfo);
+            // @title이 없으면 대체 제목 생성
+            if (!functionInfo.containsKey("title")) {
+                if (functionInfo.containsKey("text")) {
+                    functionInfo.put("title", functionInfo.get("text"));
+                } else {
+                    // 다음 줄 분석하여 함수명 추출
+                    String nextCodeBlock = getNextNonEmptyLine(content, endIdx);
+                    String extractedName = extractFunctionName(nextCodeBlock);
+                    if (extractedName != null) {
+                        functionInfo.put("title", extractedName);
+                    } else {
+                        functionInfo.put("title", "Anonymous Function (L" + lineNumber + ")");
+                    }
+                }
             }
+
+            // 필수 정보가 없더라도 위치 정보는 저장하여 표시 (빈 JSDoc 블록이라도)
+            functionInfo.put("lineNumber", lineNumber);
+            functions.add(functionInfo);
         }
         return functions;
     }
 
-    /**
-     * JSDoc 주석 문자열을 파싱하여 정보 추출
-     */
+    private String getNextNonEmptyLine(String content, int startIndex) {
+        int length = content.length();
+        int i = startIndex;
+        while (i < length) {
+            char c = content.charAt(i);
+            if (!Character.isWhitespace(c)) {
+                break;
+            }
+            i++;
+        }
+
+        if (i >= length)
+            return "";
+
+        int lineEnd = content.indexOf('\n', i);
+        if (lineEnd == -1)
+            lineEnd = length;
+
+        return content.substring(i, lineEnd).trim();
+    }
+
+    private String extractFunctionName(String line) {
+        if (line == null || line.isEmpty())
+            return null;
+
+        // Pattern 1: function myFunc()
+        Pattern p1 = Pattern.compile("function\\s+([a-zA-Z0-9_$]+)");
+        Matcher m1 = p1.matcher(line);
+        if (m1.find())
+            return m1.group(1);
+
+        // Pattern 2: myFunc = function() or myFunc: function()
+        Pattern p2 = Pattern.compile("([a-zA-Z0-9_$]+)\\s*[:=]\\s*function");
+        Matcher m2 = p2.matcher(line);
+        if (m2.find())
+            return m2.group(1);
+
+        // Pattern 3: Prototype like FormUtility.prototype.func = ...
+        Pattern p3 = Pattern.compile("\\.([a-zA-Z0-9_$]+)\\s*=");
+        Matcher m3 = p3.matcher(line);
+        if (m3.find())
+            return m3.group(1);
+
+        return line; // Fallback to the line itself (cropped)
+    }
+
     private Map<String, Object> parseJSDocComment(String jsdoc) {
         Map<String, Object> info = new HashMap<>();
 
-        Pattern titlePattern = Pattern.compile("@title\\s*:\\s*(.+)");
+        Pattern titlePattern = Pattern.compile("@title\\s*[:\\s]\\s*(.+)"); // 콜론 또는 공백 허용
         Matcher titleMatcher = titlePattern.matcher(jsdoc);
         if (titleMatcher.find())
             info.put("title", titleMatcher.group(1).trim());
 
-        Pattern textPattern = Pattern.compile("@text\\s*:\\s*(.+)");
+        Pattern textPattern = Pattern.compile("@text\\s*[:\\s]\\s*(.+)");
         Matcher textMatcher = textPattern.matcher(jsdoc);
         if (textMatcher.find())
             info.put("text", textMatcher.group(1).trim());
 
-        Pattern paramPattern = Pattern.compile("@param\\s*:\\s*(.+)");
+        Pattern paramPattern = Pattern.compile("@param\\s*[:\\s]\\s*(.+)");
         Matcher paramMatcher = paramPattern.matcher(jsdoc);
         StringBuilder params = new StringBuilder();
         while (paramMatcher.find()) {
@@ -137,77 +215,25 @@ public class DeveloperGuidService {
         if (params.length() > 0)
             info.put("param", params.toString());
 
-        Pattern returnPattern = Pattern.compile("@return\\s*:\\s*(.+)");
+        Pattern returnPattern = Pattern.compile("@return\\s*[:\\s]\\s*(.+)");
         Matcher returnMatcher = returnPattern.matcher(jsdoc);
         if (returnMatcher.find())
             info.put("return", returnMatcher.group(1).trim());
 
-        Pattern datePattern = Pattern.compile("@date\\s*:\\s*(.+)");
+        Pattern datePattern = Pattern.compile("@date\\s*[:\\s]\\s*(.+)");
         Matcher dateMatcher = datePattern.matcher(jsdoc);
         if (dateMatcher.find())
             info.put("date", dateMatcher.group(1).trim());
 
-        Pattern writerPattern = Pattern.compile("@writer\\s*:\\s*(.+)");
+        Pattern writerPattern = Pattern.compile("@writer\\s*[:\\s]\\s*(.+)");
         Matcher writerMatcher = writerPattern.matcher(jsdoc);
         if (writerMatcher.find())
             info.put("writer", writerMatcher.group(1).trim());
 
-        return info.containsKey("title") ? info : null;
+        return info;
     }
 
-    /**
-     * 샘플 데이터 생성 (테스트용)
-     */
     public List<Map<String, Object>> getSampleGuidData() {
-        List<Map<String, Object>> guidList = new ArrayList<>();
-
-        Map<String, Object> calendarUtils = new HashMap<>();
-        calendarUtils.put("fileName", "CalendarUtils.js");
-        calendarUtils.put("filePath", "/common/js/common/utils/CalendarUtils.js");
-
-        String sampleSrc = "/**\n" +
-                " * @title : giCalendarSeletedDate\n" +
-                " * @text : 캘린더 날짜 조회\n" +
-                " * @return : YYYY-MM-DD\n" +
-                " * @writer : 이경태\n" +
-                " * */\n" +
-                "FormUtility.prototype.giCalendarSeletedDate = function () {\n" +
-                "    return giCalendarSeletedDateList;\n" +
-                "}\n" +
-                "\n" +
-                "/**\n" +
-                " * @title : giCalendar\n" +
-                " * @date : new Date() 객체 파라미터 [new Date()]\n" +
-                " * @text : < div id='gi-calendar-main'> < /div> \" 생성 후 사용(필수)\n" +
-                " * @writer : 이경태\n" +
-                " * */\n" +
-                "FormUtility.prototype.giCalendar = function (e) {\n" +
-                "    // ... implementation \n" +
-                "}";
-
-        calendarUtils.put("src", sampleSrc);
-
-        List<Map<String, Object>> functions = new ArrayList<>();
-
-        Map<String, Object> func1 = new HashMap<>();
-        func1.put("title", "giCalendarSeletedDate");
-        func1.put("text", "캘린더 날짜 조회");
-        func1.put("return", "YYYY-MM-DD");
-        func1.put("writer", "이경태");
-        func1.put("lineNumber", 1);
-        functions.add(func1);
-
-        Map<String, Object> func2 = new HashMap<>();
-        func2.put("title", "giCalendar");
-        func2.put("date", "new Date() 객체 파라미터 [new Date()]");
-        func2.put("text", "<div id='gi-calendar-main'></div> 생성 후 사용(필수)");
-        func2.put("writer", "이경태");
-        func2.put("lineNumber", 10);
-        functions.add(func2);
-
-        calendarUtils.put("functions", functions);
-        guidList.add(calendarUtils);
-
-        return guidList;
+        return new ArrayList<>();
     }
 }

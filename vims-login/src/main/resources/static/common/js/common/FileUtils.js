@@ -5,6 +5,7 @@ class file {
 
     /**
      * created by ikyoungtae 2025.9
+     * @title 파일 업로드
      * @param PATH  upload file path
      * @param ID_TO_RECEIVE_VALUE  id to receive uuid value
      * @param FOLDER_NAME  file upload folder name
