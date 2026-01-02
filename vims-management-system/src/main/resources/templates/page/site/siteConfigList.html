@@ -422,7 +422,7 @@
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"], ID: 'config_group_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"], ID: 'config_group_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.USE_YN"], ID: 'use_yn', WIDTH: '20', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
-                        { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.SYSTEM_CREATE_USERID"], ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.SYSTEM_UPDATE_DATE"], ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -602,7 +602,7 @@
             }
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close(CONFIG_GROUP_POPUPID);
                     findBySiteConfigGroupList();
                 }
@@ -627,7 +627,7 @@
             }
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close(CONFIG_KEY_POPUPID);
                     findBySiteConfigList(null, null, null, null, p_config_group_id);
                 }
@@ -664,7 +664,7 @@
         axios.post(url, param).then(response => {
             let status = response.status;
             if (status === 200) {
-                formUtil.showMessage(Message.Label.Array["COMPLETE.REMOVE"]);
+                formUtil.toast(Message.Label.Array["COMPLETE.REMOVE"]);
                 findBySiteConfigList(null, null, null, null, cont.config_group_id);
             }
         }).catch(error => {
@@ -700,7 +700,7 @@
             axios.post(url, param).then(response => {
                 let status = response.status;
                 if (status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                     findBySiteConfigList(null, null, null, null, cont.config_group_id);
                     common_popup.close(prgmId);
                 }

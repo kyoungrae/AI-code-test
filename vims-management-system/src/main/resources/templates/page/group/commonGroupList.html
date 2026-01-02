@@ -568,10 +568,10 @@
                         { HEADER: "No", ID: "no", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "이메일", ID: "user_email", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "사용자 아이디", ID: "user_id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: "소속코드", ID: "office_code", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "등록", ID: "register_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
 
                         { HEADER: "ID", ID: "id", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "소속코드", ID: "office_code", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: "역할", ID: "role", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: "시퀀스 아이디", ID: "id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
@@ -624,7 +624,7 @@
         axios.post(url, param).then(response => {
             let status = response.status;
             if (status === 200) {
-                formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                 findByCommonUserList();
                 findByCommonUserGroupList();
             }
@@ -644,7 +644,7 @@
         axios.post(url, param).then(response => {
             let status = response.status;
             if (status === 200) {
-                formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                 groupId = null;
                 findByCommonGroupList();
                 findByCommonUserGroupList();
@@ -675,7 +675,7 @@
         axios.post(url, param).then(response => {
             let status = response.status;
             if (status === 200) {
-                formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                 fnReset();
                 common_popup.close(COMMON_GROUP_UPDATE_PRGMID);
             }
@@ -694,7 +694,7 @@
             axios.post(url, param).then(response => {
                 let status = response.status;
                 if (status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
                     findByCommonGroupList();
                 }
             }).catch(error => {
@@ -753,7 +753,7 @@
         axios.post(url, param).then(response => {
             let status = response.status;
             if (status === 200) {
-                formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"], "success");
                 findByCommonUserGroupList();
             }
         }).catch(error => {

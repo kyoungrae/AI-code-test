@@ -649,25 +649,25 @@ input.gi-switch:checked::before {
 /* 1. GRID CONTAINER SPACING FIX */
 /* Remove any default browser margins/paddings from the list rows to reduce gaps */
 ul.gi-grid-list {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
 }
 
 /* 2. GRID ROW HEIGHT FIX - ULTRA COMPACT */
 /* User requested tighter spacing. 24px is the absolute minimum to fit a 20px button comfortably. */
 ul.gi-grid-list>li.gi-col-16px {
-    height: auto !important;
-    min-height: 24px !important;
+    height: auto;
+    min-height: 24px;
     /* Reduced from 30px to 24px */
-    padding: 0 !important;
+    padding: 0;
 }
 
 /* 3. CENTER ALIGN ONLY BUTTON CELLS - Fix for Hierarchy Lines */
 /* Only align button cells to center so tree lines in other cells don't break */
 ul.gi-grid-list>li[data-field*="btn"] {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 4. MAIN BUTTONS (Large) */
@@ -675,86 +675,86 @@ button[class*="gi-btn"],
 a[class*="gi-btn"],
 input[type="button"][class*="gi-btn"],
 input[type="submit"][class*="gi-btn"] {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-weight: 500 !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
-    border: 1px solid transparent !important;
-    border-radius: 6px !important;
-    letter-spacing: normal !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    padding: 0.25rem 1rem !important;
-    line-height: normal !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    letter-spacing: normal;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.25rem 1rem;
+    line-height: normal;
     min-height: 36px;
-    height: auto !important;
+    height: auto;
 }
 
 /* 5. GRID BUTTONS (Ultra Compact 20px) */
 /* Tiny buttons to fit in the 24px row without clipping */
 .gi-grid-btn,
 .gi-grid-modify-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-weight: 500 !important;
-    border-radius: 3px !important;
-    letter-spacing: normal !important;
-    transition: all 0.2s ease !important;
-    box-shadow: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 3px;
+    letter-spacing: normal;
+    transition: all 0.2s ease;
+    box-shadow: none;
     /* Cleaner look for dense grid */
 
-    height: 20px !important;
+    height: 20px;
     /* 20px Height */
-    padding: 0 6px !important;
-    font-size: 11px !important;
-    margin: 0 2px !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
+    padding: 0 6px;
+    font-size: 11px;
+    margin: 0 2px;
+    line-height: 1;
+    white-space: nowrap;
 }
 
 /* Specific Colors */
 .gi-grid-btn {
     /* Delete/Normal Button */
-    background-color: #ffffff !important;
-    border: 1px solid #cbd5e1 !important;
-    color: #475569 !important;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
 }
 
 .gi-grid-btn:hover {
-    background-color: #f1f5f9 !important;
-    border-color: #94a3b8 !important;
-    color: #0f172a !important;
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+    color: #0f172a;
 }
 
 .gi-grid-modify-btn {
     /* Modify Button */
-    background-color: #FFF7ED !important;
-    border: 1px solid #FFEDD5 !important;
-    color: #C2410C !important;
+    background-color: #FFF7ED;
+    border: 1px solid #FFEDD5;
+    color: #C2410C;
 }
 
 .gi-grid-modify-btn:hover {
-    background-color: #FFEDD5 !important;
-    border-color: #FB923C !important;
+    background-color: #FFEDD5;
+    border-color: #FB923C;
 }
 
 /* Reset for Containers */
 div[class*="gi-btn"],
 span[class*="gi-btn"] {
-    box-shadow: none !important;
-    background-color: transparent !important;
-    transform: none !important;
-    border: none !important;
-    padding: 0 !important;
+    box-shadow: none;
+    background-color: transparent;
+    transform: none;
+    border: none;
+    padding: 0;
 }
 
 /* Hover State */
 button[class*="gi-btn"]:hover,
 a[class*="gi-btn"]:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
-    transform: translateY(-1px) !important;
-    filter: brightness(1.02) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transform: translateY(-1px);
+    filter: brightness(1.02);
 }
 
 /* Active State */
@@ -762,17 +762,17 @@ button[class*="gi-btn"]:active,
 a[class*="gi-btn"]:active,
 .gi-grid-btn:active,
 .gi-grid-modify-btn:active {
-    transform: translateY(0) !important;
-    box-shadow: none !important;
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 /* 4. INPUTS */
 .gi-input-container,
 .gi-select-container {
     background-color: #ffffff;
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 6px !important;
-    box-shadow: none !important;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    box-shadow: none;
     padding: 0 8px;
     display: flex;
     align-items: center;
@@ -782,35 +782,103 @@ a[class*="gi-btn"]:active,
 /* Hide underline animation */
 .gi-input-container::after,
 .gi-select-container::after {
-    display: none !important;
+    display: none;
 }
 
 /* Focus State */
 .gi-input-container:focus-within,
 .gi-select-container:focus-within {
-    border-color: var(--background-color-btn-blue) !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    border-color: var(--background-color-btn-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 /* 5. PAGING / DROPDOWN */
 .gi-grid-row-selector {
-    background-color: #ffffff !important;
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 6px !important;
-    padding: 0 8px !important;
+    background-color: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 0 8px;
     font-size: 13px;
-    height: 32px !important;
+    height: 32px;
     cursor: pointer;
     vertical-align: middle;
 }
 
 .gi-grid-row-selector:focus {
     outline: none;
-    border-color: var(--background-color-btn-blue) !important;
+    border-color: var(--background-color-btn-blue);
 }
 
 /* Layout */
 .gi-main2,
 .gi-main-content {
     background-color: var(--main-background-color);
+}
+
+/* ======================================================================================================== Toast Message */
+#gi-toast-container {
+    position: fixed;
+    bottom: 30px;
+    right: 15px;
+    z-index: 11000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.gi-toast-message {
+    min-width: 300px;
+    background-color: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateX(100%);
+    border-left: 4px solid #A2C5FF;
+    pointer-events: auto;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.gi-toast-message.success {
+    border-left-color: #10B981;
+}
+
+.gi-toast-message.error {
+    border-left-color: #EF4444;
+}
+
+.gi-toast-message.warning {
+    border-left-color: #F59E0B;
+}
+
+@keyframes toast-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toast-fade-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
 }

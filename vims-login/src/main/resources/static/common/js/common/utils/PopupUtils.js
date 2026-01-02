@@ -341,3 +341,38 @@ FormUtility.prototype.showMessage = function (msg) {
         }, sec);
     }
 }
+
+/**
+ * @title : Toast Message Function
+ * @msg : 출력 메세지 [String]
+ * @type : 메세지 타입 ('info', 'success', 'error', 'warning') [String]
+ * @duration : 지속 시간 (ms) [Number]
+ * @writer : 이경태
+ */
+FormUtility.prototype.toast = function (msg, type = 'info', duration = 3000) {
+    let container = $("#gi-toast-container");
+    if (container.length === 0) {
+        $("body").append('<div id="gi-toast-container"></div>');
+        container = $("#gi-toast-container");
+    }
+
+    let toastId = 'toast-' + Date.now();
+    let typeClass = type || 'info';
+
+    let html = `<div id="${toastId}" class="gi-toast-message ${typeClass}">
+                    <span>${msg}</span>
+                </div>`;
+
+    let $toast = $(html);
+    container.append($toast);
+
+    setTimeout(() => {
+        $toast.css('animation', 'toast-fade-out 0.4s forwards');
+        $toast.one('animationend', function () {
+            $(this).remove();
+            if (container.children().length === 0) {
+                container.remove();
+            }
+        });
+    }, duration);
+};

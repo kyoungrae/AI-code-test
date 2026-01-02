@@ -718,7 +718,7 @@
             axios.post(url, param).then(response => {
                 let status = response.status;
                 if (status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     findByCommonGroupList(null, null, null, null, row);
                     findByCommonAccessGroupMenuList(null, null, null, null, row);
                     findByMenuList();
@@ -883,12 +883,12 @@
 
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close("gi-menu_register-popup");
                     findByCommonCodeMenuList();
                     findByMenuList();
                 } else {
-                    formUtil.showMessage(Message.Label.Array["FAIL.INSERT"])
+                    formUtil.toast(Message.Label.Array["FAIL.INSERT"])
                 }
             }).catch(error => {
                 formUtil.alertPopup(error.response.data);
@@ -917,12 +917,12 @@
 
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close("gi-menuDepth_register-popup");
                     findByCommonCodeMenuList();
                     findByMenuList();
                 } else {
-                    formUtil.showMessage(Message.Label.Array["FAIL.INSERT"])
+                    formUtil.toast(Message.Label.Array["FAIL.INSERT"])
                 }
             }).catch(error => {
                 formUtil.alertPopup(error.response.data);
@@ -950,12 +950,12 @@
             };
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
-                    formUtil.showMessage(Message.Label.Array["COMPLETE.UPDATE"]);
+                    formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                     common_popup.close("gi-menu_update-popup");
                     findByCommonCodeMenuList();
                     findByMenuList();
                 } else {
-                    formUtil.showMessage(Message.Label.Array["FAIL.UPDATE"]);
+                    formUtil.toast(Message.Label.Array["FAIL.UPDATE"]);
                 }
             }).catch(error => {
                 formUtil.alertPopup(error + "");
@@ -974,7 +974,7 @@
             menu_sequence: data.menu_sequence
         };
         axios.post(url, param).then(response => {
-            formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+            formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
             findByCommonCodeMenuList();
             findByMenuList();
         }).catch(error => {
@@ -1039,7 +1039,7 @@
         }
         axios.post(url, param).then(response => {
             if (response.status === 200) {
-                formUtil.showMessage(Message.Label.Array["COMPLETE.DELETE"]);
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
                 findByCommonGroupList(null, null, null, null, cont);
                 findByCommonAccessGroupMenuList(null, null, null, null, cont);
                 findByMenuList();

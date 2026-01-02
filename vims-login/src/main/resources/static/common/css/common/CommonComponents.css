@@ -368,7 +368,7 @@ html {
 
 #search_menu_name,
 #search_menu_name2 {
-    background-color: #ffffff !important;
+    background-color: #ffffff;
     border-radius: 5px 5px 5px 5px;
     height: 85%;
 }
@@ -562,4 +562,3 @@ a.gi-search-menu-title:active {
     background-color: #00000014;
     border-radius: 5px;
 }
-

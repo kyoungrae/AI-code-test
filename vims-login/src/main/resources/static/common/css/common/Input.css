@@ -289,14 +289,14 @@ option {
 
 .gi-input-label[data-focus-label="true"] {
     font-size: 11px;
-    top: 0.6rem !important;
-    left: 2rem !important;
+    top: 0.6rem;
+    left: 2rem;
 }
 
 .gi-select-label[data-focus-label="true"] {
     font-size: 11px;
-    top: 0.6rem !important;
-    left: 2rem !important;
+    top: 0.6rem;
+    left: 2rem;
 }
 
 .gi-span-label[data-focus-label="true"] {
@@ -398,9 +398,20 @@ option {
 }
 
 [data-focus-label-text-align="center"] {
-    /*left: calc(100% - 50% - 18.5px) !important;*/
-    left: 50% !important;
-    top: 50% !important;
+    /*left: calc(100% - 50% - 18.5px);*/
+    left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
 }
 
+/* Search Area Height Adjustment - Ensuring consistent 40px height for containers and inputs */
+#search-area,
+#search-area2,
+[id^="search-area"] {
+    height: 40px !important;
+}
+
+[id^="search-area"] .gi-input-container,
+[id^="search-area"] .gi-select-container {
+    height: 40px;
+}

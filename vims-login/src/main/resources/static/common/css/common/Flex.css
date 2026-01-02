@@ -46,7 +46,7 @@
 }
 
 .gi-flex-align-items-baseline {
-    align-items: baseline !important;
+    align-items: baseline;
 }
 
 .gi-flex-justify-content-center {
@@ -96,4 +96,3 @@
 .gi-flex-justify-content-flex-end {
     justify-content: flex-end;
 }
-

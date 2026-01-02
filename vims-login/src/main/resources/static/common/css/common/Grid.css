@@ -3594,7 +3594,7 @@
 }
 
 .gi-grid-list-select {
-    background-color: rgb(186 192 255 / 33%) !important;
+    background-color: rgb(186 192 255 / 33%);
     transition: all 0.2s cubic-bezier(1, 1, 1, 1);
 }
 
@@ -3708,8 +3708,8 @@
 
 
 .gi-grid-border> :last-child {
-    border-top: 1px solid #d0d0d0 !important;
-    border-bottom: unset !important;
+    border-top: 1px solid #d0d0d0;
+    border-bottom: unset;
     /*border:2px solid #ff0099;*/
 }
 
@@ -3823,4 +3823,3 @@
     cursor: default;
     transition: 0.1s ease-in-out;
 }
-
