@@ -3,6 +3,29 @@
  * @text : 공통 코드 조회 및 전역 설정 관련 함수
  */
 
+/**
+ * @title : 공통코드 조회
+ * @text : group_id로 공통코드 조회
+ * @writer : 이경태
+ */
+async function findCommonCode(param) {
+    let result = {};
+    let url = '/cms/common/commonCode/findCommonCode';
+
+    try {
+        return new Promise((resolve, reject) => {
+            axios.post(url, param).then(response => {
+                result = response.data;
+                resolve(result);
+            }).catch(error => {
+                formUtil.alertPopup(error + "");
+            });
+        });
+    } catch (error) {
+        formUtil.alertPopup(error + "");
+    }
+}
+
 FormUtility.prototype.findByCommonCodeGroup = function (group_id) {
     let url = "/api/commonCode/findByCommonCodeGroup";
     let param = group_id.split(",");
