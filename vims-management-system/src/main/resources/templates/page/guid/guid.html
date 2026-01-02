@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개발 가이드</title>
+</head>
+
+<body>
+    <article class="gi-main-content gi-col-100 gi-row-100 gi-flex gi-flex-column">
+        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-column gi-padding-10px">
+            <!-- 페이지 제목 -->
+            <div class="gi-row-60px gi-col-100 gi-flex gi-flex-align-items-center">
+                <h2 class="gi-page-title">JavaScript 개발 가이드</h2>
+            </div>
+
+            <!-- 검색 영역 -->
+            <div class="gi-row-50px gi-col-100 gi-flex gi-flex-align-items-center gi-margin-bottom-15px">
+                <div class="gi-row-100 gi-col-50 gi-flex gi-flex-align-items-center gi-grid-gap-10px">
+                    <div class="gi-row-100 gi-col-60 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
+                        data-focus-line="false">
+                        <label for="searchKeyword" class="gi-input-label" data-focus-label="false"
+                            data-focus-label-text-align="center" data-required="false">검색어</label>
+                        <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchKeyword"
+                            name="searchKeyword" data-focus-input-text-align="center" autocomplete="off"
+                            placeholder="함수명 또는 설명 검색" />
+                    </div>
+                    <div class="gi-row-100 gi-col-20">
+                        <button id="search-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow"
+                            type="button">검색</button>
+                    </div>
+                    <div class="gi-row-100 gi-col-20">
+                        <button id="reload-btn" class="gi-btn-blue gi-row-40px gi-input-container-box-shadow"
+                            type="button">새로고침</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 가이드 컨텐츠 영역 -->
+            <div class="gi-row-100 gi-col-100 gi-article-content gi-overflow-scroll">
+                <div id="guid-content" class="gi-row-100 gi-col-100 gi-padding-20px">
+                    <!-- 가이드 내용이 여기에 동적으로 추가됩니다 -->
+                    <div class="gi-flex gi-flex-center gi-padding-20px">
+                        <p style="color: #888;">데이터를 불러오는 중...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <script type="text/javascript">
+        let guidData = []; // 전체 가이드 데이터
+        let filteredData = []; // 필터링된 데이터
+
+        // 페이지 초기화
+        function init() {
+            loadGuidData();
+            setupEventListeners();
+        }
+
+        // 이벤트 리스너 설정
+        function setupEventListeners() {
+            // 검색 버튼 클릭
+            $("#search-btn").on("click", function () {
+                searchGuidData();
+            });
+
+            // 검색어 입력 시 엔터키
+            $("#searchKeyword").on("keypress", function (e) {
+                if (e.which === 13) {
+                    searchGuidData();
+                }
+            });
+
+            // 새로고침 버튼 클릭
+            $("#reload-btn").on("click", function () {
+                loadGuidData();
+                $("#searchKeyword").val("");
+                commonTag.inputTagReset($(".gi-input"));
+            });
+        }
+
+        // 가이드 데이터 로드
+        function loadGuidData() {
+            $("#guid-content").html('<div class="gi-flex gi-flex-center gi-padding-20px"><p style="color: #888;">데이터를 불러오는 중...</p></div>');
+
+            // 샘플 데이터 로드 (실제 사용 시 /api/scan 으로 변경)
+            axios.get("/cms/common/guid/api/sample")
+                .then(response => {
+                    if (response.data.success) {
+                        guidData = response.data.data;
+                        filteredData = guidData;
+                        renderGuidData(filteredData);
+                    } else {
+                        formUtil.alertPopup("데이터 로드 실패: " + response.data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error loading guid data:", error);
+                    formUtil.alertPopup("데이터 로드 중 오류가 발생했습니다.");
+                });
+        }
+
+        // 검색 기능
+        function searchGuidData() {
+            let keyword = $("#searchKeyword").val().trim().toLowerCase();
+
+            if (!keyword) {
+                filteredData = guidData;
+            } else {
+                filteredData = guidData.map(file => {
+                    let matchedFunctions = file.functions.filter(func => {
+                        return (func.title && func.title.toLowerCase().includes(keyword)) ||
+                            (func.text && func.text.toLowerCase().includes(keyword)) ||
+                            (func.param && func.param.toLowerCase().includes(keyword)) ||
+                            (func.return && func.return.toLowerCase().includes(keyword));
+                    });
+
+                    if (matchedFunctions.length > 0) {
+                        return {
+                            ...file,
+                            functions: matchedFunctions
+                        };
+                    }
+                    return null;
+                }).filter(file => file !== null);
+            }
+
+            renderGuidData(filteredData);
+        }
+
+        // 가이드 데이터 렌더링
+        function renderGuidData(data) {
+            if (!data || data.length === 0) {
+                $("#guid-content").html(`
+                <div class="gi-flex gi-flex-center gi-padding-20px">
+                    <p style="color: #888;">검색 결과가 없습니다.</p>
+                </div>
+            `);
+                return;
+            }
+
+            let html = '';
+
+            data.forEach((file, fileIndex) => {
+                html += `
+                <div class="gi-margin-bottom-30px">
+                    <div class="gi-flex gi-flex-align-items-center gi-margin-bottom-15px" style="border-bottom: 2px solid #4a5568; padding-bottom: 10px;">
+                        <h3 style="margin: 0; color: #2d3748;">
+                            <i class="fa-brands fa-js-square" style="color: #f7df1e; margin-right: 8px;"></i>
+                            ${file.fileName}
+                        </h3>
+                        <span style="margin-left: 10px; font-size: 12px; color: #718096;">${file.filePath}</span>
+                    </div>
+
+                    <div class="gi-grid-container gi-grid gi-grid-gap-15px">
+            `;
+
+                file.functions.forEach((func, funcIndex) => {
+                    html += `
+                    <div class="gi-article-section gi-padding-15px" style="background-color: #f7fafc; border-left: 4px solid #4299e1;">
+                        <div class="gi-margin-bottom-10px">
+                            <h4 style="margin: 0 0 5px 0; color: #2b6cb0; font-size: 16px;">
+                                <i class="fa-solid fa-code" style="margin-right: 5px;"></i>
+                                ${func.title || '함수명 없음'}
+                            </h4>
+                        </div>
+
+                        ${func.text ? `
+                        <div class="gi-margin-bottom-8px">
+                            <span style="font-weight: 600; color: #4a5568;">설명:</span>
+                            <span style="color: #2d3748;">${func.text}</span>
+                        </div>
+                        ` : ''}
+
+                        ${func.param ? `
+                        <div class="gi-margin-bottom-8px">
+                            <span style="font-weight: 600; color: #4a5568;">파라미터:</span>
+                            <code style="background-color: #edf2f7; padding: 2px 6px; border-radius: 3px; color: #c53030;">${func.param}</code>
+                        </div>
+                        ` : ''}
+
+                        ${func.date ? `
+                        <div class="gi-margin-bottom-8px">
+                            <span style="font-weight: 600; color: #4a5568;">날짜:</span>
+                            <span style="color: #2d3748;">${func.date}</span>
+                        </div>
+                        ` : ''}
+
+                        ${func.return ? `
+                        <div class="gi-margin-bottom-8px">
+                            <span style="font-weight: 600; color: #4a5568;">반환값:</span>
+                            <code style="background-color: #edf2f7; padding: 2px 6px; border-radius: 3px; color: #38a169;">${func.return}</code>
+                        </div>
+                        ` : ''}
+
+                        ${func.writer ? `
+                        <div>
+                            <span style="font-weight: 600; color: #4a5568;">작성자:</span>
+                            <span style="color: #2d3748;">${func.writer}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+                });
+
+                html += `
+                    </div>
+                </div>
+            `;
+            });
+
+            $("#guid-content").html(html);
+        }
+
+        // 페이지 로드 시 초기화
+        $(document).ready(function () {
+            init();
+        });
+    </script>
+</body>
+
+</html>

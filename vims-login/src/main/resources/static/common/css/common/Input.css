@@ -279,7 +279,6 @@ option {
 
 .gi-input-label[data-focus-label="false"] {
     top: calc(100% - 50% - 8.5px);
-    left: 15px;
 }
 
 .gi-select-label[data-focus-label="false"] {
@@ -289,13 +288,13 @@ option {
 
 .gi-input-label[data-focus-label="true"] {
     font-size: 11px;
-    top: 0.6rem;
+    top: 0.3rem;
     left: 2rem;
 }
 
 .gi-select-label[data-focus-label="true"] {
     font-size: 11px;
-    top: 0.6rem;
+    top: 0.3rem;
     left: 2rem;
 }
 
@@ -310,7 +309,7 @@ option {
     position: absolute;
     color: red;
     top: 0px;
-    left: -10px;
+    left: -7px;
 }
 
 .gi-select-label[data-required="true"]::before {
@@ -318,7 +317,7 @@ option {
     position: absolute;
     color: red;
     top: 5px;
-    left: -10px;
+    left: -7px;
 }
 
 .gi-span-label[data-required="true"]::before {
@@ -326,7 +325,7 @@ option {
     position: absolute;
     color: red;
     top: 0px;
-    left: -10px;
+    left: -7px;
 }
 
 .gi-input-label[data-required="false"]::before {
