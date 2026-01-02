@@ -1,0 +1,230 @@
+/* ========== Calendar Styles ========== */
+
+/* ======================================================================================================== 달력 Calendar 영역*/
+input[gi-datepicker] {
+    background: url("../../img/calendar.svg") no-repeat right 10px center;
+    background-size: 20px;
+    padding-right: 1rem;
+}
+
+#gi-calendar-main,
+#gi-datepicker_calendar-main {
+    box-sizing: border-box;
+    padding: 10px;
+    text-shadow: 0px 1px 1px #0000009c;
+    border-radius: var(--border-radius-article);
+}
+
+.gi-calendar-top {
+    margin: 10px 0px;
+    height: calc(10% - 10px);
+}
+
+.gi-calendar-week {
+    margin: 10px 0px;
+    height: calc(10% - 10px);
+}
+
+.gi-calendar-weekly {
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: calc(80% - 30px);
+    justify-content: center;
+    align-items: center;
+    /*align-content: center;*/
+    align-content: flex-start;
+}
+
+.gi-calendar-weekly-date-layer {
+    width: calc(14.2857% - 2px);
+    height: 19%;
+    position: relative;
+}
+
+.gi-calendar-weekly-date {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border: 1px solid #f0f0f0;
+    padding: 3px;
+    box-sizing: border-box;
+    flex-direction: column;
+    overflow: visible;
+    cursor: pointer;
+    scrollbar-width: none;
+}
+
+.gi-calendar-weekly-date[data-day-select="true"] {
+    background-color: #fbf1da;
+}
+
+.gi-calendar-weekly-date[data-day-select="false"] {
+    background-color: #ffffff;
+    transition: 0.5s all;
+}
+
+.gi-calendar-weekly-date[data-day-select="false"]:hover {
+    background-color: #e1e1e3;
+    color: #FFFFFF;
+}
+
+.gi-calendar-week-content {
+    width: calc(14.2857% - 2px);
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    align-items: end;
+    justify-content: end;
+}
+
+#gi-Calendar {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.gi-calendar-weekly-pre-date,
+.gi-calendar-weekly-next-date {
+    color: #f0f0f0 !important;
+    text-shadow: 0px 1px 1px #7c7c7c9c;
+}
+
+#gi-calendar-weekly-box>.gi-calendar-weekly-date-layer:nth-child(7n)>.gi-calendar-weekly-date>.gi-day {
+    color: var(--color-calendar-holiyday);
+}
+
+#gi-calendar-weekly-box>.gi-calendar-weekly-date-layer>.gi-calendar-weekly-date[data-holiday="Y"]>.gi-day {
+    color: var(--color-calendar-holiyday)
+}
+
+.gi-calendar-pre,
+.gi-calendar-next {
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+}
+
+.gi-calendar-pre:hover,
+.gi-calendar-next:hover {
+    color: #000000;
+}
+
+.gi-calendar-pre:active>i {
+    animation: slide-in-fwd-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.gi-calendar-next:active>i {
+    animation: slide-in-fwd-center 1.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.gi-calendar-YEAR,
+.gi-calendar-MONTH {
+    font-size: 17px;
+    /*font-weight: bold;*/
+    margin: 0px 10px;
+}
+
+.gi-day-schedule {
+    font-size: 11px;
+    width: 100%;
+    /*background: rgb(225 225 225 / 63%);*/
+    color: #000000;
+    flex-direction: column;
+    /*border-radius: 2px;*/
+}
+
+.gi-day-schedule>div>i {
+    font-size: 5px;
+    margin-right: 3px;
+}
+
+.gi-schedule-detail {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-left: 10%;
+    transform: translateY(-50%);
+    /* 수직 중앙 맞춤 */
+    z-index: 1;
+    min-width: 300px;
+    min-height: 220px;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px #0000005e;
+}
+
+.gi-schedule-detail::before {
+    content: "\25B2";
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: -11px;
+    color: rgb(255 255 255);
+    transform: rotate(270deg);
+    text-shadow: 0px -3px 3px #0000005e;
+    box-shadow: none;
+}
+
+.gi-schedule-detail-title-box {
+    height: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.gi-schedule-detail-cancel-button {
+    position: absolute;
+    display: flex;
+    right: 0px;
+    top: -7px;
+    color: #7f7f7f;
+    background: #cfcfcf;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 4px #000000b0;
+    cursor: pointer;
+}
+
+.gi-schedule-detail-cancel-button:hover {
+    color: #fff;
+    background: #bdbdbd;
+}
+
+.gi-schedule-detail-cancel-button:hover>i {
+    transition: all 0.2s cubic-bezier(0.680, -0.550, 0.000, 0.1);
+    transform: rotate(360deg);
+}
+
+.gi-schedule-detail-title {
+    width: 80%;
+    border: none;
+    outline: none;
+}
+
+.gi-schedule-detail-start-time,
+.gi-schedule-detail-end-time {
+    border: none;
+    outline: none;
+}
+
+.gi-schedule-detail-color-selector option:checked {
+    background-color: #7ea8f9;
+}
+
+.color-preview {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    background-color: #7ea8f9;
+    ;
+}
+
+.gi-holiday {
+    font-size: 0.5rem;
+    word-break: keep-all;
+}
+

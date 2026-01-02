@@ -1,18 +1,20 @@
 <style>
-    #remember_email_label, #find-pw-btn {
+    #remember_email_label,
+    #find-pw-btn {
         font-size: 0.8rem;
         color: #888888;
     }
 </style>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#">
 
-<!--  공통으로 묶어야 하는 부분  -->
+    <!--  공통으로 묶어야 하는 부분  -->
     <link rel="stylesheet" href="/common/css/common/FormUtility.css">
-    <link rel="stylesheet" href="/common/css/common/Common.css">
+    <link rel="stylesheet" href="/common/css/common/index.css">
     <script type="text/javascript" src="/common/js/jquery/jquery3.6.0.js"></script>
     <script type="text/javascript" src="/common/js/common/FormUtility.js"></script>
     <script type="text/javascript" src="/common/js/common/CommonTag.js"></script>
@@ -20,9 +22,10 @@
     <script type="text/javascript" src="/common/js/common/Message.js"></script>
     <script type="text/javascript" src="/common/js/axios/axios.js"></script>
     <title>Login</title>
-<!--  공통으로 묶어야 하는 부분  -->
+    <!--  공통으로 묶어야 하는 부분  -->
 
 </head>
+
 <body>
     <div class="gi-main-body gi-flex-column gi-flex-center">
         <main class="gi-login-main gi-flex gi-flex-center">
@@ -35,24 +38,33 @@
                 <form id="loginForm" class="gi-row-100 gi-col-80 gi-flex gi-flex-column gi-flex-center">
                     <div class="gi-col-25 gi-row-100">
                         <div class="gi-input-container gi-flex gi-flex-center" data-focus-line="false">
-                            <label class="gi-input-label" data-focus-label="false" data-required="true" for="email">email</label>
-                            <input class="gi-input gi-margin-1px" data-required="true" type="text" id="email" name="email" autocomplete="off"  data-focus-input-text-align="default"/>
+                            <label class="gi-input-label" data-focus-label="false" data-required="true"
+                                for="email">email</label>
+                            <input class="gi-input gi-margin-1px" data-required="true" type="text" id="email"
+                                name="email" autocomplete="off" data-focus-input-text-align="default" />
                         </div>
                     </div>
                     <div class="gi-col-25 gi-row-100">
                         <div class="gi-input-container gi-flex gi-flex-center" data-focus-line="false">
-                            <label class="gi-input-label" data-focus-label="false" data-required="true" for="password">password</label>
-                            <input class="gi-input gi-margin-1px" data-required="true" type="password" id="password" name="password" autocomplete="off"  data-focus-input-text-align="default"/>
+                            <label class="gi-input-label" data-focus-label="false" data-required="true"
+                                for="password">password</label>
+                            <input class="gi-input gi-margin-1px" data-required="true" type="password" id="password"
+                                name="password" autocomplete="off" data-focus-input-text-align="default" />
                         </div>
                     </div>
                     <div class="gi-col-10 gi-row-100 gi-margin-top-1 gi-font-size-15px">
-                        <div class="gi-col-100 gi-input-container gi-flex gi-flex-justify-content-space-between" data-focus-line="false">
+                        <div class="gi-col-100 gi-input-container gi-flex gi-flex-justify-content-space-between"
+                            data-focus-line="false">
                             <div class="gi-row-100 gi-flex gi-flex-center" style="height:var(--default-input-height)">
-                                <input type="checkbox" id="remember_email" name="remember_email" class="gi-margin-left-4 gi-input gi-cursor-pointer" data-required="false" autocomplete="off"/>
-                                <label id="remember_email_label" for="remember_email" class="gi-row-70 gi-margin-left-2 gi-cursor-pointer">로그인 유지</label>
+                                <input type="checkbox" id="remember_email" name="remember_email"
+                                    class="gi-margin-left-4 gi-input gi-cursor-pointer" data-required="false"
+                                    autocomplete="off" />
+                                <label id="remember_email_label" for="remember_email"
+                                    class="gi-row-70 gi-margin-left-2 gi-cursor-pointer">로그인 유지</label>
 
                                 <span class="gi-margin-right-3">
-                                    <a id="find-pw-btn" class="gi-row-30 gi-login-forgot-password  gi-cursor-pointer" gi-popup-open-id="gi-popup2">비밀번호 찾기</a>
+                                    <a id="find-pw-btn" class="gi-row-30 gi-login-forgot-password  gi-cursor-pointer"
+                                        gi-popup-open-id="gi-popup2">비밀번호 찾기</a>
                                 </span>
                             </div>
                         </div>
@@ -61,7 +73,7 @@
                 <div class="gi-col-20 gi-row-100">
                     <div class="gi-btn-section gi-flex gi-flex-space-around gi-col-60">
                         <button class="gi-btn gi-row-15 gi-col-100" id="checkLogin" type="button">LOGIN</button>
-<!--                        <button class="gi-btn gi-row-15 gi-col-100" id="add_userInfo" type="button">쿠키등록</button>-->
+                        <!--                        <button class="gi-btn gi-row-15 gi-col-100" id="add_userInfo" type="button">쿠키등록</button>-->
                     </div>
                 </div>
             </section>
@@ -84,8 +96,12 @@
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="authenticationTarget" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">email</label>
-                                    <input data-field="authenticationTarget" id="authenticationTarget" name="authenticationTarget" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="500"/>
+                                    <label for="authenticationTarget" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">email</label>
+                                    <input data-field="authenticationTarget" id="authenticationTarget"
+                                        name="authenticationTarget" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        gi-maxlength="500" />
                                     <span class="authentication-timer gi-margin-right-3"></span>
                                 </div>
                                 <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
@@ -99,8 +115,12 @@
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="authenticationNumber" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">인증번호</label>
-                                    <input data-field="authenticationNumber" id="authenticationNumber" name="authenticationNumber" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="6" inputNumberOnly/>
+                                    <label for="authenticationNumber" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">인증번호</label>
+                                    <input data-field="authenticationNumber" id="authenticationNumber"
+                                        name="authenticationNumber" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        gi-maxlength="6" inputNumberOnly />
                                 </div>
                                 <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
                                     <button id="number-check-btn" class="gi-input-btn" type="button">인증번호 확인</button>
@@ -119,8 +139,12 @@
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="changePassword" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">4~12자리 영문 대소문자,숫자,특수문자 조합</label>
-                                    <input data-field="changePassword" id="changePassword" name="changePassword" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="12" type="password"/>
+                                    <label for="changePassword" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">4~12자리 영문
+                                        대소문자,숫자,특수문자 조합</label>
+                                    <input data-field="changePassword" id="changePassword" name="changePassword"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" gi-maxlength="12" type="password" />
                                 </div>
                             </div>
                         </div>
@@ -130,8 +154,11 @@
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="changePasswordCheck" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">비밀번호 확인</label>
-                                    <input data-field="changePasswordCheck" id="changePasswordCheck" name="changePasswordCheck" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off" gi-maxlength="12" type="password"/>
+                                    <label for="changePasswordCheck" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default" data-required="true">비밀번호 확인</label>
+                                    <input data-field="changePasswordCheck" id="changePasswordCheck"
+                                        name="changePasswordCheck" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" gi-maxlength="12" type="password" />
                                 </div>
                             </div>
                         </div>
@@ -141,7 +168,8 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+            <div
+                class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
                 <button id="initialize-btn" class="gi-popup-register-btn gi-hidden" type="button">비밀번호 초기화</button>
                 <button id="confirm-btn" class="gi-popup-register-btn gi-hidden" type="button">적용</button>
                 <button id="popup-close-btn" class="gi-popup-close-btn" type="button">닫기</button>
@@ -161,6 +189,7 @@
     <div id="formUtil_uncutFileUpload"></div>
 </article>
 <!-- 공통 footer 로 묶어야 하는 부분 -->
+
 </html>
 <script>
     let formUtil = new FormUtility();
@@ -168,26 +197,26 @@
     let authenticationNumber = null;
     let authenticationTimer = null;
     init();
-    function init(){
+    function init() {
         new PageInit();
         clickEvent();
         $("body").addClass('animate-content-end');
         getEmailCookie();
     }
-    function clickEvent(){
-        $("#add_userInfo").click(function(){
+    function clickEvent() {
+        $("#add_userInfo").click(function () {
             addUser();
         });
-        $("#checkLogin").click(function(){
+        $("#checkLogin").click(function () {
             let validation = [];
-                validation.formId = "loginForm";
-                validation[0] ={id :"email",message : Message.Label.Array["CHECK.ID"]};
-                validation[1] ={id :"password",message : Message.Label.Array["CHECK.PWD"]};
-            if(formUtil.validationCheck(validation)){
+            validation.formId = "loginForm";
+            validation[0] = { id: "email", message: Message.Label.Array["CHECK.ID"] };
+            validation[1] = { id: "password", message: Message.Label.Array["CHECK.PWD"] };
+            if (formUtil.validationCheck(validation)) {
                 login();
             }
         });
-        $("#send-number-btn").on("click", function (){
+        $("#send-number-btn").on("click", function () {
             sendAuthenticationEmail();
         });
         // $("#find-pw-btn").on("click", function (){
@@ -223,11 +252,11 @@
         //     }
         // });
 
-        $("#popup-close-btn").on("click", function (){
+        $("#popup-close-btn").on("click", function () {
             popupInit();
         });
 
-        $("#initialize-btn").on("click", function (){
+        $("#initialize-btn").on("click", function () {
             $("#loginPageAuthenticationForm").addClass("invisible");
             $("#loginPagePasswordInitializeForm").addClass("visible");
 
@@ -240,25 +269,25 @@
             $("#confirm-btn").removeClass("gi-hidden");
         });
 
-        $("#confirm-btn").on("click", async function (){
+        $("#confirm-btn").on("click", async function () {
             let validateUrl = "/common/common/commonUser/validatePasswordPolicy";
             let initializeUrl = "/common/common/commonUser/initializePassword";
             let newPassword = $("#changePassword").val();
             let newPasswordCheck = $("#changePasswordCheck").val();
 
-            if(!formUtil.checkEmptyValue(newPassword)){
+            if (!formUtil.checkEmptyValue(newPassword)) {
                 const message = Message.Label.Array["CHECK.INPUT.PASSWORD"];
                 formUtil.showMessage(message);
                 return false;
             }
 
-            if(!formUtil.checkEmptyValue(newPasswordCheck)){
+            if (!formUtil.checkEmptyValue(newPasswordCheck)) {
                 const message = Message.Label.Array["CHECK.INPUT.PASSWORD_CHECK"];
                 formUtil.showMessage(message);
                 return false;
             }
 
-            if(newPassword !== newPasswordCheck){
+            if (newPassword !== newPasswordCheck) {
                 const message = Message.Label.Array["FAIL.COMPARE.PASSWORD"];
                 formUtil.showMessage(message);
                 return false;
@@ -287,18 +316,18 @@
             }
         });
     }
-    function addUser(){
-        let cont  = {
-            user_id : "go66go66",
-            email : "go66go66@giens.co.kr",
-            password : "1234"
+    function addUser() {
+        let cont = {
+            user_id: "go66go66",
+            email: "go66go66@giens.co.kr",
+            password: "1234"
         }
         let url = "/api/v1/auth/register";
-        axios.post(url , cont).then(response =>{
+        axios.post(url, cont).then(response => {
             let data = response.data;
             formUtil.alertPopup("등록완료");
-        }).catch(error =>{
-            formUtil.alertPopup(""+error);
+        }).catch(error => {
+            formUtil.alertPopup("" + error);
         })
     }
     // 로그인 함수
@@ -312,34 +341,34 @@
         let url = "/login";
 
         axios.post(url, cont).then(response => {
-                new session().setItem("userInfo", {
-                    email: email,
-                });
-                new session().setItem("recentPage", {url: '/index/index'}); //main으로 연결
-                let redirectUrl = response.data.redirectUrl;
-                setEmailCookie();
-                requestPageRedirect(redirectUrl);
-            }).catch(error => {
-                formUtil.alertPopup(Message.Label.Array["FAIL.IDPWD"]);
+            new session().setItem("userInfo", {
+                email: email,
+            });
+            new session().setItem("recentPage", { url: '/index/index' }); //main으로 연결
+            let redirectUrl = response.data.redirectUrl;
+            setEmailCookie();
+            requestPageRedirect(redirectUrl);
+        }).catch(error => {
+            formUtil.alertPopup(Message.Label.Array["FAIL.IDPWD"]);
         })
     }
 
     // 페이지 리디렉션 함수
     function requestPageRedirect(redirectUrl) {
         $("body").removeClass('animate-content-end');
-        setTimeout(function(){
+        setTimeout(function () {
             $("body").addClass('animate-content-start');
             window.location.href = redirectUrl;
-        },100);
+        }, 100);
     }
 
-    function setEmailCookie(){
+    function setEmailCookie() {
         let url = "/common/setEmailCookie";
         let email = $("#email").val();
         let rememberMe = $("#remember_email").prop("checked");
         let requestParam = {
-            email : email,
-            isChecked : rememberMe
+            email: email,
+            isChecked: rememberMe
         }
 
         axios.post(url, requestParam).then(response => {
@@ -351,8 +380,8 @@
     function getEmailCookie() {
         let url = "/common/getEmailCookie";
         axios.get(url).then(response => {
-            let email= response.data.email;
-            if(formUtil.checkEmptyValue(email)){
+            let email = response.data.email;
+            if (formUtil.checkEmptyValue(email)) {
                 $("#email").val(email);
                 $("#email").siblings("label").attr("data-focus-label", true);
                 $("#remember_email").prop("checked", true);
@@ -376,7 +405,7 @@
         let authenticationInfo = {
             title: "[giens] 인증코드 발송",
             content: content,
-            email_list : targetEmail
+            email_list: targetEmail
         }
         let disabledTag = ['authenticationTarget', 'send-number-btn'];
 
@@ -388,8 +417,8 @@
         axios.post(url, authenticationInfo).then(response => {
             let status = response.status;
             console.log(status);
-            if(status === 200){
-            }else{
+            if (status === 200) {
+            } else {
                 // custom alert 적용 필요
                 formUtil.showMessage("인증번호 전송 실패");
                 commonTag.tagDisabled(true, disabledTag);
@@ -397,7 +426,7 @@
         });
     }
 
-    function expiredMessage(){
+    function expiredMessage() {
         let target = $(".authentication-check-message");
         let enableTags = ['authenticationTarget', 'send-number-btn'];
         target.removeClass("gi-hidden");
@@ -420,7 +449,7 @@
 
             if (timeLeft === 0) {
                 clearInterval(authenticationTimer);
-                if(typeof callback === "function"){
+                if (typeof callback === "function") {
                     callback();
                 }
             }
@@ -428,7 +457,7 @@
         }, 1000);
     }
 
-    function popupInit(){
+    function popupInit() {
         let loginPageAuthenticationFormInputs = $("#loginPageAuthenticationForm input");
         let loginPagePasswordInitializeFormInputs = $("#loginPagePasswordInitializeForm input");
         let initializeBtn = $("#initialize-btn");
@@ -452,18 +481,18 @@
         $("#authenticationNumber").val("");
 
         // 비밀번호 초기화 폼 버튼 비활성화
-        if(!initializeBtn.hasClass("gi-hidden")) initializeBtn.addClass("gi-hidden");
+        if (!initializeBtn.hasClass("gi-hidden")) initializeBtn.addClass("gi-hidden");
 
         // 팝업 폼 초기화(default : loginPageAuthenticationForm)
         $("#loginPageAuthenticationForm").removeClass("invisible");
         $("#loginPagePasswordInitializeForm").removeClass("visible");
 
         // 폼 별 input 입력 초기화
-        loginPageAuthenticationFormInputs.each(function (){
+        loginPageAuthenticationFormInputs.each(function () {
             $(this).val("");
         })
 
-        loginPagePasswordInitializeFormInputs.each(function (){
+        loginPagePasswordInitializeFormInputs.each(function () {
             $(this).val("");
         })
 
@@ -471,21 +500,21 @@
         $("#confirm-btn").addClass("gi-hidden");
     }
 
-    function authenticationMailTemplate(){
+    function authenticationMailTemplate() {
         let html = "";
 
         html += "<div class='gi-row-100 gi-col-100'>"
-             +      "<div class='gi-row-100 gi-mail-logo-area'>"
-             +          "<a class='gi-mail-logo'></a>"
-             +      "</div>"
-             +      "<div class='gi-row-100 gi-mail-content-area'>"
-             +          "<div class='gi-row-100 gi-mail-content'>"
-             +              "[giens] 이메일 인증코드<br>"
-             +              "비밀번호 초기화를 위한 인증 코드를 발송하였습니다.<br>"
-             +              "아래의 인증 코드를 인증번호에 입력해주시기 바랍니다.<br>"
-             +           "<span>" + authenticationNumber + "</span>"
-             +          "</div>"
-             +      "</div>";
+            + "<div class='gi-row-100 gi-mail-logo-area'>"
+            + "<a class='gi-mail-logo'></a>"
+            + "</div>"
+            + "<div class='gi-row-100 gi-mail-content-area'>"
+            + "<div class='gi-row-100 gi-mail-content'>"
+            + "[giens] 이메일 인증코드<br>"
+            + "비밀번호 초기화를 위한 인증 코드를 발송하였습니다.<br>"
+            + "아래의 인증 코드를 인증번호에 입력해주시기 바랍니다.<br>"
+            + "<span>" + authenticationNumber + "</span>"
+            + "</div>"
+            + "</div>";
 
         return html;
     }

@@ -1,21 +1,344 @@
-*{
-    --btn-width : 70px;
-    --btn-height : 30px;
-    --btn-border-radius : 10px;
-    --btn-background-color-white : #ffffff;
+/* ========== Button Styles ========== */
+
+/* ======================================================================================================== Button 버튼 영역*/
+.gi-btn-section {
+    width: var(--width-section-btn);
+    height: var(--heigth-section-btn);
 }
-button[data-file-upload-btn]{
-    width: 30px;
-    height: var(--btn-height);
-    border:1px solid #eaeaea;
+
+.gi-btn {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: #d5d5d5;
+    color: #000000;
+    border-radius: var(--border-radius-btn);
     cursor: pointer;
-    border-radius : var(--btn-border-radius);
-    background-image: url("../../img/file_upload.png");
-    background-size: contain;
-    background-repeat: no-repeat;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
 }
-button[data-file-upload-btn]:hover{
+
+.gi-grid-btn {
+    height: 100%;
+    min-width: 80%;
+    border: 1px solid #cfcfcf;
+    background-color: #fffefe;
+    font-size: 10px;
+    color: #000000;
+    border-radius: var(--border-radius-grid-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
 }
-input[data-file-upload-uuid]{
-    display: none;
+
+.gi-grid-modify-btn {
+    height: 100%;
+    min-width: 80%;
+    border: none;
+    background-color: #fde69f;
+    color: #000000;
+    border-radius: var(--border-radius-grid-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
 }
+
+.gi-btn-blue {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-back);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-skyblue {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-blue);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-red {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-red);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-yellow {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-yellow);
+    color: #000000;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-search {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 85px;
+    border: none;
+    background-color: var(--background-color-btn-light-gray);
+    color: #000000;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-reset {
+    white-space: nowrap;
+    /*글자 내려가지 않게*/
+    padding: var(--padding-icon-btn);
+    height: 100%;
+    min-width: 80px;
+    border: none;
+    background-color: var(--background-color-btn-light-gray);
+    color: #000000;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-more {
+    padding: var(--padding-icon-btn);
+    height: 100%;
+    min-width: 80px;
+    border: none;
+    background-color: var(--background-color-btn-yellow);
+    color: #000000;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-back {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-back);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-file-upload {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-file-upload);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-file-download {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-file-upload);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-register {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-back);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+}
+
+.gi-btn-more>i,
+.gi-btn-reset>i {
+    transition: 0.2s ease-in;
+}
+
+.gi-btn-more:focus>i,
+.gi-btn-reset:hover>i {
+    transform: rotate(380deg);
+}
+
+.gi-btn-register:hover {
+    background-color: var(--background-color-btn-back-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-back:hover {
+    background-color: var(--background-color-btn-back-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-blue:hover {
+    background-color: var(--background-color-btn-back-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-more:hover {
+    background-color: var(--background-color-btn-yellow-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-reset:hover {
+    background-color: #888888;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-search:hover {
+    background-color: #888888;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn:hover {
+    background-color: #888888;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-grid-btn:hover {
+    background-color: #888888;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-skyblue:hover {
+    background-color: var(--background-color-btn-blue-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-red:hover {
+    background-color: var(--background-color-btn-red-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-btn-yellow:hover {
+    background-color: var(--background-color-btn-yellow-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-input-btn {
+    width: 100%;
+    height: 100%;
+    color: #000000;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.gi-input-btn[disabled] {
+    cursor: unset;
+}
+
+.gi-input-btn:not([disabled]):hover {
+    color: #FFFFFF;
+}
+
+.gi-input-btn:not([disabled]):hover {
+    background-color: var(--background-color-input-btn-hover);
+}
+
+.gi-input-btn[data-btn-active="true"] {
+    background-color: var(--background-color-input-btn-hover) !important;
+    color: #FFFFFF !important;
+}
+
+.gi-input-btn[data-btn-active="false"] {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.gi-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.gi-tooltip-info-icon {
+    position: relative;
+    padding: 10px 10px;
+    cursor: pointer;
+    background: url("../../img/info_mark_circle.svg") no-repeat center;
+    background-size: 20px 20px;
+    opacity: 0.2;
+}
+
+.gi-tooltip-info-icon:hover {
+    background: url("../../img/info_mark_circle_black.svg") no-repeat center;
+    background-size: 20px 20px;
+    opacity: 0.2;
+}
+
+.gi-tooltip-info-text {
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    word-break: keep-all;
+}
+
+.gi-tooltip-info-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.6) transparent transparent transparent;
+}
+
+

@@ -1,0 +1,3826 @@
+/* ========== Display Grid Utilities ========== */
+
+/* ======================================================================================================== display Grid 그리드 영역*/
+.gi-grid {
+    display: grid;
+}
+
+.gi-grid-place-content-space-around {
+    place-content: space-around;
+}
+
+.gi-grid-center {
+    justify-items: center;
+    align-items: center;
+}
+
+.gi-grid-center-left {
+    justify-items: left;
+    align-items: center;
+}
+
+.gi-grid-center-right {
+    justify-items: right;
+    align-items: center;
+}
+
+.gi-grid-align-items-center {
+    align-items: center;
+}
+
+.gi-grid-align-items-start {
+    align-items: start;
+}
+
+.gi-grid-align-content-center {
+    align-content: center;
+}
+
+.gi-grid-justify-items-center {
+    justify-items: center;
+}
+
+.gi-grid-justify-content-center {
+    justify-content: center;
+}
+
+.gi-grid-gap-1px-1px {
+    gap: 1px 1px;
+}
+
+.gi-grid-gap-11px-11px {
+    gap: 11px 11px;
+}
+
+.gi-grid-gap-21px-21px {
+    gap: 21px 21px;
+}
+
+.gi-grid-gap-31px-31px {
+    gap: 31px 31px;
+}
+
+.gi-grid-gap-41px-41px {
+    gap: 41px 41px;
+}
+
+.gi-grid-gap-51px-51px {
+    gap: 51px 51px;
+}
+
+.gi-grid-gap-61px-61px {
+    gap: 61px 61px;
+}
+
+.gi-grid-gap-71px-71px {
+    gap: 71px 71px;
+}
+
+.gi-grid-gap-81px-81px {
+    gap: 81px 81px;
+}
+
+.gi-grid-gap-91px-91px {
+    gap: 91px 91px;
+}
+
+.gi-grid-gap-2px-2px {
+    gap: 2px 2px;
+}
+
+.gi-grid-gap-12px-12px {
+    gap: 12px 12px;
+}
+
+.gi-grid-gap-22px-22px {
+    gap: 22px 22px;
+}
+
+.gi-grid-gap-32px-32px {
+    gap: 32px 32px;
+}
+
+.gi-grid-gap-42px-42px {
+    gap: 42px 42px;
+}
+
+.gi-grid-gap-52px-52px {
+    gap: 52px 52px;
+}
+
+.gi-grid-gap-62px-62px {
+    gap: 62px 62px;
+}
+
+.gi-grid-gap-72px-72px {
+    gap: 72px 72px;
+}
+
+.gi-grid-gap-82px-82px {
+    gap: 82px 82px;
+}
+
+.gi-grid-gap-92px-92px {
+    gap: 92px 92px;
+}
+
+.gi-grid-gap-3px-3px {
+    gap: 3px 3px;
+}
+
+.gi-grid-gap-13px-13px {
+    gap: 13px 13px;
+}
+
+.gi-grid-gap-23px-23px {
+    gap: 23px 23px;
+}
+
+.gi-grid-gap-33px-33px {
+    gap: 33px 33px;
+}
+
+.gi-grid-gap-43px-43px {
+    gap: 43px 43px;
+}
+
+.gi-grid-gap-53px-53px {
+    gap: 53px 53px;
+}
+
+.gi-grid-gap-63px-63px {
+    gap: 63px 63px;
+}
+
+.gi-grid-gap-73px-73px {
+    gap: 73px 73px;
+}
+
+.gi-grid-gap-83px-83px {
+    gap: 83px 83px;
+}
+
+.gi-grid-gap-93px-93px {
+    gap: 93px 93px;
+}
+
+.gi-grid-gap-4px-4px {
+    gap: 4px 4px;
+}
+
+.gi-grid-gap-14px-14px {
+    gap: 14px 14px;
+}
+
+.gi-grid-gap-24px-24px {
+    gap: 24px 24px;
+}
+
+.gi-grid-gap-34px-34px {
+    gap: 34px 34px;
+}
+
+.gi-grid-gap-44px-44px {
+    gap: 44px 44px;
+}
+
+.gi-grid-gap-54px-54px {
+    gap: 54px 54px;
+}
+
+.gi-grid-gap-64px-64px {
+    gap: 64px 64px;
+}
+
+.gi-grid-gap-74px-74px {
+    gap: 74px 74px;
+}
+
+.gi-grid-gap-84px-84px {
+    gap: 84px 84px;
+}
+
+.gi-grid-gap-94px-94px {
+    gap: 94px 94px;
+}
+
+.gi-grid-gap-5px-5px {
+    gap: 5px 5px;
+}
+
+.gi-grid-gap-15px-15px {
+    gap: 15px 15px;
+}
+
+.gi-grid-gap-25px-25px {
+    gap: 25px 25px;
+}
+
+.gi-grid-gap-35px-35px {
+    gap: 35px 35px;
+}
+
+.gi-grid-gap-45px-45px {
+    gap: 45px 45px;
+}
+
+.gi-grid-gap-55px-55px {
+    gap: 55px 55px;
+}
+
+.gi-grid-gap-65px-65px {
+    gap: 65px 65px;
+}
+
+.gi-grid-gap-75px-75px {
+    gap: 75px 75px;
+}
+
+.gi-grid-gap-85px-85px {
+    gap: 85px 85px;
+}
+
+.gi-grid-gap-95px-95px {
+    gap: 95px 95px;
+}
+
+.gi-grid-gap-6px-6px {
+    gap: 6px 6px;
+}
+
+.gi-grid-gap-16px-16px {
+    gap: 16px 16px;
+}
+
+.gi-grid-gap-26px-26px {
+    gap: 26px 26px;
+}
+
+.gi-grid-gap-36px-36px {
+    gap: 36px 36px;
+}
+
+.gi-grid-gap-46px-46px {
+    gap: 46px 46px;
+}
+
+.gi-grid-gap-56px-56px {
+    gap: 56px 56px;
+}
+
+.gi-grid-gap-66px-66px {
+    gap: 66px 66px;
+}
+
+.gi-grid-gap-76px-76px {
+    gap: 76px 76px;
+}
+
+.gi-grid-gap-86px-86px {
+    gap: 86px 86px;
+}
+
+.gi-grid-gap-96px-96px {
+    gap: 96px 96px;
+}
+
+.gi-grid-gap-7px-7px {
+    gap: 7px 7px;
+}
+
+.gi-grid-gap-17px-17px {
+    gap: 17px 17px;
+}
+
+.gi-grid-gap-27px-27px {
+    gap: 27px 27px;
+}
+
+.gi-grid-gap-37px-37px {
+    gap: 37px 37px;
+}
+
+.gi-grid-gap-47px-47px {
+    gap: 47px 47px;
+}
+
+.gi-grid-gap-57px-57px {
+    gap: 57px 57px;
+}
+
+.gi-grid-gap-67px-67px {
+    gap: 67px 67px;
+}
+
+.gi-grid-gap-77px-77px {
+    gap: 77px 77px;
+}
+
+.gi-grid-gap-87px-87px {
+    gap: 87px 87px;
+}
+
+.gi-grid-gap-97px-97px {
+    gap: 97px 97px;
+}
+
+.gi-grid-gap-8px-8px {
+    gap: 8px 8px;
+}
+
+.gi-grid-gap-18px-18px {
+    gap: 18px 18px;
+}
+
+.gi-grid-gap-28px-28px {
+    gap: 28px 28px;
+}
+
+.gi-grid-gap-38px-38px {
+    gap: 38px 38px;
+}
+
+.gi-grid-gap-48px-48px {
+    gap: 48px 48px;
+}
+
+.gi-grid-gap-58px-58px {
+    gap: 58px 58px;
+}
+
+.gi-grid-gap-68px-68px {
+    gap: 68px 68px;
+}
+
+.gi-grid-gap-78px-78px {
+    gap: 78px 78px;
+}
+
+.gi-grid-gap-88px-88px {
+    gap: 88px 88px;
+}
+
+.gi-grid-gap-98px-98px {
+    gap: 98px 98px;
+}
+
+.gi-grid-gap-9px-9px {
+    gap: 9px 9px;
+}
+
+.gi-grid-gap-19px-19px {
+    gap: 19px 19px;
+}
+
+.gi-grid-gap-29px-29px {
+    gap: 29px 29px;
+}
+
+.gi-grid-gap-39px-39px {
+    gap: 39px 39px;
+}
+
+.gi-grid-gap-49px-49px {
+    gap: 49px 49px;
+}
+
+.gi-grid-gap-59px-59px {
+    gap: 59px 59px;
+}
+
+.gi-grid-gap-69px-69px {
+    gap: 69px 69px;
+}
+
+.gi-grid-gap-79px-79px {
+    gap: 79px 79px;
+}
+
+.gi-grid-gap-89px-89px {
+    gap: 89px 89px;
+}
+
+.gi-grid-gap-99px-99px {
+    gap: 99px 99px;
+}
+
+.gi-grid-gap-10px {
+    gap: 10px;
+}
+
+.gi-grid-gap-10px-10px {
+    gap: 10px 10px;
+}
+
+.gi-grid-gap-20px {
+    gap: 20px;
+}
+
+.gi-grid-gap-20px-20px {
+    gap: 20px 20px;
+}
+
+.gi-grid-gap-30px {
+    gap: 30px;
+}
+
+.gi-grid-gap-30px-30px {
+    gap: 30px 30px;
+}
+
+.gi-grid-gap-40px {
+    gap: 40px;
+}
+
+.gi-grid-gap-40px-40px {
+    gap: 40px 40px;
+}
+
+.gi-grid-gap-50px {
+    gap: 50px;
+}
+
+.gi-grid-gap-50px-50px {
+    gap: 50px 50px;
+}
+
+.gi-grid-gap-60px {
+    gap: 60px;
+}
+
+.gi-grid-gap-60px-60px {
+    gap: 60px 60px;
+}
+
+.gi-grid-gap-70px {
+    gap: 70px;
+}
+
+.gi-grid-gap-70px-70px {
+    gap: 70px 70px;
+}
+
+.gi-grid-gap-80px {
+    gap: 80px;
+}
+
+.gi-grid-gap-80px-80px {
+    gap: 80px 80px;
+}
+
+.gi-grid-gap-90px {
+    gap: 90px;
+}
+
+.gi-grid-gap-90px-90px {
+    gap: 90px 90px;
+}
+
+.gi-grid-gap-100px {
+    gap: 100px;
+}
+
+.gi-grid-gap-100px-100px {
+    gap: 100px 100px;
+}
+
+.gi-grid-template-rows-0 {
+    grid-template-rows: 0;
+}
+
+.gi-grid-template-rows-1fr {
+    grid-template-rows: 1fr;
+}
+
+.gi-grid-template-rows-1fr-3fr {
+    grid-template-rows: 1fr 3fr;
+}
+
+.gi-grid-template-rows-1fr-4fr {
+    grid-template-rows: 1fr 4fr;
+}
+
+.gi-grid-template-rows-1fr-5fr {
+    grid-template-rows: 1fr 5fr;
+}
+
+.gi-grid-template-rows-1fr-6fr {
+    grid-template-rows: 1fr 6fr;
+}
+
+.gi-grid-template-rows-1fr-8fr {
+    grid-template-rows: 1fr 8fr;
+}
+
+.gi-grid-template-rows-1fr-9fr {
+    grid-template-rows: 1fr 9fr;
+}
+
+.gi-grid-template-rows-1fr-12fr {
+    grid-template-rows: 1fr 12fr;
+}
+
+.gi-grid-template-rows-1fr-14fr {
+    grid-template-rows: 1fr 14fr;
+}
+
+.gi-grid-template-rows-1fr-15fr {
+    grid-template-rows: 1fr 15fr;
+}
+
+.gi-grid-template-rows-2fr-8fr {
+    grid-template-rows: 2fr 8fr;
+}
+
+.gi-grid-template-rows-2fr-1fr-2fr {
+    grid-template-rows: 2fr 1fr 2fr;
+}
+
+.gi-grid-template-rows-2fr-9fr {
+    grid-template-rows: 2fr 9fr;
+}
+
+.gi-grid-template-rows-2fr-10fr {
+    grid-template-rows: 2fr 10fr;
+}
+
+.gi-grid-template-rows-2fr-12fr {
+    grid-template-rows: 2fr 12fr;
+}
+
+.gi-grid-template-rows-2fr-3fr {
+    grid-template-rows: 2fr 3fr;
+}
+
+.gi-grid-template-rows-2fr-5fr {
+    grid-template-rows: 2fr 5fr;
+}
+
+.gi-grid-template-rows-3fr-7fr {
+    grid-template-rows: 3fr 7fr;
+}
+
+.gi-grid-template-rows-4fr-6fr {
+    grid-template-rows: 4fr 6fr;
+}
+
+.gi-grid-template-rows-4fr-3fr {
+    grid-template-rows: 4fr 3fr;
+}
+
+.gi-grid-template-rows-5fr-5fr {
+    grid-template-rows: 5fr 5fr;
+}
+
+.gi-grid-template-rows-6fr-4fr {
+    grid-template-rows: 6fr 4fr;
+}
+
+.gi-grid-template-rows-7fr-3fr {
+    grid-template-rows: 7fr 3fr;
+}
+
+.gi-grid-template-rows-8fr-2fr {
+    grid-template-rows: 8fr 2fr;
+}
+
+.gi-grid-template-rows-9fr-1fr {
+    grid-template-rows: 9fr 1fr;
+}
+
+.gi-grid-template-rows-11fr-2fr {
+    grid-template-rows: 11fr 2fr;
+}
+
+.gi-grid-template-rows-repeat-1-1fr {
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.gi-grid-template-rows-repeat-1-1fr-1fr {
+    grid-template-rows: repeat(1, 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-1-1fr-3fr-1fr {
+    grid-template-rows: repeat(1, 1fr 3fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-1-1fr-25fr {
+    grid-template-rows: repeat(1, 1fr 25fr);
+}
+
+.gi-grid-template-rows-3fr-3fr-1fr-2fr-2fr-3fr {
+    grid-template-rows: 3fr 3fr 1fr 2fr 2fr 3fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-4fr-1fr-3fr {
+    grid-template-rows: 1fr 1fr 4fr 1fr 3fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-1fr {
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-1fr {
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-2fr-1fr {
+    grid-template-rows: 1fr 2fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-2fr {
+    grid-template-rows: 1fr 1fr 2fr;
+}
+
+.gi-grid-template-rows-1fr-3fr-1fr {
+    grid-template-rows: 1fr 3fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-3fr {
+    grid-template-rows: 1fr 1fr 3fr;
+}
+
+.gi-grid-template-rows-1fr-4fr-1fr {
+    grid-template-rows: 1fr 4fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-4fr {
+    grid-template-rows: 1fr 1fr 4fr;
+}
+
+.gi-grid-template-rows-1fr-5fr-1fr {
+    grid-template-rows: 1fr 5fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-5fr {
+    grid-template-rows: 1fr 1fr 5fr;
+}
+
+.gi-grid-template-rows-1fr-6fr-1fr {
+    grid-template-rows: 1fr 6fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-6fr {
+    grid-template-rows: 1fr 1fr 6fr;
+}
+
+.gi-grid-template-rows-1fr-7fr-1fr {
+    grid-template-rows: 1fr 7fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-7fr {
+    grid-template-rows: 1fr 1fr 7fr;
+}
+
+.gi-grid-template-rows-1fr-8fr-1fr {
+    grid-template-rows: 1fr 8fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-8fr {
+    grid-template-rows: 1fr 1fr 8fr;
+}
+
+.gi-grid-template-rows-1fr-9fr-1fr {
+    grid-template-rows: 1fr 9fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-9fr {
+    grid-template-rows: 1fr 1fr 9fr;
+}
+
+.gi-grid-template-rows-1fr-10fr-1fr {
+    grid-template-rows: 1fr 10fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-1fr-10fr {
+    grid-template-rows: 1fr 1fr 10fr;
+}
+
+.gi-grid-template-rows-1fr-7fr-2fr {
+    grid-template-rows: 1fr 7fr 2fr;
+}
+
+.gi-grid-template-rows-1fr-15fr-4fr {
+    grid-template-rows: 1fr 15fr 4fr;
+}
+
+.gi-grid-template-rows-2fr-15fr-4fr {
+    grid-template-rows: 2fr 15fr 4fr;
+}
+
+.gi-grid-template-rows-2fr-18fr-3fr {
+    grid-template-rows: 2fr 18fr 3fr;
+}
+
+.gi-grid-template-rows-1fr-18fr-3fr {
+    grid-template-rows: 1fr 18fr 3fr;
+}
+
+.gi-grid-template-rows-1fr-18fr {
+    grid-template-rows: 1fr 18fr;
+}
+
+.gi-grid-template-rows-0fr-2fr-1fr-2fr {
+    grid-template-rows: 0fr 2fr 1fr 2fr;
+}
+
+.gi-grid-template-rows-0fr-2fr-1fr-1fr {
+    grid-template-rows: 0fr 2fr 1fr 1fr;
+}
+
+.gi-grid-template-rows-7fr-2fr-1fr {
+    grid-template-rows: 7fr 2fr 1fr;
+}
+
+.gi-grid-template-rows-1fr-2fr {
+    grid-template-rows: 1fr 2fr;
+}
+
+.gi-grid-template-rows-1fr-2fr-2fr-2fr {
+    grid-template-rows: 1fr 2fr 2fr 2fr;
+}
+
+.gi-grid-template-rows-2fr-3fr-3fr-3fr {
+    grid-template-rows: 2fr 3fr 3fr 3fr;
+}
+
+.gi-grid-template-rows-2fr-2fr-4fr-6fr {
+    grid-template-rows: 2fr 2fr 4fr 6fr;
+}
+
+.gi-grid-template-rows-1fr-5fr {
+    grid-template-rows: 1fr 5fr;
+}
+
+.gi-grid-template-rows-repeat-1-1fr-4fr-4fr {
+    grid-template-rows: repeat(1, 1fr 4fr 4fr);
+}
+
+.gi-grid-template-rows-repeat-1-4fr-4fr-1fr {
+    grid-template-rows: repeat(1, 4fr 4fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-1-4fr-4fr-2fr {
+    grid-template-rows: repeat(1, 4fr 4fr 2fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr {
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-2fr {
+    grid-template-rows: repeat(2, 1fr 2fr);
+}
+
+.gi-grid-template-rows-repeat-2-2fr-1fr {
+    grid-template-rows: repeat(2, 2fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-3fr {
+    grid-template-rows: repeat(2, 1fr 3fr);
+}
+
+.gi-grid-template-rows-repeat-2-3fr-1fr {
+    grid-template-rows: repeat(2, 3fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-4fr {
+    grid-template-rows: repeat(2, 1fr 4fr);
+}
+
+.gi-grid-template-rows-repeat-2-4fr-1fr {
+    grid-template-rows: repeat(2, 4fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-5fr {
+    grid-template-rows: repeat(2, 1fr 5fr);
+}
+
+.gi-grid-template-rows-repeat-2-5fr-1fr {
+    grid-template-rows: repeat(2, 5fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-6fr {
+    grid-template-rows: repeat(2, 1fr 6fr);
+}
+
+.gi-grid-template-rows-repeat-2-6fr-1fr {
+    grid-template-rows: repeat(2, 6fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-7fr {
+    grid-template-rows: repeat(2, 1fr 7fr);
+}
+
+.gi-grid-template-rows-repeat-2-7fr-1fr {
+    grid-template-rows: repeat(2, 7fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-8fr {
+    grid-template-rows: repeat(2, 1fr 8fr);
+}
+
+.gi-grid-template-rows-repeat-2-8fr-1fr {
+    grid-template-rows: repeat(2, 8fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-2-1fr-9fr {
+    grid-template-rows: repeat(2, 1fr 9fr);
+}
+
+.gi-grid-template-rows-repeat-2-9fr-1fr {
+    grid-template-rows: repeat(2, 9fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr {
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-2fr-1fr {
+    grid-template-rows: repeat(3, 1fr 2fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-2fr-1fr-1fr {
+    grid-template-rows: repeat(3, 2fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-3fr-1fr {
+    grid-template-rows: repeat(3, 1fr 3fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-3fr-1fr-1fr {
+    grid-template-rows: repeat(3, 3fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-4fr-1fr {
+    grid-template-rows: repeat(3, 1fr 4fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-4fr-1fr-1fr {
+    grid-template-rows: repeat(3, 4fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-5fr-1fr {
+    grid-template-rows: repeat(3, 1fr 5fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-5fr-1fr-1fr {
+    grid-template-rows: repeat(3, 5fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-6fr-1fr {
+    grid-template-rows: repeat(3, 1fr 6fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-6fr-1fr-1fr {
+    grid-template-rows: repeat(3, 6fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-7fr-1fr {
+    grid-template-rows: repeat(3, 1fr 7fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-7fr-1fr-1fr {
+    grid-template-rows: repeat(3, 7fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-8fr-1fr {
+    grid-template-rows: repeat(3, 1fr 8fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-8fr-1fr-1fr {
+    grid-template-rows: repeat(3, 8fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-1fr-9fr-1fr {
+    grid-template-rows: repeat(3, 1fr 9fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-3-9fr-1fr-1fr {
+    grid-template-rows: repeat(3, 9fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr {
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-2fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 2fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-2fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 2fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-3fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 3fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-3fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 3fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-4fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 4fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-4fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 4fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-5fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 5fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-5fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 5fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-6fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 6fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-6fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 6fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-7fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 7fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-7fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 7fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-8fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 8fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-8fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 8fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-1fr-9fr-1fr-1fr {
+    grid-template-rows: repeat(4, 1fr 9fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-4-9fr-1fr-1fr-1fr {
+    grid-template-rows: repeat(4, 9fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-rows-repeat-5-1fr {
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.gi-grid-template-rows-repeat-6-1fr {
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.gi-grid-template-rows-repeat-7-1fr {
+    grid-template-rows: repeat(7, 1fr);
+}
+
+.gi-grid-template-rows-repeat-8-1fr {
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.gi-grid-template-rows-repeat-9-1fr {
+    grid-template-rows: repeat(9, 1fr);
+}
+
+.gi-grid-template-rows-repeat-10-1fr {
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.gi-grid-template-rows-1fr-2fr-4fr-3fr-2fr-5fr {
+    grid-template-rows: 1fr 2fr 4fr 3fr 2fr 5fr;
+}
+
+.gi-grid-template-rows-1fr-2fr-2fr-3fr-2fr-7fr {
+    grid-template-rows: 1fr 2fr 2fr 3fr 2fr 7fr;
+}
+
+.gi-grid-template-columns-2fr-8fr {
+    grid-template-columns: 2fr 8fr;
+}
+
+.gi-grid-template-columns-3fr-7fr {
+    grid-template-columns: 3fr 7fr;
+}
+
+.gi-grid-template-columns-4fr-6fr {
+    grid-template-columns: 4fr 6fr;
+}
+
+.gi-grid-template-columns-5fr-5fr {
+    grid-template-columns: 5fr 5fr;
+}
+
+.gi-grid-template-columns-6fr-4fr {
+    grid-template-columns: 6fr 4fr;
+}
+
+.gi-grid-template-columns-7fr-3fr {
+    grid-template-columns: 7fr 3fr;
+}
+
+.gi-grid-template-columns-8fr-2fr {
+    grid-template-columns: 8fr 2fr;
+}
+
+.gi-grid-template-columns-9fr-1fr {
+    grid-template-columns: 9fr 1fr;
+}
+
+.gi-grid-template-columns-repeat-1-1fr {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-9fr-1fr {
+    grid-template-columns: repeat(1, 9fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-2fr-4fr {
+    grid-template-columns: repeat(1, 2fr 4fr);
+}
+
+.gi-grid-template-columns-repeat-1-2fr-2fr-1fr {
+    grid-template-columns: repeat(1, 2fr 2fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-1fr-1fr {
+    grid-template-columns: repeat(1, 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-1fr {
+    grid-template-columns: repeat(1, 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-2fr {
+    grid-template-columns: repeat(1, 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-3fr {
+    grid-template-columns: repeat(1, 1fr 3fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-4fr {
+    grid-template-columns: repeat(1, 1fr 4fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-5fr {
+    grid-template-columns: repeat(1, 1fr 5fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-6fr {
+    grid-template-columns: repeat(1, 1fr 6fr);
+}
+
+.gi-grid-template-columns-repeat-1-1fr-7fr {
+    grid-template-columns: repeat(1, 1fr 7fr);
+}
+
+.gi-grid-template-columns-repeat-1-2fr-1fr {
+    grid-template-columns: repeat(1, 2fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-2fr-1fr-2fr {
+    grid-template-columns: repeat(1, 2fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-1-3fr-1fr {
+    grid-template-columns: repeat(1, 3fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-3fr-2fr {
+    grid-template-columns: repeat(1, 3fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-1-3fr-5fr {
+    grid-template-columns: repeat(1, 3fr 5fr);
+}
+
+.gi-grid-template-columns-repeat-1-3fr-6fr {
+    grid-template-columns: repeat(1, 3fr 6fr);
+}
+
+.gi-grid-template-columns-repeat-1-3fr-7fr {
+    grid-template-columns: repeat(1, 3fr 7fr);
+}
+
+.gi-grid-template-columns-repeat-1-3fr-3fr-2fr {
+    grid-template-columns: repeat(1, 3fr 3fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-1-5fr-1fr {
+    grid-template-columns: repeat(1, 5fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-4fr-1fr-1fr {
+    grid-template-columns: repeat(1, 4fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-1-4fr-1fr-4fr {
+    grid-template-columns: repeat(1, 4fr 1fr 4fr);
+}
+
+.gi-grid-template-columns-repeat-1-4fr-1fr-2fr {
+    grid-template-columns: repeat(1, 4fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-1-4fr-1fr-3fr {
+    grid-template-columns: repeat(1, 4fr 1fr 3fr);
+}
+
+.gi-grid-template-columns-repeat-1-4fr-5fr {
+    grid-template-columns: repeat(1, 4fr 5fr);
+}
+
+.gi-grid-template-columns-repeat-1-4fr-6fr {
+    grid-template-columns: repeat(1, 4fr 6fr);
+}
+
+
+
+.gi-grid-template-columns-repeat-2-1fr {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-1fr {
+    grid-template-columns: repeat(2, 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-2fr {
+    grid-template-columns: repeat(2, 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-2-2fr-1fr {
+    grid-template-columns: repeat(2, 2fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-3fr {
+    grid-template-columns: repeat(2, 1fr 3fr);
+}
+
+.gi-grid-template-columns-repeat-2-3fr-1fr {
+    grid-template-columns: repeat(2, 3fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-4fr {
+    grid-template-columns: repeat(2, 1fr 4fr);
+}
+
+.gi-grid-template-columns-repeat-2-4fr-1fr {
+    grid-template-columns: repeat(2, 4fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-5fr {
+    grid-template-columns: repeat(2, 1fr 5fr);
+}
+
+.gi-grid-template-columns-repeat-2-5fr-1fr {
+    grid-template-columns: repeat(2, 5fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-6fr {
+    grid-template-columns: repeat(2, 1fr 6fr);
+}
+
+.gi-grid-template-columns-repeat-2-6fr-1fr {
+    grid-template-columns: repeat(2, 6fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-7fr {
+    grid-template-columns: repeat(2, 1fr 7fr);
+}
+
+.gi-grid-template-columns-repeat-2-7fr-1fr {
+    grid-template-columns: repeat(2, 7fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-8fr {
+    grid-template-columns: repeat(2, 1fr 8fr);
+}
+
+.gi-grid-template-columns-repeat-2-8fr-1fr {
+    grid-template-columns: repeat(2, 8fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-2-1fr-9fr {
+    grid-template-columns: repeat(2, 1fr 9fr);
+}
+
+.gi-grid-template-columns-repeat-2-9fr-1fr {
+    grid-template-columns: repeat(2, 9fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-2fr-1fr {
+    grid-template-columns: repeat(3, 1fr 2fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-2fr-1fr-1fr {
+    grid-template-columns: repeat(3, 2fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-3fr-1fr {
+    grid-template-columns: repeat(3, 1fr 3fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-3fr-1fr-1fr {
+    grid-template-columns: repeat(3, 3fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-4fr-1fr {
+    grid-template-columns: repeat(3, 1fr 4fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-4fr-1fr-1fr {
+    grid-template-columns: repeat(3, 4fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-5fr-1fr {
+    grid-template-columns: repeat(3, 1fr 5fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-5fr-1fr-1fr {
+    grid-template-columns: repeat(3, 5fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-6fr-1fr {
+    grid-template-columns: repeat(3, 1fr 6fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-6fr-1fr-1fr {
+    grid-template-columns: repeat(3, 6fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-7fr-1fr {
+    grid-template-columns: repeat(3, 1fr 7fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-7fr-1fr-1fr {
+    grid-template-columns: repeat(3, 7fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-8fr-1fr {
+    grid-template-columns: repeat(3, 1fr 8fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-8fr-1fr-1fr {
+    grid-template-columns: repeat(3, 8fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-9fr-1fr {
+    grid-template-columns: repeat(3, 1fr 9fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-9fr-1fr-1fr {
+    grid-template-columns: repeat(3, 9fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-2fr-2fr {
+    grid-template-columns: repeat(3, 1fr 2fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-2fr-1fr-2fr {
+    grid-template-columns: repeat(3, 2fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-3fr-2fr {
+    grid-template-columns: repeat(3, 1fr 3fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-3fr-1fr-2fr {
+    grid-template-columns: repeat(3, 3fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-4fr-2fr {
+    grid-template-columns: repeat(3, 1fr 4fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-4fr-1fr-2fr {
+    grid-template-columns: repeat(3, 4fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-5fr-2fr {
+    grid-template-columns: repeat(3, 1fr 5fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-5fr-1fr-2fr {
+    grid-template-columns: repeat(3, 5fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-6fr-2fr {
+    grid-template-columns: repeat(3, 1fr 6fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-6fr-1fr-2fr {
+    grid-template-columns: repeat(3, 6fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-7fr-2fr {
+    grid-template-columns: repeat(3, 1fr 7fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-7fr-1fr-2fr {
+    grid-template-columns: repeat(3, 7fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-8fr-2fr {
+    grid-template-columns: repeat(3, 1fr 8fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-8fr-1fr-2fr {
+    grid-template-columns: repeat(3, 8fr 1fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-1fr-9fr-2fr {
+    grid-template-columns: repeat(3, 1fr 9fr 2fr);
+}
+
+.gi-grid-template-columns-repeat-3-9fr-1fr-2fr {
+    grid-template-columns: repeat(3, 9fr 1fr 2fr);
+}
+
+
+
+.gi-grid-template-columns-repeat-4-1fr {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-2fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 2fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-2fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 2fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-3fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 3fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-3fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 3fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-4fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 4fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-4fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 4fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-5fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 5fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-5fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 5fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-6fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 6fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-6fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 6fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-7fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 7fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-7fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 7fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-8fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 8fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-8fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 8fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-1fr-9fr-1fr-1fr {
+    grid-template-columns: repeat(4, 1fr 9fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-4-9fr-1fr-1fr-1fr {
+    grid-template-columns: repeat(4, 9fr 1fr 1fr 1fr);
+}
+
+.gi-grid-template-columns-repeat-5-1fr {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.gi-grid-template-columns-repeat-6-1fr {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.gi-grid-template-columns-repeat-7-1fr {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.gi-grid-template-columns-repeat-8-1fr {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.gi-grid-template-columns-repeat-9-1fr {
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.gi-grid-template-columns-repeat-10-1fr {
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.gi-grid-template-columns-repeat-13-1fr {
+    grid-template-columns: repeat(13, 1fr);
+}
+
+.gi-grid-template-columns-repeat-14-1fr {
+    grid-template-columns: repeat(14, 1fr);
+}
+
+.gi-grid-template-columns-repeat-15-1fr {
+    grid-template-columns: repeat(15, 1fr);
+}
+
+.gi-grid-template-columns-repeat-16-1fr {
+    grid-template-columns: repeat(16, 1fr);
+}
+
+.gi-grid-template-columns-repeat-17-1fr {
+    grid-template-columns: repeat(17, 1fr);
+}
+
+.gi-grid-template-columns-repeat-18-1fr {
+    grid-template-columns: repeat(18, 1fr);
+}
+
+.gi-grid-template-columns-1fr-2fr {
+    grid-template-columns: 1fr 2fr;
+}
+
+.gi-grid-template-columns-1fr-3fr {
+    grid-template-columns: 1fr 3fr;
+}
+
+.gi-grid-template-columns-1fr-4fr {
+    grid-template-columns: 1fr 4fr;
+}
+
+.gi-grid-template-columns-1fr-5fr {
+    grid-template-columns: 1fr 5fr;
+}
+
+.gi-grid-template-columns-1fr-6fr {
+    grid-template-columns: 1fr 6fr;
+}
+
+.gi-grid-template-columns-1fr-7fr {
+    grid-template-columns: 1fr 7fr;
+}
+
+.gi-grid-template-columns-1fr-8fr {
+    grid-template-columns: 1fr 8fr;
+}
+
+.gi-grid-template-columns-1fr-9fr {
+    grid-template-columns: 1fr 9fr;
+}
+
+.gi-grid-template-columns-1fr-10fr {
+    grid-template-columns: 1fr 10fr;
+}
+
+.gi-grid-template-columns-2fr-2fr {
+    grid-template-columns: 2fr 2fr;
+}
+
+.gi-grid-template-columns-2fr-3fr {
+    grid-template-columns: 2fr 3fr;
+}
+
+.gi-grid-template-columns-2fr-4fr {
+    grid-template-columns: 2fr 4fr;
+}
+
+.gi-grid-template-columns-2fr-5fr {
+    grid-template-columns: 2fr 5fr;
+}
+
+.gi-grid-template-columns-2fr-6fr {
+    grid-template-columns: 2fr 6fr;
+}
+
+.gi-grid-template-columns-2fr-7fr {
+    grid-template-columns: 2fr 7fr;
+}
+
+.gi-grid-template-columns-2fr-8fr {
+    grid-template-columns: 2fr 8fr;
+}
+
+.gi-grid-template-columns-2fr-9fr {
+    grid-template-columns: 2fr 9fr;
+}
+
+.gi-grid-template-columns-2fr-10fr {
+    grid-template-columns: 2fr 10fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-1fr {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-1fr {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-2fr-1fr {
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-2fr {
+    grid-template-columns: 1fr 1fr 2fr;
+}
+
+.gi-grid-template-columns-1fr-3fr-1fr {
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-3fr {
+    grid-template-columns: 1fr 1fr 3fr;
+}
+
+.gi-grid-template-columns-1fr-4fr-1fr {
+    grid-template-columns: 1fr 4fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-4fr {
+    grid-template-columns: 1fr 1fr 4fr;
+}
+
+.gi-grid-template-columns-1fr-5fr-1fr {
+    grid-template-columns: 1fr 5fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-5fr {
+    grid-template-columns: 1fr 1fr 5fr;
+}
+
+.gi-grid-template-columns-1fr-6fr-1fr {
+    grid-template-columns: 1fr 6fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-6fr {
+    grid-template-columns: 1fr 1fr 6fr;
+}
+
+.gi-grid-template-columns-1fr-6fr-2fr {
+    grid-template-columns: 1fr 6fr 2fr;
+}
+
+.gi-grid-template-columns-1fr-7fr-1fr {
+    grid-template-columns: 1fr 7fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-7fr {
+    grid-template-columns: 1fr 1fr 7fr;
+}
+
+.gi-grid-template-columns-1fr-8fr-1fr {
+    grid-template-columns: 1fr 8fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-8fr {
+    grid-template-columns: 1fr 1fr 8fr;
+}
+
+.gi-grid-template-columns-1fr-9fr-1fr {
+    grid-template-columns: 1fr 9fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-9fr {
+    grid-template-columns: 1fr 1fr 9fr;
+}
+
+.gi-grid-template-columns-1fr-10fr-1fr {
+    grid-template-columns: 1fr 10fr 1fr;
+}
+
+.gi-grid-template-columns-1fr-1fr-10fr {
+    grid-template-columns: 1fr 1fr 10fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-1fr {
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-1fr {
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-2fr-1fr {
+    grid-template-columns: 2fr 2fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-2fr {
+    grid-template-columns: 2fr 1fr 2fr;
+}
+
+.gi-grid-template-columns-2fr-3fr-1fr {
+    grid-template-columns: 2fr 3fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-3fr {
+    grid-template-columns: 2fr 1fr 3fr;
+}
+
+.gi-grid-template-columns-2fr-4fr-1fr {
+    grid-template-columns: 2fr 4fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-4fr {
+    grid-template-columns: 2fr 1fr 4fr;
+}
+
+.gi-grid-template-columns-2fr-5fr-1fr {
+    grid-template-columns: 2fr 5fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-5fr {
+    grid-template-columns: 2fr 1fr 5fr;
+}
+
+.gi-grid-template-columns-2fr-6fr-1fr {
+    grid-template-columns: 2fr 6fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-6fr {
+    grid-template-columns: 2fr 1fr 6fr;
+}
+
+.gi-grid-template-columns-2fr-6fr-2fr {
+    grid-template-columns: 2fr 6fr 2fr;
+}
+
+.gi-grid-template-columns-2fr-7fr-1fr {
+    grid-template-columns: 2fr 7fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-7fr {
+    grid-template-columns: 2fr 1fr 7fr;
+}
+
+.gi-grid-template-columns-2fr-8fr-1fr {
+    grid-template-columns: 2fr 8fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-8fr {
+    grid-template-columns: 2fr 1fr 8fr;
+}
+
+.gi-grid-template-columns-2fr-9fr-1fr {
+    grid-template-columns: 2fr 9fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-9fr {
+    grid-template-columns: 2fr 1fr 9fr;
+}
+
+.gi-grid-template-columns-2fr-10fr-1fr {
+    grid-template-columns: 2fr 10fr 1fr;
+}
+
+.gi-grid-template-columns-2fr-1fr-10fr {
+    grid-template-columns: 2fr 1fr 10fr;
+}
+
+.gi-grid-template-columns-3fr-1fr {
+    grid-template-columns: 3fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-1fr {
+    grid-template-columns: 3fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-2fr {
+    grid-template-columns: 3fr 1fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-1fr {
+    grid-template-columns: 3fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-2fr-1fr {
+    grid-template-columns: 3fr 2fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-2fr-2fr {
+    grid-template-columns: 3fr 2fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-2fr {
+    grid-template-columns: 3fr 1fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-3fr-1fr {
+    grid-template-columns: 3fr 3fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-3fr-2fr {
+    grid-template-columns: 3fr 3fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-3fr {
+    grid-template-columns: 3fr 1fr 3fr;
+}
+
+.gi-grid-template-columns-3fr-4fr-1fr {
+    grid-template-columns: 3fr 4fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-4fr-2fr {
+    grid-template-columns: 3fr 4fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-4fr-3fr {
+    grid-template-columns: 3fr 4fr 3fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-4fr {
+    grid-template-columns: 3fr 1fr 4fr;
+}
+
+.gi-grid-template-columns-3fr-5fr-1fr {
+    grid-template-columns: 3fr 5fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-5fr-2fr {
+    grid-template-columns: 3fr 5fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-5fr {
+    grid-template-columns: 3fr 1fr 5fr;
+}
+
+.gi-grid-template-columns-3fr-6fr-1fr {
+    grid-template-columns: 3fr 6fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-6fr-2fr {
+    grid-template-columns: 3fr 6fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-6fr {
+    grid-template-columns: 3fr 1fr 6fr;
+}
+
+.gi-grid-template-columns-3fr-7fr-1fr {
+    grid-template-columns: 3fr 7fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-7fr-2fr {
+    grid-template-columns: 3fr 7fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-7fr {
+    grid-template-columns: 3fr 1fr 7fr;
+}
+
+.gi-grid-template-columns-3fr-8fr-1fr {
+    grid-template-columns: 3fr 8fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-8fr-2fr {
+    grid-template-columns: 3fr 8fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-8fr {
+    grid-template-columns: 3fr 1fr 8fr;
+}
+
+.gi-grid-template-columns-3fr-9fr-1fr {
+    grid-template-columns: 3fr 9fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-9fr-2fr {
+    grid-template-columns: 3fr 9fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-9fr {
+    grid-template-columns: 3fr 1fr 9fr;
+}
+
+.gi-grid-template-columns-3fr-10fr-1fr {
+    grid-template-columns: 3fr 10fr 1fr;
+}
+
+.gi-grid-template-columns-3fr-10fr-2fr {
+    grid-template-columns: 3fr 10fr 2fr;
+}
+
+.gi-grid-template-columns-3fr-1fr-10fr {
+    grid-template-columns: 3fr 1fr 10fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-1fr {
+    grid-template-columns: 4fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-1fr {
+    grid-template-columns: 4fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-2fr-1fr {
+    grid-template-columns: 4fr 2fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-2fr {
+    grid-template-columns: 4fr 1fr 2fr;
+}
+
+.gi-grid-template-columns-4fr-2fr-2fr {
+    grid-template-columns: 4fr 2fr 2fr;
+}
+
+.gi-grid-template-columns-4fr-3fr-1fr {
+    grid-template-columns: 4fr 3fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-3fr {
+    grid-template-columns: 4fr 1fr 3fr;
+}
+
+.gi-grid-template-columns-4fr-3fr-3fr {
+    grid-template-columns: 4fr 3fr 3fr;
+}
+
+.gi-grid-template-columns-4fr-4fr-1fr {
+    grid-template-columns: 4fr 4fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-4fr {
+    grid-template-columns: 4fr 1fr 4fr;
+}
+
+.gi-grid-template-columns-4fr-5fr-1fr {
+    grid-template-columns: 4fr 5fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-5fr {
+    grid-template-columns: 4fr 1fr 5fr;
+}
+
+.gi-grid-template-columns-4fr-6fr-1fr {
+    grid-template-columns: 4fr 6fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-6fr {
+    grid-template-columns: 4fr 1fr 6fr;
+}
+
+.gi-grid-template-columns-4fr-7fr-1fr {
+    grid-template-columns: 4fr 7fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-7fr {
+    grid-template-columns: 4fr 1fr 7fr;
+}
+
+.gi-grid-template-columns-4fr-8fr-1fr {
+    grid-template-columns: 4fr 8fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-8fr {
+    grid-template-columns: 4fr 1fr 8fr;
+}
+
+.gi-grid-template-columns-4fr-9fr-1fr {
+    grid-template-columns: 4fr 9fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-9fr {
+    grid-template-columns: 4fr 1fr 9fr;
+}
+
+.gi-grid-template-columns-4fr-10fr-1fr {
+    grid-template-columns: 4fr 10fr 1fr;
+}
+
+.gi-grid-template-columns-4fr-1fr-10fr {
+    grid-template-columns: 4fr 1fr 10fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-1fr {
+    grid-template-columns: 5fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-1fr {
+    grid-template-columns: 5fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-2fr-1fr {
+    grid-template-columns: 5fr 2fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-2fr {
+    grid-template-columns: 5fr 1fr 2fr;
+}
+
+.gi-grid-template-columns-5fr-2fr-2fr {
+    grid-template-columns: 5fr 2fr 2fr;
+}
+
+.gi-grid-template-columns-5fr-3fr-1fr {
+    grid-template-columns: 5fr 3fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-3fr {
+    grid-template-columns: 5fr 1fr 3fr;
+}
+
+.gi-grid-template-columns-5fr-3fr-2fr {
+    grid-template-columns: 5fr 3fr 2fr;
+}
+
+.gi-grid-template-columns-5fr-4fr-1fr {
+    grid-template-columns: 5fr 4fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-4fr {
+    grid-template-columns: 5fr 1fr 4fr;
+}
+
+.gi-grid-template-columns-5fr-5fr-1fr {
+    grid-template-columns: 5fr 5fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-5fr {
+    grid-template-columns: 5fr 1fr 5fr;
+}
+
+.gi-grid-template-columns-5fr-6fr-1fr {
+    grid-template-columns: 5fr 6fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-6fr {
+    grid-template-columns: 5fr 1fr 6fr;
+}
+
+.gi-grid-template-columns-5fr-7fr-1fr {
+    grid-template-columns: 5fr 7fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-7fr {
+    grid-template-columns: 5fr 1fr 7fr;
+}
+
+.gi-grid-template-columns-5fr-8fr-1fr {
+    grid-template-columns: 5fr 8fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-8fr {
+    grid-template-columns: 5fr 1fr 8fr;
+}
+
+.gi-grid-template-columns-5fr-9fr-1fr {
+    grid-template-columns: 5fr 9fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-9fr {
+    grid-template-columns: 5fr 1fr 9fr;
+}
+
+.gi-grid-template-columns-5fr-10fr-1fr {
+    grid-template-columns: 5fr 10fr 1fr;
+}
+
+.gi-grid-template-columns-5fr-1fr-10fr {
+    grid-template-columns: 5fr 1fr 10fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-1fr {
+    grid-template-columns: 6fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-1fr {
+    grid-template-columns: 6fr 1fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-2fr-1fr {
+    grid-template-columns: 6fr 2fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-2fr {
+    grid-template-columns: 6fr 1fr 2fr;
+}
+
+.gi-grid-template-columns-6fr-2fr-2fr {
+    grid-template-columns: 6fr 2fr 2fr;
+}
+
+.gi-grid-template-columns-6fr-3fr-1fr {
+    grid-template-columns: 6fr 3fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-3fr {
+    grid-template-columns: 6fr 1fr 3fr;
+}
+
+.gi-grid-template-columns-6fr-4fr-1fr {
+    grid-template-columns: 6fr 4fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-4fr {
+    grid-template-columns: 6fr 1fr 4fr;
+}
+
+.gi-grid-template-columns-6fr-5fr-1fr {
+    grid-template-columns: 6fr 5fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-5fr {
+    grid-template-columns: 6fr 1fr 5fr;
+}
+
+.gi-grid-template-columns-6fr-6fr-1fr {
+    grid-template-columns: 6fr 6fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-6fr {
+    grid-template-columns: 6fr 1fr 6fr;
+}
+
+.gi-grid-template-columns-6fr-7fr-1fr {
+    grid-template-columns: 6fr 7fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-7fr {
+    grid-template-columns: 6fr 1fr 7fr;
+}
+
+.gi-grid-template-columns-6fr-8fr-1fr {
+    grid-template-columns: 6fr 8fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-8fr {
+    grid-template-columns: 6fr 1fr 8fr;
+}
+
+.gi-grid-template-columns-6fr-9fr-1fr {
+    grid-template-columns: 6fr 9fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-9fr {
+    grid-template-columns: 6fr 1fr 9fr;
+}
+
+.gi-grid-template-columns-6fr-10fr-1fr {
+    grid-template-columns: 6fr 10fr 1fr;
+}
+
+.gi-grid-template-columns-6fr-1fr-10fr {
+    grid-template-columns: 6fr 1fr 10fr;
+}
+
+
+.gi-grid-column-span-1 {
+    grid-column: span 1;
+}
+
+.gi-grid-column-span-2 {
+    grid-column: span 2;
+}
+
+.gi-grid-column-span-3 {
+    grid-column: span 3;
+}
+
+.gi-grid-column-span-4 {
+    grid-column: span 4;
+}
+
+.gi-grid-column-span-5 {
+    grid-column: span 5;
+}
+
+.gi-grid-column-span-6 {
+    grid-column: span 6;
+}
+
+.gi-grid-column-span-7 {
+    grid-column: span 7;
+}
+
+.gi-grid-column-span-8 {
+    grid-column: span 8;
+}
+
+.gi-grid-column-span-9 {
+    grid-column: span 9;
+}
+
+.gi-grid-column-span-10 {
+    grid-column: span 10;
+}
+
+.gi-grid-row-span-1 {
+    grid-row: span 1;
+}
+
+.gi-grid-row-span-2 {
+    grid-row: span 2;
+}
+
+.gi-grid-row-span-3 {
+    grid-row: span 3;
+}
+
+.gi-grid-row-span-4 {
+    grid-row: span 4;
+}
+
+.gi-grid-row-span-5 {
+    grid-row: span 5;
+}
+
+.gi-grid-row-span-6 {
+    grid-row: span 6;
+}
+
+.gi-grid-row-span-7 {
+    grid-row: span 7;
+}
+
+.gi-grid-row-span-8 {
+    grid-row: span 8;
+}
+
+.gi-grid-row-span-9 {
+    grid-row: span 9;
+}
+
+.gi-grid-row-span-10 {
+    grid-row: span 10;
+}
+
+.gi-grid-row-col-1 {
+    grid-row: col 1
+}
+
+.gi-grid-row-col-2 {
+    grid-row: col 2
+}
+
+.gi-grid-row-col-3 {
+    grid-row: col 3
+}
+
+.gi-grid-row-col-4 {
+    grid-row: col 4
+}
+
+.gi-grid-row-col-5 {
+    grid-row: col 5
+}
+
+.gi-grid-row-col-6 {
+    grid-row: col 6
+}
+
+.gi-grid-row-col-7 {
+    grid-row: col 7
+}
+
+.gi-grid-row-col-8 {
+    grid-row: col 8
+}
+
+.gi-grid-row-col-9 {
+    grid-row: col 9
+}
+
+.gi-grid-row-col-10 {
+    grid-row: col 10
+}
+
+.gi-column-gap-1px {
+    column-gap: 1px
+}
+
+.gi-column-gap-11px {
+    column-gap: 11px
+}
+
+.gi-column-gap-21px {
+    column-gap: 21px
+}
+
+.gi-column-gap-31px {
+    column-gap: 31px
+}
+
+.gi-column-gap-41px {
+    column-gap: 41px
+}
+
+.gi-column-gap-51px {
+    column-gap: 51px
+}
+
+.gi-column-gap-61px {
+    column-gap: 61px
+}
+
+.gi-column-gap-71px {
+    column-gap: 71px
+}
+
+.gi-column-gap-81px {
+    column-gap: 81px
+}
+
+.gi-column-gap-91px {
+    column-gap: 91px
+}
+
+.gi-column-gap-2px {
+    column-gap: 2px
+}
+
+.gi-column-gap-12px {
+    column-gap: 12px
+}
+
+.gi-column-gap-22px {
+    column-gap: 22px
+}
+
+.gi-column-gap-32px {
+    column-gap: 32px
+}
+
+.gi-column-gap-42px {
+    column-gap: 42px
+}
+
+.gi-column-gap-52px {
+    column-gap: 52px
+}
+
+.gi-column-gap-62px {
+    column-gap: 62px
+}
+
+.gi-column-gap-72px {
+    column-gap: 72px
+}
+
+.gi-column-gap-82px {
+    column-gap: 82px
+}
+
+.gi-column-gap-92px {
+    column-gap: 92px
+}
+
+.gi-column-gap-3px {
+    column-gap: 3px
+}
+
+.gi-column-gap-13px {
+    column-gap: 13px
+}
+
+.gi-column-gap-23px {
+    column-gap: 23px
+}
+
+.gi-column-gap-33px {
+    column-gap: 33px
+}
+
+.gi-column-gap-43px {
+    column-gap: 43px
+}
+
+.gi-column-gap-53px {
+    column-gap: 53px
+}
+
+.gi-column-gap-63px {
+    column-gap: 63px
+}
+
+.gi-column-gap-73px {
+    column-gap: 73px
+}
+
+.gi-column-gap-83px {
+    column-gap: 83px
+}
+
+.gi-column-gap-93px {
+    column-gap: 93px
+}
+
+.gi-column-gap-4px {
+    column-gap: 4px
+}
+
+.gi-column-gap-14px {
+    column-gap: 14px
+}
+
+.gi-column-gap-24px {
+    column-gap: 24px
+}
+
+.gi-column-gap-34px {
+    column-gap: 34px
+}
+
+.gi-column-gap-44px {
+    column-gap: 44px
+}
+
+.gi-column-gap-54px {
+    column-gap: 54px
+}
+
+.gi-column-gap-64px {
+    column-gap: 64px
+}
+
+.gi-column-gap-74px {
+    column-gap: 74px
+}
+
+.gi-column-gap-84px {
+    column-gap: 84px
+}
+
+.gi-column-gap-94px {
+    column-gap: 94px
+}
+
+.gi-column-gap-5px {
+    column-gap: 5px
+}
+
+.gi-column-gap-15px {
+    column-gap: 15px
+}
+
+.gi-column-gap-25px {
+    column-gap: 25px
+}
+
+.gi-column-gap-35px {
+    column-gap: 35px
+}
+
+.gi-column-gap-45px {
+    column-gap: 45px
+}
+
+.gi-column-gap-55px {
+    column-gap: 55px
+}
+
+.gi-column-gap-65px {
+    column-gap: 65px
+}
+
+.gi-column-gap-75px {
+    column-gap: 75px
+}
+
+.gi-column-gap-85px {
+    column-gap: 85px
+}
+
+.gi-column-gap-95px {
+    column-gap: 95px
+}
+
+.gi-column-gap-6px {
+    column-gap: 6px
+}
+
+.gi-column-gap-16px {
+    column-gap: 16px
+}
+
+.gi-column-gap-26px {
+    column-gap: 26px
+}
+
+.gi-column-gap-36px {
+    column-gap: 36px
+}
+
+.gi-column-gap-46px {
+    column-gap: 46px
+}
+
+.gi-column-gap-56px {
+    column-gap: 56px
+}
+
+.gi-column-gap-66px {
+    column-gap: 66px
+}
+
+.gi-column-gap-76px {
+    column-gap: 76px
+}
+
+.gi-column-gap-86px {
+    column-gap: 86px
+}
+
+.gi-column-gap-96px {
+    column-gap: 96px
+}
+
+.gi-column-gap-7px {
+    column-gap: 7px
+}
+
+.gi-column-gap-17px {
+    column-gap: 17px
+}
+
+.gi-column-gap-27px {
+    column-gap: 27px
+}
+
+.gi-column-gap-37px {
+    column-gap: 37px
+}
+
+.gi-column-gap-47px {
+    column-gap: 47px
+}
+
+.gi-column-gap-57px {
+    column-gap: 57px
+}
+
+.gi-column-gap-67px {
+    column-gap: 67px
+}
+
+.gi-column-gap-77px {
+    column-gap: 77px
+}
+
+.gi-column-gap-87px {
+    column-gap: 87px
+}
+
+.gi-column-gap-97px {
+    column-gap: 97px
+}
+
+.gi-column-gap-8px {
+    column-gap: 8px
+}
+
+.gi-column-gap-18px {
+    column-gap: 18px
+}
+
+.gi-column-gap-28px {
+    column-gap: 28px
+}
+
+.gi-column-gap-38px {
+    column-gap: 38px
+}
+
+.gi-column-gap-48px {
+    column-gap: 48px
+}
+
+.gi-column-gap-58px {
+    column-gap: 58px
+}
+
+.gi-column-gap-68px {
+    column-gap: 68px
+}
+
+.gi-column-gap-78px {
+    column-gap: 78px
+}
+
+.gi-column-gap-88px {
+    column-gap: 88px
+}
+
+.gi-column-gap-98px {
+    column-gap: 98px
+}
+
+.gi-column-gap-9px {
+    column-gap: 9px
+}
+
+.gi-column-gap-19px {
+    column-gap: 19px
+}
+
+.gi-column-gap-29px {
+    column-gap: 29px
+}
+
+.gi-column-gap-39px {
+    column-gap: 39px
+}
+
+.gi-column-gap-49px {
+    column-gap: 49px
+}
+
+.gi-column-gap-59px {
+    column-gap: 59px
+}
+
+.gi-column-gap-69px {
+    column-gap: 69px
+}
+
+.gi-column-gap-79px {
+    column-gap: 79px
+}
+
+.gi-column-gap-89px {
+    column-gap: 89px
+}
+
+.gi-column-gap-99px {
+    column-gap: 99px
+}
+
+.gi-column-gap-10px {
+    column-gap: 10px
+}
+
+.gi-column-gap-20px {
+    column-gap: 20px
+}
+
+.gi-column-gap-30px {
+    column-gap: 30px
+}
+
+.gi-column-gap-40px {
+    column-gap: 40px
+}
+
+.gi-column-gap-50px {
+    column-gap: 50px
+}
+
+.gi-column-gap-60px {
+    column-gap: 60px
+}
+
+.gi-column-gap-70px {
+    column-gap: 70px
+}
+
+.gi-column-gap-80px {
+    column-gap: 80px
+}
+
+.gi-column-gap-90px {
+    column-gap: 90px
+}
+
+.gi-column-gap-100px {
+    column-gap: 100px
+}
+
+.gi-column-gap-1 {
+    column-gap: 1%
+}
+
+.gi-column-gap-11 {
+    column-gap: 11%
+}
+
+.gi-column-gap-21 {
+    column-gap: 21%
+}
+
+.gi-column-gap-31 {
+    column-gap: 31%
+}
+
+.gi-column-gap-41 {
+    column-gap: 41%
+}
+
+.gi-column-gap-51 {
+    column-gap: 51%
+}
+
+.gi-column-gap-61 {
+    column-gap: 61%
+}
+
+.gi-column-gap-71 {
+    column-gap: 71%
+}
+
+.gi-column-gap-81 {
+    column-gap: 81%
+}
+
+.gi-column-gap-91 {
+    column-gap: 91%
+}
+
+.gi-column-gap-2 {
+    column-gap: 2%
+}
+
+.gi-column-gap-12 {
+    column-gap: 12%
+}
+
+.gi-column-gap-22 {
+    column-gap: 22%
+}
+
+.gi-column-gap-32 {
+    column-gap: 32%
+}
+
+.gi-column-gap-42 {
+    column-gap: 42%
+}
+
+.gi-column-gap-52 {
+    column-gap: 52%
+}
+
+.gi-column-gap-62 {
+    column-gap: 62%
+}
+
+.gi-column-gap-72 {
+    column-gap: 72%
+}
+
+.gi-column-gap-82 {
+    column-gap: 82%
+}
+
+.gi-column-gap-92 {
+    column-gap: 92%
+}
+
+.gi-column-gap-3 {
+    column-gap: 3%
+}
+
+.gi-column-gap-13 {
+    column-gap: 13%
+}
+
+.gi-column-gap-23 {
+    column-gap: 23%
+}
+
+.gi-column-gap-33 {
+    column-gap: 33%
+}
+
+.gi-column-gap-43 {
+    column-gap: 43%
+}
+
+.gi-column-gap-53 {
+    column-gap: 53%
+}
+
+.gi-column-gap-63 {
+    column-gap: 63%
+}
+
+.gi-column-gap-73 {
+    column-gap: 73%
+}
+
+.gi-column-gap-83 {
+    column-gap: 83%
+}
+
+.gi-column-gap-93 {
+    column-gap: 93%
+}
+
+.gi-column-gap-4 {
+    column-gap: 4%
+}
+
+.gi-column-gap-14 {
+    column-gap: 14%
+}
+
+.gi-column-gap-24 {
+    column-gap: 24%
+}
+
+.gi-column-gap-34 {
+    column-gap: 34%
+}
+
+.gi-column-gap-44 {
+    column-gap: 44%
+}
+
+.gi-column-gap-54 {
+    column-gap: 54%
+}
+
+.gi-column-gap-64 {
+    column-gap: 64%
+}
+
+.gi-column-gap-74 {
+    column-gap: 74%
+}
+
+.gi-column-gap-84 {
+    column-gap: 84%
+}
+
+.gi-column-gap-94 {
+    column-gap: 94%
+}
+
+.gi-column-gap-5 {
+    column-gap: 5%
+}
+
+.gi-column-gap-15 {
+    column-gap: 15%
+}
+
+.gi-column-gap-25 {
+    column-gap: 25%
+}
+
+.gi-column-gap-35 {
+    column-gap: 35%
+}
+
+.gi-column-gap-45 {
+    column-gap: 45%
+}
+
+.gi-column-gap-55 {
+    column-gap: 55%
+}
+
+.gi-column-gap-65 {
+    column-gap: 65%
+}
+
+.gi-column-gap-75 {
+    column-gap: 75%
+}
+
+.gi-column-gap-85 {
+    column-gap: 85%
+}
+
+.gi-column-gap-95 {
+    column-gap: 95%
+}
+
+.gi-column-gap-6 {
+    column-gap: 6%
+}
+
+.gi-column-gap-16 {
+    column-gap: 16%
+}
+
+.gi-column-gap-26 {
+    column-gap: 26%
+}
+
+.gi-column-gap-36 {
+    column-gap: 36%
+}
+
+.gi-column-gap-46 {
+    column-gap: 46%
+}
+
+.gi-column-gap-56 {
+    column-gap: 56%
+}
+
+.gi-column-gap-66 {
+    column-gap: 66%
+}
+
+.gi-column-gap-76 {
+    column-gap: 76%
+}
+
+.gi-column-gap-86 {
+    column-gap: 86%
+}
+
+.gi-column-gap-96 {
+    column-gap: 96%
+}
+
+.gi-column-gap-7 {
+    column-gap: 7%
+}
+
+.gi-column-gap-17 {
+    column-gap: 17%
+}
+
+.gi-column-gap-27 {
+    column-gap: 27%
+}
+
+.gi-column-gap-37 {
+    column-gap: 37%
+}
+
+.gi-column-gap-47 {
+    column-gap: 47%
+}
+
+.gi-column-gap-57 {
+    column-gap: 57%
+}
+
+.gi-column-gap-67 {
+    column-gap: 67%
+}
+
+.gi-column-gap-77 {
+    column-gap: 77%
+}
+
+.gi-column-gap-87 {
+    column-gap: 87%
+}
+
+.gi-column-gap-97 {
+    column-gap: 97%
+}
+
+.gi-column-gap-8 {
+    column-gap: 8%
+}
+
+.gi-column-gap-18 {
+    column-gap: 18%
+}
+
+.gi-column-gap-28 {
+    column-gap: 28%
+}
+
+.gi-column-gap-38 {
+    column-gap: 38%
+}
+
+.gi-column-gap-48 {
+    column-gap: 48%
+}
+
+.gi-column-gap-58 {
+    column-gap: 58%
+}
+
+.gi-column-gap-68 {
+    column-gap: 68%
+}
+
+.gi-column-gap-78 {
+    column-gap: 78%
+}
+
+.gi-column-gap-88 {
+    column-gap: 88%
+}
+
+.gi-column-gap-98 {
+    column-gap: 98%
+}
+
+.gi-column-gap-9 {
+    column-gap: 9%
+}
+
+.gi-column-gap-19 {
+    column-gap: 19%
+}
+
+.gi-column-gap-29 {
+    column-gap: 29%
+}
+
+.gi-column-gap-39 {
+    column-gap: 39%
+}
+
+.gi-column-gap-49 {
+    column-gap: 49%
+}
+
+.gi-column-gap-59 {
+    column-gap: 59%
+}
+
+.gi-column-gap-69 {
+    column-gap: 69%
+}
+
+.gi-column-gap-79 {
+    column-gap: 79%
+}
+
+.gi-column-gap-89 {
+    column-gap: 89%
+}
+
+.gi-column-gap-99 {
+    column-gap: 99%
+}
+
+.gi-column-gap-10 {
+    column-gap: 10%
+}
+
+.gi-column-gap-10 {
+    column-gap: 20%
+}
+
+.gi-column-gap-10 {
+    column-gap: 30%
+}
+
+.gi-column-gap-10 {
+    column-gap: 40%
+}
+
+.gi-column-gap-10 {
+    column-gap: 50%
+}
+
+.gi-column-gap-10 {
+    column-gap: 60%
+}
+
+.gi-column-gap-10 {
+    column-gap: 70%
+}
+
+.gi-column-gap-10 {
+    column-gap: 80%
+}
+
+.gi-column-gap-10 {
+    column-gap: 90%
+}
+
+.gi-column-gap-10 {
+    column-gap: 100%
+}
+
+.gi-column-gap-1rem {
+    column-gap: 1rem
+}
+
+.gi-column-gap-11rem {
+    column-gap: 11rem
+}
+
+.gi-column-gap-21rem {
+    column-gap: 21rem
+}
+
+.gi-column-gap-31rem {
+    column-gap: 31rem
+}
+
+.gi-column-gap-41rem {
+    column-gap: 41rem
+}
+
+.gi-column-gap-51rem {
+    column-gap: 51rem
+}
+
+.gi-column-gap-61rem {
+    column-gap: 61rem
+}
+
+.gi-column-gap-71rem {
+    column-gap: 71rem
+}
+
+.gi-column-gap-81rem {
+    column-gap: 81rem
+}
+
+.gi-column-gap-91rem {
+    column-gap: 91rem
+}
+
+.gi-column-gap-2rem {
+    column-gap: 2rem
+}
+
+.gi-column-gap-12rem {
+    column-gap: 12rem
+}
+
+.gi-column-gap-22rem {
+    column-gap: 22rem
+}
+
+.gi-column-gap-32rem {
+    column-gap: 32rem
+}
+
+.gi-column-gap-42rem {
+    column-gap: 42rem
+}
+
+.gi-column-gap-52rem {
+    column-gap: 52rem
+}
+
+.gi-column-gap-62rem {
+    column-gap: 62rem
+}
+
+.gi-column-gap-72rem {
+    column-gap: 72rem
+}
+
+.gi-column-gap-82rem {
+    column-gap: 82rem
+}
+
+.gi-column-gap-92rem {
+    column-gap: 92rem
+}
+
+.gi-column-gap-3rem {
+    column-gap: 3rem
+}
+
+.gi-column-gap-13rem {
+    column-gap: 13rem
+}
+
+.gi-column-gap-23rem {
+    column-gap: 23rem
+}
+
+.gi-column-gap-33rem {
+    column-gap: 33rem
+}
+
+.gi-column-gap-43rem {
+    column-gap: 43rem
+}
+
+.gi-column-gap-53rem {
+    column-gap: 53rem
+}
+
+.gi-column-gap-63rem {
+    column-gap: 63rem
+}
+
+.gi-column-gap-73rem {
+    column-gap: 73rem
+}
+
+.gi-column-gap-83rem {
+    column-gap: 83rem
+}
+
+.gi-column-gap-93rem {
+    column-gap: 93rem
+}
+
+.gi-column-gap-4rem {
+    column-gap: 4rem
+}
+
+.gi-column-gap-14rem {
+    column-gap: 14rem
+}
+
+.gi-column-gap-24rem {
+    column-gap: 24rem
+}
+
+.gi-column-gap-34rem {
+    column-gap: 34rem
+}
+
+.gi-column-gap-44rem {
+    column-gap: 44rem
+}
+
+.gi-column-gap-54rem {
+    column-gap: 54rem
+}
+
+.gi-column-gap-64rem {
+    column-gap: 64rem
+}
+
+.gi-column-gap-74rem {
+    column-gap: 74rem
+}
+
+.gi-column-gap-84rem {
+    column-gap: 84rem
+}
+
+.gi-column-gap-94rem {
+    column-gap: 94rem
+}
+
+.gi-column-gap-5rem {
+    column-gap: 5rem
+}
+
+.gi-column-gap-15rem {
+    column-gap: 15rem
+}
+
+.gi-column-gap-25rem {
+    column-gap: 25rem
+}
+
+.gi-column-gap-35rem {
+    column-gap: 35rem
+}
+
+.gi-column-gap-45rem {
+    column-gap: 45rem
+}
+
+.gi-column-gap-55rem {
+    column-gap: 55rem
+}
+
+.gi-column-gap-65rem {
+    column-gap: 65rem
+}
+
+.gi-column-gap-75rem {
+    column-gap: 75rem
+}
+
+.gi-column-gap-85rem {
+    column-gap: 85rem
+}
+
+.gi-column-gap-95rem {
+    column-gap: 95rem
+}
+
+.gi-column-gap-6rem {
+    column-gap: 6rem
+}
+
+.gi-column-gap-16rem {
+    column-gap: 16rem
+}
+
+.gi-column-gap-26rem {
+    column-gap: 26rem
+}
+
+.gi-column-gap-36rem {
+    column-gap: 36rem
+}
+
+.gi-column-gap-46rem {
+    column-gap: 46rem
+}
+
+.gi-column-gap-56rem {
+    column-gap: 56rem
+}
+
+.gi-column-gap-66rem {
+    column-gap: 66rem
+}
+
+.gi-column-gap-76rem {
+    column-gap: 76rem
+}
+
+.gi-column-gap-86rem {
+    column-gap: 86rem
+}
+
+.gi-column-gap-96rem {
+    column-gap: 96rem
+}
+
+.gi-column-gap-7rem {
+    column-gap: 7rem
+}
+
+.gi-column-gap-17rem {
+    column-gap: 17rem
+}
+
+.gi-column-gap-27rem {
+    column-gap: 27rem
+}
+
+.gi-column-gap-37rem {
+    column-gap: 37rem
+}
+
+.gi-column-gap-47rem {
+    column-gap: 47rem
+}
+
+.gi-column-gap-57rem {
+    column-gap: 57rem
+}
+
+.gi-column-gap-67rem {
+    column-gap: 67rem
+}
+
+.gi-column-gap-77rem {
+    column-gap: 77rem
+}
+
+.gi-column-gap-87rem {
+    column-gap: 87rem
+}
+
+.gi-column-gap-97rem {
+    column-gap: 97rem
+}
+
+.gi-column-gap-8rem {
+    column-gap: 8rem
+}
+
+.gi-column-gap-18rem {
+    column-gap: 18rem
+}
+
+.gi-column-gap-28rem {
+    column-gap: 28rem
+}
+
+.gi-column-gap-38rem {
+    column-gap: 38rem
+}
+
+.gi-column-gap-48rem {
+    column-gap: 48rem
+}
+
+.gi-column-gap-58rem {
+    column-gap: 58rem
+}
+
+.gi-column-gap-68rem {
+    column-gap: 68rem
+}
+
+.gi-column-gap-78rem {
+    column-gap: 78rem
+}
+
+.gi-column-gap-88rem {
+    column-gap: 88rem
+}
+
+.gi-column-gap-98rem {
+    column-gap: 98rem
+}
+
+.gi-column-gap-9rem {
+    column-gap: 9rem
+}
+
+.gi-column-gap-19rem {
+    column-gap: 19rem
+}
+
+.gi-column-gap-29rem {
+    column-gap: 29rem
+}
+
+.gi-column-gap-39rem {
+    column-gap: 39rem
+}
+
+.gi-column-gap-49rem {
+    column-gap: 49rem
+}
+
+.gi-column-gap-59rem {
+    column-gap: 59rem
+}
+
+.gi-column-gap-69rem {
+    column-gap: 69rem
+}
+
+.gi-column-gap-79rem {
+    column-gap: 79rem
+}
+
+.gi-column-gap-89rem {
+    column-gap: 89rem
+}
+
+.gi-column-gap-99rem {
+    column-gap: 99rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 10rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 20rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 30rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 40rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 50rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 60rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 70rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 80rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 90rem
+}
+
+.gi-column-gap-10 {
+    column-gap: 100rem
+}
+
+
+.gi-Grid-side {
+    display: flex;
+    position: relative;
+}
+
+[data-side-grid-open="false"] {
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    animation: side_grid_close_animation 0.3s cubic-bezier(0.2, 0.5, 0.4, 0.1);
+}
+
+[data-side-grid-open="true"] {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    margin: 0;
+    animation: side_grid_open_animation 0.3s cubic-bezier(0.2, 0.5, 0.4, 0.1);
+}
+
+@keyframes side_grid_open_animation {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+    0.1% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    100% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+    }
+}
+
+@keyframes side_grid_close_animation {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+
+    100% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+}
+
+/*[data-side-grid-open="false"], [data-side-grid-open="true"] {*/
+/*    will-change: transform, opacity, width, height, padding;*/
+/*    transition: width 0.3s cubic-bezier(0.2,0.5,0.4,0.1),*/
+/*    height 0.3s cubic-bezier(0.2,0.5,0.4,0.1),*/
+/*    padding 0.3s cubic-bezier(0.2,0.5,0.4,0.1),*/
+/*    opacity 0.3s cubic-bezier(0.2,0.5,0.4,0.1);*/
+/*    backface-visibility: hidden;*/
+/*}*/
+
+/*[data-side-grid-open="false"] {*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    padding: 0;*/
+/*    opacity: 0;*/
+/*}*/
+
+/*[data-side-grid-open="true"] {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    padding: 5px;*/
+/*    opacity: 1;*/
+/*}*/
+
+/* ========== Custom Grid Styles ========== */
+
+/* ======================================================================================================== CustomGrid 그리드 영역*/
+#gi-Grid,
+.gi-Grid {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    border-radius: var(--border-radius-article);
+    scrollbar-width: none;
+}
+
+.gi-grid-list-header {
+    border-bottom: 1px solid #bbbbbb6e;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+    color: #4f4f4f;
+    z-index: 1;
+}
+
+.gi-grid-list {
+    margin-bottom: 5px;
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+
+.gi-grid-list-header>li,
+.gi-grid-list>li {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.gi-grid-list-header>li.hidden,
+.gi-grid-list>li.hidden,
+.gi-grid-list-header>li.gi-hidden,
+.gi-grid-list>li.gi-hidden {
+    display: none !important;
+}
+
+
+#gi-grid-list-body {
+    height: calc(100% - var(--grid-row-selector-height));
+    min-height: 170px;
+}
+
+.gi-grid-row-selector {
+    height: var(--grid-row-selector-height);
+    border: unset;
+}
+
+.gi-grid-paging-content {
+    min-height: 30px;
+    padding: 5px;
+    background-color: #00000000;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.gi-grid-paging-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 25px;
+    padding: 0px 5px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-btn);
+    border: 1px solid #bbbbbb6e;
+    background-color: #ffffff;
+    margin: 0px 5px;
+    transition: 0.5s all;
+}
+
+.gi-grid-paging-prev-btn,
+.gi-grid-paging-next-btn {
+    font-size: 22px;
+    line-height: 15px;
+    min-width: 25px;
+    display: inline-block;
+}
+
+.gi-grid-paging-btn:hover {
+    cursor: pointer;
+    color: var(--background-text-color-btn-gray-hover);
+    background-color: var(--background-color-btn-gray-hover);
+}
+
+.gi-grid-paging-btn.active {
+    background-color: #8f8f8f;
+    color: white;
+    font-weight: bold;
+}
+
+.gi-grid-list-hover {
+    background-color: rgb(254 241 208 / 33%);
+    transition: all 0.2s cubic-bezier(1, 1, 1, 1);
+}
+
+.gi-grid-list-select {
+    background-color: rgb(186 192 255 / 33%) !important;
+    transition: all 0.2s cubic-bezier(1, 1, 1, 1);
+}
+
+.gi-grid-list-multi_select {
+    background-color: #f3f3f3;
+    transition: all 0.2s cubic-bezier(1, 1, 1, 1);
+}
+
+.gi-grid-list>.gi-grid-li-border-dotted {
+    border-right: 1px dotted #dbdbdb;
+}
+
+.unused-menu {
+    background-color: #c5c5c544;
+    color: #7d7d7d;
+}
+
+.gi-grid-hierarchy-depth0 {
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+}
+
+.gi-grid-hierarchy-depth0::before {
+    content: "";
+    background-image: url(../../img/circle.png);
+    position: relative;
+    width: 20px;
+    height: 100%;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: 8px 8px;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.gi-grid-hierarchy-depth1,
+.gi-grid-hierarchy-depth2 {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.gi-grid-hierarchy-depth1::before,
+.gi-grid-hierarchy-depth2::before {
+    content: "";
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Level 1 Lines */
+.gi-grid-hierarchy-depth1::before {
+    width: 25px;
+    height: calc(100% + 5px);
+    /* Matches margin-bottom of .gi-grid-list */
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 12px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth1.gi-grid-hierarchy-last::before {
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 50% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 12px 50% / 12px 1px no-repeat;
+}
+
+/* Level 2 Lines */
+.gi-grid-hierarchy-depth2::before {
+    width: 45px;
+    height: calc(100% + 5px);
+    background:
+        /* Parent Line */
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
+        /* Self Line */
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 100% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth2.gi-grid-hierarchy-parent-last::before {
+    /* Hide parent vertical line part below the horizontal branch if needed, but usually we just hide the whole parent trail */
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 100% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth2.gi-grid-hierarchy-last::before {
+    /* Truncate self vertical line */
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 50% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-hierarchy-depth2.gi-grid-hierarchy-parent-last.gi-grid-hierarchy-last::before {
+    background:
+        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 50% no-repeat,
+        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+}
+
+.gi-grid-border {
+    border: 1px solid #d0d0d0;
+}
+
+.gi-grid-border> :nth-child(2n) {
+    border-top: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+    /*border:2px solid #ee00ff;*/
+}
+
+
+
+.gi-grid-border> :last-child {
+    border-top: 1px solid #d0d0d0 !important;
+    border-bottom: unset !important;
+    /*border:2px solid #ff0099;*/
+}
+
+.gi-grid-border> :nth-child(2n-1)> :nth-child(2n) {
+    border-top: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+    /*border:2px solid red;*/
+}
+
+.gi-grid-border> :nth-child(2n)> :nth-child(2n) {
+    border-top: 1px solid #d0d0d0;
+    border-bottom: 1px solid #d0d0d0;
+    /*border:2px solid blue;*/
+}
+
+.gi-grid-border> :nth-child(2n-1)> :nth-child(2n-1)> :nth-child(2n) {
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    /*border:2px solid #ff00fb;*/
+}
+
+.gi-grid-border> :nth-child(2n)> :nth-child(2n-1)> :nth-child(2n) {
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    /*border:2px solid #000000;*/
+}
+
+.gi-grid-border> :nth-child(2n)> :nth-child(2n-1)> :nth-child(2n)> :nth-child(n):not(:last-child) {
+    border-right: 1px solid #d0d0d0;
+    /*border:2px solid #00b2ff;*/
+}
+
+.gi-grid-border> :nth-child(2n)> :nth-child(2n)> :nth-child(2n)> :nth-child(n):not(:last-child) {
+    border-right: 1px solid #d0d0d0;
+    /*border:2px solid #5f1dff;*/
+}
+
+.gi-grid-border> :nth-child(2n-1)> :nth-child(2n)> :nth-child(2n) {
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    /*border:2px solid #00ff3c;*/
+}
+
+.gi-grid-border> :nth-child(2n-1)> :nth-child(2n)> :nth-child(2n)> :nth-child(n):not(:last-child) {
+    border-right: 1px solid #d0d0d0;
+    /*border:2px solid #00ffe5;*/
+}
+
+.gi-grid-border> :nth-child(2n-1)> :nth-child(2n-1)> :nth-child(2n)> :nth-child(n):not(:last-child) {
+    border-right: 1px solid #d0d0d0;
+    /*border:2px solid #00bbff;*/
+}
+
+.gi-grid-border> :nth-child(2n)> :nth-child(2n)> :nth-child(2n) {
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+}
+
+.gi-grid-border-radius> :nth-child(2n-1):first-child>:nth-child(2n-1):first-child> :nth-child(2n-1):first-child,
+.gi-grid-border-radius> :nth-child(2n-1):first-child>:nth-child(2n-1):first-child> :nth-child(2n-1):first-child> :nth-child(2n-1):first-child:nth-child(n) {
+    border-radius: 15px 0 0 0;
+    /*border:2px solid #00bbff;*/
+}
+
+.gi-grid-border-radius> :nth-child(2n-1):first-child>:nth-child(2n-1):first-child> :nth-child(2n-1):last-child,
+.gi-grid-border-radius> :nth-child(2n-1):first-child>:nth-child(2n-1):first-child> :nth-child(2n-1):last-child> :nth-child(2n-1):last-child:nth-child(n) {
+    border-radius: 0 15px 0 0;
+    /*border:2px solid #00bbff;*/
+}
+
+.gi-grid-border-radius> :nth-child(2n-1):last-child>:nth-child(2n-1):last-child> :nth-child(2n-1):first-child,
+.gi-grid-border-radius> :nth-child(2n-1):last-child>:nth-child(2n-1):last-child> :nth-child(2n-1):first-child> :nth-child(2n-1):first-child:nth-child(n) {
+    border-radius: 0 0 0 15px;
+    /*border:2px solid #00bbff;*/
+}
+
+.gi-grid-border-radius> :nth-child(2n-1):last-child>:nth-child(2n-1):last-child> :nth-child(2n-1):last-child,
+.gi-grid-border-radius> :nth-child(2n-1):last-child>:nth-child(2n-1):last-child> :nth-child(2n-1):last-child> :nth-child(2n-1):last-child:nth-child(n) {
+    border-radius: 0 0 15px 0;
+    /*border:2px solid #00bbff;*/
+}
+
+.gi-grid-template-border {
+    border: 1px solid #d0d0d0;
+}
+
+.gi-grid-template-border> :nth-child(2n-1) {
+    border-top: 1px solid #d0d0d0;
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+}
+
+.gi-grid-template-border> :nth-child(2n-1):last-child {
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.gi-grid-template-border> :nth-child(2n) {
+    border-top: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+}
+
+.gi-grid-template-border> :nth-child(2n):last-child {
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.gridColumResizer {
+    width: 100%;
+    height: 100%;
+    right: 0px;
+    position: relative;
+    cursor: default;
+    transition: 0.1s ease-in-out;
+}
+

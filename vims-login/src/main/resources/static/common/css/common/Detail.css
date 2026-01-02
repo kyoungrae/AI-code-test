@@ -1,0 +1,55 @@
+/* ========== Detail Page Layout ========== */
+
+/* ======================================================================================================== 상세 페이지 Layout Detail 영역*/
+.gi-layout-detail-title {
+    border: var(--border-layout);
+    font-size: 14px;
+    background-color: #ededed;
+}
+
+.gi-layout-detail-title-2 {
+    font-size: 14px;
+    background-color: #ededed;
+}
+
+.gi-grid-input-edge {
+    border-radius: 15px 15px 15px 15px;
+}
+
+.gi-grid-input-edge-left-top {
+    border-radius: 15px 0 0 0;
+}
+
+.gi-grid-input-edge-right-top {
+    border-radius: 0 15px 0 0;
+}
+
+.gi-grid-input-edge-right-bottom {
+    border-radius: 0 0 var(--border-grid-input-edge) 0;
+}
+
+.gi-grid-input-edge-left-bottom {
+    border-radius: 0 0 0 var(--border-grid-input-edge);
+}
+
+.gi-grid-input-edge-top {
+    border-radius: var(--border-grid-input-edge) var(--border-grid-input-edge) 0 0;
+}
+
+.gi-grid-input-edge-bottom {
+    border-radius: 0 0 var(--border-grid-input-edge) var(--border-grid-input-edge);
+}
+
+.gi-grid-input-edge-left-top-bottom {
+    border-radius: var(--border-grid-input-edge) 0 0 var(--border-grid-input-edge);
+}
+
+.gi-grid-input-edge-right-top-bottom {
+    border-radius: 0 var(--border-grid-input-edge) var(--border-grid-input-edge) 0;
+}
+
+.gi-grid-input-edge-border,
+.gi-grid-edge-border {
+    border-radius: var(--border-grid-input-edge);
+}
+

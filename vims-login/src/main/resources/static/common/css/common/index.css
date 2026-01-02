@@ -1,0 +1,32 @@
+/* ==========================================================
+ * GI Common CSS - Modular Structure
+ * 모든 CSS 파일을 import하는 메인 파일
+ * ==========================================================*/
+
+/* Base Styles */
+@import "Variables.css";
+@import "animation.css";
+
+/* Utility Classes */
+@import "Position.css";
+@import "Spacing.css";
+@import "Typography.css";
+
+/* Layout */
+@import "Grid.css";
+@import "Flex.css";
+@import "Layout.css";
+
+/* Components */
+@import "Button.css";
+@import "Input.css";
+@import "Tag.css";
+@import "CommonComponents.css";
+
+/* Pages & Features */
+@import "Menubar.css";
+@import "Login.css";
+@import "Calendar.css";
+@import "Chart.css";
+@import "Detail.css";
+@import "Popup.css";

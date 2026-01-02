@@ -1,0 +1,79 @@
+/* ========== CSS Variables and Base Styles ========== */
+
+@import "animation.css";
+@import "Button.css";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('../../../assets/pretendard/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #CBD5E1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background-color: #94A3B8;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Pretendard-Regular', sans-serif;
+    box-sizing: border-box;
+
+    --default-input-height: 44px;
+    --logo-image: url("../../img/GI.png");
+
+    --border-radius-btn: 8px;
+    --border-radius-grid-btn: 6px;
+    --border-radius-header: 12px;
+    --border-radius-article: 16px;
+    --border-layout: 1px solid #E2E8F0;
+    --border-grid-input-edge: 12px;
+
+    --height-100vh: 100vh;
+    --width-section-btn: 100%;
+    --heigth-section-btn: 100%;
+    --padding-btn: 0.5rem 1rem;
+    --padding-icon-btn: 0.5rem 1.25rem 0.5rem 0.75rem;
+
+    --main-background-color: #F8FAFC;
+    --main-background-header-color: #1E293B;
+
+    --background-color-btn-red: #EF4444;
+    --background-color-btn-blue: #3B82F6;
+    --background-color-btn-back: #1F2937;
+    --background-color-btn-file-upload: #1F2937;
+    --background-color-btn-green: #10B981;
+    --background-color-btn-gray: #6B7280;
+    --background-color-btn-yellow: #F59E0B;
+
+    --background-color-input-btn-hover: #9CA3AF;
+    --background-color-btn-red-hover: #DC2626;
+    --background-color-btn-blue-hover: #2563EB;
+    --background-color-btn-back-hover: #111827;
+    --background-color-btn-green-hover: #059669;
+    --background-color-btn-gray-hover: #4B5563;
+    --background-text-color-btn-gray-hover: #ffffff;
+    --background-color-btn-yellow-hover: #D97706;
+    --background-color-btn-light-gray: #F3F4F6;
+
+    --color-calendar-holiyday: #EF4444;
+    --grid-row-selector-height: 32px;
+}
+

@@ -1,0 +1,100 @@
+/* ========== Tag Styles ========== */
+
+/* ======================================================================================================== 태그 영역 */
+.gi-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #8b8b8b;
+    color: #ffffff;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: small;
+    padding: 3px;
+    margin: 1%;
+    box-sizing: border-box;
+}
+
+.gi-tag-red {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff4c4c;
+    color: #ffffff;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: small;
+    padding: 3px;
+    margin: 1%;
+    box-sizing: border-box;
+}
+
+.gi-tag-green {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00e109;
+    color: #ffffff;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: small;
+    padding: 3px;
+    margin: 1%;
+    box-sizing: border-box;
+}
+
+.gi-tag-blue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4c92ff;
+    color: #ffffff;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: small;
+    padding: 10px;
+    margin: 1%;
+    box-sizing: border-box;
+}
+
+.gi-tag-yellow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFE300FF;
+    color: #000000;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: small;
+    padding: 3px;
+    margin: 1%;
+    box-sizing: border-box;
+}
+
+.gi-tag-gray {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b7b7b7;
+    color: #ffffff;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: small;
+    padding: 10px;
+    margin: 1%;
+    box-sizing: border-box;
+}
+
+.gi-tag-gray-hover {
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    text-shadow: 1px 1px 5px black;
+}
+
+.gi-tag-gray-hover:hover {
+    background-color: tomato;
+    transform: scale(1.02);
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+    text-shadow: 1px 1px 5px black;
+}
+

@@ -1,11 +1,9 @@
-
 <div class="gi-row-100 gi-col-100">
-    <div class="gi-row-50 gi-col-50 gi-flex gi-flex-center">
-        <button data-file-upload-btn id="file_upload" type="button"></button>
-        <input data-file-upload-uuid id="receive_uuid"/>
-    </div>
+  <div class="gi-row-50 gi-col-50 gi-flex gi-flex-center">
+    <button data-file-upload-btn id="file_upload" type="button" class="gi-btn-blue">파일 업로드</button>
+    <input data-file-upload-uuid id="receive_uuid" />
+  </div>
 </div>
 <script>
-  fileUtil.createFileUpload("PATH","receive_uuid","testfolder");
-
+  fileUtil.createFileUpload("PATH", "receive_uuid", "testfolder");
 </script>

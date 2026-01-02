@@ -1,0 +1,816 @@
+/* ========== Popup Styles ========== */
+
+/* ======================================================================================================== 팝업영역*/
+.gi-popup {
+    position: fixed;
+    padding: 20px;
+    width: 90%;
+    height: 90%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(1px);
+    transition: width 0.5s ease-in-out;
+}
+
+.gi-popup[data-popup-open="true"] {
+    display: flex;
+    visibility: visible;
+}
+
+.gi-popup[data-popup-open="false"] {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.45s, opacity 0.45s ease;
+}
+
+.gi-popup[data-popup-open="true"]>.gi-popup-body {
+    animation: slide-in-blurred-top 0.6s cubic-bezier(.23, 1.000, .32, 1.000) both;
+}
+
+.gi-popup[data-popup-open="false"]>.gi-popup-body {
+    animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
+    animation-fill-mode: forwards;
+}
+
+.gi-popup-body {
+    width: 60%;
+    height: 500px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 0 32px #6f6f6fa8;
+}
+
+.gi-popup-header {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gi-popup-contents {
+    width: 100%;
+    height: 70%;
+}
+
+.gi-popup-footer {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gi-popup-close-btn {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: #d5d5d5;
+    color: #000000;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    margin: 0 5px 0 5px;
+}
+
+.gi-popup-close-btn:hover {
+    background-color: #888888;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-popup-register-btn {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-back);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    margin: 0 5px 0 5px;
+}
+
+.gi-popup-update-btn {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-back);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    margin: 0 5px 0 5px;
+}
+
+.gi-popup-delete-btn {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 60px;
+    border: none;
+    background-color: var(--background-color-btn-back);
+    color: #ffffff;
+    border-radius: var(--border-radius-btn);
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    margin: 0 5px 0 5px;
+}
+
+.gi-popup-register-btn:hover {
+    background-color: var(--background-color-btn-back-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-popup-update-btn:hover {
+    background-color: var(--background-color-btn-back-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gi-popup-delete-btn:hover {
+    background-color: var(--background-color-btn-back-hover);
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+/* ======================================================================================================== select box */
+[gi-selectbox],
+[gi-selectbox-year],
+[gi-selectbox-custom] {
+    cursor: pointer;
+    border: none;
+    position: relative;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /*background: url("../../img/dropdown.svg") no-repeat right 10px center;*/
+    background-size: 15px;
+}
+
+[gi-selectbox].active+ul,
+[gi-selectbox-year].active+ul,
+[gi-selectbox-custom].active+ul {
+    display: block;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    /* 그리드보다 높게 조정 */
+    width: 100%;
+    max-height: 200px;
+    background: #fff;
+    /*box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);*/
+    box-shadow: 0px 5px 10px rgb(134 139 206 / 33%);
+    list-style-type: none;
+    /*outline: solid 0.5px var(--background-color-btn-gray);*/
+    outline: solid 0.5px #cfcfff59;
+    overflow-y: auto;
+    padding: 2% 5% 2% 5%;
+    border-radius: 10px;
+}
+
+[gi-selectbox]+ul,
+[gi-selectbox-year]+ul,
+[gi-selectbox-custom]+ul {
+    display: none;
+}
+
+[gi-selectbox]+ul li,
+[gi-selectbox-year]+ul li,
+[gi-selectbox-custom]+ul li {
+    padding: 0;
+}
+
+[gi-selectbox]+ul li button,
+[gi-selectbox-year]+ul li button,
+[gi-selectbox-custom]+ul li button {
+    padding: 0 0.8rem;
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    height: 2.5rem;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+[gi-selectbox]+ul li button:hover,
+[gi-selectbox]+ul li button:focus,
+[gi-selectbox-year]+ul li button:hover,
+[gi-selectbox-year]+ul li button:focus,
+[gi-selectbox-custom]+ul li button:hover,
+[gi-selectbox-custom]+ul li button:focus {
+    background-color: rgba(255, 99, 71, 0.3);
+}
+
+/* formatCheck 함수에서 사용 */
+.check_on {
+    background-image: url("../../img/check_on.svg");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px 20px;
+    transition: opacity 0.3s ease-in-out, background-size 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.check_off {
+    background-image: url("../../img/check_off.svg");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px 20px;
+    transition: background-size 0.3s ease-in-out;
+    opacity: 0.5;
+}
+
+/* grid 정렬용 */
+.gi-grid-sort-asc {
+    background-image: url("../../img/grid_sort_asc.svg");
+    background-repeat: no-repeat;
+    background-position: right 5% center;
+    background-size: 15px 15px;
+}
+
+.gi-grid-sort-desc {
+    background-image: url("../../img/grid_sort_desc.svg");
+    background-repeat: no-repeat;
+    background-position: right 5% center;
+    background-size: 15px 15px;
+}
+
+/* grid sort hover. detail_btn(상세버튼)외에 hover로 이미지추가 */
+.gi-grid-list-header li:not(.gi-grid-sort-asc):not(.gi-grid-sort-desc):not([data-column$="detail_btn"]):hover {
+    background-image: url("../../img/grid_sort_default.svg");
+    background-repeat: no-repeat;
+    background-position: right 5% center;
+    background-size: 15px 15px;
+}
+
+/* 공동명의자 추가 hover */
+.gi-layout-detail-title.gi-super-joint-owner {
+    cursor: pointer;
+    position: relative;
+}
+
+.gi-layout-detail-title.gi-super-joint-owner::after {
+    content: "";
+    position: absolute;
+    right: 10%;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../img/add.svg");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gi-layout-detail-title.gi-super-joint-owner:hover::after {
+    opacity: 0.6;
+}
+
+/* 공동명의자 제거 hover */
+.gi-layout-detail-title.gi-sub-joint-owner {
+    cursor: pointer;
+    position: relative;
+}
+
+.gi-layout-detail-title.gi-sub-joint-owner::after {
+    content: "";
+    position: absolute;
+    right: 10%;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../img/remove.svg");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gi-layout-detail-title.gi-sub-joint-owner:hover::after {
+    opacity: 0.6;
+}
+
+[data-time-zone="true"] {
+    background: #d9d9d9;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.1s cubic-bezier(0.8, 0.8, 0.8, 0.8);
+}
+
+[data-time-zone="true"]:hover {
+    background: #cbcbcb;
+    color: #FFFFFF;
+}
+
+[data-time-zone="false"] {
+    color: #e1e1e1;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 5px;
+}
+
+.gi-input-update-tag-icon {
+    position: absolute;
+    right: 0%;
+    top: -12%;
+    padding: 10px;
+    cursor: pointer;
+    color: #a9a9a9;
+    transition: .5s cubic-bezier(0.165, 0.84, 0.44, 1)
+}
+
+.gi-input-update-tag-icon:hover {
+    color: #000000;
+}
+
+/* ======================================================================================================== authUser dropdown in nav bar */
+.side-nav-profile-dropdown {
+    position: relative;
+    display: block;
+}
+
+.side-nav-profile-trigger {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 14px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    justify-content: space-between;
+}
+
+.profile-trigger:hover {
+    background-color: #9797975c;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info-frame {
+    display: flex;
+    width: 100%;
+}
+
+.profile-info {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 2%;
+}
+
+.profile-name {
+    font-size: 14px;
+    color: #fff;
+}
+
+.dropdown-menu {
+    position: absolute;
+    /*top: 100%;*/
+    /*right: 0;*/
+    left: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    /*min-width: 120px;*/
+    width: 100%;
+    z-index: 10;
+    margin: -28% 0 0 100%;
+    height: 152%;
+    justify-content: center;
+}
+
+.dropdown-menu:before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    border-top: 7px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid #ffffff;
+    border-bottom: 7px solid transparent;
+}
+
+.dropdown-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #4f4f4f;
+    display: block;
+}
+
+.dropdown-menu a i {
+    font-size: 13px;
+    color: rgb(136, 136, 136);
+    width: 13px;
+}
+
+.dropdown-menu a span {
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.dropdown-menu a:first-child:hover {
+    border-radius: 8px 8px 0px 0px;
+}
+
+.dropdown-menu a:last-child:hover {
+    border-radius: 0px 0px 8px 8px;
+}
+
+.side-nav-profile-dropdown.active .dropdown-menu {
+    display: flex;
+}
+
+.gi-home-setting:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../img/icon_management.svg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    top: 13px;
+    right: 15px;
+    transition: 0.1s cubic-bezier(1, 1, 1, 1);
+}
+
+.gi-home-setting:active:after {
+    transform: rotate(90deg);
+}
+
+.gi-home-setting-article {
+    position: absolute;
+    top: 5%;
+    left: 97%;
+    background-color: #ffffff;
+    width: 150px;
+    min-height: 33px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+}
+
+.gi-home-setting-article:after {
+    content: "";
+    position: absolute;
+    left: -15px;
+    top: -7px;
+    transform: rotate(35deg);
+    border-top: 7px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid #ffffff;
+    border-bottom: 7px solid transparent;
+}
+
+/* ======================================================================================================== on/off switch */
+input.gi-switch {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+input.gi-switch::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: white;
+    top: 1px;
+    left: 1px;
+    transition: 0.4s;
+}
+
+input.gi-switch:checked {
+    background-color: tomato;
+}
+
+input.gi-switch:checked::before {
+    transform: translateX(10px);
+}
+
+/* ======================================================================================================== */
+#server_time>div,
+#server_date {
+    background-color: var(--main-background-header-color);
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#server_time>div {
+    width: 30px;
+    font-size: 15px;
+}
+
+#server_time>div>span {
+    min-width: 15px;
+}
+
+.gi-article-section {
+    padding: 5px;
+    box-shadow: 0px 2px 4px #87878747;
+    border-radius: var(--border-radius-article);
+    /*align-items: center;*/
+}
+
+.key_pad {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.key_pad-number {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: #b4c1ff;
+    border-radius: 15px;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #000000;
+    transition: 0.2s cubic-bezier(1, 1, 1, 1);
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.key_pad-number:hover,
+.key_pad-number:active {
+    cursor: pointer;
+    background-color: #888888;
+}
+
+/* ======================================================================================================== myinfo */
+.user_icon_layout_body {
+    position: relative;
+}
+
+.add_user_img-btn {
+    padding: var(--padding-btn);
+    height: 100%;
+    min-width: 30px;
+    border: none;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0 5px 0 5px;
+    background-image: url("../../../common/img/add.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.add_user_img-btn:hover {
+    background-image: url("../../../common/img/add-hover.svg");
+}
+
+.add_user_img-btn-section {
+    position: absolute;
+    height: 30px;
+    top: 90%;
+    left: 90%;
+}
+
+/* ======================================================================================================== slider */
+[gi-slider-wrapper] {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+[gi-slider] {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    aspect-ratio: 4 / 1;
+}
+
+[gi-slider-item] {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+[gi-slider-prev],
+[gi-slider-next] {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    cursor: pointer;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+[gi-slider-next] {
+    right: 0px;
+}
+
+/* ======================================================================================================== Modern Design Overrides Link Fix Final 4 */
+
+/* 1. GRID CONTAINER SPACING FIX */
+/* Remove any default browser margins/paddings from the list rows to reduce gaps */
+ul.gi-grid-list {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 2. GRID ROW HEIGHT FIX - ULTRA COMPACT */
+/* User requested tighter spacing. 24px is the absolute minimum to fit a 20px button comfortably. */
+ul.gi-grid-list>li.gi-col-16px {
+    height: auto !important;
+    min-height: 24px !important;
+    /* Reduced from 30px to 24px */
+    padding: 0 !important;
+}
+
+/* 3. CENTER ALIGN ONLY BUTTON CELLS - Fix for Hierarchy Lines */
+/* Only align button cells to center so tree lines in other cells don't break */
+ul.gi-grid-list>li[data-field*="btn"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* 4. MAIN BUTTONS (Large) */
+button[class*="gi-btn"],
+a[class*="gi-btn"],
+input[type="button"][class*="gi-btn"],
+input[type="submit"][class*="gi-btn"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 500 !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid transparent !important;
+    border-radius: 6px !important;
+    letter-spacing: normal !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 0.25rem 1rem !important;
+    line-height: normal !important;
+    min-height: 36px;
+    height: auto !important;
+}
+
+/* 5. GRID BUTTONS (Ultra Compact 20px) */
+/* Tiny buttons to fit in the 24px row without clipping */
+.gi-grid-btn,
+.gi-grid-modify-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 500 !important;
+    border-radius: 3px !important;
+    letter-spacing: normal !important;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+    /* Cleaner look for dense grid */
+
+    height: 20px !important;
+    /* 20px Height */
+    padding: 0 6px !important;
+    font-size: 11px !important;
+    margin: 0 2px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+}
+
+/* Specific Colors */
+.gi-grid-btn {
+    /* Delete/Normal Button */
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #475569 !important;
+}
+
+.gi-grid-btn:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+    color: #0f172a !important;
+}
+
+.gi-grid-modify-btn {
+    /* Modify Button */
+    background-color: #FFF7ED !important;
+    border: 1px solid #FFEDD5 !important;
+    color: #C2410C !important;
+}
+
+.gi-grid-modify-btn:hover {
+    background-color: #FFEDD5 !important;
+    border-color: #FB923C !important;
+}
+
+/* Reset for Containers */
+div[class*="gi-btn"],
+span[class*="gi-btn"] {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    transform: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* Hover State */
+button[class*="gi-btn"]:hover,
+a[class*="gi-btn"]:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+    transform: translateY(-1px) !important;
+    filter: brightness(1.02) !important;
+}
+
+/* Active State */
+button[class*="gi-btn"]:active,
+a[class*="gi-btn"]:active,
+.gi-grid-btn:active,
+.gi-grid-modify-btn:active {
+    transform: translateY(0) !important;
+    box-shadow: none !important;
+}
+
+/* 4. INPUTS */
+.gi-input-container,
+.gi-select-container {
+    background-color: #ffffff;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hide underline animation */
+.gi-input-container::after,
+.gi-select-container::after {
+    display: none !important;
+}
+
+/* Focus State */
+.gi-input-container:focus-within,
+.gi-select-container:focus-within {
+    border-color: var(--background-color-btn-blue) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* 5. PAGING / DROPDOWN */
+.gi-grid-row-selector {
+    background-color: #ffffff !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 6px !important;
+    padding: 0 8px !important;
+    font-size: 13px;
+    height: 32px !important;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.gi-grid-row-selector:focus {
+    outline: none;
+    border-color: var(--background-color-btn-blue) !important;
+}
+
+/* Layout */
+.gi-main2,
+.gi-main-content {
+    background-color: var(--main-background-color);
+}

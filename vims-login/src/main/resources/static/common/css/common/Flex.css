@@ -1,0 +1,99 @@
+/* ========== Flexbox Utilities ========== */
+
+/* ======================================================================================================== Flex 영역*/
+.gi-inline-flex {
+    display: inline-flex;
+}
+
+.gi-flex {
+    display: flex;
+}
+
+.gi-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.gi-flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.gi-flex-center-left {
+    justify-content: left;
+    align-items: center;
+}
+
+.gi-flex-center-right {
+    justify-content: right;
+    align-items: center;
+}
+
+.gi-flex-align-content-flex-start {
+    align-content: flex-start
+}
+
+.gi-flex-align-items-center {
+    align-items: center;
+}
+
+.gi-flex-align-items-flex-start {
+    align-items: flex-start;
+}
+
+.gi-flex-align-items-flex-end {
+    align-items: flex-end;
+}
+
+.gi-flex-align-items-baseline {
+    align-items: baseline !important;
+}
+
+.gi-flex-justify-content-center {
+    justify-content: center;
+}
+
+.gi-flex-justify-content-right {
+    justify-content: right;
+}
+
+.gi-flex-space-around {
+    justify-content: space-around;
+}
+
+.gi-flex-space-between {
+    justify-content: space-between;
+}
+
+.gi-flex-justify-content-space-evenly {
+    justify-content: space-evenly;
+}
+
+.gi-flex-justify-content-space-around {
+    justify-content: space-around;
+}
+
+.gi-flex-justify-content-space-between {
+    justify-content: space-between;
+}
+
+.gi-flex-wrap {
+    flex-wrap: wrap;
+}
+
+.gi-flex-direction-column {
+    flex-direction: column;
+}
+
+.gi-flex-direction-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.gi-flex-justify-content-flex-start {
+    justify-content: flex-start;
+}
+
+.gi-flex-justify-content-flex-end {
+    justify-content: flex-end;
+}
+
