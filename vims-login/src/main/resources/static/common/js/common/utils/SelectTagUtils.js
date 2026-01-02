@@ -4,7 +4,7 @@
  */
 
 /**
- * @title : .gi-select tag focus event
+ * @title : Select 태그 포커스 이벤트
  * @value : true, false
  * @return : select line status event and label status event
  * @see : .gi-select-container[data-focus-line="false"]::after, .gi-select-container[data-focus-line="true"]::after
@@ -53,6 +53,9 @@ CommonTag.prototype.selectTagFocus = function (select) {
     }
 
 }
+/**
+ * @title : Select 라벨 포커스 이벤트
+ */
 CommonTag.prototype.selectLabelTagFocus = function (label) {
     label.on("click", function (e) {
         let selectId = $(e.target).attr("for");
@@ -81,7 +84,7 @@ CommonTag.prototype.selectLabelTagFocus = function (label) {
     }
 }
 /**
- * @title : .gi-select tag reset event
+ * @title : Select 태그 리셋 이벤트
  * @value : form tag contain input
  * @return : select status
  * @see : .gi-select-container[data-focus-line="false"]::after, .gi-select-container[data-focus-line="true"]::after
@@ -101,7 +104,7 @@ CommonTag.prototype.selectTagReset = function (select) {
 }
 
 /**
- * @title : GiSelectBox();
+ * @title : 공통 코드 기반 Select Box 생성
  * @see : input[gi-selectbox]
  * @text : input[gi-selectbox]의 data-selectbox-field 속성을 가져와 COMMON_CODE의 GROUP_ID와 매칭시켜 selectbox를 반환
  * @writer : 진은영
@@ -120,7 +123,10 @@ class GiSelectBox {
         commonTag.inputTagFocus($(".gi-input"));
     }
 
-    // 공통코드 -> html append
+    /**
+     * @title : 옵션 초기화 (공통코드)
+     * @text : 공통코드 -> html append
+     */
     async initSelectboxOption() {
         const selectboxs = $(this.selector);
         // 이경태 수정부분 시작
@@ -229,7 +235,9 @@ class GiSelectBox {
         });
     }
 
-    // selectbox event
+    /**
+     * @title : Select Box 이벤트 설정
+     */
     initSelectBox() {
         // selectbox click/enter Event
         $(this.selector).off('click keydown').on('click keydown', (e) => {
@@ -336,7 +344,10 @@ class GiSelectBox {
     }
 }
 
-//데이터를 직접 넘겨주고 만드는 selectbox
+/**
+ * @title : 사용자 정의 데이터 기반 Select Box 생성
+ * @text : 데이터를 직접 넘겨주고 만드는 selectbox
+ */
 class GiSelectBoxCustom {
     static defaultSelector = 'input[gi-selectbox-custom]';
 
@@ -346,6 +357,9 @@ class GiSelectBoxCustom {
         this.cleanupSelectbox();
     }
 
+    /**
+     * @title : Select Box 정리
+     */
     cleanupSelectbox() {
         const selectboxs = $(this.selector);
 
@@ -379,14 +393,19 @@ class GiSelectBoxCustom {
         this.initialize();
     }
 
-    // 초기화
+    /**
+     * @title : 초기화
+     */
     initialize() {
         this.initSelectboxOption();   // 데이터 세팅 및 selectbox 생성
         this.addEventSelectBox();         // selectbox 이벤트 세팅
         commonTag.inputTagFocus($(".gi-input"));
     }
 
-    // 내부 데이터 기반으로 HTML 생성
+    /**
+     * @title : 옵션 초기화 (Custom)
+     * @text : 내부 데이터 기반으로 HTML 생성
+     */
     initSelectboxOption() {
         const selectboxs = $(this.selector);
 
@@ -451,7 +470,9 @@ class GiSelectBoxCustom {
         });
     }
 
-    // SelectBox 이벤트 설정
+    /**
+     * @title : Select Box 이벤트 설정 (Custom)
+     */
     addEventSelectBox() {
         $(this.selector).off('click keydown2').on('click keydown2', (e) => {
             const $target = $(e.currentTarget);
@@ -477,7 +498,9 @@ class GiSelectBoxCustom {
         });
     }
 
-    // 선택값 설정
+    /**
+     * @title : 선택값 설정 (Custom)
+     */
     chooseSelectBox(target) {
         target.next('ul').find('li button').off('click').on('click', (e) => {
             const $selectedItem = $(e.currentTarget);
@@ -525,7 +548,10 @@ class GiSelectBoxCustom {
         });
     }
 
-    // id와 값을 넘겨받아 해당 옵션 선택
+    /**
+     * @title : 값 선택 함수
+     * @text : id와 값을 넘겨받아 해당 옵션 선택
+     */
     selectValue(id, value) {
         let target = $(`#${id}`);
         if (!target.attr('id').includes('_select')) {
@@ -602,7 +628,7 @@ class GiSelectBoxCustom {
 
 
 /**
- * @title : GiSelectBoxYear();
+ * @title : 연도 선택 Select Box 생성
  * @see : input[gi-selectbox-year]
  * @text : input[gi-selectbox-year]의 selectbox를 반환.
  * @ gi-selectbox-start-year에서 gi-selectbox-end-year 까지 1씩 더하거나 빼서 셀렉트박스 옵션을 정함
@@ -624,7 +650,10 @@ class GiSelectBoxYear {
         commonTag.inputTagFocus($(".gi-input"));
     }
 
-    // 공통코드 -> html append
+    /**
+     * @title : 옵션 초기화 (Year)
+     * @text : 공통코드 -> html append
+     */
     async initSelectboxOption() {
         const selectboxs = $(this.selector);
         selectboxs.each(async (i, selectbox) => {
@@ -734,7 +763,9 @@ class GiSelectBoxYear {
         });
     }
 
-    // selectbox event
+    /**
+     * @title : Select Box 이벤트 설정 (Year)
+     */
     initSelectBox() {
         // selectbox click/enter Event
         $(this.selector).off('click keydown').on('click keydown', (e) => {

@@ -3,10 +3,13 @@
  * @text : 유효성 검사 관련 함수 모음
  */
 
-// @title : Value 값이 null,공백,undefined 인지 검사
-// @value :  값
-// @return : 값이 없으면 false, 값이 존재하면 true [Boolean]
-// @writer : 이경태
+/**
+ * @title : 값 유효성 체크
+ * @text : Value 값이 null,공백,undefined 인지 검사
+ * @value :  값
+ * @return : 값이 없으면 false, 값이 존재하면 true [Boolean]
+ * @writer : 이경태
+ */
 FormUtility.prototype.checkEmptyValue = function (value) {
     let data = $.trim(value);
     let flag = true;
@@ -16,11 +19,13 @@ FormUtility.prototype.checkEmptyValue = function (value) {
     return flag;
 };
 
-// @title : Value 값이 null,공백,undefined 인지 검사
-// @value :  값
-// @return : 값이 없으면 false, 값이 존재하면 true [Boolean]
-// @text : checkEmptyValue 와 분리, checkEmptyValue 를 object 형식으로 사용하는 코드가 존재 하기때문에 이 함수는 오직 object 값이 존재하는지만 검사
-// @writer : 이경태
+/**
+ * @title : 객체 유효성 체크
+ * @text : checkEmptyValue 와 분리, checkEmptyValue 를 object 형식으로 사용하는 코드가 존재 하기때문에 이 함수는 오직 object 값이 존재하는지만 검사
+ * @value :  값
+ * @return : 값이 없으면 false, 값이 존재하면 true [Boolean]
+ * @writer : 이경태
+ */
 FormUtility.prototype.checkObjectEmptyValue = function (value) {
     let result = true;
     if (value === "undefined" || value === null || value === "null" || value === undefined || (typeof value === "object" && !Object.keys(value).length)) {
@@ -29,12 +34,15 @@ FormUtility.prototype.checkObjectEmptyValue = function (value) {
     return result;
 }
 
-// @title : validation Check
-// @e : [formId=\"\"{id:\"\",message:\"\"}]\n// @formId : validationCheck하려는 id가 속해있는 상위 div 혹은 form tag의 ID[String]
-// @id : validationCheck하려는 id[String]
-// @message : vaildationCheck시 나올 문구[String]
-// @text : 선행작업 requiredParamClassSetting() ,alertPopup()
-// @writer: 이경태
+/**
+ * @title : 필수 입력 검증
+ * @param e : [formId=\"\"{id:\"\",message:\"\"}]
+ * @formId : validationCheck하려는 id가 속해있는 상위 div 혹은 form tag의 ID[String]
+ * @id : validationCheck하려는 id[String]
+ * @message : vaildationCheck시 나올 문구[String]
+ * @text : 선행작업 requiredParamClassSetting() ,alertPopup()
+ * @writer: 이경태
+ */
 FormUtility.prototype.validationCheck = function (e) {
     let result = true;
     let formId = e.formId;
@@ -124,6 +132,10 @@ FormUtility.prototype.isSyllable = function (query) {
     return true;
 }
 
+/**
+ * @title : 비밀번호 유효성 검증
+ * @text : 서버를 통한 비밀번호 유효성 검사
+ */
 FormUtility.prototype.validatePassword = async function (url, password) {
     try {
         const response = await axios.post(url, password);

@@ -601,8 +601,8 @@
                 const lineHeight = 24;
                 const paddingTop = 20; // code.hljs padding-top
 
-                // [Fix] Add +1 correction for visual alignment (compensating for potential backend/frontend newline mismatch)
-                const targetLine = lineNumber + 1;
+                // [Fix] Removed +1 offset to align strictly with the JSDoc/Function start line
+                const targetLine = lineNumber;
 
                 const scrollPos = (targetLine - 1) * lineHeight;
 

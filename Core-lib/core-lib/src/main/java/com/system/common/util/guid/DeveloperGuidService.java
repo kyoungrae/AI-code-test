@@ -122,37 +122,16 @@ public class DeveloperGuidService {
             Map<String, Object> functionInfo = parseJSDocComment(jsdoc);
 
             // [Filtering Logic]
-            String nextCodeBlock = getNextNonEmptyLine(content, endIdx);
-            String extractedName = extractFunctionName(nextCodeBlock);
-
-            // 1. 이벤트 핸들러인 경우: @title 태그가 없으면 무조건 제외 (설명이 있어도 제외)
-            if ("Event Handler / Script".equals(extractedName)) {
-                if (!functionInfo.containsKey("title")) {
-                    continue; // Skip event handlers without explicit @title
-                }
-            }
-
-            // 2. 일반 함수/클래스인 경우나 @title이 있는 경우 처리
+            // 사용자 요청: "@title을 기준으로 Dev Guide System 목록에 나와야 하며 title이 없는 그냥 주석은 목록에 나오면
+            // 안돼"
+            // 따라서 @title 키가 없으면 무조건 제외합니다. (Description이나 Code 분석으로 제목을 만들지 않음)
             if (!functionInfo.containsKey("title")) {
-                if (extractedName == null || extractedName.equals("Unknown Function")) {
-                    // 함수 정의가 아니면 내부 주석으로 간주하고 Skip
-                    continue;
-                }
-
-                // 일반 함수라면 Description이나 Text를 제목으로 사용
-                if (functionInfo.containsKey("description")) {
-                    functionInfo.put("title", functionInfo.get("description"));
-                } else if (functionInfo.containsKey("text")) {
-                    functionInfo.put("title", functionInfo.get("text"));
-                } else {
-                    // 설명도 없으면 코드에서 추출한 이름 사용
-                    if (extractedName != null && !extractedName.isEmpty()) {
-                        functionInfo.put("title", extractedName);
-                    } else {
-                        continue;
-                    }
-                }
+                continue;
             }
+
+            // 추가 정보: 코드 라인 분석 (타이틀이 있는 경우 함수 이름을 보조 정보로 활용할 수는 있음)
+            // String nextCodeBlock = getNextNonEmptyLine(content, endIdx);
+            // String extractedName = extractFunctionName(nextCodeBlock);
 
             functionInfo.put("lineNumber", lineNumber);
             functions.add(functionInfo);
