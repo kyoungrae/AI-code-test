@@ -1,10 +1,6 @@
 /**
- * @title : InputTagUtils
+ * @title : InputTag 포커싱
  * @text : CommonTag Input Utility Functions (Focus, Reset, Disabled, CheckBox)
- */
-
-/**
- * @title : .gi-input tag focus event
  * @value : true, false
  * @return : input line status event and label status event
  * @see : .gi-input-container[data-focus-line="false"]::after, .gi-input-container[data-focus-line="true"]::after
@@ -92,6 +88,10 @@ CommonTag.prototype.inputTagFocus = function (input) {
     }
 
 }
+/**
+ * @title : InputTag 라벨 포커싱
+ * @writer : 이경태
+ */
 CommonTag.prototype.inputLabelTagFocus = function (label) {
     label.on("click", function (e) {
         let inputId = $(e.target).attr("for");
@@ -141,7 +141,7 @@ CommonTag.prototype.inputLabelTagFocus = function (label) {
     }
 }
 /**
- * @title : .gi-input tag reset event
+ * @title : InputTag 재설정
  * @value : form tag contain input
  * @return : input status
  * @see : .gi-input-container[data-focus-line="false"]::after, .gi-input-container[data-focus-line="true"]::after
@@ -165,7 +165,7 @@ CommonTag.prototype.inputTagReset = function (input) {
 }
 
 /**
- * @title : data-gi-tag-disabled 적용 시 default settings
+ * @title : InputTag 비활성화
  * @writer : 문상혁
  */
 CommonTag.prototype.tagDisabled = function (disabled, tagIdArray) {
@@ -243,7 +243,7 @@ CommonTag.prototype.tagDisabled = function (disabled, tagIdArray) {
 }
 
 /**
- * @title : checkBox init Setting;
+ * @title : checkBox 초기값 셋팅
  * @see : input[type="checkBox"]
  * @text : input type = checkBox의 초기값 셋팅
  * @writer : 이경태
@@ -268,7 +268,7 @@ class inputTypeCheckBoxInitSetting {
 }
 
 /**
- * @title : inputDisabledUpdateAble
+ * @title : InputTag 비활설화 업데이트 아이콘 설정
  * @value : default = undefined || input tag id
  * @text : data-gi-tag-disabled 설정 후 gi-input-update-tag-icon를 사용 하여 disabled를 해제 시킨다.
  * @writer : 이경태

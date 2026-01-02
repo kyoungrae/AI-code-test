@@ -35,7 +35,7 @@
             overflow: hidden;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            width: 100%
+            width: 100%;
         }
 
         .guid-container * {
@@ -292,7 +292,10 @@
             padding: 20px !important;
             font-family: 'Fira Code', monospace;
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 24px !important;
+            /* Fixed Line Height for calculation accuracy */
+            white-space: pre;
+            /* No Wrap */
         }
 
         /* Highlight Active Line */
@@ -303,6 +306,8 @@
             background: rgba(56, 139, 253, 0.15);
             border-left: 2px solid #58a6ff;
             pointer-events: none;
+            height: 24px !important;
+            /* Match Fixed Line Height */
         }
 
         /* Loading */
@@ -592,18 +597,25 @@
             function scrollToLine(lineNumber) {
                 if (!lineNumber || !els.codeContainer) return;
 
-                const lineHeight = 22.4; // Approximation for 14px font height * 1.6
-                const scrollPos = (lineNumber - 1) * lineHeight;
+                // Fixed calculation to avoid sub-pixel drift
+                const lineHeight = 24;
+                const paddingTop = 20; // code.hljs padding-top
+
+                // [Fix] Add +1 correction for visual alignment (compensating for potential backend/frontend newline mismatch)
+                const targetLine = lineNumber + 1;
+
+                const scrollPos = (targetLine - 1) * lineHeight;
 
                 // Highlight Overlay
                 if (els.lineHighlight) {
                     els.lineHighlight.style.display = 'block';
-                    els.lineHighlight.style.top = `${scrollPos}px`;
+                    els.lineHighlight.style.top = `${scrollPos + paddingTop}px`;
                     els.lineHighlight.style.height = `${lineHeight}px`;
                 }
 
+                // [Fix] Scroll to exact position + padding (to hide padding and stick to top)
                 els.codeContainer.scrollTo({
-                    top: scrollPos - 150, // Center a bit
+                    top: scrollPos + paddingTop,
                     behavior: 'smooth'
                 });
             }
