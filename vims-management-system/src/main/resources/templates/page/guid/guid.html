@@ -1,224 +1,644 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개발 가이드</title>
+    <title>JavaScript Developer Guide</title>
+    <!-- Common Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Highlight.js for Code Syntax Highlighting -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --header-height: 60px;
+            --sidebar-width: 250px;
+            --border-color: #e2e8f0;
+            --primary-color: #3182ce;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --code-bg: #282c34;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            height: var(--header-height);
+            background-color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            z-index: 10;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2b6cb0;
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f7fafc;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - var(--header-height));
+        }
+
+        /* Sidebar (File List) */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #fff;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 15px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .file-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            transition: background-color 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .file-item:hover {
+            background-color: #edf2f7;
+        }
+
+        .file-item.active {
+            background-color: #ebf8ff;
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .file-item i {
+            color: #f7df1e;
+            /* JS Icon Color */
+        }
+
+        /* Content Area (Split View) */
+        .content-area {
+            flex: 1;
+            display: flex;
+            background-color: #fff;
+        }
+
+        /* Left Panel: Code Viewer */
+        .code-panel {
+            flex: 1;
+            background-color: var(--code-bg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .panel-header {
+            padding: 10px 15px;
+            background-color: #21252b;
+            color: #d7dae0;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #181a1f;
+        }
+
+        .code-content {
+            flex: 1;
+            overflow: auto;
+            padding: 0;
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        code.hljs {
+            padding: 20px !important;
+            background: transparent;
+        }
+
+        /* Highlight Line */
+        .highlight-line {
+            background-color: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            left: 0;
+            right: 0;
+            pointer-events: none;
+        }
+
+        /* Right Panel: Guide/Docs */
+        .guide-panel {
+            width: 40%;
+            min-width: 350px;
+            max-width: 600px;
+            background-color: #f8f9fa;
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .guide-header {
+            padding: 15px;
+            background-color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .guide-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .guide-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        .guide-card.active {
+            border-color: var(--primary-color);
+            border-left-width: 4px;
+            background-color: #ebf8ff;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .line-badge {
+            font-family: 'Fira Code', monospace;
+            background-color: #e2e8f0;
+            color: #4a5568;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .card-desc {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background-color: #f7fafc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #edf2f7;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .meta-label {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #a0aec0;
+            text-transform: uppercase;
+        }
+
+        .meta-values {
+            font-family: 'Fira Code', monospace;
+            color: #2d3748;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #cbd5e0;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .gi-code-function {
+            color: #61aeee;
+        }
+
+        .gi-code-keyword {
+            color: #c678dd;
+        }
+
+        .gi-code-string {
+            color: #98c379;
+        }
+
+        .gi-code-comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+    </style>
 </head>
 
 <body>
-    <article class="gi-main-content gi-col-100 gi-row-100 gi-flex gi-flex-column">
-        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-column gi-padding-10px">
-            <!-- 페이지 제목 -->
-            <div class="gi-row-60px gi-col-100 gi-flex gi-flex-align-items-center">
-                <h2 class="gi-page-title">JavaScript 개발 가이드</h2>
-            </div>
 
-            <!-- 검색 영역 -->
-            <div class="gi-row-50px gi-col-100 gi-flex gi-flex-align-items-center gi-margin-bottom-15px">
-                <div class="gi-row-100 gi-col-50 gi-flex gi-flex-align-items-center gi-grid-gap-10px">
-                    <div class="gi-row-100 gi-col-60 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                        data-focus-line="false">
-                        <label for="searchKeyword" class="gi-input-label" data-focus-label="false"
-                            data-focus-label-text-align="center" data-required="false">검색어</label>
-                        <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchKeyword"
-                            name="searchKeyword" data-focus-input-text-align="center" autocomplete="off"
-                            placeholder="함수명 또는 설명 검색" />
-                    </div>
-                    <div class="gi-row-100 gi-col-20">
-                        <button id="search-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow"
-                            type="button">검색</button>
-                    </div>
-                    <div class="gi-row-100 gi-col-20">
-                        <button id="reload-btn" class="gi-btn-blue gi-row-40px gi-input-container-box-shadow"
-                            type="button">새로고침</button>
-                    </div>
+    <header>
+        <div class="header-title">
+            <i class="fa-brands fa-js-square" style="color: #f7df1e; font-size: 1.8rem;"></i>
+            <span>JS Developer Guide</span>
+        </div>
+        <div class="header-controls">
+            <button class="btn btn-secondary" onclick="loadGuidData('sample')">
+                <i class="fa-solid fa-vial"></i> Load Sample
+            </button>
+            <button class="btn btn-primary" onclick="loadGuidData('scan')">
+                <i class="fa-solid fa-sync"></i> Scan All Files
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar: File List -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <span>Explorer</span>
+                <span id="file-count" class="badge">0 files</span>
+            </div>
+            <div class="file-list" id="file-list">
+                <!-- File items will be injected here -->
+                <div style="padding: 20px; text-align: center; color: #a0aec0; font-size: 0.9rem;">
+                    Click "Scan" to load files
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content: Split View -->
+        <div class="content-area">
+            <!-- Left: Code Viewer -->
+            <div class="code-panel">
+                <div class="panel-header">
+                    <span id="current-file-name"><i class="fa-solid fa-code"></i> Select a file</span>
+                    <span id="current-file-path" style="color: #5c6370;"></span>
+                </div>
+                <div class="code-content" id="code-content-wrapper">
+                    <pre><code id="code-viewer" class="language-javascript">// Select a file from the sidebar to view code</code></pre>
                 </div>
             </div>
 
-            <!-- 가이드 컨텐츠 영역 -->
-            <div class="gi-row-100 gi-col-100 gi-article-content gi-overflow-scroll">
-                <div id="guid-content" class="gi-row-100 gi-col-100 gi-padding-20px">
-                    <!-- 가이드 내용이 여기에 동적으로 추가됩니다 -->
-                    <div class="gi-flex gi-flex-center gi-padding-20px">
-                        <p style="color: #888;">데이터를 불러오는 중...</p>
+            <!-- Right: Guide Documentation -->
+            <div class="guide-panel">
+                <div class="guide-header">
+                    <i class="fa-solid fa-book-open"></i> Documentation
+                </div>
+                <div class="guide-content" id="guide-content">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <p>Select a file to view documentation</p>
                     </div>
                 </div>
             </div>
         </div>
-    </article>
+    </div>
 
-    <script type="text/javascript">
-        let guidData = []; // 전체 가이드 데이터
-        let filteredData = []; // 필터링된 데이터
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
 
-        // 페이지 초기화
-        function init() {
-            loadGuidData();
-            setupEventListeners();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+    <script>
+        let currentData = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            hljs.highlightAll();
+        });
+
+        function showLoading(show) {
+            document.getElementById('loading-overlay').style.display = show ? 'flex' : 'none';
         }
 
-        // 이벤트 리스너 설정
-        function setupEventListeners() {
-            // 검색 버튼 클릭
-            $("#search-btn").on("click", function () {
-                searchGuidData();
-            });
+        // Load Data (Sample or Scan)
+        function loadGuidData(type) {
+            showLoading(true);
+            const url = type === 'sample' ? '/cms/common/guid/api/sample' : '/cms/common/guid/api/scan';
 
-            // 검색어 입력 시 엔터키
-            $("#searchKeyword").on("keypress", function (e) {
-                if (e.which === 13) {
-                    searchGuidData();
-                }
-            });
-
-            // 새로고침 버튼 클릭
-            $("#reload-btn").on("click", function () {
-                loadGuidData();
-                $("#searchKeyword").val("");
-                commonTag.inputTagReset($(".gi-input"));
-            });
-        }
-
-        // 가이드 데이터 로드
-        function loadGuidData() {
-            $("#guid-content").html('<div class="gi-flex gi-flex-center gi-padding-20px"><p style="color: #888;">데이터를 불러오는 중...</p></div>');
-
-            // 샘플 데이터 로드 (실제 사용 시 /api/scan 으로 변경)
-            axios.get("/cms/common/guid/api/sample")
+            axios.get(url)
                 .then(response => {
                     if (response.data.success) {
-                        guidData = response.data.data;
-                        filteredData = guidData;
-                        renderGuidData(filteredData);
+                        currentData = response.data.data;
+                        renderFileList(currentData);
+
+                        // Automatically select first file if available
+                        if (currentData.length > 0) {
+                            selectFile(0);
+                        }
                     } else {
-                        formUtil.alertPopup("데이터 로드 실패: " + response.data.message);
+                        alert('Failed to load data: ' + response.data.message);
                     }
                 })
                 .catch(error => {
-                    console.error("Error loading guid data:", error);
-                    formUtil.alertPopup("데이터 로드 중 오류가 발생했습니다.");
+                    console.error('Error:', error);
+                    alert('An error occurred while loading data.');
+                })
+                .finally(() => {
+                    showLoading(false);
                 });
         }
 
-        // 검색 기능
-        function searchGuidData() {
-            let keyword = $("#searchKeyword").val().trim().toLowerCase();
+        // Render File List in Sidebar
+        function renderFileList(data) {
+            const listEl = document.getElementById('file-list');
+            document.getElementById('file-count').innerText = `${data.length} files`;
 
-            if (!keyword) {
-                filteredData = guidData;
-            } else {
-                filteredData = guidData.map(file => {
-                    let matchedFunctions = file.functions.filter(func => {
-                        return (func.title && func.title.toLowerCase().includes(keyword)) ||
-                            (func.text && func.text.toLowerCase().includes(keyword)) ||
-                            (func.param && func.param.toLowerCase().includes(keyword)) ||
-                            (func.return && func.return.toLowerCase().includes(keyword));
-                    });
-
-                    if (matchedFunctions.length > 0) {
-                        return {
-                            ...file,
-                            functions: matchedFunctions
-                        };
-                    }
-                    return null;
-                }).filter(file => file !== null);
-            }
-
-            renderGuidData(filteredData);
-        }
-
-        // 가이드 데이터 렌더링
-        function renderGuidData(data) {
-            if (!data || data.length === 0) {
-                $("#guid-content").html(`
-                <div class="gi-flex gi-flex-center gi-padding-20px">
-                    <p style="color: #888;">검색 결과가 없습니다.</p>
-                </div>
-            `);
+            if (data.length === 0) {
+                listEl.innerHTML = '<div style="padding: 20px; text-align: center;">No JS files found.</div>';
                 return;
             }
 
             let html = '';
-
-            data.forEach((file, fileIndex) => {
+            data.forEach((file, index) => {
                 html += `
-                <div class="gi-margin-bottom-30px">
-                    <div class="gi-flex gi-flex-align-items-center gi-margin-bottom-15px" style="border-bottom: 2px solid #4a5568; padding-bottom: 10px;">
-                        <h3 style="margin: 0; color: #2d3748;">
-                            <i class="fa-brands fa-js-square" style="color: #f7df1e; margin-right: 8px;"></i>
-                            ${file.fileName}
-                        </h3>
-                        <span style="margin-left: 10px; font-size: 12px; color: #718096;">${file.filePath}</span>
-                    </div>
-
-                    <div class="gi-grid-container gi-grid gi-grid-gap-15px">
+                <div class="file-item" onclick="selectFile(${index})" id="file-item-${index}">
+                    <i class="fa-brands fa-js"></i>
+                    <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${file.fileName}</span>
+                </div>
             `;
+            });
+            listEl.innerHTML = html;
+        }
 
-                file.functions.forEach((func, funcIndex) => {
-                    html += `
-                    <div class="gi-article-section gi-padding-15px" style="background-color: #f7fafc; border-left: 4px solid #4299e1;">
-                        <div class="gi-margin-bottom-10px">
-                            <h4 style="margin: 0 0 5px 0; color: #2b6cb0; font-size: 16px;">
-                                <i class="fa-solid fa-code" style="margin-right: 5px;"></i>
-                                ${func.title || '함수명 없음'}
-                            </h4>
-                        </div>
+        // Select a File and Update Views
+        function selectFile(index) {
+            // Highlight sidebar item
+            document.querySelectorAll('.file-item').forEach(el => el.classList.remove('active'));
+            const activeItem = document.getElementById(`file-item-${index}`);
+            if (activeItem) activeItem.classList.add('active');
 
-                        ${func.text ? `
-                        <div class="gi-margin-bottom-8px">
-                            <span style="font-weight: 600; color: #4a5568;">설명:</span>
-                            <span style="color: #2d3748;">${func.text}</span>
-                        </div>
-                        ` : ''}
+            const fileData = currentData[index];
+            if (!fileData) return;
 
-                        ${func.param ? `
-                        <div class="gi-margin-bottom-8px">
-                            <span style="font-weight: 600; color: #4a5568;">파라미터:</span>
-                            <code style="background-color: #edf2f7; padding: 2px 6px; border-radius: 3px; color: #c53030;">${func.param}</code>
-                        </div>
-                        ` : ''}
+            // Update Header
+            document.getElementById('current-file-name').innerHTML = `<i class="fa-brands fa-js" style="color:#f7df1e"></i> ${fileData.fileName}`;
+            document.getElementById('current-file-path').innerText = fileData.filePath;
 
-                        ${func.date ? `
-                        <div class="gi-margin-bottom-8px">
-                            <span style="font-weight: 600; color: #4a5568;">날짜:</span>
-                            <span style="color: #2d3748;">${func.date}</span>
-                        </div>
-                        ` : ''}
+            // 1. Render Code
+            renderCode(fileData.src || '// No source code available');
 
-                        ${func.return ? `
-                        <div class="gi-margin-bottom-8px">
-                            <span style="font-weight: 600; color: #4a5568;">반환값:</span>
-                            <code style="background-color: #edf2f7; padding: 2px 6px; border-radius: 3px; color: #38a169;">${func.return}</code>
-                        </div>
-                        ` : ''}
+            // 2. Render Guide
+            renderGuide(fileData.functions || []);
+        }
 
-                        ${func.writer ? `
-                        <div>
-                            <span style="font-weight: 600; color: #4a5568;">작성자:</span>
-                            <span style="color: #2d3748;">${func.writer}</span>
-                        </div>
-                        ` : ''}
-                    </div>
-                `;
-                });
+        // Render Source Code with Syntax Highlighting
+        function renderCode(sourceCode) {
+            const codeViewer = document.getElementById('code-viewer');
+            // HTML escape to prevent XSS and rendering issues
+            codeViewer.textContent = sourceCode;
+            // Re-apply highlight.js
+            hljs.highlightElement(codeViewer);
 
+            // Reset scroll
+            document.getElementById('code-content-wrapper').scrollTop = 0;
+        }
+
+        // Render Guide Cards (Right Panel)
+        function renderGuide(functions) {
+            const guideEl = document.getElementById('guide-content');
+
+            if (!functions || functions.length === 0) {
+                guideEl.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-regular fa-file-code"></i>
+                    <p>No JSDoc comments found in this file.</p>
+                </div>`;
+                return;
+            }
+
+            let html = '';
+            functions.forEach((func, idx) => {
                 html += `
+                <div class="guide-card" onclick="scrollToLine(${func.lineNumber}, this)">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-cube"></i> ${func.title || 'Untitled Function'}
+                        </div>
+                        ${func.lineNumber ? `<span class="line-badge">Line ${func.lineNumber}</span>` : ''}
+                    </div>
+                    
+                    ${func.text ? `<div class="card-desc">${func.text}</div>` : ''}
+                    
+                    <div class="card-meta">
+                        ${func.param ? `
+                        <div class="meta-item">
+                            <span class="meta-label">Parameters</span>
+                            <span class="meta-values">${func.param}</span>
+                        </div>` : ''}
+                        
+                        ${func.return ? `
+                        <div class="meta-item">
+                            <span class="meta-label">Returns</span>
+                            <span class="meta-values" style="color: #38a169;">${func.return}</span>
+                        </div>` : ''}
+                        
+                        ${func.writer ? `
+                        <div class="meta-item">
+                            <span class="meta-label">Author</span>
+                            <span class="meta-values">${func.writer}</span>
+                        </div>` : ''}
                     </div>
                 </div>
             `;
             });
-
-            $("#guid-content").html(html);
+            guideEl.innerHTML = html;
         }
 
-        // 페이지 로드 시 초기화
-        $(document).ready(function () {
-            init();
-        });
+        // Scroll Code Viewer to Specific Line
+        function scrollToLine(lineNumber, cardElement) {
+            if (!lineNumber) return;
+
+            // Highlight active card
+            document.querySelectorAll('.guide-card').forEach(el => el.classList.remove('active'));
+            if (cardElement) cardElement.classList.add('active');
+
+            // Calculate scroll position
+            const codeWrapper = document.getElementById('code-content-wrapper');
+            const codeViewer = document.getElementById('code-viewer');
+
+            // Approximate line height (depends on font size/line-height)
+            const lineHeight = 21; // px (14px * 1.5)
+            const scrollPos = (lineNumber - 1) * lineHeight - 100; // -100 for some padding from top
+
+            codeWrapper.scrollTo({
+                top: scrollPos,
+                behavior: 'smooth'
+            });
+
+            // Temporary Flash Effect (Optional)
+            // Can add a highlight overlay if needed
+        }
     </script>
+
 </body>
 
 </html>
