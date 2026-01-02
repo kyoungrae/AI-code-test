@@ -65,7 +65,7 @@ FormUtility.prototype.setHyphenToTels = function (ids) {
     for (let i = 0; i < ids.length; i++) {
         let value = $("#" + ids[i]).text();
         if (value) {
-            $("#" + ids[i]).text(this.formatPhoneNumber(value));
+            $("#" + ids[i]).text(formUtil.formatPhoneNumber(value));
         }
     }
 }
@@ -77,7 +77,7 @@ FormUtility.prototype.setCommaToMoney = function (ids) {
     for (let i = 0; i < ids.length; i++) {
         let value = $("#" + ids[i]).text();
         if (value) {
-            $("#" + ids[i]).text(this.addComma(value));
+            $("#" + ids[i]).text(formUtil.addComma(value));
         }
     }
 }
@@ -92,7 +92,7 @@ FormUtility.prototype.setCommaToMoney = function (ids) {
 FormUtility.prototype.replaceAll = function (v, f, cf) {
     let result = "";
 
-    if (this.checkEmptyValue(v)) {
+    if (formUtil.checkEmptyValue(v)) {
         result = v.replaceAll(new RegExp(f, "gi"), cf);
     }
 
@@ -124,7 +124,7 @@ FormUtility.prototype.calcDate = function (valueOfDate, type, dayNumber) {
     let flag = pattern.test(valueOfDate);
 
     if (!flag) {
-        this.alertPopup("calcDate 함수의 날짜 형식이 맞지 않습니다 [ex:yyyy-MM-dd]");
+        formUtil.alertPopup("calcDate 함수의 날짜 형식이 맞지 않습니다 [ex:yyyy-MM-dd]");
     }
 
     dayNumber = parseInt(dayNumber);
@@ -224,7 +224,7 @@ FormUtility.prototype.setSpecialCharacters = function (v, f, s) {
     let match = "";
     let returnValue = "";
 
-    if (this.checkEmptyValue(v) && this.checkEmptyValue(f) && this.checkEmptyValue(s)) {
+    if (formUtil.checkEmptyValue(v) && formUtil.checkEmptyValue(f) && formUtil.checkEmptyValue(s)) {
         cleaned = v.replace(/\s/g, "");
         stringFormatArray = f.split(",");
         stringFormatArray.map(function (e, i) {
@@ -248,7 +248,7 @@ FormUtility.prototype.setSpecialCharacters = function (v, f, s) {
             formUtil.alertPopup("match is " + match + ", length of value is not match");
         }
     } else {
-        this.alertPopup("The value does not Exist");
+        formUtil.alertPopup("The value does not Exist");
     }
 }
 /**
@@ -274,11 +274,11 @@ FormUtility.prototype.transSpecialChar = function (v, f, s) {
             e = "Value cannot be smaller \n than the number you want to divide";
             throw e;
         }
-        if (!this.checkEmptyValue(v)) {
+        if (!formUtil.checkEmptyValue(v)) {
             e = "Value is undefined";
             throw e;
         }
-        if (!this.checkEmptyValue(s)) {
+        if (!formUtil.checkEmptyValue(s)) {
             e = "SpecialCharacter is undefined";
             throw e;
         }
@@ -297,7 +297,7 @@ FormUtility.prototype.transSpecialChar = function (v, f, s) {
                 resultFormat = new RegExp("^" + format + "$");
                 match = cleaned.match(resultFormat);
 
-                if (!this.checkEmptyValue(match)) {
+                if (!formUtil.checkEmptyValue(match)) {
                     throw "Did Not Macthed Value of length";
                 }
 
@@ -330,7 +330,7 @@ FormUtility.prototype.transSpecialChar = function (v, f, s) {
         }
         return returnValue;
     } catch (e) {
-        this.alertPopup("transSpecialCharacter: " + e);
+        formUtil.alertPopup("transSpecialCharacter: " + e);
     }
 }
 

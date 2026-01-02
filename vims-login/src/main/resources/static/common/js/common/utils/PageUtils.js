@@ -52,7 +52,7 @@ FormUtility.prototype.loadContent = function (reqUrl, DATA) {
     let url = `/common/redirectPage/redirect?url=${encodeURIComponent(reqUrl + ".html")}`;
 
     axios.get(url).then(response => {
-        this.resetFormUtilityValue();
+        formUtil.resetFormUtilityValue();
         let pageSources = response.data;
 
         $("#gi-road-content").empty().html(pageSources);
@@ -79,7 +79,7 @@ FormUtility.prototype.loadContent = function (reqUrl, DATA) {
         formUtil.activatedMenu(reqUrl);
     })
         .catch(error => {
-            this.alertPopup('Failed to load content:', error);
+            formUtil.alertPopup('Failed to load content:', error);
         });
 }
 /**
@@ -93,7 +93,7 @@ FormUtility.prototype.apiLoadContent = function (prefixUrl, reqUrl, DATA) {
     let url = prefixUrl + `/page/load` + `?url=${encodeURIComponent(reqUrl + ".html")}`;
 
     axios.get(url).then(response => {
-        this.resetFormUtilityValue();
+        formUtil.resetFormUtilityValue();
         let pageSources = response.data;
 
         $("#gi-road-content").empty().html(pageSources);
@@ -106,7 +106,7 @@ FormUtility.prototype.apiLoadContent = function (prefixUrl, reqUrl, DATA) {
             sessionStorage.setItem("DATA", cont);
         }
     }).catch(error => {
-        this.alertPopup('Failed to load content:', error);
+        formUtil.alertPopup('Failed to load content:', error);
     });
 }
 /**
@@ -133,7 +133,7 @@ FormUtility.prototype.loadToHtml = async function (cont) {
                 return resolve(response.data);
             }
         }).catch(error => {
-            this.alertPopup('Failed to load content:', error);
+            formUtil.alertPopup('Failed to load content:', error);
         });
     })
 }

@@ -38,7 +38,7 @@ FormUtility.prototype.findByCommonCodeGroup = function (group_id) {
 FormUtility.prototype.findCommonCode = function (group_id) {
     let commonCodeGroup = JSON.parse(sessionStorage.getItem("commonCodeGroup"));
     let returnData = [];
-    if (this.checkEmptyValue(commonCodeGroup)) {
+    if (formUtil.checkEmptyValue(commonCodeGroup)) {
         commonCodeGroup.forEach(item => {
             if (item.group_code_id === group_id) {
                 returnData.push(item);
@@ -49,8 +49,8 @@ FormUtility.prototype.findCommonCode = function (group_id) {
 }
 
 FormUtility.prototype.resetFormUtilityValue = function () {
-    if (this.gridSortManager) {
-        this.gridSortManager.resetSort();
+    if (formUtil.gridSortManager) {
+        formUtil.gridSortManager.resetSort();
     }
 }
 FormUtility.prototype.setCommonCodeName = async function (fieldName, groupId, cont) {

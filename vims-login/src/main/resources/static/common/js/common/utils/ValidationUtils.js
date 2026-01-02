@@ -36,35 +36,65 @@ FormUtility.prototype.checkObjectEmptyValue = function (value) {
 // @text : 선행작업 requiredParamClassSetting() ,alertPopup()
 // @writer: 이경태
 FormUtility.prototype.validationCheck = function (e) {
-    let check = true;
-    let targetId = e.formId;
-    let failId = "";
-    let failMessage = "";
+    let result = true;
+    let formId = e.formId;
+    let requiredFields = $("#" + formId + " [data-required='true'][data-field]").not('label').not('span');
 
-    // 유효성 체크 실패 시 해당 input tag에 focus event
-    let failFocus = function (failId) {
-        $("#" + failId).focus();
-    }
+    requiredFields.each(function (index, field) {
+        let $field = $(field);
+        let volume = $field.val();
 
-    for (let i = 0; i < e.length; i++) {
-        let id = "#" + targetId + " #" + e[i].id;
-        let value = $(id).val();
-        let message = e[i].message;
-
-        if (!this.checkEmptyValue(value)) {
-            check = false;
-            failId = e[i].id;
-            failMessage = message;
-            break;
+        if (!volume) {
+            $field.parent().attr('data-focus-line', true);
+            $field.parent().children("label").attr('data-focus-label', true);
+        } else {
+            $field.parent().attr('data-focus-line', false);
+            $field.parent().children("label").attr('data-focus-label', true);
         }
-    }
+    });
 
-    if (!check) {
-        this.alertPopup(failMessage);
-        failFocus(failId);
-    }
-    return check;
-}
+    // 필수 입력 필드가 비어있을 때 경고 팝업 표시
+    requiredFields.each(function (index, field) {
+        let $field = $(field);
+        let volume = "";
+
+        field.type === "radio" || field.type === "checkbox" ? volume = $field.is(":checked") : volume = $field.val();
+
+        if (!volume) {
+            for (let config of e) {
+                if (field.id === config.id) {
+                    result = false;
+                    formUtil.alertPopup(config.message);
+                    return false; // 각 필수 입력 필드에 대한 경고 팝업 한 번만 표시
+                }
+            }
+        }
+        else {
+            // value가 있고, gi-format-check 태그를 붙인 경우, 형식 체크
+            if ($field.is('input[gi-format-check]')) {
+                let formatCheck = new GiFormatCheck();
+                let formatType = $field.attr("gi-format-check");
+                let formatTypes = GiFormatCheck.getFormatTypes();
+
+                if (formatTypes.includes(formatType)) {
+                    let isValid = formatCheck.validateInputFormat(field);
+                    let config = e.find(c => c.id === field.id);
+
+                    if (!isValid && config) {
+                        result = false;
+                        formUtil.alertPopup(config.message.replace('를', '를 형식에 맞게<br/>'));  //todo 하드코딩
+
+                        //밑줄 처리
+                        $field.parent().attr('data-focus-line', true);
+                        $field.parent().children("label").attr('data-focus-label', true);
+                        return false;
+                    }
+                }
+            }
+        }
+    });
+    return result;
+};
 
 /**
  * @title 한글 음절 단위 + 영문 + 숫자 검증
@@ -99,13 +129,13 @@ FormUtility.prototype.validatePassword = async function (url, password) {
         const response = await axios.post(url, password);
 
         if (response.data && response.data?.length > 0) {
-            this.showMessage(response.data[0]);
+            formUtil.showMessage(response.data[0]);
             return false;
         }
 
         return true;
     } catch (error) {
-        this.alertPopup(error.message || error);
+        formUtil.alertPopup(error.message || error);
         return false;
     }
 }

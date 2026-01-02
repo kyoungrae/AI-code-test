@@ -2,7 +2,7 @@
 //Message.Label = {};
 //Message.Label.Array = {};
 Message.Label.Array["COMMON_GROUP.TITLE_DETAIL"] = "그룹상세";
-Message.Label.Array["COMMON_GROUP.TITLE_LIST"] = "그룹설정";
+Message.Label.Array["COMMON_GROUP.TITLE_LIST"] = "그룹목록";
 Message.Label.Array["COMMON_GROUP.TITLE_MODIFY"] = "그룹수정";
 Message.Label.Array["COMMON_GROUP.TITLE_REGISTER"] = "그룹등록";
 
@@ -26,5 +26,5 @@ Message.Label.Array["COMMON_GROUP.SYSTEM_CREATE_DATE"] = "작성일자";
 Message.Label.Array["COMMON_GROUP.SYSTEM_CREATE_USERID"] = "작성자ID";
 Message.Label.Array["COMMON_GROUP.SYSTEM_UPDATE_DATE"] = "수정일자";
 Message.Label.Array["COMMON_GROUP.SYSTEM_UPDATE_USERID"] = "수정자ID";
-
+Message.Label.Array["COMMON_USER_GROUP.REGISTER_GROUP_USER_BTN"] = "그룹사용자등록";
 Message.Label.Array["COMMON_GROUP.CHECK.GROUP_USER_CONTAIN"] = "그룹에 사용자가 포함되어 있는지 확인하세요";

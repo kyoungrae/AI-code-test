@@ -3,9 +3,9 @@ class loadToScript {
     constructor() {
         const scriptsToLoad = [
             "login/CommonUserMessage",
-            "login/CommonGroupMessage",
             "login/CommonMenuMessage",
             "login/CommonUserGroupMessage",
+            "management/CommonGroupMessage",
             "management/CommonAccessGroupMenuListMessage",
             "management/CommonAccessGroupMenuMessage",
             "management/CommonCodeGroupMessage",

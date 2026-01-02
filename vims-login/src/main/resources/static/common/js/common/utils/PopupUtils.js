@@ -7,22 +7,31 @@
 // @message : validation check message parameter (String)
 // @writer: 이경태
 FormUtility.prototype.alertPopup = function (message) {
-    let messageBox =
-        '<div class="gi-popup-body">' +
-        '<div class="gi-popup slide-in-blurred-top">' +
-        '<div class="gi-popup-title-box">' +
-        '<span class="gi-popup-title">알림</span>' +
-        '</div>' +
-        '<div class="gi-popup-message-box">' +
-        '<span class="gi-popup-message">' + message + '</span>' +
-        '</div>' +
-        '<div class="gi-popup-button-box">' +
-        '<button class="gi-popup-button" onclick="$(\'.gi-popup-body\').remove()">확인</button>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
-    $("body").append(messageBox);
-    $(".gi-popup-button").focus();
+    if (formUtil.checkEmptyValue(message)) {
+        message = message + "";
+        if (message.includes('\n')) {
+            message = message.replaceAll('\n', '</br>');
+        }
+    } else {
+        message = "메시지가 없습니다.";
+    }
+
+    let initAlertPopupDiv = '<div id="alertPopup">'
+        + '<div class="alertPopup_content">'
+        + '<div class="alertPopup_text">'
+        + '<span>' + message + '</span>'
+        + '</div>'
+        + '<div class="gi-padding-10px">'
+        + '<button type="button" class="gi-btn gi-col-30px subbtn alertPopup_success_btn">확인</button>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
+
+    $(".alertPopupBody").html(initAlertPopupDiv);
+
+    $(".alertPopup_success_btn").click(function () {
+        $(this).closest("#alertPopup").remove();
+    })
 }
 
 // JS 에서 사용하는 confirm과 기능은 같으나 비동기적으로 동작.
@@ -31,33 +40,33 @@ FormUtility.prototype.alertPopup = function (message) {
 // @param {string} message 출력할 메시지
 // @returns {Promise<Boolean>} 확인을 누른 경우에는 true / 취소를 누른 경우에는 false
 // @writer: 이진주
-FormUtility.prototype.confirm = function (message) {
-    return new Promise(function (resolve) {
-        let messageBox =
-            '<div class="gi-popup-body">' +
-            '<div class="gi-popup slide-in-blurred-top">' +
-            '<div class="gi-popup-title-box">' +
-            '<span class="gi-popup-title">알림</span>' +
-            '</div>' +
-            '<div class="gi-popup-message-box">' +
-            '<span class="gi-popup-message">' + message + '</span>' +
-            '</div>' +
-            '<div class="gi-popup-button-box">' +
-            '<button class="gi-popup-button gi-popup-confirm" id="confirm-ok">확인</button>' +
-            '<button class="gi-popup-button gi-popup-cancel" id="confirm-cancel">취소</button>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-        $("body").append(messageBox);
-        $("#confirm-ok").focus();
+FormUtility.prototype.confirm = async function (message) {
+    return new Promise((resolve, reject) => {
+        const key = Date.now();
+        const popupHtml = `
+            <div id="confirm_${key}" class="prompt">
+                <div class="popup_content">
+                    <div class="popup_text">
+                        <span> ${message} </span>
+                    </div>
+                    <div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                        <button type="button" class="gi-btn-blue popup_success_btn">확인</button>
+                        <button type="button" class="gi-btn popup_cancel_btn">취소</button>
+                    </div>
+                </div>
+            </div>
+        `;
 
-        $("#confirm-ok").on("click", function () {
-            $(".gi-popup-body").remove();
+        $(".PopupBody").empty();
+        $(".PopupBody").append(popupHtml);
+
+        $(`#confirm_${key} .popup_success_btn`).click(function () {
+            $(`#confirm_${key}`).remove();
             resolve(true);
         });
 
-        $("#confirm-cancel").on("click", function () {
-            $(".gi-popup-body").remove();
+        $(`#confirm_${key} .popup_cancel_btn`).click(function () {
+            $(`#confirm_${key}`).remove();
             resolve(false);
         });
     });
@@ -71,32 +80,41 @@ FormUtility.prototype.confirm = function (message) {
 // @text : 팝업창
 // @writer: 이경태
 FormUtility.prototype.popup = function (btnId, message, func, funcParam) {
-    let messageBox =
-        '<div class="gi-popup-body">' +
-        '<div class="gi-popup slide-in-blurred-top">' +
-        '<div class="gi-popup-title-box">' +
-        '<span class="gi-popup-title">알림</span>' +
-        '</div>' +
-        '<div class="gi-popup-message-box">' +
-        '<span class="gi-popup-message">' + message + '</span>' +
-        '</div>' +
-        '<div class="gi-popup-button-box">' +
-        '<button id=' + btnId + ' class="gi-popup-button">확인</button>' +
-        '<button id="popup_cancel_btn" class="gi-popup-button" >취소</button>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
-    $("body").append(messageBox);
-    $("#" + btnId).focus();
+    let Popup = '<div id="popup">'
+        + '<div class="popup_content">'
+        + '<div class="popup_text">'
+        + '<span>' + message + '</span>'
+        + '</div>'
+        + '<div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">'
+        + '<button type="button" id="' + btnId + '"' + ' class="gi-btn-blue popup_success_btn">확인</button>'
+        + '<button type="button" class="gi-btn  popup_cancel_btn">취소</button>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
 
-    $("#popup_cancel_btn").off("click").on("click", function () {
-        $(".gi-popup-body").remove();
-        return false;
-    })
-    $("#" + btnId).off("click").on("click", function () {
-        $(".gi-popup-body").remove();
-        func(funcParam);
-    })
+    if (!(formUtil.checkEmptyValue(btnId) && formUtil.checkEmptyValue(func))) {
+        formUtil.alertPopup(Message.Label.Array["FAIL.FUNCTION.POPUP"]);
+    } else {
+        $(".PopupBody").append(Popup);
+
+        $(".popup_cancel_btn").click(function () {
+            $(this).closest("#popup").remove();
+        })
+
+        $("#" + btnId).click(function () {
+            if (funcParam !== undefined) {
+                if (Array.isArray(funcParam)) {
+                    func.call(null, funcParam);
+                } else {
+                    func.call(null, funcParam);
+                }
+                $(this).closest("#popup").remove();
+            } else {
+                func();
+                $(this).closest("#popup").remove();
+            }
+        });
+    }
 }
 
 // @title : popup
@@ -108,43 +126,58 @@ FormUtility.prototype.popup = function (btnId, message, func, funcParam) {
 // @text : 팝업창
 // @writer: 이경태
 FormUtility.prototype.popupInput = function (btnId, popupInputId, message, inputLabel, func, funcParam) {
-    let messageBox =
-        '<div class="gi-popup-body">' +
-        '<div class="gi-popup slide-in-blurred-top">' +
-        '<div class="gi-popup-title-box">' +
-        '<span class="gi-popup-title">알림</span>' +
-        '</div>' +
-        '<div class="gi-popup-message-box">' +
-        '<span class="gi-popup-message">' + message + '</span>' +
-        '<div class="gi-input-container gi-margin-top-10px">' +
-        '<label for="' + popupInputId + '" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="default" data-required="false">' + inputLabel + '</label>' +
-        '<input type="text" class="gi-input" data-focus-span-text-align="center" id="' + popupInputId + '" name="' + popupInputId + '" autocomplete="off" />' +
-        '</div>' +
-        '</div>' +
-        '<div class="gi-popup-button-box">' +
-        '<button id=' + btnId + ' class="gi-popup-button">확인</button>' +
-        '<button id="popup_cancel_btn" class="gi-popup-button" >취소</button>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
-    $("body").append(messageBox);
-    commonTag.inputTagReset($(".gi-popup-body .gi-input"));
-    $("#" + popupInputId).focus();
+    let Popup = '<div id="popup">'
+        + '<div class="popup_content">'
+        + '<div class="popup_text">'
+        + '<span>' + message + '</span>'
+        + '</div>'
+        + '<div class="gi-row-100 gi-col-50">'
+        + '<div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">'
+        + '<label for="popup_input" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="true">' + inputLabel + '</label>'
+        + '<input data-field="popup_input" id="popup_input" name="popup_input" class="gi-input" data-focus-input-text-align="center" data-required="true" autoComplete="off"/>'
+        + '</div>'
+        + '</div>'
+        + '<div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">'
+        + '<button type="button" id="' + btnId + '"' + ' class="gi-btn-blue popup_success_btn">확인</button>'
+        + '<button type="button" class="gi-btn  popup_cancel_btn">취소</button>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
 
-    $("#popup_cancel_btn").off("click").on("click", function () {
-        $(".gi-popup-body").remove();
-        return false;
-    })
-    $("#" + btnId).off("click").on("click", function () {
-        if (formUtil.checkEmptyValue($("#" + popupInputId).val())) {
-            $(".gi-popup-body").remove();
-            funcParam[popupInputId] = $("#" + popupInputId).val();
-            func(funcParam);
-        } else {
-            formUtil.alertPopup("값을 입력해주세요");
-            return false;
-        }
-    })
+    if (!(formUtil.checkEmptyValue(btnId) && formUtil.checkEmptyValue(func))) {
+        formUtil.alertPopup(Message.Label.Array["FAIL.FUNCTION.POPUP"]);
+    } else {
+        $(".PopupBody").append(Popup);
+        commonTag.inputTagFocus($("#popup_input"));
+
+        $(".popup_cancel_btn").click(function () {
+            $(this).closest("#popup").remove();
+        })
+
+        $("#" + btnId).click(function () {
+            if (funcParam !== undefined) {
+                funcParam[popupInputId] = $("#popup_input").val();
+                let MESSAGE = message;
+                let validation = [];
+                validation.formId = "popup";
+                validation[0] = { id: "popup_input", message: MESSAGE };
+
+                if (formUtil.validationCheck(validation)) {
+                    if (Array.isArray(funcParam)) {
+                        func.apply(null, funcParam);
+                    } else {
+                        func.call(null, funcParam);
+                    }
+                    $(this).closest("#popup").remove();
+                } else {
+                    return false;
+                }
+            } else {
+                func();
+                $(this).closest("#popup").remove();
+            }
+        })
+    }
 }
 
 // @title : popup - radio 선택
@@ -156,103 +189,129 @@ FormUtility.prototype.popupInput = function (btnId, popupInputId, message, input
 // @funcParam : func 함수에 전달될 Parameters ex)func(funcParam)
 // @writer: 배수연
 FormUtility.prototype.popupRadio = function (btnId, popupInputId, message, radioOptions, func, funcParam) {
-    let radioHtml = "";
-    radioOptions.forEach((option, index) => {
-        let isChecked = index === 0 ? "checked" : "";
-        radioHtml += `
-            <div class="gi-radio-container">
-            <input type="radio" id="${popupInputId}_${index}" name="${popupInputId}" value="${option.value}" class="gi-radio" ${isChecked}>
-            <label for="${popupInputId}_${index}" class="gi-radio-label">${option.label}</label>
-            </div>
-            `;
+    let Popup = '<div id="popup">'
+        + '<div class="popup_content">'
+        + '<div class="popup_text">'
+        + '<span>' + message + '</span>'
+        + '</div>'
+        + '<div class="gi-row-100 gi-col-50">';
+
+    Popup += '<div class="gi-row-100 gi-col-100 gi-flex">';
+
+    radioOptions.forEach(function (option, index) {
+        Popup += '<div class="gi-row-100 gi-input-container gi-flex gi-flex-center">'
+            + '<input data-field="' + popupInputId + '" type="radio" id="' + popupInputId + index + '" name="' + popupInputId + '" class="gi-input" data-focus-span-text-align="center" data-required="true" value="' + option.value + '">'
+            + '<label for="' + popupInputId + index + '" class="gi-input-radio-label" data-focus-label="true" data-focus-label-text-align="default">' + option.label + '</label>'
+            + '</div>';
     });
 
-    let messageBox =
-        '<div class="gi-popup-body">' +
-        '<div class="gi-popup slide-in-blurred-top">' +
-        '<div class="gi-popup-title-box">' +
-        '<span class="gi-popup-title">알림</span>' +
-        '</div>' +
-        '<div class="gi-popup-message-box">' +
-        '<span class="gi-popup-message">' + message + '</span>' +
-        '<div class="gi-radio-group gi-margin-top-10px">' +
-        radioHtml +
-        '</div>' +
-        '</div>' +
-        '<div class="gi-popup-button-box">' +
-        '<button id="' + btnId + '" class="gi-popup-button">확인</button>' +
-        '<button id="popup_cancel_btn" class="gi-popup-button">취소</button>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
+    Popup += '</div>';
 
-    $("body").append(messageBox);
-    $("#" + btnId).focus();
+    Popup += '</div>'
+        + '<div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">'
+        + '<button type="button" id="' + btnId + '" class="gi-btn-blue popup_success_btn">확인</button>'
+        + '<button type="button" class="gi-btn popup_cancel_btn">취소</button>'
+        + '</div>'
+        + '</div>'
+        + '</div>';
 
-    $("#popup_cancel_btn").off("click").on("click", function () {
-        $(".gi-popup-body").remove();
-        return false;
-    });
+    if (!(formUtil.checkEmptyValue(btnId) && formUtil.checkEmptyValue(func))) {
+        formUtil.alertPopup(Message.Label.Array["FAIL.FUNCTION.POPUP"]);
+    } else {
+        $(".PopupBody").append(Popup);
 
-    $("#" + btnId).off("click").on("click", function () {
-        let selectedValue = $("input[name='" + popupInputId + "']:checked").val();
-        if (selectedValue) {
-            $(".gi-popup-body").remove();
-            funcParam[popupInputId] = selectedValue;
-            func(funcParam);
-        } else {
-            formUtil.alertPopup("항목을 선택해주세요");
-            return false;
-        }
-    });
-}
-
-// JS 에서 사용하는 prompt와 기능은 같으나 비동기적으로 동작.
-// @async
-// @function prompt
-// @param {string} message 출력할 메시지
-// @returns {Promise<Object>} 사용자가 입력한 문자열. 사용자가 취소를 누른 경우에는 null
-// @writer: 이진주
-FormUtility.prototype.prompt = function (message, maxlength) {
-    return new Promise(function (resolve) {
-        let messageBox =
-            '<div class="gi-popup-body">' +
-            '<div class="gi-popup slide-in-blurred-top">' +
-            '<div class="gi-popup-title-box">' +
-            '<span class="gi-popup-title">알림</span>' +
-            '</div>' +
-            '<div class="gi-popup-message-box">' +
-            '<span class="gi-popup-message">' + message + '</span>' +
-            '<div class="gi-input-container gi-margin-top-10px">' +
-            '<input type="text" class="gi-input" data-focus-span-text-align="center" id="prompt-input" autocomplete="off" maxlength="' + maxlength + '"/>' +
-            '</div>' +
-            '</div>' +
-            '<div class="gi-popup-button-box">' +
-            '<button class="gi-popup-button gi-popup-confirm" id="prompt-ok">확인</button>' +
-            '<button class="gi-popup-button gi-popup-cancel" id="prompt-cancel">취소</button>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-        $("body").append(messageBox);
-        $("#prompt-input").focus();
-
-        $("#prompt-ok").on("click", function () {
-            let input = $("#prompt-input").val();
-            $(".gi-popup-body").remove();
-            resolve(input);
+        $(".popup_cancel_btn").click(function () {
+            $(this).closest("#popup").remove();
         });
 
-        $("#prompt-cancel").on("click", function () {
-            $(".gi-popup-body").remove();
-            resolve(null);
-        });
+        $("#" + btnId).click(function () {
+            // 선택된 radio 버튼의 값을 가져오기
+            let selectedValue = $("input[name='" + popupInputId + "']:checked").val();
 
-        $("#prompt-input").on("keydown", function (e) {
-            if (e.key === 'Enter') {
-                let input = $("#prompt-input").val();
-                $(".gi-popup-body").remove();
-                resolve(input);
+            if (!selectedValue) {
+                formUtil.alertPopup('입력 값이 없습니다.');
+                return false;
             }
+
+            if (funcParam !== undefined) {
+                funcParam[popupInputId] = selectedValue;
+
+                let messageId = popupInputId.toUpperCase();
+                let message = Message.Label.Array["COMPLETE.INSERT"];
+                let validation = [];
+                validation.formId = "popup";
+                validation[0] = { id: "popup_radio", message: message };
+
+                if (formUtil.validationCheck(validation)) {
+                    if (Array.isArray(funcParam)) {
+                        func.apply(null, funcParam);
+                    } else {
+                        func.call(null, funcParam);
+                    }
+                    $(this).closest("#popup").remove();
+                } else {
+                    return false;
+                }
+            } else {
+                func();
+                $(this).closest("#popup").remove();
+            }
+        });
+    }
+};
+
+/**
+ * JS 에서 사용하는 prompt와 기능은 같으나 비동기적으로 동작.
+ * @async
+ * @function prompt
+ * @param {string} message 출력할 메시지
+ * @returns {Promise<Object>} 사용자가 입력한 문자열. 사용자가 취소를 누른 경우에는 null
+ * @writer: 이진주
+ */
+FormUtility.prototype.prompt = async function (message, maxlength) {
+    return new Promise((resolve, reject) => {
+        const key = Date.now();
+        const popupHtml = `
+            <div id="prompt_${key}" class="prompt">
+                <div class="popup_content">
+                    <div class="popup_text">
+                        <span>${message}</span>
+                    </div>
+                    <div class="gi-row-100 gi-col-50">
+                        <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                            <label for="popup_input" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="true">입력 값</label>
+                            <input data-field="popup_input" id="popup_input" name="popup_input" class="gi-input popup_input" data-focus-input-text-align="center" data-required="true" autoComplete="off" 
+                                ${maxlength ? `gi-maxlength="${maxlength}"` : ""}  
+                            />
+                        </div>
+                    </div>
+                    <div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                        <button type="button" class="gi-btn-blue popup_success_btn">확인</button>
+                        <button type="button" class="gi-btn popup_cancel_btn">취소</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        $(".PopupBody").append(popupHtml);
+        commonTag.inputTagFocus($("#popup_input"));
+        if (maxlength) new GiMaxLengthCheck();
+
+        $(`#prompt_${key} .popup_success_btn`).click(function () {
+            const inputValue = $(`#prompt_${key} .popup_input`).val();
+
+            if (!inputValue) {
+                formUtil.alertPopup('입력 값이 없습니다.');
+                return;
+            }
+
+            $(`#prompt_${key}`).remove();
+            return resolve(inputValue);
+        });
+
+        $(`#prompt_${key} .popup_cancel_btn`).click(function () {
+            $(`#prompt_${key}`).remove();
+            resolve(null);
         });
     });
 }
