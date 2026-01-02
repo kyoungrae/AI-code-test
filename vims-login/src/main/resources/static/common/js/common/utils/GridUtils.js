@@ -1,5 +1,5 @@
 /**
- * @title : GridUtils
+ * @title : 그리드 생성
  * @text : 그리드 관련 유틸리티 (giGrid 등)
  */
 FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
@@ -1776,9 +1776,3 @@ FormUtility.prototype.gridResize = function (gridId) {
         e.preventDefault(); // 드래그 시 텍스트 선택 방지
     });
 }
-/**
- * @title : 이미지 파일 업로드
- * @id : 파일업로드 팝업을 띄울 버튼 click event ID 설정 (이벤트를 걸어줄 아이디) [String]
- * @path : controller URL 입력
- * @writer : 이경태
- * */

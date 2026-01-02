@@ -1,5 +1,5 @@
 /**
- * @title : GridSortManager
+ * @title : 그리드 정렬 관리자
  * @text : 현재 Grid 정렬 상태를 관리해주는 클래스
  * @writer : 진은영
  * */

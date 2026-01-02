@@ -3,7 +3,7 @@
  * @text : 팝업 및 알림 관련 함수 모음
  */
 
-// @title : validation Check alertPopup
+// @title : 알림 팝업
 // @message : validation check message parameter (String)
 // @writer: 이경태
 FormUtility.prototype.alertPopup = function (message) {
@@ -72,7 +72,7 @@ FormUtility.prototype.confirm = async function (message) {
     });
 }
 
-// @title : popup
+// @title : 확인 취소 팝업
 // @message : 팝업에 출력될 메세지 [String]
 // @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
 // @func : 확인 버튼 click event function [function]
@@ -117,7 +117,7 @@ FormUtility.prototype.popup = function (btnId, message, func, funcParam) {
     }
 }
 
-// @title : popup
+// @title : 입력 팝업
 // @message : 팝업에 출력될 메세지 [String]
 // @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
 // @popupTitle : popup의 title [String]
@@ -261,6 +261,7 @@ FormUtility.prototype.popupRadio = function (btnId, popupInputId, message, radio
 };
 
 /**
+ * @title : 프롬프트 입력 (비동기)
  * JS 에서 사용하는 prompt와 기능은 같으나 비동기적으로 동작.
  * @async
  * @function prompt
@@ -317,7 +318,7 @@ FormUtility.prototype.prompt = async function (message, maxlength) {
 }
 
 /**
- * @title : showMessage
+ * @title : 메시지 보기 (자동 사라짐)
  * @mgs : 출력 메세지 [String]
  * @text : 메세지가 나타났다가 자동으로 사라지는 기능
  * @writer : 이경태
@@ -343,7 +344,7 @@ FormUtility.prototype.showMessage = function (msg) {
 }
 
 /**
- * @title : Toast Message Function
+ * @title : 토스트 메시지
  * @msg : 출력 메세지 [String]
  * @type : 메세지 타입 ('info', 'success', 'error', 'warning') [String]
  * @duration : 지속 시간 (ms) [Number]

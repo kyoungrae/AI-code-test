@@ -56,7 +56,6 @@ public class DeveloperGuidService {
                 recursiveScan(file, guidList);
             } else {
                 String path = file.getAbsolutePath().replace("\\", "/");
-                // 수정: 요청하신대로 common/js/common 폴더 내의 파일만 스캔 (하위 폴더 포함)
                 if (path.endsWith(".js") && path.contains("/common/js/common")) {
                     System.out.println(">>> [DeveloperGuide] Found JS File: " + path);
                     FileSystemResource resource = new FileSystemResource(file);
@@ -122,23 +121,39 @@ public class DeveloperGuidService {
 
             Map<String, Object> functionInfo = parseJSDocComment(jsdoc);
 
-            // @title이 없으면 대체 제목 생성
+            // [Filtering Logic]
+            String nextCodeBlock = getNextNonEmptyLine(content, endIdx);
+            String extractedName = extractFunctionName(nextCodeBlock);
+
+            // 1. 이벤트 핸들러인 경우: @title 태그가 없으면 무조건 제외 (설명이 있어도 제외)
+            if ("Event Handler / Script".equals(extractedName)) {
+                if (!functionInfo.containsKey("title")) {
+                    continue; // Skip event handlers without explicit @title
+                }
+            }
+
+            // 2. 일반 함수/클래스인 경우나 @title이 있는 경우 처리
             if (!functionInfo.containsKey("title")) {
-                if (functionInfo.containsKey("text")) {
+                if (extractedName == null || extractedName.equals("Unknown Function")) {
+                    // 함수 정의가 아니면 내부 주석으로 간주하고 Skip
+                    continue;
+                }
+
+                // 일반 함수라면 Description이나 Text를 제목으로 사용
+                if (functionInfo.containsKey("description")) {
+                    functionInfo.put("title", functionInfo.get("description"));
+                } else if (functionInfo.containsKey("text")) {
                     functionInfo.put("title", functionInfo.get("text"));
                 } else {
-                    // 다음 줄 분석하여 함수명 추출
-                    String nextCodeBlock = getNextNonEmptyLine(content, endIdx);
-                    String extractedName = extractFunctionName(nextCodeBlock);
-                    if (extractedName != null) {
+                    // 설명도 없으면 코드에서 추출한 이름 사용
+                    if (extractedName != null && !extractedName.isEmpty()) {
                         functionInfo.put("title", extractedName);
                     } else {
-                        functionInfo.put("title", "Anonymous Function (L" + lineNumber + ")");
+                        continue;
                     }
                 }
             }
 
-            // 필수 정보가 없더라도 위치 정보는 저장하여 표시 (빈 JSDoc 블록이라도)
             functionInfo.put("lineNumber", lineNumber);
             functions.add(functionInfo);
         }
@@ -155,14 +170,11 @@ public class DeveloperGuidService {
             }
             i++;
         }
-
         if (i >= length)
             return "";
-
         int lineEnd = content.indexOf('\n', i);
         if (lineEnd == -1)
             lineEnd = length;
-
         return content.substring(i, lineEnd).trim();
     }
 
@@ -170,67 +182,87 @@ public class DeveloperGuidService {
         if (line == null || line.isEmpty())
             return null;
 
-        // Pattern 1: function myFunc()
-        Pattern p1 = Pattern.compile("function\\s+([a-zA-Z0-9_$]+)");
-        Matcher m1 = p1.matcher(line);
-        if (m1.find())
-            return m1.group(1);
+        // 1. Class definition: "class ClassName"
+        Pattern pClass = Pattern.compile("class\\s+([a-zA-Z0-9_$]+)");
+        Matcher mClass = pClass.matcher(line);
+        if (mClass.find())
+            return "class " + mClass.group(1);
 
-        // Pattern 2: myFunc = function() or myFunc: function()
-        Pattern p2 = Pattern.compile("([a-zA-Z0-9_$]+)\\s*[:=]\\s*function");
-        Matcher m2 = p2.matcher(line);
-        if (m2.find())
-            return m2.group(1);
+        // 2. Prototype assignment: "ClassName.prototype.methodName = ..." -> returns
+        // fully qualified name
+        Pattern pProto = Pattern.compile("([a-zA-Z0-9_$]+\\.prototype\\.[a-zA-Z0-9_$]+)\\s*=");
+        Matcher mProto = pProto.matcher(line);
+        if (mProto.find())
+            return mProto.group(1);
 
-        // Pattern 3: Prototype like FormUtility.prototype.func = ...
-        Pattern p3 = Pattern.compile("\\.([a-zA-Z0-9_$]+)\\s*=");
-        Matcher m3 = p3.matcher(line);
-        if (m3.find())
-            return m3.group(1);
+        // 3. Simple function: "function myFunc()"
+        Pattern pFunc = Pattern.compile("function\\s+([a-zA-Z0-9_$]+)");
+        Matcher mFunc = pFunc.matcher(line);
+        if (mFunc.find())
+            return mFunc.group(1);
 
-        return line; // Fallback to the line itself (cropped)
+        // 4. Variable assignment: "const myFunc = ..." or "myFunc: function"
+        Pattern pVar = Pattern.compile("([a-zA-Z0-9_$]+)\\s*[:=]\\s*(function|\\(|new|class)");
+        Matcher mVar = pVar.matcher(line);
+        if (mVar.find())
+            return mVar.group(1);
+
+        // 5. Prototype method direct match (fallback): ".methodName ="
+        Pattern pProtoSimple = Pattern.compile("\\.([a-zA-Z0-9_$]+)\\s*=");
+        Matcher mProtoSimple = pProtoSimple.matcher(line);
+        if (mProtoSimple.find())
+            return mProtoSimple.group(1);
+
+        // 6. jQuery Event Handler ($(...) or jQuery(...))
+        if (line.startsWith("$(") || line.startsWith("jQuery(")) {
+            return "Event Handler / Script";
+        }
+
+        // [중요] 그 외 일반 코드는 null 반환 (함수 정의 아님)
+        return null;
     }
 
     private Map<String, Object> parseJSDocComment(String jsdoc) {
         Map<String, Object> info = new HashMap<>();
 
-        Pattern titlePattern = Pattern.compile("@title\\s*[:\\s]\\s*(.+)"); // 콜론 또는 공백 허용
-        Matcher titleMatcher = titlePattern.matcher(jsdoc);
-        if (titleMatcher.find())
-            info.put("title", titleMatcher.group(1).trim());
+        String cleanContent = jsdoc.replaceAll("^/\\*+|\\*+/$", "");
+        StringBuilder desc = new StringBuilder();
+        String[] lines = cleanContent.split("\n");
 
-        Pattern textPattern = Pattern.compile("@text\\s*[:\\s]\\s*(.+)");
-        Matcher textMatcher = textPattern.matcher(jsdoc);
-        if (textMatcher.find())
-            info.put("text", textMatcher.group(1).trim());
+        extractTag(jsdoc, "title", info);
+        extractTag(jsdoc, "text", info);
+        extractTag(jsdoc, "param", info);
+        extractTag(jsdoc, "return", info);
+        extractTag(jsdoc, "writer", info);
+        extractTag(jsdoc, "date", info);
 
-        Pattern paramPattern = Pattern.compile("@param\\s*[:\\s]\\s*(.+)");
-        Matcher paramMatcher = paramPattern.matcher(jsdoc);
-        StringBuilder params = new StringBuilder();
-        while (paramMatcher.find()) {
-            if (params.length() > 0)
-                params.append(", ");
-            params.append(paramMatcher.group(1).trim());
+        for (String line : lines) {
+            String trimmed = line.trim();
+            if (trimmed.startsWith("*"))
+                trimmed = trimmed.substring(1).trim();
+
+            if (!trimmed.isEmpty() && !trimmed.startsWith("@")) {
+                if (desc.length() > 0)
+                    desc.append(" ");
+                desc.append(trimmed);
+            }
+            if (trimmed.startsWith("@"))
+                break;
         }
-        if (params.length() > 0)
-            info.put("param", params.toString());
 
-        Pattern returnPattern = Pattern.compile("@return\\s*[:\\s]\\s*(.+)");
-        Matcher returnMatcher = returnPattern.matcher(jsdoc);
-        if (returnMatcher.find())
-            info.put("return", returnMatcher.group(1).trim());
-
-        Pattern datePattern = Pattern.compile("@date\\s*[:\\s]\\s*(.+)");
-        Matcher dateMatcher = datePattern.matcher(jsdoc);
-        if (dateMatcher.find())
-            info.put("date", dateMatcher.group(1).trim());
-
-        Pattern writerPattern = Pattern.compile("@writer\\s*[:\\s]\\s*(.+)");
-        Matcher writerMatcher = writerPattern.matcher(jsdoc);
-        if (writerMatcher.find())
-            info.put("writer", writerMatcher.group(1).trim());
+        if (desc.length() > 0) {
+            info.put("description", desc.toString());
+        }
 
         return info;
+    }
+
+    private void extractTag(String text, String tagName, Map<String, Object> info) {
+        Pattern p = Pattern.compile("@" + tagName + "\\s*[:\\s]\\s*(.+)");
+        Matcher m = p.matcher(text);
+        if (m.find()) {
+            info.put(tagName, m.group(1).trim());
+        }
     }
 
     public List<Map<String, Object>> getSampleGuidData() {

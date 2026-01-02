@@ -13,9 +13,9 @@ let setAfterEventFlag = false;
 let setAfterEventFunction;
 
 /**
- * @title : giCalendarSeletedDate
- * @text : 캘린더 날짜 조회
- * @return : YYYY-MM-DD
+ * @title : 캘린더 날짜 조회
+ * @text : 캘린더 선택된 날짜 리스트 조회
+ * @return : YYYY-MM-DD List
  * @writer : 이경태
  * */
 FormUtility.prototype.giCalendarSeletedDate = function () {
@@ -23,7 +23,7 @@ FormUtility.prototype.giCalendarSeletedDate = function () {
 }
 
 /**
- * @title : giCalendar
+ * @title : 캘린더 생성
  * @date : new Date() 객체 파라미터 [new Date()]
  * @text : < div id='gi-calendar-main'> < /div> " 생성 후 사용(필수)
  * @writer : 이경태
@@ -350,7 +350,7 @@ FormUtility.prototype.giCalendar = function (e) {
     }
 }
 /**
- * @title : searchHoliday
+ * @title : 공휴일 조회 API
  * @text : 공공포탈 API 공휴일 정보 받아오는 함수
  * @writer : 이경태
  * */
@@ -371,8 +371,8 @@ FormUtility.prototype.searchHoliday = function (nowYear, nowMonth) {
     })
 }
 /**
- * @title : colorSelector
- * @text : 일정 detail 박스에 초기 시간 셋팅
+ * @title : 색상 선택기
+ * @text : 일정 등록 시 색상 선택 옵션 추가
  * @writer : 이경태
  * */
 FormUtility.prototype.giCalendarColorSelector = function (e) {
@@ -391,7 +391,7 @@ FormUtility.prototype.giCalendarColorSelector = function (e) {
 }
 
 /**
- * @title : resetTime
+ * @title : 시간 초기화
  * @text : 일정 detail 박스에 초기 시간 셋팅
  * @writer : 이경태
  * */
@@ -400,7 +400,7 @@ FormUtility.prototype.resetTime = function (startTime, endTime) {
     $("." + endTime).val("13:00");
 }
 /**
- * @title : giCalendarToDayCheck
+ * @title : 오늘 날짜 확인
  * @text : 달력에 오늘 날짜 표시 해주는 함수
  * @writer : 이경태
  * */
@@ -424,8 +424,8 @@ FormUtility.prototype.giCalendarToDayCheck = function () {
     }
 }
 /**
- * @title : giCalendarAddHoliday
- * @text : 공휴일추가
+ * @title : 공휴일 추가
+ * @text : 캘린더에 공휴일 정보 렌더링
  * @writer : 이경태
  * */
 FormUtility.prototype.giCalendarAddHoliday = function (year, month) {
@@ -468,8 +468,8 @@ FormUtility.prototype.giCalendarAddHoliday = function (year, month) {
     }
 }
 /**
- * @title : giCalendarPrevMonth
- * @text : 이전달 조회
+ * @title : 이전달 조회
+ * @text : 캘린더 이전달 보기
  * @writer : 이경태
  * */
 FormUtility.prototype.giCalendarPrevMonth = function (flag1 = addScheduleFlag, flag2 = addScheduleParameter, flag3 = addClickDateFlag) {
@@ -489,8 +489,8 @@ FormUtility.prototype.giCalendarPrevMonth = function (flag1 = addScheduleFlag, f
     }
 }
 /**
- * @title : giCalendarNextMonth
- * @text : 다음달 조회
+ * @title : 다음달 조회
+ * @text : 캘린더 다음달 보기
  * @writer : 이경태
  * */
 FormUtility.prototype.giCalendarNextMonth = function (flag1 = addScheduleFlag, flag2 = addScheduleParameter, flag3 = addClickDateFlag) {
@@ -512,7 +512,7 @@ FormUtility.prototype.giCalendarNextMonth = function (flag1 = addScheduleFlag, f
 }
 
 /**
- * @title : giDatePicker
+ * @title : 데이트 피커 생성
  * @e : {form_date ID, to_date ID}
  * @text : input 태그에 커스텀 태그로 사용 input[gi-datepicker]
  * @writer : 이경태
@@ -791,8 +791,8 @@ FormUtility.prototype.giDatePicker = function (input, e) {
 }
 
 /**
- * @title : giDatePickerPrevMonth
- * @text : 이전달 조회
+ * @title : 데이트 피커 이전달
+ * @text : 데이트 피커 이전달 조회
  * @writer : 이경태
  * */
 FormUtility.prototype.giDatePickerPrevMonth = function (input) {
@@ -802,8 +802,8 @@ FormUtility.prototype.giDatePickerPrevMonth = function (input) {
     formUtil.giDatePicker(input, date);
 }
 /**
- * @title : giDatePickerNextMonth
- * @text : 다음달 조회
+ * @title : 데이트 피커 다음달
+ * @text : 데이터 피커 다음달 조회
  * @writer : 이경태
  * */
 FormUtility.prototype.giDatePickerNextMonth = function (input) {
