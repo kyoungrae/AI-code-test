@@ -204,7 +204,7 @@
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
                 <button id="siteConfigGroupCodeUpdate-btn" class="gi-popup-update-btn"
-                    type="button">[Page.Message].Message.Label.Array["MODIFY_BTN"]</button>
+                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
                 <button class="gi-popup-close-btn"
                     type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
             </div>
@@ -374,7 +374,7 @@
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
                 <button id="siteConfigCodeUpdate-btn" class="gi-popup-register-btn"
-                    type="button">[Page.Message].Message.Label.Array["MODIFY_BTN"]</button>
+                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
                 <button class="gi-popup-close-btn"
                     type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
             </div>
@@ -488,7 +488,7 @@
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"], ID: 'config_group_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"], ID: 'config_group_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.USE_YN"], ID: 'use_yn', WIDTH: '20', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
-                        { HEADER: Message.Label.Array["MODIFY_BTN"], ID: 'modify_btn1', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn1', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn1', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG_GROUP.SYSTEM_CREATE_USERID"], ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -518,7 +518,7 @@
                 //그리드 row 선택 이벤트 설정
                 siteConfig_group_list_grid.rowClick(siteConfigRowClickEvent);
                 siteConfig_group_list_grid.deleteBtnClick(siteConfigGroupListGridDeleteBtnClickEventHandler, "delete_btn1");
-                siteConfig_group_list_grid.updateBtnClick(siteConfigGroupListGridUpdateBtnClickEventHandler, "modify_btn1");
+                siteConfig_group_list_grid.updateBtnClick(siteConfigGroupListGridUpdateBtnClickEventHandler, "update_btn1");
                 function siteConfigGroupListGridDeleteBtnClickEventHandler(row, e) {
                     siteConfigGroupRemove(row);
                 }
@@ -627,7 +627,7 @@
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG.SYSTEM_CREATE_USERID"], ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG.SYSTEM_UPDATE_DATE"], ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: Message.Label.Array["COMMON_SITE_CONFIG.SYSTEM_UPDATE_USERID"], ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: Message.Label.Array["MODIFY_BTN"], ID: "modify_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["UPDATE_BTN"], ID: "update_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: Message.Label.Array["DELETE_BTN"], ID: "delete_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "사이드 그리드", ID: "sideGridOpen_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
@@ -662,7 +662,7 @@
                 }
 
                 //그리드 내부의 수정 버튼 클릭 이벤트 설정
-                siteConfig_list_grid.updateBtnClick(updatePopupSettings, "modify_btn");
+                siteConfig_list_grid.updateBtnClick(updatePopupSettings, "update_btn");
 
                 //그리드 내부의 삭제 버튼 클릭 이벤트 설정
                 siteConfig_list_grid.deleteBtnClick(removeCommonSiteConfigKey, "delete_btn");
