@@ -1,9 +1,4 @@
 /**
- * @title : CommonUtils
- * @text : 공통 코드 조회 및 전역 설정 관련 함수
- */
-
-/**
  * @title : 공통코드 조회
  * @text : group_id로 공통코드 조회
  * @writer : 이경태

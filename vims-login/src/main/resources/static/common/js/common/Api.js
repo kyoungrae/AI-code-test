@@ -1,3 +1,9 @@
+/**
+ * @title : 카카오맵
+ * @see : 
+ * @text : 카카오맵 생성 Class함수
+ * @writer : 이경태
+ */
 class kakaoMap {
     constructor() {
         // 카카오 지도 API가 로드되었는지 확인
@@ -8,7 +14,7 @@ class kakaoMap {
 
     // 지도 생성 함수
     createMap(id, keyword) {
-        var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
         this.deleteMap(id);
         var mapContainer = document.getElementById(id), // 지도를 표시할 div
             mapOption = {
@@ -31,7 +37,7 @@ class kakaoMap {
         // 주소로 좌표를 검색 검색합니다
         // 주소로 좌표를 검색합니다
 
-            // 키워드 검색 완료 시 호출되는 콜백함수
+        // 키워드 검색 완료 시 호출되는 콜백함수
         function placesSearchCB(data, status, pagination) {
             if (status === kakao.maps.services.Status.OK) {
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정
@@ -46,7 +52,7 @@ class kakaoMap {
                 map.setBounds(bounds);
             }
         }
-        geocoder.addressSearch(keyword, function(result, status) {
+        geocoder.addressSearch(keyword, function (result, status) {
 
             // 정상적으로 검색이 완료됐으면
             if (status === kakao.maps.services.Status.OK) {
@@ -61,7 +67,7 @@ class kakaoMap {
 
                 // 인포윈도우로 장소에 대한 설명을 표시합니다
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+keyword+'</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">' + keyword + '</div>'
                 });
                 infowindow.open(map, marker);
 
@@ -77,7 +83,7 @@ class kakaoMap {
             });
 
             // 마커 클릭 시 인포윈도우 표시
-            kakao.maps.event.addListener(marker, 'click', function() {
+            kakao.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
                 infowindow.open(map, marker);
             });
@@ -96,7 +102,7 @@ function loadKakaoMapScript() {
         var script = document.createElement('script');
         script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=08b7a9bdd253ada6f1d65275b08aec58&libraries=services";
         script.type = "text/javascript";
-        script.onload = function() {
+        script.onload = function () {
         };
         document.head.appendChild(script); // head에 추가하여 스크립트 로드
     }

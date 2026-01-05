@@ -1,3 +1,8 @@
+/**
+ * @title : jwt 유틸
+ * @text : 
+ * @note : 
+ */
 class JwtUtils {
     static getCookie(name) {
         const value = `; ${document.cookie}`;

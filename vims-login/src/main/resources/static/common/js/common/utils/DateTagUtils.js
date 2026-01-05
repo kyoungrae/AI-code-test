@@ -1,10 +1,5 @@
 /**
- * @title : DateTagUtils
- * @text : CommonTag Date Utility Functions and Classes
- */
-
-/**
- * @title : GiDatePicker
+ * @title : 날짜 선택기
  * @see : input gi-datepicker
  * @writer : 이경태
  */
@@ -163,7 +158,7 @@ class GiDatePicker {
 }
 
 /**
- * @title : defaultToday
+ * @title : 기본값 오늘 날짜 설정
  * @value : [gi-default-today]
  * @text : 태그가 붙은 input의 value값이 오늘로 입력 된다.
  * @return : ex) 2024-08-23

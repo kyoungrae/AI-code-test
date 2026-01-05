@@ -1,5 +1,5 @@
 /**
- * @title : FormUtility
+ * @title : 폼 유틸리티
  * @text : Form 요소 관련 유틸리티 (Facade)
  *         실제 구현은 utils/ 폴더 내로 분리됨.
  */

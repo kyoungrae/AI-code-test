@@ -1,9 +1,4 @@
 /**
- * @title : ValidationUtils
- * @text : 유효성 검사 관련 함수 모음
- */
-
-/**
  * @title : 값 유효성 체크
  * @text : Value 값이 null,공백,undefined 인지 검사
  * @value :  값

@@ -1,8 +1,3 @@
-/**
- * @title : CalendarUtils
- * @text : 캘린더 및 날짜 선택 관련 함수 모음
- */
-
 let giCalendarSeletedDateList = [];
 let addScheduleFlag = false;
 let addClickDateFlag = false;

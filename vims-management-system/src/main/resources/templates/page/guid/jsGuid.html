@@ -189,7 +189,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            width: 100%;
+            width: 80%;
             height: 100%;
             background-color: #fff;
         }
@@ -607,7 +607,6 @@
 
                 const fileData = globalData[fileIdx];
                 const funcData = fileData.functions[funcIdx];
-
                 // 1. Render Docs
                 if (els.docTitle) els.docTitle.innerText = funcData.title || 'Untitled';
                 if (els.docDesc) els.docDesc.innerHTML = funcData.text || 'No description provided.';
@@ -641,8 +640,8 @@
                 const lineHeight = 24;
                 const paddingTop = 20; // code.hljs padding-top
 
-                // [Fix] Removed +1 offset to align strictly with the JSDoc/Function start line
-                const targetLine = lineNumber;
+                // [Fix] Adjusted offset to ensure the title line appears at the very top
+                const targetLine = lineNumber + 1;
 
                 const scrollPos = (targetLine - 1) * lineHeight;
 

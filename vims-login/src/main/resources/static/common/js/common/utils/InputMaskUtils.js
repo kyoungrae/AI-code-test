@@ -1,5 +1,5 @@
 /**
- * @title : InputMaskUtils
+ * @title : 입력 마스크 유틸리티
  * @text : CommonTag Input Masking and Filter Utilities
  */
 
@@ -54,7 +54,7 @@ class checkPriceType {
 }
 
 /**
- * @title : maxLengthCheck Class
+ * @title : 최대 길이 체크
  * @value : [gi-maxlength = "length"]
  * @text : gi-maxlength 로 설정한 값이 있으면 그 길이만큼만 입력을 받는다. 한글은 3으로 계산 (오라클DB와 동일)
  * @writer : 이진주
@@ -84,7 +84,7 @@ class GiMaxLengthCheck {
 }
 
 /**
- * @title : maxLengthCheck Class
+ * @title : 최대 길이 숫자 체크
  * @value : [gi-maxlength = "length"]
  * @text : gi-maxlength 로 설정한 값이 있으면 그 길이만큼만 입력을 받는다. 한글은 3으로 계산 (오라클DB와 동일)
  * @writer : 이진주
@@ -111,7 +111,7 @@ class GiMaxLengthNumberCheck {
 }
 
 /**
- * @title : formatting
+ * @title : 숫자 입력 제한 (0 시작 방지)
  * @value : ["onlyNumericWithoutLeadingZero"]
  * @text : 숫자만 입력 가능하게끔 하나 첫 입력에 0 입력 시 배제처리
  * @writer : 문상혁
@@ -143,7 +143,7 @@ class OnlyNumericWithoutLeadingZero {
 }
 
 /**
- * @title : formatting
+ * @title : 소수점 실수만 허용
  * @value : ["onlyValidDecimal"]
  * @text : n.n % 형식의 정수와 소수점 형식만 입력 가능, 잘못된 값은 필터링 또는 치환
  * @writer : 문상혁

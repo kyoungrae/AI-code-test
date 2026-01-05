@@ -1,5 +1,5 @@
 /**
- * @title : SliderUtils
+ * @title : 슬라이더 유틸리티
  * @text : CommonTag Slider Utility Classes
  */
 

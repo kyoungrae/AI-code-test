@@ -1,10 +1,5 @@
 /**
- * @title : ChartUtils
- * @text : 차트 관련 함수 모음
- */
-
-/**
- * @title : pieChartInit
+ * @title : 파이 차트 초기화
  * @text : 파이차트 생성
  * @id : pieChart 적용 ID 파라미터 [String]
  * @writer : 이경태

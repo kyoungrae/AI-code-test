@@ -1,9 +1,4 @@
 /**
- * @title : KeyPadUtils
- * @text : 키패드 관련 함수 모음
- */
-
-/**
  * @title : 키패드 기능 설정
  * @targetId : 숫자가 입력될 태그 아이디
  * @id : 키패드 아이디 ,아이다가 false 이면 기본 key_pad 로 설정

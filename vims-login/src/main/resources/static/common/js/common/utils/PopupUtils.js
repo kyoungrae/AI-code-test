@@ -1,11 +1,8 @@
 /**
- * @title : PopupUtils
- * @text : 팝업 및 알림 관련 함수 모음
+ * @title : 알림 팝업
+ * @message : validation check message parameter (String)
+ * @writer: 이경태
  */
-
-// @title : 알림 팝업
-// @message : validation check message parameter (String)
-// @writer: 이경태
 FormUtility.prototype.alertPopup = function (message) {
     if (formUtil.checkEmptyValue(message)) {
         message = message + "";
@@ -13,7 +10,7 @@ FormUtility.prototype.alertPopup = function (message) {
             message = message.replaceAll('\n', '</br>');
         }
     } else {
-        message = "메시지가 없습니다.";
+        message = "메세지가 없습니다.";
     }
 
     let initAlertPopupDiv = '<div id="alertPopup">'
@@ -34,12 +31,14 @@ FormUtility.prototype.alertPopup = function (message) {
     })
 }
 
-// JS 에서 사용하는 confirm과 기능은 같으나 비동기적으로 동작.
-// @async
-// @function confirm
-// @param {string} message 출력할 메시지
-// @returns {Promise<Boolean>} 확인을 누른 경우에는 true / 취소를 누른 경우에는 false
-// @writer: 이진주
+/**
+ * @title : 확인 취소 팝업 (confirm)
+ * @text : JS 에서 사용하는 confirm과 기능은 같으나 비동기적으로 동작.
+ * @async
+ * @param {string} message 출력할 메세지
+ * @returns {Promise<Boolean>} 확인을 누른 경우에는 true / 취소를 누른 경우에는 false
+ * @writer: 이진주
+ */
 FormUtility.prototype.confirm = async function (message) {
     return new Promise((resolve, reject) => {
         const key = Date.now();
@@ -72,13 +71,15 @@ FormUtility.prototype.confirm = async function (message) {
     });
 }
 
-// @title : 확인 취소 팝업
-// @message : 팝업에 출력될 메세지 [String]
-// @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
-// @func : 확인 버튼 click event function [function]
-// @funcParam : func 함수에 전달될 Parameters ex)func(funcParam)
-// @text : 팝업창
-// @writer: 이경태
+/**
+ * @title : 확인 취소 팝업
+ * @message : 팝업에 출력될 메세지 [String]
+ * @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
+ * @func : 확인 버튼 click event function [function]
+ * @funcParam : func 함수에 전달될 Parameters ex)func(funcParam)
+ * @text : 팝업창
+ * @writer: 이경태
+ */
 FormUtility.prototype.popup = function (btnId, message, func, funcParam) {
     let Popup = '<div id="popup">'
         + '<div class="popup_content">'
@@ -117,14 +118,17 @@ FormUtility.prototype.popup = function (btnId, message, func, funcParam) {
     }
 }
 
-// @title : 입력 팝업
-// @message : 팝업에 출력될 메세지 [String]
-// @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
-// @popupTitle : popup의 title [String]
-// @func : 확인 버튼 click event function [function]
-// @funcParam : func 함수에 전달될 Parameters ex)func(funcParam)
-// @text : 팝업창
-// @writer: 이경태
+/**
+ * @title : 입력 팝업
+ * @message : 팝업에 출력될 메세지 [String]
+ * @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
+ * @popupInputId : popup의 input id [String]
+ * @inputLabel : input의 label [String]
+ * @func : 확인 버튼 click event function [function]
+ * @funcParam : func 함수에 전달될 Parameters ex)func(funcParam)
+ * @text : 팝업창
+ * @writer: 이경태
+ */
 FormUtility.prototype.popupInput = function (btnId, popupInputId, message, inputLabel, func, funcParam) {
     let Popup = '<div id="popup">'
         + '<div class="popup_content">'
@@ -180,14 +184,16 @@ FormUtility.prototype.popupInput = function (btnId, popupInputId, message, input
     }
 }
 
-// @title : popup - radio 선택
-// @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
-// @popupInputId : radio data-field값 [String]
-// @message : 팝업에 출력될 메세지 [String]
-// @radioOptions : 라디오버튼 밸류와 라벨 [value, label]
-// @func : 확인 버튼 click event function [function]
-// @funcParam : func 함수에 전달될 Parameters ex)func(funcParam)
-// @writer: 배수연
+/**
+ * @title : popup - radio 선택
+ * @btnId : 확인 버튼 click event를 위한 아이디 부여 [String]
+ * @popupInputId : radio data-field값 [String]
+ * @message : 팝업에 출력될 메세지 [String]
+ * @radioOptions : 라디오버튼 밸류와 라벨 [value, label]
+ * @func : 확인 버튼 click event function [function]
+ * @funcParam : func 함수에 전달될 Parameters ex)func(funcParam)
+ * @writer: 배수연
+ */
 FormUtility.prototype.popupRadio = function (btnId, popupInputId, message, radioOptions, func, funcParam) {
     let Popup = '<div id="popup">'
         + '<div class="popup_content">'
@@ -265,7 +271,7 @@ FormUtility.prototype.popupRadio = function (btnId, popupInputId, message, radio
  * JS 에서 사용하는 prompt와 기능은 같으나 비동기적으로 동작.
  * @async
  * @function prompt
- * @param {string} message 출력할 메시지
+ * @param {string} message 출력할 메세지
  * @returns {Promise<Object>} 사용자가 입력한 문자열. 사용자가 취소를 누른 경우에는 null
  * @writer: 이진주
  */
@@ -318,7 +324,7 @@ FormUtility.prototype.prompt = async function (message, maxlength) {
 }
 
 /**
- * @title : 메시지 보기 (자동 사라짐)
+ * @title : 메세지 보기 (자동 사라짐)
  * @mgs : 출력 메세지 [String]
  * @text : 메세지가 나타났다가 자동으로 사라지는 기능
  * @writer : 이경태
@@ -344,7 +350,7 @@ FormUtility.prototype.showMessage = function (msg) {
 }
 
 /**
- * @title : 토스트 메시지
+ * @title : 토스트 메세지
  * @msg : 출력 메세지 [String]
  * @type : 메세지 타입 ('info', 'success', 'error', 'warning') [String]
  * @duration : 지속 시간 (ms) [Number]

@@ -1,18 +1,11 @@
 /**
- * @title : FormatUtils
- * @text : 데이터 포맷팅 유틸리티
+ * @title : 날짜 문자열 하이픈 삽입
+ * @id : target id [String]
+ * @v : 값 [String]
+ * @f : 기호(-) [String]
+ * @return : 1999+f+01+f+01
+ * @writer : 이경태
  */
-/**
- * @title : FormatUtils
- * @text : 문자열 포맷팅 및 변환 관련 함수 모음
- */
-
-// @title : setHyphenStringDate
-// @id : target id [String]
-// @v : 값 [String]
-// @f : 기호(-) [String]
-// @return : 1999+f+01+f+01
-// @writer: 이경태
 FormUtility.prototype.setHyphenStringDate = function (id, v, f) {
     if (v.length !== 8) {
         $("#" + id).val("");
@@ -25,10 +18,12 @@ FormUtility.prototype.setHyphenStringDate = function (id, v, f) {
     $("#" + id).val(y + f + m + f + d);
 }
 
-// @title : setHyphenToDates
-// @ids : target ids [String[]]
-// @separator : separator of strings [string] (optional, default : '-')
-// @writer: 이진주
+/**
+ * @title : 날짜 텍스트 하이픈 변환
+ * @ids : target ids [String[]]
+ * @separator : 구분자 [string] (optional, default : '-')
+ * @writer : 이진주
+ */
 FormUtility.prototype.setHyphenToDates = function (ids, separator) {
     if (!separator) {
         separator = "-";
@@ -44,9 +39,11 @@ FormUtility.prototype.setHyphenToDates = function (ids, separator) {
     }
 }
 
-// @title : setHyphenToReginos
-// @ids : target ids [String[]]
-// @writer: 이진주
+/**
+ * @title : 주민번호 텍스트 하이픈 변환
+ * @ids : target ids [String[]]
+ * @writer : 이진주
+ */
 FormUtility.prototype.setHyphenToReginos = function (ids) {
     for (let i = 0; i < ids.length; i++) {
         let value = $("#" + ids[i]).text();
@@ -58,9 +55,11 @@ FormUtility.prototype.setHyphenToReginos = function (ids) {
     }
 }
 
-// @title : setHyphenToTels
-// @ids : target ids [String[]]
-// @writer: 이진주
+/**
+ * @title : 전화번호 텍스트 하이픈 변환
+ * @ids : target ids [String[]]
+ * @writer : 이진주
+ */
 FormUtility.prototype.setHyphenToTels = function (ids) {
     for (let i = 0; i < ids.length; i++) {
         let value = $("#" + ids[i]).text();
@@ -70,9 +69,11 @@ FormUtility.prototype.setHyphenToTels = function (ids) {
     }
 }
 
-// @title : setCommaToMoney
-// @ids : target ids [String[]]
-// @writer: 이진주
+/**
+ * @title : 금액 콤마 변환
+ * @ids : target ids [String[]]
+ * @writer : 이진주
+ */
 FormUtility.prototype.setCommaToMoney = function (ids) {
     for (let i = 0; i < ids.length; i++) {
         let value = $("#" + ids[i]).text();
@@ -83,11 +84,11 @@ FormUtility.prototype.setCommaToMoney = function (ids) {
 }
 
 /**
- * @title : replaceAll
+ * @title : 문자열 전체 치환
  * @v : 값 [String]
- * @f : format(-) [String]
- * @cf : change format [String]
- * @writer: 이경태
+ * @f : 찾을 문자열(format) [String]
+ * @cf : 변경할 문자열(change format) [String]
+ * @writer : 이경태
  */
 FormUtility.prototype.replaceAll = function (v, f, cf) {
     let result = "";
@@ -100,9 +101,9 @@ FormUtility.prototype.replaceAll = function (v, f, cf) {
 }
 
 /**
- * @title : search address
+ * @title : 주소 검색(다음API)
  * @id : 주소 검색 후 선택한 주소를 입력할 인풋의 아이디 [String]
- * @writer: 이진주
+ * @writer : 이진주
  */
 FormUtility.prototype.searchAddress = function (id) {
     new daum.Postcode({
@@ -182,7 +183,7 @@ FormUtility.prototype.addComma = function (v) {
 }
 
 /**
- * @title : axios response data hypen 생성
+ * @title : 응답 데이터 하이픈 처리
  * @value : Hypen 적용시킬 대상 값
  * @id    : Hypen 적용 유형(주민등록번호/사업자등록번호(REGINO), 제원관리번호(FORM_OKNO), 전화번호(TEL_NO), 날짜(YMD))
  * @writer : 문상혁
@@ -209,13 +210,13 @@ FormUtility.prototype.setAutoHypen = function (value, id) {
     return addHypen;
 }
 /**
- * @title : setSpecialCharacters
+ * @title : 특수문자 삽입
  * @v : value 적용대상의 값[String]
  * @f : setStringFormat 적용대상의 형식 ex) "3,2,1" [String]
  * @s : 삽입할 특수 기호 ex) [String]
  * @text : 설정한 자리수에 특수 문자 넣어주는 기능
  * @writer : 이경태
- * */
+ */
 FormUtility.prototype.setSpecialCharacters = function (v, f, s) {
     let cleaned = "";
     let stringFormatArray = [];
@@ -252,14 +253,14 @@ FormUtility.prototype.setSpecialCharacters = function (v, f, s) {
     }
 }
 /**
- * @title : transSpecialCharacter
+ * @title : 특수문자 변환
  * @v : value 값[String]
  * @f : setStringFormat 적용대상의 형식 ex) 다중 직접정의 :"3,2,1" 단일자리수 "3" [String]
  * @s : 삽입할 특수 기호 ex) [String]
  * @text : 설정한 자리수에 특수 문자 넣어주거나 이미 해당 특수문자가 있으면 제거해서 반환
  *         특수문자를 제거해서 반환하고 싶으면 formUtil.transSpecialChar("1,000","",","); f 값은 빈값으로 넘겨주고 제거할 특수문자를 삽입해준다.
  * @writer : 이경태
- * */
+ */
 FormUtility.prototype.transSpecialChar = function (v, f, s) {
     let cleaned = "";
     let format = "";
@@ -348,9 +349,11 @@ function getTodayWithHyphens() {
 }
 
 /**
- * type : hyphen(yyyy-MM-dd), normal(yyyyMMdd)
+ * @title : 날짜 포맷팅
+ * @date : 날짜 값 [Date|String]
+ * @type : 포맷 타입 - hyphen(yyyy-MM-dd), normal(yyyyMMdd) [String]
+ * @return : 포맷팅된 날짜 문자열 [String]
  */
-
 FormUtility.prototype.dateFormatting = function (date, type) {
     let target;
 

@@ -1,10 +1,5 @@
 /**
- * @title : TagValidationUtils
- * @text : CommonTag Validation Utility Classes
- */
-
-/**
- * @title : GiResidentNumber
+ * @title : 주민등록번호 유효성 검사
  * @see : input gi-residentnumber
  * @text : this class is validation check for resident register number
  * @writer : 이경태
@@ -84,7 +79,7 @@ class GiResidentNumber {
     }
 }
 /**
- * @title : GiCorporateNumber
+ * @title : 사업자등록번호 유효성 검사
  * @see : input gi-corporatenumber
  * @text : this class is validation check for corporate register number
  * @writer : 이경태
@@ -170,7 +165,7 @@ class GiCorporateNumber {
 }
 
 /**
- * @title : formatCheck Class
+ * @title : 포맷 유효성 검사
  * @value : [gi-format-check = "validationId"]
  * @validationId : (작성 후 선택해서 사용하시면 됩니다.)
  *                  human_name

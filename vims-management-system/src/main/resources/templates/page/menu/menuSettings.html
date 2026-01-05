@@ -774,8 +774,8 @@
                         { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_DATE"], ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: Message.Label.Array["COMMON_ACCESS_GROUP_MENU.SYSTEM_UPDATE_USERID"], ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false }
+                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
@@ -1079,8 +1079,8 @@
                         { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_NAME"]', ID: 'icon_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COMMON_ICON.ICON_CLASS"]', ID: 'icon_class', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["SELECT_BTN"]', ID: 'select_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false }
+                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
                     ]
                 }
                 let commonIcon_menu_grid = formUtil.giGrid(commonIcon_menuGrid_header, paging, page, "gi-icon-grid");

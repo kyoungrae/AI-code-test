@@ -1,5 +1,5 @@
 /**
- * @title : InputTag 포커싱
+ * @title : 입력 태그 포커스
  * @text : CommonTag Input Utility Functions (Focus, Reset, Disabled, CheckBox)
  * @value : true, false
  * @return : input line status event and label status event
@@ -89,7 +89,7 @@ CommonTag.prototype.inputTagFocus = function (input) {
 
 }
 /**
- * @title : InputTag 라벨 포커싱
+ * @title : 입력 태그 라벨 포커스
  * @writer : 이경태
  */
 CommonTag.prototype.inputLabelTagFocus = function (label) {
@@ -141,7 +141,7 @@ CommonTag.prototype.inputLabelTagFocus = function (label) {
     }
 }
 /**
- * @title : InputTag 재설정
+ * @title : 입력 태그 초기화
  * @value : form tag contain input
  * @return : input status
  * @see : .gi-input-container[data-focus-line="false"]::after, .gi-input-container[data-focus-line="true"]::after
@@ -165,7 +165,7 @@ CommonTag.prototype.inputTagReset = function (input) {
 }
 
 /**
- * @title : InputTag 비활성화
+ * @title : 입력 태그 비활성화
  * @writer : 문상혁
  */
 CommonTag.prototype.tagDisabled = function (disabled, tagIdArray) {
@@ -243,7 +243,7 @@ CommonTag.prototype.tagDisabled = function (disabled, tagIdArray) {
 }
 
 /**
- * @title : checkBox 초기값 셋팅
+ * @title : 체크박스 초기값 설정
  * @see : input[type="checkBox"]
  * @text : input type = checkBox의 초기값 셋팅
  * @writer : 이경태
@@ -268,7 +268,7 @@ class inputTypeCheckBoxInitSetting {
 }
 
 /**
- * @title : InputTag 비활설화 업데이트 아이콘 설정
+ * @title : 입력 태그 수정 아이콘 설정
  * @value : default = undefined || input tag id
  * @text : data-gi-tag-disabled 설정 후 gi-input-update-tag-icon를 사용 하여 disabled를 해제 시킨다.
  * @writer : 이경태

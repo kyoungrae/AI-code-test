@@ -1,9 +1,4 @@
 /**
- * @title : AddressTagUtils
- * @text : CommonTag Address Utility Classes
- */
-
-/**
  * @title : 주소
  * @text : 다음주소 api
  *  ex) owner_address-btn / owner_address / owner_address_detail / owner_postal_code (명명규칙 주의)

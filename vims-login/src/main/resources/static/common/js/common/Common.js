@@ -1,6 +1,6 @@
 /**
- * @title : PageInit();
- * @Text : html 페이지 로딩시 최초 이벤트를 설정하기 위한 Class 입니다.
+ * @title : 페이지 초기화
+ * @text : html 페이지 로딩시 최초 이벤트를 설정하기 위한 Class 입니다.
  * @writer : 이경태
  */
 class PageInit {
@@ -103,7 +103,7 @@ class PageInit {
 }
 
 /**
- * @title : afterLoadDataEvent();
+ * @title : 데이터 로드 후 이벤트
  * @text : 데이터 동적생성 후 이벤트 재설정
  * @writer : 이경태
  */
@@ -118,7 +118,7 @@ class afterLoadDataEvent {
     }
 }
 /**
- * @title :  scrollAnimationInit();
+ * @title : 스크롤 애니메이션 초기화
  * @text : 컨텐츠가 overflow 됐을때 animation 효과 추가
  * @writer : 이경태
  */
@@ -195,8 +195,8 @@ class scrollAnimationInit {
     }
 }
 /**
- * @title :  dataBinding();
- * @text :  giGrid내의 상세 버튼을 클릭하여 detail 페이지로 이동 했을때 session에 있는 DATA 값을 조회해 와서 data-field에 설정된 ID와 DATA의 key값을
+ * @title : 데이터 바인딩
+ * @text : giGrid내의 상세 버튼을 클릭하여 detail 페이지로 이동 했을때 session에 있는 DATA 값을 조회해 와서 data-field에 설정된 ID와 DATA의 key값을
  *          매칭 시켜 value 값을 할당 시킨다.
  * @param : $("#detailPage")
  * @writer : 이경태
@@ -204,9 +204,6 @@ class scrollAnimationInit {
 class dataBinding {
     constructor() {
     }
-    /**
-     *   @title :  dataBinding().setData(@param);
-     */
     async setData(dataFieldList) {
         return new Promise((resolve, reject) => {
             dataFieldList = $("#" + dataFieldList);

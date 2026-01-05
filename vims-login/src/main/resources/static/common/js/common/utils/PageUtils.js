@@ -1,12 +1,8 @@
 /**
- * @title : PageUtils
- * @text : 페이지 이동 및 화면 제어 유틸리티
+ * @title : 메뉴 활성화
+ * @reqUrl : 요청 URL [String]
+ * @text : 현재 페이지에 맞는 메뉴를 활성화하고 세션에 저장
  */
-/**
- * @title : PageUtils
- * @text : 페이지 로드 및 메뉴 활성화 관련 함수 모음
- */
-
 FormUtility.prototype.activatedMenu = function (reqUrl) {
     let sessionUrl = JSON.parse(sessionStorage.getItem("recentPage")).url;
 
@@ -47,6 +43,12 @@ FormUtility.prototype.activatedMenu = function (reqUrl) {
     }
 }
 
+/**
+ * @title : 컨텐츠 로드
+ * @reqUrl : 요청 URL [String]
+ * @DATA : 전달할 데이터 [Object]
+ * @text : 페이지 컨텐츠를 로드하고 세션에 데이터 저장
+ */
 FormUtility.prototype.loadContent = function (reqUrl, DATA) {
     let cont = JSON.stringify(DATA);
     let url = `/common/redirectPage/redirect?url=${encodeURIComponent(reqUrl + ".html")}`;
@@ -83,10 +85,11 @@ FormUtility.prototype.loadContent = function (reqUrl, DATA) {
         });
 }
 /**
+ * @title : API Gateway를 통한 컨텐츠 로드
  * @text : API Gateway를 통한 loadContent
- * @param prefixUrl
- * @param reqUrl
- * @param DATA
+ * @param prefixUrl : API 프리픽스 URL [String]
+ * @param reqUrl : 요청 URL [String]
+ * @param DATA : 전달할 데이터 [Object]
  */
 FormUtility.prototype.apiLoadContent = function (prefixUrl, reqUrl, DATA) {
     let cont = JSON.stringify(DATA);
@@ -110,11 +113,11 @@ FormUtility.prototype.apiLoadContent = function (prefixUrl, reqUrl, DATA) {
     });
 }
 /**
- * @title : loadToHtml .html 코드 삽입 함수
+ * @title : HTML 파일 로드
  * @cont :[url:url,data:data]
  * @text : html코드를 사입 하기 위한 함수 함수앞에 awaite 추가  ex) awaite formUtil.loadToHtml(cont)
  * @writer : 이경태
- * */
+ */
 FormUtility.prototype.loadToHtml = async function (cont) {
     return new Promise(resolve => {
         let url = `/common/redirectPage/redirect?url=${encodeURIComponent(cont.url + ".html")}`;
@@ -138,10 +141,10 @@ FormUtility.prototype.loadToHtml = async function (cont) {
     })
 }
 /**
- * @title : pageReDirectAnimation
+ * @title : 페이지 이동 애니메이션
  * @text : 페이지 이동시 애니메이션 설정
  * @writer : 이경태
- * */
+ */
 FormUtility.prototype.pageReDirectAnimation = function () {
     if ($("#gi-road-content").data("animation")) {
         $(".gi-article-content").addClass("animate-content-start");
@@ -152,10 +155,10 @@ FormUtility.prototype.pageReDirectAnimation = function () {
 }
 
 /**
- * @title : pageReDirectAnimation
+ * @title : 페이지 제목 설정
  * @text : 페이지 이동시 애니메이션 설정
  * @writer : 이경태
- * */
+ */
 FormUtility.prototype.setTitle = function () {
     if (formUtil.checkEmptyValue(sessionStorage.getItem("DATA"))) {
         let data = JSON.parse(sessionStorage.getItem("DATA"));
@@ -163,8 +166,8 @@ FormUtility.prototype.setTitle = function () {
     }
 }
 /**
- * @title : handleToolTip
- * @writer: 문상혁
+ * @title : 툴팁 처리
+ * @writer : 문상혁
  */
 FormUtility.prototype.handleToolTip = function () {
     $(".gi-tooltip-info-icon").hover(

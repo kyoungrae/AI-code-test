@@ -1,15 +1,15 @@
-const Message = {};
-Message.Label = {};
-Message.Label.Array = {};
 /**
- * 기본 CRUD MESSAGE가 기준이 되며 페이지별 특정 문구를 작성하여 사용합니다.
- * COMPLETE : 문장 종결이 완료
+ * @title : 기본 CRUD MESSAGE가 기준이 되며 페이지별 특정 문구를 작성하여 사용합니다.
+ * @see : COMPLETE : 문장 종결이 완료
  * FAIL : 행위에 대한 실패를 알릴때
  * CONFIRM : 문장의 종결 표현이 판정 의문문.
  * CHECK : 특정 값이 존재 하지 않아 요구 할때
  * INFO : 정보성 메세지
  * */
 // 기본 CRUD MESSAGE
+const Message = {};
+Message.Label = {};
+Message.Label.Array = {};
 
 
 Message.Label.Array["CHECK.ID"] = "아이디를 입력해 주세요";
