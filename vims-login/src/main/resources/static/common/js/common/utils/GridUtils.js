@@ -1158,10 +1158,6 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
 
             if (isHierarchy) {
                 // 1. 필요한 데이터 추출 rows에 보관
-                // ex) rows[0] = { $row: jQuery.fn.init {0: ul.gi-grid-list.gi-row-100.gi-ul.gi-flex.gi-flex-justify-content-space-evenly.gi-cursor-pointer, length: 1}
-                //              ,level : "0"
-                //              ,parentVal : "SPECIFICATION_MANAGEMENT"
-                //              ,subVal : "-"
                 let rows = [];
                 $("#" + gridId + " .gi-grid-list").each(function () {
                     let $row = $(this);
@@ -1173,8 +1169,13 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                     let subVal = $row.find(`li[data-field="${application_sub_hierarchyOptionColumn}"] span`)
                         .first().text().trim();
                     rows.push({ $row, level, parentVal, subVal });
-
                 });
+
+                // [추가] 자식 여부 확인
+                rows.forEach(r => {
+                    r.hasChild = rows.some(child => child.subVal === r.parentVal);
+                });
+
                 // 2. 레벨별 그룹화
                 let depth0 = rows.filter(r => r.level === "0");
                 let depth1 = rows.filter(r => r.level === "1");
@@ -1184,20 +1185,29 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 rows.forEach((r, i) => {
                     //NOTE: row의 li 요소중 hidden과 마지막 li 요소를 제외한 li에 border dotted 추가
                     r.$row.find("li").not('.hidden').not(":last").addClass("gi-grid-li-border-dotted");
+
+                    let $firstLi = r.$row.find("li").not('.hidden').first();
+
+                    // [추가] 토글 아이콘 추가 (자식이 있는 경우에만)
+                    if (r.hasChild) {
+                        if ($firstLi.find('.gi-tree-toggle').length === 0) {
+                            $firstLi.prepend('<i class="fa-solid fa-caret-down gi-tree-toggle expanded" style="cursor:pointer; margin-right:5px; float: left;"></i>');
+                        }
+                    }
+
                     if (r.level === "0") {
-                        r.$row.find("li").not('.hidden').first().addClass("gi-grid-hierarchy-depth0");
+                        $firstLi.addClass("gi-grid-hierarchy-depth0");
                         //NOTE: 첫번째 row를 제외한 row에 border-top-dotted-gray 추가
-                        // r.$row.not("[data-row-num='"+(i+1)+"']").addClass("border-top-dotted-gray");
                         if (r !== depth0[0]) {
                             r.$row.addClass("border-top-dotted-gray");
                         }
                         unUsedMenuUISettings(r);
 
                     } else if (r.level === "1") {
-                        r.$row.find("li").not('.hidden').first().addClass("gi-grid-hierarchy-depth1");
+                        $firstLi.addClass("gi-grid-hierarchy-depth1");
                         unUsedMenuUISettings(r);
                     } else if (r.level === "2") {
-                        r.$row.find("li").not('.hidden').first().addClass("gi-grid-hierarchy-depth2");
+                        $firstLi.addClass("gi-grid-hierarchy-depth2");
                         unUsedMenuUISettings(r);
                     }
 
@@ -1275,6 +1285,52 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 finalOrder.forEach(r => {
                     $body.append(r.$row);
                 });
+
+                // [추가] 토글 이벤트 핸들러
+                $body.off("click", ".gi-tree-toggle").on("click", ".gi-tree-toggle", function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    let $btn = $(this);
+                    let $row = $btn.closest("ul.gi-grid-list");
+                    let isExpanded = $btn.hasClass("expanded");
+
+                    // 현재 Row의 PK (parentVal)
+                    let myPK = $row.find(`li[data-field="${application_parent_hierarchyOptionColumn}"] span`).first().text().trim();
+
+                    if (isExpanded) {
+                        $btn.removeClass("expanded fa-caret-down").addClass("collapsed fa-caret-right");
+                        toggleChildren(myPK, false);
+                    } else {
+                        $btn.removeClass("collapsed fa-caret-right").addClass("expanded fa-caret-down");
+                        toggleChildren(myPK, true);
+                    }
+                });
+
+                function toggleChildren(parentPK, show) {
+                    $body.find("ul.gi-grid-list").each(function () {
+                        let $childRow = $(this);
+                        // Child의 FK (subVal)
+                        let childFK = $childRow.find(`li[data-field="${application_sub_hierarchyOptionColumn}"] span`).first().text().trim();
+
+                        if (childFK === parentPK) {
+                            if (show) {
+                                $childRow.removeClass("gi-hidden");
+                                // 자식이 펼쳐져 있다면 그 후손도 보여줌
+                                let $childBtn = $childRow.find(".gi-tree-toggle");
+                                if ($childBtn.hasClass("expanded")) {
+                                    let childPK = $childRow.find(`li[data-field="${application_parent_hierarchyOptionColumn}"] span`).first().text().trim();
+                                    toggleChildren(childPK, true);
+                                }
+                            } else {
+                                $childRow.addClass("gi-hidden");
+                                // 후손도 숨김
+                                let childPK = $childRow.find(`li[data-field="${application_parent_hierarchyOptionColumn}"] span`).first().text().trim();
+                                toggleChildren(childPK, false);
+                            }
+                        }
+                    });
+                }
             }
         },
         //그리드 데이터 설정

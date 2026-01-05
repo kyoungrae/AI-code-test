@@ -3618,7 +3618,7 @@
     align-items: center;
 }
 
-.gi-grid-hierarchy-depth0::before {
+/* .gi-grid-hierarchy-depth0::before {
     content: "";
     background-image: url(../../img/circle.png);
     position: relative;
@@ -3629,7 +3629,7 @@
     background-size: 8px 8px;
     background-position: center;
     flex-shrink: 0;
-}
+} */
 
 .gi-grid-hierarchy-depth1,
 .gi-grid-hierarchy-depth2 {
