@@ -3,19 +3,45 @@
 
 echo "=== 1. Core-lib Maven 빌드 시작 ==="
 
+# Maven 명령어 찾기
+MVN_CMD="mvn"
+FOUND_MVN=false
+
+if command -v mvn &> /dev/null; then
+    FOUND_MVN=true
+else
+    # 흔한 IntelliJ Maven 경로 탐색 (Mac OS 기준)
+    POSSIBLE_PATHS=(
+        "/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn"
+        "/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/bin/mvn"
+        "$HOME/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin/mvn"
+        "$HOME/Applications/IntelliJ IDEA CE.app/Contents/plugins/maven/lib/maven3/bin/mvn"
+    )
+    
+    for PATH_CHECK in "${POSSIBLE_PATHS[@]}"; do
+        if [ -f "$PATH_CHECK" ]; then
+            MVN_CMD="$PATH_CHECK"
+            FOUND_MVN=true
+            echo "ℹ️ IntelliJ 내장 Maven을 찾았습니다: $MVN_CMD"
+            break
+        fi
+    done
+fi
+
 # Core-lib 디렉토리로 이동하여 빌드 수행
 cd Core-lib
 
-if command -v mvn &> /dev/null; then
-    mvn clean install -DskipTests
+if [ "$FOUND_MVN" = true ]; then
+    echo "🚀 빌드 명령 실행: $MVN_CMD clean install -DskipTests -Dmaven.javadoc.skip=true"
+    "$MVN_CMD" clean install -DskipTests -Dmaven.javadoc.skip=true
     if [ $? -ne 0 ]; then
         echo "❌ Maven 빌드에 실패했습니다."
         exit 1
     fi
     echo "✅ Maven 빌드 성공!"
 else
-    echo "⚠️ 'mvn' 명령어를 찾을 수 없습니다. 자동 빌드를 건너뜁니다."
-    echo "ℹ️ IntelliJ 등 IDE에서 Core-lib을 수동으로 빌드(install)해주세요."
+    echo "⚠️ 'mvn' 명령어를 찾을 수 없습니다. (IntelliJ Maven 경로 자동 탐색 실패)"
+    echo "ℹ️ 터미널에서 'mvn'을 사용할 수 있도록 설정하거나, IDE에서 직접 빌드해주세요."
 fi
 
 # 다시 프로젝트 루트로 이동
@@ -29,7 +55,8 @@ JAR_PATH="Core-lib/core-lib/target/core-lib-1.0.jar"
 
 # JAR 파일 존재 확인
 if [ ! -f "$JAR_PATH" ]; then
-    echo "❌ 오류: 빌드는 성공했으나 $JAR_PATH 파일이 생성되지 않았습니다."
+    echo "❌ 오류: 빌드 결과물($JAR_PATH)을 찾을 수 없습니다."
+    echo "👉 IntelliJ Maven 탭에서 'Core-lib > Lifecycle > install'을 실행했는지 확인해주세요."
     exit 1
 fi
 
