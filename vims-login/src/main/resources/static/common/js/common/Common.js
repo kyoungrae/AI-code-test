@@ -310,6 +310,7 @@ class dataBinding {
         return elementsList[0];
     }
     setDataSelectBox(ID, VALUE) {
+        console.log(ID, VALUE)
         let target = $("#" + ID);
         let target_select = $("#" + ID + "_select");
         const targetNode = target.closest("div")[0];
@@ -318,6 +319,7 @@ class dataBinding {
             childList: true, // 자식 노드의 추가/제거 감시
             subtree: true // 하위 트리의 모든 노드 감시
         };
+        console.log(!formUtil.checkEmptyValue(target_select))
         if (!formUtil.checkEmptyValue(target_select)) {
             if (target_select[0].hasAttribute("gi-selectbox") && target.closest("div").hasClass("gi-input-container")) {
                 // MutationObserver 생성
@@ -368,7 +370,6 @@ class dataBinding {
                 }
             });
             observer.observe(targetNode, config);
-
             let elements = $(targetNode).children(".slide-drop-down").children("li").children("button");
             elements.map((i, item) => {
                 let _selectBoxValue = $(item).val();

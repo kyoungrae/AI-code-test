@@ -73,9 +73,7 @@ Message.Label.Array["MORE_BTN"] = "더보기";
 Message.Label.Array["SAVE_BTN"] = "저장";
 Message.Label.Array["SELECT_BTN"] = "선택";
 Message.Label.Array["SEARCH_BTN"] = "조회";
-Message.Label.Array["SEARCH_BTN"] = "조회";
 Message.Label.Array["REGISTER_BTN"] = "등록";
-Message.Label.Array["RESET_BTN"] = "초기화";
 Message.Label.Array["RESET_BTN"] = "초기화";
 Message.Label.Array["UPLOAD_BTN"] = "업로드";
 
@@ -93,4 +91,6 @@ Message.Label.Array["FILE_NAME"] = "파일명";
 Message.Label.Array["FILE_SIZE"] = "파일크기";
 Message.Label.Array["FILE_EXTENSION"] = "확장자";
 Message.Label.Array["FILE_DESCRIPTION"] = "설명";
+
+Message.Label.Array["USE_YN"] = "사용여부";
 

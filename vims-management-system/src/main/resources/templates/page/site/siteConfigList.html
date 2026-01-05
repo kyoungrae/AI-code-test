@@ -88,7 +88,7 @@
 <article id="siteConfigGroupRegister_gi-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body" style="width:350px !important; height: 300px !important;">
         <div class="gi-popup-header">
-            <span>[Page.Message].Message.Label.Array["COMMON_SITE_CONFIG_GROUP.TITLE_REGISTER_CONFIG_GROUP_ID"]</span>
+            <span>[Page.Message].Message.Label.Array["COMMON_SITE_CONFIG_GROUP.TITLE_REGISTER_CONFIG_GROUP"]</span>
         </div>
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
@@ -141,6 +141,70 @@
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
                 <button id="siteConfigGroupCodeRegister-btn" class="gi-popup-register-btn"
                     type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+                <button class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+            </div>
+        </div>
+    </div>
+</article>
+<!--NOTE: 설정그룹 수정 팝업-->
+<article id="siteConfigGroupUpdate_gi-popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="width:350px !important; height: 300px !important;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["COMMON_SITE_CONFIG_GROUP.TITLE_UPDATE_CONFIG_GROUP"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="siteConfigGroupCodeUpdate" class="gi-row-100">
+                    <div
+                        class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+                        <div
+                            class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
+                                    <label for="config_group_id" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
+                                    <input data-field="config_group_id" id="config_group_id" name="config_group_id"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
+                                    <label for="config_group_name" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COMMON_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"]</label>
+                                    <input data-field="config_group_name" id="config_group_name"
+                                        name="config_group_name" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100">
+                                <div
+                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                    <label for="use_yn" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["USE_YN"]</label>
+                                    <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn"
+                                        id="update_group_use_yn" name="use_yn" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div
+                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="siteConfigGroupCodeUpdate-btn" class="gi-popup-update-btn"
+                    type="button">[Page.Message].Message.Label.Array["MODIFY_BTN"]</button>
                 <button class="gi-popup-close-btn"
                     type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
             </div>
@@ -320,6 +384,8 @@
 <script type="text/javascript">
     var PRGMID = "siteConfigList";	//page id
     var CONFIG_GROUP_FORMID = "siteConfigGroupCodeRegister";
+    var CONFIG_GROUP_UPDATE_FORMID = "siteConfigGroupCodeUpdate";
+    var CONFIG_GROUP_UPDATE_POPUPID = "siteConfigGroupUpdate_gi-popup";
     var CONFIG_GROUP_POPUPID = "siteConfigGroupRegister_gi-popup";
     var CONFIG_KEY_FORMID = "siteConfigCodeRegister";
     var CONFIG_KEY_POPUPID = "siteConfigRegister_gi-popup";
@@ -452,12 +518,22 @@
                 //그리드 row 선택 이벤트 설정
                 siteConfig_group_list_grid.rowClick(siteConfigRowClickEvent);
                 siteConfig_group_list_grid.deleteBtnClick(siteConfigGroupListGridDeleteBtnClickEventHandler, "delete_btn1");
-                siteConfig_group_list_grid.updateBtnClick(siteConfigGroupListGridMoifyBtnClickEventHandler, "modify_btn1");
+                siteConfig_group_list_grid.updateBtnClick(siteConfigGroupListGridUpdateBtnClickEventHandler, "modify_btn1");
                 function siteConfigGroupListGridDeleteBtnClickEventHandler(row, e) {
-                    formUtil.toast(Message.Label.Array['COMPLETE.DELETE']);
+                    siteConfigGroupRemove(row);
                 }
-                function siteConfigGroupListGridMoifyBtnClickEventHandler(row, e) {
-                    formUtil.toast(Message.Label.Array['COMPLETE.UPDATE']);
+                function siteConfigGroupListGridUpdateBtnClickEventHandler(row, e) {
+                    const formId = "siteConfigGroupUpdate_gi-popup";
+                    $("#" + formId).attr("data-popup-open", "true");
+                    data_binding.setDataForm(formId, row);
+                    data_binding.setDataSelectBox("update_group_use_yn", row.use_yn);
+
+                    $(".gi-popup-update-btn").off("click.siteConfigGroupUpdateBtnClickEventHandler")
+                        .on("click.siteConfigGroupUpdateBtnClickEventHandler", siteConfigGroupUpdateBtnClickEventHandler);
+                    function siteConfigGroupUpdateBtnClickEventHandler() {
+                        siteConfigGroupUpdate(formId);
+                    }
+
                 }
                 function siteConfigRowClickEvent(row, e) {
                     let clickFlag = $(e.currentTarget).hasClass("gi-grid-list-select");
@@ -620,18 +696,44 @@
 
         }
     }
-    //NOTE : 그룹 수정 팝업 셋팅
-    function siteConfigGroupListGridDeleteBtnClickEventHandler(cont) {
-        // $("#siteConfigUpdate_gi-popup").attr("data-popup-open", "true");
-        // data_binding.setDataForm("siteConfigUpdate_gi-popup", cont);
-        // data_binding.setDataSelectBox("update_use_yn", cont.use_yn);
+    //NOTE : 설정 그룹 수정
+    function siteConfigGroupUpdate() {
+        let flag = checkValidation(CONFIG_GROUP_UPDATE_FORMID);
+        if (flag) {
+            let data = data_binding.getData(CONFIG_GROUP_UPDATE_FORMID);
+            let url = "/cms/common/commonSiteConfigGroup/update";
+            let param = {
+                config_group_id: data.config_group_id,
+                config_group_name: data.config_group_name,
+                use_yn: data.use_yn
+            }
+            axios.post(url, param).then(response => {
+                if (response.status === 200) {
+                    formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
+                    common_popup.close(CONFIG_GROUP_UPDATE_POPUPID);
+                    findBySiteConfigGroupList();
+                }
+            }).catch(error => {
+                formUtil.alertPopup(error.response.data);
+            })
 
-        // $("#siteConfigCodeUpdate-btn").off("click.siteConfigCodeUpdateBtnClickEventHandler")
-        //     .on("click.siteConfigCodeUpdateBtnClickEventHandler", siteConfigCodeUpdateBtnClickEventHandler);
-        // function siteConfigCodeUpdateBtnClickEventHandler() {
-        //     updateCommonSiteConfigKey("siteConfigUpdate_gi-popup");
-        // }
-
+        }
+    }
+    //NOTE: 설정 그룹 삭제
+    function siteConfigGroupRemove(cont) {
+        let url = "/cms/common/commonSiteConfigGroup/remove";
+        let param = {
+            config_group_id: cont.config_group_id,
+        }
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
+                findBySiteConfigGroupList();
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error.response.data);
+        })
     }
     //NOTE : 설정키 등록
     function siteConfigKeyRegister(p_config_group_id) {
