@@ -528,11 +528,30 @@
                     })
                     .catch(err => {
                         console.error(err);
-                        if (err.response && err.response.status === 500) {
-                            renderError('Server error (500). Please check backend logs.');
+                        let errMsg = 'Failed to load data.';
+
+                        if (err.response) {
+                            // 서버 응답이 있는 경우 상세 에러 표시
+                            if (err.response.status === 500) {
+                                const serverMsg = err.response.data ? (err.response.data.message || err.response.data.error || 'Check server logs') : 'Unknown Error';
+                                const serverTrace = (err.response.data && err.response.data.trace) ? `<br><br><pre style="white-space:pre-wrap; font-size:10px;">${err.response.data.trace}</pre>` : '';
+
+                                errMsg = `<strong>Server Error (500)</strong><br><br>
+                                          <div style="text-align:left; background:#fff1f2; color:#be185d; padding:10px; border-radius:4px; font-size:12px; overflow:auto; max-height:300px; border:1px solid #fda4af;">
+                                            ${serverMsg}
+                                            ${serverTrace}
+                                          </div>
+                                          <br>혹시 Core-lib이 최신 상태로 빌드되었는지 확인해주세요.`;
+                            } else {
+                                errMsg = `Error ${err.response.status}: ${err.response.statusText}`;
+                            }
+                        } else if (err.request) {
+                            errMsg = 'No response from server.';
                         } else {
-                            renderError('Failed to load data.');
+                            errMsg = 'Request setup failed: ' + err.message;
                         }
+
+                        renderError(errMsg);
                     })
                     .finally(() => showLoading(false));
             }
@@ -634,13 +653,17 @@
 
                 // 2. Render Code
                 if (els.codeViewer) {
-                    els.codeViewer.textContent = fileData.src || '/* Source code not found. */';
+                    // [Change] Show only the code of the selected section (group), not the entire file
+                    els.codeViewer.textContent = funcData.src || '/* No code available for this section. */';
                     delete els.codeViewer.dataset.highlighted; // Clear highlight cache
                     if (window.hljs) hljs.highlightElement(els.codeViewer);
                 }
 
-                // 3. Scroll to Line
-                scrollToLine(funcData.lineNumber);
+                // 3. Reset Scroll (Since we are showing partial code)
+                if (els.codeContainer) {
+                    els.codeContainer.scrollTo({ top: 0 });
+                }
+                // scrollToLine(funcData.lineNumber); // Disabled as we show partial code
             }
 
             function scrollToLine(lineNumber) {

@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.File;
 
 /**
  * @title : DeveloperGuidController
@@ -24,12 +25,23 @@ public class DeveloperGuidController {
     @Autowired
     private DeveloperGuidService developerGuidService;
 
+    @Autowired
+    private CssGuidService cssGuidService;
+
     /**
-     * 개발 가이드 페이지 이동
+     * 개발 가이드 페이지 이동 (JS)
      */
     @GetMapping("")
     public String guidPage(Model model) {
         return "page/guid/guid";
+    }
+
+    /**
+     * 개발 가이드 페이지 이동 (CSS)
+     */
+    @GetMapping("/css")
+    public String cssGuidPage() {
+        return "page/guid/cssGuid";
     }
 
     /**
@@ -50,23 +62,11 @@ public class DeveloperGuidController {
         Map<String, Object> result = new HashMap<>();
 
         try {
-            // 현재 실행 경로를 기준으로 Workspace 루트 찾기
-            String userDir = System.getProperty("user.dir");
-
-            // vims-management-system 등 하위 폴더에서 실행된 경우 상위로 이동하여 workspace 루트를 잡음
-            File currentDir = new File(userDir);
-            if (currentDir.getName().startsWith("vims-")) {
-                userDir = currentDir.getParent();
-            }
-
+            String userDir = getWorkspaceRoot();
             userDir = userDir.replace("\\", "/");
-
-            // vims-login 내의 특정 경로만 스캔하도록 설정
             String targetPath = userDir + "/vims-login/src/main/resources/static/common/js/common";
 
             System.out.println(">>> [DeveloperGuide] Search Target Path: " + targetPath);
-
-            // "file:" 접두사로 시작하면 Service에서 해당 디렉토리 하위를 재귀 스캔함
             String rootPath = "file:" + targetPath;
 
             List<Map<String, Object>> guidList = developerGuidService.parseJavaScriptFiles(rootPath);
@@ -81,5 +81,54 @@ public class DeveloperGuidController {
         }
 
         return result;
+    }
+
+    /**
+     * CSS 파일 스캔 API
+     */
+    @GetMapping("/api/scanCss")
+    @ResponseBody
+    public Map<String, Object> scanCssFiles() {
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            String userDir = getWorkspaceRoot();
+            userDir = userDir.replace("\\", "/");
+            String targetPath = userDir + "/vims-login/src/main/resources/static/common/css/common";
+
+            System.out.println(">>> [DeveloperGuide] CSS Search Target Path: " + targetPath);
+            File dir = new File(targetPath);
+
+            List<Map<String, Object>> fileList;
+            if (dir.exists() && dir.isDirectory()) {
+                fileList = cssGuidService.parseCssFiles(dir);
+            } else {
+                fileList = new ArrayList<>();
+                result.put("message", "Path not found: " + targetPath);
+            }
+
+            result.put("success", true);
+            result.put("data", fileList);
+            result.put("count", fileList.size());
+
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "Exception: " + e.getClass().getName() + " - " + e.getMessage());
+            if (e.getStackTrace().length > 0) {
+                result.put("trace", e.getStackTrace()[0].toString());
+            }
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private String getWorkspaceRoot() {
+        String userDir = System.getProperty("user.dir");
+        File currentDir = new File(userDir);
+        if (currentDir.getName().startsWith("vims-")) {
+            userDir = currentDir.getParent();
+        }
+        return userDir;
     }
 }
