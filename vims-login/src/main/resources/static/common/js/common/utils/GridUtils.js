@@ -1191,7 +1191,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                     // [추가] 토글 아이콘 추가 (자식이 있는 경우에만)
                     if (r.hasChild) {
                         if ($firstLi.find('.gi-tree-toggle').length === 0) {
-                            $firstLi.prepend('<i class="fa-solid fa-caret-down gi-tree-toggle expanded" style="cursor:pointer; margin-right:5px; float: left;"></i>');
+                            $firstLi.prepend('<i class="fa-solid fa-caret-down gi-tree-toggle expanded"></i>');
                         }
                     }
 

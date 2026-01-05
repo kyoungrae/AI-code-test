@@ -3618,6 +3618,13 @@
     align-items: center;
 }
 
+.gi-tree-toggle {
+    cursor: pointer;
+    margin-right: 5px;
+    float: left;
+    color: #bdbdbd;
+}
+
 /* .gi-grid-hierarchy-depth0::before {
     content: "";
     background-image: url(../../img/circle.png);
