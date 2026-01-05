@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Backend Developer Guide</title>
+    <!-- Fonts & Icons -->
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --primary-color: #3b82f6;
+            /* Backend Blue */
+            --primary-light: #eff6ff;
+            --primary-lighter: #dbeafe;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-color: #f3f4f6;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Pretendard', sans-serif;
+            background-color: #fff;
+            color: var(--text-primary);
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .guid-container {
+            display: flex;
+            height: calc(100vh - 40px);
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Sidebar */
+        .guid-sidebar {
+            width: var(--sidebar-width);
+            background: #f9fafb;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            background: #fff;
+        }
+
+        .logo-area {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area i {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+
+        .nav-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px 10px;
+        }
+
+        .nav-item {
+            padding: 10px 15px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-lighter);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .nav-item.sub-item {
+            padding-left: 35px;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .guid-main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px 60px;
+            scroll-behavior: smooth;
+        }
+
+        .content-section {
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            scroll-margin-top: 40px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: #1f2937;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h3::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            color: #4b5563;
+        }
+
+        /* Table Style */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #334155;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        code:not(.hljs) {
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            color: #db2777;
+            /* Pinkish code text */
+        }
+
+        /* Code Block */
+        pre {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        pre code {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 20px !important;
+        }
+
+        .file-path-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 10px;
+            border: 1px solid #bae6fd;
+        }
+
+        /* Alert/Callout */
+        .callout {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+            color: #1e3a8a;
+        }
+
+        .description-text {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="guid-container">
+        <!-- Sidebar Navigation -->
+        <div class="guid-sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <i class="fa-solid fa-server"></i>
+                    <span>Backend Guide</span>
+                </div>
+            </div>
+            <div class="nav-list">
+                <a class="nav-item active" onclick="scrollToSection('intro')">
+                    <i class="fa-solid fa-house"></i> 아키텍처 개요
+                </a>
+                <a class="nav-item" onclick="scrollToSection('exception')">
+                    <i class="fa-solid fa-triangle-exclamation"></i> 예외 처리 가이드
+                </a>
+                <a class="nav-item" onclick="scrollToSection('impl-intro')">
+                    <i class="fa-solid fa-code"></i> 구현 단계
+                </a>
+                <a class="nav-item sub-item" onclick="scrollToSection('step1')">
+                    Step 1: VO 생성
+                </a>
+                <a class="nav-item sub-item" onclick="scrollToSection('step2')">
+                    Step 2: Mapper 설정
+                </a>
+                <a class="nav-item sub-item" onclick="scrollToSection('step3')">
+                    Step 3: Service 구현
+                </a>
+                <a class="nav-item sub-item" onclick="scrollToSection('step4')">
+                    Step 4: Controller 구현
+                </a>
+                <a class="nav-item" onclick="scrollToSection('exception-code')">
+                    <i class="fa-solid fa-file-code"></i> 예외 처리 코드 예시
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content (Markdown Rendered) -->
+        <div class="guid-main-content" id="mainScrollArea">
+
+            <div id="intro" class="content-section">
+                <h1>VIMS 백엔드 개발 가이드</h1>
+                <p class="description-text">이 가이드는 <code>CommonGroup</code> 도메인을 예시로 하여, VIMS 백엔드에서 새로운 비즈니스 기능을 구현하는 표준
+                    프로세스와 예외 처리(Exception Handling) 방법을 설명합니다.</p>
+
+                <h2>1. 아키텍처 개요</h2>
+                <p>백엔드는 <strong>Spring Boot</strong>, <strong>MyBatis</strong>, <strong>JPA</strong>가 통합된 계층형 아키텍처를
+                    따릅니다.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구성 요소 (Component)</th>
+                            <th>설명</th>
+                            <th>명명 규칙 (Naming Convention)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>VO / Entity</strong></td>
+                            <td>데이터 구조를 정의하고 DB 테이블과 매핑됩니다.</td>
+                            <td><code>[Domain].java</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mapper</strong></td>
+                            <td>XML에 정의된 SQL을 실행하기 위한 MyBatis 인터페이스입니다.</td>
+                            <td><code>[Domain]Mapper.java</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mapper XML</strong></td>
+                            <td>실제 SQL 쿼리문이 작성된 XML 파일입니다.</td>
+                            <td><code>[Domain]Mapper.xml</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Repository</strong></td>
+                            <td>JPA를 이용한 기본 CRUD 처리용 리포지토리입니다 (선택/혼용).</td>
+                            <td><code>[Domain]Repository.java</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Service</strong></td>
+                            <td>비즈니스 로직을 포함하며 <code>AbstractCommonService</code>를 상속받습니다.</td>
+                            <td><code>[Domain]Service.java</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Controller</strong></td>
+                            <td>REST API 요청을 처리하며 <code>AbstractCommonController</code>를 상속받습니다.</td>
+                            <td><code>[Domain]Controller.java</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="exception" class="content-section">
+                <h2>2. 예외 처리 가이드 (Exception Handling)</h2>
+
+                <h3>2.1 글로벌 예외 처리</h3>
+                <ul>
+                    <li><code>AbstractCommonService</code>와 <code>CustomException</code>을 사용하여 예외를 일관되게 처리합니다.</li>
+                    <li><code>MessageSource</code>를 통해 다국어 처리된 에러 메시지를 반환합니다.</li>
+                </ul>
+
+                <h3>2.2 예외 처리 패턴</h3>
+                <p>Service 계층에서 로직 수행 중 발생하는 예외는 <code>CustomException</code>으로 감싸서 던지거나, 특정
+                    예외(<code>DuplicateKeyException</code> 등)를 잡아 사용자 친화적인 메시지로 변환합니다.</p>
+
+                <div class="callout">
+                    <strong>주요 메서드:</strong> <code>getMessage(String code)</code> - 메시지 코드(properties)를 받아 현재 로케일에 맞는
+                    메시지를 반환합니다.
+                </div>
+            </div>
+
+            <div id="impl-intro" class="content-section">
+                <h2>3. 구현 단계 (Implementation Steps)</h2>
+            </div>
+
+            <div id="step1" class="content-section">
+                <h3>Step 1: VO (Value Object) 생성</h3>
+                <p>데이터 구조를 정의하는 클래스를 생성합니다. Lombok 어노테이션을 사용하여 보일러플레이트 코드를 줄입니다.</p>
+                <div class="file-path-badge">src/main/java/com/vims/common/group/CommonGroup.java</div>
+                <pre><code class="language-java">package com.vims.common.group;
+
+import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "COMMON_GROUP") // DB 테이블 매핑
+public class CommonGroup {
+    @Id
+    private String group_id;
+    private String group_name;
+    // ... 추가 필드 정의
+}</code></pre>
+            </div>
+
+            <div id="step2" class="content-section">
+                <h3>Step 2: Mapper (MyBatis) 설정</h3>
+                <p>SQL 실행을 위한 인터페이스와 연동되는 XML 파일을 정의합니다.</p>
+                <div class="file-path-badge">src/main/java/com/vims/common/group/CommonGroupMapper.java</div>
+                <pre><code class="language-java">package com.vims.common.group;
+
+import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
+
+@Mapper
+public interface CommonGroupMapper {
+    List<CommonGroup> SELECT(CommonGroup request);
+    List<CommonGroup> SELECT_PAGE(CommonGroup request);
+    int INSERT(CommonGroup request);
+    int UPDATE(CommonGroup request);
+    int DELETE(CommonGroup request);
+}</code></pre>
+
+                <div class="file-path-badge" style="margin-top:20px;">
+                    src/main/resources/mybatis/common/CommonGroupMapper.xml</div>
+                <pre><code class="language-xml">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "..."&gt;
+&lt;mapper namespace="com.vims.common.group.CommonGroupMapper"&gt;
+    &lt;select id="SELECT" resultType="com.vims.common.group.CommonGroup"&gt;
+        SELECT * FROM COMMON_GROUP
+        WHERE 1=1
+        &lt;!-- 동적 쿼리 작성 --&gt;
+    &lt;/select&gt;
+    &lt;!-- SELECT_PAGE, INSERT, UPDATE, DELETE 등 정의 --&gt;
+&lt;/mapper&gt;</code></pre>
+            </div>
+
+            <div id="step3" class="content-section">
+                <h3>Step 3: Service 구현 (예외 처리 포함)</h3>
+                <p><code>AbstractCommonService</code>를 상속받아 공통 로직을 활용하고, 예외 처리를 적용합니다.</p>
+                <div class="file-path-badge">src/main/java/com/vims/common/group/CommonGroupService.java</div>
+                <pre><code class="language-java">package com.vims.common.group;
+
+import com.system.common.base.AbstractCommonService;
+import com.system.common.exception.CustomException; // 사용자 정의 예외
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DuplicateKeyException; // 스프링 DB 예외
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class CommonGroupService extends AbstractCommonService&lt;CommonGroup&gt; {
+
+    private final CommonGroupMapper commonGroupMapper;
+    private final MessageSource messageSource; // 메시지 소스 주입
+
+    // 메시지 코드로부터 메시지 내용을 가져오는 헬퍼 메서드
+    private String getMessage(String code) {
+        return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+    }
+
+    @Override
+    protected List&lt;CommonGroup&gt; findImpl(CommonGroup request) throws Exception {
+        try {
+            return commonGroupMapper.SELECT(request);
+        } catch (Exception e) {
+            // 일반적인 조회 예외
+            throw new CustomException(getMessage("EXCEPTION.COMMON.FIND_FAILED"));
+        }
+    }
+
+    @Override
+    protected int registerImpl(CommonGroup request) {
+        try {
+            return commonGroupMapper.INSERT(request);
+        } catch (DuplicateKeyException dke) {
+            // PK 중복 등으로 인한 등록 실패 시 사용자 정의 메시지 반환
+            throw new CustomException(getMessage("EXCEPTION.PK.EXIST"));
+        } catch (Exception e) {
+            // 그 외 예외는 그대로 던지거나 커스텀 처리
+            throw e;
+        }
+    }
+
+    @Override
+    protected int removeImpl(CommonGroup request) throws Exception {
+        // 비즈니스 로직 검증 예시
+        // 하위 데이터가 존재하면 삭제 불가능하게 처리
+        boolean hasChild = checkChildData(request);
+        if (hasChild) {
+            throw new CustomException(getMessage("EXCEPTION.DELETE.EXIST.SBU_DATA"));
+        }
+        
+        try {
+            return commonGroupMapper.DELETE(request);
+        } catch (Exception e) {
+             throw new CustomException(getMessage("EXCEPTION.COMMON.DELETE_FAILED"));
+        }
+    }
+    
+    // 단순 조회 메서드
+    private boolean checkChildData(CommonGroup request) {
+        // ... 확인 로직 ...
+        return false;
+    }
+
+    // 필요에 따라 updateImpl 등 오버라이드...
+}</code></pre>
+            </div>
+
+            <div id="step4" class="content-section">
+                <h3>Step 4: Controller 구현</h3>
+                <p><code>AbstractCommonController</code>를 상속받아 표준 API 엔드포인트(<code>/find</code>, <code>/register</code>,
+                    <code>/update</code>, <code>/remove</code>)를 노출합니다.
+                </p>
+                <div class="file-path-badge">src/main/java/com/vims/common/group/CommonGroupController.java</div>
+                <pre><code class="language-java">package com.vims.common.group;
+
+import com.system.common.base.AbstractCommonController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/cms/common/commonGroup")
+@RequiredArgsConstructor
+public class CommonGroupController extends AbstractCommonController&lt;CommonGroup&gt; {
+
+    private final CommonGroupService commonGroupService;
+
+    // 1. 조회
+    @PostMapping("/find")
+    @Override
+    protected List&lt;CommonGroup&gt; findImpl(@RequestBody CommonGroup request) throws Exception {
+        return commonGroupService.findImpl(request);
+    }
+
+    // 2. 등록
+    @PostMapping("/register")
+    @Override
+    protected int registerImpl(@RequestBody CommonGroup request) {
+        return commonGroupService.registerImpl(request);
+    }
+
+    // 3. 수정
+    @PostMapping("/update")
+    @Override
+    protected int updateImpl(@RequestBody CommonGroup request) {
+        return commonGroupService.updateImpl(request);
+    }
+
+    // 4. 삭제
+    @PostMapping("/remove")
+    @Override
+    protected int removeImpl(@RequestBody CommonGroup request) throws Exception {
+        return commonGroupService.removeImpl(request);
+    }
+}</code></pre>
+            </div>
+
+            <div id="exception-code" class="content-section">
+                <h2>4. 예외 처리 코드 예시 (messages.properties)</h2>
+                <p><code>src/main/resources/messages.properties</code>에 에러 메시지를 정의합니다.</p>
+                <pre><code class="language-properties">EXCEPTION.PK.EXIST=이미 존재하는 식별자입니다.
+EXCEPTION.DELETE.EXIST.SBU_DATA=하위 데이터가 존재하여 삭제할 수 없습니다.
+EXCEPTION.COMMON.FIND_FAILED=데이터 조회 중 오류가 발생했습니다.
+EXCEPTION.COMMON.DELETE_FAILED=데이터 삭제 중 오류가 발생했습니다.</code></pre>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
