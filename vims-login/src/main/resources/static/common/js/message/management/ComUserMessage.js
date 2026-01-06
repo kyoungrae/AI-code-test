@@ -31,6 +31,7 @@ Message.Label.Array["COM_USER.PASSWORD"] = "비밀번호";
 Message.Label.Array["COM_USER.ROLE"] = "역할";
 Message.Label.Array["COM_USER.USER_ID"] = "유저아이디";
 Message.Label.Array["COM_USER.OFFICE_CODE"] = "소속코드";
+Message.Label.Array["COM_USER.OFFICE_CODE_NAME"] = "소속명";
 Message.Label.Array["COM_USER.SYSTEM_CREATE_USERID"] = "작성자ID";
 Message.Label.Array["COM_USER.SYSTEM_CREATE_DATE"] = "작성일자";
 Message.Label.Array["COM_USER.SYSTEM_UPDATE_USERID"] = "수정자ID";

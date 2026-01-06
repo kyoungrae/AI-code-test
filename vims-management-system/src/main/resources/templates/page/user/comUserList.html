@@ -81,8 +81,8 @@
         </article>
     </section>
 </article>
-<article id="register_user_popup" class="gi-popup login-page" data-popup-open="false">
-    <div class="gi-popup-body login-page">
+<article id="register_user_popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body gi-row-500px">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_USER.TITLE_REGISTER"]</span>
         </div>
@@ -98,6 +98,14 @@
                                         data-focus-label-text-align="default"
                                         data-required="true">[Page.Message].Message.Label.Array["COM_USER.USER_ID"]</label>
                                     <input data-field="user_id" id="register_user_id" name="register_user_id"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" gi-maxlength="500" />
+                                </div>
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_user_name" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COM_USER.USER_NAME"]</label>
+                                    <input data-field="user_name" id="register_user_name" name="register_user_name"
                                         class="gi-input" data-focus-span-text-align="default" data-required="true"
                                         autocomplete="off" gi-maxlength="500" />
                                 </div>
@@ -120,6 +128,35 @@
                                     <input type="password" data-field="password" id="register_password"
                                         name="register_password" class="gi-input" data-focus-span-text-align="default"
                                         data-required="true" autocomplete="off" gi-maxlength="500" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_tel" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COM_USER.TEL"]</label>
+                                    <input type="tel" data-field="tel" id="register_tel" name="register_tel"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" gi-maxlength="500" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_address" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="false">[Page.Message].Message.Label.Array["COM_USER.ADDRESS"]</label>
+                                    <input data-field="address" id="register_address" name="register_address"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" gi-maxlength="500" />
+                                </div>
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_address_detail" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="false">[Page.Message].Message.Label.Array["COM_USER.ADDRESS_DETAIL"]</label>
+                                    <input data-field="address_detail" id="register_address_detail"
+                                        name="register_address_detail" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        gi-maxlength="500" />
                                 </div>
                             </div>
                         </div>
@@ -227,6 +264,7 @@
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ROLE"]', ID: 'role', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.USER_ID"]', ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.OFFICE_CODE"]', ID: 'office_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COM_USER.OFFICE_CODE_NAME"]', ID: 'office_code_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false, COM_CODE_GROUP_ID: "OFFICE_CODE" },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.SYSTEM_CREATE_USERID"]', ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.SYSTEM_CREATE_DATE"]', ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.SYSTEM_UPDATE_USERID"]', ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
