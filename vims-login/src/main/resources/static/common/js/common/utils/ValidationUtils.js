@@ -39,31 +39,26 @@ FormUtility.prototype.checkObjectEmptyValue = function (value) {
  * @text : 선행작업 requiredParamClassSetting() ,alertPopup()
  * @writer: 이경태
  */
-FormUtility.prototype.validationCheck = function (arg1, arg2) {
-    let result = true;
-    let formId;
-    let configs = [];
-    let isAutoConfig = false;
-    let messagePrefix = "";
-
-    // 인자 타입에 따른 처리
-    if (Array.isArray(arg1)) {
-        // 기존 방식: validation config 배열 (배열에 formId 속성 포함)
-        formId = arg1.formId;
-        configs = arg1;
-    } else if (typeof arg1 === 'string' && typeof arg2 === 'string') {
-        // 새로운 방식: formId, messagePrefix 전달
-        formId = arg1;
-        messagePrefix = arg2;
-        isAutoConfig = true;
+/**
+ * @title : 유효성 검사
+ * @text : formId와 messagePrefix를 받아 필수 입력 항목을 검사합니다.
+ * @param formId (String) : 검사할 Form의 ID
+ * @param messagePrefix (String) : 메시지 키의 접두사 (예: "COM_CODE_GROUP.CHECK.")
+ */
+FormUtility.prototype.validationCheck = function (formId, messagePrefix) {
+    console.log("validationCheck", formId, messagePrefix);
+    if (!formId || !messagePrefix) {
+        console.error("validationCheck error: formId and messagePrefix are required.");
+        return false;
     }
 
+    let result = true;
     let requiredFields = $("#" + formId + " [data-required='true'][data-field]").not('label').not('span');
 
+    // UI Reset (Focus lines) - 기존 로직 참고
     requiredFields.each(function (index, field) {
         let $field = $(field);
         let volume = $field.val();
-
         if (!volume) {
             $field.parent().attr('data-focus-line', true);
             $field.parent().children("label").attr('data-focus-label', true);
@@ -73,68 +68,62 @@ FormUtility.prototype.validationCheck = function (arg1, arg2) {
         }
     });
 
-    // 필수 입력 필드가 비어있을 때 경고 팝업 표시
-    requiredFields.each(function (index, field) {
+    for (let i = 0; i < requiredFields.length; i++) {
+        let field = requiredFields[i];
         let $field = $(field);
         let volume = "";
 
         field.type === "radio" || field.type === "checkbox" ? volume = $field.is(":checked") : volume = $field.val();
 
         if (!volume) {
-            if (isAutoConfig) {
+            if ($field.data("field")) {
+                let messageId = $field.data("field").toUpperCase();
+                let messageKey = messagePrefix + messageId;
+                let message = Message.Label.Array[messageKey];
+
+                if (!message) {
+                    console.warn(`Message not found for key: ${messageKey}`);
+                    message = "Message key not found: " + messageKey;
+                }
+
+                result = false;
+                formUtil.alertPopup(message);
+
+                if (field.type !== "radio" && field.type !== "checkbox") {
+                    $field.focus();
+                }
+                return false;
+            }
+        }
+
+        // 정규식 체크 (값이 있을 때만)
+        if ($field.is('input[gi-format-check]')) {
+            let formatCheck = new GiFormatCheck();
+            let formatType = $field.attr("gi-format-check");
+            let formatTypes = GiFormatCheck.getFormatTypes();
+
+            if (formatTypes.includes(formatType)) {
+                let isValid = formatCheck.validateInputFormat(field);
+                let message = "";
+
                 if ($field.data("field")) {
                     let messageId = $field.data("field").toUpperCase();
-                    let message = Message.Label.Array[messagePrefix + messageId];
-                    if (message) {
-                        result = false;
-                        formUtil.alertPopup(message);
-                        return false; // 각 필수 입력 필드에 대한 경고 팝업 한 번만 표시
-                    }
+                    message = Message.Label.Array[messagePrefix + messageId];
                 }
-            } else {
-                for (let config of configs) {
-                    if (field.id === config.id) {
-                        result = false;
-                        formUtil.alertPopup(config.message);
-                        return false; // 각 필수 입력 필드에 대한 경고 팝업 한 번만 표시
-                    }
+
+                if (!isValid && message) {
+                    result = false;
+                    // TODO: 메시지 커스터마이징이 필요하다면 여기서 처리
+                    formUtil.alertPopup(message.replace('를', '를 형식에 맞게<br/>'));
+
+                    $field.parent().attr('data-focus-line', true);
+                    $field.parent().children("label").attr('data-focus-label', true);
+                    return false;
                 }
             }
         }
-        else {
-            // value가 있고, gi-format-check 태그를 붙인 경우, 형식 체크
-            if ($field.is('input[gi-format-check]')) {
-                let formatCheck = new GiFormatCheck();
-                let formatType = $field.attr("gi-format-check");
-                let formatTypes = GiFormatCheck.getFormatTypes();
+    }
 
-                if (formatTypes.includes(formatType)) {
-                    let isValid = formatCheck.validateInputFormat(field);
-                    let message = "";
-
-                    if (isAutoConfig) {
-                        if ($field.data("field")) {
-                            let messageId = $field.data("field").toUpperCase();
-                            message = Message.Label.Array[messagePrefix + messageId];
-                        }
-                    } else {
-                        let config = configs.find(c => c.id === field.id);
-                        if (config) message = config.message;
-                    }
-
-                    if (!isValid && message) {
-                        result = false;
-                        formUtil.alertPopup(message.replace('를', '를 형식에 맞게<br/>'));  //todo 하드코딩
-
-                        //밑줄 처리
-                        $field.parent().attr('data-focus-line', true);
-                        $field.parent().children("label").attr('data-focus-label', true);
-                        return false;
-                    }
-                }
-            }
-        }
-    });
     return result;
 };
 

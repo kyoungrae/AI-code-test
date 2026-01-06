@@ -981,53 +981,14 @@
         })
     }
     function checkRegisterPopupValidation() {
-        let flag = false;
-        let validation = $('#' + COM_MENU_REGISTER_PRGMID + ' [data-required="true"]')
-            .filter((_, el) => formUtil.checkEmptyValue(el.id))
-            .map((_, el) => ({
-                id: el.id,
-                message: Message.Label.Array["COM_MENU.CHECK." + el.name.toUpperCase()]
-            })).get();
-        validation.formId = COM_MENU_REGISTER_PRGMID;
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(COM_MENU_REGISTER_PRGMID, "COM_MENU.CHECK.");
     }
     function checkValidation(ID) {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = ID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_DEPT_GROUP.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(ID, "COM_DEPT_GROUP.CHECK.");
     }
     //NOTE: 메뉴 수정 유효성 검사
     function menuModifyCheckValidation(ID) {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = ID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_MENU.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(ID, "COM_MENU.CHECK.");
     }
     //NOTE: 권한 적용 그룹 목록 Group_id 삭제
     function commonAccessGroupIdRemove(cont) {

@@ -8,6 +8,7 @@ Message.Label.Array["SITE_CONFIG.VALID.CONFIG_GROUP_ID"] = "이미 등록된 설
 Message.Label.Array["SITE_CONFIG.ERROR.IS_ALREADY_EXISTS"] = "해당 설정키가 이미 있습니다. 설정키를 변경하고 다시 시도하세요.";
 
 Message.Label.Array["SITE_CONFIG.CHECK.CONFIG_GROUP_ID"] = "그룹(을)를 입력해 주세요";
+Message.Label.Array["SITE_CONFIG.CHECK.CONFIG_GROUP_NAME"] = "그룹명(을)를 입력해 주세요";
 Message.Label.Array["SITE_CONFIG.CHECK.CONFIG_KEY"] = "설정 키(을)를 입력해 주세요";
 Message.Label.Array["SITE_CONFIG.CHECK.CONFIG_VALUE"] = "설정 값(을)를 입력해 주세요";
 Message.Label.Array["SITE_CONFIG.CHECK.DESCRIPTION"] = "설명(을)를 입력해 주세요";

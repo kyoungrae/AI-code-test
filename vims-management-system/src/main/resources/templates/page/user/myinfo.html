@@ -346,22 +346,9 @@
         }
     }
     // NOTE: 유효성 검사
+    // NOTE: 유효성 검사
     function checkValidation() {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = PRGMID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_USER.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(PRGMID, "COM_USER.CHECK.");
     }
 
     //NOTE : 비밀번호 변경 검사 로직

@@ -760,21 +760,7 @@
         }
     }
     function checkValidation(form_id) {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = form_id;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["SITE_CONFIG.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(form_id, "SITE_CONFIG.CHECK.");
     }
     //NOTE: 설정키 삭제 API
     function removeComSiteConfigKey(cont) {

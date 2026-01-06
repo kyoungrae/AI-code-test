@@ -705,21 +705,7 @@
     }
 
     function registerComDeptGroupValidationCheck() {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = COM_DEPT_GROUP_REGISTER_PRGMID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_DEPT_GROUP.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(COM_DEPT_GROUP_REGISTER_PRGMID, "COM_DEPT_GROUP.CHECK.");
     }
     async function findByExistComUserGroup(data) {
         return new Promise(resolve => {
