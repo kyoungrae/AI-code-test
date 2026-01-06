@@ -48,7 +48,7 @@
                                     <label for="register_top_menu_code" class="gi-input-label" data-focus-label="true"
                                         data-focus-label-text-align="default"
                                         data-required="true">[Page.Message].Message.Label.Array["COM_MENU.TOP_MENU_CODE"]</label>
-                                    <input data-gi-tag-disabled data-field="top_menu_code" id="register_top_menu_code"
+                                    <input data-disabled data-field="top_menu_code" id="register_top_menu_code"
                                         name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
                                         data-required="true" autocomplete="off" />
                                 </div>
@@ -132,7 +132,7 @@
                                     <label for="register_menu_level" class="gi-input-label" data-focus-label="true"
                                         data-focus-label-text-align="default"
                                         data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_LEVEL"]</label>
-                                    <input inputNumberOnly data-gi-tag-disabled data-field="menu_level"
+                                    <input inputNumberOnly data-disabled data-field="menu_level"
                                         id="register_menu_level" name="menu_level" class="gi-input"
                                         data-focus-span-text-align="default" data-required="true" autocomplete="off"
                                         maxlength="1" />
@@ -175,9 +175,9 @@
                                     <label for="register_depth_top_menu_code" class="gi-input-label"
                                         data-focus-label="true" data-focus-label-text-align="default"
                                         data-required="true">[Page.Message].Message.Label.Array["COM_MENU.TOP_MENU_CODE"]</label>
-                                    <input data-gi-tag-disabled data-field="top_menu_code"
-                                        id="register_depth_top_menu_code" name="top_menu_code" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                    <input data-disabled data-field="top_menu_code" id="register_depth_top_menu_code"
+                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                         </div>
@@ -259,7 +259,7 @@
                                     <label for="register_depth_menu_level" class="gi-input-label"
                                         data-focus-label="true" data-focus-label-text-align="default"
                                         data-required="true">메뉴레벨</label>
-                                    <input inputNumberOnly data-gi-tag-disabled data-field="menu_level"
+                                    <input inputNumberOnly data-disabled data-field="menu_level"
                                         id="register_depth_menu_level" name="menu_level" class="gi-input"
                                         data-focus-span-text-align="default" data-required="true" autocomplete="off"
                                         maxlength="1" />
@@ -299,7 +299,7 @@
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_top_menu_code" class="gi-input-label" data-focus-label="true"
                                         data-focus-label-text-align="default" data-required="true">상위메뉴코드</label>
-                                    <input data-gi-tag-disabled data-field="top_menu_code" id="update_top_menu_code"
+                                    <input data-disabled data-field="top_menu_code" id="update_top_menu_code"
                                         name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
                                         data-required="true" autocomplete="off" />
                                 </div>
@@ -312,7 +312,7 @@
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_menu_icon" class="gi-input-label" data-focus-label="true"
                                         data-focus-label-text-align="default" data-required="false">메뉴아이콘</label>
-                                    <input data-gi-tag-disabled data-field="menu_icon" id="update_menu_icon"
+                                    <input data-disabled data-field="menu_icon" id="update_menu_icon"
                                         name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
                                         data-required="false" autocomplete="off" />
                                 </div>
@@ -342,9 +342,9 @@
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_menu_code" class="gi-input-label" data-focus-label="true"
                                         data-focus-label-text-align="default" data-required="true">메뉴코드</label>
-                                    <input data-gi-tag-disabled data-field="menu_code" id="update_menu_code"
-                                        name="menu_code" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
+                                    <input data-disabled data-field="menu_code" id="update_menu_code" name="menu_code"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" />
                                 </div>
                             </div>
                         </div>
@@ -536,7 +536,7 @@
         let cont1 = $("#menu_name").val();
         if (formUtil.checkEmptyValue(cont1)) param.menu_name = cont1;
         // 정렬조건추가 (기준id, 순서)
-        param.sort_id = "menu_name_kr";
+        param.sort_id = "menu_level, menu_number";
         param.sort_order = "ASC";
 
         axios.post(url, param).then(response => {

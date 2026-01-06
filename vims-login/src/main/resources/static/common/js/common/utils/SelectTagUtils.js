@@ -55,7 +55,7 @@ CommonTag.prototype.selectLabelTagFocus = function (label) {
     label.on("click", function (e) {
         let selectId = $(e.target).attr("for");
         let select = $(this).siblings("select")[0];
-        let disabledFlag = $("#" + selectId).attr("data-gi-tag-disabled");
+        let disabledFlag = $("#" + selectId).attr("data-disabled");
         if (disabledFlag === "undefined") {
             $(select).focus();
             $(select).off("blur.giSelectBlurHandlerEvent").on("blur.giSelectBlurHandlerEvent", giSelectBlurHandlerEvent);

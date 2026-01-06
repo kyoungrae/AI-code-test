@@ -97,7 +97,7 @@ CommonTag.prototype.inputLabelTagFocus = function (label) {
         let inputId = $(e.target).attr("for");
         let input = $(this).siblings("input")[0];
         let inputType = input.type;
-        let disabledFlag = $("#" + inputId).attr("data-gi-tag-disabled");
+        let disabledFlag = $("#" + inputId).attr("data-disabled");
         if (disabledFlag !== "undefined") {
             if ("radio" === inputType || "checkbox" === inputType) {
 
@@ -189,7 +189,7 @@ CommonTag.prototype.tagDisabled = function (disabled, tagIdArray) {
                 }
             }
         } else {
-            $('[data-gi-tag-disabled]').each(function () {
+            $('[data-disabled]').each(function () {
                 $(this).attr('disabled', true);
 
                 if ($(this).is('input') || $(this).is('span')) {
@@ -210,7 +210,7 @@ CommonTag.prototype.tagDisabled = function (disabled, tagIdArray) {
                 let target = $('#' + tagIdArray[i]);
                 target
                     .attr('disabled', false)
-                    .removeAttr('data-gi-tag-disabled');
+                    .removeAttr('data-disabled');
 
                 if (target.is('input') || target.is('span')) {
                     target
@@ -223,10 +223,10 @@ CommonTag.prototype.tagDisabled = function (disabled, tagIdArray) {
                 }
             }
         } else {
-            $('[data-gi-tag-disabled]').each(function () {
+            $('[data-disabled]').each(function () {
                 $(this)
                     .attr('disabled', false)
-                    .removeAttr('data-gi-tag-disabled');
+                    .removeAttr('data-disabled');
 
                 if ($(this).is('input') || $(this).is('span')) {
                     $(this)
@@ -270,7 +270,7 @@ class inputTypeCheckBoxInitSetting {
 /**
  * @title : 입력 태그 수정 아이콘 설정
  * @value : default = undefined || input tag id
- * @text : data-gi-tag-disabled 설정 후 gi-input-update-tag-icon를 사용 하여 disabled를 해제 시킨다.
+ * @text : data-disabled 설정 후 gi-input-update-tag-icon를 사용 하여 disabled를 해제 시킨다.
  * @writer : 이경태
  */
 CommonTag.prototype.inputDisabledUpdateAble = function (tag) {
@@ -285,9 +285,9 @@ CommonTag.prototype.inputDisabledUpdateAble = function (tag) {
             })
         }
     } else {
-        $(".gi-input[data-gi-tag-disabled-update-able]").map((i, item) => {
+        $(".gi-input[data-disabled-update-able]").map((i, item) => {
             let flag = $(item.attributes).filter(function () {
-                return $(this)[0].name === "data-gi-tag-disabled";
+                return $(this)[0].name === "data-disabled";
             }).length > 0;
             if (flag) {
                 let inputContainer = $(item).parent(".gi-input-container");

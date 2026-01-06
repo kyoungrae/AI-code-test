@@ -28,6 +28,7 @@ Message.Label.Array["COM_USER.REGISTER_BTN"] = "사용자등록";
 Message.Label.Array["COM_USER.ID"] = "시퀀스 아이디";
 Message.Label.Array["COM_USER.EMAIL"] = "이메일";
 Message.Label.Array["COM_USER.PASSWORD"] = "비밀번호";
+Message.Label.Array["COM_USER.PASSWORD_CONFIRM"] = "비밀번호 확인";
 Message.Label.Array["COM_USER.ROLE"] = "역할";
 Message.Label.Array["COM_USER.USER_ID"] = "유저아이디";
 Message.Label.Array["COM_USER.OFFICE_CODE"] = "소속코드";

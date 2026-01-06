@@ -129,6 +129,15 @@
                                         name="register_password" class="gi-input" data-focus-span-text-align="default"
                                         data-required="true" autocomplete="off" gi-maxlength="500" />
                                 </div>
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_password_confirm" class="gi-input-label"
+                                        data-focus-label="true" data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COM_USER.PASSWORD_CONFIRM"]</label>
+                                    <input type="password" data-field="register_password_confirm"
+                                        id="register_password_confirm" name="register_password_confirm" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        gi-maxlength="500" />
+                                </div>
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
@@ -146,7 +155,7 @@
                                         data-focus-label-text-align="default"
                                         data-required="false">[Page.Message].Message.Label.Array["COM_USER.ADDRESS"]</label>
                                     <input data-field="address" id="register_address" name="register_address"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="false"
                                         autocomplete="off" gi-maxlength="500" />
                                 </div>
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
@@ -155,7 +164,7 @@
                                         data-required="false">[Page.Message].Message.Label.Array["COM_USER.ADDRESS_DETAIL"]</label>
                                     <input data-field="address_detail" id="register_address_detail"
                                         name="register_address_detail" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
                                         gi-maxlength="500" />
                                 </div>
                             </div>
@@ -166,7 +175,7 @@
                                         data-required="false">[Page.Message].Message.Label.Array["COM_USER.POSTAL_CODE"]</label>
                                     <input data-field="postal_code" id="register_postal_code"
                                         name="register_postal_code" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
                                         gi-maxlength="500" />
                                 </div>
                             </div>
@@ -189,6 +198,7 @@
 </article>
 <script type="text/javascript">
     var PRGMID = "comUserList";	//page id
+    var POPUP_REGISTER_FROM = "register_user_popup";
     var POPUP_REGISTER_BTN = "#popup-register_user_confirm-btn";
     init();
     function init() {
@@ -235,7 +245,7 @@
             .on("click.popupRegisterBtnClickEventHandler", popupRegisterBtnClickEventHandler);
         function popupRegisterBtnClickEventHandler() {
             let param = dataBinding.getData("register_user_popup");
-            registerUser(param);
+            if (formUtil.validationCheck(POPUP_REGISTER_FROM, "COM_USER.CHECK.")) registerUser(param);
         }
 
     }
