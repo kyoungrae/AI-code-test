@@ -281,8 +281,7 @@
 </article>
 <script type="text/javascript">
     var PRGMID = "comDeptGroupList";	//page id
-    var data_binding = new dataBinding();
-    var common_popup = new popup();
+
     var COM_DEPT_GROUP_REGISTER_PRGMID = "gi-common_group_register-popup";
     var COM_DEPT_GROUP_UPDATE_PRGMID = "gi-common_group_update-popup";
     var COM_USER_GROUP_REGISTER_PRGMID = "gi-common_user_group_register-popup";
@@ -347,13 +346,13 @@
         })
 
         $("#user_id-search-btn").off("click").on("click", function () {
-            let data = data_binding.getData("comUserGroupRegister");
+            let data = dataBinding.getData("comUserGroupRegister");
             findByComUserList('', '', '', '', data.group_id);
         })
 
     }
     function comDeptGroupRegisterBtnClickEventHandler() {
-        let data = data_binding.getData("gi-common_group_register-popup");
+        let data = dataBinding.getData("gi-common_group_register-popup");
         if (registerComDeptGroupValidationCheck()) {
             registerComDeptGroup(data);
         }
@@ -650,7 +649,7 @@
                 findByComUserGroupList();
                 $("#insert_child_group-btn").addClass("gi-hidden");
                 $("#insert_user_group-btn").addClass("gi-hidden");
-                common_popup.close("gi-common_group_register-popup");
+                popup.close("gi-common_group_register-popup");
             }
         }).catch(error => {
             formUtil.alertPopup(error.response.data);
@@ -658,10 +657,10 @@
     }
     function updatePopupComDeptGroup(data) {
         $("#" + COM_DEPT_GROUP_UPDATE_PRGMID).attr("data-popup-open", true);
-        data_binding.setDataForm("comDeptGroupUpdate", data);
-        data_binding.setDataSelectBox("use_yn-update", data.use_yn);
+        dataBinding.setDataForm("comDeptGroupUpdate", data);
+        dataBinding.setDataSelectBox("use_yn-update", data.use_yn);
         $("#comDeptGroupUpdate-btn").off("click.updateComDeptGroup").on("click.updateComDeptGroup", function () {
-            let param = data_binding.getData(COM_DEPT_GROUP_UPDATE_PRGMID);
+            let param = dataBinding.getData(COM_DEPT_GROUP_UPDATE_PRGMID);
             updateComDeptGroup(param);
         })
     }
@@ -677,7 +676,7 @@
             if (status === 200) {
                 formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                 fnReset();
-                common_popup.close(COM_DEPT_GROUP_UPDATE_PRGMID);
+                popup.close(COM_DEPT_GROUP_UPDATE_PRGMID);
             }
         }).catch(error => {
             formUtil.alertPopup(error + "");

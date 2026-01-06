@@ -360,10 +360,10 @@
         let url = "/login";
 
         axios.post(url, cont).then(response => {
-            new session().setItem("userInfo", {
+            new Session().setItem("userInfo", {
                 email: email,
             });
-            new session().setItem("recentPage", { url: '/index/index' }); //main으로 연결
+            new Session().setItem("recentPage", { url: '/index/index' }); //main으로 연결
             let redirectUrl = response.data.redirectUrl;
             setEmailCookie();
             requestPageRedirect(redirectUrl);

@@ -389,9 +389,8 @@
     var CONFIG_GROUP_POPUPID = "siteConfigGroupRegister_gi-popup";
     var CONFIG_KEY_FORMID = "siteConfigCodeRegister";
     var CONFIG_KEY_POPUPID = "siteConfigRegister_gi-popup";
-    var data_binding = new dataBinding();
     var configGroupId = "";
-    var common_popup = new popup();
+
     var commonTag = new CommonTag();
     init();
 
@@ -525,8 +524,8 @@
                 function siteConfigGroupListGridUpdateBtnClickEventHandler(row, e) {
                     const formId = "siteConfigGroupUpdate_gi-popup";
                     $("#" + formId).attr("data-popup-open", "true");
-                    data_binding.setDataForm(formId, row);
-                    data_binding.setDataSelectBox("update_group_use_yn", row.use_yn);
+                    dataBinding.setDataForm(formId, row);
+                    dataBinding.setDataSelectBox("update_group_use_yn", row.use_yn);
 
                     $(".gi-popup-update-btn").off("click.siteConfigGroupUpdateBtnClickEventHandler")
                         .on("click.siteConfigGroupUpdateBtnClickEventHandler", siteConfigGroupUpdateBtnClickEventHandler);
@@ -677,7 +676,7 @@
     function siteConfigGroupIdRegister() {
         let flag = checkValidation(CONFIG_GROUP_FORMID);
         if (flag) {
-            let data = data_binding.getData(CONFIG_GROUP_FORMID);
+            let data = dataBinding.getData(CONFIG_GROUP_FORMID);
             let url = "/cms/common/comSiteConfigGroup/register";
             let param = {
                 config_group_id: data.config_group_id,
@@ -687,7 +686,7 @@
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
-                    common_popup.close(CONFIG_GROUP_POPUPID);
+                    popup.close(CONFIG_GROUP_POPUPID);
                     findBySiteConfigGroupList();
                 }
             }).catch(error => {
@@ -700,7 +699,7 @@
     function siteConfigGroupUpdate() {
         let flag = checkValidation(CONFIG_GROUP_UPDATE_FORMID);
         if (flag) {
-            let data = data_binding.getData(CONFIG_GROUP_UPDATE_FORMID);
+            let data = dataBinding.getData(CONFIG_GROUP_UPDATE_FORMID);
             let url = "/cms/common/comSiteConfigGroup/update";
             let param = {
                 config_group_id: data.config_group_id,
@@ -710,7 +709,7 @@
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
-                    common_popup.close(CONFIG_GROUP_UPDATE_POPUPID);
+                    popup.close(CONFIG_GROUP_UPDATE_POPUPID);
                     findBySiteConfigGroupList();
                 }
             }).catch(error => {
@@ -739,7 +738,7 @@
     function siteConfigKeyRegister(p_config_group_id) {
         let flag = checkValidation(CONFIG_KEY_FORMID);
         if (flag) {
-            let data = data_binding.getData(CONFIG_KEY_FORMID);
+            let data = dataBinding.getData(CONFIG_KEY_FORMID);
             let url = "/cms/common/comSiteConfig/register";
             let param = {
                 config_group_id: data.config_group_id,
@@ -751,7 +750,7 @@
             axios.post(url, param).then(response => {
                 if (response.status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
-                    common_popup.close(CONFIG_KEY_POPUPID);
+                    popup.close(CONFIG_KEY_POPUPID);
                     findBySiteConfigList(null, null, null, null, p_config_group_id);
                 }
             }).catch(error => {
@@ -797,8 +796,8 @@
     //NOTE : 설정키 수정 팝업 셋팅
     function updatePopupSettings(cont) {
         $("#siteConfigUpdate_gi-popup").attr("data-popup-open", "true");
-        data_binding.setDataForm("siteConfigUpdate_gi-popup", cont);
-        data_binding.setDataSelectBox("update_use_yn", cont.use_yn);
+        dataBinding.setDataForm("siteConfigUpdate_gi-popup", cont);
+        dataBinding.setDataSelectBox("update_use_yn", cont.use_yn);
 
         $("#siteConfigCodeUpdate-btn").off("click.siteConfigCodeUpdateBtnClickEventHandler")
             .on("click.siteConfigCodeUpdateBtnClickEventHandler", siteConfigCodeUpdateBtnClickEventHandler);
@@ -810,7 +809,7 @@
     //NOTE: 설정키 수정 API
     function updateComSiteConfigKey(prgmId) {
         let flag = checkValidation(prgmId);
-        let cont = data_binding.getData(prgmId);
+        let cont = dataBinding.getData(prgmId);
         if (flag) {
             let url = "/cms/common/comSiteConfig/update";
             let param = {
@@ -825,7 +824,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                     findBySiteConfigList(null, null, null, null, cont.config_group_id);
-                    common_popup.close(prgmId);
+                    popup.close(prgmId);
                 }
 
             }).catch(error => {

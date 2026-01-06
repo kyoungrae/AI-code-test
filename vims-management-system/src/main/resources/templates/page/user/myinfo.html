@@ -236,8 +236,7 @@
 </article>
 <script type="text/javascript">
     var PRGMID = "inspectionEquipmentModelTypeModify";	//page id
-    var data_binding = new dataBinding();
-    var common_popup = new popup();
+
     init();
 
 
@@ -255,13 +254,12 @@
     async function dataSetting() {
         const userInfo = await findUserData();
 
-        let data_binding = new dataBinding();
-        data_binding.setDataForm(PRGMID, userInfo.user);
+        dataBinding.setDataForm(PRGMID, userInfo.user);
 
         bindUserGroup(userInfo.userGroups);
         // findImgFile();
 
-        let data = data_binding.getData(PRGMID);
+        let data = dataBinding.getData(PRGMID);
 
         //초기 값 셋팅
         initValueSetting(data);
@@ -324,7 +322,7 @@
 
     function modify() {
         if (checkValidation()) {
-            let data = new dataBinding().getData(PRGMID);
+            let data = dataBinding.getData(PRGMID);
             let url = "/cms/common/comUser/update";
             let param = {
                 id: data.id,
@@ -374,7 +372,7 @@
             .on("click.changePopupUpdateClickEventHandler", changePopupUpdateClickEventHandler);
 
         function changePopupUpdateClickEventHandler() {
-            let data = data_binding.getData("comUserPasswordChange");
+            let data = dataBinding.getData("comUserPasswordChange");
             const beforePassword = data.popup_before_password;
             const newPassword = data.popup_new_password;
             const newPasswordConfirm = data.popup_new_password_confirm;
@@ -417,7 +415,7 @@
             console.log(response)
             if (response.status === 200) {
                 formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
-                common_popup.close("change-password-popup");
+                popup.close("change-password-popup");
             }
         }).catch(error => {
             formUtil.alertPopup(error.response.data);

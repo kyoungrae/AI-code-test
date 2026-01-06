@@ -472,8 +472,7 @@
     var COM_CODE_PRGMID = "comCodeRegister";
     var COM_CODE_UPDATE_PRGMID = "comCodeUpdate";
     var COM_CODE_GROUP_UPDATE_PRGMID = "comDeptGroupCodeUpdate";
-    var data_binding = new dataBinding();
-    var common_popup = new popup();
+
     var global_group_id = "";
     init();
     function init() {
@@ -607,8 +606,8 @@
                 function rowClickEvent(rows) {
                     global_group_id = rows.group_id;
                     $("#register-area2").removeClass("gi-hidden");
-                    data_binding.setDataForm("gi-code_register-popup", rows);
-                    // common_popup.popupSetData("gi-code_register-popup",rows);
+                    dataBinding.setDataForm("gi-code_register-popup", rows);
+                    // popup.popupSetData("gi-code_register-popup",rows);
                     findByComCodeList('', '', '', '', rows.group_id);
                 }
             } else {
@@ -771,7 +770,7 @@
         $("#gi-group_code_update-popup").attr("data-popup-open", "true");
         $("#gi-group_code_update-popup #update_group_id1").val(cont.group_id);
         $("#gi-group_code_update-popup #update_group_name").val(cont.group_name);
-        data_binding.setDataSelectBox("update_group_use_yn", cont.use_yn);
+        dataBinding.setDataSelectBox("update_group_use_yn", cont.use_yn);
     }
     function comCodeUpdateSetting(cont) {
         $("#gi-code_update-popup").attr("data-popup-open", "true");
@@ -780,13 +779,13 @@
         $("#gi-code_update-popup #update_code_name").val(cont.code_name);
         $("#gi-code_update-popup #update_code_number").val(cont.code_number);
 
-        data_binding.setDataSelectBox("update_use_yn", cont.use_yn);
+        dataBinding.setDataSelectBox("update_use_yn", cont.use_yn);
     }
 
     function comCodeGroupRegister() {
         let flag = comCodeGroupCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COM_CODE_GROUP_PRGMID);
+            let data = dataBinding.getData(COM_CODE_GROUP_PRGMID);
             let url = "/cms/common/comCodeGroup/register";
             // console.log(data);
             let param = {
@@ -814,7 +813,7 @@
     function comCodeRegister() {
         let flag = comCodeCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COM_CODE_PRGMID);
+            let data = dataBinding.getData(COM_CODE_PRGMID);
             let url = "/cms/common/comCode/register";
             // console.log(data);
             let param = {
@@ -843,7 +842,7 @@
     function comCodeUpdate() {
         let flag = comCodeUpdateCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COM_CODE_UPDATE_PRGMID);
+            let data = dataBinding.getData(COM_CODE_UPDATE_PRGMID);
             let url = "/cms/common/comCode/update";
             // console.log(data);
             let param = {
@@ -873,7 +872,7 @@
     function comCodeGroupUpdate() {
         let flag = comCodeGroupUpdateCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COM_CODE_GROUP_UPDATE_PRGMID);
+            let data = dataBinding.getData(COM_CODE_GROUP_UPDATE_PRGMID);
             let url = "/cms/common/comCodeGroup/update";
             // console.log(data);
             let param = {
@@ -898,72 +897,16 @@
         }
     }
     function comCodeGroupCheckValidation() {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = COM_CODE_GROUP_PRGMID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_CODE_GROUP.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(COM_CODE_GROUP_PRGMID, "COM_CODE_GROUP.CHECK.");
     }
     function comCodeCheckValidation() {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = COM_CODE_PRGMID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_CODE.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(COM_CODE_PRGMID, "COM_CODE.CHECK.");
     }
     function comCodeUpdateCheckValidation() {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = COM_CODE_UPDATE_PRGMID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_CODE.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(COM_CODE_UPDATE_PRGMID, "COM_CODE.CHECK.");
     }
     function comCodeGroupUpdateCheckValidation() {
-        let flag = false;
-
-        let validation = [];
-        validation.formId = COM_CODE_GROUP_UPDATE_PRGMID;
-        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
-            if ($(item).data("field")) {
-                let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_CODE_GROUP.CHECK." + messageId];
-                validation.push({ id: item.id, message: message });
-            }
-        });
-        if (formUtil.validationCheck(validation)) {
-            flag = true;
-        }
-        return flag;
+        return formUtil.validationCheck(COM_CODE_GROUP_UPDATE_PRGMID, "COM_CODE_GROUP.CHECK.");
     }
     async function comCodeGroupDeleteCheckValidation(param) {
         let flag = true;

@@ -31,16 +31,33 @@ FormUtility.prototype.checkObjectEmptyValue = function (value) {
 
 /**
  * @title : 필수 입력 검증
- * @param e : [formId=\"\"{id:\"\",message:\"\"}]
- * @formId : validationCheck하려는 id가 속해있는 상위 div 혹은 form tag의 ID[String]
- * @id : validationCheck하려는 id[String]
- * @message : vaildationCheck시 나올 문구[String]
+ * @param arg1 : [Array|String] validation config 배열 OR formId
+ * @param arg2 : [String] (Optional) messagePrefix (2번째 방식 사용 시 필요)
+ * @description : 
+ *    1. validationCheck(configArray): configArray에 formId 속성과 {id, message} 객체들이 포함됨
+ *    2. validationCheck(formId, messagePrefix): formId 내의 required field에 대해 messagePrefix + data-field로 메시지 자동 조회
  * @text : 선행작업 requiredParamClassSetting() ,alertPopup()
  * @writer: 이경태
  */
-FormUtility.prototype.validationCheck = function (e) {
+FormUtility.prototype.validationCheck = function (arg1, arg2) {
     let result = true;
-    let formId = e.formId;
+    let formId;
+    let configs = [];
+    let isAutoConfig = false;
+    let messagePrefix = "";
+
+    // 인자 타입에 따른 처리
+    if (Array.isArray(arg1)) {
+        // 기존 방식: validation config 배열 (배열에 formId 속성 포함)
+        formId = arg1.formId;
+        configs = arg1;
+    } else if (typeof arg1 === 'string' && typeof arg2 === 'string') {
+        // 새로운 방식: formId, messagePrefix 전달
+        formId = arg1;
+        messagePrefix = arg2;
+        isAutoConfig = true;
+    }
+
     let requiredFields = $("#" + formId + " [data-required='true'][data-field]").not('label').not('span');
 
     requiredFields.each(function (index, field) {
@@ -64,11 +81,23 @@ FormUtility.prototype.validationCheck = function (e) {
         field.type === "radio" || field.type === "checkbox" ? volume = $field.is(":checked") : volume = $field.val();
 
         if (!volume) {
-            for (let config of e) {
-                if (field.id === config.id) {
-                    result = false;
-                    formUtil.alertPopup(config.message);
-                    return false; // 각 필수 입력 필드에 대한 경고 팝업 한 번만 표시
+            if (isAutoConfig) {
+                if ($field.data("field")) {
+                    let messageId = $field.data("field").toUpperCase();
+                    let message = Message.Label.Array[messagePrefix + messageId];
+                    if (message) {
+                        result = false;
+                        formUtil.alertPopup(message);
+                        return false; // 각 필수 입력 필드에 대한 경고 팝업 한 번만 표시
+                    }
+                }
+            } else {
+                for (let config of configs) {
+                    if (field.id === config.id) {
+                        result = false;
+                        formUtil.alertPopup(config.message);
+                        return false; // 각 필수 입력 필드에 대한 경고 팝업 한 번만 표시
+                    }
                 }
             }
         }
@@ -81,11 +110,21 @@ FormUtility.prototype.validationCheck = function (e) {
 
                 if (formatTypes.includes(formatType)) {
                     let isValid = formatCheck.validateInputFormat(field);
-                    let config = e.find(c => c.id === field.id);
+                    let message = "";
 
-                    if (!isValid && config) {
+                    if (isAutoConfig) {
+                        if ($field.data("field")) {
+                            let messageId = $field.data("field").toUpperCase();
+                            message = Message.Label.Array[messagePrefix + messageId];
+                        }
+                    } else {
+                        let config = configs.find(c => c.id === field.id);
+                        if (config) message = config.message;
+                    }
+
+                    if (!isValid && message) {
                         result = false;
-                        formUtil.alertPopup(config.message.replace('를', '를 형식에 맞게<br/>'));  //todo 하드코딩
+                        formUtil.alertPopup(message.replace('를', '를 형식에 맞게<br/>'));  //todo 하드코딩
 
                         //밑줄 처리
                         $field.parent().attr('data-focus-line', true);

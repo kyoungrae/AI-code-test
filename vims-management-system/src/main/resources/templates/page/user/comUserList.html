@@ -159,6 +159,17 @@
                                         gi-maxlength="500" />
                                 </div>
                             </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_postal_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="false">[Page.Message].Message.Label.Array["COM_USER.POSTAL_CODE"]</label>
+                                    <input data-field="postal_code" id="register_postal_code"
+                                        name="register_postal_code" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        gi-maxlength="500" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -168,7 +179,7 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="confirm-btn" class="gi-popup-register-btn gi-hidden"
+                <button id="popup-register_user_confirm-btn" class="gi-popup-register-btn"
                     type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
                 <button id="popup-close-btn" class="gi-popup-close-btn"
                     type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
@@ -178,6 +189,7 @@
 </article>
 <script type="text/javascript">
     var PRGMID = "comUserList";	//page id
+    var POPUP_REGISTER_BTN = "#popup-register_user_confirm-btn";
     init();
     function init() {
 
@@ -203,7 +215,7 @@
         $("#search-area select").val("");
 
         //데이터 호출 후 이벤트 재설정
-        new afterLoadDataEvent();
+        new AfterLoadDataEvent();
     }
 
     //클릭 이벤트
@@ -219,9 +231,13 @@
         });
 
         //추가버튼 클릭 이벤트
-        $("#insert-btn").click(function () {
-            console.log("insert btn Event")
-        });
+        $(POPUP_REGISTER_BTN).off("click.popupRegisterBtnClickEventHandler")
+            .on("click.popupRegisterBtnClickEventHandler", popupRegisterBtnClickEventHandler);
+        function popupRegisterBtnClickEventHandler() {
+            let param = dataBinding.getData("register_user_popup");
+            registerUser(param);
+        }
+
     }
     function findByComUserList(page, range, sortId, sortOrder) {
         //default page
@@ -338,5 +354,26 @@
             formUtil.alertPopup(error.response.data);
 
         })
+    }
+    function registerUser(cont) {
+        const url = "cms/common/comUser/register";;
+        const param = {
+            user_id: cont.user_id,
+            user_name: cont.user_name,
+            password: cont.password,
+            office_code: cont.office_code,
+            tel: cont.tel,
+            address: cont.address,
+            address_detail: cont.address_detail,
+            postal_code: cont.postal_code,
+        }
+        axios.post(url, param)
+            .then(response => {
+                console.log(response);
+                formUtil.toastMessage(Message.Label.Array["COMPLETE.INSERT"]);
+            })
+            .catch(error => {
+                console.log(error.response.data);
+            })
     }
 </script>

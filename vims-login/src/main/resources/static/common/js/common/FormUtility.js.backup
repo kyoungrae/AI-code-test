@@ -3986,7 +3986,7 @@ FormUtility.prototype.setComCodeName = async function (fieldName, groupId, cont)
 }
 
 FormUtility.prototype.setClassVariables = function (type) {
-    let sessionInit = new session();
+    let sessionInit = new Session();
     let dataBindingInit = new dataBinding();
     let popupInit = new popup();
 

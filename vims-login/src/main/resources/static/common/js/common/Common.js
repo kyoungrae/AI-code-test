@@ -8,7 +8,7 @@ class PageInit {
         // this.formUtilitySettings();
         this.commonTagSettings();
         this.messageLabelSettings();
-        new popup();
+        new Popup();
         setTimeout(function () {
             // new scrollAnimationInit;
         })
@@ -107,7 +107,7 @@ class PageInit {
  * @text : 데이터 동적생성 후 이벤트 재설정
  * @writer : 이경태
  */
-class afterLoadDataEvent {
+class AfterLoadDataEvent {
     constructor() {
         // new scrollAnimationInit;
         this.commonTagSettings();
@@ -122,7 +122,7 @@ class afterLoadDataEvent {
  * @text : 컨텐츠가 overflow 됐을때 animation 효과 추가
  * @writer : 이경태
  */
-class scrollAnimationInit {
+class ScrollAnimationInit {
     constructor() {
         //컨텐츠가 overflow 됐을때 animation 효과 추가
         this.initScrollAnimation();
@@ -201,14 +201,14 @@ class scrollAnimationInit {
  * @param : $("#detailPage")
  * @writer : 이경태
  */
-class dataBinding {
+class DataBinding {
     constructor() {
     }
     async setData(dataFieldList) {
         return new Promise((resolve, reject) => {
             dataFieldList = $("#" + dataFieldList);
             setTimeout(() => {
-                let data = new session().getItem("DATA");
+                let data = new Session().getItem("DATA");
                 let elements = dataFieldList.find("[data-field]");
                 elements.map((i, items) => {
                     let nodeName = items.nodeName === "SPAN";
@@ -244,7 +244,7 @@ class dataBinding {
                                     });
                                     $(items).next().val(selectText);
                                     resolve();
-                                    new afterLoadDataEvent();
+                                    new AfterLoadDataEvent();
                                 } else {
                                     // Set up MutationObserver to wait for slide-drop-down
                                     const observer = new MutationObserver((mutations) => {
@@ -262,7 +262,7 @@ class dataBinding {
                                                     $(items).next().val(selectText);
                                                     observer.disconnect(); // Stop observing
                                                     resolve();
-                                                    new afterLoadDataEvent();
+                                                    new AfterLoadDataEvent();
                                                 }
                                             }
                                         });
@@ -276,7 +276,7 @@ class dataBinding {
                         }
                     }
                 });
-                new afterLoadDataEvent();
+                new AfterLoadDataEvent();
                 resolve();
             })
         })
@@ -466,7 +466,7 @@ class dataBinding {
     }
 }
 
-class session {
+class Session {
     constructor() {
 
     }
@@ -484,7 +484,7 @@ class session {
 
 }
 
-class popup {
+class Popup {
     dataList = "";
     constructor() {
         this.initialize();
@@ -591,7 +591,7 @@ class popup {
     }
 
     changePopupFrame(popupId) {
-        let list = new session().getItem("recentPopupList");
+        let list = new Session().getItem("recentPopupList");
         if (formUtil.checkEmptyValue(list)) {
             $("#gi-search-popup").empty();
 

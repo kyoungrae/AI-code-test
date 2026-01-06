@@ -81,9 +81,9 @@ FormUtility.prototype.setComCodeName = async function (fieldName, groupId, cont)
  * @text : 세션, 데이터바인딩, 팝업 클래스 인스턴스 반환
  */
 FormUtility.prototype.setClassVariables = function (type) {
-    let sessionInit = new session();
-    let dataBindingInit = new dataBinding();
-    let popupInit = new popup();
+    let sessionInit = new Session();
+    let dataBindingInit = new DataBinding();
+    let popupInit = new Popup();
 
     if (type === "session") {
         return sessionInit;

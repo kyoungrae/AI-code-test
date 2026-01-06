@@ -2,9 +2,9 @@
 class loadToScript {
     constructor() {
         const scriptsToLoad = [
-            "login/ComUserMessage",
             "login/ComMenuMessage",
             "login/ComUserGroupMessage",
+            "login/ComUserMessage",
             "management/ComUserGroupMessage",
             "management/ComDeptGroupMessage",
             "management/ComAccsGroupMenuListMessage",
@@ -17,7 +17,6 @@ class loadToScript {
             "management/ComOfficeMessage",
             "management/ComSiteConfigGroupMessage",
             "management/ComSiteConfigMessage",
-            "management/ComUserMessage",
             "management/IndexMessage",
             "management/SiteBannerImageMessage",
             "management/SiteConfigHistoryMessage",
