@@ -199,6 +199,46 @@
         </where>
     </delete>
 
+    <insert id="INSERT">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT nextval('TOKEN_SEQ')
+        </selectKey>
+        INSERT INTO COM_USER (
+            id,
+            system_create_date,
+            <trim prefixOverrides=",">
+                <if test="email != null">, email</if>
+                <if test="password != null">, password</if>
+                <if test="role != null">, role</if>
+                <if test="user_id != null">, user_id</if>
+                <if test="office_code != null">, office_code</if>
+                <if test="system_create_userid != null">, system_create_userid</if>
+                <if test="user_name != null">, user_name</if>
+                <if test="tel != null">, tel</if>
+                <if test="address != null">, address</if>
+                <if test="address_detail != null">, address_detail</if>
+                <if test="postal_code != null">, postal_code</if>
+                <if test="uuid != null">, uuid</if>
+            </trim>
+        ) VALUES (
+            #{id},
+            NOW(),
+            <trim prefixOverrides=",">
+                <if test="email != null">, #{email}</if>
+                <if test="password != null">, #{password}</if>
+                <if test="role != null">, #{role}</if>
+                <if test="user_id != null">, #{user_id}</if>
+                <if test="office_code != null">, #{office_code}</if>
+                <if test="system_create_userid != null">, #{system_create_userid}</if>
+                <if test="user_name != null">, #{user_name}</if>
+                <if test="tel != null">, #{tel}</if>
+                <if test="address != null">, #{address}</if>
+                <if test="address_detail != null">, #{address_detail}</if>
+                <if test="postal_code != null">, #{postal_code}</if>
+                <if test="uuid != null">, #{uuid}</if>
+            </trim>
+        )
+    </insert>
     <update id="UPDATE">
         UPDATE COM_USER
         <set>

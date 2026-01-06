@@ -6,20 +6,21 @@ package com.vims.common.user;
 import com.system.auth.authuser.AuthUser;
 import com.system.common.base.AbstractCommonService;
 import com.system.common.exception.CustomException;
+import com.system.common.util.passwordvalidation.PasswordPolicy;
+import com.system.common.util.passwordvalidation.PasswordValidationUtil;
 import com.system.common.util.validation.ValidationService;
 import com.vims.common.siteconfig.ComSiteConfig;
 import com.vims.common.siteconfig.ComSiteConfigService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -108,13 +109,22 @@ public class ComUserService extends AbstractCommonService<ComUser> {
     }
 
     @Override
-    protected int registerImpl(ComUser request) {
-        List<String> failReasons = validatePasswordPolicy(request.getPassword());
-        if (failReasons.size() > 0) {
-            throw new CustomException(failReasons.get(0));
+    protected int registerImpl(ComUser request) throws Exception {
+        // 비밀번호 확인
+        if (!request.getPassword().equals(request.getPassword_confirm())) {
+            throw new CustomException(getMessage("EXCEPTION.PASSWORD.NOT_MATCH"));
         }
+        // 비밀번호 정책 확인
+        validationPasswordPolicy(request.getPassword());
 
-        return comUserMapper.INSERT(request);
+        // 비밀번호 암호화
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        try {
+            return comUserMapper.INSERT(request);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public int changePassword(ComUser request) throws Exception {
@@ -136,58 +146,79 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         return comUserMapper.UPDATE(user);
     }
 
-    public void validationPasswordPolicy(String newPassword) throws Exception {
-        List<ComSiteConfig> list = new ArrayList<>();
+    /**
+     * DB에서 비밀번호 정책을 조회하여 PasswordPolicy 객체로 변환
+     * 캐싱을 통해 매번 DB 조회를 방지하여 성능 개선
+     */
+    @Cacheable(value = "passwordPolicy", unless = "#result == null")
+    private PasswordPolicy getPasswordPolicyFromConfig() throws Exception {
         var comSiteConfig = ComSiteConfig.builder()
                 .config_group_id("PASSWORD_POLICY")
                 .use_yn("1")
                 .build();
-        list = comSiteConfigService.findImpl(comSiteConfig);
-        for (ComSiteConfig csc : list) {
-            String key = csc.getConfig_key();
-            String value = csc.getConfig_value();
-            // NOTE: 비밀번호 최대길이 설정
-            if (key.equals("MAX_LENGTH")) {
-                if (newPassword.length() > Integer.parseInt(value)) {
-                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.MAX_LENGTH"));
-                }
-                // NOTE: 비밀번호 최소 길이 설정
-            } else if (key.equals("MIN_LENGTH")) {
-                if (newPassword.length() < Integer.parseInt(value)) {
-                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.MIN_LENGTH"));
-                }
-                // NOTE: 비밀번호 대문자 설정
-            } else if (key.equals("REQUIRE_UPPERCASE")) {
-                Pattern UPPERCASE_PATTERN = Pattern.compile(".*[A-Z].*");
-                if (!UPPERCASE_PATTERN.matcher(newPassword).matches()) {
-                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.REQUIRE_UPPERCASE"));
-                }
-                // NOTE: 비밀번호 소문자 설정
-            } else if (key.equals("REQUIRE_LOWERCASE")) {
-                Pattern LOWRERCASE_PATTERN = Pattern.compile(".*[a-z].*");
-                if (!LOWRERCASE_PATTERN.matcher(newPassword).matches()) {
-                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.REQUIRE_LOWERCASE"));
-                }
-                // NOTE: 비밀번호 숫자 포함 설정
-            } else if (key.equals("REQUIRE_NUMBER")) {
-                Pattern NUMBER_PATTERN = Pattern.compile(".*\\d.*");
-                if (!NUMBER_PATTERN.matcher(newPassword).matches()) {
-                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.REQUIRE_NUMBER"));
-                }
-                // NOTE: 비빌번호 특수 문자 포함 설정
-            } else if (key.equals("REQUIRE_SPECIAL_CHARACTER")) {
-                Pattern SPECIAL_CHARACTER_PATTERN = Pattern.compile(".*[!@#$%^&*(),.?\":{}|<>].*");
-                if (!SPECIAL_CHARACTER_PATTERN.matcher(newPassword).matches()) {
-                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.REQUIRE_SPECIAL_CHARACTER"));
-                }
-            } else {
-                throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.NOT_EXISTS") + key);
+        List<ComSiteConfig> configList = comSiteConfigService.findImpl(comSiteConfig);
+
+        PasswordPolicy policy = new PasswordPolicy();
+        for (ComSiteConfig config : configList) {
+            String key = config.getConfig_key();
+            String value = config.getConfig_value();
+
+            switch (key) {
+                case "MAX_LENGTH":
+                    policy.setMaxLength(Integer.parseInt(value));
+                    break;
+                case "MIN_LENGTH":
+                    policy.setMinLength(Integer.parseInt(value));
+                    break;
+                case "REQUIRE_UPPERCASE":
+                    policy.setRequireUppercase("1".equals(value) || "true".equalsIgnoreCase(value));
+                    break;
+                case "REQUIRE_LOWERCASE":
+                    policy.setRequireLowercase("1".equals(value) || "true".equalsIgnoreCase(value));
+                    break;
+                case "REQUIRE_NUMBER":
+                    policy.setRequireNumber("1".equals(value) || "true".equalsIgnoreCase(value));
+                    break;
+                case "REQUIRE_SPECIAL_CHARACTER":
+                    policy.setRequireSpecialCharacter("1".equals(value) || "true".equalsIgnoreCase(value));
+                    break;
+                default:
+                    // 알 수 없는 설정 키는 무시 (로그 남기는 것도 고려 가능)
+                    break;
             }
+        }
+        return policy;
+    }
+
+    /**
+     * 비밀번호 정책 검증 (Core 라이브러리의 PasswordValidationUtil 사용)
+     * MessageSource를 통한 국제화 지원 및 모든 에러 메시지 표시
+     */
+    public void validationPasswordPolicy(String newPassword) throws Exception {
+        PasswordPolicy policy = getPasswordPolicyFromConfig();
+        PasswordValidationUtil validator = new PasswordValidationUtil();
+        List<String> errors = validator.validatePassword(newPassword, policy, messageSource);
+
+        if (!errors.isEmpty()) {
+            // 모든 에러를 한 번에 표시하여 사용자 경험 개선
+            String allErrors = String.join(" / ", errors);
+            throw new CustomException(allErrors);
         }
     }
 
-    public List<String> validatePasswordPolicy(String newPassword) {
-        return null;
+    /**
+     * 비밀번호 정책 검증 후 실패 이유 목록 반환 (MessageSource 지원)
+     */
+    public List<String> validatePasswordPolicy(String password) {
+        try {
+            PasswordPolicy policy = getPasswordPolicyFromConfig();
+            PasswordValidationUtil validator = new PasswordValidationUtil();
+            return validator.validatePassword(password, policy, messageSource);
+        } catch (Exception e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(getMessage("EXCEPTION.PASSWORD.POLICY.LOAD_FAILED"));
+            return errors;
+        }
     }
 
     public boolean matchToPassword(ComUser request) {
@@ -198,35 +229,4 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         String before_password_encoded = userList.get(0).getPassword();
         return passwordEncoder.matches(request.getBefore_password(), before_password_encoded);
     }
-    //
-    // public String getUserImageUrlByUserEmail(String email) {
-    // // TODO 이미지 호출 방식이 변경되면 여기도 바껴야 함
-    // String fileName = comUserMapper.GET_USER_IMAGE_FILE_NAME_BY_EMAIL(email);
-    // if(fileName == null || fileName.isEmpty()){
-    // return ""; // return null을 하면 에러나서 빈값 리턴
-    // }
-    // String imagePath =
-    // ApplicationResource.get("application.properties").get("imgPath").toString();
-    // String filePath =
-    // ApplicationResource.get("application.properties").get("filePath").toString();
-    // return imagePath + "?fileId=" + fileName + "&basePath=" + filePath +
-    // "/userImgFolder";
-    // }
-    // public int initializePassword(ComUser request) {
-    // var comUser = ComUser.builder().email(request.getEmail()).build();
-    // List<ComUser> users = comUserMapper.SELECT(comUser);
-    //
-    // if (users == null || users.isEmpty() || users.size() != 1) {
-    // throw new UsernameNotFoundException("NO_USER");
-    // }
-    //
-    // List<String> failReasons = validatePasswordPolicy(request.getPassword());
-    // if (failReasons.size() > 0) {
-    // throw new CustomException(failReasons.get(0));
-    // }
-    //
-    // var comUserBean = ComUser.builder().id(users.get(0).getId())
-    // .password(passwordEncoder.encode(request.get_password())).build();
-    // return comUserMapper.UPDATE(comUserBean);
-    // }
 }

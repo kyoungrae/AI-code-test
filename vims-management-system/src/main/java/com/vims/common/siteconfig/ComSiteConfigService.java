@@ -1,19 +1,15 @@
-/**
- * ++ giens Product ++
- */
 package com.vims.common.siteconfig;
 
 import com.system.common.base.AbstractCommonService;
 import com.system.common.exception.CustomException;
-import com.system.common.util.passwordvalidation.PasswordPolicy;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,19 +38,23 @@ public class ComSiteConfigService extends AbstractCommonService<ComSiteConfig> {
     }
 
     @Override
+    @CacheEvict(value = "passwordPolicy", allEntries = true)
     protected int removeImpl(ComSiteConfig request) {
         return comSiteConfigMapper.DELETE(request);
     }
 
     @Override
+    @CacheEvict(value = "passwordPolicy", allEntries = true)
     protected int updateImpl(ComSiteConfig request) {
         return comSiteConfigMapper.UPDATE(request);
     }
+
     @Override
-    protected int registerImpl(ComSiteConfig request) throws Exception{
-        try{
+    @CacheEvict(value = "passwordPolicy", allEntries = true)
+    protected int registerImpl(ComSiteConfig request) throws Exception {
+        try {
             return comSiteConfigMapper.INSERT(request);
-        }catch (DuplicateKeyException dke){
+        } catch (DuplicateKeyException dke) {
             throw new CustomException(getMessage("EXCEPTION.PK.EXIST"));
         }
     }

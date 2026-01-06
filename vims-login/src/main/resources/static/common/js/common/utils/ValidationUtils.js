@@ -48,7 +48,7 @@ FormUtility.prototype.checkObjectEmptyValue = function (value) {
 FormUtility.prototype.validationCheck = function (formId, messagePrefix) {
     console.log("validationCheck", formId, messagePrefix);
     if (!formId || !messagePrefix) {
-        console.error("validationCheck error: formId and messagePrefix are required.");
+        formUtil.toast("validationCheck error: formId and messagePrefix are required.");
         return false;
     }
 
@@ -87,7 +87,7 @@ FormUtility.prototype.validationCheck = function (formId, messagePrefix) {
                 }
 
                 result = false;
-                formUtil.alertPopup(message);
+                formUtil.toast(message, "error");
 
                 if (field.type !== "radio" && field.type !== "checkbox") {
                     $field.focus();
@@ -114,7 +114,7 @@ FormUtility.prototype.validationCheck = function (formId, messagePrefix) {
                 if (!isValid && message) {
                     result = false;
                     // TODO: 메시지 커스터마이징이 필요하다면 여기서 처리
-                    formUtil.alertPopup(message.replace('를', '를 형식에 맞게<br/>'));
+                    formUtil.toast(message.replace('를', '를 형식에 맞게<br/>'), "error");
 
                     $field.parent().attr('data-focus-line', true);
                     $field.parent().children("label").attr('data-focus-label', true);

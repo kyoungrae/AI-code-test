@@ -15,22 +15,22 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ComUserController extends AbstractCommonController<ComUser> {
 
-	private final ComUserService comUserService;
+    private final ComUserService comUserService;
     private final ComUserRepository comUserRepository;
 
-	@PostMapping("/findPage")
-    public Map<String,List<?>> findPage(@RequestBody ComUser reqeust) throws Exception{
+    @PostMapping("/findPage")
+    public Map<String, List<?>> findPage(@RequestBody ComUser reqeust) throws Exception {
         return comUserService.findPage(reqeust);
     }
 
     @PostMapping("/findAll")
-    protected List<ComUser> findAll(@RequestBody ComUser request) throws Exception{
+    protected List<ComUser> findAll(@RequestBody ComUser request) throws Exception {
         return comUserRepository.findAll();
     }
 
     @PostMapping("/find")
     @Override
-    protected List<ComUser> findImpl(@RequestBody ComUser request) throws Exception{
+    protected List<ComUser> findImpl(@RequestBody ComUser request) throws Exception {
         return comUserService.findImpl(request);
     }
 
@@ -48,32 +48,12 @@ public class ComUserController extends AbstractCommonController<ComUser> {
 
     @PostMapping("/register")
     @Override
-    public int registerImpl(@RequestBody ComUser request) {
+    public int registerImpl(@RequestBody ComUser request) throws Exception {
         return comUserService.registerImpl(request);
     }
 
-//    @PostMapping("/matchToPassword")
-//    public boolean matchToPassword(@RequestBody ComUser request){
-//        return comUserService.matchToPassword(request);
-//    }
-//
-//    @PostMapping("/getUserImageUrlByUserEmail")
-//    protected String getUserImageUrlByUserEmail(@RequestBody ComUser request) throws Exception{
-//        return comUserService.getUserImageUrlByUserEmail(request.getEmail());
-//    }
-
     @PostMapping("/changePassword")
-    public int changePassword(@RequestBody ComUser request) throws Exception{
+    public int changePassword(@RequestBody ComUser request) throws Exception {
         return comUserService.changePassword(request);
     }
-
-//    @PostMapping("/validatePasswordPolicy")
-//    public List<String> validatePasswordPolicy(@RequestBody String request) {
-//        return comUserService.validatePasswordPolicy(request);
-//    }
-//
-//    @PostMapping("/initializePassword")
-//    public int initializePassword(@RequestBody ComUser request) {
-//        return comUserService.initializePassword(request);
-//    }
 }
