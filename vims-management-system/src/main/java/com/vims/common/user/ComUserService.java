@@ -11,6 +11,10 @@ import com.system.common.util.passwordvalidation.PasswordValidationUtil;
 import com.system.common.util.validation.ValidationService;
 import com.vims.common.siteconfig.ComSiteConfig;
 import com.vims.common.siteconfig.ComSiteConfigService;
+import com.system.auth.domain.Token;
+import com.system.auth.domain.TokenType;
+import com.system.auth.mapper.SequenceMapper;
+import com.system.auth.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.MessageSource;
@@ -30,6 +34,8 @@ public class ComUserService extends AbstractCommonService<ComUser> {
     private final PasswordEncoder passwordEncoder;
     private final MessageSource messageSource;
     private final ComSiteConfigService comSiteConfigService;
+    private final SequenceMapper sequenceMapper;
+    private final TokenService tokenService;
 
     private String getMessage(String code) {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
@@ -108,6 +114,7 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         return comUserMapper.UPDATE(request);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     protected int registerImpl(ComUser request) throws Exception {
         // 비밀번호 확인
@@ -121,9 +128,25 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         request.setPassword(passwordEncoder.encode(request.getPassword()));
 
         try {
-            return comUserMapper.INSERT(request);
+            int result = comUserMapper.INSERT(request);
+
+            // Register Token
+            int tokenId = sequenceMapper.SELECT_NEXT_TOKEN_ID();
+            var token = Token.builder()
+                    .id(tokenId)
+                    .token("")
+                    .token_type(TokenType.AUTHORIZATION)
+                    .expired(false)
+                    .revoked(false)
+                    .auth_user(AuthUser.builder().id(request.getId()).build())
+                    .build();
+            tokenService.save(token);
+
+            return result;
         } catch (Exception e) {
-            throw e;
+            e.printStackTrace();
+            throw new Exception(e + "");
+
         }
     }
 

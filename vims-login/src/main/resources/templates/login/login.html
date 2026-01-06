@@ -227,11 +227,7 @@
             addUser();
         });
         $("#checkLogin").click(function () {
-            let validation = [];
-            validation.formId = "loginForm";
-            validation[0] = { id: "email", message: Message.Label.Array["CHECK.ID"] };
-            validation[1] = { id: "password", message: Message.Label.Array["CHECK.PWD"] };
-            if (formUtil.validationCheck(validation)) {
+            if (formUtil.validationCheck("loginForm", "CHECK.")) {
                 login();
             }
         });

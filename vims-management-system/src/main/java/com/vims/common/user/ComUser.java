@@ -76,7 +76,7 @@ public class ComUser extends Common {
      *  system_create_date : 작성일자
      * </pre>
      */
-    private String system_create_date;
+    private Date system_create_date;
 
     /***
      * <pre>
@@ -90,7 +90,7 @@ public class ComUser extends Common {
      *  system_update_date : 수정일자
      * </pre>
      */
-    private String system_update_date;
+    private Date system_update_date;
 
     /***
      * <pre>
