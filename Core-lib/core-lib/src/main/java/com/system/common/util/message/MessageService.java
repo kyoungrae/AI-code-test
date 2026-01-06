@@ -55,7 +55,7 @@ public class MessageService {
         // management 관련 메시지들
         defaultFiles.add("ComMenuMessage");
         defaultFiles.add("ComIconMessage");
-        defaultFiles.add("ComGroupMessage");
+        defaultFiles.add("ComDeptGroupMessage");
         defaultFiles.add("ComUserMessage");
         defaultFiles.add("ComCodeMessage");
         defaultFiles.add("ComCodeGroupMessage");

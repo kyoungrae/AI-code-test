@@ -866,12 +866,12 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
 }
 
 //NOTE: 불필요한 COM_CODE 조회 차단 로직
-async function checkSameCode(comCodeGroupIdArray, comGroupCodeId, cont) {
-    let param = { group_id: comGroupCodeId };
+async function checkSameCode(comCodeGroupIdArray, comDeptGroupCodeId, cont) {
+    let param = { group_id: comDeptGroupCodeId };
     let comCodeArray = [];
     //NOTE: 공통코드 Array에 그리드 COM_CODE_GROUP_ID 값과 일치하는 값이 있는지 여부
     let isExist = comCodeGroupIdArray.some(item => {
-        return Object.keys(item)[0] === comGroupCodeId;
+        return Object.keys(item)[0] === comDeptGroupCodeId;
     });
 
     //NOTE : 그리드 DataSet 호출 시 그리드 내의 COM_CODE_GROUP_ID로 COM_CODE 조회 후 comCodeGroupIdArray 배열에 추가
@@ -880,18 +880,18 @@ async function checkSameCode(comCodeGroupIdArray, comGroupCodeId, cont) {
         comCodeList.map(item => {
             comCodeArray.push({ [item.code_id]: item.code_name });
         })
-        comCodeGroupIdArray.push({ [comGroupCodeId]: comCodeArray });
+        comCodeGroupIdArray.push({ [comDeptGroupCodeId]: comCodeArray });
     }
     //NOTE: comCodeGroupIdArray 배열의 COM_CODE 키:값 으로 데이터 바인딩
     for (let key in cont) {
         let returnVALUE = "";
-        let lowerKey = comGroupCodeId.toLowerCase();
+        let lowerKey = comDeptGroupCodeId.toLowerCase();
         //NOTE : 그리드 row의 키가 COM_CODE_GROUP_ID와 일치 하는지 여부 파악
         if (key.toLowerCase() === lowerKey) {
             //NOTE: comCodeGroupIdArray 배열안의 키:값과 일치 하면 CODE_NAME 리턴
             comCodeGroupIdArray.find(item => {
-                if (formUtil.checkEmptyValue(item[comGroupCodeId])) {
-                    item[comGroupCodeId].find(valueItem => {
+                if (formUtil.checkEmptyValue(item[comDeptGroupCodeId])) {
+                    item[comDeptGroupCodeId].find(valueItem => {
                         if (Object.keys(valueItem)[0] === cont[key]) {
                             returnVALUE = valueItem[cont[key]];
                         }

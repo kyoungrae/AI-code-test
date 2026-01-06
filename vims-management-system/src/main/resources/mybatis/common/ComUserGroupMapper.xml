@@ -80,7 +80,7 @@
         SELECT
         id,
         group_id,
-        (SELECT group_name FROM COM_GROUP b where b.group_id = a.group_id) as group_name,
+        (SELECT group_name FROM COM_DEPT_GROUP b where b.group_id = a.group_id) as group_name,
         (SELECT user_name FROM COM_USER c where c.id = a.id) as user_name,
         user_email,
         user_id,
@@ -206,7 +206,7 @@
         SELECT
         id,
         group_id,
-        (SELECT group_name FROM COM_GROUP b where b.group_id = a.group_id) as group_name,
+        (SELECT group_name FROM COM_DEPT_GROUP b where b.group_id = a.group_id) as group_name,
         (SELECT user_name FROM COM_USER c where c.id = a.id) as user_name,
         user_email,
         user_id,

@@ -604,10 +604,10 @@
                         if (sideGridOpenFlag === "true") {
                             let accessGroupBtnActive = $(e.currentTarget).find("li[data-field='access_right_group']").children().length > 0;
                             if (accessGroupBtnActive) {
-                                findByComGroupList(null, null, null, null, rows);
+                                findByComDeptGroupList(null, null, null, null, rows);
                                 findByComAccsGroupMenuList(null, null, null, null, rows);
                             } else {
-                                findByComGroupList(null, null, null, null, null);
+                                findByComDeptGroupList(null, null, null, null, null);
                                 findByComAccsGroupMenuList(null, null, null, null, null);
                             }
                         }
@@ -649,7 +649,7 @@
             + '  </div>'
             + '</div>';
         await $("#access_group_grid").append(htmlSource);
-        await findByComGroupList(null, null, null, null, data);
+        await findByComDeptGroupList(null, null, null, null, data);
         await findByComAccsGroupMenuList(null, null, null, null, data);
     }
     /**
@@ -660,8 +660,8 @@
      * @param sortOrder
      * @param cont
      */
-    function findByComGroupList(page, range, sortId, sortOrder, cont) {
-        let url = "/cms/common/comGroup/findNotExistsComAccsGroupMenu";
+    function findByComDeptGroupList(page, range, sortId, sortOrder, cont) {
+        let url = "/cms/common/comDeptGroup/findNotExistsComAccsGroupMenu";
         let param = {
         };
         // 검색조건 설정 (추가해서 사용)
@@ -671,30 +671,30 @@
             if (status === 200) {
                 let data = response.data;
                 // 그리드 헤더 설정
-                let comGroup_menuGrid_header = {
+                let comDeptGroup_menuGrid_header = {
                     title: "그룹아이디 목록",
                     list: [
-                        { HEADER: Message.Label.Array["COM_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: Message.Label.Array["COM_GROUP.TOP_GROUP_ID"], ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: Message.Label.Array["COM_GROUP.GROUP_ID"], ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: Message.Label.Array["COM_GROUP.USE_YN"], ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
-                        { HEADER: Message.Label.Array["COM_GROUP.GROUP_LEVEL"], ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array["COM_DEPT_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COM_DEPT_GROUP.TOP_GROUP_ID"], ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COM_DEPT_GROUP.GROUP_ID"], ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COM_DEPT_GROUP.USE_YN"], ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: Message.Label.Array["COM_DEPT_GROUP.GROUP_LEVEL"], ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: Message.Label.Array["REGISTER_BTN"], ID: "register_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: { "group_level": "0" }, HIDDEN: false },
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let comGroup_menu_grid = formUtil.giGridHierarchy(comGroup_menuGrid_header, null, null, "gi-Grid2");
+                let comDeptGroup_menu_grid = formUtil.giGridHierarchy(comDeptGroup_menuGrid_header, null, null, "gi-Grid2");
 
-                comGroup_menu_grid.HierarchyOption({ level_column: "group_level", parent_depth_column: "group_id", child_depth_column: "top_group_id" });
+                comDeptGroup_menu_grid.HierarchyOption({ level_column: "group_level", parent_depth_column: "group_id", child_depth_column: "top_group_id" });
                 //그리드 데이터 설정
                 if (cont !== null) {
-                    comGroup_menu_grid.DataSet(data);
+                    comDeptGroup_menu_grid.DataSet(data);
                 } else {
-                    comGroup_menu_grid.DataSet();
+                    comDeptGroup_menu_grid.DataSet();
                 }
 
-                comGroup_menu_grid.detailBtnClick(registerAccessGroupInMenu, "register_btn");
-                comGroup_menu_grid.gridColumResize("gi-Grid2");
+                comDeptGroup_menu_grid.detailBtnClick(registerAccessGroupInMenu, "register_btn");
+                comDeptGroup_menu_grid.gridColumResize("gi-Grid2");
                 function registerAccessGroupInMenu(row) {
                     row["menu_code"] = cont.menu_code;
                     accessGroupInMenuRegister(row);
@@ -719,7 +719,7 @@
                 let status = response.status;
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
-                    findByComGroupList(null, null, null, null, row);
+                    findByComDeptGroupList(null, null, null, null, row);
                     findByComAccsGroupMenuList(null, null, null, null, row);
                     findByMenuList();
                 } else {
@@ -1003,7 +1003,7 @@
         $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
             if ($(item).data("field")) {
                 let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COM_GROUP.CHECK." + messageId];
+                let message = Message.Label.Array["COM_DEPT_GROUP.CHECK." + messageId];
                 validation.push({ id: item.id, message: message });
             }
         });
@@ -1040,7 +1040,7 @@
         axios.post(url, param).then(response => {
             if (response.status === 200) {
                 formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
-                findByComGroupList(null, null, null, null, cont);
+                findByComDeptGroupList(null, null, null, null, cont);
                 findByComAccsGroupMenuList(null, null, null, null, cont);
                 findByMenuList();
             }

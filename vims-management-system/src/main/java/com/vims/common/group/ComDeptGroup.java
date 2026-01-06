@@ -20,7 +20,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class ComGroup extends Common {
+public class ComDeptGroup extends Common {
     @Transient
 	private String keys = Arrays.toString(new String[]{"group_id"});
 
