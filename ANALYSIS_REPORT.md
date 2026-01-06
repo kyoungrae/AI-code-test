@@ -9,9 +9,9 @@
 - **vims-gateway**, **FMS**: core-lib dependency 사용
 
 ### 2. 파싱 규칙
-- **HTML**: `[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]`
-- **JavaScript Object Definition**: `{ HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]', ... }`
-- **JavaScript Code**: `Message.Label.Array["COMMON_MENU.MENU_NAME"]`
+- **HTML**: `[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]`
+- **JavaScript Object Definition**: `{ HEADER: '[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]', ... }`
+- **JavaScript Code**: `Message.Label.Array["COM_MENU.MENU_NAME"]`
 
 ## 문제점
 
@@ -43,9 +43,9 @@
 ```javascript
 // menuSettings.html 라인 550-552
 let menuGrid = {
-    title: '[Page.Message].Message.Label.Array["COMMON_MENU.TITLE"]', // ✗ 치환 안됨
+    title: '[Page.Message].Message.Label.Array["COM_MENU.TITLE"]', // ✗ 치환 안됨
     list: [
-        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]', ... } // ✗ 치환 안됨
+        { HEADER: '[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]', ... } // ✗ 치환 안됨
     ]
 }
 ```
@@ -249,9 +249,9 @@ JavaScript에서 [Page.Message] 패턴 대신 Message 객체를 직접 참조하
 ```javascript
 // menuSettings.html
 let menuGrid = {
-    title: '[Page.Message].Message.Label.Array["COMMON_MENU.TITLE"]', // ✗ 치환 안됨
+    title: '[Page.Message].Message.Label.Array["COM_MENU.TITLE"]', // ✗ 치환 안됨
     list: [
-        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]', ... }
+        { HEADER: '[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]', ... }
     ]
 }
 ```
@@ -260,9 +260,9 @@ let menuGrid = {
 ```javascript
 // menuSettings.html
 let menuGrid = {
-    title: Message.Label.Array["COMMON_MENU.TITLE"], // ✓ 런타임 참조
+    title: Message.Label.Array["COM_MENU.TITLE"], // ✓ 런타임 참조
     list: [
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME"], ... } // ✓ 런타임 참조
+        { HEADER: Message.Label.Array["COM_MENU.MENU_NAME"], ... } // ✓ 런타임 참조
     ]
 }
 ```
@@ -290,7 +290,7 @@ let menuGrid = {
    
 2. **HTML 마크업은 유지**
    - HTML 태그 내의 `[Page.Message]` 패턴은 서버 사이드에서 계속 치환
-   - 예: `<h1>[Page.Message].Message.Label.Array["COMMON_MENU.TITLE_LIST"]</h1>`
+   - 예: `<h1>[Page.Message].Message.Label.Array["COM_MENU.TITLE_LIST"]</h1>`
 
 #### Phase 2: 중기 개선 (방안 2)
 1. **빌드 자동화 설정**
@@ -325,10 +325,10 @@ let menuGrid = {
 **수정 전 (menuSettings.html 라인 548-577)**:
 ```javascript
 let menuGrid = {
-    title: '[Page.Message].Message.Label.Array["COMMON_MENU.TITLE"]',
+    title: '[Page.Message].Message.Label.Array["COM_MENU.TITLE"]',
     list: [
-        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]', ID: "menu_name_kr", ... },
-        { HEADER: '[Page.Message].Message.Label.Array["COMMON_MENU.MENU_CODE"]', ID: "menu_code", ... },
+        { HEADER: '[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]', ID: "menu_name_kr", ... },
+        { HEADER: '[Page.Message].Message.Label.Array["COM_MENU.MENU_CODE"]', ID: "menu_code", ... },
         // ... 나머지
     ]
 }
@@ -337,24 +337,24 @@ let menuGrid = {
 **수정 후**:
 ```javascript
 let menuGrid = {
-    title: Message.Label.Array["COMMON_MENU.TITLE"],
+    title: Message.Label.Array["COM_MENU.TITLE"],
     list: [
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME"], ID: "menu_name_kr", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_CODE"], ID: "menu_code", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_LEVEL"], ID: "menu_level", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NUMBER"], ID: "menu_number", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.TOP_MENU_CODE"], ID: "top_menu_code", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.PRGM_URL"], ID: "prgm_url", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.URL"], ID: "url", ... },
-        { HEADER: Message.Label.Array["COMMON_ICON.ICON_VIEW"], ID: 'icon_view', ... },
-        { HEADER: Message.Label.Array["COMMON_ICON.ICON_CLASS"], ID: "menu_icon", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.USE_YN"], ID: "use_yn", ... },
+        { HEADER: Message.Label.Array["COM_MENU.MENU_NAME"], ID: "menu_name_kr", ... },
+        { HEADER: Message.Label.Array["COM_MENU.MENU_CODE"], ID: "menu_code", ... },
+        { HEADER: Message.Label.Array["COM_MENU.MENU_LEVEL"], ID: "menu_level", ... },
+        { HEADER: Message.Label.Array["COM_MENU.MENU_NUMBER"], ID: "menu_number", ... },
+        { HEADER: Message.Label.Array["COM_MENU.TOP_MENU_CODE"], ID: "top_menu_code", ... },
+        { HEADER: Message.Label.Array["COM_MENU.PRGM_URL"], ID: "prgm_url", ... },
+        { HEADER: Message.Label.Array["COM_MENU.URL"], ID: "url", ... },
+        { HEADER: Message.Label.Array["COM_ICON.ICON_VIEW"], ID: 'icon_view', ... },
+        { HEADER: Message.Label.Array["COM_ICON.ICON_CLASS"], ID: "menu_icon", ... },
+        { HEADER: Message.Label.Array["COM_MENU.USE_YN"], ID: "use_yn", ... },
         { HEADER: Message.Label.Array["MODIFY_BTN"], ID: "update_menu_btn", ... },
         { HEADER: Message.Label.Array["DELETE_BTN"], ID: "delete_menu_btn", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"], ID: "access_right_group", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_SEQUENCE"], ID: "menu_sequence", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME_EN"], ID: "menu_name_en", ... },
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME_MN"], ID: "menu_name_mn", ... },
+        { HEADER: Message.Label.Array["COM_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"], ID: "access_right_group", ... },
+        { HEADER: Message.Label.Array["COM_MENU.MENU_SEQUENCE"], ID: "menu_sequence", ... },
+        { HEADER: Message.Label.Array["COM_MENU.MENU_NAME_EN"], ID: "menu_name_en", ... },
+        { HEADER: Message.Label.Array["COM_MENU.MENU_NAME_MN"], ID: "menu_name_mn", ... },
         // ... 나머지
     ]
 }

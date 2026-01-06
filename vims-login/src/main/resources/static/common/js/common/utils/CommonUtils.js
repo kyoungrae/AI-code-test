@@ -3,9 +3,9 @@
  * @text : group_id로 공통코드 조회
  * @writer : 이경태
  */
-async function findCommonCode(param) {
+async function findComCode(param) {
     let result = {};
-    let url = '/cms/common/commonCode/findCommonCode';
+    let url = '/cms/common/comCode/findComCode';
 
     try {
         return new Promise((resolve, reject) => {
@@ -25,12 +25,12 @@ async function findCommonCode(param) {
  * @title : 공통 코드 그룹 조회
  * @text : 그룹 ID 목록으로 공통코드 조회 및 세션 저장
  */
-FormUtility.prototype.findByCommonCodeGroup = function (group_id) {
-    let url = "/api/commonCode/findByCommonCodeGroup";
+FormUtility.prototype.findByComCodeGroup = function (group_id) {
+    let url = "/api/comCode/findByComCodeGroup";
     let param = group_id.split(",");
     axios.post(url, param).then(response => {
         let data = response.data;
-        sessionStorage.setItem("commonCodeGroup", JSON.stringify(data));
+        sessionStorage.setItem("comCodeGroup", JSON.stringify(data));
     });
 }
 
@@ -38,11 +38,11 @@ FormUtility.prototype.findByCommonCodeGroup = function (group_id) {
  * @title : 세션 내 공통코드 조회
  * @text : 세션에 저장된 공통코드 중 특정 그룹 코드 조회
  */
-FormUtility.prototype.findCommonCode = function (group_id) {
-    let commonCodeGroup = JSON.parse(sessionStorage.getItem("commonCodeGroup"));
+FormUtility.prototype.findComCode = function (group_id) {
+    let comCodeGroup = JSON.parse(sessionStorage.getItem("comCodeGroup"));
     let returnData = [];
-    if (formUtil.checkEmptyValue(commonCodeGroup)) {
-        commonCodeGroup.forEach(item => {
+    if (formUtil.checkEmptyValue(comCodeGroup)) {
+        comCodeGroup.forEach(item => {
             if (item.group_code_id === group_id) {
                 returnData.push(item);
             }
@@ -64,13 +64,13 @@ FormUtility.prototype.resetFormUtilityValue = function () {
  * @title : 공통 코드명 설정
  * @text : 필드명과 그룹 ID를 이용해 공통코드 명칭 설정
  */
-FormUtility.prototype.setCommonCodeName = async function (fieldName, groupId, cont) {
+FormUtility.prototype.setComCodeName = async function (fieldName, groupId, cont) {
     let codeId = cont[fieldName];
     let param = {
         group_id: groupId,
         code_id: codeId
     }
-    let data = await findCommonCode(param);
+    let data = await findComCode(param);
     if (data.length > 0) {
         let value = data[0].code_name;
         $("[data-field=" + fieldName + "]").text(value);

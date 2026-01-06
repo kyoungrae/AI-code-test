@@ -29,7 +29,7 @@ class file {
 class createFileUploadHTML {
     constructor(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME) {
         this.BTN_ID = $('button[data-file-upload-btn]')
-        this.PATH = PATH; //NOTE : COMMON_FILE 테이블이 아닌 특정 파일 테이블이 있으면 해당 경로 작성
+        this.PATH = PATH; //NOTE : COM_FILE 테이블이 아닌 특정 파일 테이블이 있으면 해당 경로 작성
         this.ID_TO_RECEIVE_VALUE = ID_TO_RECEIVE_VALUE;
         this.FOLDER_NAME = FOLDER_NAME;
         this.COMMON_UPLOAD_PATH = "/fms/fileManager/upload";
@@ -61,7 +61,7 @@ class createFileUploadHTML {
         this.FINAL_UPLOAD_FILE_LIST = {};   //NOTE : 최종 upload 대상 파일 목록
         this.FILE_TEXT_LIST = [];
         this.CONTENTS = null;
-        this.COMMON_FILE_UPLOAD_ID = "#formUtil_fileUpload"; //NOTE: home.html 내에 있는 파일 업로드용 layout ID
+        this.COM_FILE_UPLOAD_ID = "#formUtil_fileUpload"; //NOTE: home.html 내에 있는 파일 업로드용 layout ID
         this.CANCEL_BTN = ".formUtil-fileUpload_cancelBtn";
         this.UPLOAD_BTN = ".formUtil-fileUpload_uploadBtn";
         this.DRAG_N_DROP_INPUT = "#fileElem";
@@ -149,7 +149,7 @@ class createFileUploadHTML {
      */
     clearFileUploadBody() {
         let isEmpty = $(".fileUpload_body").length === 0;
-        let $fileUpload = $(this.COMMON_FILE_UPLOAD_ID);
+        let $fileUpload = $(this.COM_FILE_UPLOAD_ID);
         isEmpty ? $fileUpload.append(this.CONTENTS) : $fileUpload.empty();
     }
     /**
@@ -179,7 +179,7 @@ class createFileUploadHTML {
             .off("click.formUtilFileUploadCancelBtnClickEventHandler")
             .on("click.formUtilFileUploadCancelBtnClickEventHandler", formUtilFileUploadCancelBtnClickEventHandler);
         function formUtilFileUploadCancelBtnClickEventHandler() {
-            $(that.COMMON_FILE_UPLOAD_ID).empty();
+            $(that.COM_FILE_UPLOAD_ID).empty();
             that.resetVariable();
         }
     }
@@ -193,7 +193,7 @@ class createFileUploadHTML {
             .off("click.fileUploadBtnClickEventHandler")
             .on("click.fileUploadBtnClickEventHandler", fileUploadBtnClickEventHandler);
         function fileUploadBtnClickEventHandler() {
-            that.commonFileUpload();
+            that.comFileUpload();
         }
     }
     /**
@@ -292,7 +292,7 @@ class createFileUploadHTML {
     /**
      * @title : 공통 파일 업로드 실행
      */
-    commonFileUpload() {
+    comFileUpload() {
         let that = this;
         let url = that.COMMON_UPLOAD_PATH;
         let param = new FormData();
@@ -327,7 +327,7 @@ class createFileUploadHTML {
                     let data = response.data;
                     let file_uuid = data[0].file_uuid;
 
-                    //NOTE : 파일을 저장 후 전달 받은 COMMON_FILE의 FILE_UUID를 설정한 값에 전달
+                    //NOTE : 파일을 저장 후 전달 받은 COM_FILE의 FILE_UUID를 설정한 값에 전달
                     $("#" + that.ID_TO_RECEIVE_VALUE).val(file_uuid);
                     //NOTE : 파일업로드 팝업 초기화
                     $("#formUtil_fileUpload").empty();

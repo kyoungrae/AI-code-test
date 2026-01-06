@@ -1,7 +1,7 @@
 package com.fms.file;
 
-import com.fms.common.CommonFile;
-import com.fms.common.CommonFileMapper;
+import com.fms.common.ComFile;
+import com.fms.common.ComFileMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -23,10 +23,10 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class FileManagerService extends FileProcessManager {
-    private final CommonFileMapper commonFileMapper;
+    private final ComFileMapper comFileMapper;
 //    private final String applicationFileName = "application.properties";
 //    public List<Map<String,Object>> fileSearch(Map<String,Object> param) throws Exception{
-//        return commonFileMapper.COMMON_FILE_SELECT(param);
+//        return comFileMapper.COM_FILE_SELECT(param);
 //    }
 //    public void fileCreate(Map<String , Object> map) throws Exception{
 //        String folderName = (String) map.get("folder_name");
@@ -49,12 +49,12 @@ public class FileManagerService extends FileProcessManager {
                 list.put("system_create_userid",userId);
             }
             if(!result.isEmpty()){
-                var commonFile = CommonFile.builder()
+                var comFile = ComFile.builder()
                         .uuid(uid)
                         .temp_yn(0) //NOTE : 파일 임시 저장, 사용자가 작성 취소 하거나, 화면을 나갈 경우 삭제하기 위한 flag
                         .system_create_userid(userId)
                         .build();
-                commonFileMapper.COMMON_FILE_INSERT(commonFile);
+                comFileMapper.COM_FILE_INSERT(comFile);
                 return result;
             }else{
                 throw new Exception("File upload failed");

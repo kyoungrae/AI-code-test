@@ -1,0 +1,50 @@
+package com.vims.common.codegroup;
+
+import com.system.common.base.AbstractCommonService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@AllArgsConstructor
+public class ComCodeGroupService extends AbstractCommonService<ComCodeGroup> {
+    private final ComCodeGroupMapper comCodeGroupMapper;
+    private final ComCodeGroupRepository comCodeGroupRepository;
+
+    protected List<ComCodeGroup> findByGroupId(ComCodeGroup request) throws Exception {
+        try{
+            return comCodeGroupRepository.findAll();
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+    }
+    @Override
+    protected List<ComCodeGroup> selectPage(ComCodeGroup request) throws Exception {
+        return comCodeGroupMapper.SELECT_PAGE(request);
+    }
+
+    @Override
+    protected int selectPagingTotalNumber(ComCodeGroup request) throws Exception {
+        return comCodeGroupMapper.SELECT_PAGING_TOTAL_NUMBER(request);
+    }
+    @Override
+    protected List<ComCodeGroup> findImpl(ComCodeGroup request) throws Exception {
+        return comCodeGroupMapper.SELECT(request);
+    }
+
+    @Override
+    protected int removeImpl(ComCodeGroup request) {
+        return comCodeGroupMapper.DELETE(request);
+    }
+
+    @Override
+    protected int updateImpl(ComCodeGroup request) {
+        return comCodeGroupMapper.UPDATE(request);
+    }
+
+    @Override
+    protected int registerImpl(ComCodeGroup request) {
+        return comCodeGroupMapper.INSERT(request);
+    }
+}

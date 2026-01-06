@@ -5,14 +5,14 @@
     <select id="SELECT_USER_INFO" resultType="com.system.auth.authuser.AuthUser">
         SELECT
            id, email, password, role, user_id, office_code, system_create_userid, system_create_date, system_update_date, system_update_userid, user_name, tel, address, address_detail, postal_code, uuid
-        FROM COMMON_USER
+        FROM COM_USER
         where email = #{email}
     </select>
     <select id="SELECT_NEXT_TOKEN_ID" resultType="int">
         SELECT nextval('TOKEN_SEQ')
     </select>
     <insert id="INSERT_USER_INFO" parameterType="com.system.auth.authuser.AuthUser">
-        INSERT INTO COMMON_USER (
+        INSERT INTO COM_USER (
             id,
             user_id,
             password,

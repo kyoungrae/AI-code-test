@@ -181,7 +181,7 @@
     }
     function findUserName() {
         const email = JwtUtils.getUserEmailFromJWT();
-        const url = "/cms/common/commonUser/find";
+        const url = "/cms/common/comUser/find";
 
         axios.post(url, { email }).then(response => {
             const data = response.data[0];
@@ -246,7 +246,7 @@
      * NOTE : 메뉴데이터 조회
      */
     function findByMenuList() {
-        let url = "/cms/common/commonMenu/findAccessRightGroupForMenu";
+        let url = "/cms/common/comMenu/findAccessRightGroupForMenu";
         let param = {};
         axios.post(url, param).then(response => {
             let status = response.status;

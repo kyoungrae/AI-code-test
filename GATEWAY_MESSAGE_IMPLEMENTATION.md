@@ -65,7 +65,7 @@ message:
 └───────┬──────────┘
         │
         │ HTTP GET
-        │ /common/js/message/management/CommonMenuMessage.js
+        │ /common/js/message/management/ComMenuMessage.js
         │
         ▼
 ┌──────────────────┐
@@ -103,11 +103,11 @@ PageRedirectService.pageLoad()
     ↓
 PageRedirectService.messageMatcher()
     ↓
-MessageService.getMessage("COMMON_MENU.MENU_NAME", "ko")
+MessageService.getMessage("COM_MENU.MENU_NAME", "ko")
     ↓
 messageCache에서 조회 → "메뉴명" 반환
     ↓
-HTML에서 [Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]
+HTML에서 [Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]
 → "메뉴명"으로 치환
 ```
 
@@ -121,9 +121,9 @@ HTML에서 [Page.Message].Message.Label.Array["COMMON_MENU.MENU_NAME"]
 <script>
 // JavaScript에서 직접 참조
 let menuGrid = {
-    title: Message.Label.Array["COMMON_MENU.TITLE"],  // ✓ 런타임 참조
+    title: Message.Label.Array["COM_MENU.TITLE"],  // ✓ 런타임 참조
     list: [
-        { HEADER: Message.Label.Array["COMMON_MENU.MENU_NAME"], ... }
+        { HEADER: Message.Label.Array["COM_MENU.MENU_NAME"], ... }
     ]
 }
 </script>
@@ -143,8 +143,8 @@ let menuGrid = {
 ```
 === MessageService: 로드된 JS 파일 목록 ===
  - Message
- - CommonMenuMessage
- - CommonIconMessage
+ - ComMenuMessage
+ - ComIconMessage
  - ...
 === 총 X개 파일 발견 ===
 
@@ -157,9 +157,9 @@ let menuGrid = {
   ✓ Gateway에서 파일 로드 성공: http://localhost:8080/common/js/common/Message.js
     → 파싱된 메시지 수: 97
 
-메시지 파일 로드 시도: CommonMenuMessage.js (locale: ko)
-  → Gateway를 통해 메시지 로드 시도: CommonMenuMessage.js
-    Gateway URL 시도: http://localhost:8080/common/js/message/management/CommonMenuMessage.js
+메시지 파일 로드 시도: ComMenuMessage.js (locale: ko)
+  → Gateway를 통해 메시지 로드 시도: ComMenuMessage.js
+    Gateway URL 시도: http://localhost:8080/common/js/message/management/ComMenuMessage.js
   ✓ Gateway에서 파일 로드 성공
     → 파싱된 메시지 수: 48
 ```

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vims.common.menu.ComMenuMapper">
+    <sql id="sortFilter">
+        ORDER BY
+        <choose>
+            <when test="sort_id != null and sort_order != null">
+                ${sort_id} ${sort_order}
+            </when>
+            <otherwise>
+                system_create_date DESC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="SELECT_PAGE" resultType="com.vims.common.menu.ComMenu">
+        SELECT
+            
+            menu_code, 
+            menu_name_kr, 
+            menu_name_en, 
+            menu_name_mn, 
+            menu_number, 
+            menu_level, 
+            top_menu_code, 
+            url,
+            use_yn,
+            system_create_date, 
+            system_create_userid, 
+            system_update_date, 
+            system_update_userid, 
+            menu_sequence, 
+            menu_icon, 
+            prgm_url 
+        FROM COM_MENU
+        <where>
+            
+            <if test="menu_code != null and menu_code != ''">AND menu_code = #{menu_code}</if>
+            <if test="menu_name_kr != null and menu_name_kr != ''">AND menu_name_kr = #{menu_name_kr}</if>
+            <if test="menu_name_en != null and menu_name_en != ''">AND menu_name_en = #{menu_name_en}</if>
+            <if test="menu_name_mn != null and menu_name_mn != ''">AND menu_name_mn = #{menu_name_mn}</if>
+            <if test="menu_number != null and menu_number != ''">AND menu_number = #{menu_number}</if>
+            <if test="menu_level != null and menu_level != ''">AND menu_level = #{menu_level}</if>
+            <if test="top_menu_code != null and top_menu_code != ''">AND top_menu_code = #{top_menu_code}</if>
+            <if test="url != null and url != ''">AND url = #{url}</if>
+            <if test="use_yn != null and use_yn != ''">AND use_yn = #{use_yn}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
+            <if test="menu_sequence != null and menu_sequence != ''">AND menu_sequence = #{menu_sequence}</if>
+            <if test="menu_icon != null and menu_icon != ''">AND menu_icon = #{menu_icon}</if>
+            <if test="prgm_url != null and prgm_url != ''">AND prgm_url = #{prgm_url}</if>
+            
+            <if test="_menu_code != null and _menu_code != ''">AND menu_code LIKE CONCAT('%', #{_menu_code}, '%')</if>
+            <if test="_menu_name_kr != null and _menu_name_kr != ''">AND menu_name_kr LIKE CONCAT('%', #{_menu_name_kr}, '%')</if>
+            <if test="_menu_name_en != null and _menu_name_en != ''">AND menu_name_en LIKE CONCAT('%', #{_menu_name_en}, '%')</if>
+            <if test="_menu_name_mn != null and _menu_name_mn != ''">AND menu_name_mn LIKE CONCAT('%', #{_menu_name_mn}, '%')</if>
+            <if test="_menu_number != null and _menu_number != ''">AND menu_number LIKE CONCAT('%', #{_menu_number}, '%')</if>
+            <if test="_menu_level != null and _menu_level != ''">AND menu_level LIKE CONCAT('%', #{_menu_level}, '%')</if>
+            <if test="_top_menu_code != null and _top_menu_code != ''">AND top_menu_code LIKE CONCAT('%', #{_top_menu_code}, '%')</if>
+            <if test="_url != null and _url != ''">AND url LIKE CONCAT('%', #{_url}, '%')</if>
+            <if test="_use_yn != null and _use_yn != ''">AND use_yn LIKE CONCAT('%', #{_use_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+            <if test="_menu_sequence != null and _menu_sequence != ''">AND menu_sequence LIKE CONCAT('%', #{_menu_sequence}, '%')</if>
+            <if test="_menu_icon != null and _menu_icon != ''">AND menu_icon LIKE CONCAT('%', #{_menu_icon}, '%')</if>
+            <if test="_prgm_url != null and _prgm_url != ''">AND prgm_url LIKE CONCAT('%', #{_prgm_url}, '%')</if>
+        </where>
+        <include refid="sortFilter"/>
+        LIMIT #{row_range} OFFSET #{offset}
+    </select>
+
+    <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
+        SELECT CEIL(COUNT(*) / #{row_range}) FROM COM_MENU
+        <where>
+            
+            <if test="menu_code != null and menu_code != ''">AND menu_code = #{menu_code}</if>
+            <if test="menu_name_kr != null and menu_name_kr != ''">AND menu_name_kr = #{menu_name_kr}</if>
+            <if test="menu_name_en != null and menu_name_en != ''">AND menu_name_en = #{menu_name_en}</if>
+            <if test="menu_name_mn != null and menu_name_mn != ''">AND menu_name_mn = #{menu_name_mn}</if>
+            <if test="menu_number != null and menu_number != ''">AND menu_number = #{menu_number}</if>
+            <if test="menu_level != null and menu_level != ''">AND menu_level = #{menu_level}</if>
+            <if test="top_menu_code != null and top_menu_code != ''">AND top_menu_code = #{top_menu_code}</if>
+            <if test="url != null and url != ''">AND url = #{url}</if>
+            <if test="use_yn != null and use_yn != ''">AND use_yn = #{use_yn}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
+            <if test="menu_sequence != null and menu_sequence != ''">AND menu_sequence = #{menu_sequence}</if>
+            <if test="menu_icon != null and menu_icon != ''">AND menu_icon = #{menu_icon}</if>
+            <if test="prgm_url != null and prgm_url != ''">AND prgm_url = #{prgm_url}</if>
+            
+            <if test="_menu_code != null and _menu_code != ''">AND menu_code LIKE CONCAT('%', #{_menu_code}, '%')</if>
+            <if test="_menu_name_kr != null and _menu_name_kr != ''">AND menu_name_kr LIKE CONCAT('%', #{_menu_name_kr}, '%')</if>
+            <if test="_menu_name_en != null and _menu_name_en != ''">AND menu_name_en LIKE CONCAT('%', #{_menu_name_en}, '%')</if>
+            <if test="_menu_name_mn != null and _menu_name_mn != ''">AND menu_name_mn LIKE CONCAT('%', #{_menu_name_mn}, '%')</if>
+            <if test="_menu_number != null and _menu_number != ''">AND menu_number LIKE CONCAT('%', #{_menu_number}, '%')</if>
+            <if test="_menu_level != null and _menu_level != ''">AND menu_level LIKE CONCAT('%', #{_menu_level}, '%')</if>
+            <if test="_top_menu_code != null and _top_menu_code != ''">AND top_menu_code LIKE CONCAT('%', #{_top_menu_code}, '%')</if>
+            <if test="_url != null and _url != ''">AND url LIKE CONCAT('%', #{_url}, '%')</if>
+            <if test="_use_yn != null and _use_yn != ''">AND use_yn LIKE CONCAT('%', #{_use_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+            <if test="_menu_sequence != null and _menu_sequence != ''">AND menu_sequence LIKE CONCAT('%', #{_menu_sequence}, '%')</if>
+            <if test="_menu_icon != null and _menu_icon != ''">AND menu_icon LIKE CONCAT('%', #{_menu_icon}, '%')</if>
+            <if test="_prgm_url != null and _prgm_url != ''">AND prgm_url LIKE CONCAT('%', #{_prgm_url}, '%')</if>
+        </where>
+    </select>
+
+    <select id="SELECT" resultType="com.vims.common.menu.ComMenu">
+        SELECT
+            
+            menu_code,
+            menu_name_kr,
+            menu_name_en,
+            menu_name_mn,
+            menu_number,
+            menu_level,
+            top_menu_code,
+            url,
+            use_yn,
+            system_create_date,
+            system_create_userid,
+            system_update_date,
+            system_update_userid,
+            menu_sequence,
+            menu_icon,
+            prgm_url
+        FROM COM_MENU
+        <where>
+            
+            <if test="menu_code != null and menu_code != ''">AND menu_code = #{menu_code}</if>
+            <if test="menu_name_kr != null and menu_name_kr != ''">AND menu_name_kr = #{menu_name_kr}</if>
+            <if test="menu_name_en != null and menu_name_en != ''">AND menu_name_en = #{menu_name_en}</if>
+            <if test="menu_name_mn != null and menu_name_mn != ''">AND menu_name_mn = #{menu_name_mn}</if>
+            <if test="menu_number != null and menu_number != ''">AND menu_number = #{menu_number}</if>
+            <if test="menu_level != null and menu_level != ''">AND menu_level = #{menu_level}</if>
+            <if test="top_menu_code != null and top_menu_code != ''">AND top_menu_code = #{top_menu_code}</if>
+            <if test="url != null and url != ''">AND url = #{url}</if>
+            <if test="use_yn != null and use_yn != ''">AND use_yn = #{use_yn}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
+            <if test="menu_sequence != null and menu_sequence != ''">AND menu_sequence = #{menu_sequence}</if>
+            <if test="menu_icon != null and menu_icon != ''">AND menu_icon = #{menu_icon}</if>
+            <if test="prgm_url != null and prgm_url != ''">AND prgm_url = #{prgm_url}</if>
+            
+            <if test="_menu_code != null and _menu_code != ''">AND menu_code LIKE CONCAT('%', #{_menu_code}, '%')</if>
+            <if test="_menu_name_kr != null and _menu_name_kr != ''">AND menu_name_kr LIKE CONCAT('%', #{_menu_name_kr}, '%')</if>
+            <if test="_menu_name_en != null and _menu_name_en != ''">AND menu_name_en LIKE CONCAT('%', #{_menu_name_en}, '%')</if>
+            <if test="_menu_name_mn != null and _menu_name_mn != ''">AND menu_name_mn LIKE CONCAT('%', #{_menu_name_mn}, '%')</if>
+            <if test="_menu_number != null and _menu_number != ''">AND menu_number LIKE CONCAT('%', #{_menu_number}, '%')</if>
+            <if test="_menu_level != null and _menu_level != ''">AND menu_level LIKE CONCAT('%', #{_menu_level}, '%')</if>
+            <if test="_top_menu_code != null and _top_menu_code != ''">AND top_menu_code LIKE CONCAT('%', #{_top_menu_code}, '%')</if>
+            <if test="_url != null and _url != ''">AND url LIKE CONCAT('%', #{_url}, '%')</if>
+            <if test="_use_yn != null and _use_yn != ''">AND use_yn LIKE CONCAT('%', #{_use_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+            <if test="_menu_sequence != null and _menu_sequence != ''">AND menu_sequence LIKE CONCAT('%', #{_menu_sequence}, '%')</if>
+            <if test="_menu_icon != null and _menu_icon != ''">AND menu_icon LIKE CONCAT('%', #{_menu_icon}, '%')</if>
+            <if test="_prgm_url != null and _prgm_url != ''">AND prgm_url LIKE CONCAT('%', #{_prgm_url}, '%')</if>
+        </where>
+    </select>
+    <select id="SELECT_HIERARCHY" resultType="com.vims.common.menu.ComMenu">
+        SELECT
+        ROW_NUMBER() OVER() AS no,
+        menu_code,
+        menu_name_kr,
+        menu_name_en,
+        menu_name_mn,
+        menu_number,
+        menu_level,
+        top_menu_code,
+        prgm_url,
+        menu_icon,
+        url,
+        use_yn,
+        fn_get_com_code_name('use_yn', use_yn) as use_yn_name,
+        menu_sequence,
+        system_create_userid,
+        system_update_userid,
+        DATE_FORMAT(system_update_date,'%Y-%m-%d %H:%i:%S') AS system_update_date,
+        DATE_FORMAT(system_create_date,'%Y-%m-%d %H:%i:%S') AS system_create_date
+        FROM COM_MENU
+        <where>
+            1=1
+            <if test="menu_code != null and menu_code != '' ">AND menu_code = #{menu_code}</if>
+            <if test="menu_name_kr != null and menu_name_kr != '' ">AND menu_name_kr = #{menu_name_kr}</if>
+            <if test="menu_name_en != null and menu_name_en != '' ">AND menu_name = #{menu_name_en}</if>
+            <if test="menu_name_mn != null and menu_name_mn != '' ">AND menu_name_mn = #{menu_name_mn}</if>
+            <if test="menu_number != null and menu_number != '' ">AND menu_number = #{menu_number}</if>
+            <if test="menu_level != null and menu_level != '' ">AND menu_level = #{menu_level}</if>
+            <if test="top_menu_code != null and top_menu_code != '' ">AND top_menu_code = #{top_menu_code}</if>
+            <if test="prgm_url != null and prgm_url != '' ">AND prgm_url = #{prgm_url}</if>
+            <if test="url != null and url != '' ">AND url = #{url}</if>
+            <if test="use_yn != null and use_yn != '' ">AND use_yn = #{use_yn}</if>
+            <if test="system_create_userid != null and system_create_userid != '' ">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_update_userid != null and system_update_userid != '' ">AND system_update_userid = #{system_update_userid}</if>
+        </where>
+        <include refid="sortFilter"/>
+    </select>
+    <select id="SELECT_ACCESS_RIGHTS_GROUP_FOR_MENU" resultType="com.vims.common.menu.ComMenu">
+        WITH RECURSIVE accessible_menus AS (
+            SELECT DISTINCT cm.*
+            FROM COM_MENU cm
+            WHERE cm.menu_code IN (
+                SELECT DISTINCT menu_code
+                FROM COM_ACCS_GROUP_MENU
+                WHERE access_rights_group_id IN (
+                    SELECT group_id
+                    FROM COM_USER_GROUP
+                    WHERE user_email = #{user_email}
+                )
+            )
+            UNION
+            SELECT parent.*
+            FROM COM_MENU parent
+             JOIN accessible_menus child ON child.top_menu_code = parent.menu_code
+        )
+        SELECT DISTINCT *
+        FROM accessible_menus
+        WHERE use_yn = '1'
+        ORDER BY menu_level, menu_sequence
+    </select>
+    <insert id="INSERT">
+        INSERT INTO COM_MENU(
+             menu_code
+            <if test="menu_name_kr != null">, menu_name_kr</if>
+            <if test="menu_name_en != null">, menu_name_en</if>
+            <if test="menu_name_mn != null">, menu_name_mn</if>
+            <if test="menu_number != null">, menu_number</if>
+            <if test="menu_level != null">, menu_level</if>
+            <if test="top_menu_code != null">, top_menu_code</if>
+            <if test="url != null">, url</if>
+            <if test="use_yn != null">, use_yn</if>
+            <if test="system_create_date != null">, system_create_date</if>
+            <if test="system_create_userid != null">, system_create_userid</if>
+            <if test="system_update_date != null">, system_update_date</if>
+            <if test="system_update_userid != null">, system_update_userid</if>
+            <if test="menu_icon != null">, menu_icon</if>
+            <if test="prgm_url != null">, prgm_url</if>
+        )
+        VALUES(
+            
+             #{menu_code}
+            <if test="menu_name_kr != null">, #{menu_name_kr}</if>
+            <if test="menu_name_en != null">, #{menu_name_en}</if>
+            <if test="menu_name_mn != null">, #{menu_name_mn}</if>
+            <if test="menu_number != null">, #{menu_number}</if>
+            <if test="menu_level != null">, #{menu_level}</if>
+            <if test="top_menu_code != null">, #{top_menu_code}</if>
+            <if test="url != null">, #{url}</if>
+            <if test="use_yn != null">, #{use_yn}</if>
+            <if test="system_create_date != null">, #{system_create_date}</if>
+            <if test="system_create_userid != null">, #{system_create_userid}</if>
+            <if test="system_update_date != null">, #{system_update_date}</if>
+            <if test="system_update_userid != null">, #{system_update_userid}</if>
+            <if test="menu_icon != null">, #{menu_icon}</if>
+            <if test="prgm_url != null">, #{prgm_url}</if>
+        )
+    </insert>
+
+    <delete id="DELETE">
+        DELETE FROM COM_MENU
+        <where>
+            
+             menu_code = #{menu_code}
+            AND menu_sequence = #{menu_sequence}
+            
+            <if test="menu_name_kr != null">AND menu_name_kr = #{menu_name_kr}</if>
+            <if test="menu_name_en != null">AND menu_name_en = #{menu_name_en}</if>
+            <if test="menu_name_mn != null">AND menu_name_mn = #{menu_name_mn}</if>
+            <if test="menu_number != null">AND menu_number = #{menu_number}</if>
+            <if test="menu_level != null">AND menu_level = #{menu_level}</if>
+            <if test="top_menu_code != null">AND top_menu_code = #{top_menu_code}</if>
+            <if test="url != null">AND url = #{url}</if>
+            <if test="use_yn != null">AND use_yn = #{use_yn}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_userid != null">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_userid != null">AND system_update_userid = #{system_update_userid}</if>
+            <if test="menu_icon != null">AND menu_icon = #{menu_icon}</if>
+            <if test="prgm_url != null">AND prgm_url = #{prgm_url}</if>
+        </where>
+    </delete>
+
+    <update id="UPDATE">
+        UPDATE COM_MENU
+        <set>
+            system_update_date = #{system_update_date}
+            ,system_update_userid = #{system_update_userid}
+            <if test="menu_name_kr != null">,menu_name_kr = #{menu_name_kr}</if>
+            <if test="menu_name_en != null">,menu_name_en = #{menu_name_en}</if>
+            <if test="menu_name_mn != null">,menu_name_mn = #{menu_name_mn}</if>
+            <if test="menu_number != null">,menu_number = #{menu_number}</if>
+            <if test="menu_level != null">,menu_level = #{menu_level}</if>
+            <if test="top_menu_code != null">,top_menu_code = #{top_menu_code}</if>
+            <if test="url != null">,url = #{url}</if>
+            <if test="use_yn != null">,use_yn = #{use_yn}</if>
+            <if test="system_create_date != null">,system_create_date = #{system_create_date}</if>
+            <if test="system_create_userid != null">,system_create_userid = #{system_create_userid}</if>
+            <if test="menu_icon != null">,menu_icon = #{menu_icon}</if>
+            <if test="prgm_url != null">,prgm_url = #{prgm_url}</if>
+        </set>
+        <where>
+            
+             menu_code = #{menu_code}
+            AND menu_sequence = #{menu_sequence}
+        </where>
+    </update>
+</mapper>

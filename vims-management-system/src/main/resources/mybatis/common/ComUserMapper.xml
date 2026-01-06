@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vims.common.user.ComUserMapper">
+    <sql id="sortFilter">
+        ORDER BY
+        <choose>
+            <when test="sort_id != null and sort_order != null">
+                ${sort_id} ${sort_order}
+            </when>
+            <otherwise>
+                system_create_date DESC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="SELECT_PAGE" resultType="com.vims.common.user.ComUser">
+        SELECT
+            row_number() over ()AS no,
+            
+            id, 
+            email, 
+            password, 
+            role, 
+            user_id, 
+            office_code,
+            FN_GET_OFFICE_NAME(office_code) AS office_name,
+            system_create_userid, 
+            system_create_date, 
+            system_update_userid, 
+            system_update_date, 
+            user_name, 
+            tel, 
+            address, 
+            address_detail, 
+            postal_code, 
+            uuid 
+        FROM COM_USER
+        <where>
+            
+            <if test="id != null and id != ''">AND id = #{id}</if>
+            <if test="email != null and email != ''">AND email = #{email}</if>
+            <if test="password != null and password != ''">AND password = #{password}</if>
+            <if test="role != null and role != ''">AND role = #{role}</if>
+            <if test="user_id != null and user_id != ''">AND user_id = #{user_id}</if>
+            <if test="office_code != null and office_code != ''">AND office_code = #{office_code}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="user_name != null and user_name != ''">AND user_name = #{user_name}</if>
+            <if test="tel != null and tel != ''">AND tel = #{tel}</if>
+            <if test="address != null and address != ''">AND address = #{address}</if>
+            <if test="address_detail != null and address_detail != ''">AND address_detail = #{address_detail}</if>
+            <if test="postal_code != null and postal_code != ''">AND postal_code = #{postal_code}</if>
+            <if test="uuid != null and uuid != ''">AND uuid = #{uuid}</if>
+            
+            <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
+            <if test="_email != null and _email != ''">AND email LIKE CONCAT('%', #{_email}, '%')</if>
+            <if test="_password != null and _password != ''">AND password LIKE CONCAT('%', #{_password}, '%')</if>
+            <if test="_role != null and _role != ''">AND role LIKE CONCAT('%', #{_role}, '%')</if>
+            <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
+            <if test="_office_code != null and _office_code != ''">AND office_code LIKE CONCAT('%', #{_office_code}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_user_name != null and _user_name != ''">AND user_name LIKE CONCAT('%', #{_user_name}, '%')</if>
+            <if test="_tel != null and _tel != ''">AND tel LIKE CONCAT('%', #{_tel}, '%')</if>
+            <if test="_address != null and _address != ''">AND address LIKE CONCAT('%', #{_address}, '%')</if>
+            <if test="_address_detail != null and _address_detail != ''">AND address_detail LIKE CONCAT('%', #{_address_detail}, '%')</if>
+            <if test="_postal_code != null and _postal_code != ''">AND postal_code LIKE CONCAT('%', #{_postal_code}, '%')</if>
+            <if test="_uuid != null and _uuid != ''">AND uuid LIKE CONCAT('%', #{_uuid}, '%')</if>
+        </where>
+        <include refid="sortFilter"/>
+        LIMIT #{row_range} OFFSET #{offset}
+    </select>
+
+    <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
+        SELECT CEIL(COUNT(*) / #{row_range}) FROM COM_USER
+        <where>
+            
+            <if test="id != null and id != ''">AND id = #{id}</if>
+            <if test="email != null and email != ''">AND email = #{email}</if>
+            <if test="password != null and password != ''">AND password = #{password}</if>
+            <if test="role != null and role != ''">AND role = #{role}</if>
+            <if test="user_id != null and user_id != ''">AND user_id = #{user_id}</if>
+            <if test="office_code != null and office_code != ''">AND office_code = #{office_code}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="user_name != null and user_name != ''">AND user_name = #{user_name}</if>
+            <if test="tel != null and tel != ''">AND tel = #{tel}</if>
+            <if test="address != null and address != ''">AND address = #{address}</if>
+            <if test="address_detail != null and address_detail != ''">AND address_detail = #{address_detail}</if>
+            <if test="postal_code != null and postal_code != ''">AND postal_code = #{postal_code}</if>
+            <if test="uuid != null and uuid != ''">AND uuid = #{uuid}</if>
+            
+            <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
+            <if test="_email != null and _email != ''">AND email LIKE CONCAT('%', #{_email}, '%')</if>
+            <if test="_password != null and _password != ''">AND password LIKE CONCAT('%', #{_password}, '%')</if>
+            <if test="_role != null and _role != ''">AND role LIKE CONCAT('%', #{_role}, '%')</if>
+            <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
+            <if test="_office_code != null and _office_code != ''">AND office_code LIKE CONCAT('%', #{_office_code}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_user_name != null and _user_name != ''">AND user_name LIKE CONCAT('%', #{_user_name}, '%')</if>
+            <if test="_tel != null and _tel != ''">AND tel LIKE CONCAT('%', #{_tel}, '%')</if>
+            <if test="_address != null and _address != ''">AND address LIKE CONCAT('%', #{_address}, '%')</if>
+            <if test="_address_detail != null and _address_detail != ''">AND address_detail LIKE CONCAT('%', #{_address_detail}, '%')</if>
+            <if test="_postal_code != null and _postal_code != ''">AND postal_code LIKE CONCAT('%', #{_postal_code}, '%')</if>
+            <if test="_uuid != null and _uuid != ''">AND uuid LIKE CONCAT('%', #{_uuid}, '%')</if>
+        </where>
+    </select>
+
+    <select id="SELECT" resultType="com.vims.common.user.ComUser">
+        SELECT
+            
+            id,
+            email,
+            password,
+            role,
+            user_id,
+            office_code,
+            FN_GET_OFFICE_NAME(office_code) AS office_name,
+            system_create_userid,
+            system_create_date,
+            system_update_userid,
+            system_update_date,
+            user_name,
+            tel,
+            address,
+            address_detail,
+            postal_code,
+            uuid
+        FROM COM_USER
+        <where>
+            
+            <if test="id != null and id != ''">AND id = #{id}</if>
+            <if test="email != null and email != ''">AND email = #{email}</if>
+            <if test="password != null and password != ''">AND password = #{password}</if>
+            <if test="role != null and role != ''">AND role = #{role}</if>
+            <if test="user_id != null and user_id != ''">AND user_id = #{user_id}</if>
+            <if test="office_code != null and office_code != ''">AND office_code = #{office_code}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="user_name != null and user_name != ''">AND user_name = #{user_name}</if>
+            <if test="tel != null and tel != ''">AND tel = #{tel}</if>
+            <if test="address != null and address != ''">AND address = #{address}</if>
+            <if test="address_detail != null and address_detail != ''">AND address_detail = #{address_detail}</if>
+            <if test="postal_code != null and postal_code != ''">AND postal_code = #{postal_code}</if>
+            <if test="uuid != null and uuid != ''">AND uuid = #{uuid}</if>
+            
+            <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
+            <if test="_email != null and _email != ''">AND email LIKE CONCAT('%', #{_email}, '%')</if>
+            <if test="_password != null and _password != ''">AND password LIKE CONCAT('%', #{_password}, '%')</if>
+            <if test="_role != null and _role != ''">AND role LIKE CONCAT('%', #{_role}, '%')</if>
+            <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
+            <if test="_office_code != null and _office_code != ''">AND office_code LIKE CONCAT('%', #{_office_code}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_user_name != null and _user_name != ''">AND user_name LIKE CONCAT('%', #{_user_name}, '%')</if>
+            <if test="_tel != null and _tel != ''">AND tel LIKE CONCAT('%', #{_tel}, '%')</if>
+            <if test="_address != null and _address != ''">AND address LIKE CONCAT('%', #{_address}, '%')</if>
+            <if test="_address_detail != null and _address_detail != ''">AND address_detail LIKE CONCAT('%', #{_address_detail}, '%')</if>
+            <if test="_postal_code != null and _postal_code != ''">AND postal_code LIKE CONCAT('%', #{_postal_code}, '%')</if>
+            <if test="_uuid != null and _uuid != ''">AND uuid LIKE CONCAT('%', #{_uuid}, '%')</if>
+        </where>
+    </select>
+
+    <delete id="DELETE">
+        DELETE FROM COM_USER
+        <where>
+            
+            AND id = #{id}
+            
+            <if test="email != null">AND email = #{email}</if>
+            <if test="password != null">AND password = #{password}</if>
+            <if test="role != null">AND role = #{role}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+            <if test="office_code != null">AND office_code = #{office_code}</if>
+            <if test="system_create_userid != null">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
+            <if test="system_update_userid != null">AND system_update_userid = #{system_update_userid}</if>
+            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
+            <if test="user_name != null">AND user_name = #{user_name}</if>
+            <if test="tel != null">AND tel = #{tel}</if>
+            <if test="address != null">AND address = #{address}</if>
+            <if test="address_detail != null">AND address_detail = #{address_detail}</if>
+            <if test="postal_code != null">AND postal_code = #{postal_code}</if>
+            <if test="uuid != null">AND uuid = #{uuid}</if>
+        </where>
+    </delete>
+
+    <update id="UPDATE">
+        UPDATE COM_USER
+        <set>
+            
+            <if test="email != null and email != '' ">,email = #{email}</if>
+            <if test="password != null and password != '' ">,password = #{password}</if>
+            <if test="role != null and role != '' ">,role = #{role}</if>
+            <if test="user_id != null and user_id != '' ">,user_id = #{user_id}</if>
+            <if test="office_code != null and office_code != '' ">,office_code = #{office_code}</if>
+            <if test="system_create_userid != null and system_create_user_id != '' ">,system_create_userid = #{system_create_userid}</if>
+            <if test="system_create_date != null and system_create_date != '' ">,system_create_date = #{system_create_date}</if>
+            <if test="system_update_userid != null and system_update_userid != '' ">,system_update_userid = #{system_update_userid}</if>
+            <if test="system_update_date != null and system_update_date != '' ">,system_update_date = #{system_update_date}</if>
+            <if test="user_name != null and user_name != '' ">,user_name = #{user_name}</if>
+            <if test="tel != null and tel != '' ">,tel = #{tel}</if>
+            <if test="address != null and address != '' ">,address = #{address}</if>
+            <if test="address_detail != null and address_detail != '' ">,address_detail = #{address_detail}</if>
+            <if test="postal_code != null and postal_code != '' ">,postal_code = #{postal_code}</if>
+            <if test="uuid != null and uuid != '' ">,uuid = #{uuid}</if>
+        </set>
+        <where>
+            
+            AND id = #{id}
+        </where>
+    </update>
+</mapper>

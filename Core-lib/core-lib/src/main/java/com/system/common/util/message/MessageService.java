@@ -53,18 +53,18 @@ public class MessageService {
         List<String> defaultFiles = new ArrayList<>();
         defaultFiles.add("Message"); // common/Message.js
         // management 관련 메시지들
-        defaultFiles.add("CommonMenuMessage");
-        defaultFiles.add("CommonIconMessage");
-        defaultFiles.add("CommonGroupMessage");
-        defaultFiles.add("CommonUserMessage");
-        defaultFiles.add("CommonCodeMessage");
-        defaultFiles.add("CommonCodeGroupMessage");
-        defaultFiles.add("CommonAccessGroupMenuMessage");
-        defaultFiles.add("CommonAccessGroupMenuListMessage");
-        defaultFiles.add("CommonUserGroupMessage");
-        defaultFiles.add("CommonOfficeMessage");
-        defaultFiles.add("CommonSiteConfigMessage");
-        defaultFiles.add("CommonSiteConfigGroupMessage");
+        defaultFiles.add("ComMenuMessage");
+        defaultFiles.add("ComIconMessage");
+        defaultFiles.add("ComGroupMessage");
+        defaultFiles.add("ComUserMessage");
+        defaultFiles.add("ComCodeMessage");
+        defaultFiles.add("ComCodeGroupMessage");
+        defaultFiles.add("ComAccsGroupMenuMessage");
+        defaultFiles.add("ComAccsGroupMenuListMessage");
+        defaultFiles.add("ComUserGroupMessage");
+        defaultFiles.add("ComOfficeMessage");
+        defaultFiles.add("ComSiteConfigMessage");
+        defaultFiles.add("ComSiteConfigGroupMessage");
         defaultFiles.add("IndexMessage");
         defaultFiles.add("SiteBannerImageMessage");
         defaultFiles.add("SiteConfigHistoryMessage");

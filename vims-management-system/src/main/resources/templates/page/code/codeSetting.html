@@ -135,7 +135,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="commonGroupCodeRegister" class="gi-row-100">
+                <form id="comGroupCodeRegister" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div
@@ -206,7 +206,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="commonGroupCodeUpdate" class="gi-row-100">
+                <form id="comGroupCodeUpdate" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div
@@ -265,7 +265,7 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="commonCodeGroupUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
+                <button id="comCodeGroupUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
         </div>
@@ -281,7 +281,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="commonCodeRegister" class="gi-row-100">
+                <form id="comCodeRegister" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div
@@ -354,7 +354,7 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="commonCodeRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
+                <button id="comCodeRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
         </div>
@@ -368,7 +368,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="commonCodeUpdate" class="gi-row-100">
+                <form id="comCodeUpdate" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div
@@ -459,7 +459,7 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="commonCodeUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
+                <button id="comCodeUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
         </div>
@@ -467,11 +467,11 @@
 </article>
 <!--/ common_code 팝업 영역-->
 <script type="text/javascript">
-    var PRGMID = "commonCodeGroupList";	//page id
-    var COMMON_CODE_GROUP_PRGMID = "commonGroupCodeRegister";
-    var COMMON_CODE_PRGMID = "commonCodeRegister";
-    var COMMON_CODE_UPDATE_PRGMID = "commonCodeUpdate";
-    var COMMON_CODE_GROUP_UPDATE_PRGMID = "commonGroupCodeUpdate";
+    var PRGMID = "comCodeGroupList";	//page id
+    var COM_CODE_GROUP_PRGMID = "comGroupCodeRegister";
+    var COM_CODE_PRGMID = "comCodeRegister";
+    var COM_CODE_UPDATE_PRGMID = "comCodeUpdate";
+    var COM_CODE_GROUP_UPDATE_PRGMID = "comGroupCodeUpdate";
     var data_binding = new dataBinding();
     var common_popup = new popup();
     var global_group_id = "";
@@ -483,8 +483,8 @@
         //초기화
         resetEvent();
         //데이터 조회
-        findByCommonCodeGroupList();
-        findByCommonCodeList();
+        findByComCodeGroupList();
+        findByComCodeList();
         setTimeout(function () {
             //클릭 이벤트
             clickEvent();
@@ -503,7 +503,7 @@
         //검색영역2 값 초기화
         $("#search-area2 input").val("");
         $("#search-area2 select").val("");
-        $("#commonCodeRegister input").val("");
+        $("#comCodeRegister input").val("");
         $("#register-area2").addClass("gi-hidden");
 
         commonTag.inputTagReset($(".gi-input"));
@@ -514,37 +514,37 @@
         // 초기화버튼 클릭 이벤트
         $("#reset-btn").click(function () {
             resetEvent();
-            findByCommonCodeGroupList();
+            findByComCodeGroupList();
         });
         //조회버튼 클릭 이벤트
         $("#search-btn").click(function () {
-            findByCommonCodeGroupList();
+            findByComCodeGroupList();
         });
 
         //공통 그룹코드 등록버튼 클릭 이벤트
         $("#commonGroUpCodeRegister-btn").click(function () {
-            commonCodeGroupRegister();
+            comCodeGroupRegister();
         })
         //공통 코드 등록버튼 클릭 이벤트
-        $("#commonCodeRegister-btn").click(function () {
-            commonCodeRegister();
+        $("#comCodeRegister-btn").click(function () {
+            comCodeRegister();
         })
         //공통 코드 수정버튼 클릭 이벤트
-        $("#commonCodeUpdate-btn").click(function () {
-            commonCodeUpdate();
+        $("#comCodeUpdate-btn").click(function () {
+            comCodeUpdate();
         })
         //공통 그룹코드 수정버튼 클릭 이벤트
-        $("#commonCodeGroupUpdate-btn").click(function () {
-            commonCodeGroupUpdate();
+        $("#comCodeGroupUpdate-btn").click(function () {
+            comCodeGroupUpdate();
         })
     }
-    function findByCommonCodeGroupList(page, range, sortId, sortOrder) {
+    function findByComCodeGroupList(page, range, sortId, sortOrder) {
         //default page
         if (!formUtil.checkEmptyValue(page)) page = 1;
         //default range(row)
         if (!formUtil.checkEmptyValue(range)) range = 10;
 
-        let url = "/cms/common/commonCodeGroup/findPage";
+        let url = "/cms/common/comCodeGroup/findPage";
         let param = {
             page_no: page,
             row_range: range
@@ -572,7 +572,7 @@
                 let paging = response.data.TOTAL_PAGING[0];
 
                 // 그리드 헤더 설정
-                let commonCodeGroup_menuGrid_header = {
+                let comCodeGroup_menuGrid_header = {
                     title: "공통코드그룹 목록",
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
@@ -582,34 +582,34 @@
                         { HEADER: "생성자ID", ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
                         { HEADER: "수정일", ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
                         { HEADER: "수정자ID", ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
                         { HEADER: "수정", ID: "update_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "삭제", ID: "delete_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let commonCodeGroup_menu_grid = formUtil.giGrid(commonCodeGroup_menuGrid_header, paging, page, "gi-Grid");
+                let comCodeGroup_menu_grid = formUtil.giGrid(comCodeGroup_menuGrid_header, paging, page, "gi-Grid");
 
                 //그리드 데이터 설정
-                commonCodeGroup_menu_grid.DataSet(data);
+                comCodeGroup_menu_grid.DataSet(data);
 
                 //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
-                commonCodeGroup_menu_grid.pagingSet(findByCommonCodeGroupList);
+                comCodeGroup_menu_grid.pagingSet(findByComCodeGroupList);
 
                 //그리드 내부의 수정 버튼 클릭 이벤트 설정
-                commonCodeGroup_menu_grid.updateBtnClick(commonCodeGroupUpdateSetting, "update_group_code_btn");
+                comCodeGroup_menu_grid.updateBtnClick(comCodeGroupUpdateSetting, "update_group_code_btn");
 
                 //그리드 내부의 삭제 버튼 클릭 이벤트 설정
-                commonCodeGroup_menu_grid.deleteBtnClick(commonCodeGroupDelete, "delete_group_code_btn");
+                comCodeGroup_menu_grid.deleteBtnClick(comCodeGroupDelete, "delete_group_code_btn");
 
                 //그리드 row 선택 이벤트 설정
-                commonCodeGroup_menu_grid.rowClick(rowClickEvent);
+                comCodeGroup_menu_grid.rowClick(rowClickEvent);
                 function rowClickEvent(rows) {
                     global_group_id = rows.group_id;
                     $("#register-area2").removeClass("gi-hidden");
                     data_binding.setDataForm("gi-code_register-popup", rows);
                     // common_popup.popupSetData("gi-code_register-popup",rows);
-                    findByCommonCodeList('', '', '', '', rows.group_id);
+                    findByComCodeList('', '', '', '', rows.group_id);
                 }
             } else {
                 formUtil.alertPopup("response status is :" + status);
@@ -618,20 +618,20 @@
             formUtil.alertPopup(error);
         })
     }
-    async function commonCodeGroupDelete(deleteParamDataList) {
-        let url = "/cms/common/commonCodeGroup/remove";
+    async function comCodeGroupDelete(deleteParamDataList) {
+        let url = "/cms/common/comCodeGroup/remove";
         let data = deleteParamDataList;
         // console.log(data);
         let param = {
             group_id: data.group_id,
             group_name: data.group_name
         }
-        if (await commonCodeGroupDeleteCheckValidation(param)) {
+        if (await comCodeGroupDeleteCheckValidation(param)) {
             axios.post(url, param).then(response => {
                 let status = response.status;
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
-                    findByCommonCodeGroupList();
+                    findByComCodeGroupList();
                 } else {
                     formUtil.alertPopup("response status is :" + status);
                 }
@@ -639,11 +639,11 @@
                 formUtil.alertPopup(error + "");
             })
         } else {
-            formUtil.alertPopup(Message.Label.Array["COMMON_CODE_GROUP.CHECK.COMMON_CODE_EXIT"]);
+            formUtil.alertPopup(Message.Label.Array["COM_CODE_GROUP.CHECK.COM_CODE_EXIT"]);
         }
     }
-    function commonCodeDelete(deleteParamDataList) {
-        let url = "/cms/common/commonCode/remove";
+    function comCodeDelete(deleteParamDataList) {
+        let url = "/cms/common/comCode/remove";
         let data = deleteParamDataList;
         let flag = false;
         // console.log(data);
@@ -655,7 +655,7 @@
             let status = response.status;
             if (status === 200) {
                 formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
-                findByCommonCodeList("", "", "", "", data.group_id);
+                findByComCodeList("", "", "", "", data.group_id);
             } else {
                 formUtil.alertPopup("response status is :" + status);
             }
@@ -664,13 +664,13 @@
         })
     }
 
-    function findByCommonCodeList(page, range, sortId, sortOrder, groupId) {
+    function findByComCodeList(page, range, sortId, sortOrder, groupId) {
         //default page
         if (!formUtil.checkEmptyValue(page)) page = 1;
         //default range(row)
         if (!formUtil.checkEmptyValue(range)) range = 10;
 
-        let url = "/cms/common/commonCode/findPage";
+        let url = "/cms/common/comCode/findPage";
         let param = {
             page_no: page,
             row_range: range
@@ -698,7 +698,7 @@
                 let paging = response.data.TOTAL_PAGING[0];
 
                 // 그리드 헤더 설정
-                let commonCode_menuGrid_header = {
+                let comCode_menuGrid_header = {
                     title: "공통코드 목록",
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
@@ -706,7 +706,7 @@
                         { HEADER: "코드ID", ID: "code_id", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "그룹ID", ID: "group_id", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "그룹명", ID: "code_name", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COMMON_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
                         { HEADER: "수정", ID: "update_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "삭제", ID: "delete_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
 
@@ -718,31 +718,31 @@
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let commonCode_menu_grid = formUtil.giGrid(commonCode_menuGrid_header, paging, page, "gi-Grid2");
+                let comCode_menu_grid = formUtil.giGrid(comCode_menuGrid_header, paging, page, "gi-Grid2");
 
 
                 if (!formUtil.checkEmptyValue(global_group_id)) {
-                    commonCode_menu_grid.DataSet();
+                    comCode_menu_grid.DataSet();
                 } else {
                     //그리드 데이터 설정
-                    commonCode_menu_grid.DataSet(data);
+                    comCode_menu_grid.DataSet(data);
                 }
 
                 //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
-                commonCode_menu_grid.pagingSet(findByCommonCodeList);
+                comCode_menu_grid.pagingSet(findByComCodeList);
 
                 //그리드 내부의 삭제 버튼 클릭 이벤트 설정
-                commonCode_menu_grid.deleteBtnClick(commonCodeDelete, "delete_code_btn");
+                comCode_menu_grid.deleteBtnClick(comCodeDelete, "delete_code_btn");
 
                 //그리드 내부의 수정 버튼 클릭 이벤트 설정
-                commonCode_menu_grid.updateBtnClick(commonCodeUpdateSetting, "update_code_btn");
+                comCode_menu_grid.updateBtnClick(comCodeUpdateSetting, "update_code_btn");
 
                 $("#search-btn2").off().on("click", function () {
-                    findByCommonCodeList("", "", "", "", groupId);
+                    findByComCodeList("", "", "", "", groupId);
                 });
                 $("#reset-btn2").off().on("click", function () {
                     resetEvent2();
-                    findByCommonCodeList();
+                    findByComCodeList();
                 });
             } else {
                 formUtil.alertPopup("response status is :" + status);
@@ -751,8 +751,8 @@
             formUtil.alertPopup(error);
         })
     }
-    async function findByCommonCodeLength(cont) {
-        let url = "common/common/commonCode/find";
+    async function findByComCodeLength(cont) {
+        let url = "common/common/comCode/find";
         let param = {
             group_id: cont.group_id
         };
@@ -767,13 +767,13 @@
             })
         })
     }
-    function commonCodeGroupUpdateSetting(cont) {
+    function comCodeGroupUpdateSetting(cont) {
         $("#gi-group_code_update-popup").attr("data-popup-open", "true");
         $("#gi-group_code_update-popup #update_group_id1").val(cont.group_id);
         $("#gi-group_code_update-popup #update_group_name").val(cont.group_name);
         data_binding.setDataSelectBox("update_group_use_yn", cont.use_yn);
     }
-    function commonCodeUpdateSetting(cont) {
+    function comCodeUpdateSetting(cont) {
         $("#gi-code_update-popup").attr("data-popup-open", "true");
         $("#gi-code_update-popup #update_group_id").val(cont.group_id);
         $("#gi-code_update-popup #update_code_id").val(cont.code_id);
@@ -783,11 +783,11 @@
         data_binding.setDataSelectBox("update_use_yn", cont.use_yn);
     }
 
-    function commonCodeGroupRegister() {
-        let flag = commonCodeGroupCheckValidation();
+    function comCodeGroupRegister() {
+        let flag = comCodeGroupCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COMMON_CODE_GROUP_PRGMID);
-            let url = "/cms/common/commonCodeGroup/register";
+            let data = new dataBinding().getData(COM_CODE_GROUP_PRGMID);
+            let url = "/cms/common/comCodeGroup/register";
             // console.log(data);
             let param = {
 
@@ -800,7 +800,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close("gi-group_code_register-popup");
-                    findByCommonCodeGroupList();
+                    findByComCodeGroupList();
                 } else {
                     resetEvent();
                     formUtil.alertPopup("response status is :" + status);
@@ -811,11 +811,11 @@
             })
         }
     }
-    function commonCodeRegister() {
-        let flag = commonCodeCheckValidation();
+    function comCodeRegister() {
+        let flag = comCodeCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COMMON_CODE_PRGMID);
-            let url = "/cms/common/commonCode/register";
+            let data = new dataBinding().getData(COM_CODE_PRGMID);
+            let url = "/cms/common/comCode/register";
             // console.log(data);
             let param = {
 
@@ -829,7 +829,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     common_popup.close("gi-code_register-popup");
-                    findByCommonCodeList("", "", "", "", data.group_id);
+                    findByComCodeList("", "", "", "", data.group_id);
                 } else {
                     resetEvent();
                     formUtil.alertPopup("response status is :" + status);
@@ -840,11 +840,11 @@
             })
         }
     }
-    function commonCodeUpdate() {
-        let flag = commonCodeUpdateCheckValidation();
+    function comCodeUpdate() {
+        let flag = comCodeUpdateCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COMMON_CODE_UPDATE_PRGMID);
-            let url = "/cms/common/commonCode/update";
+            let data = new dataBinding().getData(COM_CODE_UPDATE_PRGMID);
+            let url = "/cms/common/comCode/update";
             // console.log(data);
             let param = {
 
@@ -859,7 +859,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                     common_popup.close("gi-code_update-popup");
-                    findByCommonCodeList("", "", "", "", data.group_id);
+                    findByComCodeList("", "", "", "", data.group_id);
                 } else {
                     resetEvent();
                     formUtil.alertPopup("response status is :" + status);
@@ -870,11 +870,11 @@
             })
         }
     }
-    function commonCodeGroupUpdate() {
-        let flag = commonCodeGroupUpdateCheckValidation();
+    function comCodeGroupUpdate() {
+        let flag = comCodeGroupUpdateCheckValidation();
         if (flag) {
-            let data = new dataBinding().getData(COMMON_CODE_GROUP_UPDATE_PRGMID);
-            let url = "/cms/common/commonCodeGroup/update";
+            let data = new dataBinding().getData(COM_CODE_GROUP_UPDATE_PRGMID);
+            let url = "/cms/common/comCodeGroup/update";
             // console.log(data);
             let param = {
                 group_id: data.group_id,
@@ -886,7 +886,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                     common_popup.close("gi-group_code_update-popup");
-                    findByCommonCodeGroupList();
+                    findByComCodeGroupList();
                 } else {
                     resetEvent();
                     formUtil.alertPopup("response status is :" + status);
@@ -897,15 +897,15 @@
             })
         }
     }
-    function commonCodeGroupCheckValidation() {
+    function comCodeGroupCheckValidation() {
         let flag = false;
 
         let validation = [];
-        validation.formId = COMMON_CODE_GROUP_PRGMID;
+        validation.formId = COM_CODE_GROUP_PRGMID;
         $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
             if ($(item).data("field")) {
                 let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COMMON_CODE_GROUP.CHECK." + messageId];
+                let message = Message.Label.Array["COM_CODE_GROUP.CHECK." + messageId];
                 validation.push({ id: item.id, message: message });
             }
         });
@@ -914,15 +914,15 @@
         }
         return flag;
     }
-    function commonCodeCheckValidation() {
+    function comCodeCheckValidation() {
         let flag = false;
 
         let validation = [];
-        validation.formId = COMMON_CODE_PRGMID;
+        validation.formId = COM_CODE_PRGMID;
         $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
             if ($(item).data("field")) {
                 let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COMMON_CODE.CHECK." + messageId];
+                let message = Message.Label.Array["COM_CODE.CHECK." + messageId];
                 validation.push({ id: item.id, message: message });
             }
         });
@@ -931,15 +931,15 @@
         }
         return flag;
     }
-    function commonCodeUpdateCheckValidation() {
+    function comCodeUpdateCheckValidation() {
         let flag = false;
 
         let validation = [];
-        validation.formId = COMMON_CODE_UPDATE_PRGMID;
+        validation.formId = COM_CODE_UPDATE_PRGMID;
         $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
             if ($(item).data("field")) {
                 let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COMMON_CODE.CHECK." + messageId];
+                let message = Message.Label.Array["COM_CODE.CHECK." + messageId];
                 validation.push({ id: item.id, message: message });
             }
         });
@@ -948,15 +948,15 @@
         }
         return flag;
     }
-    function commonCodeGroupUpdateCheckValidation() {
+    function comCodeGroupUpdateCheckValidation() {
         let flag = false;
 
         let validation = [];
-        validation.formId = COMMON_CODE_GROUP_UPDATE_PRGMID;
+        validation.formId = COM_CODE_GROUP_UPDATE_PRGMID;
         $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i, item) => {
             if ($(item).data("field")) {
                 let messageId = $(item).data("field").toUpperCase();
-                let message = Message.Label.Array["COMMON_CODE_GROUP.CHECK." + messageId];
+                let message = Message.Label.Array["COM_CODE_GROUP.CHECK." + messageId];
                 validation.push({ id: item.id, message: message });
             }
         });
@@ -965,9 +965,9 @@
         }
         return flag;
     }
-    async function commonCodeGroupDeleteCheckValidation(param) {
+    async function comCodeGroupDeleteCheckValidation(param) {
         let flag = true;
-        let dataLength = await findByCommonCodeLength(param);
+        let dataLength = await findByComCodeLength(param);
         if (dataLength > 0) flag = false;
         return flag;
     }

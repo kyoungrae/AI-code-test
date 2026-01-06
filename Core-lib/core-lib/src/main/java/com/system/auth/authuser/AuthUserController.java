@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/common/common/commonUser")
+@RequestMapping("/common/common/comUser")
 @RequiredArgsConstructor
 public class AuthUserController extends AbstractCommonController<AuthUser> {
     @Override

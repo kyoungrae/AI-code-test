@@ -1,6 +1,6 @@
 package com.fms.file;
 
-import com.fms.common.CommonFileDetail;
+import com.fms.common.ComFileDetail;
 import com.system.common.util.ApplicationResource;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

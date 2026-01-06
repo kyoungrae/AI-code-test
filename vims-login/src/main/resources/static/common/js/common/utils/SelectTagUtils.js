@@ -101,7 +101,7 @@ CommonTag.prototype.selectTagReset = function (select) {
 /**
  * @title : 공통 코드 기반 Select Box 생성
  * @see : input[gi-selectbox]
- * @text : input[gi-selectbox]의 data-selectbox-field 속성을 가져와 COMMON_CODE의 GROUP_ID와 매칭시켜 selectbox를 반환
+ * @text : input[gi-selectbox]의 data-selectbox-field 속성을 가져와 COM_CODE의 GROUP_ID와 매칭시켜 selectbox를 반환
  * @writer : 진은영
  */
 class GiSelectBox {
@@ -137,7 +137,7 @@ class GiSelectBox {
             $(selectbox).after(copySelectBox);
             copySelectBox.attr("readonly", "readonly");
 
-            let url = '/cms/common/commonCode/findCommonCode';
+            let url = '/cms/common/comCode/findComCode';
             let param = {
                 group_id: fieldValue,
                 use_yn: '1'

@@ -1,6 +1,6 @@
-# VIMS 백엔드 개발 가이드 (샘플: CommonGroup)
+# VIMS 백엔드 개발 가이드 (샘플: ComGroup)
 
-이 가이드는 `CommonGroup` 도메인을 예시로 하여, VIMS 백엔드에서 새로운 비즈니스 기능을 구현하는 표준 프로세스와 예외 처리(Exception Handling) 방법을 설명합니다.
+이 가이드는 `ComGroup` 도메인을 예시로 하여, VIMS 백엔드에서 새로운 비즈니스 기능을 구현하는 표준 프로세스와 예외 처리(Exception Handling) 방법을 설명합니다.
 
 ## 1. 아키텍처 개요
 백엔드는 **Spring Boot**, **MyBatis**, **JPA**가 통합된 계층형 아키텍처를 따릅니다.
@@ -33,7 +33,7 @@ Service 계층에서 로직 수행 중 발생하는 예외는 `CustomException`�
 ### Step 1: VO (Value Object) 생성
 데이터 구조를 정의하는 클래스를 생성합니다. Lombok 어노테이션을 사용하여 보일러플레이트 코드를 줄입니다.
 
-**파일:** `src/main/java/com/vims/common/group/CommonGroup.java`
+**파일:** `src/main/java/com/vims/common/group/ComGroup.java`
 ```java
 package com.vims.common.group;
 
@@ -48,8 +48,8 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "COMMON_GROUP") // DB 테이블 매핑
-public class CommonGroup {
+@Table(name = "COM_GROUP") // DB 테이블 매핑
+public class ComGroup {
     @Id
     private String group_id;
     private String group_name;
@@ -60,7 +60,7 @@ public class CommonGroup {
 ### Step 2: Mapper (MyBatis) 설정
 SQL 실행을 위한 인터페이스와 연동되는 XML 파일을 정의합니다.
 
-**인터페이스:** `src/main/java/com/vims/common/group/CommonGroupMapper.java`
+**인터페이스:** `src/main/java/com/vims/common/group/ComGroupMapper.java`
 ```java
 package com.vims.common.group;
 
@@ -68,21 +68,21 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface CommonGroupMapper {
-    List<CommonGroup> SELECT(CommonGroup request);
-    List<CommonGroup> SELECT_PAGE(CommonGroup request);
-    int INSERT(CommonGroup request);
-    int UPDATE(CommonGroup request);
-    int DELETE(CommonGroup request);
+public interface ComGroupMapper {
+    List<ComGroup> SELECT(ComGroup request);
+    List<ComGroup> SELECT_PAGE(ComGroup request);
+    int INSERT(ComGroup request);
+    int UPDATE(ComGroup request);
+    int DELETE(ComGroup request);
 }
 ```
 
-**XML:** `src/main/resources/mybatis/common/CommonGroupMapper.xml`
+**XML:** `src/main/resources/mybatis/common/ComGroupMapper.xml`
 ```xml
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "...">
-<mapper namespace="com.vims.common.group.CommonGroupMapper">
-    <select id="SELECT" resultType="com.vims.common.group.CommonGroup">
-        SELECT * FROM COMMON_GROUP
+<mapper namespace="com.vims.common.group.ComGroupMapper">
+    <select id="SELECT" resultType="com.vims.common.group.ComGroup">
+        SELECT * FROM COM_GROUP
         WHERE 1=1
         <!-- 동적 쿼리 작성 -->
     </select>
@@ -93,7 +93,7 @@ public interface CommonGroupMapper {
 ### Step 3: Service 구현 (예외 처리 포함)
 `AbstractCommonService`를 상속받아 공통 로직을 활용하고, 예외 처리를 적용합니다.
 
-**파일:** `src/main/java/com/vims/common/group/CommonGroupService.java`
+**파일:** `src/main/java/com/vims/common/group/ComGroupService.java`
 ```java
 package com.vims.common.group;
 
@@ -109,9 +109,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CommonGroupService extends AbstractCommonService<CommonGroup> {
+public class ComGroupService extends AbstractCommonService<ComGroup> {
 
-    private final CommonGroupMapper commonGroupMapper;
+    private final ComGroupMapper comGroupMapper;
     private final MessageSource messageSource; // 메시지 소스 주입
 
     // 메시지 코드로부터 메시지 내용을 가져오는 헬퍼 메서드
@@ -120,9 +120,9 @@ public class CommonGroupService extends AbstractCommonService<CommonGroup> {
     }
 
     @Override
-    protected List<CommonGroup> findImpl(CommonGroup request) throws Exception {
+    protected List<ComGroup> findImpl(ComGroup request) throws Exception {
         try {
-            return commonGroupMapper.SELECT(request);
+            return comGroupMapper.SELECT(request);
         } catch (Exception e) {
             // 일반적인 조회 예외
             throw new CustomException(getMessage("EXCEPTION.COMMON.FIND_FAILED"));
@@ -130,9 +130,9 @@ public class CommonGroupService extends AbstractCommonService<CommonGroup> {
     }
 
     @Override
-    protected int registerImpl(CommonGroup request) {
+    protected int registerImpl(ComGroup request) {
         try {
-            return commonGroupMapper.INSERT(request);
+            return comGroupMapper.INSERT(request);
         } catch (DuplicateKeyException dke) {
             // PK 중복 등으로 인한 등록 실패 시 사용자 정의 메시지 반환
             throw new CustomException(getMessage("EXCEPTION.PK.EXIST"));
@@ -143,7 +143,7 @@ public class CommonGroupService extends AbstractCommonService<CommonGroup> {
     }
 
     @Override
-    protected int removeImpl(CommonGroup request) throws Exception {
+    protected int removeImpl(ComGroup request) throws Exception {
         // 비즈니스 로직 검증 예시
         // 하위 데이터가 존재하면 삭제 불가능하게 처리
         boolean hasChild = checkChildData(request);
@@ -152,14 +152,14 @@ public class CommonGroupService extends AbstractCommonService<CommonGroup> {
         }
         
         try {
-            return commonGroupMapper.DELETE(request);
+            return comGroupMapper.DELETE(request);
         } catch (Exception e) {
              throw new CustomException(getMessage("EXCEPTION.COMMON.DELETE_FAILED"));
         }
     }
     
     // 단순 조회 메서드
-    private boolean checkChildData(CommonGroup request) {
+    private boolean checkChildData(ComGroup request) {
         // ... 확인 로직 ...
         return false;
     }
@@ -171,7 +171,7 @@ public class CommonGroupService extends AbstractCommonService<CommonGroup> {
 ### Step 4: Controller 구현
 `AbstractCommonController`를 상속받아 표준 API 엔드포인트(`/find`, `/register`, `/update`, `/remove`)를 노출합니다.
 
-**파일:** `src/main/java/com/vims/common/group/CommonGroupController.java`
+**파일:** `src/main/java/com/vims/common/group/ComGroupController.java`
 ```java
 package com.vims.common.group;
 
@@ -181,38 +181,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cms/common/commonGroup")
+@RequestMapping("/cms/common/comGroup")
 @RequiredArgsConstructor
-public class CommonGroupController extends AbstractCommonController<CommonGroup> {
+public class ComGroupController extends AbstractCommonController<ComGroup> {
 
-    private final CommonGroupService commonGroupService;
+    private final ComGroupService comGroupService;
 
     // 1. 조회
     @PostMapping("/find")
     @Override
-    protected List<CommonGroup> findImpl(@RequestBody CommonGroup request) throws Exception {
-        return commonGroupService.findImpl(request);
+    protected List<ComGroup> findImpl(@RequestBody ComGroup request) throws Exception {
+        return comGroupService.findImpl(request);
     }
 
     // 2. 등록
     @PostMapping("/register")
     @Override
-    protected int registerImpl(@RequestBody CommonGroup request) {
-        return commonGroupService.registerImpl(request);
+    protected int registerImpl(@RequestBody ComGroup request) {
+        return comGroupService.registerImpl(request);
     }
 
     // 3. 수정
     @PostMapping("/update")
     @Override
-    protected int updateImpl(@RequestBody CommonGroup request) {
-        return commonGroupService.updateImpl(request);
+    protected int updateImpl(@RequestBody ComGroup request) {
+        return comGroupService.updateImpl(request);
     }
 
     // 4. 삭제
     @PostMapping("/remove")
     @Override
-    protected int removeImpl(@RequestBody CommonGroup request) throws Exception {
-        return commonGroupService.removeImpl(request);
+    protected int removeImpl(@RequestBody ComGroup request) throws Exception {
+        return comGroupService.removeImpl(request);
     }
 }
 ```
