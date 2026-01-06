@@ -369,6 +369,7 @@
         const url = "/cms/common/comUser/register";
         const param = {
             user_id: cont.user_id,
+            email: cont.email,
             user_name: cont.user_name,
             password: cont.password,
             password_confirm: cont.password_confirm,
@@ -380,7 +381,8 @@
         }
         axios.post(url, param)
             .then(response => {
-                console.log(response);
+                popup.close(POPUP_REGISTER_FROM);
+                findByComUserList();
                 formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
             })
             .catch(error => {

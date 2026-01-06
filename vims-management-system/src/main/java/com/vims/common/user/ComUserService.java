@@ -22,6 +22,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.system.auth.authuser.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,19 +129,20 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         request.setPassword(passwordEncoder.encode(request.getPassword()));
 
         try {
-            int result = comUserMapper.INSERT(request);
+            var comUser = ComUser.builder()
+                    .email(request.getEmail())
+                    .password(request.getPassword())
+                    .user_id(request.getUser_id())
+                    .user_name(request.getUser_name())
+                    .role(Role.USER.name())
+                    .tel(request.getTel())
+                    .address(request.getAddress())
+                    .address_detail(request.getAddress_detail())
+                    .postal_code(request.getPostal_code())
+                    .build();
+            int result = comUserMapper.INSERT(comUser);
 
             // Register Token
-            int tokenId = sequenceMapper.SELECT_NEXT_TOKEN_ID();
-            var token = Token.builder()
-                    .id(tokenId)
-                    .token("")
-                    .token_type(TokenType.AUTHORIZATION)
-                    .expired(false)
-                    .revoked(false)
-                    .auth_user(AuthUser.builder().id(request.getId()).build())
-                    .build();
-            tokenService.save(token);
 
             return result;
         } catch (Exception e) {
