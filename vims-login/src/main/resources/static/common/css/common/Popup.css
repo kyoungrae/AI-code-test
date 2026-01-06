@@ -36,8 +36,7 @@
 }
 
 .gi-popup-body {
-    width: 60%;
-    height: 500px;
+    min-height: 300px;
     background-color: #FFFFFF;
     border-radius: 15px;
     display: flex;

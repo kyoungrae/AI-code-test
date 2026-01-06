@@ -1,10 +1,10 @@
 //const Message = {};
 //Message.Label = {};
 //Message.Label.Array = {};
-Message.Label.Array["COM_USER.TITLE_DETAIL"] = "사용자관리 상세";
-Message.Label.Array["COM_USER.TITLE_LIST"] = "사용자관리 목록";
-Message.Label.Array["COM_USER.TITLE_MODIFY"] = "사용자관리 수정";
-Message.Label.Array["COM_USER.TITLE_REGISTER"] = "사용자관리 등록";
+Message.Label.Array["COM_USER.TITLE_DETAIL"] = "사용자 상세";
+Message.Label.Array["COM_USER.TITLE_LIST"] = "사용자 목록";
+Message.Label.Array["COM_USER.TITLE_MODIFY"] = "사용자 수정";
+Message.Label.Array["COM_USER.TITLE_REGISTER"] = "사용자 등록";
 
 Message.Label.Array["COM_USER.CHECK.ID"] = "시퀀스 아이디(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.EMAIL"] = "이메일(을)를 입력해 주세요";
@@ -22,6 +22,7 @@ Message.Label.Array["COM_USER.CHECK.ADDRESS"] = "주소(을)를 입력해 주세
 Message.Label.Array["COM_USER.CHECK.ADDRESS_DETAIL"] = "주소상세(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.POSTAL_CODE"] = "우편번호(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.UUID"] = "파일ID(을)를 입력해 주세요";
+Message.Label.Array["COM_USER.REGISTER_BTN"] = "사용자등록";
 
 
 Message.Label.Array["COM_USER.ID"] = "시퀀스 아이디";

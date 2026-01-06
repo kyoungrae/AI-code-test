@@ -22,10 +22,7 @@ class file {
     };
 }
 
-/**
- * @title : 파일 업로드 HTML 생성 클래스
- * @text : 파일 업로드 팝업 및 기능 관리 클래스
- */
+//CLASS : 파일 업로드 HTML 생성 클래스 파일 업로드 팝업 및 기능 관리 클래스
 class createFileUploadHTML {
     constructor(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME) {
         this.BTN_ID = $('button[data-file-upload-btn]')
@@ -39,18 +36,14 @@ class createFileUploadHTML {
         this.setUploadHTML();                    //NOTE : (3) 업로드 POPUP UI 설정
         this.fileUploadPopupOpenBtnClickEvent(); //NOTE : (4) 파일 업로드 팝업 OPEN 이벤트
     }
-    /**
-     * @title : 파라미터 검증
-     */
+    //CLASS: 파라미터 검증
     isCheckParameters() {
         if (!formUtil.checkEmptyValue(this.BTN_ID)) formUtil.showMessage("please insert BTN_ID value");
         if (!formUtil.checkEmptyValue(this.PATH)) formUtil.showMessage("please insert PATH value");
         if (!formUtil.checkEmptyValue(this.ID_TO_RECEIVE_VALUE)) formUtil.showMessage("please insert ID_TO_RECEIVE_VALUE value");
         if (!formUtil.checkEmptyValue(this.FOLDER_NAME)) formUtil.showMessage("please insert FOLDER_NAME value");
     }
-    /**
-     * @title : 전역 변수 설정
-     */
+    //CLASS : 전역 변수 설정
     globalVariable() {
         this.ACTIVE_BTN_ID = "";            //NOTE : 파일업로드 버튼 활성화 아이디 (같은 화면에서 두개 이상의 버튼을 생성 할때 사용)
         this.EXISTS_FILE_LIST = [];          //NOTE : 기존 파일 목록
@@ -72,10 +65,7 @@ class createFileUploadHTML {
         this.FILE_EXTENSION_WIDTH = "gi-row-15";
         this.FILE_DELETE_BTN_WIDTH = "gi-row-10";
     }
-    /**
-     * @title : 변수 초기화
-     * @text : 파일 업로드 취소 버튼 이벤트 할당 및 변수 초기화
-     */
+    //CLASS :변수 초기화 파일 업로드 취소 버튼 이벤트 할당 및 변수 초기화
     resetVariable() {
         this.EXISTS_FILE_LIST = [];
         this.CHANGED_EXISTS_FILE_LIST = [];
@@ -83,9 +73,7 @@ class createFileUploadHTML {
         this.TOTAL_FILE_LIST = [];
         this.FINAL_UPLOAD_FILE_LIST = {};
     }
-    /**
-     * @title : 업로드 팝업 UI 설정
-     */
+    //CLASS : 업로드 팝업 UI 설정
     setUploadHTML() {
         this.CONTENTS +=
             '<div class="formUtil-fileUpload_body" data-fileupload-boxopen="on">'
@@ -122,10 +110,7 @@ class createFileUploadHTML {
             + '    </div>'
             + '</div>';
     }
-    /**
-     * @title : 파일 크기 계산
-     * @text : Bytes 단위를 KB, MB 등으로 변환
-     */
+    //CLASS : 파일 크기 계산 Bytes 단위를 KB, MB 등으로 변환
     formatBytes(bytes, decimals = 2) {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -134,45 +119,32 @@ class createFileUploadHTML {
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
-    /**
-     * @title : 팝업 오픈 이벤트 바인딩
-     * @text : 파일 업로드 POPUP OPEN 시 이벤트 바인딩 목록
-     */
+    //CLASS : 팝업 오픈 이벤트 바인딩 파일 업로드 POPUP OPEN 시 이벤트 바인딩 목록
     openPopupEventBinding() {
         this.clearFileUploadBody();               //NOTE : 파일 업로드 UI 노출 및 숨김
         this.fileUploadPopupCloseBtnClickEvent(); //NOTE : 파일 업로드 CLOSE 이벤트 (취소)
         this.fileUploadBtnClickEvent();           //NOTE : 파일 업로드
         this.dragAndDropAreaChangeEvent();
     }
-    /**
-     * @title : 팝업 UI 노출 및 숨김
-     */
+    //CLASS : 팝업 UI 노출 및 숨김
     clearFileUploadBody() {
         let isEmpty = $(".fileUpload_body").length === 0;
         let $fileUpload = $(this.COM_FILE_UPLOAD_ID);
         isEmpty ? $fileUpload.append(this.CONTENTS) : $fileUpload.empty();
     }
-    /**
-     * @title : 팝업 오픈 버튼 이벤트
-     */
+    //CLASS : 팝업 오픈 버튼 이벤트
     fileUploadPopupOpenBtnClickEvent() {
         let that = this;
         $(this.BTN_ID).off("click").on("click", fileUploadPopupOpenBtnClickEventHandler);
 
-        /**
-         * @title : 팝업 오픈 버튼 이벤트
-         * @text : 파일 업로드 POPUP OPEN 시 이벤트 바인딩
-         */
+        //NOTE : 팝업 오픈 버튼 이벤트 파일 업로드 POPUP OPEN 시 이벤트 바인딩
         function fileUploadPopupOpenBtnClickEventHandler(e) {
             //NOTE : 파일업로드 버튼 활성화 아이디 (같은 화면에서 두개 이상의 버튼을 생성 할때 사용)
             that.ACTIVE_BTN_ID = "#" + e.currentTarget.id
             that.openPopupEventBinding();
         }
     }
-    /**
-     * @title : 닫기 버튼 이벤트
-     * @text : 파일 업로드 CLOSE 이벤트 (취소)
-     */
+    //CLASS : 닫기 버튼 이벤트 파일 업로드 CLOSE 이벤트 (취소)
     fileUploadPopupCloseBtnClickEvent() {
         let that = this;
         $(this.CANCEL_BTN)
@@ -183,10 +155,7 @@ class createFileUploadHTML {
             that.resetVariable();
         }
     }
-    /**
-     * @title : 업로드 버튼 이벤트
-     * @text : 파일 최종 업로드 이벤트
-     */
+    //CLASS : 업로드 버튼 이벤트 파일 최종 업로드 이벤트
     fileUploadBtnClickEvent() {
         let that = this;
         $(that.UPLOAD_BTN)
@@ -196,10 +165,7 @@ class createFileUploadHTML {
             that.comFileUpload();
         }
     }
-    /**
-     * @title : 드래그 앤 드롭 영역 이벤트
-     * @text : 파일 최종 업로드 이벤트 핸들러 및 리스트 관리
-     */
+    //CLASS : 드래그 앤 드롭 영역 이벤트 파일 최종 업로드 이벤트 핸들러 및 리스트 관리
     dragAndDropAreaChangeEvent() {
         let that = this;
         $(that.DRAG_N_DROP_INPUT)
@@ -207,7 +173,7 @@ class createFileUploadHTML {
             .on("change.dragAndDropAreaChangeEventHandler", function (e) {
                 dragAndDropAreaChangeEventHandler(e);
             })
-        //NOTE : 화면에 파일리스트 노출
+        //FUN : 화면에 파일리스트 노출
         function showFileList() {
             let fileSettingsHtml = "";
             if (that.TOTAL_FILE_LIST.length > 0) {
@@ -289,9 +255,7 @@ class createFileUploadHTML {
             }
         }
     }
-    /**
-     * @title : 공통 파일 업로드 실행
-     */
+    //CLASS : 공통 파일 업로드 실행
     comFileUpload() {
         let that = this;
         let url = that.COMMON_UPLOAD_PATH;

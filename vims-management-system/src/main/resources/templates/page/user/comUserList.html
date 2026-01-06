@@ -1,4 +1,4 @@
-<article class="gi-article-content gi-col-95 gi-row-90">
+<article class="gi-article-content gi-col-95 gi-row-100">
     <section class="gi-col-100 gi-row-100">
         <header class="gi-flex gi-flex-center gi-col-10">
             <h1 class="gi-page-title">[Page.Message].Message.Label.Array["COM_USER.TITLE_LIST"]</h1>
@@ -71,14 +71,73 @@
             </div>
             <!--/     그리드 영역      -->
             <!--      등록버튼 영역      -->
-            <!--            <div class="gi-row-100">-->
-            <!--                <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">-->
-            <!--                    <button id="insert-btn" class="gi-btn gi-float-right " type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>-->
-            <!--                </div>-->
-            <!--            </div>-->
+            <div class="gi-row-100">
+                <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
+                    <button id="insert-btn" class="gi-btn gi-float-right " type="button"
+                        gi-popup-open-id="register_user_popup">[Page.Message].Message.Label.Array["COM_USER.REGISTER_BTN"]</button>
+                </div>
+            </div>
             <!--/     추가버튼 영역      -->
         </article>
     </section>
+</article>
+<article id="register_user_popup" class="gi-popup login-page" data-popup-open="false">
+    <div class="gi-popup-body login-page">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["COM_USER.TITLE_REGISTER"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="registerUserFrom" class="gi-row-100">
+                    <div class="gi-padding-30px ">
+                        <div class="">
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_user_id" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COM_USER.USER_ID"]</label>
+                                    <input data-field="user_id" id="register_user_id" name="register_user_id"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                        autocomplete="off" gi-maxlength="500" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_email" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COM_USER.EMAIL"]</label>
+                                    <input data-field="email" id="register_email" name="register_email" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        gi-maxlength="500" />
+                                </div>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-flex">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_password" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COM_USER.PASSWORD"]</label>
+                                    <input type="password" data-field="password" id="register_password"
+                                        name="register_password" class="gi-input" data-focus-span-text-align="default"
+                                        data-required="true" autocomplete="off" gi-maxlength="500" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div
+                class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="confirm-btn" class="gi-popup-register-btn gi-hidden"
+                    type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+                <button id="popup-close-btn" class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+            </div>
+        </div>
+    </div>
 </article>
 <script type="text/javascript">
     var PRGMID = "comUserList";	//page id
@@ -179,6 +238,7 @@
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.POSTAL_CODE"]', ID: 'postal_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.UUID"]', ID: 'uuid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["DETAIL_BTN"]', ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
                     ]
@@ -199,7 +259,7 @@
                 comUser_grid.pagingSet(findByComUserList);
 
                 //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
-                comUser_grid.detailBtnClick(redirectDetailPage, "detail_btn");
+                comUser_grid.detailBtnClick("test", "detail_btn");
 
                 //그리스 내부의 header click 정렬 이벤트 설정
                 comUser_grid.sortDataSet(findByComUserList);
@@ -238,15 +298,7 @@
             }
         }).catch(error => {
             formUtil.alertPopup(error.response.data);
+
         })
-    }
-    function redirectDetailPage(redirectDataList) {
-        let url = "/cms/comUserDetail";
-
-        //이전페이지 아이디 설정
-        redirectDataList["pre_page_id"] = "/cms/comUserList";
-        // console.log(redirectDataList)
-
-        formUtil.loadContent(url, redirectDataList);
     }
 </script>
