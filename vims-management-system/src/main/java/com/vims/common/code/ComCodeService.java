@@ -12,14 +12,16 @@ public class ComCodeService extends AbstractCommonService<ComCode> {
 
     private final ComCodeRepository comCodeRepository;
     private final ComCodeMapper comCodeMapper;
+
     protected List<ComCode> findComCode(ComCode request) throws Exception {
-        try{
+        try {
             return comCodeMapper.SELECT(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e);
         }
 
     }
+
     @Override
     protected List<ComCode> selectPage(ComCode request) throws Exception {
         return comCodeMapper.SELECT_PAGE(request);
@@ -29,6 +31,7 @@ public class ComCodeService extends AbstractCommonService<ComCode> {
     protected int selectPagingTotalNumber(ComCode request) throws Exception {
         return comCodeMapper.SELECT_PAGING_TOTAL_NUMBER(request);
     }
+
     @Override
     protected List<ComCode> findImpl(ComCode request) throws Exception {
         return comCodeMapper.SELECT(request);

@@ -16,7 +16,7 @@
 
     <select id="SELECT_PAGE" resultType="com.vims.common.code.ComCode">
         SELECT
-            
+            row_number() over (ORDER BY system_create_date DESC )AS no,
             code_id, 
             group_id, 
             code_name, 

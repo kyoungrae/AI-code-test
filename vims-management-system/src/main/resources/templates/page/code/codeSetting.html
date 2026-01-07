@@ -547,7 +547,7 @@
         let param = {
             page_no: page,
             row_range: range,
-            offset: (page - 1) * range,
+            offset: (page - 1) * range
         };
         // 검색조건 설정 (추가해서 사용)
         let cont1 = $("#searchDesc1").val();
@@ -570,7 +570,7 @@
             if (status === 200) {
                 let data = response.data.DATA;
                 let paging = response.data.TOTAL_PAGING[0];
-
+                console.log(data)
                 // 그리드 헤더 설정
                 let comCodeGroup_menuGrid_header = {
                     title: "공통코드그룹 목록",
@@ -612,36 +612,31 @@
                     findByComCodeList('', '', '', '', rows.group_id);
                 }
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error);
+            formUtil.toast(error);
         })
     }
     async function comCodeGroupDelete(deleteParamDataList) {
         let url = "/cms/common/comCodeGroup/remove";
         let data = deleteParamDataList;
-        // console.log(data);
         let param = {
             group_id: data.group_id,
             group_name: data.group_name
         }
-        if (await comCodeGroupDeleteCheckValidation(param)) {
-            axios.post(url, param).then(response => {
-                let status = response.status;
-                if (status === 200) {
-                    formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
-                    findByComCodeGroupList();
-                } else {
-                    formUtil.alertPopup("response status is :" + status);
-                }
-            }).catch(error => {
-                formUtil.alertPopup(error + "");
-            })
-        } else {
-            formUtil.alertPopup(Message.Label.Array["COM_CODE_GROUP.CHECK.COM_CODE_EXIT"]);
-        }
-    }
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
+                findByComCodeGroupList();
+            } else {
+                formUtil.toast("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.toast(error.response.data);
+        })
+    } 1
     function comCodeDelete(deleteParamDataList) {
         let url = "/cms/common/comCode/remove";
         let data = deleteParamDataList;
@@ -657,10 +652,10 @@
                 formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
                 findByComCodeList("", "", "", "", data.group_id);
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error + "");
+            formUtil.toast(error.response.data);
         })
     }
 
@@ -673,7 +668,8 @@
         let url = "/cms/common/comCode/findPage";
         let param = {
             page_no: page,
-            row_range: range
+            row_range: range,
+            offset: (page - 1) * range
         };
         // 검색조건 설정 (추가해서 사용)
         let cont1 = $("#searchDesc1").val();
@@ -745,10 +741,10 @@
                     findByComCodeList();
                 });
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error);
+            formUtil.toast(error);
         })
     }
     async function findByComCodeLength(cont) {
@@ -763,7 +759,7 @@
                 dataLength = data.length;
                 resolve(dataLength);
             }).catch(error => {
-                formUtil.alertPopup(error + "");
+                formUtil.toast(error + "");
             })
         })
     }
@@ -799,15 +795,15 @@
                 let status = response.status;
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
-                    common_popup.close("gi-group_code_register-popup");
+                    popup.close("gi-group_code_register-popup");
                     findByComCodeGroupList();
                 } else {
                     resetEvent();
-                    formUtil.alertPopup("response status is :" + status);
+                    formUtil.toast("response status is :" + status);
                 }
             }).catch(error => {
                 resetEvent();
-                formUtil.alertPopup(error);
+                formUtil.toast(error);
             })
         }
     }
@@ -828,15 +824,15 @@
                 let status = response.status;
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
-                    common_popup.close("gi-code_register-popup");
+                    popup.close("gi-code_register-popup");
                     findByComCodeList("", "", "", "", data.group_id);
                 } else {
                     resetEvent();
-                    formUtil.alertPopup("response status is :" + status);
+                    formUtil.toast("response status is :" + status);
                 }
             }).catch(error => {
                 resetEvent();
-                formUtil.alertPopup(error);
+                formUtil.toast(error.response.data);
             })
         }
     }
@@ -858,15 +854,15 @@
                 let status = response.status;
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
-                    common_popup.close("gi-code_update-popup");
+                    popup.close("gi-code_update-popup");
                     findByComCodeList("", "", "", "", data.group_id);
                 } else {
                     resetEvent();
-                    formUtil.alertPopup("response status is :" + status);
+                    formUtil.toast("response status is :" + status);
                 }
             }).catch(error => {
                 resetEvent();
-                formUtil.alertPopup(error);
+                formUtil.toast(error.response.data);
             })
         }
     }
@@ -885,15 +881,15 @@
                 let status = response.status;
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
-                    common_popup.close("gi-group_code_update-popup");
+                    popup.close("gi-group_code_update-popup");
                     findByComCodeGroupList();
                 } else {
                     resetEvent();
-                    formUtil.alertPopup("response status is :" + status);
+                    formUtil.toast("response status is :" + status);
                 }
             }).catch(error => {
                 resetEvent();
-                formUtil.alertPopup(error);
+                formUtil.toast(error.response.data);
             })
         }
     }
@@ -908,11 +904,5 @@
     }
     function comCodeGroupUpdateCheckValidation() {
         return formUtil.validationCheck(COM_CODE_GROUP_UPDATE_PRGMID, "COM_CODE_GROUP.CHECK.");
-    }
-    async function comCodeGroupDeleteCheckValidation(param) {
-        let flag = true;
-        let dataLength = await findByComCodeLength(param);
-        if (dataLength > 0) flag = false;
-        return flag;
     }
 </script>
