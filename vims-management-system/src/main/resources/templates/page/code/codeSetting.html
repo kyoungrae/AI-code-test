@@ -604,12 +604,19 @@
 
                 //그리드 row 선택 이벤트 설정
                 comCodeGroup_menu_grid.rowClick(rowClickEvent);
-                function rowClickEvent(rows) {
-                    global_group_id = rows.group_id;
-                    $("#register-area2").removeClass("gi-hidden");
-                    dataBinding.setDataForm("gi-code_register-popup", rows);
-                    // popup.popupSetData("gi-code_register-popup",rows);
-                    findByComCodeList('', '', '', '', rows.group_id);
+                function rowClickEvent(rows, e) {
+                    let clickFlag = $(e.currentTarget).hasClass("gi-grid-list-select");
+                    if (clickFlag) {
+                        global_group_id = rows.group_id;
+                        $("#register-area2").removeClass("gi-hidden");
+                        dataBinding.setDataForm("gi-code_register-popup", rows);
+                        findByComCodeList('', '', '', '', rows.group_id);
+                    } else {
+                        global_group_id = "";
+                        $("#register-area2").addClass("gi-hidden");
+                        dataBinding.setDataForm("gi-code_register-popup", {});
+                        findByComCodeList('', '', '', '', "");
+                    }
                 }
             } else {
                 formUtil.toast("response status is :" + status);

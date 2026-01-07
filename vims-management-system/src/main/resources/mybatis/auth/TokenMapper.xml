@@ -34,6 +34,6 @@
 
     <delete id="DELETE_EXPIRED_TOKEN_BY_USER_ID" parameterType="int">
         DELETE FROM TOKEN
-        WHERE user_id = #{userId} AND (expired = 1 OR revoked = 1)
+        WHERE user_id = #{userId}
     </delete>
 </mapper>

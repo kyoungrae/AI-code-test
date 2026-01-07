@@ -72,7 +72,12 @@ spring:
 logging:
     level:
         root: INFO
-        com.*: DEBUG
-        org.apache.ibatis: DEBUG
-        java.sql: DEBUG
-        org.springframework.jdbc: DEBUG
+        com: DEBUG
+        org.apache.ibatis: WARN
+        java.sql: WARN
+        org.springframework.jdbc: WARN
+        jdbc.sqlonly: INFO        # log4jdbc (만약 활성화된다면)
+        jdbc.sqltiming: OFF
+        jdbc.audit: OFF
+        jdbc.resultset: OFF
+        jdbc.connection: OFF

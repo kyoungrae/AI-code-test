@@ -88,6 +88,7 @@ public class ComUserService extends AbstractCommonService<ComUser> {
             }
             return comUserMapper.DELETE(request);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException(getMessage("EXCEPTION.REMOVE"));
         }
     }

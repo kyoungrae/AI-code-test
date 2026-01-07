@@ -2,6 +2,8 @@ package com.vims.common.codegroup;
 
 import com.system.common.base.AbstractCommonService;
 import com.system.common.exception.CustomException;
+import com.vims.common.code.ComCode;
+import com.vims.common.code.ComCodeMapper;
 
 import lombok.AllArgsConstructor;
 
@@ -17,6 +19,7 @@ public class ComCodeGroupService extends AbstractCommonService<ComCodeGroup> {
     private final ComCodeGroupMapper comCodeGroupMapper;
     private final ComCodeGroupRepository comCodeGroupRepository;
     private final MessageSource messageSource;
+    private final ComCodeMapper comCodeMapper;
 
     private String getMessage(String code) {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
@@ -47,10 +50,10 @@ public class ComCodeGroupService extends AbstractCommonService<ComCodeGroup> {
 
     @Override
     protected int removeImpl(ComCodeGroup request) {
-        List<ComCodeGroup> list = null;
+        List<ComCode> list = null;
         try {
-            var comCodeGroup = ComCodeGroup.builder().group_id(request.getGroup_id()).build();
-            list = comCodeGroupMapper.SELECT(comCodeGroup);
+            var comCode = ComCode.builder().group_id(request.getGroup_id()).build();
+            list = comCodeMapper.SELECT(comCode);
             if (list.isEmpty()) {
                 return comCodeGroupMapper.DELETE(request);
             } else {
