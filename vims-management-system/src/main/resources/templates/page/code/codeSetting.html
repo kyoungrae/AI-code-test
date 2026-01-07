@@ -546,7 +546,8 @@
         let url = "/cms/common/comCodeGroup/findPage";
         let param = {
             page_no: page,
-            row_range: range
+            row_range: range,
+            offset: (page - 1) * range,
         };
         // 검색조건 설정 (추가해서 사용)
         let cont1 = $("#searchDesc1").val();

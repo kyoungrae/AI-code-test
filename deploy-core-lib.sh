@@ -107,4 +107,16 @@ echo "✅ vims-management-system 빌드 성공!"
 cd ..
 
 echo ""
+echo "=== 5. vims-gateway 프로젝트 빌드 시작 ==="
+cd vims-gateway
+echo "🚀 vims-gateway 빌드 실행..."
+"$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+if [ $? -ne 0 ]; then
+    echo "❌ vims-gateway 빌드 실패"
+    exit 1
+fi
+echo "✅ vims-gateway 빌드 성공!"
+cd ..
+
+echo ""
 echo "🎉 모든 작업이 완료되었습니다! 🎉"
