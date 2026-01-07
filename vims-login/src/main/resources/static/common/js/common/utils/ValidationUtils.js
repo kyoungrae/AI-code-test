@@ -46,7 +46,6 @@ FormUtility.prototype.checkObjectEmptyValue = function (value) {
  * @param messagePrefix (String) : 메시지 키의 접두사 (예: "COM_CODE_GROUP.CHECK.")
  */
 FormUtility.prototype.validationCheck = function (formId, messagePrefix) {
-    console.log("validationCheck", formId, messagePrefix);
     if (!formId || !messagePrefix) {
         formUtil.toast("validationCheck error: formId and messagePrefix are required.");
         return false;

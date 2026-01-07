@@ -533,6 +533,19 @@ class Popup {
             $parent.find("input").not("[type='radio']").val("");
             $parent.find("select option:eq(0)").prop("selected", true);
 
+            //라인 초기화
+            let p = $parent.find("div[data-focus-line]");
+            p.map((i, item) => {
+                $(item).attr("data-focus-line", "true");
+            });
+
+            //라벨 초기화
+            let k = $parent.find("label[data-focus-label]");
+            k.map((i, item) => {
+                $(item).attr("data-focus-label", "true");
+            });
+
+            //사이드 그리드 초기화
             let t = $($parent).find("div[data-side-grid-open]");
             t.map((i, item) => {
                 $(item).attr("data-side-grid-open", "false");
@@ -556,6 +569,17 @@ class Popup {
         let popupId = $("#" + id);
         popupId.attr("data-popup-open", "false");
         popupId.data("popupOpen", "false");
+        //라인 초기화
+        let p = popupId.find("div[data-focus-line]");
+        p.map((i, item) => {
+            $(item).attr("data-focus-line", "true");
+        });
+
+        //라벨 초기화
+        let k = popupId.find("label[data-focus-label]");
+        k.map((i, item) => {
+            $(item).attr("data-focus-label", "true");
+        });
 
         // 폼 필드 초기화
         popupId.find("input").not("[type='radio']").val("");
@@ -567,6 +591,11 @@ class Popup {
             $(item).empty();
         });
 
+    }
+    open(id) {
+        let popupId = $("#" + id);
+        popupId.attr("data-popup-open", "true");
+        popupId.data("popupOpen", "true");
     }
     getPopupList(popupIds) {
         let url = "/common/common/commonPopup/findCommonPopup"
