@@ -11,17 +11,24 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TokenService {
     private final TokenMapper tokenMapper;
-    public Optional<Token> findByToken(String token){
+
+    public Optional<Token> findByToken(String token) {
         return tokenMapper.SELECT_TOKEN(token);
     }
-    public List<Token> findByAllToken(Token request){
+
+    public List<Token> findByAllToken(Token request) {
         return tokenMapper.SELECT_ALL_TOKEN(request);
     }
 
-    public int save(Token token){
+    public int save(Token token) {
         return tokenMapper.INSERT_TOKEN(token);
     }
-    public int update(Token token){
+
+    public int update(Token token) {
         return tokenMapper.UPDATE_TOKEN(token);
+    }
+
+    public int deleteExpiredTokens(Integer userId) {
+        return tokenMapper.DELETE_EXPIRED_TOKEN_BY_USER_ID(userId);
     }
 }

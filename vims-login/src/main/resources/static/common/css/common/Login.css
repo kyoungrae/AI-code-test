@@ -66,6 +66,7 @@
     background: none;
     position: relative;
     transition: transform 300ms, box-shadow 300ms;
+    box-shadow: none !important;
 }
 
 #checkLogin::before,
@@ -76,7 +77,7 @@
     height: 60px;
     border-radius: 40% 45% 40% 35%;
     z-index: -1;
-    top: -40%;
+    top: 0%;
     right: 0%;
 }
 
@@ -97,4 +98,3 @@
 .animate-content-end {
     animation: animate-end 1.3s ease-in-out;
 }
-

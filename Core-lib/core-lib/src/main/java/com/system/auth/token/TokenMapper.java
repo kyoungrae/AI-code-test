@@ -9,8 +9,12 @@ import java.util.Optional;
 @Mapper
 public interface TokenMapper {
     public Optional<Token> SELECT_TOKEN(String token);
+
     int INSERT_TOKEN(Token token);
+
     int UPDATE_TOKEN(Token token);
 
     List<Token> SELECT_ALL_TOKEN(Token request);
+
+    int DELETE_EXPIRED_TOKEN_BY_USER_ID(Integer userId);
 }

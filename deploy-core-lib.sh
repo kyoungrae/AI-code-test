@@ -81,3 +81,30 @@ ls -lh vims-login/src/lib/core-lib-1.0.jar
 
 echo ""
 echo "✅ 이제 각 애플리케이션을 재시작하세요!"
+
+echo ""
+echo "=== 3. vims-login 프로젝트 빌드 시작 ==="
+cd vims-login
+echo "🚀 vims-login 빌드 실행..."
+"$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+if [ $? -ne 0 ]; then
+    echo "❌ vims-login 빌드 실패"
+    exit 1
+fi
+echo "✅ vims-login 빌드 성공!"
+cd ..
+
+echo ""
+echo "=== 4. vims-management-system 프로젝트 빌드 시작 ==="
+cd vims-management-system
+echo "🚀 vims-management-system 빌드 실행..."
+"$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+if [ $? -ne 0 ]; then
+    echo "❌ vims-management-system 빌드 실패"
+    exit 1
+fi
+echo "✅ vims-management-system 빌드 성공!"
+cd ..
+
+echo ""
+echo "🎉 모든 작업이 완료되었습니다! 🎉"

@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+
 @Service
 @AllArgsConstructor
 public class AuthenticationService {
@@ -31,7 +32,7 @@ public class AuthenticationService {
     private final AuthUserService AuthUserService;
     private final SequenceService sequenceService;
 
-    @Transactional(rollbackFor =  Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public AuthenticationResponse register(RegisterRequest request) throws Exception {
         UserInfo userInfo = new UserInfo();
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -60,7 +61,9 @@ public class AuthenticationService {
                 .token(jwtToken)
                 .build();
     }
-    public AuthenticationResponse authenticate(AuthenticationRequest request){
+
+    @Transactional(rollbackFor = Exception.class)
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
         try {
             var authToken = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
 
@@ -69,13 +72,26 @@ public class AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             var user = (AuthUser) authentication.getPrincipal();
 
+            // 만료되거나 취소된 이전 토큰 삭제 (데이터 누적 방지)
+            tokenService.deleteExpiredTokens(user.getId());
+
             var jwtToken = jwtService.generateToken(user);
+
+            int token_seq = sequenceService.selectTokenSequence();
+            var token = Token.builder()
+                    .id(token_seq)
+                    .token(jwtToken)
+                    .token_type(TokenType.AUTHORIZATION)
+                    .auth_user(user)
+                    .build();
+            tokenService.save(token);
+
             return AuthenticationResponse.builder()
                     .token(jwtToken)
                     .build();
         } catch (Exception e) {
-            e.printStackTrace();  // 예외 로그 확인
-            throw e;              // 혹은 ResponseEntity.status(401).body("인증 실패")
+            e.printStackTrace(); // 예외 로그 확인
+            throw e; // 혹은 ResponseEntity.status(401).body("인증 실패")
         }
     }
 }

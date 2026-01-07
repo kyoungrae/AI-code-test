@@ -20,11 +20,13 @@ public class LogoutService implements LogoutHandler {
 
     private final TokenService tokenService;
     private final JwtService jwtService;
+
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         final Cookie[] cookies = request.getCookies();
         final String jwt;
-        Optional<Cookie> optionalCookie = Arrays.stream(cookies).filter(cookie -> "Authorization".equals(cookie.getName())).findFirst();
+        Optional<Cookie> optionalCookie = Arrays.stream(cookies)
+                .filter(cookie -> "Authorization".equals(cookie.getName())).findFirst();
 
         jwt = optionalCookie.get().getValue();
         var storedToken = tokenService.findByToken(jwt)
@@ -32,7 +34,7 @@ public class LogoutService implements LogoutHandler {
         if (storedToken != null) {
             storedToken.setExpired(true);
             storedToken.setRevoked(true);
-            tokenService.save(storedToken);
+            tokenService.update(storedToken);
             SecurityContextHolder.clearContext();
         }
     }
