@@ -301,9 +301,10 @@
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ADDRESS_DETAIL"]', ID: 'address_detail', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.POSTAL_CODE"]', ID: 'postal_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.UUID"]', ID: 'uuid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
-                        { HEADER: '[Page.Message].Message.Label.Array["DETAIL_BTN"]', ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["DETAIL_BTN"]', ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["UPDATE_BTN"]', ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["DETAIL_BTN"]', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
                     ]
                 }
@@ -314,7 +315,7 @@
                 //comUser_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
 
                 //사이드 그리드 설정
-                //comUser_grid.sideOpenBtnClick("comUser_gi-Grid-side","sideGridOpen_btn");
+                // comUser_grid.sideOpenBtnClick("comUser_gi-Grid-side", "sideGridOpen_btn");
 
                 //그리드 데이터 설정
                 comUser_grid.DataSet(data);
@@ -324,6 +325,8 @@
 
                 //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
                 comUser_grid.detailBtnClick("test", "detail_btn");
+
+                comUser_grid.deleteBtnClick(deleteUser, "delete_btn");
 
                 //그리스 내부의 header click 정렬 이벤트 설정
                 comUser_grid.sortDataSet(findByComUserList);
@@ -343,20 +346,20 @@
                 //그리드 row MultiSelect click 이벤트 설정
                 //comUser_grid.gridColumResize("comUser_gi-Grid")
 
-                function comUserRowMultiSelectClick(rows) {
-                    console.log(rows);
-                }
+                // function comUserRowMultiSelectClick(rows) {
+                //     console.log(rows);
+                // }
 
-                function comUserRowCheckboxClick(rows) {
-                    console.log(rows);
-                }
+                // function comUserRowCheckboxClick(rows) {
+                //     console.log(rows);
+                // }
 
-                function comUserRowClickEvent(rows) {
-                    console.log(rows);
-                }
-                function comUserRowDoubleClickEvent(rows) {
-                    console.log(rows);
-                }
+                // function comUserRowClickEvent(rows) {
+                //     console.log(rows);
+                // }
+                // function comUserRowDoubleClickEvent(rows) {
+                //     console.log(rows);
+                // }
             } else {
                 formUtil.alertPopup("response status is :" + status);
             }
@@ -365,6 +368,8 @@
 
         })
     }
+
+    //FUN : 사용자 등록
     function registerUser(cont) {
         const url = "/cms/common/comUser/register";
         const param = {
@@ -384,6 +389,48 @@
                 popup.close(POPUP_REGISTER_FROM);
                 findByComUserList();
                 formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
+            })
+            .catch(error => {
+                formUtil.toast(error.response.data, "error");
+            })
+    }
+
+    //FUN : 사용자 수정
+    function updateUser(cont) {
+        const url = "/cms/common/comUser/update";
+        const param = {
+            user_id: cont.user_id,
+            email: cont.email,
+            user_name: cont.user_name,
+            password: cont.password,
+            password_confirm: cont.password_confirm,
+            office_code: cont.office_code,
+            tel: cont.tel,
+            address: cont.address,
+            address_detail: cont.address_detail,
+            postal_code: cont.postal_code,
+        }
+        axios.post(url, param)
+            .then(response => {
+                popup.close(POPUP_UPDATE_FROM);
+                findByComUserList();
+                formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
+            })
+            .catch(error => {
+                formUtil.toast(error.response.data, "error");
+            })
+    }
+
+    //FUN : 사용자 삭제
+    function deleteUser(cont) {
+        const url = "/cms/common/comUser/remove";
+        const param = {
+            id: cont.id,
+        }
+        axios.post(url, param)
+            .then(response => {
+                findByComUserList();
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
             })
             .catch(error => {
                 formUtil.toast(error.response.data, "error");

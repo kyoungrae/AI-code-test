@@ -27,6 +27,7 @@ public class ComUserGroupService extends AbstractCommonService<ComUserGroup> {
     private String getMessage(String code) {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
     }
+
     @Override
     protected List<ComUserGroup> selectPage(ComUserGroup request) throws Exception {
         return comUserGroupMapper.SELECT_PAGE(request);
@@ -36,13 +37,14 @@ public class ComUserGroupService extends AbstractCommonService<ComUserGroup> {
     protected int selectPagingTotalNumber(ComUserGroup request) throws Exception {
         return comUserGroupMapper.SELECT_PAGING_TOTAL_NUMBER(request);
     }
+
     @Override
     protected List<ComUserGroup> findImpl(ComUserGroup request) throws Exception {
         return comUserGroupMapper.SELECT(request);
     }
 
     @Override
-    protected int removeImpl(ComUserGroup request) {
+    public int removeImpl(ComUserGroup request) {
         return comUserGroupMapper.DELETE(request);
     }
 
@@ -52,15 +54,16 @@ public class ComUserGroupService extends AbstractCommonService<ComUserGroup> {
     }
 
     @Override
-    protected int registerImpl(ComUserGroup request) throws Exception{
+    protected int registerImpl(ComUserGroup request) throws Exception {
         int rtn = 0;
         try {
             rtn = comUserGroupMapper.INSERT(request);
-        }catch (DuplicateKeyException dke){
+        } catch (DuplicateKeyException dke) {
             throw new CustomException(getMessage("EXCEPTION.PK.EXIST.USER"));
         }
         return rtn;
     }
+
     public Map<String, List<?>> findJoinComUserGroupPage(ComUserGroup request) throws Exception {
         List<ComUserGroup> list = new ArrayList<>();
         Map<String, List<?>> result = new HashMap<>();
@@ -79,14 +82,17 @@ public class ComUserGroupService extends AbstractCommonService<ComUserGroup> {
         }
         return result;
     }
+
     protected List<ComUserGroup> selectJoinComUserGroupPage(ComUserGroup request) throws Exception {
-        try{
+        try {
             return comUserGroupMapper.SELECT_JOIN_COM_USER_GROUP_PAGE(request);
-        }catch (Exception e){
-            e.printStackTrace();;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ;
         }
         return null;
     }
+
     protected int selectJoinComUserGroupPagingTotalNumber(ComUserGroup request) throws Exception {
         return comUserGroupMapper.SELECT_JOIN_COM_USER_GROUP_PAGING_TOTAL_NUMBER(request);
     }

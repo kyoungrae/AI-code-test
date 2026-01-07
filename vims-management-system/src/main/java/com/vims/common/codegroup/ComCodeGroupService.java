@@ -13,12 +13,13 @@ public class ComCodeGroupService extends AbstractCommonService<ComCodeGroup> {
     private final ComCodeGroupRepository comCodeGroupRepository;
 
     protected List<ComCodeGroup> findByGroupId(ComCodeGroup request) throws Exception {
-        try{
+        try {
             return comCodeGroupRepository.findAll();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e);
         }
     }
+
     @Override
     protected List<ComCodeGroup> selectPage(ComCodeGroup request) throws Exception {
         return comCodeGroupMapper.SELECT_PAGE(request);
@@ -28,6 +29,7 @@ public class ComCodeGroupService extends AbstractCommonService<ComCodeGroup> {
     protected int selectPagingTotalNumber(ComCodeGroup request) throws Exception {
         return comCodeGroupMapper.SELECT_PAGING_TOTAL_NUMBER(request);
     }
+
     @Override
     protected List<ComCodeGroup> findImpl(ComCodeGroup request) throws Exception {
         return comCodeGroupMapper.SELECT(request);

@@ -11,9 +11,12 @@ import com.system.common.util.passwordvalidation.PasswordValidationUtil;
 import com.system.common.util.validation.ValidationService;
 import com.vims.common.siteconfig.ComSiteConfig;
 import com.vims.common.siteconfig.ComSiteConfigService;
+import com.vims.common.usergroup.ComUserGroup;
+import com.vims.common.usergroup.ComUserGroupService;
 import com.system.auth.domain.Token;
 import com.system.auth.domain.TokenType;
 import com.system.auth.mapper.SequenceMapper;
+import com.system.auth.token.TokenMapper;
 import com.system.auth.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -31,12 +34,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ComUserService extends AbstractCommonService<ComUser> {
     private final ComUserMapper comUserMapper;
-    private final ComUserRepository comUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final MessageSource messageSource;
     private final ComSiteConfigService comSiteConfigService;
-    private final SequenceMapper sequenceMapper;
     private final TokenService tokenService;
+    private final ComUserGroupService comUserGroupService;
 
     private String getMessage(String code) {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
@@ -70,12 +72,23 @@ public class ComUserService extends AbstractCommonService<ComUser> {
 
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     protected int removeImpl(ComUser request) {
         try {
+            int tokenDeleteResult = tokenService.deleteExpiredTokens(request.getId());
+            if (tokenDeleteResult < 0) {
+                throw new CustomException(getMessage("EXCEPTION.REMOVE.TOKEN"));
+            }
+
+            var comUserGroup = ComUserGroup.builder().id(request.getId()).build();
+            int userGroupDeleteResult = comUserGroupService.removeImpl(comUserGroup);
+            if (userGroupDeleteResult < 0) {
+                throw new CustomException(getMessage("EXCEPTION.REMOVE.USER_GROUP"));
+            }
             return comUserMapper.DELETE(request);
         } catch (Exception e) {
-            throw new CustomException(getMessage(""));
+            throw new CustomException(getMessage("EXCEPTION.REMOVE"));
         }
     }
 
@@ -86,17 +99,6 @@ public class ComUserService extends AbstractCommonService<ComUser> {
             rtn = comUserMapper.DELETE_TOKEN(request);
         } catch (Exception e) {
             throw new Exception(e + ": Fail to Remove Token");
-        }
-        return rtn;
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    protected int removeUser(ComUser request) throws Exception {
-        int rtn = 0;
-        try {
-            rtn = comUserMapper.DELETE(request);
-        } catch (Exception e) {
-            throw new Exception(e + ": Fail to Remove User");
         }
         return rtn;
     }

@@ -62,7 +62,6 @@ public class AuthenticationService {
                 .build();
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         try {
             var authToken = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
@@ -72,20 +71,7 @@ public class AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             var user = (AuthUser) authentication.getPrincipal();
 
-            // 만료되거나 취소된 이전 토큰 삭제 (데이터 누적 방지)
-            tokenService.deleteExpiredTokens(user.getId());
-
             var jwtToken = jwtService.generateToken(user);
-
-            int token_seq = sequenceService.selectTokenSequence();
-            var token = Token.builder()
-                    .id(token_seq)
-                    .token(jwtToken)
-                    .token_type(TokenType.AUTHORIZATION)
-                    .auth_user(user)
-                    .build();
-            tokenService.save(token);
-
             return AuthenticationResponse.builder()
                     .token(jwtToken)
                     .build();
