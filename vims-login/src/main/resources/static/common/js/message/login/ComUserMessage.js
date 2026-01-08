@@ -3,7 +3,7 @@
 //Message.Label.Array = {};
 Message.Label.Array["COM_USER.TITLE_DETAIL"] = "사용자 상세";
 Message.Label.Array["COM_USER.TITLE_LIST"] = "사용자 목록";
-Message.Label.Array["COM_USER.TITLE_MODIFY"] = "사용자 수정";
+Message.Label.Array["COM_USER.TITLE_UPDATE"] = "사용자 수정";
 Message.Label.Array["COM_USER.TITLE_REGISTER"] = "사용자 등록";
 
 Message.Label.Array["COM_USER.CHECK.ID"] = "시퀀스 아이디(을)를 입력해 주세요";

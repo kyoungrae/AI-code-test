@@ -81,6 +81,7 @@
         </article>
     </section>
 </article>
+<!-- 등록 팝업 영역 -->
 <article id="register_user_popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body gi-row-500px">
         <div class="gi-popup-header">
@@ -205,10 +206,127 @@
         </div>
     </div>
 </article>
+<!-- /등록 팝업 영역 -->
+<!--수정 팝업 영역-->
+<article id="update_comUser_popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body gi-row-500px">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["COM_USER.TITLE_UPDATE"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <!--      팝업내용 삽입 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
+                <form id="comUserUpdateForm" class="gi-row-100">
+                    <div class="gi-padding-30px ">
+                        <div class="">
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-direction-column">
+                                <div class="gi-row-100 gi-col-100 gi-flex">
+                                    <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                        <label for="update_email" class="gi-input-label" data-focus-label="true"
+                                            data-focus-label-text-align="default"
+                                            data-required="false">[Page.Message].Message.Label.Array["COM_USER.EMAIL"]</label>
+                                        <input data-disabled data-field="email" id="update_email" name="update_email"
+                                            class="gi-input" data-focus-span-text-align="default" data-required="false"
+                                            autocomplete="off" gi-maxlength="255" />
+                                    </div>
+                                    <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                        <label for="update_user_id" class="gi-input-label" data-focus-label="true"
+                                            data-focus-label-text-align="default"
+                                            data-required="false">[Page.Message].Message.Label.Array["COM_USER.USER_ID"]</label>
+                                        <input data-disabled data-field="user_id" id="update_user_id"
+                                            name="update_user_id" class="gi-input" data-focus-span-text-align="default"
+                                            data-required="false" autocomplete="off" gi-maxlength="255" />
+                                    </div>
+                                </div>
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="update_password" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="false">[Page.Message].Message.Label.Array["COM_USER.PASSWORD"]</label>
+                                    <input data-field="password" id="update_password" name="update_password"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="false"
+                                        autocomplete="off" gi-maxlength="255" />
+                                </div>
+                                <div class="gi-row-100 gi-flex gi-flex-center ">
+                                    <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                        <label for="update_user_name" class="gi-input-label" data-focus-label="true"
+                                            data-focus-label-text-align="default"
+                                            data-required="false">[Page.Message].Message.Label.Array["COM_USER.USER_NAME"]</label>
+                                        <input data-field="user_name" id="update_user_name" name="update_user_name"
+                                            class="gi-input" data-focus-span-text-align="default" data-required="false"
+                                            autocomplete="off" gi-maxlength="100" />
+                                    </div>
+                                    <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                        <label for="update_office_code" class="gi-input-label" data-focus-label="true"
+                                            data-focus-label-text-align="default"
+                                            data-required="false">[Page.Message].Message.Label.Array["COM_USER.OFFICE_CODE"]</label>
+                                        <input data-field="office_code" id="update_office_code"
+                                            name="update_office_code" class="gi-input"
+                                            data-focus-span-text-align="default" data-required="false"
+                                            autocomplete="off" gi-maxlength="7" />
+                                    </div>
+                                </div>
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="update_tel" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="false">[Page.Message].Message.Label.Array["COM_USER.TEL"]</label>
+                                    <input data-field="tel" id="update_tel" name="update_tel" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
+                                        gi-maxlength="11" />
+                                </div>
+                                <div class="gi-row-100 gi-flex gi-flex-center ">
+                                    <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                        <label for="update_address" class="gi-input-label" data-focus-label="true"
+                                            data-focus-label-text-align="default"
+                                            data-required="false">[Page.Message].Message.Label.Array["COM_USER.ADDRESS"]</label>
+                                        <input data-field="address" id="update_address" name="update_address"
+                                            class="gi-input" data-focus-span-text-align="default" data-required="false"
+                                            autocomplete="off" gi-maxlength="100" />
+                                    </div>
+                                    <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                        <label for="update_address_detail" class="gi-input-label"
+                                            data-focus-label="true" data-focus-label-text-align="default"
+                                            data-required="false">[Page.Message].Message.Label.Array["COM_USER.ADDRESS_DETAIL"]</label>
+                                        <input data-field="address_detail" id="update_address_detail"
+                                            name="update_address_detail" class="gi-input"
+                                            data-focus-span-text-align="default" data-required="false"
+                                            autocomplete="off" gi-maxlength="100" />
+                                    </div>
+                                </div>
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="update_postal_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="false">[Page.Message].Message.Label.Array["COM_USER.POSTAL_CODE"]</label>
+                                    <input data-field="postal_code" id="update_postal_code" name="update_postal_code"
+                                        class="gi-input" data-focus-span-text-align="default" data-required="false"
+                                        autocomplete="off" gi-maxlength="5" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/      팝업내용 삽입 영역      -->
+        </div>
+        <div class="gi-popup-footer">
+            <div
+                class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="popup-update_comUser_confirm-btn" class="gi-popup-update-btn"
+                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+                <button id="popup-update_comUser_close-btn" class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+            </div>
+        </div>
+    </div>
+</article>
+<!--/수정 팝업 영역-->
 <script type="text/javascript">
     var PRGMID = "comUserList";	//page id
     var POPUP_REGISTER_FROM = "register_user_popup";
     var POPUP_REGISTER_BTN = "#popup-register_user_confirm-btn";
+
+    var UPDATE_POPUP_ID = "update_comUser_popup";
+    var UPDATE_POPUP_FORM = "comUserUpdateForm";
+    var UPDATE_POPUP_CONFIRM_BTN = "popup-update_comUser_confirm-btn";
     init();
     function init() {
 
@@ -339,6 +457,9 @@
                 //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
                 comUser_grid.detailBtnClick("test", "detail_btn");
 
+                //그리드 내부의 수정 버튼 클릭 이벤트(수정 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                comUser_grid.updateBtnClick(comUserUpdatePopupOpen, "update_btn");
+
                 comUser_grid.deleteBtnClick(deleteUser, "delete_btn");
 
                 //그리스 내부의 header click 정렬 이벤트 설정
@@ -374,12 +495,26 @@
                 //     console.log(rows);
                 // }
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error.response.data);
+            formUtil.toast(error);
 
         })
+    }
+
+    //FUN : 수정팝업 호출
+    function comUserUpdatePopupOpen(cont) {
+        //console.log(cont);
+        input.setSelectOption("#update_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
+        dataBinding.setDataForm(UPDATE_POPUP_ID, cont);
+        popup.open(UPDATE_POPUP_ID);
+
+        $("#" + UPDATE_POPUP_CONFIRM_BTN).off("click.updatePopupConfirmBtnClickEventHandler")
+            .on("click.updatePopupConfirmBtnClickEventHandler", updatePopupConfirmBtnClickEventHandler);
+        function updatePopupConfirmBtnClickEventHandler() {
+            updateUser(cont);
+        }
     }
 
     //FUN : 사용자 등록
@@ -397,7 +532,6 @@
             address_detail: cont.address_detail,
             postal_code: cont.postal_code,
         }
-        console.log(param)
         axios.post(url, param)
             .then(response => {
                 popup.close(POPUP_REGISTER_FROM);
