@@ -37,7 +37,6 @@ class PageInit {
         commonTag.selectLabelTagFocus(selectYearTag.siblings("label"));
         commonTag.tagDisabled();
         commonTag.defaultToday();
-        new GiDatePicker();
         new GiResidentNumber();
         new GiCorporateNumber();
         new GiDatePicker();

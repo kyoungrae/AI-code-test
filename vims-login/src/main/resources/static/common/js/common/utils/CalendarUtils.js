@@ -522,7 +522,7 @@ FormUtility.prototype.giCalendarNextMonth = function (flag1 = addScheduleFlag, f
 /**
  * @title : 데이트 피커 생성
  * @e : {form_date ID, to_date ID}
- * @text : input 태그에 커스텀 태그로 사용 input[gi-datepicker]
+ * @text : input 태그에 커스텀 태그로 사용 input[data-datepicker]
  * @writer : 이경태
  * */
 FormUtility.prototype.giDatePicker = function (input, e, direction) {
@@ -612,16 +612,16 @@ FormUtility.prototype.giDatePicker = function (input, e, direction) {
             + '</div>';
 
     }
-    if ($("#" + input).attr("gi-datepicker") === "notBeforeDate") {
+    if ($("#" + input).attr("data-datepicker") === "notBeforeDate") {
         // 오늘보다 이전 선택 불가 달력 출력
         notBeforeSelect();
-    } else if ($("#" + input).attr("gi-datepicker") === "notAfterDate") {
+    } else if ($("#" + input).attr("data-datepicker") === "notAfterDate") {
         // 오늘보다 이후 선택 불가 달력 출력
         notAfterSelect();
-    } else if ($("#" + input).attr("gi-datepicker") === "fromTodayUntilAMonthLater") {
+    } else if ($("#" + input).attr("data-datepicker") === "fromTodayUntilAMonthLater") {
         // 오늘 포함 한달 뒤 까지만 선택 가능
         fromTodayUntilAMonthLaterSelect();
-    } else if ($("#" + input).attr("gi-datepicker") === "setRange") {
+    } else if ($("#" + input).attr("data-datepicker") === "setRange") {
         // gi-date-min , gi-date-max 사이의 날짜만 선택 가능 (min, max는 옵셔널이며 'YYYY-MM-DD')
         selectByRange();
     } else {

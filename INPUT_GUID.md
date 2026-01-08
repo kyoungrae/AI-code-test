@@ -26,3 +26,24 @@
 </javascript>
 
 **example end**
+
+## @title : input 태그 calendar 설정
+## @type : data-tag
+## @date : 2026-01-08
+## @author : 이경태
+## @extend : 
+## @call : new GiCalendar();
+**example start**
+
+<javascript>
+    ///Users/ikyoungtae/Documents/coding/AI-code-test/vims-login/src/main/resources/static/common/js/common/Common.js
+    new GiCalendar(); //Common.js -> commonTagSettings(); 
+
+    ///Users/ikyoungtae/Documents/coding/AI-code-test/vims-login/src/main/resources/templates/layout/home.html
+    var commonTag = new CommonTag();
+</javascript>
+<html>
+    <input type="text" data-datepicker/>
+</html>
+
+**example end**

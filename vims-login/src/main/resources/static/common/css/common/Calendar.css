@@ -1,7 +1,7 @@
 /* ========== Calendar Styles ========== */
 
 /* ======================================================================================================== 달력 Calendar 영역*/
-input[gi-datepicker] {
+input[data-datepicker] {
     background: url("../../img/calendar.svg") no-repeat right 10px center;
     background-size: 20px;
     padding-right: 1rem;

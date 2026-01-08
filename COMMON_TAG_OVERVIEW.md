@@ -14,7 +14,7 @@
 | **InputTagUtils.js** | **입력 필드 기본 동작** | `inputTagFocus`, `tagDisabled`, `inputTagReset` <br> Focus/Blur 시 스타일 변경 및 Disabled 처리 |
 | **InputMaskUtils.js** | **입력 값 마스킹** | `checkPriceType` (금액 콤마), `checkInputOnlyType` (숫자만) <br> 사용자 입력 시 실시간 포맷팅 |
 | **SelectTagUtils.js** | **커스텀 SelectBox** | `GiSelectBox` (공통코드 연동), `GiSelectBoxCustom`, `GiSelectBoxYear` <br> `input[gi-selectbox]`를 커스텀 드롭다운으로 변환 |
-| **DateTagUtils.js** | **날짜 선택기** | `GiDatePicker`, `defaultToday` <br> `input[gi-datepicker]`에 달력 팝업 연결 |
+| **DateTagUtils.js** | **날짜 선택기** | `GiDatePicker`, `defaultToday` <br> `input[data-datepicker]`에 달력 팝업 연결 |
 | **AddressTagUtils.js** | **주소 검색** | `GiAddress` <br> Daum Postcode API 연동 주소 검색 팝업 |
 | **TagValidationUtils.js** | **유효성 검증** | `GiFormatCheck`, `GiResidentNumber`, `GiCorporateNumber` <br> 주민/법인번호, 이메일, 전화번호 등 형식 검증 |
 | **SliderUtils.js** | **슬라이더 컴포넌트** | `GiSlider` <br> 이미지/컨텐츠 슬라이드 기능 제공 |
@@ -51,7 +51,7 @@
 HTML 태그에 아래 속성을 추가하여 기능을 활성화합니다.
 
 *   `gi-selectbox`: 공통코드 그룹 ID와 연동하여 SelectBox 생성.
-*   `gi-datepicker`: 클릭 시 달력 팝업 활성화.
+*   `data-datepicker`: 클릭 시 달력 팝업 활성화.
 *   `gi-format-check="{type}"`: 입력 값 형식 검증 (예: `number`, `email`, `phone_number`).
 *   `gi-residentnumber`: 주민등록번호 포맷팅 및 유효성 검증.
 *   `gi-address`: 주소 검색 팝업 버튼 연결.

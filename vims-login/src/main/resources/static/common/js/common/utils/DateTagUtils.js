@@ -1,6 +1,6 @@
 /**
  * @title : 날짜 선택기
- * @see : input gi-datepicker
+ * @see : input data-datepicker
  * @writer : 이경태
  */
 class GiDatePicker {
@@ -9,7 +9,7 @@ class GiDatePicker {
     }
     initDatePicker() {
 
-        const inputs = $("input[gi-datepicker]");
+        const inputs = $("input[data-datepicker]");
         const that = this;
         inputs.map((i, input) => {
 
