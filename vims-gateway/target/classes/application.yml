@@ -96,7 +96,7 @@ spring:
 #            - StripPrefix=1
 
 token:
-  secret: key # 실제 운영 시에는 매우 복잡하고 긴 난수로 변경해야 합니다.
+  secret: YeyKgN7Oa0dfKJCR0Xr3Sp45WdU8BCv2Zd0X6KxRTfFgfPZ3MH3xccjC3WCt90Az # Login 서비스와 동일한 키 값 사용
 
 gateway:
   api-key: vims-internal-secret-key-1234 # 시스템 간 통신용 API KEY (운영 시 변경 필수)
