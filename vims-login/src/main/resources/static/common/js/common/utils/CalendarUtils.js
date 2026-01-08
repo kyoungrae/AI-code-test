@@ -23,10 +23,14 @@ FormUtility.prototype.giCalendarSeletedDate = function () {
  * @text : < div id='gi-calendar-main'> < /div> " 생성 후 사용(필수)
  * @writer : 이경태
  * */
-FormUtility.prototype.giCalendar = function (e) {
+FormUtility.prototype.giCalendar = function (e, direction) {
     let date = "";
     let nowMonth = 0;
     let nowYear = 0;
+
+    // 이전 값 가져오기
+    let oldYear = parseInt($("#gi-calendar-main").find(".gi-calendar-YEAR").text());
+    let oldMonth = parseInt($("#gi-calendar-main").find(".gi-calendar-MONTH").text());
 
     if (formUtil.checkEmptyValue(e)) { //prev , next Month 클릭시
         date = e;
@@ -67,13 +71,22 @@ FormUtility.prototype.giCalendar = function (e) {
         nextDate_no = 7 - endDate;
     }
 
+    // 애니메이션 클래스 결정
+    let yearAnim = (direction && !isNaN(oldYear)) ? (oldYear !== nowYear ? (direction === 'up' ? 'gi-calendar-slot-up' : 'gi-calendar-slot-down') : '') : 'tilt-in-top-1';
+    let monthAnim = (direction && !isNaN(oldMonth)) ? (oldMonth !== nowMonth ? (direction === 'up' ? 'gi-calendar-slot-up' : 'gi-calendar-slot-down') : '') : 'tilt-in-top-1';
+
     // 달력 헤더설정 (onclick 핸들러 수정: formUtil.giCalendarPrevMonth)
     let CalendarBox = '<div class="gi-col-100 gi-row-100 ">'
         + '<div class="gi-calendar-top gi-flex gi-flex-justify-content-center">'
         + '<div class="gi-calendar-pre gi-col-20px gi-flex gi-cursor-pointer" onclick="formUtil.giCalendarPrevMonth()"><i class="fa-solid fa-angle-left"></i></div>'
-        + '<div class="gi-calendar-top-date gi-col-40 gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center"><span class="gi-calendar-YEAR tilt-in-top-1">' + nowYear + '</span>년<span class="gi-calendar-MONTH tilt-in-top-1">' + text_nowMonth + '</span>월</div>'
+        + '<div class="gi-calendar-top-date gi-col-40 gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center gi-cursor-pointer" onclick="formUtil.openYearMonthPicker(null, \'all\')">'
+        + '<span class="gi-calendar-YEAR ' + yearAnim + '">' + nowYear + '</span>년'
+        + '<span class="gi-calendar-MONTH ' + monthAnim + '">' + text_nowMonth + '</span>월'
+        + '<i class="fa-solid fa-chevron-down"></i>'
+        + '</div>'
         + '<div class="gi-calendar-next gi-col-20px gi-flex gi-cursor-pointer" onclick="formUtil.giCalendarNextMonth()"><i class="fa-solid fa-angle-right"></i></div>'
         + '</div>'
+        + '<div class="gi-calendar-body-container">'
         + '<div class="gi-calendar-week gi-flex gi-flex-justify-content-center">'
         + '<div class="gi-calendar-week-content">월</div>'
         + '<div class="gi-calendar-week-content">화</div>'
@@ -119,7 +132,7 @@ FormUtility.prototype.giCalendar = function (e) {
             + '</div>'
     }
 
-    $("#gi-calendar-main > #gi-calendar-weekly-box").html(weekly_date_html);
+    $("#gi-calendar-main").find("#gi-calendar-weekly-box").html(weekly_date_html);
 
     formUtil.giCalendarToDayCheck(); //오늘 날짜 표시
     formUtil.searchHoliday(nowYear, text_nowMonth); //공휴일 표시
@@ -469,9 +482,9 @@ FormUtility.prototype.giCalendarAddHoliday = function (year, month) {
  * */
 FormUtility.prototype.giCalendarPrevMonth = function (flag1 = addScheduleFlag, flag2 = addScheduleParameter, flag3 = addClickDateFlag) {
     let year = parseInt($(".gi-calendar-YEAR").text());
-    let month = parseInt($(".gi-calendar-MONTH").text()) - 1;
-    let date = new Date(year, month - 1);
-    let giCalendarGrid = formUtil.giCalendar(date);
+    let month = parseInt($(".gi-calendar-MONTH").text());
+    let date = new Date(year, month - 2);
+    let giCalendarGrid = formUtil.giCalendar(date, 'down');
 
     if (flag3) {
         giCalendarGrid.addClickDateEvent(addClickDateSettingFunction);
@@ -490,10 +503,10 @@ FormUtility.prototype.giCalendarPrevMonth = function (flag1 = addScheduleFlag, f
  * */
 FormUtility.prototype.giCalendarNextMonth = function (flag1 = addScheduleFlag, flag2 = addScheduleParameter, flag3 = addClickDateFlag) {
     let year = parseInt($(".gi-calendar-YEAR").text());
-    let month = parseInt($(".gi-calendar-MONTH").text()) + 1;
+    let month = parseInt($(".gi-calendar-MONTH").text());
 
-    let date = new Date(year, month - 1);
-    let giCalendarGrid = formUtil.giCalendar(date);
+    let date = new Date(year, month);
+    let giCalendarGrid = formUtil.giCalendar(date, 'up');
 
     if (flag3) {
         giCalendarGrid.addClickDateEvent(addClickDateSettingFunction);
@@ -512,11 +525,17 @@ FormUtility.prototype.giCalendarNextMonth = function (flag1 = addScheduleFlag, f
  * @text : input 태그에 커스텀 태그로 사용 input[gi-datepicker]
  * @writer : 이경태
  * */
-FormUtility.prototype.giDatePicker = function (input, e) {
+FormUtility.prototype.giDatePicker = function (input, e, direction) {
     let date = new Date();
     let nowMonth = 0;
     let nowYear = 0;
     let datepickerId = "gi-datepicker_calendar-main";
+
+    // 이전 값 가져오기
+    let $datepicker = $("#" + datepickerId);
+    let oldYear = parseInt($datepicker.find(".gi-calendar-YEAR").text());
+    let oldMonth = parseInt($datepicker.find(".gi-calendar-MONTH").text());
+
     if (formUtil.checkEmptyValue(e)) { //prev , next Month 클릭시
         date = e;
         nowYear = date.getFullYear();
@@ -554,13 +573,22 @@ FormUtility.prototype.giDatePicker = function (input, e) {
     if (0 !== endDate) {
         nextDate_no = 7 - endDate;
     }
+    // 애니메이션 클래스 결정
+    let yearAnim = (direction && !isNaN(oldYear)) ? (oldYear !== nowYear ? (direction === 'up' ? 'gi-calendar-slot-up' : 'gi-calendar-slot-down') : '') : 'tilt-in-top-1';
+    let monthAnim = (direction && !isNaN(oldMonth)) ? (oldMonth !== nowMonth ? (direction === 'up' ? 'gi-calendar-slot-up' : 'gi-calendar-slot-down') : '') : 'tilt-in-top-1';
+
     // 달력 헤더설정 (onclick 수정 formUtil.giDatePickerPrevMonth)
     let CalendarBox = '<div id="' + datepickerId + '" class="gi-col-100 gi-row-100 ">'
         + '<div class="gi-calendar-top gi-flex gi-flex-justify-content-center">'
         + '<div class="gi-calendar-pre gi-col-20px gi-flex gi-cursor-pointer" onclick="formUtil.giDatePickerPrevMonth(\'' + input + '\')"><i class="fa-solid fa-angle-left"></i></div>'
-        + '<div class="gi-calendar-top-date gi-col-40 gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center"><span class="gi-calendar-YEAR tilt-in-top-1">' + nowYear + '</span>년<span class="gi-calendar-MONTH tilt-in-top-1">' + text_nowMonth + '</span>월</div>'
+        + '<div class="gi-calendar-top-date gi-col-40 gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center gi-cursor-pointer" onclick="formUtil.openYearMonthPicker(\'' + input + '\', \'all\')">'
+        + '<span class="gi-calendar-YEAR ' + yearAnim + '">' + nowYear + '</span>년'
+        + '<span class="gi-calendar-MONTH ' + monthAnim + '">' + text_nowMonth + '</span>월'
+        + '<i class="fa-solid fa-chevron-down"></i>'
+        + '</div>'
         + '<div class="gi-calendar-next gi-col-20px gi-flex gi-cursor-pointer" onclick="formUtil.giDatePickerNextMonth(\'' + input + '\')"><i class="fa-solid fa-angle-right"></i></div>'
         + '</div>'
+        + '<div class="gi-calendar-body-container">'
         + '<div class="gi-calendar-week gi-flex gi-flex-justify-content-center">'
         + '<div class="gi-calendar-week-content">월</div>'
         + '<div class="gi-calendar-week-content">화</div>'
@@ -571,6 +599,7 @@ FormUtility.prototype.giDatePicker = function (input, e) {
         + '<div class="gi-calendar-week-content">일</div>'
         + '</div>'
         + '<div id ="gi-calendar-weekly-box" class="gi-calendar-weekly gi-flex gi-col-100">'
+        + '</div>'
         + '</div>'
         + '</div>'
 
@@ -607,7 +636,7 @@ FormUtility.prototype.giDatePicker = function (input, e) {
             + '</div>'
     }
 
-    $("#" + datepickerId + " > #gi-calendar-weekly-box").html(weekly_date_html);
+    $("#" + datepickerId).find("#gi-calendar-weekly-box").html(weekly_date_html);
 
     formUtil.giCalendarToDayCheck(); //오늘 날짜 표시
 
@@ -792,9 +821,9 @@ FormUtility.prototype.giDatePicker = function (input, e) {
  * */
 FormUtility.prototype.giDatePickerPrevMonth = function (input) {
     let year = parseInt($("#gi-datepicker_calendar-main").find(".gi-calendar-YEAR").text());
-    let month = parseInt($("#gi-datepicker_calendar-main").find(".gi-calendar-MONTH").text()) - 1;
-    let date = new Date(year, month - 1);
-    formUtil.giDatePicker(input, date);
+    let month = parseInt($("#gi-datepicker_calendar-main").find(".gi-calendar-MONTH").text());
+    let date = new Date(year, month - 2);
+    formUtil.giDatePicker(input, date, 'down');
 }
 /**
  * @title : 데이트 피커 다음달
@@ -803,8 +832,137 @@ FormUtility.prototype.giDatePickerPrevMonth = function (input) {
  * */
 FormUtility.prototype.giDatePickerNextMonth = function (input) {
     let year = parseInt($("#gi-datepicker_calendar-main").find(".gi-calendar-YEAR").text());
-    let month = parseInt($("#gi-datepicker_calendar-main").find(".gi-calendar-MONTH").text()) + 1;
-    let date = new Date(year, month - 1);
+    let month = parseInt($("#gi-datepicker_calendar-main").find(".gi-calendar-MONTH").text());
+    let date = new Date(year, month);
 
-    formUtil.giDatePicker(input, date);
+    formUtil.giDatePicker(input, date, 'up');
+}
+
+/**
+ * @title : 년/월 선택 피커 오픈
+ * @text : 슬롯머신 스타일의 년/월 선택창 오픈
+ */
+FormUtility.prototype.openYearMonthPicker = function (input, type) {
+    let year = parseInt($(".gi-calendar-YEAR").text());
+    let month = parseInt($(".gi-calendar-MONTH").text());
+
+    let isDatePicker = input !== null;
+    let datepickerId = isDatePicker ? "gi-datepicker_calendar-main" : "gi-calendar-main";
+    let $calendar = isDatePicker ? $("#" + datepickerId) : $("#gi-calendar-main");
+    let $header = $calendar.find(".gi-calendar-top-date");
+
+    // 이미 열려있으면 닫기 (토글 기능)
+    if ($calendar.find(".gi-picker-overlay").length > 0) {
+        $calendar.find(".gi-picker-overlay").remove();
+        $header.removeClass("active");
+        return;
+    }
+
+    $header.addClass("active");
+
+    let years = [];
+    for (let i = year - 10; i <= year + 10; i++) years.push(i);
+
+    let months = [];
+    for (let i = 1; i <= 12; i++) months.push(i);
+
+    let pickerHtml = `
+        <div class="gi-picker-overlay">
+            <div class="gi-picker-header">
+                <span>날짜 선택</span>
+                <span class="gi-picker-close-btn" onclick="let $cal = $(this).closest('.gi-col-100'); $cal.find('.gi-picker-overlay').remove(); $cal.find('.gi-calendar-top-date').removeClass('active');"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <div class="gi-picker-content">
+                <div class="gi-picker-highlight"></div>
+                <div class="gi-picker-column gi-picker-year-col">
+                    <div class="gi-picker-spacer"></div>
+                    ${years.map(y => `<div class="gi-picker-item ${y === year ? 'active' : ''}" data-value="${y}">${y}</div>`).join('')}
+                    <div class="gi-picker-spacer"></div>
+                </div>
+                <div class="gi-picker-column gi-picker-month-col">
+                    <div class="gi-picker-spacer"></div>
+                    ${months.map(m => `<div class="gi-picker-item ${m === month ? 'active' : ''}" data-value="${m}">${m}월</div>`).join('')}
+                    <div class="gi-picker-spacer"></div>
+                </div>
+            </div>
+            <div class="gi-picker-footer">
+                <button type="button" class="gi-picker-confirm-btn">확인</button>
+            </div>
+        </div>
+    `;
+
+    $calendar.find(".gi-calendar-body-container").append(pickerHtml);
+
+    // 초기 스크롤 위치 설정
+    setTimeout(() => {
+        const $yearCol = $calendar.find(".gi-picker-year-col");
+        const $monthCol = $calendar.find(".gi-picker-month-col");
+
+        const $activeYear = $yearCol.find(".gi-picker-item.active");
+        const $activeMonth = $monthCol.find(".gi-picker-item.active");
+
+        if ($activeYear.length) {
+            $yearCol.scrollTop($activeYear[0].offsetTop - $yearCol.height() / 2 + $activeYear.height() / 2);
+        }
+        if ($activeMonth.length) {
+            $monthCol.scrollTop($activeMonth[0].offsetTop - $monthCol.height() / 2 + $activeMonth.height() / 2);
+        }
+    }, 150);
+
+    // 스크롤 이벤트로 활성화된 아이템 강조 및 3D 효과 적용
+    $calendar.find(".gi-picker-column").on("scroll", function () {
+        let $col = $(this);
+        let center = $col.scrollTop() + $col.height() / 2;
+        let closestItem = null;
+        let minDiff = Infinity;
+
+        $col.find(".gi-picker-item").each(function () {
+            let itemCenter = this.offsetTop + this.offsetHeight / 2;
+            let diff = center - itemCenter; // 중앙으로부터의 거리
+            let absDiff = Math.abs(diff);
+
+            // 3D 회전 효과 및 투명도 계산
+            let rotation = (diff / 2); // 회전 각도
+            let opacity = Math.max(0.2, 1 - (absDiff / 120)); // 투명도
+            let scale = Math.max(0.8, 1 - (absDiff / 350)); // 크기 조절
+
+            $(this).css({
+                "transform": `rotateX(${rotation}deg) scale(${scale})`,
+                "opacity": opacity
+            });
+
+            if (absDiff < minDiff) {
+                minDiff = absDiff;
+                closestItem = $(this);
+            }
+        });
+
+        if (closestItem && !closestItem.hasClass("active")) {
+            $col.find(".gi-picker-item").removeClass("active");
+            closestItem.addClass("active");
+        }
+    });
+
+    // 항목 클릭 시 해당 항목으로 스크롤 이동 기능 추가
+    $calendar.find(".gi-picker-item").on("click", function () {
+        let $item = $(this);
+        let $col = $item.closest(".gi-picker-column");
+
+        // 해당 아이템이 중앙에 오도록 스크롤 이동
+        $col.animate({
+            scrollTop: this.offsetTop - $col.height() / 2 + this.offsetHeight / 2
+        }, 150);
+    });
+
+    // 확인 버튼 클릭 이벤트
+    $(".gi-picker-confirm-btn").on("click", function () {
+        let selectedYear = $(".gi-picker-year-col .gi-picker-item.active").data("value");
+        let selectedMonth = $(".gi-picker-month-col .gi-picker-item.active").data("value");
+
+        if (isDatePicker) {
+            formUtil.giDatePicker(input, new Date(selectedYear, selectedMonth - 1));
+        } else {
+            formUtil.giCalendar(new Date(selectedYear, selectedMonth - 1));
+        }
+    });
 }
