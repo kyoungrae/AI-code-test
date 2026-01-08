@@ -94,3 +94,9 @@ spring:
 #            - Path=/api/search/**
 #          filters:
 #            - StripPrefix=1
+
+token:
+  secret: key # 실제 운영 시에는 매우 복잡하고 긴 난수로 변경해야 합니다.
+
+gateway:
+  api-key: vims-internal-secret-key-1234 # 시스템 간 통신용 API KEY (운영 시 변경 필수)

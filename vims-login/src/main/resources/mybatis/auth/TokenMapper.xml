@@ -36,4 +36,10 @@
         DELETE FROM TOKEN
         WHERE user_id = #{userId} AND (expired = 1 OR revoked = 1)
     </delete>
+    
+    <update id="REVOKE_ALL_USER_TOKENS" parameterType="int">
+        UPDATE TOKEN
+        SET expired = 1, revoked = 1
+        WHERE user_id = #{userId} AND expired = 0 AND revoked = 0
+    </update>
 </mapper>

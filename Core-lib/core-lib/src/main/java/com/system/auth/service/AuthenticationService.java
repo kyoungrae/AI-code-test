@@ -54,6 +54,8 @@ public class AuthenticationService {
                 .id(token_seq)
                 .token(jwtToken)
                 .token_type(TokenType.AUTHORIZATION)
+                .expired(false)
+                .revoked(false)
                 .auth_user(user)
                 .build();
         tokenService.save(token);
@@ -62,6 +64,7 @@ public class AuthenticationService {
                 .build();
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         try {
             var authToken = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
@@ -71,7 +74,23 @@ public class AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             var user = (AuthUser) authentication.getPrincipal();
 
+            // 기존 유효한 토큰들을 모두 무효화 (EXPIRED=1, REVOKED=1)
+            tokenService.revokeAllUserTokens(user.getId());
+
             var jwtToken = jwtService.generateToken(user);
+
+            // 새로운 토큰을 데이터베이스에 저장
+            int token_seq = sequenceService.selectTokenSequence();
+            var token = Token.builder()
+                    .id(token_seq)
+                    .token(jwtToken)
+                    .token_type(TokenType.AUTHORIZATION)
+                    .expired(false)
+                    .revoked(false)
+                    .auth_user(user)
+                    .build();
+            tokenService.save(token);
+
             return AuthenticationResponse.builder()
                     .token(jwtToken)
                     .build();

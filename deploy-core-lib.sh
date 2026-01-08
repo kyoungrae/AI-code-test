@@ -88,8 +88,14 @@ cd vims-login
 echo "🚀 vims-login 빌드 실행..."
 "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
 if [ $? -ne 0 ]; then
-    echo "❌ vims-login 빌드 실패"
-    exit 1
+    echo "⚠️ 첫 번째 시도 실패 (파일 잠금 문제일 수 있음)"
+    echo "🔄 1초 후 재시도합니다..."
+    sleep 1
+    "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+    if [ $? -ne 0 ]; then
+        echo "❌ vims-login 빌드 실패"
+        exit 1
+    fi
 fi
 echo "✅ vims-login 빌드 성공!"
 cd ..
@@ -100,8 +106,14 @@ cd vims-management-system
 echo "🚀 vims-management-system 빌드 실행..."
 "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
 if [ $? -ne 0 ]; then
-    echo "❌ vims-management-system 빌드 실패"
-    exit 1
+    echo "⚠️ 첫 번째 시도 실패 (파일 잠금 문제일 수 있음)"
+    echo "🔄 1초 후 재시도합니다..."
+    sleep 1
+    "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+    if [ $? -ne 0 ]; then
+        echo "❌ vims-management-system 빌드 실패"
+        exit 1
+    fi
 fi
 echo "✅ vims-management-system 빌드 성공!"
 cd ..
@@ -112,8 +124,14 @@ cd vims-gateway
 echo "🚀 vims-gateway 빌드 실행..."
 "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
 if [ $? -ne 0 ]; then
-    echo "❌ vims-gateway 빌드 실패"
-    exit 1
+    echo "⚠️ 첫 번째 시도 실패 (파일 잠금 문제일 수 있음)"
+    echo "🔄 1초 후 재시도합니다..."
+    sleep 1
+    "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+    if [ $? -ne 0 ]; then
+        echo "❌ vims-gateway 빌드 실패"
+        exit 1
+    fi
 fi
 echo "✅ vims-gateway 빌드 성공!"
 cd ..

@@ -24,11 +24,25 @@ public class LogoutService implements LogoutHandler {
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         final Cookie[] cookies = request.getCookies();
-        final String jwt;
-        Optional<Cookie> optionalCookie = Arrays.stream(cookies)
-                .filter(cookie -> "Authorization".equals(cookie.getName())).findFirst();
 
-        jwt = optionalCookie.get().getValue();
+        // Handle case when no cookies are present
+        if (cookies == null || cookies.length == 0) {
+            return;
+        }
+
+        // Find Authorization cookie
+        Optional<Cookie> optionalCookie = Arrays.stream(cookies)
+                .filter(cookie -> "Authorization".equals(cookie.getName()))
+                .findFirst();
+
+        // Handle case when Authorization cookie is not found
+        if (optionalCookie.isEmpty()) {
+            return;
+        }
+
+        final String jwt = optionalCookie.get().getValue();
+
+        // Find and invalidate the token in database
         var storedToken = tokenService.findByToken(jwt)
                 .orElse(null);
         if (storedToken != null) {
