@@ -1,9 +1,138 @@
-<div class="gi-row-100 gi-col-100">
-  <div class="gi-row-50 gi-col-50 gi-flex gi-flex-center">
-    <button data-file-upload-btn id="file_upload" type="button" class="gi-btn-blue">파일 업로드</button>
-    <input data-file-upload-uuid id="receive_uuid" />
-  </div>
-</div>
-<script>
-  fileUtil.createFileUpload("PATH", "receive_uuid", "testfolder");
+<article class="gi-article-content gi-col-95 gi-row-100">
+  <section class="gi-col-100 gi-row-100">
+    <!-- 페이지 헤더: 프레임워크 표준에 따라 좌측 정렬 및 아이콘 제거 -->
+    <header class="gi-flex gi-flex-center gi-col-10">
+      <h1 class="gi-page-title">샘플 등록 페이지 (Sample Registration)</h1>
+    </header>
+
+    <!-- 메인 콘텐츠 영역: gi-col-90 구조 유지 -->
+    <article class="gi-col-90 gi-row-100">
+      <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-overflow-scroll">
+        <form id="sampleRegistrationForm" class="gi-row-100 gi-col-100">
+          <div class="gi-padding-30px">
+
+            <!-- [기본 정보 섹션] myinfo.html의 grid-rows-container 스타일 적용 -->
+            <div
+              class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container gi-margin-bottom-20px">
+              <div
+                class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title gi-grid-input-edge-left-top">
+                <span>기본 정보</span>
+              </div>
+              <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-1fr">
+                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                  <label for="sample_name" class="gi-input-label" data-focus-label="true"
+                    data-focus-label-text-align="default" data-required="true">샘플 명칭</label>
+                  <input data-field="sample_name" id="sample_name" name="sample_name" class="gi-input"
+                    data-focus-span-text-align="default" data-required="true" placeholder="샘플 이름을 입력하세요"
+                    autocomplete="off" />
+                </div>
+                <div
+                  class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center gi-grid-input-edge-right-top">
+                  <label for="sample_code" class="gi-input-label" data-focus-label="true"
+                    data-focus-label-text-align="default" data-required="true">샘플 코드</label>
+                  <input data-field="sample_code" id="sample_code" name="sample_code" class="gi-input"
+                    data-focus-span-text-align="default" data-required="true" placeholder="SAMP-001"
+                    autocomplete="off" />
+                </div>
+                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                  <label for="sample_category" class="gi-input-label" data-focus-label="true"
+                    data-focus-label-text-align="default" data-required="true">카테고리</label>
+                  <select data-field="sample_category" id="sample_category" name="sample_category" class="gi-select">
+                    <option value="">선택하세요</option>
+                    <option value="CAT01">UI 컴포넌트</option>
+                    <option value="CAT02">데이터 처리</option>
+                    <option value="CAT03">API 연동</option>
+                  </select>
+                </div>
+                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center">
+                  <label for="reg_date" class="gi-input-label" data-focus-label="true"
+                    data-focus-label-text-align="default" data-required="false">등록 일자</label>
+                  <input data-field="reg_date" id="reg_date" name="reg_date" class="gi-input"
+                    data-focus-span-text-align="default" data-required="false" data-datepicker autocomplete="off" />
+                </div>
+              </div>
+            </div>
+
+            <!-- [상세 내용 섹션] -->
+            <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+              <div
+                class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title gi-grid-input-edge-left-bottom">
+                <span>상세 내용</span>
+              </div>
+              <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-rows-repeat-2-1fr">
+                <div class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center"
+                  style="min-height: 100px;">
+                  <label for="sample_desc" class="gi-input-label" data-focus-label="true"
+                    data-focus-label-text-align="default" data-required="false">설명 내용</label>
+                  <textarea data-field="sample_desc" id="sample_desc" name="sample_desc" class="gi-input"
+                    style="height: 100%; padding: 10px;" placeholder="상세 내용을 입력해 주세요..."></textarea>
+                </div>
+                <div
+                  class="gi-row-100 gi-input-container gi-input-container-box-border gi-flex gi-flex-center gi-grid-input-edge-right-bottom">
+                  <label class="gi-input-label" data-focus-label="true">사용 여부</label>
+                  <div class="gi-flex gi-flex-align-items-center gi-padding-left-20px gi-col-100">
+                    <label class="gi-flex gi-flex-align-items-center gi-margin-right-20px gi-cursor-pointer">
+                      <input type="radio" name="use_yn" value="Y" checked class="gi-margin-right-5px"> 사용
+                    </label>
+                    <label class="gi-flex gi-flex-align-items-center gi-cursor-pointer">
+                      <input type="radio" name="use_yn" value="N" class="gi-margin-right-5px"> 미사용
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 버튼 영역: 프레임워크 표준 배치 -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-margin-top-30px">
+              <div
+                class="gi-btn-section gi-row-30 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-col-30px">
+                <button id="sample-reset-btn" class="gi-btn" type="button">초기화</button>
+                <button id="sample-save-btn" class="gi-btn-blue" type="button">등록하기</button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </article>
+  </section>
+</article>
+
+<script type="text/javascript">
+  var PRGMID = "sampleRegistrationForm";
+
+  init();
+
+  function init() {
+    // [Framework] 페이지 초기화 (포커싱 및 라벨 애니메이션 활성화)
+    new PageInit();
+
+    // 클릭 이벤트 설정
+    clickEvent();
+  }
+
+  function clickEvent() {
+    // 등록하기 버튼 클릭
+    $("#sample-save-btn").on("click", function () {
+      // [Framework] 유효성 검사
+      if (formUtil.validationCheck(PRGMID, "CHECK.")) {
+        let data = dataBinding.getData(PRGMID);
+        saveSample(data);
+      }
+    });
+
+    // 초기화 버튼 클릭
+    $("#sample-reset-btn").on("click", function () {
+      $("#" + PRGMID)[0].reset();
+      // [Framework] 스타일 리셋
+      new AfterLoadDataEvent();
+      formUtil.toast("초기화되었습니다.");
+    });
+  }
+
+  function saveSample(data) {
+    formUtil.popup("save_confirm", "입력한 데이터를 등록하시겠습니까?", function () {
+      formUtil.toast("등록이 완료되었습니다.");
+    });
+  }
 </script>
