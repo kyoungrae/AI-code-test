@@ -132,18 +132,7 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         request.setPassword(passwordEncoder.encode(request.getPassword()));
 
         try {
-            var comUser = ComUser.builder()
-                    .email(request.getEmail())
-                    .password(request.getPassword())
-                    .user_id(request.getUser_id())
-                    .user_name(request.getUser_name())
-                    .role(Role.USER.name())
-                    .tel(request.getTel())
-                    .address(request.getAddress())
-                    .address_detail(request.getAddress_detail())
-                    .postal_code(request.getPostal_code())
-                    .build();
-            int result = comUserMapper.INSERT(comUser);
+            int result = comUserMapper.INSERT(request);
 
             // Register Token
 

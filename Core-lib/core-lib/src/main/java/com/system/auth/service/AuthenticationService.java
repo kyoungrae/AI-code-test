@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class AuthenticationService {
@@ -74,22 +76,48 @@ public class AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             var user = (AuthUser) authentication.getPrincipal();
 
-            // 기존 유효한 토큰들을 모두 무효화 (EXPIRED=1, REVOKED=1)
-            tokenService.revokeAllUserTokens(user.getId());
-
-            var jwtToken = jwtService.generateToken(user);
-
-            // 새로운 토큰을 데이터베이스에 저장
-            int token_seq = sequenceService.selectTokenSequence();
-            var token = Token.builder()
-                    .id(token_seq)
-                    .token(jwtToken)
-                    .token_type(TokenType.AUTHORIZATION)
+            // 유효한 토큰 조회
+            var tokenParam = Token.builder()
+                    .auth_user(user)
                     .expired(false)
                     .revoked(false)
-                    .auth_user(user)
                     .build();
-            tokenService.save(token);
+            List<Token> validTokens = tokenService.findByAllToken(tokenParam);
+
+            String jwtToken = null;
+            if (validTokens != null && !validTokens.isEmpty()) {
+                for (Token validToken : validTokens) {
+                    // 실제 유효성 검증 (리다이렉트 없음)
+                    if (jwtService.isTokenValid(validToken.getToken(), user)) {
+                        jwtToken = validToken.getToken();
+                        break;
+                    } else {
+                        // DB 상으론 유효한데 실제론 만료된 경우 -> 업데이트
+                        validToken.setExpired(true);
+                        validToken.setRevoked(true);
+                        tokenService.update(validToken);
+                    }
+                }
+            }
+
+            if (jwtToken == null) {
+                // 기존 유효한 토큰들을 모두 무효화 (EXPIRED=1, REVOKED=1)
+                tokenService.revokeAllUserTokens(user.getId());
+
+                jwtToken = jwtService.generateToken(user);
+
+                // 새로운 토큰을 데이터베이스에 저장
+                int token_seq = sequenceService.selectTokenSequence();
+                var token = Token.builder()
+                        .id(token_seq)
+                        .token(jwtToken)
+                        .token_type(TokenType.AUTHORIZATION)
+                        .expired(false)
+                        .revoked(false)
+                        .auth_user(user)
+                        .build();
+                tokenService.save(token);
+            }
 
             return AuthenticationResponse.builder()
                     .token(jwtToken)

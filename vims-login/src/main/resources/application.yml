@@ -7,6 +7,9 @@ server:
             enabled: true
             force: true
 
+gateway:
+    url: http://localhost:8080
+
 spring:
     profiles:
         active: local
@@ -28,16 +31,17 @@ spring:
 #        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
 
         # MariaDB JDBC URL
-        url: jdbc:mariadb://192.168.0.232:3306/MVIMS
+        url: jdbc:mariadb://192.168.0.232:3306/MVIMS?autoReconnect=true&tcpKeepAlive=true
         username: mvims
         password: 1234   # 비밀번호가 그대로라면 유지, 아니면 MariaDB용으로 변경
         driver-class-name: org.mariadb.jdbc.Driver
 
         hikari:
             maximum-pool-size: 10
-            idle-timeout: 300000         # 5분
+            idle-timeout: 120000         # 2분 (max-lifetime보다 작게 설정)
             max-lifetime: 180000         # 3분
             connection-timeout: 30000
+            keepalive-time: 60000        # 1분 (커넥션 유효성 주기적 체크)
 
     jpa:
         show-sql: false

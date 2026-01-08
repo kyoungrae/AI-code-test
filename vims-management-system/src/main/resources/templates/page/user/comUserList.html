@@ -119,6 +119,15 @@
                                         data-focus-span-text-align="default" data-required="true" autocomplete="off"
                                         gi-maxlength="500" />
                                 </div>
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
+                                    <label for="register_office_code" class="gi-input-label" data-focus-label="true"
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["COM_USER.OFFICE_CODE"]</label>
+                                    <input data-field="office_code" id="register_office_code"
+                                        name="register_office_code" class="gi-input"
+                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
+                                        gi-maxlength="7" />
+                                </div>
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
@@ -217,6 +226,7 @@
             //클릭 이벤트
             clickEvent();
         });
+
     }
 
     function resetEvent() {
@@ -240,6 +250,9 @@
             findByComUserList();
         });
 
+        $("#insert-btn").off("click.insertBtnClickEventHandler").on("click.insertBtnClickEventHandler", function () {
+            input.setSelectOption("#register_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
+        });
         //추가버튼 클릭 이벤트
         $(POPUP_REGISTER_BTN).off("click.popupRegisterBtnClickEventHandler")
             .on("click.popupRegisterBtnClickEventHandler", popupRegisterBtnClickEventHandler);
@@ -287,10 +300,10 @@
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ID"]', ID: 'id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.EMAIL"]', ID: 'email', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.PASSWORD"]', ID: 'password', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ROLE"]', ID: 'role', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ROLE"]', ID: 'role', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.USER_ID"]', ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.OFFICE_CODE"]', ID: 'office_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COM_USER.OFFICE_CODE_NAME"]', ID: 'office_code_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false, COM_CODE_GROUP_ID: "OFFICE_CODE" },
+                        { HEADER: '[Page.Message].Message.Label.Array["COM_USER.OFFICE_NAME"]', ID: 'office_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.SYSTEM_CREATE_USERID"]', ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.SYSTEM_CREATE_DATE"]', ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.SYSTEM_UPDATE_USERID"]', ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -384,6 +397,7 @@
             address_detail: cont.address_detail,
             postal_code: cont.postal_code,
         }
+        console.log(param)
         axios.post(url, param)
             .then(response => {
                 popup.close(POPUP_REGISTER_FROM);
@@ -436,4 +450,5 @@
                 formUtil.toast(error.response.data, "error");
             })
     }
+
 </script>

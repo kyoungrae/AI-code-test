@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/cms/com/comOffice")
+@RequestMapping("/cms/common/comOffice")
 @RequiredArgsConstructor
 public class ComOfficeController extends AbstractCommonController<ComOffice> {
 

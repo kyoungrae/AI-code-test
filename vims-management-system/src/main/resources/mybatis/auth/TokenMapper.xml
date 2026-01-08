@@ -9,6 +9,14 @@
             TOKEN T
         WHERE T.token = #{token}
     </select>
+
+    <select id="SELECT_ALL_TOKEN" parameterType="com.system.auth.domain.Token" resultType="com.system.auth.domain.Token">
+        SELECT *
+        FROM TOKEN
+        WHERE user_id = #{auth_user.id}
+          AND expired = #{expired}
+          AND revoked = #{revoked}
+    </select>
     <insert id="INSERT_TOKEN" parameterType="com.system.auth.domain.Token">
         INSERT INTO TOKEN(
             id,
