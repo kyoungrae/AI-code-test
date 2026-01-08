@@ -270,9 +270,6 @@
                 <a class="nav-item sub-item" onclick="scrollToSection('step4')">
                     Step 4: Controller 구현
                 </a>
-                <a class="nav-item" onclick="scrollToSection('exception-code')">
-                    <i class="fa-solid fa-file-code"></i> 예외 처리 코드 예시
-                </a>
             </div>
         </div>
 
@@ -349,6 +346,15 @@
                     <strong>주요 메서드:</strong> <code>getMessage(String code)</code> - 메시지 코드(properties)를 받아 현재 로케일에 맞는
                     메시지를 반환합니다.
                 </div>
+
+                <h3>2.3 예외 처리 코드 예시 (messages.properties)</h3>
+                <pre><p><code>src/main/resources/messages.properties</code>에 에러 메시지를 정의합니다.</p><code class="language-properties"> 
+   EXCEPTION.PK.EXIST=이미 존재하는 식별자입니다.
+   EXCEPTION.DELETE.EXIST.SBU_DATA=하위 데이터가 존재하여 삭제할 수 없습니다.
+   EXCEPTION.COMMON.FIND_FAILED=데이터 조회 중 오류가 발생했습니다.
+   EXCEPTION.COMMON.DELETE_FAILED=데이터 삭제 중 오류가 발생했습니다.</code>
+
+</pre>
             </div>
 
             <div id="impl-intro" class="content-section">
@@ -538,20 +544,58 @@ public class ComDeptGroupController extends AbstractCommonController&lt;ComDeptG
     }
 }</code></pre>
             </div>
-
-            <div id="exception-code" class="content-section">
-                <h2>4. 예외 처리 코드 예시 (messages.properties)</h2>
-                <p><code>src/main/resources/messages.properties</code>에 에러 메시지를 정의합니다.</p>
-                <pre><code class="language-properties">EXCEPTION.PK.EXIST=이미 존재하는 식별자입니다.
-EXCEPTION.DELETE.EXIST.SBU_DATA=하위 데이터가 존재하여 삭제할 수 없습니다.
-EXCEPTION.COMMON.FIND_FAILED=데이터 조회 중 오류가 발생했습니다.
-EXCEPTION.COMMON.DELETE_FAILED=데이터 삭제 중 오류가 발생했습니다.</code></pre>
-            </div>
-
         </div>
     </div>
 
 
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+
+                // Sidebar active state update
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => item.classList.remove('active'));
+
+                // Find the nav item that was clicked (based on the passed ID)
+                // This is a simple way since we know the mapping
+                const clickedItem = Array.from(navItems).find(item => {
+                    const onclickAttr = item.getAttribute('onclick');
+                    return onclickAttr && onclickAttr.includes(`'${id}'`);
+                });
+
+                if (clickedItem) {
+                    clickedItem.classList.add('active');
+                }
+            }
+        }
+
+        // Optional: Update active link on scroll
+        document.getElementById('mainScrollArea').addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.content-section');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const scrollArea = document.getElementById('mainScrollArea');
+                if (scrollArea.scrollTop >= sectionTop - 100) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            if (currentSectionId) {
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    const onclickAttr = item.getAttribute('onclick');
+                    if (onclickAttr && onclickAttr.includes(`'${currentSectionId}'`)) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

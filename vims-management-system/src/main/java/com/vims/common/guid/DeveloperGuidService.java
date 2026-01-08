@@ -111,7 +111,6 @@ public class DeveloperGuidService {
         while (matcher.find()) {
             String jsdoc = matcher.group();
             int startIdx = matcher.start();
-            int endIdx = matcher.end();
 
             int lineNumber = 1;
             for (int i = 0; i < startIdx; i++) {

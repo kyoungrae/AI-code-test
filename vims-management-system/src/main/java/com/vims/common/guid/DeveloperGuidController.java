@@ -28,6 +28,9 @@ public class DeveloperGuidController {
     @Autowired
     private CssGuidService cssGuidService;
 
+    @Autowired
+    private MarkdownGuidService markdownGuidService;
+
     /**
      * 개발 가이드 페이지 이동 (JS)
      */
@@ -42,6 +45,14 @@ public class DeveloperGuidController {
     @GetMapping("/css")
     public String cssGuidPage() {
         return "page/guid/cssGuid";
+    }
+
+    /**
+     * 웹 입력 가이드 페이지 이동 (Markdown)
+     */
+    @GetMapping("/jsDevGuid")
+    public String jsDevGuidPage() {
+        return "page/guid/jsDevGuid";
     }
 
     /**
@@ -117,6 +128,34 @@ public class DeveloperGuidController {
             if (e.getStackTrace().length > 0) {
                 result.put("trace", e.getStackTrace()[0].toString());
             }
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    /**
+     * Markdown 파일 스캔 API
+     */
+    @GetMapping("/api/scanWebGuid")
+    @ResponseBody
+    public Map<String, Object> scanWebGuidFiles() {
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            String userDir = getWorkspaceRoot();
+            userDir = userDir.replace("\\", "/");
+            File dir = new File(userDir);
+
+            List<Map<String, Object>> fileList = markdownGuidService.parseMarkdownFiles(dir);
+
+            result.put("success", true);
+            result.put("data", fileList);
+            result.put("count", fileList.size());
+
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", e.getMessage());
             e.printStackTrace();
         }
 

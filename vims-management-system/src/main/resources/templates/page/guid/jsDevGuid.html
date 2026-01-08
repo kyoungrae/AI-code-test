@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web UI Developer Guide</title>
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <style>
+        :root {
+            --sidebar-width: 300px;
+            --primary-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-color: #f3f4f6;
+            --border-color: #e5e7eb;
+        }
+
+        /* Scoped styles to prevent leaking if loaded in a partial view */
+        .guid-container {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            height: calc(100vh - 100px);
+            /* Adjust based on header height if needed */
+            display: flex;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .guid-container * {
+            box-sizing: border-box;
+        }
+
+        /* Sidebar */
+        .guid-sidebar {
+            width: var(--sidebar-width);
+            background: #fff;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-area {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: #f9fafb;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .function-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        /* Tree Items */
+        .file-group {
+            margin-bottom: 5px;
+        }
+
+        .file-header {
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .file-header:hover {
+            background-color: #f3f4f6;
+        }
+
+        .file-header i.arrow {
+            transition: transform 0.2s;
+            font-size: 0.7rem;
+        }
+
+        .file-group.collapsed .file-items {
+            display: none;
+        }
+
+        .file-group.collapsed i.arrow {
+            transform: rotate(-90deg);
+        }
+
+        .func-item {
+            padding: 8px 15px 8px 38px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .func-item:hover {
+            background-color: #f0f9ff;
+            color: var(--primary-color);
+        }
+
+        .func-item.active {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .tree-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+
+        .tree-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .tree-btn:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .func-item i {
+            font-size: 0.8rem;
+            color: #a78bfa;
+        }
+
+        /* Main Content */
+        .guid-main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            height: 100%;
+            background-color: #fff;
+        }
+
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #e5e7eb;
+        }
+
+        /* Detail View Split */
+        .detail-view {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Docs Section (Top) */
+        .docs-section {
+            padding: 30px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #fff;
+            max-height: 40%;
+            overflow-y: auto;
+        }
+
+        .func-title-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .func-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .func-badge {
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .info-item div {
+            font-size: 0.95rem;
+            color: #374151;
+            font-family: 'Fira Code', monospace;
+            background: #f9fafb;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #f3f4f6;
+        }
+
+        .desc-box {
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+            border-radius: 8px;
+            padding: 15px;
+            color: #166534;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Code Section (Bottom) */
+        .code-section {
+            flex: 1;
+            background-color: #0d1117;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-header {
+            padding: 10px 20px;
+            background: #161b22;
+            color: #c9d1d9;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .code-viewer-container {
+            flex: 1;
+            overflow: auto;
+            padding: 0;
+            position: relative;
+        }
+
+        pre {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        code.hljs {
+            padding: 20px !important;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 24px !important;
+            /* Fixed Line Height for calculation accuracy */
+            white-space: pre;
+            /* No Wrap */
+        }
+
+        /* Highlight Active Line */
+        .line-highlight {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: rgba(56, 139, 253, 0.15);
+            border-left: 2px solid #58a6ff;
+            pointer-events: none;
+            height: 24px !important;
+            /* Match Fixed Line Height */
+        }
+
+        /* Loading */
+        .loading-mask {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 8px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="guid-container">
+        <div class="guid-sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <i class="fa-brands fa-square-js" style="color: #f7df1e;"></i>
+                    <span>Web UI Guide System</span>
+                </div>
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="guidSearchInput" placeholder="Search features...">
+                </div>
+                <div class="tree-controls">
+                    <button class="tree-btn" id="guidExpandAll">
+                        <i class="fa-solid fa-angles-down"></i> Expand All
+                    </button>
+                    <button class="tree-btn" id="guidCollapseAll">
+                        <i class="fa-solid fa-angles-up"></i> Collapse All
+                    </button>
+                </div>
+            </div>
+
+            <div class="function-list" id="guidFunctionList">
+                <!-- List injected here -->
+            </div>
+        </div>
+
+        <div class="guid-main-content">
+            <div id="guidDetailView" class="detail-view" style="display: none;">
+                <!-- Documentation -->
+                <div class="docs-section">
+                    <div class="func-title-area">
+                        <div class="func-title" id="guidDocTitle">functionName</div>
+                        <div class="func-badge" id="guidDocType">data-tag</div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Author</label>
+                            <div id="guidDocAuthor">-</div>
+                        </div>
+                        <div class="info-item">
+                            <label>Date</label>
+                            <div id="guidDocDate">-</div>
+                        </div>
+                        <div class="info-item">
+                            <label>Extend</label>
+                            <div id="guidDocExtend">-</div>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <label>Call Interface</label>
+                        <div id="guidDocCall">-</div>
+                    </div>
+                </div>
+
+                <!-- Source Code -->
+                <div class="code-section">
+                    <div class="code-header">
+                        <span id="guidFilePath"><i class="fa-regular fa-file-code"></i> src/file.md</span>
+                    </div>
+                    <div class="code-viewer-container" id="guidCodeContainer">
+                        <pre><code id="guidCodeViewer" class="language-javascript"></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div id="guidEmptyState" class="empty-state">
+                <i class="fa-solid fa-code-branch"></i>
+                <h2>Select a function to view details</h2>
+                <p>Choose a function from the sidebar to see documentation and code.</p>
+            </div>
+        </div>
+
+        <div class="loading-mask" id="guidLoadingMask">
+            <div class="spinner"></div>
+            <div style="margin-top: 10px; font-weight: 500;">Loading...</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+    <script>
+        (function () {
+            let globalData = [];
+            let currentSelectedEl = null;
+
+            const els = {
+                searchInput: document.getElementById('guidSearchInput'),
+                functionList: document.getElementById('guidFunctionList'),
+                detailView: document.getElementById('guidDetailView'),
+                emptyState: document.getElementById('guidEmptyState'),
+                loadingMask: document.getElementById('guidLoadingMask'),
+
+                docTitle: document.getElementById('guidDocTitle'),
+                docType: document.getElementById('guidDocType'),
+                docAuthor: document.getElementById('guidDocAuthor'),
+                docDate: document.getElementById('guidDocDate'),
+                docExtend: document.getElementById('guidDocExtend'),
+                docCall: document.getElementById('guidDocCall'),
+
+                filePath: document.getElementById('guidFilePath'),
+                codeContainer: document.getElementById('guidCodeContainer'),
+                codeViewer: document.getElementById('guidCodeViewer'),
+
+                expandBtn: document.getElementById('guidExpandAll'),
+                collapseBtn: document.getElementById('guidCollapseAll')
+            };
+
+            init();
+
+            function init() {
+                if (els.searchInput) {
+                    els.searchInput.onkeyup = (e) => filterFunctions(e.target.value);
+                }
+                if (els.expandBtn) els.expandBtn.onclick = () => toggleAll(false);
+                if (els.collapseBtn) els.collapseBtn.onclick = () => toggleAll(true);
+
+                loadData();
+            }
+
+            function showLoading(show) {
+                if (els.loadingMask) els.loadingMask.style.display = show ? 'flex' : 'none';
+            }
+
+            function loadData() {
+                showLoading(true);
+                axios.get('/cms/common/guid/api/scanWebGuid')
+                    .then(res => {
+                        if (res.data.success) {
+                            globalData = res.data.data;
+                            renderSidebar(globalData);
+                        } else {
+                            renderError(res.data.message);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        renderError('Failed to load data.');
+                    })
+                    .finally(() => showLoading(false));
+            }
+
+            function renderError(message) {
+                if (els.functionList) {
+                    els.functionList.innerHTML = `<div style="padding:20px; text-align:center; color:#ef4444;">
+                <i class="fa-solid fa-triangle-exclamation"></i><br>
+                ${message}
+            </div>`;
+                }
+            }
+
+            function renderSidebar(data) {
+                const listEl = els.functionList;
+                if (!listEl) return;
+
+                listEl.innerHTML = '';
+
+                if (!data || data.length === 0) {
+                    listEl.innerHTML = '<div style="padding:20px; text-align:center; color:#9ca3af;">No functions found.</div>';
+                    return;
+                }
+
+                data.forEach((file, fIdx) => {
+                    const fileGroup = document.createElement('div');
+                    fileGroup.className = 'file-group';
+
+                    const header = document.createElement('div');
+                    header.className = 'file-header';
+                    header.innerHTML = `<i class="fa-solid fa-chevron-down arrow"></i> <i class="fa-regular fa-folder-open"></i> ${file.fileName}`;
+                    header.onclick = () => {
+                        fileGroup.classList.toggle('collapsed');
+                    };
+                    fileGroup.appendChild(header);
+
+                    const items = document.createElement('div');
+                    items.className = 'file-items';
+
+                    if (file.examples && file.examples.length > 0) {
+                        file.examples.forEach((ex, idx) => {
+                            const item = document.createElement('div');
+                            item.className = 'func-item';
+                            item.innerHTML = `<i class="fa-solid fa-cube"></i> ${ex.title}`;
+                            item.setAttribute('data-search', ex.title.toLowerCase());
+                            item.onclick = (e) => {
+                                e.stopPropagation();
+                                selectExample(fIdx, idx, item);
+                            };
+                            items.appendChild(item);
+                        });
+                    }
+
+                    fileGroup.appendChild(items);
+                    listEl.appendChild(fileGroup);
+                });
+            }
+
+            function selectExample(fileIdx, exIdx, element) {
+                if (currentSelectedEl) currentSelectedEl.classList.remove('active');
+                element.classList.add('active');
+                currentSelectedEl = element;
+
+                if (els.emptyState) els.emptyState.style.display = 'none';
+                if (els.detailView) els.detailView.style.display = 'flex';
+
+                const fileData = globalData[fileIdx];
+                const exData = fileData.examples[exIdx];
+
+                els.docTitle.innerText = exData.title || 'Untitled';
+                els.docType.innerText = exData.type || 'N/A';
+                els.docAuthor.innerText = exData.author || '-';
+                els.docDate.innerText = exData.date || '-';
+                els.docExtend.innerText = exData.extend || '-';
+                els.docCall.innerText = exData.call || '-';
+
+                els.filePath.innerHTML = `<i class="fa-regular fa-file-code"></i> ${fileData.fileName}`;
+
+                if (els.codeViewer) {
+                    els.codeViewer.textContent = exData.content || '// No content';
+                    delete els.codeViewer.dataset.highlighted;
+
+                    // Simple logic to detect language
+                    if (exData.content.trim().startsWith('<')) {
+                        els.codeViewer.className = 'language-html';
+                    } else {
+                        els.codeViewer.className = 'language-javascript';
+                    }
+
+                    if (window.hljs) hljs.highlightElement(els.codeViewer);
+                }
+
+                if (els.codeContainer) {
+                    els.codeContainer.scrollTo({ top: 0 });
+                }
+            }
+
+            function filterFunctions(query) {
+                query = query.toLowerCase();
+                const groups = document.querySelectorAll('.file-group');
+
+                groups.forEach(group => {
+                    let hasMatch = false;
+                    const items = group.querySelectorAll('.func-item');
+
+                    items.forEach(item => {
+                        const text = item.getAttribute('data-search') || '';
+                        if (text.includes(query)) {
+                            item.style.display = 'flex';
+                            hasMatch = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+
+                    if (hasMatch) {
+                        group.style.display = 'block';
+                        group.classList.remove('collapsed');
+                    } else {
+                        group.style.display = 'none';
+                    }
+                });
+            }
+
+            function toggleAll(collapse) {
+                const groups = document.querySelectorAll('.file-group');
+                groups.forEach(group => {
+                    if (collapse) {
+                        group.classList.add('collapsed');
+                    } else {
+                        group.classList.remove('collapsed');
+                    }
+                });
+            }
+
+        })();
+    </script>
+
+</body>
+
+</html>

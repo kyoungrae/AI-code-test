@@ -3,7 +3,7 @@
 ## @date : 2026-01-08
 ## @author : 이경태
 ## @extend : CommonTag.prototype.tagDisabled
-## @call : 
+## @call : ""
 **example start**
 
 <input type="text" data-disabled/>
@@ -18,12 +18,12 @@
 ## @call : input.tagSelect("#ID", "url", {code:"", name : ""});
 **example start**
 
-<javascript>
+<script>
     //Users/ikyoungtae/Documents/coding/AI-code-test/vims-login/src/main/resources/templates/layout/home.html 
     let input = new Input(); // login.html
     
     input.setSelectOption("#register_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
-</javascript>
+</script>
 
 **example end**
 
@@ -31,19 +31,19 @@
 ## @type : data-tag
 ## @date : 2026-01-08
 ## @author : 이경태
-## @extend : 
+## @extend : ""
 ## @call : new GiCalendar();
 **example start**
 
-<javascript>
+<script>
     ///Users/ikyoungtae/Documents/coding/AI-code-test/vims-login/src/main/resources/static/common/js/common/Common.js
     new GiCalendar(); //Common.js -> commonTagSettings(); 
 
     ///Users/ikyoungtae/Documents/coding/AI-code-test/vims-login/src/main/resources/templates/layout/home.html
     var commonTag = new CommonTag();
-</javascript>
+</script>
 <html>
-    <input type="text" data-datepicker/>
+    <input data-datepicker type="" data-field="" id="" name="" class="gi-input" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
 </html>
 
 **example end**
