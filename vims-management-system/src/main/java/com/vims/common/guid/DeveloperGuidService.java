@@ -1,4 +1,4 @@
-package com.system.common.util.guid;
+package com.vims.common.guid;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 /**
  * @title : DeveloperGuidService
  * @text : JavaScript 파일의 JSDoc 주석을 파싱하여 개발 가이드 데이터를 생성하는 서비스
- * @writer : AI Assistant
+ * @writer : 이경태
  */
 @Service
 public class DeveloperGuidService {
@@ -129,76 +129,10 @@ public class DeveloperGuidService {
                 continue;
             }
 
-            // 추가 정보: 코드 라인 분석 (타이틀이 있는 경우 함수 이름을 보조 정보로 활용할 수는 있음)
-            // String nextCodeBlock = getNextNonEmptyLine(content, endIdx);
-            // String extractedName = extractFunctionName(nextCodeBlock);
-
             functionInfo.put("lineNumber", lineNumber);
             functions.add(functionInfo);
         }
         return functions;
-    }
-
-    private String getNextNonEmptyLine(String content, int startIndex) {
-        int length = content.length();
-        int i = startIndex;
-        while (i < length) {
-            char c = content.charAt(i);
-            if (!Character.isWhitespace(c)) {
-                break;
-            }
-            i++;
-        }
-        if (i >= length)
-            return "";
-        int lineEnd = content.indexOf('\n', i);
-        if (lineEnd == -1)
-            lineEnd = length;
-        return content.substring(i, lineEnd).trim();
-    }
-
-    private String extractFunctionName(String line) {
-        if (line == null || line.isEmpty())
-            return null;
-
-        // 1. Class definition: "class ClassName"
-        Pattern pClass = Pattern.compile("class\\s+([a-zA-Z0-9_$]+)");
-        Matcher mClass = pClass.matcher(line);
-        if (mClass.find())
-            return "class " + mClass.group(1);
-
-        // 2. Prototype assignment: "ClassName.prototype.methodName = ..." -> returns
-        // fully qualified name
-        Pattern pProto = Pattern.compile("([a-zA-Z0-9_$]+\\.prototype\\.[a-zA-Z0-9_$]+)\\s*=");
-        Matcher mProto = pProto.matcher(line);
-        if (mProto.find())
-            return mProto.group(1);
-
-        // 3. Simple function: "function myFunc()"
-        Pattern pFunc = Pattern.compile("function\\s+([a-zA-Z0-9_$]+)");
-        Matcher mFunc = pFunc.matcher(line);
-        if (mFunc.find())
-            return mFunc.group(1);
-
-        // 4. Variable assignment: "const myFunc = ..." or "myFunc: function"
-        Pattern pVar = Pattern.compile("([a-zA-Z0-9_$]+)\\s*[:=]\\s*(function|\\(|new|class)");
-        Matcher mVar = pVar.matcher(line);
-        if (mVar.find())
-            return mVar.group(1);
-
-        // 5. Prototype method direct match (fallback): ".methodName ="
-        Pattern pProtoSimple = Pattern.compile("\\.([a-zA-Z0-9_$]+)\\s*=");
-        Matcher mProtoSimple = pProtoSimple.matcher(line);
-        if (mProtoSimple.find())
-            return mProtoSimple.group(1);
-
-        // 6. jQuery Event Handler ($(...) or jQuery(...))
-        if (line.startsWith("$(") || line.startsWith("jQuery(")) {
-            return "Event Handler / Script";
-        }
-
-        // [중요] 그 외 일반 코드는 null 반환 (함수 정의 아님)
-        return null;
     }
 
     private Map<String, Object> parseJSDocComment(String jsdoc) {

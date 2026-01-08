@@ -1,4 +1,4 @@
-package com.system.common.util.guid;
+package com.vims.common.guid;
 
 import org.springframework.stereotype.Service;
 
@@ -45,7 +45,6 @@ public class CssGuidService {
         Map<String, Object> currentSection = null;
         StringBuilder codeBuffer = new StringBuilder();
         StringBuilder preHeaderBuffer = new StringBuilder();
-        boolean metFirstHeader = false;
 
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
@@ -68,7 +67,6 @@ public class CssGuidService {
 
                 codeBuffer = new StringBuilder();
                 codeBuffer.append(line).append("\n");
-                metFirstHeader = true;
             } else {
                 if (currentSection != null) {
                     codeBuffer.append(line).append("\n");

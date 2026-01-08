@@ -1,4 +1,4 @@
-package com.system.common.util.guid;
+package com.vims.common.guid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * @title : DeveloperGuidController
  * @text : 개발 가이드 페이지 컨트롤러
- * @writer : AI Assistant
+ * @writer : 이경태
  */
 @Controller
 @RequestMapping("/cms/common/guid")
