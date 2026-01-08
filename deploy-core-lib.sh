@@ -1,6 +1,14 @@
 #!/bin/bash
 # Core-lib 빌드 및 배포 스크립트
 
+echo "=== 0. 빌드 찌꺼기 폴더 정리 ==="
+# target 디렉토리 내에 "폴더명 번호" 형식(예: classes 2)으로 생성된 폴더들을 강제 삭제
+# Mac OS의 'find' 호환성을 고려하여 작성
+find . -type d -name "* [0-9]*" -exec rm -rf {} +
+find . -type f -name "* [0-9]*.jar" -exec rm -f {} +
+echo "✅ 중복 생성된 폴더 및 파일 정리 완료!"
+echo ""
+
 echo "=== 1. Core-lib Maven 빌드 시작 ==="
 
 # Maven 명령어 찾기
