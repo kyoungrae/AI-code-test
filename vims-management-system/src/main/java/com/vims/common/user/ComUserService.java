@@ -27,7 +27,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.system.auth.authuser.Role;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -107,13 +106,28 @@ public class ComUserService extends AbstractCommonService<ComUser> {
     @Override
     protected int updateImpl(ComUser request) {
         ValidationService validationService = new ValidationService();
-        boolean flag = validationService.checkEmptyValue(request.getPassword());
-        if (flag) {
-            List<String> failReasons = validatePasswordPolicy(request.getPassword());
-            if (failReasons.size() > 0) {
-                throw new CustomException(failReasons.get(0));
+        boolean isPasswordProvided = validationService.checkEmptyValue(request.getPassword());
+
+        if (isPasswordProvided) {
+            // 1. 비밀번호 확인 체크
+            if (!request.getPassword().equals(request.getPassword_confirm())) {
+                throw new CustomException(getMessage("EXCEPTION.PASSWORD.CONFIRM_NOT_MATCH"));
             }
+
+            // 2. 기존 비밀번호와 동일한지 체크 (raw 패스워드와 비교)
+            ComUser existingUser = comUserMapper.SELECT(ComUser.builder().id(request.getId()).build()).get(0);
+            if (passwordEncoder.matches(request.getPassword(), existingUser.getPassword())) {
+                throw new CustomException(getMessage("EXCEPTION.PASSWORD.SAME_AS_OLD"));
+            }
+
+            // 3. 비밀번호 정책 확인
+            validationPasswordPolicy(request.getPassword());
+
+            // 4. 비밀번호 암호화
             request.setPassword(passwordEncoder.encode(request.getPassword()));
+        } else {
+            // 비밀번호가 입력되지 않은 경우 기존 비밀번호를 유지
+            request.setPassword(null);
         }
         return comUserMapper.UPDATE(request);
     }
@@ -123,7 +137,7 @@ public class ComUserService extends AbstractCommonService<ComUser> {
     protected int registerImpl(ComUser request) throws Exception {
         // 비밀번호 확인
         if (!request.getPassword().equals(request.getPassword_confirm())) {
-            throw new CustomException(getMessage("EXCEPTION.PASSWORD.NOT_MATCH"));
+            throw new CustomException(getMessage("EXCEPTION.PASSWORD.CONFIRM_NOT_MATCH"));
         }
         // 비밀번호 정책 확인
         validationPasswordPolicy(request.getPassword());
@@ -176,6 +190,18 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         List<ComSiteConfig> configList = comSiteConfigService.findImpl(comSiteConfig);
 
         PasswordPolicy policy = new PasswordPolicy();
+        // 기본값 설정 (DB에 설정이 없을 경우 대비)
+        // policy.setMinLength(8);
+        // policy.setMaxLength(20);
+        // policy.setRequireUppercase(false);
+        // policy.setRequireLowercase(false);
+        // policy.setRequireNumber(true);
+        // policy.setRequireSpecialCharacter(true);
+
+        if (configList == null || configList.isEmpty()) {
+            return policy;
+        }
+
         for (ComSiteConfig config : configList) {
             String key = config.getConfig_key();
             String value = config.getConfig_value();
@@ -211,30 +237,21 @@ public class ComUserService extends AbstractCommonService<ComUser> {
      * 비밀번호 정책 검증 (Core 라이브러리의 PasswordValidationUtil 사용)
      * MessageSource를 통한 국제화 지원 및 모든 에러 메시지 표시
      */
-    public void validationPasswordPolicy(String newPassword) throws Exception {
-        PasswordPolicy policy = getPasswordPolicyFromConfig();
-        PasswordValidationUtil validator = new PasswordValidationUtil();
-        List<String> errors = validator.validatePassword(newPassword, policy, messageSource);
-
-        if (!errors.isEmpty()) {
-            // 모든 에러를 한 번에 표시하여 사용자 경험 개선
-            String allErrors = String.join(" / ", errors);
-            throw new CustomException(allErrors);
-        }
-    }
-
-    /**
-     * 비밀번호 정책 검증 후 실패 이유 목록 반환 (MessageSource 지원)
-     */
-    public List<String> validatePasswordPolicy(String password) {
+    public void validationPasswordPolicy(String newPassword) {
         try {
             PasswordPolicy policy = getPasswordPolicyFromConfig();
             PasswordValidationUtil validator = new PasswordValidationUtil();
-            return validator.validatePassword(password, policy, messageSource);
+            List<String> errors = validator.validatePassword(newPassword, policy, messageSource);
+
+            if (!errors.isEmpty()) {
+                String allErrors = String.join(" / ", errors);
+                throw new CustomException(allErrors);
+            }
+        } catch (CustomException e) {
+            throw e;
         } catch (Exception e) {
-            List<String> errors = new ArrayList<>();
-            errors.add(getMessage("EXCEPTION.PASSWORD.POLICY.LOAD_FAILED"));
-            return errors;
+            e.printStackTrace();
+            throw new CustomException(getMessage("EXCEPTION.PASSWORD.POLICY.LOAD_FAILED"));
         }
     }
 

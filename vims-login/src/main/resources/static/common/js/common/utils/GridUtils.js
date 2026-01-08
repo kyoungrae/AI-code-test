@@ -201,6 +201,9 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                             case "map":
                                 tag = '<span id="' + item.ID + "_" + i + '" class="gi-map-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '</span>';
                                 break;
+                            case "password":
+                                tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + comCodeValue + '">••••••••</span>';
+                                break;
                             case "checkbox":
                                 tag = '<input type="checkbox" id="' + gridId + '_checkbox_' + i + '" class="gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" value="' + data[i][item.ID] + '" />';
                                 break;
