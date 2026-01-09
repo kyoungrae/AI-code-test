@@ -30,11 +30,13 @@ class createFileUploadHTML {
         this.ID_TO_RECEIVE_VALUE = ID_TO_RECEIVE_VALUE;
         this.FOLDER_NAME = FOLDER_NAME;
         this.COMMON_UPLOAD_PATH = "/fms/fileManager/upload";
+        this.LIST_CONTAINER_ID = "#attached-file-list"; // 기본 컨테이너 아이디
 
         this.isCheckParameters();                //NOTE : (1) 파라미터 검증
         this.globalVariable();                   //NOTE : (2) 전역 변수 설정
         this.setUploadHTML();                    //NOTE : (3) 업로드 POPUP UI 설정
         this.fileUploadPopupOpenBtnClickEvent(); //NOTE : (4) 파일 업로드 팝업 OPEN 이벤트
+        this.initMainFileListEvent();            //NOTE : (5) 메인 화면 파일 리스트 연동 이벤트
     }
     //CLASS: 파라미터 검증
     isCheckParameters() {
@@ -292,7 +294,7 @@ class createFileUploadHTML {
                     let file_uuid = data[0].file_uuid;
 
                     //NOTE : 파일을 저장 후 전달 받은 COM_FILE의 FILE_UUID를 설정한 값에 전달
-                    $("#" + that.ID_TO_RECEIVE_VALUE).val(file_uuid);
+                    $("#" + that.ID_TO_RECEIVE_VALUE).val(file_uuid).trigger('change');
                     //NOTE : 파일업로드 팝업 초기화
                     $("#formUtil_fileUpload").empty();
                 }
@@ -302,4 +304,94 @@ class createFileUploadHTML {
 
     }
 
+    //CLASS : 메인 화면 파일 리스트 연동 이벤트 초기화
+    initMainFileListEvent() {
+        let that = this;
+        let $uuidInput = $("#" + that.ID_TO_RECEIVE_VALUE);
+
+        // UUID 값이 변경될 때마다 리스트 갱신
+        $uuidInput.off("change.mainFileList").on("change.mainFileList", function () {
+            let uuid = $(this).val();
+            if (uuid) {
+                that.fetchAndRenderMainFileList(uuid);
+            } else {
+                $(that.LIST_CONTAINER_ID).html('<p class="gi-text-center gi-text-secondary gi-font-size-13px gi-padding-24px">첨부된 파일이 없습니다.</p>');
+            }
+        });
+
+        // 초기 로드시 UUID가 있으면 목록 조회
+        if ($uuidInput.val()) {
+            $uuidInput.trigger("change");
+        }
+    }
+
+    //CLASS : 메인 화면 파일 목록 조회 및 렌더링
+    fetchAndRenderMainFileList(uuid) {
+        let that = this;
+        let url = that.PATH + "/find";
+        let param = { uuid: uuid };
+
+        axios.post(url, param).then(response => {
+            let files = response.data;
+            that.renderMainFileList(files);
+        }).catch(error => {
+            console.error("Main file list fetch error:", error);
+        });
+    }
+
+    //CLASS : 메인 화면 파일 목록 UI 렌더링
+    renderMainFileList(files) {
+        let that = this;
+        let $container = $(that.LIST_CONTAINER_ID);
+
+        if (!files || files.length === 0) {
+            $container.html('<p class="gi-text-center gi-text-secondary gi-font-size-13px gi-padding-24px">첨부된 파일이 없습니다.</p>');
+            return;
+        }
+
+        let html = "";
+        files.forEach((file, index) => {
+            html += `
+                <ul class="gi-row-100 gi-flex gi-flex-align-items-center gi-padding-12px" 
+                    style="background: #ffffff; border: 1px solid #e1e4ef; border-radius: 10px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: all 0.2s ease;">
+                    <li class="gi-row-10 gi-flex gi-flex-justify-content-center">
+                        <span class="formUtil-file_no">${index + 1}</span>
+                    </li>
+                    <li class="gi-row-50 gi-padding-left-20px gi-font-size-14px gi-font-weight-500" style="border-left: 1px solid #f0f0f0;">${file.file_name}</li>
+                    <li class="gi-row-15 gi-text-center gi-font-size-13px gi-text-secondary" style="border-left: 1px solid #f0f0f0;">${file.file_size}</li>
+                    <li class="gi-row-15 gi-text-center gi-font-size-13px gi-text-secondary" style="border-left: 1px solid #f0f0f0;">${file.file_extension}</li>
+                    <li class="gi-row-10 gi-flex gi-flex-justify-content-center" style="border-left: 1px solid #f0f0f0;">
+                        <button type="button" class="formUtil-file_delete" data-file-id="${file.file_id}" data-uuid="${file.uuid}" style="width:24px; height:24px; border:none; background-color:transparent; cursor:pointer;"></button>
+                    </li>
+                </ul>
+            `;
+        });
+
+        $container.html(html);
+
+        // 삭제 버튼 이벤트 바인딩
+        $container.find(".formUtil-file_delete").on("click", function () {
+            let fileId = $(this).data("fileId");
+            let uuid = $(this).data("uuid");
+            that.deleteMainFile(fileId, uuid);
+        });
+    }
+
+    //CLASS : 메인 화면 개별 파일 삭제
+    deleteMainFile(fileId, uuid) {
+        let that = this;
+        formUtil.popup("delete_file_confirm", "해당 파일을 삭제하시겠습니까?", function () {
+            let url = that.PATH + "/removeByFileIdAndUuid";
+            let param = { file_id: fileId, uuid: uuid };
+
+            axios.post(url, param).then(response => {
+                if (response.data > 0) {
+                    formUtil.toast("파일이 삭제되었습니다.");
+                    that.fetchAndRenderMainFileList(uuid);
+                }
+            }).catch(error => {
+                console.error("Main file delete error:", error);
+            });
+        });
+    }
 }

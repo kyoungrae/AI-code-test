@@ -11,26 +11,26 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/common/file/comFileDetail")
+@RequestMapping("/fms/common/file/comFileDetail")
 @RequiredArgsConstructor
 public class ComFileDetailController extends AbstractCommonController<ComFileDetail> {
 
-	private final ComFileDetailService comFileDetailService;
+    private final ComFileDetailService comFileDetailService;
     private final ComFileDetailRepository comFileDetailRepository;
 
-	@PostMapping("/findPage")
-    public Map<String,List<?>> findPage(@RequestBody ComFileDetail reqeust) throws Exception{
+    @PostMapping("/findPage")
+    public Map<String, List<?>> findPage(@RequestBody ComFileDetail reqeust) throws Exception {
         return comFileDetailService.findPage(reqeust);
     }
 
     @PostMapping("/findAll")
-    protected List<ComFileDetail> findAll(@RequestBody ComFileDetail request) throws Exception{
+    protected List<ComFileDetail> findAll(@RequestBody ComFileDetail request) throws Exception {
         return comFileDetailRepository.findAll();
     }
 
     @PostMapping("/find")
     @Override
-    protected List<ComFileDetail> findImpl(@RequestBody ComFileDetail request) throws Exception{
+    protected List<ComFileDetail> findImpl(@RequestBody ComFileDetail request) throws Exception {
         return comFileDetailService.findImpl(request);
     }
 

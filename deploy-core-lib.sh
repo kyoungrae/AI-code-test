@@ -71,6 +71,7 @@ fi
 # lib 디렉토리 생성
 mkdir -p vims-management-system/src/lib
 mkdir -p vims-login/src/lib
+mkdir -p FMS/src/lib
 
 # JAR 파일 복사
 echo "📦 vims-management-system에 배포 중..."
@@ -79,6 +80,9 @@ cp "$JAR_PATH" vims-management-system/src/lib/
 echo "📦 vims-login에 배포 중..."
 cp "$JAR_PATH" vims-login/src/lib/
 
+echo "📦 FMS에 배포 중..."
+cp "$JAR_PATH" FMS/src/lib/
+
 # 결과 확인
 echo ""
 echo "=== 배포 완료! ==="
@@ -86,6 +90,7 @@ echo ""
 echo "배포된 파일:"
 ls -lh vims-management-system/src/lib/core-lib-1.0.jar
 ls -lh vims-login/src/lib/core-lib-1.0.jar
+ls -lh FMS/src/lib/core-lib-1.0.jar
 
 echo ""
 echo "✅ 이제 각 애플리케이션을 재시작하세요!"
@@ -142,6 +147,24 @@ if [ $? -ne 0 ]; then
     fi
 fi
 echo "✅ vims-gateway 빌드 성공!"
+cd ..
+
+echo ""
+echo "=== 6. FMS 프로젝트 빌드 시작 ==="
+cd FMS
+echo "🚀 FMS 빌드 실행..."
+"$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+if [ $? -ne 0 ]; then
+    echo "⚠️ 첫 번째 시도 실패 (파일 잠금 문제일 수 있음)"
+    echo "🔄 1초 후 재시도합니다..."
+    sleep 1
+    "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+    if [ $? -ne 0 ]; then
+        echo "❌ FMS 빌드 실패"
+        exit 1
+    fi
+fi
+echo "✅ FMS 빌드 성공!"
 cd ..
 
 echo ""
