@@ -1,2 +1,0 @@
-bin/onpenjdk19/jdk-19/lib/modules filter=lfs diff=lfs merge=lfs -text
-onpenjdk19/jdk-19/lib/modules filter=lfs diff=lfs merge=lfs -text
