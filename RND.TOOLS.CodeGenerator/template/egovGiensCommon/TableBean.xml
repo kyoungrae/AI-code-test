@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>Bean</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#ENTITY_NAME##sourcetype#</filename>
+        <ext>java</ext>
+        <path>./work/genSrc/kr/co/giens/#namespace#/common/database/bean/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>kr.co.giens.#namespace#.common.database.bean</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+/**
+ * # giens java application
+ */
+package #pakage#;
+
+/**
+ * <pre>
+ *  #ENTITY_NAME##sourcetype#
+ * </pre>
+ *
+ * @since #cdate#
+ * @version #version#
+ * @author #author#
+ */
+public abstract class #ENTITY_NAME##sourcetype# extends DataBean {
+
+	private String[] keys = {#begin#"#key_fields#"#conjunction##end#};
+
+	public #ENTITY_NAME##sourcetype#(){
+	    super();
+	}
+
+	{
+	    super.setKeyFields(keys);
+	}
+
+#begin#
+
+    /**
+    *<pre>
+        #field_name# : #field_desc#
+    </pre>
+    */
+	private String #field_name#;
+#end#
+#begin#
+	public String get#Field_name#() {
+	    return this.#field_name#;
+	}
+	public void set#Field_name#(String v) {
+	    this.#field_name# = v;
+	}
+#end#
+	public abstract  DataBean newInstance();
+}
+	]]>
+    </source>
+</template>

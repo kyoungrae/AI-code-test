@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>html</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#service#List</filename>
+        <ext>html</ext>
+        <path>./work/genSrc/template/page/#namespace#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>comm.vims.#namespace#</pakage>
+    </definition>
+
+
+
+    <source>
+        <![CDATA[
+<article class="gi-article-content gi-col-95 gi-row-90">
+    <section class="gi-col-100 gi-row-100">
+        <header class="gi-flex gi-flex-center gi-col-10">
+            <h1 class="gi-page-title">[Page.Message].Message.Label.Array["#tablename#.TITLE_LIST"]</h1>
+        </header>
+        <article class=" gi-col-90 gi-row-100">
+            <!--      검색기능 영역      -->
+            <div id="search-area" class="gi-col-5 gi-padding-left-right-20px gi-flex">
+                <div class="gi-row-100 gi-flex gi-flex-space-around gi-col-30px-important">
+                    <!--      검색설정 영역      -->
+                    <div class="gi-row-20">
+                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center" data-focus-line="false">
+                            <label for="searchDesc1" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false" >searchDesc1</label>
+                            <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchDesc1" name="searchDesc1" data-focus-input-text-align="center" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <!--/     검색설정 영역      -->
+                    <!--      날짜선택 영역      -->
+                    <div class="gi-row-24 gi-flex">
+                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center" data-focus-line="false">
+                            <label for="from_date" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false">[Page.Message].Message.Label.Array["START_DATE"]</label>
+                            <input id="from_date" class="gi-input gi-margin-1px" data-required="false" type="text" name="from_date" autocomplete="off" data-focus-input-text-align="center" data-datepicker/>
+                        </div>
+                        <div class="gi-flex gi-flex-align-items-center">
+                            <span class="gi-date-middle-symbol"> ~ </span>
+                        </div>
+                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center" data-focus-line="false">
+                            <label for="to_date" class="gi-input-label" data-focus-label="false" data-focus-label-text-align="center" data-required="false">[Page.Message].Message.Label.Array["END_DATE"]</label>
+                            <input id="to_date" class="gi-input gi-margin-1px" data-required="false" type="text" name="to_date" autocomplete="off" data-focus-input-text-align="center" data-datepicker/>
+                        </div>
+                    </div>
+                    <!--/     날짜선택 영역      -->
+                    <!--      더보기,초기화 버튼 영역      -->
+                    <div class="gi-flex gi-flex-align-items-center">
+                        <div class="gi-btn-section gi-col-100 gi-flex gi-flex-justify-content-space-evenly">
+                            <button id="more-btn" class="gi-btn-more" type="button"><i class="fa-solid fa-gear gi-row-15px"></i>[Page.Message].Message.Label.Array["MORE_BTN"]</button>
+                            <button id="reset-btn" class="gi-btn-reset" type="button"><i class="fa-solid fa-rotate-right gi-row-15px"></i>[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+                        </div>
+                    </div>
+                    <!--/     더보기,초기화 버튼 영역      -->
+                    <!--     조회 버튼 영역      -->
+                    <div class="gi-row-40 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
+                        <div class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
+                            <button id="search-btn" class="gi-btn" type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                        </div>
+                    </div>
+                    <!--/     조회 버튼 영역      -->
+                </div>
+            </div>
+            <!--/     검색기능 영역      -->
+            <!--      그리드 영역      -->
+            <div class="gi-row-100 gi-col-90">
+                <div id="gi-Grid"></div>
+<!--                <div id="gi-Grid" class="gi-Grid" data-side-grid-open="true" data-side-grid-open-init="true"></div>-->
+<!--                <div class="gi-Grid-side" id="gi-Grid-side" data-side-grid-open="false"></div>-->
+            </div>
+            <!--/     그리드 영역      -->
+            <!--      등록버튼 영역      -->
+<!--            <div class="gi-row-100">-->
+<!--                <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">-->
+<!--                    <button id="insert-btn" class="gi-btn gi-float-right " type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!--/     추가버튼 영역      -->
+        </article>
+    </section>
+</article>
+<script type="text/javascript">
+    var PRGMID = "#service#List";	//page id
+    init();
+    function init(){
+
+
+        //초기화
+        resetEvent();
+
+        //데이터 조회
+        findBy#Service#List();
+
+        setTimeout(function(){
+            //페이지 초기설정
+            new PageInit();
+
+            //클릭 이벤트
+            clickEvent();
+        });
+    }
+
+    function resetEvent(){
+        //검색영역 값 초기화
+        $("#search-area input").val("");
+        $("#search-area select").val("");
+
+        //데이터 호출 후 이벤트 재설정
+        new afterLoadDataEvent();
+    }
+
+    //클릭 이벤트
+    function clickEvent(){
+        // 초기화버튼 클릭 이벤트
+        $(".gi-btn-reset").click(function(){
+            resetEvent();
+            findBy#Service#List();
+        });
+        //조회버튼 클릭 이벤트
+        $("#search-btn").click(function(){
+            findBy#Service#List();
+        });
+
+        //추가버튼 클릭 이벤트
+        $("#insert-btn").click(function(){
+            console.log("insert btn Event")
+        });
+    }
+    function findBy#Service#List(page,range,sortId,sortOrder) {
+        //default page
+        if(!formUtil.checkEmptyValue(page)) page = 1;
+        //default range(row)
+        if(!formUtil.checkEmptyValue(range)) range = 10;
+
+        let url = "/#namespace#/#scope#/#service#/findPage";
+        let param = {
+            page_no:page,
+            row_range : range
+        };
+        // 검색조건 설정 (추가해서 사용)
+        let cont1 = $("#searchDesc1").val();
+        let cont2 = $("#from_date").val();
+        let cont3 = $("#to_date").val();
+        if(formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+        if(formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+        if(formUtil.checkEmptyValue(cont3)) param.to_date   = cont3;
+
+        // 정렬조건추가 (기준id, 순서)
+        if(formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+        if(formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+
+                // 그리드 헤더 설정
+                let #service#_menuGrid_header = {
+                    title : '[Page.Message].Message.Label.Array["#tablename#.TITLE"]',
+                    list:[
+                        {HEADER:'No',  ID:'no',   WIDTH:'7',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},#begin#
+                        {HEADER:'[Page.Message].Message.Label.Array["#tablename#.#FIELD_NAME#"]',  ID:'#field_name#',  WIDTH:'40',TYPE:'text',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:#notnull#}#conjunction##end#,
+                        {HEADER:'[Page.Message].Message.Label.Array["DETAIL_BTN"]',  ID:'detail_btn',  WIDTH:'15',TYPE:'button',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false}
+                    <!--{HEADER:'사이드 그리드',  ID:'sideGridOpen_btn',  WIDTH:'15',TYPE:'button',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false}-->
+                    <!--{HEADER:'checkbox',  ID:'checkbox',  WIDTH:'25',TYPE:'checkbox',FONT_SIZE:'12px',TEXT_ALIGN:'center',HIDDEN:false},-->
+                    ]
+                }
+                //그리드 생성 <div id="gi-Grid"></div>
+                let #service#_menu_grid = formUtil.giGrid(#service#_menuGrid_header,paging,page);
+
+                //그리드 하이라키 구조로 변경
+                //let #service#_menu_grid = formUtil.giGridHierarchy(#service#_menuGrid_header,paging,page);
+                //#service#_menu_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
+
+                //사이드 그리드 설정
+                //#service#_menu_grid.sideOpenBtnClick("gi-Grid-side","sideGridOpen_btn");
+
+                //그리드 데이터 설정
+                #service#_menu_grid.DataSet(data);
+
+                //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+                #service#_menu_grid.pagingSet(findBy#Service#List);
+
+                //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                #service#_menu_grid.detailBtnClick(redirectDetailPage,"detail_btn");
+
+                //그리스 내부의 header click 정렬 이벤트 설정
+                #service#_menu_grid.sortDataSet(findBy#Service#List);
+
+                //그리드 row 선택 이벤트 설정
+                //#service#_menu_grid.rowClick(#service#RowClickEvent);
+
+                //그리드 row Double click 이벤트 설정
+                //#service#_menu_grid.rowDoubleClick(#service#RowDoubleClickEvent);
+
+                //그리드 checkbox click 이벤트 설정
+                //#service#_menu_grid.rowCheckboxClick(#service#RowCheckboxClick);
+
+                //그리드 row MultiSelect click 이벤트 설정
+                //#service#_menu_grid.rowMultiSelectClick(#service#RowMultiSelectClick);
+
+                function #service#RowMultiSelectClick(rows){
+                    console.log(rows);
+                }
+
+                function #service#RowCheckboxClick(rows){
+                    console.log(rows);
+                }
+
+                function #service#RowClickEvent(rows){
+                    console.log(rows);
+                }
+                function #service#RowDoubleClickEvent(rows){
+                    console.log(rows);
+                }
+            } else {
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error.response.data);
+        })
+    }
+    function redirectDetailPage(redirectDataList){
+        let url = "/#namespace#/#service#Detail";
+
+        //이전페이지 아이디 설정
+        redirectDataList["pre_page_id"] =  "/#namespace#/#service#List";
+        // console.log(redirectDataList)
+
+        formUtil.loadContent(url , redirectDataList);
+    }
+</script>
+	]]>
+    </source>
+</template>

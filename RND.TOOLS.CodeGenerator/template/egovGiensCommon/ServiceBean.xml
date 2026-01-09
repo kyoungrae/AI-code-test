@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>Bean</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service##Sourcetype#</filename>
+        <ext>java</ext>
+        <path>./work/genSrc/kr/co/giens/#namespace#/#scope#/bean/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>kr.co.giens.#namespace#.#scope#.bean</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+/**
+ *  ++ giens Product ++
+ */
+package #pakage#;
+
+import kr.co.giens.#namespace#.common.database.bean.#ENTITY_NAME#Bean;
+/**
+ * <pre>
+ *  #Service##sourcetype#
+ * </pre>
+ *
+ * @since #cdate#
+ * @version #version#
+ * @author #author#
+ */
+public class #Service##sourcetype# extends #ENTITY_NAME#Bean {
+	private String NO;
+	private String fromDate;
+	private String toDate;
+
+	private String sys_cr_user_id;
+	private String sys_up_user_id;
+
+	public void setNO(String v){
+		NO = v;
+	}
+
+	public String getNO(){
+		return NO;
+	}
+
+	public String getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public String getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
+	}
+
+	public String getSys_cr_user_id() {
+		return sys_cr_user_id;
+	}
+
+	public void setSys_cr_user_id(String sys_cr_user_id) {
+		this.sys_cr_user_id = sys_cr_user_id;
+	}
+
+	public String getSys_up_user_id() {
+		return sys_up_user_id;
+	}
+
+	public void setSys_up_user_id(String sys_up_user_id) {
+		this.sys_up_user_id = sys_up_user_id;
+	}
+
+	public DataBean newInstance() {
+		return new #Service#Bean();
+	}
+
+
+#begin#
+   /**
+   *<pre>
+   #field_name#
+   #field_desc#
+   </pre>
+   */
+	private String _#field_name#=null;
+#end#
+#begin#
+	public String get_#field_name#() {
+	    return this._#field_name#;
+	}
+	public void set_#field_name#(String v) {
+	    this._#field_name# = v;
+	}
+#end#
+
+}
+	]]>
+    </source>
+</template>

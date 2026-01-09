@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>html</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#service#Detail</filename>
+        <ext>html</ext>
+        <path>./work/genSrc/template/page/#namespace#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>comm.vims.#namespace#</pakage>
+    </definition>
+
+
+
+    <source>
+        <![CDATA[
+<article class="gi-article-content gi-col-95 gi-row-90">
+    <section class="gi-col-100 gi-row-100">
+        <header class="gi-flex gi-flex-center gi-col-10">
+            <h1 class="gi-page-title">[Page.Message].Message.Label.Array["#tablename#.TITLE_DETAIL"]</h1>
+        </header>
+        <article class="gi-col-90 gi-row-100 gi-grid gi-grid-template-rows-9fr-1fr gi-grid-gap-10px-10px">
+            <!--      디테일 영역      -->
+            <div  class="gi-row-100 gi-col-100 gi-overflow">
+                <div id="#service#Detail" class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center">
+                    <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-margin-bottom-15px gi-grid-template-columns-repeat-3-1fr gi-grid-template-col-3-border">
+                        #begin#<div class="gi-row-100 gi-col-100 gi-flex">
+                            <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
+                                <span>title</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-grid">
+                                <div class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
+                                    <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default" data-required="#nullable#">[Page.Message].Message.Label.Array["#tablename#.#FIELD_NAME#"]</span>
+                                    <span data-field="#field_name#" class="gi-span" data-focus-span-text-align="center">[Page.Message].Message.Label.Array["#tablename#.#FIELD_NAME#"]</span>
+                                </div>
+                            </div>
+                        </div>
+                        #end#
+                    </div>
+                    <div class="gi-row-100 gi-col-100 gi-flex gi-padding-5px ">
+                        <div class="gi-row-50 gi-col-100 gi-flex gi-grid-template-col-2-border">
+                            <div class="gi-min-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
+                                <span>[Page.Message].Message.Label.Array["FILE_NAME"]</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-7fr-3fr">
+                                <div class="gi-col-100 gi-row-100 gi-flex gi-flex-column">
+                                    <div class="gi-row-100 gi-span-container gi-flex gi-flex-center">
+                                        <label for="uuid" class="gi-span-label gi-col-21px-important" data-focus-label="true" data-focus-label-text-align="default" >[Page.Message].Message.Label.Array["FILE_NAME"]</label>
+                                        <span data-field="uuid" id="uuid" name="uuid" class="gi-span gi-hidden" data-focus-span-text-align="center"></span>
+                                    </div>
+                                    <div class="gi-col-100 gi-row-100">
+                                        <span class="formUtil-file-list gi-min-col-21px"></span>
+                                    </div>
+                                </div>
+                                <div class="gi-btn-section gi-flex gi-flex-center gi-layout-detail-title-2">
+                                    <button id="fileDownload" class="gi-input-btn" type="button">[Page.Message].Message.Label.Array["FILE_DOWN_BTN"]</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/     디테일 영역      -->
+            <!--      버튼 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-overflow-scroll">
+                <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                    <button id="back-btn" class="gi-btn-back" type="button">[Page.Message].Message.Label.Array["BACK_BTN"]</button>
+                    <button id="modify-btn" class="gi-btn-blue" type="button">[Page.Message].Message.Label.Array["MODIFY_BTN"]</button>
+                </div>
+            </div>
+            <!--/     추가버튼 영역      -->
+        </article>
+    </section>
+</article>
+<script type="text/javascript">
+    var PRGMID = "#service#Detail";	//page id
+    init();
+
+
+    function init(){
+        dataSetting();
+
+        //초기화
+        resetEvent();
+
+        setTimeout(function(){
+            //페이지 초기설정
+            new PageInit();
+            //클릭 이벤트
+            clickEvent();
+        });
+
+        //파일다운로드 이벤트 설정
+        //formUtil.createFileDownload("fileDownload","파일경로 입력","UUID 값");
+    }
+
+    //리스트에서 받아온 데이터 바인딩처리
+    function dataSetting(){
+        dataBinding.setData(PRGMID);
+    }
+
+    function resetEvent(){
+        //데이터 호출 후 이벤트 재설정
+        new afterLoadDataEvent();
+    }
+
+    //클릭 이벤트
+    function clickEvent(){
+        // 초기화 버튼 클릭 이벤트
+        $(".gi-btn-reset").click(function(){
+
+        });
+        //뒤로가기 버튼 클릭 이벤트
+        $("#back-btn").click(function(){
+            redirectBackPage();
+        })
+        //수정하기 버튼 클릭 이벤트
+        $("#modify-btn").click(function(){
+            redirectModifyPage();
+        })
+    }
+    function redirectBackPage(){
+        let url = "/#namespace#/#service#List";
+        formUtil.loadContent(url,"");
+    }
+    function redirectModifyPage(){
+        let data = new dataBinding().getData(PRGMID)
+        let url = "/#namespace#/#service#Modify";
+        formUtil.loadContent(url,data);
+
+    }
+</script>
+	]]>
+    </source>
+</template>

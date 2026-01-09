@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>Mapper</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service##Sourcetype#</filename>
+        <ext>xml</ext>
+        <path>./work/genSrc/resources/mybatis/#namespace#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>com.#namespace#.#scope#</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.#namespace#.#scope#.#Service#Mapper">
+    <sql id="sortFilter">
+        ORDER BY
+        <choose>
+            <when test="sort_id != null and sort_order != null">
+                ${sort_id} ${sort_order}
+            </when>
+            <otherwise>
+                sub.no ASC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="SELECT_PAGE" resultType="#pakage#.#Service#">
+        SELECT * FROM (
+            SELECT
+                row_number() over (ORDER BY system_create_date DESC )AS no,
+                #begin#
+                #field_name##conjunction# #end#
+            FROM #tablename#
+            <where>
+                #begin#
+                <if test="#field_name# != null and #field_name# != ''">AND #field_name# = #{#field_name#}</if>#end#
+                #begin#
+                <if test="_#field_name# != null and _#field_name# != ''">AND #field_name# LIKE CONCAT('%', #{_#field_name#}, '%')</if>#end#
+            </where>
+        ) AS sub
+        <include refid="sortFilter"/>
+        LIMIT #{row_range} OFFSET #{offset}
+    </select>
+
+    <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
+        SELECT CEIL(COUNT(*) / #{row_range}) FROM #tablename#
+        <where>
+            #begin#
+            <if test="#field_name# != null and #field_name# != ''">AND #field_name# = #{#field_name#}</if>#end#
+            #begin#
+            <if test="_#field_name# != null and _#field_name# != ''">AND #field_name# LIKE CONCAT('%', #{_#field_name#}, '%')</if>#end#
+        </where>
+    </select>
+
+    <select id="SELECT" resultType="#pakage#.#Service#">
+        SELECT
+            #begin#
+            #field_name##conjunction##end#
+        FROM #tablename#
+        <where>
+            #begin#
+            <if test="#field_name# != null and #field_name# != ''">AND #field_name# = #{#field_name#}</if>#end#
+            #begin#
+            <if test="_#field_name# != null and _#field_name# != ''">AND #field_name# LIKE CONCAT('%', #{_#field_name#}, '%')</if>#end#
+        </where>
+    </select>
+
+    <insert id="INSERT">
+        INSERT INTO #tablename#(
+            #begin#
+            #conjunction# #fieldNotNullAndNotKey# #end#
+            #begin#
+            <if test="#notKeyFieldInFieldName# != null">, #notKeyFieldInFieldName#</if>#end#
+        )
+        VALUES(
+            #begin#
+            #conjunction# #{#fieldNotNullAndNotKey#}#end#
+            #begin#
+            <if test="#notKeyFieldInFieldName# != null">, #{#notKeyFieldInFieldName#}</if>#end#
+        )
+    </insert>
+
+    <delete id="DELETE">
+        DELETE FROM #tablename#
+        <where>
+            #begin#
+            #and# #key_fields# = #{#key_fields#}#end#
+            #begin#
+            <if test="#notkey_fields# != null">AND #notkey_fields# = #{#notkey_fields#}</if>#end#
+        </where>
+    </delete>
+
+    <update id="UPDATE">
+        UPDATE #tablename#
+        <set>
+            #begin#
+            <if test="#notkey_fields# != null and #notkey_fields# != '' ">,#notkey_fields# = #{#notkey_fields#}</if>#end#
+        </set>
+        <where>
+            #begin#
+            #and# #key_fields# = #{#key_fields#}#end#
+        </where>
+    </update>
+</mapper>
+]]>
+    </source>
+</template>

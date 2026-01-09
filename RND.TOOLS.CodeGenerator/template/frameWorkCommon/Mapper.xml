@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>Mapper</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service##Sourcetype#</filename>
+        <ext>java</ext>
+        <path>./work/genSrc/com/vims/#namespace#/#scope#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>com.vims.#namespace#.#scope#</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+package #pakage#;
+
+import com.system.common.base.CommonMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface #Service#Mapper extends CommonMapper<#Service#> {
+}
+
+	]]>
+    </source>
+</template>

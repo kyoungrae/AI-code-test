@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="entity">
+	<select id="SELECT.ENTITY" parameterClass="java.lang.String" resultClass="java.util.HashMap">
+		SELECT
+			a.TABLE_NAME AS table_name,
+			b.COMMENTS AS table_comments,
+			a.COLUMN_NAME AS column_name,
+			c.COMMENTS AS column_comments,
+			a.DATA_TYPE AS column_type,
+			a.DATA_LENGTH AS column_length,
+			NVL(d.column_key, 'false') AS column_key,
+			a.NULLABLE AS column_nullable,
+			a.DATA_DEFAULT AS column_default
+		FROM
+			user_tab_columns a
+				JOIN
+			user_tab_comments b ON a.TABLE_NAME = b.TABLE_NAME
+				JOIN
+			user_col_comments c ON a.TABLE_NAME = c.TABLE_NAME AND a.COLUMN_NAME = c.COLUMN_NAME
+				LEFT OUTER JOIN (
+				SELECT
+					DISTINCT TABLE_NAME, COLUMN_NAME,
+							 DECODE(NVL(index_name, 'false'), 'false', 'false', 'true') AS column_key
+				FROM
+					user_ind_columns
+			) d ON c.TABLE_NAME = d.TABLE_NAME AND c.COLUMN_NAME = d.COLUMN_NAME
+		WHERE
+			a.TABLE_NAME = #productcode#
+		ORDER BY
+			c.TABLE_NAME,
+			a.COLUMN_ID,
+			c.COLUMN_NAME
+	</select>
+</sqlMap>

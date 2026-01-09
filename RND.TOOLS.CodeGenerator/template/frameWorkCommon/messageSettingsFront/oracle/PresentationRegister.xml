@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>html</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#service#Register</filename>
+        <ext>html</ext>
+        <path>./work/genSrc/template/page/#namespace#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>comm.vims.#namespace#</pakage>
+    </definition>
+
+
+
+    <source>
+        <![CDATA[
+<article class="gi-article-content gi-col-95 gi-row-90">
+    <section class="gi-col-100 gi-row-100">
+        <header class="gi-flex gi-flex-center gi-col-10">
+            <h1 class="gi-page-title">[Page.Message].Message.Label.Array["#tablename#.TITLE_REGISTER"]</h1>
+        </header>
+        <article class="gi-col-90 gi-row-100 gi-grid gi-grid-template-rows-9fr-1fr gi-grid-gap-10px-10px">
+            <!--      등록 영역      -->
+            <form id="#service#Register" class="gi-row-100 gi-col-100 gi-overflow">
+                <div class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-margin-bottom-15px gi-grid-template-columns-repeat-3-1fr gi-grid-template-col-2-border">
+#begin#
+                    <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
+                            <span>title</span>
+                        </div>
+                        <div class="gi-row-100 gi-col-100 gi-grid">
+                             <div class="gi-row-100 gi-input-container gi-flex gi-flex-center gi-col-35px-important">
+                                <label for="#field_name#" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="#nullable#">[Page.Message].Message.Label.Array["#tablename#.#FIELD_NAME#"]</label>
+                                <input data-field="#field_name#" id="#field_name#" name="#field_name#" class="gi-input" data-focus-span-text-align="center" data-required="#nullable#" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>#end#
+
+                    <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
+                            <span>[Page.Message].Message.Label.Array["FILE_NAME"]</span>
+                        </div>
+
+                        <!--           공통 파일추가 영역            -->
+                        <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-7fr-3fr">
+                            <div class="gi-col-100 gi-row-100 gi-grid gi-grid-template-columns-2fr-8fr">
+                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center">
+                                    <label for="file_id" class="gi-input-label" data-focus-label="true" data-focus-label-text-align="default" data-required="true">[Page.Message].Message.Label.Array["FILE_NAME"]</label>
+                                    <input data-field="file_id" id="file_id" name="file_id" class="gi-input gi-hidden" data-focus-span-text-align="default" data-required="true" autocomplete="off"/>
+                                </div>
+                                <div class="gi-col-100 gi-row-100">
+                                    <span class="formUtil-file-list"></span>
+                                </div>
+                            </div>
+                            <div class="gi-btn-section gi-flex gi-flex-center">
+                                <button id="fileUpload" class="gi-input-btn" type="button">[Page.Message].Message.Label.Array["FILE_REGISTER_BTN"]</button>
+                            </div>
+                        </div>
+                        <!--/          공통 파일추가 영역            -->
+                    </div>
+                </div>
+            </form>
+            <!--/     업데이트 영역      -->
+            <!--      버튼 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-overflow-scroll">
+                <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                    <button id="register-btn" class="gi-btn-register" type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+                </div>
+            </div>
+            <!--/     버튼 영역      -->
+        </article>
+    </section>
+</article>
+<script type="text/javascript">
+    var PRGMID = "#service#Register";	//page id
+    init();
+
+
+    function init(){
+         //초기 값 셋팅
+        initValueSetting();
+
+        //초기화
+        resetEvent();
+
+        setTimeout(function(){
+            //페이지 초기설정
+            new PageInit();
+            //클릭 이벤트
+            clickEvent();
+        });
+
+    }
+
+    function initValueSetting(){
+        //파일업로드 이벤트 설정
+        let cont = {"FOLDER_NAME":"TEST","TTT1":"TTT2"};
+        formUtil.createFileUpload("fileUpload","/file/logsFileUpload","file_id",cont);
+    }
+
+    function resetEvent(){
+        //데이터 호출 후 이벤트 재설정
+        new afterLoadDataEvent();
+
+    }
+
+    //클릭 이벤트
+    function clickEvent(){
+        // 초기화 버튼 클릭 이벤트
+        $(".gi-btn-reset").click(function(){
+
+        });
+        //뒤로가기 버튼 클릭 이벤트
+        $("#back-btn").click(function(){
+            redirectBackPage();
+        })
+        //등록 버튼 클릭 이벤트
+        $("#register-btn").click(function(){
+            register();
+        })
+    }
+    function register(){
+        let flag =  checkValidation();
+        if(flag){
+            let data = new dataBinding().getData(PRGMID);
+            let url = "/#namespace#/#scope#/#service#/register";
+                //console.log(data);
+            let param = {
+#begin#
+                #field_name# : data.#field_name# #conjunction##end#
+            };
+            axios.post(url,param).then(response =>{
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.showMessage(Message.Label.Array["COMPLETE.INSERT"]);
+                    redirectBackPage();
+                } else {
+                    formUtil.alertPopup("response status is :" + status);
+                }
+            }).catch(error => {
+                formUtil.alertPopup(error.response.data);
+            })
+        }
+    }
+    function checkValidation(){
+        let flag = false;
+
+        let validation = [];
+        validation.formId = PRGMID;
+        $(".gi-input[data-required='true'],.gi-select[data-required='true']").map((i,item)=>{
+            if($(item).data("field")){
+                let messageId = $(item).data("field").toUpperCase();
+                let message = Message.Label.Array["#tablename#.CHECK."+messageId];
+                validation.push({id:item.id,message:message});
+            }
+        });
+        if(formUtil.validationCheck(validation)){
+            flag = true;
+        }
+        return flag;
+    }
+    function redirectBackPage(){
+        formUtil.loadContent("/#namespace#/#service#Detail", "");
+    }
+</script>
+
+	]]>
+    </source>
+</template>

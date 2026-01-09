@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>ServiceException</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service##Sourcetype#</filename>
+        <ext>java</ext>
+        <path>./work/genSrc/kr/co/giens/#namespace#/#scope#/service/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>kr.co.giens.#namespace#.#scope#.service</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+
+/**
+ *  ++ giens Product ++
+ */
+package #pakage#;
+
+ /**
+ * <pre>
+ * #Service##sourcetype#
+ * </pre>
+ *
+ * @since #cdate#
+ * @version #version#
+ * @author #author#
+ */
+public class #Service##Sourcetype# extends ServiceException{
+
+    public #Service#ServiceException(){
+        super();
+    }
+
+    public #Service#ServiceException(Exception e){
+        super(e);
+    }
+
+    public #Service#ServiceException(int errcode){
+        super(errcode);
+    }
+
+    public #Service#ServiceException(String errMsg){
+    	super(errMsg);
+    }
+
+    public #Service#ServiceException(int errcode, String[] msgData){
+    	super(errcode, msgData);
+    }
+
+}
+]]>
+    </source>
+</template>

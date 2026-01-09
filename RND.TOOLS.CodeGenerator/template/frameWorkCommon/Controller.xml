@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>Controller</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service##Sourcetype#</filename>
+        <ext>java</ext>
+        <path>./work/genSrc/com/vims/#namespace#/#scope#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>com.vims.#namespace#.#scope#</pakage>
+    </definition>
+    <source>
+    <![CDATA[
+package #pakage#;
+
+import com.system.common.base.AbstractCommonController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/#namespace#/#scope#/#service#")
+@RequiredArgsConstructor
+public class #Service#Controller extends AbstractCommonController<#Service#> {
+
+	private final #Service#Service #service#Service;
+    private final #Service#Repository #service#Repository;
+
+	@PostMapping("/findPage")
+    public Map<String,List<?>> findPage(@RequestBody #Service# reqeust) throws Exception{
+        return #service#Service.findPage(reqeust);
+    }
+
+    @PostMapping("/findAll")
+    protected List<#Service#> findAll(@RequestBody #Service# request) throws Exception{
+        return #service#Repository.findAll();
+    }
+
+    @PostMapping("/find")
+    @Override
+    protected List<#Service#> findImpl(@RequestBody #Service# request) throws Exception{
+        return #service#Service.findImpl(request);
+    }
+
+    @PostMapping("/remove")
+    @Override
+    protected int removeImpl(@RequestBody #Service# request) {
+        return #service#Service.removeImpl(request);
+    }
+
+    @PostMapping("/update")
+    @Override
+    protected int updateImpl(@RequestBody #Service# request) {
+        return #service#Service.updateImpl(request);
+    }
+
+    @PostMapping("/register")
+    @Override
+    protected int registerImpl(@RequestBody #Service# request) {
+        return #service#Service.registerImpl(request);
+    }
+}
+	]]>
+    </source>
+</template>

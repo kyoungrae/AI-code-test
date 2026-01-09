@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype></sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service##sourcetype#</filename>
+        <ext>java</ext>
+        <path>./work/genSrc/com/vims/#namespace#/#scope#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>com.vims.#namespace#.#scope#</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+package #pakage#;
+
+import com.system.common.base.Common;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.util.Date;
+import java.util.Arrays;
+
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
+public class #Service# extends Common {
+    @Transient
+	private String keys = Arrays.toString(new String[]{#begin#"#key_fields#"#conjunction##end#});
+
+    @Id#begin#
+    /***<pre> #field_name# : #field_desc# </pre> */
+	private #typeofparam# #field_name#;
+#end#
+
+#begin#
+    /***<pre> #field_name# : #field_desc# </pre> */
+    @Transient
+	private #typeofparam# _#field_name#;
+#end#
+
+}
+	]]>
+    </source>
+</template>

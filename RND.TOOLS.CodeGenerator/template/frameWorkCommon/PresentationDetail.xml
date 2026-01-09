@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>html</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#service#Detail</filename>
+        <ext>html</ext>
+        <path>./work/genSrc/template/page/#namespace#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>comm.vims.#namespace#</pakage>
+    </definition>
+
+
+
+    <source>
+        <![CDATA[
+<article class="gi-article-content gi-col-95 gi-row-90">
+    <section class="gi-col-100 gi-row-100">
+        <header class="gi-flex gi-flex-center gi-col-10">
+            <h1 class="gi-page-title">#entity_desc# 상세</h1>
+        </header>
+        <article class="gi-col-90 gi-row-100 gi-grid gi-grid-template-rows-9fr-1fr gi-grid-gap-10px-10px">
+            <!--      디테일 영역      -->
+            <div  class="gi-row-100 gi-col-100 gi-overflow">
+                <div id="#service#Detail" class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
+#begin#
+                    <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
+                        <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title">
+                            <span>title</span>
+                        </div>
+                        <div class="gi-row-100 gi-col-100 gi-grid">
+                            <div class="gi-row-100 gi-col-100 gi-span-container gi-span-container-box-border gi-flex gi-flex-center gi-col-35px-important">
+                                <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default" data-required="#nullable#">#field_desc#</span>
+                                <span data-field="#field_name#" class="gi-span" data-focus-span-text-align="center">#field_desc#</span>
+                            </div>
+                        </div>
+                    </div>#end#
+
+                    <div class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container" >
+                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-layout-detail-title ">
+                                <span>구비서류</span>
+                            </div>
+                            <div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-7fr-3fr">
+                                <div class="gi-col-100 gi-row-100 gi-grid gi-grid-template-columns-2fr-8fr gi-span-container-box-border">
+                                    <div class="gi-row-100  gi-span-container  gi-flex gi-flex-center ">
+                                        <label for="uuid" class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default" >첨부파일</label>
+                                        <span data-field="uuid" id="uuid" name="uuid" class="gi-span gi-hidden" data-focus-span-text-align="center"></span>
+                                    </div>
+                                    <div class="gi-col-100 gi-row-100">
+                                        <span class="formUtil-file-list"></span>
+                                    </div>
+                                </div>
+                                <div class="gi-btn-section gi-flex gi-flex-center gi-span-container-box-border">
+                                    <button id="fileDownload" class="gi-input-btn" type="button">첨부파일 다운로드</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <!--/     디테일 영역      -->
+            <!--      버튼 영역      -->
+            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-overflow-scroll">
+                <div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                    <button id="back-btn" class="gi-btn-back" type="button">뒤로가기</button>
+                    <button id="modify-btn" class="gi-btn-blue" type="button">수정하기</button>
+                </div>
+            </div>
+            <!--/     추가버튼 영역      -->
+        </article>
+    </section>
+</article>
+<script type="text/javascript">
+    var PRGMID = "#service#Detail";	//page id
+    init();
+
+
+    function init(){
+        dataSetting();
+
+        //초기화
+        resetEvent();
+
+        setTimeout(function(){
+            //페이지 초기설정
+            new PageInit();
+            //클릭 이벤트
+            clickEvent();
+        });
+
+        //파일다운로드 이벤트 설정
+        //formUtil.createFileDownload("fileDownload","파일경로 입력","UUID 값");
+    }
+
+    //리스트에서 받아온 데이터 바인딩처리
+    function dataSetting(){
+        new dataBinding().setData(PRGMID);
+    }
+
+    function resetEvent(){
+        //데이터 호출 후 이벤트 재설정
+        new afterLoadDataEvent();
+    }
+
+    //클릭 이벤트
+    function clickEvent(){
+        // 초기화 버튼 클릭 이벤트
+        $(".gi-btn-reset").click(function(){
+
+        });
+        //뒤로가기 버튼 클릭 이벤트
+        $("#back-btn").click(function(){
+            redirectBackPage();
+        })
+        //수정하기 버튼 클릭 이벤트
+        $("#modify-btn").click(function(){
+            redirectModifyPage();
+        })
+    }
+    function redirectBackPage(){
+        let url = "/#namespace#/#service#List";
+        formUtil.loadContent(url,"");
+    }
+    function redirectModifyPage(){
+        let data = new dataBinding().getData(PRGMID)
+        let url = "/#namespace#/#service#Modify";
+        formUtil.loadContent(url,data);
+
+    }
+</script>
+	]]>
+    </source>
+</template>

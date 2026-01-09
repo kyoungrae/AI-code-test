@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>Oracle</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service#Handler.Map.#Sourcetype#</filename>
+        <ext>xml</ext>
+        <path>./work/genSrc/kr/co/giens/#namespace#/#scope#/handler/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>kr.co.giens.#namespace#.#scope#</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.giens">
+
+	<resultMap id="ResultMap_#ENTITY_NAME#" type="#pakage#.bean.#Service#Bean">
+		<result property="NO" column="NO"></result>
+		 #begin#
+		<result property="#field_name#" column="#field_name#"></result>#end#
+
+<!-- 		<result property="sys_cr_id" column="sys_cr_id"></result> -->
+<!-- 		<result property="sys_up_id" column="sys_up_id"></result> -->
+	</resultMap>
+
+
+
+	<select id="SELECT_#ENTITY_NAME#" resultMap="ResultMap_#ENTITY_NAME#" parameterType="#pakage#.bean.#Service#ParmBean">
+		SELECT
+		 	ROW_NUMBER() OVER(ORDER BY ROWID DESC) NO
+#begin#
+			,#field_name##end#
+
+			<!--
+			,to_char(sys_cr_dt,'yyyy-mm-dd hh24:mi:ss') as sys_cr_dt
+			,to_char(sys_up_dt,'yyyy-mm-dd hh24:mi:ss') as sys_up_dt
+			-->
+
+<!-- 			,CC_FC_GETUSERNAME(sys_cr_id) as sys_cr_id -->
+<!-- 			,CC_FC_GETUSERNAME(sys_up_id) as sys_up_id -->
+
+		FROM #entity_name#
+		<where>
+#begin#
+			<if test="#field_name# != null">AND #field_name#=#{#field_name#}</if>#end#
+#begin#
+			<if test="_#field_name# != null">AND #field_name# like '%'||#{_#field_name#}||'%'</if>#end#
+
+		</where>
+	</select>
+
+
+
+	<select id="SELECT_#ENTITY_NAME#_PAGE" resultMap="ResultMap_#ENTITY_NAME#" parameterType="#pakage#.bean.#Service#ParmBean">
+		SELECT * FROM (
+			SELECT
+				<if test="ORDERBY != null"> ROW_NUMBER() OVER(ORDER BY ${ORDERBY}) NO </if>
+				<if test="ORDERBY == null"> ROW_NUMBER() OVER(ORDER BY ROWID DESC) NO </if>
+#begin#
+				,#field_name##end#
+
+				<!--
+				,to_char(sys_cr_dt,'yyyy-mm-dd hh24:mi:ss') as sys_cr_dt
+				,to_char(sys_up_dt,'yyyy-mm-dd hh24:mi:ss') as sys_up_dt
+				-->
+
+<!-- 				,CC_FC_GETUSERNAME(sys_cr_id) as sys_cr_id -->
+<!-- 				,CC_FC_GETUSERNAME(sys_up_id) as sys_up_id -->
+
+			FROM #entity_name#
+			<where>
+#begin#
+				<if test="#field_name# != null">AND #field_name#=#{#field_name#}</if>#end#
+#begin#
+				<if test="_#field_name# != null">AND #field_name# like '%'||#{_#field_name#}||'%'</if>#end#
+
+			</where>
+         ) LIST
+
+		<if test="CURPAGE != null">
+		WHERE NO BETWEEN ((#{CURPAGE}-1) * #{RCOUNT})+1 AND (#{CURPAGE} * #{RCOUNT})
+		</if>
+
+	</select>
+
+
+
+	<select id="SELECT_#ENTITY_NAME#_COUNT" resultType="int" parameterType="#pakage#.bean.#Service#ParmBean">
+		SELECT COUNT(*)
+		FROM #entity_name#
+		<where>
+#begin#
+			<if test="#field_name# != null">AND #field_name#=#{#field_name#}</if>#end#
+#begin#
+			<if test="_#field_name# != null">AND #field_name# like '%'||#{_#field_name#}||'%'</if>#end#
+
+		</where>
+	</select>
+
+
+
+	<insert id="INSERT_#ENTITY_NAME#">
+		INSERT INTO #ENTITY_NAME#(
+			sys_cr_dt
+			, sys_up_dt #begin#
+		    , #key_fields# #end# #begin#
+				<if test="#field_name# != null">, #field_name#</if>#end#
+		)
+		VALUES(
+			systimestamp
+			, systimestamp #begin#
+			, #{#key_fields#}  #end# #begin#
+				<if test="#field_name# != null">, #{#field_name#}</if>#end#
+		)
+	</insert>
+
+
+
+	<delete id="DELETE_#ENTITY_NAME#">
+		DELETE FROM #ENTITY_NAME#
+		<where>  #begin#
+		AND #key_fields# = #{#key_fields#}  #end#
+		</where>
+	</delete>
+
+
+
+	<update id="UPDATE_#ENTITY_NAME#">
+		UPDATE  #ENTITY_NAME#
+			<set>
+				sys_up_dt = systimestamp #begin#
+				<if test="#field_name# != null">, #field_name#=#{#field_name#}</if>#end#
+			</set>
+		<where> #begin#
+		AND #key_fields# = #{#key_fields#}  #end#
+		</where>
+	</update>
+
+
+
+</mapper>
+	]]>
+    </source>
+</template>

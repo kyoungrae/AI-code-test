@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <reserved>
+        <sourcetype>Service</sourcetype>
+        <conjunction>,</conjunction>
+        <filename>#Service##Sourcetype#</filename>
+        <ext>java</ext>
+        <path>./work/genSrc/com/vims/#namespace#/#scope#/</path>
+    </reserved>
+    <definition>
+        <version>1.0</version>
+        <author>auto code generator (kyoungtaelee)</author>
+        <cdate>2024.5.20</cdate>
+        <pakage>com.vims.#namespace#.#scope#</pakage>
+    </definition>
+    <source>
+        <![CDATA[
+/**
+ *  ++ giens Product ++
+ */
+package #pakage#;
+
+import com.vims.common.common.AbstractCommonService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class #Service##sourcetype# extends AbstractCommonService<#Service#> {
+    private final #Service#Mapper #service#Mapper;
+    private final #Service#Repository #service#Repository;
+    private final MessageSource messageSource;
+
+     private String getMessage(String code) {
+        return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+    }
+
+    @Override
+    protected List<#Service#> selectPage(#Service# request) throws Exception {
+        return #service#Mapper.SELECT_PAGE(request);
+    }
+
+    @Override
+    protected int selectPagingTotalNumber(#Service# request) throws Exception {
+        return #service#Mapper.SELECT_PAGING_TOTAL_NUMBER(request);
+    }
+    @Override
+    protected List<#Service#> findImpl(#Service# request) throws Exception {
+        return #service#Mapper.SELECT(request);
+    }
+
+    @Override
+    protected int removeImpl(#Service# request) {
+        return #service#Mapper.DELETE(request);
+    }
+
+    @Override
+    protected int updateImpl(#Service# request) {
+        return #service#Mapper.UPDATE(request);
+    }
+
+    @Override
+    protected int registerImpl(#Service# request){
+        return #service#Mapper.INSERT(request);
+    }
+}
+
+	]]>
+    </source>
+</template>
