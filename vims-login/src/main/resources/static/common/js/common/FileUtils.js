@@ -286,7 +286,8 @@ class createFileUploadHTML {
             axios.post(url, param, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
+                withCredentials: true  // 쿠키(Authorization)를 포함하여 전송
             }).then(response => {
                 let status = response.status;
                 if (status === 200 && response.data.length > 0) {
@@ -331,7 +332,7 @@ class createFileUploadHTML {
         let url = that.PATH + "/find";
         let param = { uuid: uuid };
 
-        axios.post(url, param).then(response => {
+        axios.post(url, param, { withCredentials: true }).then(response => {
             let files = response.data;
             that.renderMainFileList(files);
         }).catch(error => {
@@ -384,7 +385,7 @@ class createFileUploadHTML {
             let url = that.PATH + "/removeByFileIdAndUuid";
             let param = { file_id: fileId, uuid: uuid };
 
-            axios.post(url, param).then(response => {
+            axios.post(url, param, { withCredentials: true }).then(response => {
                 if (response.data > 0) {
                     formUtil.toast("파일이 삭제되었습니다.");
                     that.fetchAndRenderMainFileList(uuid);
