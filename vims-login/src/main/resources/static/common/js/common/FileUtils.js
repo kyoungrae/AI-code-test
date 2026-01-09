@@ -301,6 +301,9 @@ class createFileUploadHTML {
                         //NOTE : 파일을 저장 후 전달 받은 COM_FILE의 FILE_UUID를 설정한 값에 전달
                         $("#" + that.ID_TO_RECEIVE_VALUE).val(file_uuid).trigger('change');
 
+                        // 명시적으로 리스트 갱신 호출 (trigger가 작동하지 않을 경우 대비)
+                        that.fetchAndRenderMainFileList(file_uuid);
+
                         // 추가적인 필드 업데이트 (존재할 경우)
                         if ($("#file_id").length) $("#file_id").val(file_uuid);
                         if ($("#uuid").length) $("#uuid").val(file_uuid);
@@ -311,6 +314,7 @@ class createFileUploadHTML {
 
                         formUtil.toast("File Upload Success", "success");
                     }).catch(error => {
+                        console.error("File Detail Registration Error:", error);
                         formUtil.toast("File Upload Error", "error");
                     });
                 } else {
@@ -355,7 +359,7 @@ class createFileUploadHTML {
             let files = response.data;
             that.renderMainFileList(files);
         }).catch(error => {
-            console.error("Main file list fetch error:", error);
+            formUtil.toast("Main file list fetch error:", error);
         });
     }
 

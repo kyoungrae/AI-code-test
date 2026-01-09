@@ -55,6 +55,7 @@ public class FileManagerService extends FileProcessManager {
                         .uuid(uid)
                         .temp_yn(0) // NOTE : 파일 임시 저장, 사용자가 작성 취소 하거나, 화면을 나갈 경우 삭제하기 위한 flag
                         .system_create_userid(userId)
+                        .system_create_date(new java.util.Date())
                         .build();
                 comFileMapper.COM_FILE_INSERT(comFile);
                 return result;
