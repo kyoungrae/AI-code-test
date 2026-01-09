@@ -36,9 +36,15 @@ public class ComFileDetailService extends AbstractCommonService<ComFileDetail> {
     protected int selectPagingTotalNumber(ComFileDetail request) throws Exception {
         return comFileDetailMapper.SELECT_PAGING_TOTAL_NUMBER(request);
     }
+
     @Override
     protected List<ComFileDetail> findImpl(ComFileDetail request) throws Exception {
-        return comFileDetailMapper.SELECT(request);
+        try {
+            return comFileDetailMapper.SELECT(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException(getMessage("EXCEPTION.FILE.TYPE"));
+        }
     }
 
     @Override
@@ -57,15 +63,15 @@ public class ComFileDetailService extends AbstractCommonService<ComFileDetail> {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    protected int registerImpl(List<ComFileDetail> request) throws Exception{
+    protected int registerImpl(List<ComFileDetail> request) throws Exception {
         int rtn = 0;
         try {
-            for(ComFileDetail map : request){
-                if(map.getFile_name() != null || !map.getFile_name().equals("")){
+            for (ComFileDetail map : request) {
+                if (map.getFile_name() != null || !map.getFile_name().equals("")) {
                     rtn = comFileDetailMapper.INSERT(map);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CustomException(getMessage("EXCEPTION.FILE.TYPE"));
         }
         return rtn;
@@ -74,7 +80,8 @@ public class ComFileDetailService extends AbstractCommonService<ComFileDetail> {
     @Transactional(rollbackFor = Exception.class)
     protected int removeByFileIdAndUuid(ComFileDetail request) throws Exception {
         int deletedRows = comFileDetailMapper.DELETE(request);
-        if (deletedRows == 0) return 0;
+        if (deletedRows == 0)
+            return 0;
         deleteFile(request);
 
         return deletedRows;
@@ -86,15 +93,15 @@ public class ComFileDetailService extends AbstractCommonService<ComFileDetail> {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    protected int updateList(List<ComFileDetail> request) throws Exception{
+    protected int updateList(List<ComFileDetail> request) throws Exception {
         int rtn = 0;
         try {
-            for(ComFileDetail map : request){
-                if(map.getUuid() != null && !map.getUuid().isEmpty()){
+            for (ComFileDetail map : request) {
+                if (map.getUuid() != null && !map.getUuid().isEmpty()) {
                     rtn = comFileDetailMapper.UPDATE(map);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             // todo 알맞은 Exception 추가 필요
             throw new CustomException(getMessage("EXCEPTION.FILE.TYPE"));
         }

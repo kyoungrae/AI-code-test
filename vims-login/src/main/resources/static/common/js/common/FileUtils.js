@@ -369,29 +369,52 @@ class createFileUploadHTML {
         let $container = $(that.LIST_CONTAINER_ID);
 
         if (!files || files.length === 0) {
-            $container.html('<p class="gi-text-center gi-text-secondary gi-font-size-13px gi-padding-24px">첨부된 파일이 없습니다.</p>');
+            $container.html(`
+                <div class="gi-file-list-empty">
+                    <span class="gi-file-list-empty-icon">📂</span>
+                    <p class="gi-file-list-empty-text">첨부된 파일이 없습니다.</p>
+                </div>
+            `);
             return;
         }
 
-        let html = "";
+        let html = '<div class="gi-file-list-container">';
         files.forEach((file, index) => {
+            const extension = (file.file_extension || '').toLowerCase();
+            let typeClass = "";
+
+            if (['pdf', 'hwp', 'doc', 'docx'].includes(extension)) typeClass = "gi-file-type-doc";
+            else if (['xls', 'xlsx', 'csv'].includes(extension)) typeClass = "gi-file-type-xls";
+            else if (['zip', 'rar', '7z'].includes(extension)) typeClass = "gi-file-type-zip";
+            else if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) typeClass = "gi-file-type-img";
+
             html += `
-                <ul class="gi-row-100 gi-flex gi-flex-align-items-center gi-padding-12px" 
-                    style="background: #ffffff; border: 1px solid #e1e4ef; border-radius: 10px; margin-bottom: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: all 0.2s ease;">
-                    <li class="gi-row-10 gi-flex gi-flex-justify-content-center">
-                        <span class="formUtil-file_no">${index + 1}</span>
-                    </li>
-                    <li class="gi-row-50 gi-padding-left-20px gi-font-size-14px gi-font-weight-500" style="border-left: 1px solid #f0f0f0;">${file.file_name}</li>
-                    <li class="gi-row-15 gi-text-center gi-font-size-13px gi-text-secondary" style="border-left: 1px solid #f0f0f0;">${file.file_size}</li>
-                    <li class="gi-row-15 gi-text-center gi-font-size-13px gi-text-secondary" style="border-left: 1px solid #f0f0f0;">${file.file_extension}</li>
-                    <li class="gi-row-10 gi-flex gi-flex-justify-content-center" style="border-left: 1px solid #f0f0f0;">
-                        <button type="button" class="formUtil-file_delete" data-file-id="${file.file_id}" data-uuid="${file.uuid}" style="width:24px; height:24px; border:none; background-color:transparent; cursor:pointer;"></button>
-                    </li>
-                </ul>
+                <div class="gi-file-item-card">
+                    <div class="gi-file-badge-no">${index + 1}</div>
+
+                    <div class="gi-file-icon-box ${typeClass}">📄</div>
+
+                    <div class="gi-file-info">
+                        <span class="gi-file-name" title="${file.file_name}">${file.file_name}</span>
+                        <div class="gi-file-meta">
+                            <span class="gi-file-size-tag">${that.formatBytes(file.file_size)}</span>
+                            <span class="gi-file-ext-tag ${typeClass}" style="background: none;">${extension}</span>
+                        </div>
+                    </div>
+
+                    <div class="gi-file-delete-container">
+                        <button type="button" class="formUtil-file_delete gi-file-delete-btn" 
+                            data-file-id="${file.file_id}" data-uuid="${file.uuid}">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                </div>
             `;
         });
+        html += '</div>';
 
         $container.html(html);
+
 
         // 삭제 버튼 이벤트 바인딩
         $container.find(".formUtil-file_delete").on("click", function () {

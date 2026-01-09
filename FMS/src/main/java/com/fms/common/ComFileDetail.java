@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
+import java.util.Date;
 import java.util.Arrays;
 
 @EqualsAndHashCode(callSuper = true)
@@ -75,7 +75,8 @@ public class ComFileDetail extends Common {
      *  system_create_date : 작성일
      * </pre>
      */
-    private java.util.Date system_create_date;
+    private Date system_create_date;
+    private Date _system_create_date;
 
     /***
      * <pre>
@@ -83,13 +84,15 @@ public class ComFileDetail extends Common {
      * </pre>
      */
     private String system_create_userid;
+    private String _system_create_userid;
 
     /***
      * <pre>
      *  system_update_date : 수정일자
      * </pre>
      */
-    private java.util.Date system_update_date;
+    private Date system_update_date;
+    private Date _system_update_date;
 
     /***
      * <pre>
@@ -97,6 +100,7 @@ public class ComFileDetail extends Common {
      * </pre>
      */
     private String system_update_userid;
+    private String _system_update_userid;
 
     /***
      * <pre>
