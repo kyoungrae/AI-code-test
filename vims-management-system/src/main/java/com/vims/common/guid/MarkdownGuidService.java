@@ -11,6 +11,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @title : MarkdownGuidService
+ * @text : Markdown 파일을 파싱하여 개발 가이드 데이터를 생성하는 서비스
+ * @writer : 이경태
+ */
 @Service
 public class MarkdownGuidService {
 

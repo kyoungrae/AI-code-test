@@ -7,6 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 
+/**
+ * @title : CssGuidService
+ * @text : CSS 파일의 섹션을 파싱하여 개발 가이드 데이터를 생성하는 서비스
+ * @writer : 이경태
+ */
 @Service
 public class CssGuidService {
 

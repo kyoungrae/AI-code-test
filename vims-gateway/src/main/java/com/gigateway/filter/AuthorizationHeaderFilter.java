@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import java.security.Key;
 import java.util.Objects;
 
 @Component
@@ -115,7 +118,12 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                 }
 
                 try {
-                    Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt).getBody();
+                    Key key = getSignInKey(jwtSecret);
+                    Claims claims = Jwts.parserBuilder()
+                            .setSigningKey(key)
+                            .build()
+                            .parseClaimsJws(jwt)
+                            .getBody();
                     String userId = claims.getSubject();
                     String userRole = claims.get("role", String.class);
                     // ... (이후 로직 동일)
@@ -140,12 +148,18 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         try {
             if (secret == null)
                 return false;
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(jwt);
+            Key key = getSignInKey(secret);
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt);
             return true;
         } catch (Exception e) {
             logger.warn("JWT Validation Failed: {}", e.getMessage());
             return false;
         }
+    }
+
+    private Key getSignInKey(String secret) {
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
