@@ -33,6 +33,7 @@ public class FileProcessManager implements FileProcessManagerImpl {
         this.fileUnit = properties.getProperty("common.file.max.size.unit");
         this.MAX_FILE_SIZE = fileSizeDefinition(fileSize, fileUnit);
     }
+
     private Properties loadProperties(String propertyFileName) {
         Properties properties = new Properties();
         try (InputStream input = getClass().getClassLoader().getResourceAsStream(propertyFileName)) {
@@ -46,7 +47,8 @@ public class FileProcessManager implements FileProcessManagerImpl {
         }
         return properties;
     }
-    public Long fileSizeDefinition(String size , String unit ) {
+
+    public Long fileSizeDefinition(String size, String unit) {
         long result = 0L;
         try {
             if (unit.equalsIgnoreCase("GB")) {
@@ -64,78 +66,82 @@ public class FileProcessManager implements FileProcessManagerImpl {
         }
         return result;
     }
+
     @Override
     public boolean isValidDirectory(String directory) {
         Path path = Paths.get(directory);
         return Files.exists(path) && Files.isDirectory(path);
     }
 
-//    @Override
-//    public List<Map<String, Object>> searchfile(Map<String, Object> param) throws Exception {
-//        return null;
-//    }
-//
-//    @Override
-//    public void createFile(String folder_name, String file_name, String file_content ,String ex){
-//        String fileName = file_name;
-//        String fileContent = file_content;
-//        String extensions = ex;
-//        String folderName = folder_name;
-//
-//        if(fileContent.getBytes().length > MAX_FILE_SIZE){
-//            System.err.println("File size exceeds the limit");
-//            return;
-//        }
-//
-//        String directotyPath = directory;
-//        if(!folderName.isEmpty()){
-//            directotyPath = directory +"/"+folderName;
-//        }
-//
-//        if(!isValidDirectory(directotyPath)){
-//            try {
-//                Files.createDirectories(Paths.get(directotyPath));
-//                System.out.println("Invalid directory path");
-//                System.out.println("Directory created successfully");
-//            } catch (IOException ioException) {
-//                System.err.println("Failed to create directory");
-//                System.err.println(ioException.getMessage());
-//                return;
-//            }
-//        }
-//        String filePath = "";
-//        if(directotyPath.endsWith("/")){
-//            filePath = directotyPath + fileName + extensions;
-//        }else{
-//            filePath = directotyPath +"/"+ fileName + extensions;
-//        }
-//
-//        try (FileOutputStream outputStream = new FileOutputStream(filePath.toString())) {
-//            outputStream.write(fileContent.getBytes());
-//            System.out.println(filePath + ": File successfully created.");
-//        } catch (IOException e) {
-//            System.err.println("Error occurred while creating file: " + e.getMessage());
-//        }
-//
-//    }
+    // @Override
+    // public List<Map<String, Object>> searchfile(Map<String, Object> param) throws
+    // Exception {
+    // return null;
+    // }
+    //
+    // @Override
+    // public void createFile(String folder_name, String file_name, String
+    // file_content ,String ex){
+    // String fileName = file_name;
+    // String fileContent = file_content;
+    // String extensions = ex;
+    // String folderName = folder_name;
+    //
+    // if(fileContent.getBytes().length > MAX_FILE_SIZE){
+    // System.err.println("File size exceeds the limit");
+    // return;
+    // }
+    //
+    // String directotyPath = directory;
+    // if(!folderName.isEmpty()){
+    // directotyPath = directory +"/"+folderName;
+    // }
+    //
+    // if(!isValidDirectory(directotyPath)){
+    // try {
+    // Files.createDirectories(Paths.get(directotyPath));
+    // System.out.println("Invalid directory path");
+    // System.out.println("Directory created successfully");
+    // } catch (IOException ioException) {
+    // System.err.println("Failed to create directory");
+    // System.err.println(ioException.getMessage());
+    // return;
+    // }
+    // }
+    // String filePath = "";
+    // if(directotyPath.endsWith("/")){
+    // filePath = directotyPath + fileName + extensions;
+    // }else{
+    // filePath = directotyPath +"/"+ fileName + extensions;
+    // }
+    //
+    // try (FileOutputStream outputStream = new
+    // FileOutputStream(filePath.toString())) {
+    // outputStream.write(fileContent.getBytes());
+    // System.out.println(filePath + ": File successfully created.");
+    // } catch (IOException e) {
+    // System.err.println("Error occurred while creating file: " + e.getMessage());
+    // }
+    //
+    // }
 
     @Override
-    public List<Map<String ,Object>> uploadFile(String folder_name,MultipartFile[] files) throws IOException {
+    public List<Map<String, Object>> uploadFile(String folder_name, MultipartFile[] files) throws IOException {
         String directoryPath = null;
-        List<Map<String,Object>> result = new ArrayList<>();
+        List<Map<String, Object>> result = new ArrayList<>();
 
         if (files != null && files.length > 0) {
-            if(!folder_name.isEmpty()){
-                if(directory.endsWith("/")){
+            if (!folder_name.isEmpty()) {
+                if (directory.endsWith("/")) {
                     directoryPath = directory + folder_name;
-                }else{
-                    directoryPath = directory +"/"+ folder_name;
+                } else {
+                    directoryPath = directory + "/" + folder_name;
                 }
-            }else{
+            } else {
                 directoryPath = directory;
             }
 
-            if(!isValidDirectory(directoryPath)){
+            if (!isValidDirectory(directoryPath)) {
                 try {
                     Files.createDirectories(Paths.get(directoryPath));
                     System.out.println("Invalid directory path");
@@ -148,21 +154,26 @@ public class FileProcessManager implements FileProcessManagerImpl {
             int index = 0;
             for (MultipartFile file : files) {
                 if (!file.isEmpty()) {
-                    System.out.println("file.getOriginalFilename():"+file.getOriginalFilename());
-                    System.out.println("file.getSize():"+file.getSize());
+                    System.out.println("file.getOriginalFilename():" + file.getOriginalFilename());
+                    System.out.println("file.getSize():" + file.getSize());
 
                     UUID fileUUID = UUID.randomUUID();
-                    Map<String ,Object> map = new HashMap<>();
-                    map.put("file_path",directoryPath);
-                    map.put("file_id",String.valueOf(fileUUID));
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("file_path", directoryPath);
+                    map.put("file_id", String.valueOf(fileUUID));
                     result.add(map);
 
-                    List<String> list = Arrays.asList(Objects.requireNonNull(file.getOriginalFilename()).split("\\."));
+                    String originalFileName = file.getOriginalFilename();
+                    List<String> list = Arrays.asList(Objects.requireNonNull(originalFileName).split("\\."));
                     String lastItem = list.stream().reduce((first, second) -> second).orElse(null);
 
-                    File uploadFile = new File(directoryPath + File.separator + fileUUID+"."+lastItem);
+                    map.put("file_name", originalFileName);
+                    map.put("file_size", String.valueOf(file.getSize()));
+                    map.put("file_extension", lastItem);
+
+                    File uploadFile = new File(directoryPath + File.separator + fileUUID + "." + lastItem);
                     file.transferTo(uploadFile);
-                    System.out.println("fileUUID::"+fileUUID);
+                    System.out.println("fileUUID::" + fileUUID);
                     System.out.println(uploadFile);
 
                 }
@@ -174,99 +185,106 @@ public class FileProcessManager implements FileProcessManagerImpl {
         }
         return result;
     }
-    public int fileDetailInsert(String fileUUID, String file_name, String file_size,String file_path){
-        try{
 
-        }catch(Exception e){
+    public int fileDetailInsert(String fileUUID, String file_name, String file_size, String file_path) {
+        try {
+
+        } catch (Exception e) {
 
         }
         return 0;
     }
 
-//    @Override
-//    public void downloadFile(Map<String, Object> param , HttpServletResponse response) throws IOException {
-//        String filePath  = (String) param.get("file_path");
-//        String fileName = (String) param.get("file_name");
-//        String downloadFile = filePath + "/" + fileName;
-//        File file = new File(downloadFile);
-//        if (file.exists()) {
-//            try (InputStream inputStream = new FileInputStream(file)) {
-//                response.setHeader("Content-Disposition", "attachment; filename="+fileName);
-//                response.setContentType("application/octet-stream; charset=utf-8");
-//                IOUtils.copy(inputStream, response.getOutputStream());
-//                response.flushBuffer();
-//                System.out.println("downloadFile:"+downloadFile);
-//            } catch (IOException e) {
-//                System.err.println(e.getMessage());
-//            }
-//        } else {
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//        }
-//    }
-//
-//    @Override
-//    public List<File> downloadZipFileList(List<Map<String,Object>> params) throws IOException {
-//        List<File> fileList = new LinkedList<>();
-//        for(Map<String,Object> param : params){
-//            String filePath = (String) param.get("file_path");
-//            String fileName = (String) param.get("file_name");
-//            String fileOriginalName = (String) param.get("file_original_name");
-//            Path sourcePath = Paths.get(filePath, fileName);
-//            Path targetPath = Paths.get(filePath, fileOriginalName);
-//
-//            try {
-//                if (Files.exists(sourcePath)) {
-//                    Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
-//                    fileList.add(targetPath.toFile());
-//                    System.out.println("Add FileList Success");
-//
-//                } else {
-//                    throw new IOException("File not Exist");
-//                }
-//            } catch (IOException e) {
-//                throw new IOException(e.getMessage());
-//            }
-//        }
-//        return fileList;
-//    }
-//
-//    @Override
-//    public void downloadZipFile(List<File> param, HttpServletResponse response , String zip_file_name) throws Exception {
-//        String zipFileName = zip_file_name + ".zip";
-//        String encodedFileName = URLEncoder.encode(zipFileName , StandardCharsets.UTF_8).replaceAll("\\+", "%20");
-//
-//        response.setHeader("Content-Disposition", "attachment; filename=" + encodedFileName );
-//        response.setContentType("application/zip");
-//        response.setStatus(HttpServletResponse.SC_OK);
-//
-//        try (ZipOutputStream zipOut = new ZipOutputStream(response.getOutputStream())) {
-//            for (File file : param) {
-//                zipOut.putNextEntry(new ZipEntry(file.getName()));
-//                try (FileInputStream fis = new FileInputStream(file)) {
-//                    StreamUtils.copy(fis, zipOut);
-//                }
-//                zipOut.closeEntry();
-//            }
-//            deleteFiles(param);
-//        }
-//    }
-//    public void deleteFiles(List<File> fileList) throws IOException {
-//        for (File file : fileList) {
-//            Files.deleteIfExists(file.toPath());
-//        }
-//    }
+    // @Override
+    // public void downloadFile(Map<String, Object> param , HttpServletResponse
+    // response) throws IOException {
+    // String filePath = (String) param.get("file_path");
+    // String fileName = (String) param.get("file_name");
+    // String downloadFile = filePath + "/" + fileName;
+    // File file = new File(downloadFile);
+    // if (file.exists()) {
+    // try (InputStream inputStream = new FileInputStream(file)) {
+    // response.setHeader("Content-Disposition", "attachment; filename="+fileName);
+    // response.setContentType("application/octet-stream; charset=utf-8");
+    // IOUtils.copy(inputStream, response.getOutputStream());
+    // response.flushBuffer();
+    // System.out.println("downloadFile:"+downloadFile);
+    // } catch (IOException e) {
+    // System.err.println(e.getMessage());
+    // }
+    // } else {
+    // response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    // }
+    // }
+    //
+    // @Override
+    // public List<File> downloadZipFileList(List<Map<String,Object>> params) throws
+    // IOException {
+    // List<File> fileList = new LinkedList<>();
+    // for(Map<String,Object> param : params){
+    // String filePath = (String) param.get("file_path");
+    // String fileName = (String) param.get("file_name");
+    // String fileOriginalName = (String) param.get("file_original_name");
+    // Path sourcePath = Paths.get(filePath, fileName);
+    // Path targetPath = Paths.get(filePath, fileOriginalName);
+    //
+    // try {
+    // if (Files.exists(sourcePath)) {
+    // Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+    // fileList.add(targetPath.toFile());
+    // System.out.println("Add FileList Success");
+    //
+    // } else {
+    // throw new IOException("File not Exist");
+    // }
+    // } catch (IOException e) {
+    // throw new IOException(e.getMessage());
+    // }
+    // }
+    // return fileList;
+    // }
+    //
+    // @Override
+    // public void downloadZipFile(List<File> param, HttpServletResponse response ,
+    // String zip_file_name) throws Exception {
+    // String zipFileName = zip_file_name + ".zip";
+    // String encodedFileName = URLEncoder.encode(zipFileName ,
+    // StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+    //
+    // response.setHeader("Content-Disposition", "attachment; filename=" +
+    // encodedFileName );
+    // response.setContentType("application/zip");
+    // response.setStatus(HttpServletResponse.SC_OK);
+    //
+    // try (ZipOutputStream zipOut = new
+    // ZipOutputStream(response.getOutputStream())) {
+    // for (File file : param) {
+    // zipOut.putNextEntry(new ZipEntry(file.getName()));
+    // try (FileInputStream fis = new FileInputStream(file)) {
+    // StreamUtils.copy(fis, zipOut);
+    // }
+    // zipOut.closeEntry();
+    // }
+    // deleteFiles(param);
+    // }
+    // }
+    // public void deleteFiles(List<File> fileList) throws IOException {
+    // for (File file : fileList) {
+    // Files.deleteIfExists(file.toPath());
+    // }
+    // }
 
-//
+    //
 
-//    public String loadProperty(String propertyFileName, String propertyName) {
-//        try{
-//            Properties properties = new Properties();
-//            properties.load(new FileInputStream(propertyFileName));
-//            return properties.getProperty(propertyName);
-//        }catch(IOException e){
-//            System.err.println(e.getMessage());
-//            return null;
-//        }
-//    }
+    // public String loadProperty(String propertyFileName, String propertyName) {
+    // try{
+    // Properties properties = new Properties();
+    // properties.load(new FileInputStream(propertyFileName));
+    // return properties.getProperty(propertyName);
+    // }catch(IOException e){
+    // System.err.println(e.getMessage());
+    // return null;
+    // }
+    // }
 
 }

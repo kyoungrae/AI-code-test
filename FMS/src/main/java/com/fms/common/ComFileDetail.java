@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,50 +23,134 @@ import java.util.Arrays;
 @Table(name = "COM_FILE_DETAIL")
 public class ComFileDetail extends Common {
 
-	@Transient
-    private String keys = Arrays.toString(new String[]{"file_id","uuid"});
+    @Transient
+    @Builder.Default
+    private String keys = Arrays.toString(new String[] { "file_id", "uuid" });
 
-    /***<pre> file_id : 파일아이디 </pre> */
+    /***
+     * <pre>
+     *  file_id : 파일아이디
+     * </pre>
+     */
     @Id
-	private String file_id;
+    private String file_id;
 
-    /***<pre> uuid : 공통아이디 </pre> */
-	private String uuid;
+    /***
+     * <pre>
+     *  uuid : 공통아이디
+     * </pre>
+     */
+    private String uuid;
 
-    /***<pre> file_name : 파일이름 </pre> */
-	private String file_name;
+    /***
+     * <pre>
+     *  file_name : 파일이름
+     * </pre>
+     */
+    private String file_name;
 
-    /***<pre> file_size : 파일크기 </pre> */
-	private String file_size;
+    /***
+     * <pre>
+     *  file_size : 파일크기
+     * </pre>
+     */
+    private String file_size;
 
-    /***<pre> file_extension : 파일확장자 </pre> */
-	private String file_extension;
+    /***
+     * <pre>
+     *  file_extension : 파일확장자
+     * </pre>
+     */
+    private String file_extension;
 
-    /***<pre> file_path : 파일경로 </pre> */
-	private String file_path;
+    /***
+     * <pre>
+     *  file_path : 파일경로
+     * </pre>
+     */
+    private String file_path;
 
-    /***<pre> file_id : 파일아이디 </pre> */
-	@Transient
+    /***
+     * <pre>
+     *  system_create_date : 작성일
+     * </pre>
+     */
+    private java.util.Date system_create_date;
+
+    /***
+     * <pre>
+     *  system_create_userid : 작성자 아이디
+     * </pre>
+     */
+    private String system_create_userid;
+
+    /***
+     * <pre>
+     *  system_update_date : 수정일자
+     * </pre>
+     */
+    private java.util.Date system_update_date;
+
+    /***
+     * <pre>
+     *  system_update_userid : 수정자 아이디
+     * </pre>
+     */
+    private String system_update_userid;
+
+    /***
+     * <pre>
+     *  menu_code : 메뉴코드
+     * </pre>
+     */
+    private String menu_code;
+
+    /***
+     * <pre>
+     *  file_id : 파일아이디
+     * </pre>
+     */
+    @Transient
     private String _file_id;
 
-    /***<pre> uuid : 공통아이디 </pre> */
-	@Transient
+    /***
+     * <pre>
+     *  uuid : 공통아이디
+     * </pre>
+     */
+    @Transient
     private String _uuid;
 
-    /***<pre> file_name : 파일이름 </pre> */
-	@Transient
+    /***
+     * <pre>
+     *  file_name : 파일이름
+     * </pre>
+     */
+    @Transient
     private String _file_name;
 
-    /***<pre> file_size : 파일크기 </pre> */
-	@Transient
+    /***
+     * <pre>
+     *  file_size : 파일크기
+     * </pre>
+     */
+    @Transient
     private String _file_size;
 
-    /***<pre> file_extension : 파일확장자 </pre> */
-	@Transient
+    /***
+     * <pre>
+     *  file_extension : 파일확장자
+     * </pre>
+     */
+    @Transient
     private String _file_extension;
 
-    /***<pre> file_path : 파일경로 </pre> */
-	@Transient
+    /***
+     * <pre>
+     *  file_path : 파일경로
+     * </pre>
+     */
+    @Transient
     private String _file_path;
 
 }

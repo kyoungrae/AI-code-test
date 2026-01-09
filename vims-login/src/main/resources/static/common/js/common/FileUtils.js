@@ -289,17 +289,36 @@ class createFileUploadHTML {
                 },
                 withCredentials: true  // 쿠키(Authorization)를 포함하여 전송
             }).then(response => {
-                let status = response.status;
-                if (status === 200 && response.data.length > 0) {
-                    let data = response.data;
-                    let file_uuid = data[0].file_uuid;
+                if (response.status === 200 && response.data.length > 0) {
+                    let fileListData = response.data;
+                    let file_uuid = fileListData[0].uuid;
 
-                    //NOTE : 파일을 저장 후 전달 받은 COM_FILE의 FILE_UUID를 설정한 값에 전달
-                    $("#" + that.ID_TO_RECEIVE_VALUE).val(file_uuid).trigger('change');
-                    //NOTE : 파일업로드 팝업 초기화
-                    $("#formUtil_fileUpload").empty();
+                    //NOTE: 업로드 성공 후 파일 상세 정보 저장 (detail 테이블 insert)
+                    let registerUrl = that.PATH + "/register";
+                    axios.post(registerUrl, fileListData, {
+                        withCredentials: true
+                    }).then(regResponse => {
+                        //NOTE : 파일을 저장 후 전달 받은 COM_FILE의 FILE_UUID를 설정한 값에 전달
+                        $("#" + that.ID_TO_RECEIVE_VALUE).val(file_uuid).trigger('change');
+
+                        // 추가적인 필드 업데이트 (존재할 경우)
+                        if ($("#file_id").length) $("#file_id").val(file_uuid);
+                        if ($("#uuid").length) $("#uuid").val(file_uuid);
+
+                        //NOTE : 파일업로드 팝업 초기화 및 변수 초기화
+                        $("#formUtil_fileUpload").empty();
+                        that.resetVariable();
+
+                        formUtil.toast("File Upload Success", "success");
+                    }).catch(error => {
+                        formUtil.toast("File Upload Error", "error");
+                    });
+                } else {
+                    formUtil.toast("File Upload Error", "error");
                 }
-            })
+            }).catch(error => {
+                formUtil.toast("File Upload Error", "error");
+            });
 
         }
 
