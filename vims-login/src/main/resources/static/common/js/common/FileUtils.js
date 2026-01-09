@@ -55,7 +55,7 @@ class createFileUploadHTML {
         this.TOTAL_FILE_LIST = [];          //NOTE : 기존 + 신규 파일 목록 (화면 목록 처리용)
         this.FINAL_UPLOAD_FILE_LIST = {};   //NOTE : 최종 upload 대상 파일 목록
         this.FILE_TEXT_LIST = [];
-        this.CONTENTS = null;
+        this.CONTENTS = "";
         this.COM_FILE_UPLOAD_ID = "#formUtil_fileUpload"; //NOTE: home.html 내에 있는 파일 업로드용 layout ID
         this.CANCEL_BTN = ".formUtil-fileUpload_cancelBtn";
         this.UPLOAD_BTN = ".formUtil-fileUpload_uploadBtn";
@@ -77,36 +77,40 @@ class createFileUploadHTML {
     }
     //CLASS : 업로드 팝업 UI 설정
     setUploadHTML() {
-        this.CONTENTS +=
+        this.CONTENTS =
             '<div class="formUtil-fileUpload_body" data-fileupload-boxopen="on">'
-            + '    <div class="gi-row-450px formUtil-fileUpload gi-flex gi-flex-column slide-in-blurred-top">'
+            + '    <div class="gi-row-500px formUtil-fileUpload gi-flex gi-flex-column slide-in-blurred-top gi-upload-popup-card">'
+            + '        <div class="gi-flex gi-flex-justify-content-space-between gi-flex-align-items-center" style="margin-bottom: 24px;">'
+            + '            <h2 class="gi-upload-popup-title">파일 업로드</h2>'
+            + '            <button type="button" class="formUtil-fileUpload_cancelBtn gi-upload-popup-close-btn">&times;</button>'
+            + '        </div>'
             + '        <div class="formUtil-fileUploading-section"></div>'
-            + '        <article class="gi-col-100px formUtil-fileUpload_content">'
-            + '            <form class="formUtil-fileUpload_form gi-col-100 gi-flex gi-flex-center">'
-            + '                <div class="formUtil-fileUpload_dropArea">'
+            + '        <article class="formUtil-fileUpload_content" style="margin-bottom: 24px;">'
+            + '            <form class="formUtil-fileUpload_form gi-col-100 gi-flex gi-flex-center" style="border: none !important; box-shadow: none !important;">'
+            + '                <div class="formUtil-fileUpload_dropArea gi-upload-drop-area">'
             + '                    <input type="file" id="fileElem" style="display: none" multiple enctype="multipart/form-data">'
-            + '                    <label for="fileElem" class="gi-cursor-open-folder">'
-            + '                        <div class="formUtil-fileUpload_span-body">'
-            + '                            <div class="formUtil-fileUpload_img formUtil-fileUpload_span"></div>'
-            + '                            <span class="formUtil-fileUpload_span">FILE UPLOAD CLICK</span>'
-            + '                            <span class="formUtil-fileUpload_span">[Drag And Drop]</span>'
+            + '                    <label for="fileElem" class="gi-cursor-open-folder" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin: 0 !important; cursor: pointer;">'
+            + '                        <div class="gi-upload-drop-icon">'
+            + '                            <span>↑</span>'
+            + '                        </div>'
+            + '                        <div style="text-align: center;">'
+            + '                            <span class="gi-upload-drop-text">파일 클릭 또는 드래그 앤 드롭</span>'
+            + '                            <span class="gi-upload-drop-subtext">최대 용량에 유의하여 업로드 해주세요</span>'
             + '                        </div>'
             + '                    </label>'
             + '                </div>'
             + '            </form>'
             + '        </article>'
-            + '        <div class="formUtil-fileUpload_list">'
-            + '            <div class="formUtil-fileUpload_list-contents">'
+            + '        <div class="formUtil-fileUpload_list gi-upload-list-wrapper">'
+            + '            <div class="formUtil-fileUpload_list-contents gi-file-list-container gi-upload-list-container">'
             + '            </div>'
             + '        </div>'
-            + '        <article class="formUtil-fileUpload_footer">'
-            + '            <button class="formUtil-fileUpload_uploadBtn">'
-            + '                <span>업로드</span>'
-            + '                <span></span>'
-            + '            </button>'
-            + '            <button class="formUtil-fileUpload_cancelBtn">'
+            + '        <article class="formUtil-fileUpload_footer gi-upload-popup-footer">'
+            + '            <button type="button" class="formUtil-fileUpload_cancelBtn gi-upload-btn-cancel">'
             + '                <span>취소</span>'
-            + '                <span></span>'
+            + '            </button>'
+            + '            <button type="button" class="formUtil-fileUpload_uploadBtn gi-upload-btn-submit">'
+            + '                <span>업로드</span>'
             + '            </button>'
             + '        </article>'
             + '    </div>'
@@ -170,35 +174,67 @@ class createFileUploadHTML {
     //CLASS : 드래그 앤 드롭 영역 이벤트 파일 최종 업로드 이벤트 핸들러 및 리스트 관리
     dragAndDropAreaChangeEvent() {
         let that = this;
+
         $(that.DRAG_N_DROP_INPUT)
             .off("change.dragAndDropAreaChangeEventHandler")
             .on("change.dragAndDropAreaChangeEventHandler", function (e) {
                 dragAndDropAreaChangeEventHandler(e);
-            })
+            });
+
         //FUN : 화면에 파일리스트 노출
         function showFileList() {
             let fileSettingsHtml = "";
             if (that.TOTAL_FILE_LIST.length > 0) {
                 for (let i = 0; i < that.TOTAL_FILE_LIST.length; i++) {
                     let file = that.TOTAL_FILE_LIST[i];
-                    let fileName = file.name.substring(0, file.name.lastIndexOf('.'));
+                    let fileNameWithExt = file.name;
+                    let lastDotIndex = fileNameWithExt.lastIndexOf('.');
+                    let fileName = lastDotIndex !== -1 ? fileNameWithExt.substring(0, lastDotIndex) : fileNameWithExt;
+                    let fileExtension = lastDotIndex !== -1 ? fileNameWithExt.substring(lastDotIndex + 1).toLowerCase() : '';
                     let fileSize = that.formatBytes(file.size);
-                    let fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1);
-                    fileSettingsHtml +=
-                        '<ul class="gi-row-100">'
-                        + '   <li class="' + that.NO_WIDTH + '"><span class="formUtil-file_no">' + (i + 1) + '</span></li>'
-                        + '   <li class="' + that.FILE_NAME_WIDTH + ' formUtil-file_name ">' + fileName + '</li>'
-                        + '   <li class="' + that.FILE_SIZE_WIDTH + ' formUtil-file_size">' + fileSize + '</li>'
-                        + '   <li class="' + that.FILE_EXTENSION_WIDTH + ' formUtil-file_extension">' + fileExtension + '</li>'
-                        + '   <li class="' + that.FILE_DELETE_BTN_WIDTH + ' "><button type="button" class="formUtil-file_delete"></button></li>'
-                        + '</ul>';
+
+                    let typeClass = "";
+                    if (['pdf', 'hwp', 'doc', 'docx'].includes(fileExtension)) typeClass = "gi-file-type-doc";
+                    else if (['xls', 'xlsx', 'csv'].includes(fileExtension)) typeClass = "gi-file-type-xls";
+                    else if (['zip', 'rar', '7z'].includes(fileExtension)) typeClass = "gi-file-type-zip";
+                    else if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(fileExtension)) typeClass = "gi-file-type-img";
+
+                    fileSettingsHtml += `
+                        <div class="gi-file-item-card gi-upload-item-card">
+                            <div class="gi-file-badge-no">${i + 1}</div>
+                            <div class="gi-file-icon-box ${typeClass}">📄</div>
+                            <div class="gi-file-info">
+                                <span class="gi-file-name" title="${fileName}">${fileName}</span>
+                                <div class="gi-file-meta">
+                                    <span class="gi-file-size-tag">${fileSize}</span>
+                                    <span class="gi-file-ext-tag ${typeClass}" style="background: none !important;">${fileExtension}</span>
+                                </div>
+                            </div>
+                            <div class="gi-file-delete-container">
+                                <button type="button" class="formUtil-file_delete gi-file-delete-btn" data-file-name="${fileNameWithExt}">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
                 }
+            } else {
+                fileSettingsHtml = `
+                    <div class="gi-file-list-empty">
+                        <span class="gi-file-list-empty-icon">📂</span>
+                        <p class="gi-file-list-empty-text">선택된 파일이 없습니다.</p>
+                    </div>
+                `;
             }
+
             //NOTE : 공통 파일업로드 시 사용할 리스트 생성
+            that.FILE_TEXT_LIST = [];
             that.ADDED_FILE_LIST.forEach(file => {
-                let fileName = file.name.substring(0, file.name.lastIndexOf('.'));
+                let fileNameWithExt = file.name;
+                let lastDotIndex = fileNameWithExt.lastIndexOf('.');
+                let fileName = lastDotIndex !== -1 ? fileNameWithExt.substring(0, lastDotIndex) : fileNameWithExt;
+                let fileExtension = lastDotIndex !== -1 ? fileNameWithExt.substring(lastDotIndex + 1).toLowerCase() : '';
                 let fileSize = that.formatBytes(file.size);
-                let fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1);
                 let fileDescription = file.file_description || "";
                 that.FILE_TEXT_LIST.push({ "file_name": fileName, "file_size": fileSize, "file_extension": fileExtension, "file_description": fileDescription })
             });
@@ -212,45 +248,41 @@ class createFileUploadHTML {
             //NOTE : 팝업내에 업로드할 파일 삭제 이벤트
             fileDeleteBtnClickEvent();
         }
+
         //FUN : 파일 업로드 영역 변경 이벤트
         function dragAndDropAreaChangeEventHandler(e) {
             let fileSettingsList = Array.from(e.target.files);
 
             //NOTE : 기존 파일 목록에 새 파일 추가
-            that.ADDED_FILE_LIST = that.ADDED_FILE_LIST.concat(fileSettingsList);
+            let currentAdded = that.ADDED_FILE_LIST.concat(fileSettingsList);
             //NOTE : 중복된 파일 제거 (이름, 사이즈 기준)
-            that.ADDED_FILE_LIST = that.ADDED_FILE_LIST.filter((file, index, self) =>
+            that.ADDED_FILE_LIST = currentAdded.filter((file, index, self) =>
                 index === self.findIndex((f) => f.name === file.name && f.size === file.size)
             );
-            //NOTE : 총 파일리스트 기존 파일 목록에 새 파일 추가
-            that.TOTAL_FILE_LIST = that.TOTAL_FILE_LIST.concat(that.ADDED_FILE_LIST);
-            //NOTE : 총 파일리스트 중복된 파일 제거 (이름, 사이즈 기준)
-            that.TOTAL_FILE_LIST = that.TOTAL_FILE_LIST.filter((file, index, self) =>
-                index === self.findIndex((f) => f.name === file.name && f.size === file.size)
-            );
+
+            //NOTE : 전체 리스트도 업데이트 (ADDED와 동일하게 처리)
+            that.TOTAL_FILE_LIST = [...that.ADDED_FILE_LIST];
 
             //NOTE : 화면에 파일리스트 노출
             showFileList();
         }
+
         //FUN : 팝업내에 업로드할 파일 삭제 이벤트
         function fileDeleteBtnClickEvent() {
             $(".formUtil-file_delete").off("click.fileDeleteBtnClickEventHandler")
                 .on("click.fileDeleteBtnClickEventHandler", fileDeleteBtnClickEventHandler);
         }
+
         //FUN : 팝업내에 업로드할 파일 삭제 이벤트 핸들러
         function fileDeleteBtnClickEventHandler(e) {
-            const target = $(e.currentTarget).parent().parent();
-            let fileName = $(e.currentTarget).parent().siblings(".formUtil-file_name").text();
-            let fileExtension = $(e.currentTarget).parent().siblings(".formUtil-file_extension").text();
-            formUtil.popup("deleteFileBtn", fileName + " 파일을 삭제 하시겠습니까?", remove);
-            function remove() {
-                //NOTE : 해당 파일 삭제
-                $(target).remove();
-                //NOTE : 최종 파일 리스트에 삭제된 파일 제외하고 업데이트 (파일 삭제)
-                that.TOTAL_FILE_LIST = that.TOTAL_FILE_LIST.filter(file => file.name !== fileName + "." + fileExtension);
+            const $btn = $(e.currentTarget);
+            let fileNameWithExt = $btn.data("file-name");
 
-                //NOTE: 업로드 후 파일 삭제 시 최종적으로 남은 파일을 병합하기 위함
-                that.ADDED_FILE_LIST = that.TOTAL_FILE_LIST;
+            formUtil.popup("deleteFileBtn", fileNameWithExt + " 파일을 삭제 하시겠습니까?", remove);
+            function remove() {
+                //NOTE : 최종 파일 리스트에 삭제된 파일 제외하고 업데이트
+                that.TOTAL_FILE_LIST = that.TOTAL_FILE_LIST.filter(file => file.name !== fileNameWithExt);
+                that.ADDED_FILE_LIST = [...that.TOTAL_FILE_LIST];
 
                 //NOTE : 화면에 파일리스트 노출
                 showFileList();
@@ -266,7 +298,7 @@ class createFileUploadHTML {
 
         //NOTE : 업로드할 파일 존재 하는지 체크
         if (!formUtil.checkObjectEmptyValue(that.FINAL_UPLOAD_FILE_LIST)) {
-            formUtil.showMessage("업로드할 파일이 없습니다.");
+            formUtil.toast("업로드할 파일이 없습니다.", "error");
             finalFileEmptyFlag = true;
         } else {
             finalFileEmptyFlag = false;
