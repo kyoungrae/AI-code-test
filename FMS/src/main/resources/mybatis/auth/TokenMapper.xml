@@ -7,9 +7,15 @@
             T.*
         FROM
             TOKEN T
-        INNER JOIN
-            COM_USER U ON T.user_id = U.id
-        WHERE (T.expired = 0 OR T.revoked = 0) AND T.id = 1
+        WHERE T.token = #{token}
+    </select>
+
+    <select id="SELECT_ALL_TOKEN" parameterType="com.system.auth.domain.Token" resultType="com.system.auth.domain.Token">
+        SELECT *
+        FROM TOKEN
+        WHERE user_id = #{auth_user.id}
+          AND expired = #{expired}
+          AND revoked = #{revoked}
     </select>
     <insert id="INSERT_TOKEN" parameterType="com.system.auth.domain.Token">
         INSERT INTO TOKEN(
@@ -28,4 +34,20 @@
             #{token_type}
         )
     </insert>
+    <update id="UPDATE_TOKEN" parameterType="com.system.auth.domain.Token">
+        UPDATE TOKEN
+        SET expired = #{expired}, revoked = #{revoked}
+        WHERE token = #{token}
+    </update>
+
+    <delete id="DELETE_EXPIRED_TOKEN_BY_USER_ID" parameterType="int">
+        DELETE FROM TOKEN
+        WHERE user_id = #{userId} AND (expired = 1 OR revoked = 1)
+    </delete>
+
+    <update id="REVOKE_ALL_USER_TOKENS" parameterType="int">
+        UPDATE TOKEN
+        SET expired = 1, revoked = 1
+        WHERE user_id = #{userId} AND expired = 0 AND revoked = 0
+    </update>
 </mapper>

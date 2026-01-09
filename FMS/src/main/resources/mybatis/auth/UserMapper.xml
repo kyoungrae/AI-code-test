@@ -46,4 +46,7 @@
         </trim>
         )
     </insert>
+    <delete id="DELETE">
+        DELETE FROM COM_USER WHERE id = #{id}
+    </delete>
 </mapper>
