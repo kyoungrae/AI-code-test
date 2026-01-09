@@ -5,379 +5,231 @@
         </header>
         <article class=" gi-col-90 gi-row-100">
             <!--      그리드 영역      -->
-            <div class="gi-row-100 gi-col-90 gi-flex">
-                <div class="gi-row-35 gi-col-90">
-                    <!--      검색기능 영역      -->
-                    <div id="search-area" class="gi-row-100 gi-col-35px gi-flex gi-grid-gap-10px"
-                        style="padding: 0 20px;">
-                        <!--      검색설정 영역      -->
-                        <div class="gi-row-35 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="search_config_group_id" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center" data-required="false">그룹</label>
-                            <input class="gi-input gi-margin-1px" data-required="false" type="text"
-                                id="search_config_group_id" name="search_config_group_id"
-                                data-focus-input-text-align="center" autocomplete="off" />
+            <article class="gi-flex gi-grid-gap-24px">
+                <!-- 설정그룹 영역 -->
+                <div class="gi-flex-1">
+                    <div id="search-area"
+                        class="gi-flex gi-flex-align-items-center gi-grid-gap-16px gi-margin-bottom-16px">
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="search_config_group_id" class="gi-input-label"
+                                data-focus-label="true">그룹</label>
+                            <input class="gi-input" type="text" id="search_config_group_id"
+                                name="search_config_group_id" autocomplete="off" />
                         </div>
-                        <button id="reset-btn" class="gi-btn-reset gi-input-container-box-shadow" type="button"><i
-                                class="fa-solid fa-rotate-right gi-row-30px"></i>초기화</button>
-                        <button id="search-btn" class="gi-btn-search gi-row-40px gi-input-container-box-shadow"
-                            type="button" style="margin-left: auto; margin-right: 0;">조회</button>
+                        <div class="gi-flex gi-grid-gap-10px">
+                            <button id="search-btn" class="gi-btn-blue"
+                                type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                            <button id="reset-btn" class="gi-btn"
+                                type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+                        </div>
                     </div>
-                    <!--/     검색기능 영역      -->
-                    <div id="gi-Grid"></div>
-
-                    <div id="site_group_code_register-area" class="gi-col-25px gi-padding-left-right-20px gi-flex">
-                        <div class="gi-row-100 gi-flex">
-                            <div class="gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
-                                <div
-                                    class="gi-btn-section gi-row-30 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
-                                    <button class="gi-btn-blue" type="button"
-                                        gi-popup-open-id="siteConfigGroupRegister_gi-popup">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.REGISTER_CONFIG_GROUP_ID_BTN"]</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="gi-Grid" class="gi-Grid" style="height: 500px;"></div>
+                    <div class="gi-flex gi-flex-justify-content-flex-end gi-margin-top-12px">
+                        <button class="gi-btn-blue" type="button"
+                            gi-popup-open-id="siteConfigGroupRegister_gi-popup">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.REGISTER_CONFIG_GROUP_ID_BTN"]</button>
                     </div>
                 </div>
 
-                <div class="gi-row-65 gi-col-90">
-                    <!--      검색기능 영역      -->
-                    <div id="search-area2" class="gi-row-100 gi-col-35px gi-flex gi-grid-gap-10px"
-                        style="padding: 0 20px;">
-                        <div class="gi-row-15 gi-col-100 gi-input-container gi-input-container-box-shadow"
-                            data-focus-line="false">
-                            <label for="search_use_yn" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center" data-required="false">사용여부</label>
-                            <input gi-selectbox data-selectbox-field="USE_YN" class="gi-input gi-margin-1px"
-                                data-required="false" type="text" id="search_use_yn" name="search_use_yn"
-                                data-focus-input-text-align="center" autocomplete="off" />
+                <!-- 설정키 영역 -->
+                <div class="gi-flex-1_5">
+                    <div id="search-area2"
+                        class="gi-flex gi-flex-align-items-center gi-grid-gap-16px gi-margin-bottom-16px gi-padding-left-10px">
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="search_use_yn" class="gi-input-label" data-focus-label="true">사용여부</label>
+                            <input gi-selectbox data-selectbox-field="USE_YN" class="gi-input" id="search_use_yn"
+                                name="search_use_yn" autocomplete="off" />
                         </div>
-                        <div class="gi-row-15 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="search_config_key" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center" data-required="false">설정 키</label>
-                            <input class="gi-input gi-margin-1px" data-required="false" type="text"
-                                id="search_config_key" name="search_config_key" data-focus-input-text-align="center"
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="search_config_key" class="gi-input-label" data-focus-label="true">설정 키</label>
+                            <input class="gi-input" type="text" id="search_config_key" name="search_config_key"
                                 autocomplete="off" />
                         </div>
-                        <button id="reset-btn2" class="gi-btn-reset gi-input-container-box-shadow" type="button"><i
-                                class="fa-solid fa-rotate-right gi-row-30px"></i>초기화</button>
-                        <button id="search-btn2" class="gi-btn-search gi-row-40px gi-input-container-box-shadow"
-                            type="button" style="margin-left: auto; margin-right: 0;">조회</button>
-                    </div>
-                    <!--/     검색기능 영역      -->
-                    <div id="gi-Grid2" class="gi-Grid"></div>
-
-                    <div id="register-area" class="gi-col-25px gi-padding-left-right-20px gi-flex">
-                        <div class="gi-row-100 gi-flex">
-                            <div class="gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
-                                <div
-                                    class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
-                                    <button id="siteConfigRegister-btn" class="gi-btn-blue gi-hidden" type="button"
-                                        gi-popup-open-id="siteConfigRegister_gi-popup">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.REGISTER_CONFIG_KEY_BTN"]</button>
-                                </div>
-                            </div>
+                        <div class="gi-flex gi-grid-gap-10px">
+                            <button id="search-btn2" class="gi-btn-blue"
+                                type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                            <button id="reset-btn2" class="gi-btn"
+                                type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
                         </div>
                     </div>
+                    <div id="gi-Grid2" class="gi-Grid" style="height: 500px;"></div>
+                    <div class="gi-flex gi-flex-justify-content-flex-end gi-margin-top-12px">
+                        <button id="siteConfigRegister-btn" class="gi-btn-blue gi-hidden" type="button"
+                            gi-popup-open-id="siteConfigRegister_gi-popup">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.REGISTER_CONFIG_KEY_BTN"]</button>
+                    </div>
                 </div>
-            </div>
+            </article>
         </article>
     </section>
 </article>
 <!--NOTE: 설정그룹 등록 팝업-->
 <article id="siteConfigGroupRegister_gi-popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body" style="width:350px !important; height: 300px !important;">
+    <div class="gi-popup-body" style="width: 450px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.TITLE_REGISTER_CONFIG_GROUP"]</span>
         </div>
         <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="siteConfigGroupCodeRegister" class="gi-row-100">
-                    <div
-                        class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="config_group_id" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
-                                    <input data-field="config_group_id" id="config_group_id" name="config_group_id"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="config_group_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"]</label>
-                                    <input data-field="config_group_name" id="config_group_name"
-                                        name="config_group_name" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
-                                    <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="use_yn"
-                                        name="use_yn" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
+            <form id="siteConfigGroupCodeRegister">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="config_group_id" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
+                        <input data-field="config_group_id" id="config_group_id" name="config_group_id" class="gi-input"
+                            data-required="true" autocomplete="off" />
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                    <div class="gi-input-container">
+                        <label for="config_group_name" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"]</label>
+                        <input data-field="config_group_name" id="config_group_name" name="config_group_name"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="use_yn" class="gi-input-label" data-focus-label="true"
+                            data-required="true">사용여부</label>
+                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="use_yn" name="use_yn"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="siteConfigGroupCodeRegister-btn" class="gi-popup-register-btn"
-                    type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
-                <button class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
-            </div>
+            <button id="siteConfigGroupCodeRegister-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
 <!--NOTE: 설정그룹 수정 팝업-->
 <article id="siteConfigGroupUpdate_gi-popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body" style="width:350px !important; height: 300px !important;">
+    <div class="gi-popup-body" style="width: 450px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.TITLE_UPDATE_CONFIG_GROUP"]</span>
         </div>
         <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="siteConfigGroupCodeUpdate" class="gi-row-100">
-                    <div
-                        class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="config_group_id" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
-                                    <input data-field="config_group_id" id="config_group_id" name="config_group_id"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="config_group_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"]</label>
-                                    <input data-field="config_group_name" id="config_group_name"
-                                        name="config_group_name" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["USE_YN"]</label>
-                                    <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn"
-                                        id="update_group_use_yn" name="use_yn" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
+            <form id="siteConfigGroupCodeUpdate">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="config_group_id_update" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
+                        <input data-field="config_group_id" id="config_group_id_update" name="config_group_id"
+                            class="gi-input" data-required="true" autocomplete="off" />
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                    <div class="gi-input-container">
+                        <label for="config_group_name_update" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"]</label>
+                        <input data-field="config_group_name" id="config_group_name_update" name="config_group_name"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_group_use_yn" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["USE_YN"]</label>
+                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="update_group_use_yn"
+                            name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="siteConfigGroupCodeUpdate-btn" class="gi-popup-update-btn"
-                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
-                <button class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
-            </div>
+            <button id="siteConfigGroupCodeUpdate-btn" class="gi-popup-update-btn"
+                type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
 <!--NOTE: 설정키 등록 팝업-->
 <article id="siteConfigRegister_gi-popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body" style="width:350px !important; height: 400px !important;">
+    <div class="gi-popup-body" style="width: 500px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_SITE_CONFIG.TITLE_REGISTER_CONFIG_KEY"]</span>
         </div>
         <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="siteConfigCodeRegister" class="gi-row-100">
-                    <div
-                        class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="code-config_group_id" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
-                                    <input data-disabled data-field="config_group_id" id="code-config_group_id"
-                                        name="config_group_id" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="config_key" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_KEY"]</label>
-                                    <input data-field="config_key" id="config_key" name="config_key" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="config_value" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_VALUE"]</label>
-                                    <input data-field="config_value" id="config_value" name="config_value"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="description" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.DESCRIPTION"]</label>
-                                    <input data-field="description" id="description" name="description" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="code-use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.USE_YN"]</label>
-                                    <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn"
-                                        id="code-use_yn" name="use_yn" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
+            <form id="siteConfigCodeRegister">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="code-config_group_id" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
+                        <input data-disabled data-field="config_group_id" id="code-config_group_id"
+                            name="config_group_id" class="gi-input" data-required="true" autocomplete="off" />
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                    <div class="gi-input-container">
+                        <label for="config_key" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_KEY"]</label>
+                        <input data-field="config_key" id="config_key" name="config_key" class="gi-input"
+                            data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="config_value" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_VALUE"]</label>
+                        <input data-field="config_value" id="config_value" name="config_value" class="gi-input"
+                            data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="description" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.DESCRIPTION"]</label>
+                        <input data-field="description" id="description" name="description" class="gi-input"
+                            data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="code-use_yn" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.USE_YN"]</label>
+                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="code-use_yn"
+                            name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="siteConfigCodeRegister-btn" class="gi-popup-register-btn"
-                    type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
-                <button class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
-            </div>
+            <button id="siteConfigCodeRegister-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
 <!--NOTE: 설정키 수정 팝업-->
 <article id="siteConfigUpdate_gi-popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body" style="width:350px !important; height: 400px !important;">
+    <div class="gi-popup-body" style="width: 500px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_SITE_CONFIG.TITLE_MODIFY_CONFIG_KEY"]</span>
         </div>
         <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="siteConfigCodeUpdate" class="gi-row-100">
-                    <div
-                        class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-90 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="update_config_group_id" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
-                                    <input data-disabled data-field="config_group_id" id="update_config_group_id"
-                                        name="config_group_id" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="update_config_key" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_KEY"]</label>
-                                    <input data-disabled data-field="config_key" id="update_config_key"
-                                        name="config_key" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="update_config_value" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_VALUE"]</label>
-                                    <input data-field="config_value" id="update_config_value" name="config_value"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center">
-                                    <label for="update_description" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.DESCRIPTION"]</label>
-                                    <input data-field="description" id="update_description" name="description"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.USE_YN"]</label>
-                                    <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn"
-                                        id="update_use_yn" name="use_yn" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
+            <form id="siteConfigCodeUpdate">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="update_config_group_id" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"]</label>
+                        <input data-disabled data-field="config_group_id" id="update_config_group_id"
+                            name="config_group_id" class="gi-input" data-required="true" autocomplete="off" />
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                    <div class="gi-input-container">
+                        <label for="update_config_key" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_KEY"]</label>
+                        <input data-disabled data-field="config_key" id="update_config_key" name="config_key"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_config_value" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.CONFIG_VALUE"]</label>
+                        <input data-field="config_value" id="update_config_value" name="config_value" class="gi-input"
+                            data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_description" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.DESCRIPTION"]</label>
+                        <input data-field="description" id="update_description" name="description" class="gi-input"
+                            data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_SITE_CONFIG.USE_YN"]</label>
+                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="update_use_yn"
+                            name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="siteConfigCodeUpdate-btn" class="gi-popup-register-btn"
-                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
-                <button class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
-            </div>
+            <button id="siteConfigCodeUpdate-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>

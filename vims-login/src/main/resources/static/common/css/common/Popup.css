@@ -1,144 +1,133 @@
 /* ========== Popup Styles ========== */
 
-/* ======================================================================================================== 팝업영역*/
 .gi-popup {
     position: fixed;
-    padding: 20px;
-    width: 90%;
-    height: 90%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    backdrop-filter: blur(1px);
-    transition: width 0.5s ease-in-out;
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out;
 }
 
 .gi-popup[data-popup-open="true"] {
     display: flex;
     visibility: visible;
+    opacity: 1;
 }
 
 .gi-popup[data-popup-open="false"] {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s 0.45s, opacity 0.45s ease;
+    pointer-events: none;
 }
 
 .gi-popup[data-popup-open="true"]>.gi-popup-body {
-    animation: slide-in-blurred-top 0.6s cubic-bezier(.23, 1.000, .32, 1.000) both;
-}
-
-.gi-popup[data-popup-open="false"]>.gi-popup-body {
-    animation: slide-out-blurred-top 0.45s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
-    animation-fill-mode: forwards;
+    animation: slide-in-blurred-top 0.4s cubic-bezier(.23, 1.000, .32, 1.000) both;
 }
 
 .gi-popup-body {
-    min-height: 300px;
+    width: 100%;
+    max-width: 500px;
+    /* Default modern width */
     background-color: #FFFFFF;
-    border-radius: var(--border-radius-article);
+    border-radius: 12px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    box-shadow: var(--gi-card-shadow-modern);
-    border: 1px solid #f2f2f5;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f1f5f9;
+    overflow: hidden;
+    max-height: 90vh;
 }
 
 .gi-popup-header {
     width: 100%;
-    height: 15%;
+    padding: 20px 24px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid #f1f5f9;
+    background-color: #ffffff;
+}
+
+.gi-popup-header span {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0f172a;
 }
 
 .gi-popup-contents {
     width: 100%;
-    height: 70%;
+    padding: 30px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .gi-popup-footer {
     width: 100%;
-    height: 30px;
+    padding: 16px 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
+    gap: 16px;
+    border-top: 1px solid #f1f5f9;
+    background-color: #f8fafc;
+}
+
+.gi-popup-close-btn,
+.gi-popup-register-btn,
+.gi-popup-update-btn,
+.gi-popup-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+    border: 1px solid transparent;
 }
 
 .gi-popup-close-btn {
-    padding: var(--padding-btn);
-    height: 100%;
-    min-width: 60px;
-    border: none;
-    background-color: #d5d5d5;
-    color: #000000;
-    border-radius: var(--border-radius-btn);
-    cursor: pointer;
-    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    margin: 0 5px 0 5px;
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    color: #475569;
 }
 
 .gi-popup-close-btn:hover {
-    background-color: #6e6e73;
-    color: #FFFFFF;
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #1e293b;
 }
 
-.gi-popup-register-btn {
-    padding: var(--padding-btn);
-    height: 100%;
-    min-width: 60px;
-    border: none;
-    background-color: var(--background-color-btn-back);
-    color: #ffffff;
-    border-radius: var(--border-radius-btn);
-    cursor: pointer;
-    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    margin: 0 5px 0 5px;
-}
-
+.gi-popup-register-btn,
 .gi-popup-update-btn {
-    padding: var(--padding-btn);
-    height: 100%;
-    min-width: 60px;
-    border: none;
     background-color: var(--background-color-btn-back);
     color: #ffffff;
-    border-radius: var(--border-radius-btn);
-    cursor: pointer;
-    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    margin: 0 5px 0 5px;
+}
+
+.gi-popup-register-btn:hover,
+.gi-popup-update-btn:hover {
+    background-color: var(--background-color-btn-back-hover);
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
 }
 
 .gi-popup-delete-btn {
-    padding: var(--padding-btn);
-    height: 100%;
-    min-width: 60px;
-    border: none;
-    background-color: var(--background-color-btn-back);
+    background-color: #ef4444;
     color: #ffffff;
-    border-radius: var(--border-radius-btn);
-    cursor: pointer;
-    transition: 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-    margin: 0 5px 0 5px;
-}
-
-.gi-popup-register-btn:hover {
-    background-color: var(--background-color-btn-back-hover);
-    color: #FFFFFF;
-}
-
-.gi-popup-update-btn:hover {
-    background-color: var(--background-color-btn-back-hover);
-    color: #FFFFFF;
 }
 
 .gi-popup-delete-btn:hover {
-    background-color: var(--background-color-btn-back-hover);
-    color: #FFFFFF;
+    background-color: #dc2626;
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
 }
 
 /* ======================================================================================================== select box */

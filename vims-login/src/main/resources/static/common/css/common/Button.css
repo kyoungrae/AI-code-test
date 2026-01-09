@@ -8,8 +8,8 @@
 
 .gi-btn {
     padding: var(--padding-btn);
-    height: 100%;
-    min-width: 60px;
+    height: 40px;
+    min-width: 80px;
     border: none;
     background-color: #d5d5d5;
     color: #000000;
@@ -46,8 +46,8 @@
 
 .gi-btn-blue {
     padding: var(--padding-btn);
-    height: 100%;
-    min-width: 60px;
+    height: 40px;
+    min-width: 80px;
     border: none;
     background-color: var(--background-color-btn-back);
     color: #ffffff;

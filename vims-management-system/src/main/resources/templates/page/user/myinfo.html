@@ -26,49 +26,52 @@
                 <div class="gi-article-content">
                     <h2 class="gi-title-section">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_INFO"]</h2>
 
-                    <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-1fr gi-grid-gap-20px">
+                    <div class="gi-flex gi-flex-column gi-grid-gap-20px">
                         <input data-field="id" id="id" name="id" class="gi-input gi-hidden" />
                         <input data-field="uuid" id="uuid" name="uuid" class="gi-input gi-hidden" />
 
-                        <div class="gi-input-container">
-                            <label for="user_name" class="gi-input-label" data-focus-label="true"
-                                data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_NAME"]</label>
-                            <input data-field="user_name" id="user_name" name="user_name" class="gi-input"
-                                data-required="true" autocomplete="off" />
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container" style="flex: 1;">
+                                <label for="user_name" class="gi-input-label" data-focus-label="true"
+                                    data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_NAME"]</label>
+                                <input data-field="user_name" id="user_name" name="user_name" class="gi-input"
+                                    data-required="true" autocomplete="off" />
+                            </div>
+                            <div class="gi-input-container" style="flex: 1;">
+                                <label for="tel" class="gi-input-label"
+                                    data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_PHONE_NUMBER"]</label>
+                                <input data-field="tel" id="tel" name="tel" class="gi-input" autocomplete="off"
+                                    gi-format-check="phone_number" />
+                            </div>
                         </div>
 
-                        <div class="gi-input-container">
-                            <label for="tel" class="gi-input-label"
-                                data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_PHONE_NUMBER"]</label>
-                            <input data-field="tel" id="tel" name="tel" class="gi-input" autocomplete="off"
-                                gi-format-check="phone_number" />
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container" style="flex: 1;">
+                                <label for="email" class="gi-input-label" data-focus-label="true"
+                                    data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_EMAIL"]</label>
+                                <input data-field="email" id="email" name="email" class="gi-input" data-required="true"
+                                    autocomplete="off" data-disabled />
+                            </div>
+                            <div class="gi-input-container" style="flex: 1;">
+                                <label for="user_id" class="gi-input-label" data-focus-label="true"
+                                    data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_ID"]</label>
+                                <input data-field="user_id" id="user_id" name="user_id" class="gi-input"
+                                    data-required="true" autocomplete="off" data-disabled />
+                            </div>
                         </div>
 
-                        <div class="gi-input-container">
-                            <label for="email" class="gi-input-label" data-focus-label="true"
-                                data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_EMAIL"]</label>
-                            <input data-field="email" id="email" name="email" class="gi-input" data-required="true"
-                                autocomplete="off" data-disabled />
-                        </div>
-
-                        <div class="gi-input-container">
-                            <label for="user_id" class="gi-input-label" data-focus-label="true"
-                                data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_ID"]</label>
-                            <input data-field="user_id" id="user_id" name="user_id" class="gi-input"
-                                data-required="true" autocomplete="off" data-disabled />
-                        </div>
-
-                        <div class="gi-grid-span-2 gi-grid gi-grid-template-columns-4fr-1fr gi-grid-gap-10px">
-                            <div class="gi-input-container">
+                        <div class="gi-flex gi-grid-gap-10px">
+                            <div class="gi-input-container" style="flex: 4;">
                                 <label for="address" class="gi-input-label"
                                     data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_ADDRESS"]</label>
                                 <input data-field="address" id="address" name="address" class="gi-input"
                                     autocomplete="off" data-disabled />
                             </div>
-                            <button id="address-btn" class="gi-btn" type="button" gi-address>주소 검색</button>
+                            <button id="address-btn" class="gi-btn" type="button" gi-address
+                                style="flex: 1; height: 40px; margin-top: auto;">주소 검색</button>
                         </div>
 
-                        <div class="gi-grid-span-2 gi-input-container">
+                        <div class="gi-input-container">
                             <label for="address_detail" class="gi-input-label"
                                 data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_ADDRESS_DETAIL"]</label>
                             <input data-field="address_detail" id="address_detail" name="address_detail"
@@ -83,20 +86,22 @@
 
                     <div class="gi-margin-top-40px">
                         <h2 class="gi-title-section">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_ROLE"]</h2>
-                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-1fr gi-grid-gap-20px">
-                            <div class="gi-input-container">
-                                <label for="office_name" class="gi-input-label"
-                                    data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_OFFICE_NAME"]</label>
-                                <input data-field="office_name" id="office_name" name="office_name" class="gi-input"
-                                    autocomplete="off" data-disabled />
+                        <div class="gi-flex gi-flex-column gi-grid-gap-20px">
+                            <div class="gi-flex gi-grid-gap-20px">
+                                <div class="gi-input-container" style="flex: 1;">
+                                    <label for="office_name" class="gi-input-label"
+                                        data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_OFFICE_NAME"]</label>
+                                    <input data-field="office_name" id="office_name" name="office_name" class="gi-input"
+                                        autocomplete="off" data-disabled />
+                                </div>
+                                <div class="gi-input-container" style="flex: 1;">
+                                    <label for="office_code" class="gi-input-label"
+                                        data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_OFFICE_CODE"]</label>
+                                    <input data-field="office_code" id="office_code" name="office_code" class="gi-input"
+                                        autocomplete="off" data-disabled />
+                                </div>
                             </div>
-                            <div class="gi-input-container">
-                                <label for="office_code" class="gi-input-label"
-                                    data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_OFFICE_CODE"]</label>
-                                <input data-field="office_code" id="office_code" name="office_code" class="gi-input"
-                                    autocomplete="off" data-disabled />
-                            </div>
-                            <div class="gi-grid-span-2 gi-padding-10px">
+                            <div class="gi-padding-10px">
                                 <div id="user-group-div" class="gi-flex gi-flex-wrap gi-grid-gap-10px"></div>
                             </div>
                         </div>
@@ -104,14 +109,14 @@
 
                     <div class="gi-margin-top-40px">
                         <h2 class="gi-title-section">관리 정보</h2>
-                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-1fr gi-grid-gap-20px">
-                            <div class="gi-input-container">
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container" style="flex: 1;">
                                 <label for="system_create_date" class="gi-input-label"
                                     data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_CREATE_DATE"]</label>
                                 <input data-field="system_create_date" id="system_create_date" name="system_create_date"
                                     class="gi-input" autocomplete="off" data-disabled />
                             </div>
-                            <div class="gi-input-container">
+                            <div class="gi-input-container" style="flex: 1;">
                                 <label for="system_update_date" class="gi-input-label"
                                     data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_LAST_UPDATE_DATE"]</label>
                                 <input data-field="system_update_date" id="system_update_date" name="system_update_date"
@@ -142,31 +147,26 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <form id="comUserPasswordChange" class="gi-row-100 gi-col-90">
-                <div id="update-area_popup" class="gi-padding-left-right-20px gi-gird gi-grid-center">
-                    <div class="gi-row-80 gi-grid gi-grid-template-rows-repeat-1-1fr">
-                        <div class="gi-row-100 gi-input-container gi-flex gi-flex-center">
+                <div id="update-area_popup" class="gi-padding-left-right-20px">
+                    <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                        <div class="gi-input-container">
                             <label for="popup_before_password" class="gi-input-label" data-focus-label="true"
-                                data-focus-label-text-align="default"
                                 data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_BEFORE_PASSWORD"]</label>
                             <input type="password" data-field="popup_before_password" id="popup_before_password"
-                                name="popup_before_password" class="gi-input" data-focus-span-text-align="default"
-                                data-required="true" autocomplete="off" />
+                                name="popup_before_password" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
-                        <div class="gi-row-100 gi-input-container gi-flex gi-flex-center border-top-dotted-gray">
+                        <div class="gi-input-container">
                             <label for="popup_new_password" class="gi-input-label" data-focus-label="true"
-                                data-focus-label-text-align="default"
                                 data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_AFTER_PASSWORD"]</label>
                             <input type="password" data-field="popup_new_password" id="popup_new_password"
-                                name="popup_new_password" class="gi-input" data-focus-span-text-align="default"
-                                data-required="true" autocomplete="off" />
+                                name="popup_new_password" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
-                        <div class="gi-row-100 gi-input-container gi-flex gi-flex-center border-top-dotted-gray">
+                        <div class="gi-input-container">
                             <label for="popup_new_password_confirm" class="gi-input-label" data-focus-label="true"
-                                data-focus-label-text-align="default"
                                 data-required="true">[Page.Message].Message.Label.Array["COM_USER.MYINFO.MY_AFTER_PASSWORD_CONFIRM"]</label>
                             <input type="password" data-field="popup_new_password_confirm"
                                 id="popup_new_password_confirm" name="popup_new_password_confirm" class="gi-input"
-                                data-focus-span-text-align="default" data-required="true" autocomplete="off" />
+                                data-required="true" autocomplete="off" />
                         </div>
                     </div>
                 </div>

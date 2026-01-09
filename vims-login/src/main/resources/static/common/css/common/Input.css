@@ -215,7 +215,7 @@ option {
 }
 
 .gi-span[data-field$="email"] {
-    overflow-wrap: anywhere;
+    overflow: auto;
 }
 
 .gi-input-label {

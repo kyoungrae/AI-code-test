@@ -492,7 +492,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
             });
             observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
             function mapBtnClickEventHandler(e) {
-                let mapCloseBtn = '<div class="map_close-btn"><span>X</span></div>'
+                let mapCloseBtn = '<div class="map_close-btn"></div>'
                 let $tagId = $("#" + tagId);
                 let targetUl = $(e.currentTarget).parent().parent();
                 let targetLi = $(targetUl).children("li");
@@ -523,7 +523,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         sideOpenBtnClick: function (tagId, btnName) {
             let $tagId = $("#" + tagId);
             let $btnName = $("." + btnName);
-            let sideGridOpenCloseBtn = '<div class="side_grid_close-btn"><span>X</span></div>'
+            let sideGridOpenCloseBtn = '<div class="side_grid_close-btn"></div>'
             let $sideGridCloseBtn = $(".side_grid_close-btn");
 
             if ($btnName.length === 0) {

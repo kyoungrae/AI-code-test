@@ -16,7 +16,7 @@
             </div>
             <!--/     그리드 영역      -->
             <!--      추가버튼 영역      -->
-            <div class="gi-row-100 gi-col-30px">
+            <div class="gi-row-100 gi-col-30px gi-margin-top-20px">
                 <div
                     class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px gi-flex gi-flex-justify-content-flex-end">
                     <button id="menu_depth0_register_btn" class="gi-btn-blue gi-float-right"
@@ -36,393 +36,234 @@
         </div>
         <div class="gi-popup-contents" style="height: 50% !important;">
             <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-auto gi-flex gi-flex-center">
-                <form id="comMenuRegister" class="gi-row-100 gi-grid gi-grid-justify-items-center">
-                    <div
-                        class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container gi-hidden">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_top_menu_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.TOP_MENU_CODE"]</label>
-                                    <input data-disabled data-field="top_menu_code" id="register_top_menu_code"
-                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]</label>
-                                    <input data-field="menu_name" id="register_menu_name" name="menu_name_kr"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_CODE"]</label>
-                                    <input data-field="menu_code" id="register_menu_code" name="menu_code"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_prgm_url" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.PRGM_URL"]</label>
-                                    <input data-field="prgm_url" id="register_prgm_url" name="prgm_url" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_url" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.URL"]</label>
-                                    <input data-field="url" id="register_url" name="url" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_number" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_NUMBER"]</label>
-                                    <input inputNumberOnly maxlength="1" data-field="menu_number"
-                                        id="register_menu_number" name="menu_number" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.USE_YN"]</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
-                                        id="register_use_yn" name="use_yn" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_menu_level" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_LEVEL"]</label>
-                                    <input inputNumberOnly data-disabled data-field="menu_level"
-                                        id="register_menu_level" name="menu_level" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        maxlength="1" />
-                                </div>
-                            </div>
+            <form id="comMenuRegister">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-hidden">
+                        <div class="gi-input-container">
+                            <label for="register_top_menu_code" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.TOP_MENU_CODE"]</label>
+                            <input data-disabled data-field="top_menu_code" id="register_top_menu_code"
+                                name="top_menu_code" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
                     </div>
-                </form>
-            </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="register_menu_name" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]</label>
+                            <input data-field="menu_name" id="register_menu_name" name="menu_name_kr" class="gi-input"
+                                data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="register_menu_code" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_CODE"]</label>
+                            <input data-field="menu_code" id="register_menu_code" name="menu_code" class="gi-input"
+                                data-required="true" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="register_prgm_url" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.PRGM_URL"]</label>
+                            <input data-field="prgm_url" id="register_prgm_url" name="prgm_url" class="gi-input"
+                                data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="register_url" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.URL"]</label>
+                            <input data-field="url" id="register_url" name="url" class="gi-input" data-required="true"
+                                autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="register_menu_number" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_NUMBER"]</label>
+                            <input inputNumberOnly maxlength="1" data-field="menu_number" id="register_menu_number"
+                                name="menu_number" class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="register_use_yn" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.USE_YN"]</label>
+                            <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="register_use_yn"
+                                name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="register_menu_level" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_LEVEL"]</label>
+                            <input inputNumberOnly data-disabled data-field="menu_level" id="register_menu_level"
+                                name="menu_level" class="gi-input" data-required="true" autocomplete="off"
+                                maxlength="1" />
+                        </div>
+                    </div>
+                </div>
+            </form>
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="menuRegister-btn" class="gi-popup-update-btn"
-                    type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
-                <button class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
-            </div>
+            <button id="menuRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
+            <button class="gi-popup-close-btn" type="button">닫기</button>
         </div>
     </div>
 </article>
 <!--NOTE: 하위메뉴 등록 팝업-->
 <article id="gi-menuDepth_register-popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body gi-row-40-important">
+    <div class="gi-popup-body" style="width: 600px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_MENU.REGISTER_SUB_MENU_CODE"]</span>
         </div>
         <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-auto gi-flex gi-flex-center">
-                <form id="comMenuDepthRegister" class="gi-row-100 gi-grid gi-grid-justify-items-center">
-                    <div
-                        class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_top_menu_code" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.TOP_MENU_CODE"]</label>
-                                    <input data-disabled data-field="top_menu_code" id="register_depth_top_menu_code"
-                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
+            <form id="comSubMenuRegister">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="sub_register_top_menu_code" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.TOP_MENU_CODE"]</label>
+                            <input data-disabled data-field="top_menu_code" id="sub_register_top_menu_code"
+                                name="top_menu_code" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]</label>
-                                    <input data-field="menu_name_kr" id="register_depth_menu_name" name="menu_name_kr"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_CODE"]</label>
-                                    <input data-field="menu_code" id="register_depth_menu_code" name="menu_code"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_prgm_url" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_MENU.PRGM_URL"]</label>
-                                    <input data-field="prgm_url" id="register_depth_prgm_url" name="prgm_url"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="false"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_url" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_MENU.URL"]</label>
-                                    <input data-field="url" id="register_depth_url" name="url" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_number" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="true">메뉴순서</label>
-                                    <input inputNumberOnly maxlength="1" data-field="menu_number"
-                                        id="register_depth_menu_number" name="menu_number" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
-                                        id="register_depth_use_yn" name="use_yn" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="register_depth_menu_level" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="true">메뉴레벨</label>
-                                    <input inputNumberOnly data-disabled data-field="menu_level"
-                                        id="register_depth_menu_level" name="menu_level" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        maxlength="1" />
-                                </div>
-                            </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="sub_register_menu_code" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_CODE"]</label>
+                            <input data-field="menu_code" id="sub_register_menu_code" name="menu_code" class="gi-input"
+                                data-required="true" autocomplete="off" />
                         </div>
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                    <div class="gi-input-container">
+                        <label for="sub_register_menu_name" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_NAME"]</label>
+                        <input data-field="menu_name" id="sub_register_menu_name" name="menu_name_kr" class="gi-input"
+                            data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="sub_register_prgm_url" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.PRGM_URL"]</label>
+                            <input data-field="prgm_url" id="sub_register_prgm_url" name="prgm_url" class="gi-input"
+                                data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="sub_register_url" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.URL"]</label>
+                            <input data-field="url" id="sub_register_url" name="url" class="gi-input"
+                                data-required="true" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="sub_register_menu_number" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_NUMBER"]</label>
+                            <input inputNumberOnly maxlength="1" data-field="menu_number" id="sub_register_menu_number"
+                                name="menu_number" class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="sub_register_use_yn" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.USE_YN"]</label>
+                            <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
+                                id="sub_register_use_yn" name="use_yn" class="gi-input" data-required="true"
+                                autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="sub_register_menu_level" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["COM_MENU.MENU_LEVEL"]</label>
+                            <input inputNumberOnly data-disabled data-field="menu_level" id="sub_register_menu_level"
+                                name="menu_level" class="gi-input" data-required="true" autocomplete="off"
+                                maxlength="1" />
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="menuDepthRegister-btn" class="gi-popup-update-btn" type="button">등록</button>
-                <button class="gi-popup-close-btn" type="button">닫기</button>
-            </div>
+            <button id="menuDepthRegister-btn" class="gi-popup-update-btn" type="button">등록</button>
+            <button class="gi-popup-close-btn" type="button">닫기</button>
         </div>
     </div>
 </article>
 <!--NOTE: 메뉴수정 팝업-->
 <article id="gi-menu_update-popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body gi-row-40-important">
+    <div class="gi-popup-body" style="width: 600px;">
         <div class="gi-popup-header">
             <span>메뉴수정</span>
         </div>
-        <div class="gi-popup-contents" style="height: auto !important;">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-auto gi-flex gi-flex-center">
-                <form id="comMenuUpdate" class="gi-row-100 gi-grid gi-grid-justify-items-center">
-                    <div
-                        class="gi-row-80 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr gi-grid-rows-container gi-hidden">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_top_menu_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">상위메뉴코드</label>
-                                    <input data-disabled data-field="top_menu_code" id="update_top_menu_code"
-                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div id="menu_icon_layout"
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_icon" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="false">메뉴아이콘</label>
-                                    <input data-disabled data-field="menu_icon" id="update_menu_icon"
-                                        name="top_menu_code" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="false" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div
-                                class="gi-btn-section gi-row-100 gi-col-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                                <button id="update_popup_delete_icon-btn" class="gi-btn gi-row-100" type="button">아이콘
-                                    삭제</button>
-                                <button id="update_popup_icon-btn" class="gi-btn gi-row-100" type="button"
-                                    gi-popup-open-id="update_popup_icon_pack">아이콘 설정</button>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">메뉴명</label>
-                                    <input data-field="menu_name_kr" id="update_menu_name" name="menu_name_kr"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">메뉴코드</label>
-                                    <input data-disabled data-field="menu_code" id="update_menu_code" name="menu_code"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-2-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_prgm_url" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="false">API 경로</label>
-                                    <input data-field="prgm_url" id="update_prgm_url" name="prgm_url" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_url" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">경로</label>
-                                    <input data-field="url" id="update_url" name="url" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="gi-row-100 gi-col-100 gi-grid gi-grid-template-columns-repeat-3-1fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
-                                        id="update_use_yn" name="use_yn" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_number" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">메뉴순서</label>
-                                    <input inputNumberOnly maxlength="1" data-field="menu_number"
-                                        id="update_menu_number" name="menu_number" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_level" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">메뉴레벨</label>
-                                    <input inputNumberOnly data-field="menu_level" id="update_menu_level"
-                                        name="menu_level" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" maxlength="1" />
-                                </div>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-hidden">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="update_menu_sequence" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">메뉴고유번호</label>
-                                    <input inputNumberOnly data-field="menu_sequence" id="update_menu_sequence"
-                                        name="menu_sequence" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" maxlength="1" />
-                                </div>
-                            </div>
+        <div class="gi-popup-contents">
+            <form id="comMenuUpdate">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-hidden">
+                        <div class="gi-input-container">
+                            <label for="update_top_menu_code" class="gi-input-label" data-focus-label="true"
+                                data-required="true">상위메뉴코드</label>
+                            <input data-disabled data-field="top_menu_code" id="update_top_menu_code"
+                                name="top_menu_code" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                    <div id="menu_icon_layout" class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_menu_icon" class="gi-input-label" data-focus-label="true"
+                                data-required="false">메뉴아이콘</label>
+                            <input data-disabled data-field="menu_icon" id="update_menu_icon" name="top_menu_code"
+                                class="gi-input" data-required="false" autocomplete="off" />
+                        </div>
+                        <div class="gi-flex gi-grid-gap-8px" style="margin-top: auto;">
+                            <button id="update_popup_delete_icon-btn" class="gi-btn" type="button">아이콘 삭제</button>
+                            <button id="update_popup_icon-btn" class="gi-btn" type="button"
+                                gi-popup-open-id="update_popup_icon_pack">아이콘 설정</button>
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_menu_name" class="gi-input-label" data-focus-label="true"
+                                data-required="true">메뉴명</label>
+                            <input data-field="menu_name_kr" id="update_menu_name" name="menu_name_kr" class="gi-input"
+                                data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_menu_code" class="gi-input-label" data-focus-label="true"
+                                data-required="true">메뉴코드</label>
+                            <input data-disabled data-field="menu_code" id="update_menu_code" name="menu_code"
+                                class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_prgm_url" class="gi-input-label" data-focus-label="true"
+                                data-required="false">API 경로</label>
+                            <input data-field="prgm_url" id="update_prgm_url" name="prgm_url" class="gi-input"
+                                data-required="false" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_url" class="gi-input-label" data-focus-label="true"
+                                data-required="true">경로</label>
+                            <input data-field="url" id="update_url" name="url" class="gi-input" data-required="true"
+                                autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
+                                data-required="true">사용여부</label>
+                            <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="update_use_yn"
+                                name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_menu_number" class="gi-input-label" data-focus-label="true"
+                                data-required="true">메뉴순서</label>
+                            <input inputNumberOnly maxlength="1" data-field="menu_number" id="update_menu_number"
+                                name="menu_number" class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container" style="flex: 1;">
+                            <label for="update_menu_level" class="gi-input-label" data-focus-label="true"
+                                data-required="true">레벨</label>
+                            <input inputNumberOnly data-disabled data-field="menu_level" id="update_menu_level"
+                                name="menu_level" class="gi-input" data-required="true" autocomplete="off"
+                                maxlength="1" />
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="menuUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
-                <button class="gi-popup-close-btn" type="button">닫기</button>
-            </div>
+            <button id="menuUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
+            <button class="gi-popup-close-btn" type="button">닫기</button>
         </div>
     </div>
 </article>

@@ -10,21 +10,20 @@
         <article>
             <!-- 검색기능 영역 -->
             <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
-                <div class="gi-grid gi-grid-template-columns-repeat-4-1fr gi-grid-gap-20px gi-flex-align-items-center">
-
-                    <div class="gi-input-container">
+                <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+                    <div class="gi-input-container gi-flex-1">
                         <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
                         <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
                     </div>
 
-                    <div class="gi-input-container">
+                    <div class="gi-input-container gi-flex-1">
                         <label for="from_date" class="gi-input-label"
                             data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
                         <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off"
                             data-datepicker />
                     </div>
 
-                    <div class="gi-input-container">
+                    <div class="gi-input-container gi-flex-1">
                         <label for="to_date" class="gi-input-label"
                             data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
                         <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off"
@@ -32,9 +31,9 @@
                     </div>
 
                     <div class="gi-flex gi-grid-gap-10px">
-                        <button id="search-btn" class="gi-btn-blue gi-row-100"
+                        <button id="search-btn" class="gi-btn-blue"
                             type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
-                        <button id="reset-btn" class="gi-btn gi-row-100"
+                        <button id="reset-btn" class="gi-btn"
                             type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
                     </div>
                 </div>
@@ -65,8 +64,8 @@
             <span>[Page.Message].Message.Label.Array["COM_OFFICE.TITLE_REGISTER"]</span>
         </div>
         <div class="gi-popup-contents">
-            <form id="comOfficeRegisterForm" class="gi-padding-20px">
-                <div class="gi-grid gi-grid-template-columns-1fr gi-grid-gap-16px">
+            <form id="comOfficeRegisterForm">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
                     <div class="gi-input-container">
                         <label for="register_top_office_code" class="gi-input-label" data-focus-label="true"
                             data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</label>
@@ -91,15 +90,14 @@
                         <input data-field="office_type" id="register_office_type" name="register_office_type"
                             class="gi-input" autocomplete="off" />
                     </div>
-                    <!-- 관리 정보 (숨김 처리 또는 비활성화) -->
-                    <div class="gi-grid gi-grid-template-columns-1fr-1fr gi-grid-gap-10px">
-                        <div class="gi-input-container">
+                    <div class="gi-flex gi-grid-gap-10px">
+                        <div class="gi-input-container gi-flex-1">
                             <label for="register_system_create_userid" class="gi-input-label"
                                 data-focus-label="true">작성자</label>
                             <input data-field="system_create_userid" id="register_system_create_userid"
                                 name="register_system_create_userid" class="gi-input" data-disabled />
                         </div>
-                        <div class="gi-input-container">
+                        <div class="gi-input-container gi-flex-1">
                             <label for="register_system_create_date" class="gi-input-label"
                                 data-focus-label="true">작성일</label>
                             <input data-field="system_create_date" id="register_system_create_date"
@@ -110,15 +108,10 @@
             </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-grid-gap-10px">
-                <button id="popup-register_comOffice_confirm-btn" class="gi-popup-register-btn" type="button">
-                    [Page.Message].Message.Label.Array["REGISTER_BTN"]
-                </button>
-                <button id="popup-register_comOffice_close-btn" class="gi-popup-close-btn" type="button">
-                    [Page.Message].Message.Label.Array["CLOSE_BTN"]
-                </button>
-            </div>
+            <button id="popup-register_comOffice_confirm-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button id="popup-register_comOffice_close-btn" class="gi-popup-close-btn"
+                type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -130,8 +123,8 @@
             <span>[Page.Message].Message.Label.Array["COM_OFFICE.TITLE_UPDATE"]</span>
         </div>
         <div class="gi-popup-contents">
-            <form id="comOfficeUpdateForm" class="gi-padding-20px">
-                <div class="gi-grid gi-grid-template-columns-1fr gi-grid-gap-16px">
+            <form id="comOfficeUpdateForm">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
                     <div class="gi-input-container">
                         <label for="update_top_office_code" class="gi-input-label" data-focus-label="true"
                             data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</label>
@@ -160,15 +153,10 @@
             </form>
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-grid-gap-10px">
-                <button id="popup-update_comOffice_confirm-btn" class="gi-popup-update-btn" type="button">
-                    [Page.Message].Message.Label.Array["UPDATE_BTN"]
-                </button>
-                <button id="popup-update_comOffice_close-btn" class="gi-popup-close-btn" type="button">
-                    [Page.Message].Message.Label.Array["CLOSE_BTN"]
-                </button>
-            </div>
+            <button id="popup-update_comOffice_confirm-btn" class="gi-popup-update-btn"
+                type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+            <button id="popup-update_comOffice_close-btn" class="gi-popup-close-btn"
+                type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -181,7 +169,7 @@
             <span>[Page.Message].Message.Label.Array["COM_OFFICE.TITLE_DETAIL"]</span>
         </div>
         <div class="gi-popup-contents gi-padding-20px">
-            <div class="gi-grid gi-grid-template-columns-1fr gi-grid-gap-16px">
+            <div class="gi-flex gi-flex-column gi-grid-gap-16px">
 
                 <div class="gi-span-container">
                     <span class="gi-span-label"
@@ -207,23 +195,23 @@
                     <span data-field="office_type" class="gi-span"></span>
                 </div>
 
-                <div class="gi-grid gi-grid-template-columns-1fr-1fr gi-grid-gap-10px">
-                    <div class="gi-span-container">
+                <div class="gi-flex gi-grid-gap-10px">
+                    <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">작성자</span>
                         <span data-field="system_create_userid" class="gi-span"></span>
                     </div>
-                    <div class="gi-span-container">
+                    <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">작성일</span>
                         <span data-field="system_create_date" class="gi-span"></span>
                     </div>
                 </div>
 
-                <div class="gi-grid gi-grid-template-columns-1fr-1fr gi-grid-gap-10px">
-                    <div class="gi-span-container">
+                <div class="gi-flex gi-grid-gap-10px">
+                    <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">수정자</span>
                         <span data-field="system_update_userid" class="gi-span"></span>
                     </div>
-                    <div class="gi-span-container">
+                    <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">수정일</span>
                         <span data-field="system_update_date" class="gi-span"></span>
                     </div>
@@ -232,11 +220,9 @@
             </div>
         </div>
         <div class="gi-popup-footer">
-            <div class="gi-btn-section gi-row-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="popup-detail_comOffice_close-btn" class="gi-popup-close-btn" type="button">
-                    [Page.Message].Message.Label.Array["CLOSE_BTN"]
-                </button>
-            </div>
+            <button id="popup-detail_comOffice_close-btn" class="gi-popup-close-btn" type="button">
+                [Page.Message].Message.Label.Array["CLOSE_BTN"]
+            </button>
         </div>
     </div>
 </article>
