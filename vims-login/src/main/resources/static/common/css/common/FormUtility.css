@@ -30,12 +30,14 @@
 .popup_form {
     width: 25%;
     height: 20%;
-    border-radius: 15px;
+    border-radius: var(--border-radius-article);
     background-color: #ffffff;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    box-shadow: var(--gi-card-shadow-modern);
+    border: 1px solid #f2f2f5;
 }
 
 .popoup_text {
@@ -93,11 +95,13 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    border-radius: 5px;
+    border-radius: var(--border-radius-article);
     min-height: 5%;
-    padding: 20px 15px;
+    padding: 30px 20px;
     box-sizing: border-box;
     animation: fadeIn_Content .6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    box-shadow: var(--gi-card-shadow-modern);
+    border: 1px solid #f2f2f5;
 }
 
 .alertPopup_text,
@@ -216,10 +220,12 @@
     min-height: 230px;
     max-height: 800px;
     background-color: #FFFFFF;
-    border-radius: 5px;
-    padding: 20px;
+    border-radius: var(--border-radius-article);
+    padding: 30px;
     box-sizing: border-box;
     overflow: scroll;
+    box-shadow: var(--gi-card-shadow-modern);
+    border: 1px solid #f2f2f5;
 }
 
 .detail_popup_title,
@@ -314,23 +320,21 @@
 
 .formUtil-showMessageBox {
     position: absolute;
-    padding: 3rem;
-    background-color: #393939d9 !important;
-    box-shadow: 1px 1px 6px #d1d6ff;
+    padding: 1.25rem 2.5rem;
+    background-color: #1d1d1f !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     z-index: 99999;
-    border-radius: 5px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     top: calc(50vh - 75px);
     left: calc(50vw - 150px);
-    /*animation: fadeout 3s; flicker 현상으로 변경*/
     animation: none;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.25s, opacity 0.25s ease;
     color: #fff;
-    text-shadow: 1px 1px 1px #000000b0;
 }
 
 .showMessageBox {
@@ -511,12 +515,7 @@
     box-sizing: border-box;
 }
 
-.formUtil-file_description-box>label {
-    /*background: #e3e3e3 !important;*/
-    /*padding: 5px;*/
-    /*border-radius: 5px;*/
-    /*box-sizing: border-box;*/
-}
+
 
 #formUtil-file_description,
 li>.formUtil-file_description {
@@ -820,12 +819,7 @@ label[for="fileElem"]:hover {
     border-left: 1px dashed #e3e3e3 !important;
 }
 
-.formUtil-fileDownload_list-contents>ul>li {
-    /*overflow: scroll;*/
-    /*scrollbar-width: none;*/
-    /*-ms-overflow-style: none;*/
-    /*border-bottom: 1px dashed #e3e3e3  !important;*/
-}
+
 
 .formUtil-fileDownload_footer {
     width: 100%;
@@ -878,7 +872,7 @@ label[for="fileElem"]:hover {
     background-color: #d6e8fd54;
 }
 
-.formUtil-select-row[data-file-download="false"] {}
+
 
 .formUtil-select-row[data-file-download="true"] {
     background-color: #519ef929;
@@ -946,7 +940,7 @@ label[for="fileElem"]:hover {
     width: 100%;
 }
 
-input[data-file-upload-btn] {}
+
 
 @keyframes l3-1 {
 

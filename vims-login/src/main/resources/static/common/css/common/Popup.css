@@ -38,12 +38,13 @@
 .gi-popup-body {
     min-height: 300px;
     background-color: #FFFFFF;
-    border-radius: 15px;
+    border-radius: var(--border-radius-article);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    box-shadow: 0 0 32px #6f6f6fa8;
+    box-shadow: var(--gi-card-shadow-modern);
+    border: 1px solid #f2f2f5;
 }
 
 .gi-popup-header {
@@ -82,9 +83,8 @@
 }
 
 .gi-popup-close-btn:hover {
-    background-color: #888888;
+    background-color: #6e6e73;
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-popup-register-btn {
@@ -129,19 +129,16 @@
 .gi-popup-register-btn:hover {
     background-color: var(--background-color-btn-back-hover);
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-popup-update-btn:hover {
     background-color: var(--background-color-btn-back-hover);
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-popup-delete-btn:hover {
     background-color: var(--background-color-btn-back-hover);
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 /* ======================================================================================================== select box */

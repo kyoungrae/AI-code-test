@@ -202,43 +202,36 @@
 .gi-btn-register:hover {
     background-color: var(--background-color-btn-back-hover);
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-btn-back:hover {
     background-color: var(--background-color-btn-back-hover);
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-btn-blue:hover {
     background-color: var(--background-color-btn-back-hover);
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-btn-more:hover {
     background-color: var(--background-color-btn-yellow-hover);
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-btn-reset:hover {
-    background-color: #888888;
+    background-color: #6e6e73;
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-btn-search:hover {
-    background-color: #888888;
+    background-color: #6e6e73;
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-btn:hover {
-    background-color: #888888;
+    background-color: #6e6e73;
     color: #FFFFFF;
-    transform: scale(1.05);
 }
 
 .gi-grid-btn:hover {
@@ -340,5 +333,3 @@
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.6) transparent transparent transparent;
 }
-
-

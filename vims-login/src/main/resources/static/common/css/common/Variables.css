@@ -32,43 +32,47 @@
     font-family: 'Pretendard', sans-serif;
     box-sizing: border-box;
 
-    --default-input-height: 44px;
+    --default-input-height: 52px;
     --logo-image: url("../../img/GI.png");
 
-    --border-radius-btn: 8px;
-    --border-radius-grid-btn: 6px;
+    --border-radius-btn: 12px;
+    --border-radius-grid-btn: 8px;
     --border-radius-header: 12px;
-    --border-radius-article: 16px;
-    --border-layout: 1px solid #E2E8F0;
-    --border-grid-input-edge: 12px;
+    --border-radius-article: 24px;
+    --border-layout: 1px solid #f0f0f2;
+    --border-grid-input-edge: 16px;
 
     --height-100vh: 100vh;
     --width-section-btn: 100%;
     --heigth-section-btn: 100%;
-    --padding-btn: 0.5rem 1rem;
-    --padding-icon-btn: 0.5rem 1.25rem 0.5rem 0.75rem;
+    --padding-btn: 0.75rem 1.5rem;
+    --padding-icon-btn: 0.75rem 1.5rem 0.75rem 1rem;
 
-    --main-background-color: #F8FAFC;
-    --main-background-header-color: #1E293B;
+    --main-background-color: #fbfbfd;
+    --main-background-header-color: #1d1d1f;
 
-    --background-color-btn-red: #EF4444;
-    --background-color-btn-blue: #3B82F6;
-    --background-color-btn-back: #1F2937;
-    --background-color-btn-file-upload: #1F2937;
-    --background-color-btn-green: #10B981;
-    --background-color-btn-gray: #6B7280;
-    --background-color-btn-yellow: #F59E0B;
+    --background-color-btn-red: #ff3b30;
+    --background-color-btn-blue: #0071e3;
+    --background-color-btn-back: #1d1d1f;
+    --background-color-btn-file-upload: #1d1d1f;
+    --background-color-btn-green: #34c759;
+    --background-color-btn-gray: #86868b;
+    --background-color-btn-yellow: #ffcc00;
 
-    --background-color-input-btn-hover: #9CA3AF;
-    --background-color-btn-red-hover: #DC2626;
-    --background-color-btn-blue-hover: #2563EB;
-    --background-color-btn-back-hover: #111827;
-    --background-color-btn-green-hover: #059669;
-    --background-color-btn-gray-hover: #4B5563;
+    --background-color-input-btn-hover: #e8e8ed;
+    --background-color-btn-red-hover: #d70015;
+    --background-color-btn-blue-hover: #0077ed;
+    --background-color-btn-back-hover: #000000;
+    --background-color-btn-green-hover: #248a3d;
+    --background-color-btn-gray-hover: #6e6e73;
     --background-text-color-btn-gray-hover: #ffffff;
-    --background-color-btn-yellow-hover: #D97706;
-    --background-color-btn-light-gray: #F3F4F6;
+    --background-color-btn-yellow-hover: #e6b800;
+    --background-color-btn-light-gray: #f5f5f7;
 
-    --color-calendar-holiyday: #EF4444;
-    --grid-row-selector-height: 32px;
+    --color-calendar-holiyday: #ff3b30;
+    --grid-row-selector-height: 36px;
+
+    /* Modern UI Styles */
+    --gi-input-bg-modern: #f5f5f7;
+    --gi-card-shadow-modern: 0 4px 24px rgba(0, 0, 0, 0.04);
 }

@@ -3511,6 +3511,7 @@
     backdrop-filter: blur(10px);
     color: #4f4f4f;
     z-index: 1;
+    background-color: #ffffff;
 }
 
 .gi-grid-list {

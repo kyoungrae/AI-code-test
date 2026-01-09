@@ -1,305 +1,173 @@
 <article class="gi-article-content gi-col-95 gi-row-100">
-    <section class="gi-col-100 gi-row-100">
-        <header class="gi-flex gi-flex-center gi-col-10">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+
+        <!-- 페이지 헤더 -->
+        <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
             <h1 class="gi-page-title">[Page.Message].Message.Label.Array["COM_OFFICE.TITLE_LIST"]</h1>
+            <p class="gi-subtitle-main">지사 및 사무소 정보를 통합적으로 관리합니다.</p>
         </header>
-        <article class=" gi-col-90 gi-row-100">
-            <!--      검색기능 영역      -->
-            <div id="search-area" class="gi-col-5 gi-padding-left-right-20px gi-flex">
-                <div class="gi-row-100 gi-flex gi-flex-space-around gi-col-30px-important">
-                    <!--      검색설정 영역      -->
-                    <div class="gi-row-20">
-                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="searchDesc1" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center" data-required="false">searchDesc1</label>
-                            <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchDesc1"
-                                name="searchDesc1" data-focus-input-text-align="center" autocomplete="off" />
-                        </div>
+
+        <article>
+            <!-- 검색기능 영역 -->
+            <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+                <div class="gi-grid gi-grid-template-columns-repeat-4-1fr gi-grid-gap-20px gi-flex-align-items-center">
+
+                    <div class="gi-input-container">
+                        <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+                        <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
                     </div>
-                    <!--/     검색설정 영역      -->
-                    <!--      날짜선택 영역      -->
-                    <div class="gi-row-24 gi-flex">
-                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="from_date" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center"
-                                data-required="false">[Page.Message].Message.Label.Array["START_DATE"]</label>
-                            <input id="from_date" class="gi-input gi-margin-1px" data-required="false" type="text"
-                                name="from_date" autocomplete="off" data-focus-input-text-align="center"
-                                data-datepicker />
-                        </div>
-                        <div class="gi-flex gi-flex-align-items-center">
-                            <span class="gi-date-middle-symbol"> ~ </span>
-                        </div>
-                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="to_date" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center"
-                                data-required="false">[Page.Message].Message.Label.Array["END_DATE"]</label>
-                            <input id="to_date" class="gi-input gi-margin-1px" data-required="false" type="text"
-                                name="to_date" autocomplete="off" data-focus-input-text-align="center"
-                                data-datepicker />
-                        </div>
+
+                    <div class="gi-input-container">
+                        <label for="from_date" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+                        <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off"
+                            data-datepicker />
                     </div>
-                    <!--/     날짜선택 영역      -->
-                    <!--      더보기,초기화 버튼 영역      -->
-                    <!--<div class="gi-flex gi-flex-align-items-center">-->
-                    <!--    <div class="gi-btn-section gi-col-100 gi-flex gi-flex-justify-content-space-evenly">-->
-                    <!--        <button id="more-btn" class="gi-btn-more" type="button"><i class="fa-solid fa-gear gi-row-15px"></i>[Page.Message].Message.Label.Array["MORE_BTN"]</button>-->
-                    <!--        <button id="reset-btn" class="gi-btn-reset" type="button"><i class="fa-solid fa-rotate-right gi-row-15px"></i>[Page.Message].Message.Label.Array["RESET_BTN"]</button>-->
-                    <!--    </div>-->
-                    <!--</div>-->
-                    <!--/     더보기,초기화 버튼 영역      -->
-                    <!--     조회 버튼 영역      -->
-                    <div class="gi-row-40 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
-                        <div class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
-                            <button id="search-btn" class="gi-btn"
-                                type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
-                        </div>
+
+                    <div class="gi-input-container">
+                        <label for="to_date" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+                        <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off"
+                            data-datepicker />
                     </div>
-                    <!--/     조회 버튼 영역      -->
+
+                    <div class="gi-flex gi-grid-gap-10px">
+                        <button id="search-btn" class="gi-btn-blue gi-row-100"
+                            type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                        <button id="reset-btn" class="gi-btn gi-row-100"
+                            type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+                    </div>
                 </div>
             </div>
-            <!--/     검색기능 영역      -->
-            <!--      그리드 영역      -->
-            <div class="gi-row-100 gi-col-90">
-                <div id="gi-Grid"></div>
-                <!--                <div id="gi-Grid" class="gi-Grid" data-side-grid-open="true" data-side-grid-open-init="true"></div>-->
-                <!--                <div class="gi-Grid-side" id="gi-Grid-side" data-side-grid-open="false"></div>-->
+            <!--/ 검색기능 영역 -->
+
+            <!-- 그리드 영역 -->
+            <div class="gi-row-100 gi-padding-left-right-20px">
+                <div id="gi-Grid" class="gi-Grid"></div>
             </div>
-            <!--/     그리드 영역      -->
-            <!--      등록버튼 영역      -->
-            <div class="gi-row-100">
-                <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
-                    <button id="comOffice_insert-btn" class="gi-btn gi-float-right "
-                        type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
-                </div>
+            <!--/ 그리드 영역 -->
+
+            <!-- 하단 버튼 영역 -->
+            <div class="gi-flex gi-flex-justify-content-flex-end gi-padding-20px">
+                <button id="comOffice_insert-btn" class="gi-btn-blue" style="width: 120px;" type="button">
+                    [Page.Message].Message.Label.Array["REGISTER_BTN"]
+                </button>
             </div>
-            <!--/     추가버튼 영역      -->
+            <!--/ 하단 버튼 영역 -->
         </article>
     </section>
 </article>
 
 <!--등록 팝업 영역-->
 <article id="register_comOffice_popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body gi-row-500px">
+    <div class="gi-popup-body" style="width: 500px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_OFFICE.TITLE_REGISTER"]</span>
         </div>
         <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="comOfficeRegisterForm" class="gi-row-100">
-                    <div class="gi-padding-30px ">
-                        <div class="">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-direction-column">
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_top_office_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</label>
-                                    <input data-field="top_office_code" id="register_top_office_code"
-                                        name="register_top_office_code" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        gi-maxlength="7" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_office_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</label>
-                                    <input data-field="office_name" id="register_office_name"
-                                        name="register_office_name" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        gi-maxlength="100" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_office_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</label>
-                                    <input data-field="office_code" id="register_office_code"
-                                        name="register_office_code" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        gi-maxlength="7" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_office_type" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</label>
-                                    <input data-field="office_type" id="register_office_type"
-                                        name="register_office_type" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="100" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_office_type_code" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE_CODE"]</label>
-                                    <input data-field="office_type_code" id="register_office_type_code"
-                                        name="register_office_type_code" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="4" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_system_create_userid" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_USERID"]</label>
-                                    <input data-field="system_create_userid" id="register_system_create_userid"
-                                        name="register_system_create_userid" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="32" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_system_create_date" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_DATE"]</label>
-                                    <input data-field="system_create_date" id="register_system_create_date"
-                                        name="register_system_create_date" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_system_update_userid" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_USERID"]</label>
-                                    <input data-field="system_update_userid" id="register_system_update_userid"
-                                        name="register_system_update_userid" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="32" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="register_system_update_date" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_DATE"]</label>
-                                    <input data-field="system_update_date" id="register_system_update_date"
-                                        name="register_system_update_date" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="" />
-                                </div>
-                            </div>
+            <form id="comOfficeRegisterForm" class="gi-padding-20px">
+                <div class="gi-grid gi-grid-template-columns-1fr gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="register_top_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</label>
+                        <input data-field="top_office_code" id="register_top_office_code"
+                            name="register_top_office_code" class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="register_office_name" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</label>
+                        <input data-field="office_name" id="register_office_name" name="register_office_name"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="register_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</label>
+                        <input data-field="office_code" id="register_office_code" name="register_office_code"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="register_office_type" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</label>
+                        <input data-field="office_type" id="register_office_type" name="register_office_type"
+                            class="gi-input" autocomplete="off" />
+                    </div>
+                    <!-- 관리 정보 (숨김 처리 또는 비활성화) -->
+                    <div class="gi-grid gi-grid-template-columns-1fr-1fr gi-grid-gap-10px">
+                        <div class="gi-input-container">
+                            <label for="register_system_create_userid" class="gi-input-label"
+                                data-focus-label="true">작성자</label>
+                            <input data-field="system_create_userid" id="register_system_create_userid"
+                                name="register_system_create_userid" class="gi-input" data-disabled />
+                        </div>
+                        <div class="gi-input-container">
+                            <label for="register_system_create_date" class="gi-input-label"
+                                data-focus-label="true">작성일</label>
+                            <input data-field="system_create_date" id="register_system_create_date"
+                                name="register_system_create_date" class="gi-input" data-disabled />
                         </div>
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
             <div
-                class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="popup-register_comOffice_confirm-btn" class="gi-popup-register-btn"
-                    type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
-                <button id="popup-register_comOffice_close-btn" class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+                class="gi-btn-section gi-row-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-grid-gap-10px">
+                <button id="popup-register_comOffice_confirm-btn" class="gi-popup-register-btn" type="button">
+                    [Page.Message].Message.Label.Array["REGISTER_BTN"]
+                </button>
+                <button id="popup-register_comOffice_close-btn" class="gi-popup-close-btn" type="button">
+                    [Page.Message].Message.Label.Array["CLOSE_BTN"]
+                </button>
             </div>
         </div>
     </div>
 </article>
-<!--/등록 팝업 영역-->
 
 <!--수정 팝업 영역-->
 <article id="update_comOffice_popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body gi-row-500px">
+    <div class="gi-popup-body" style="width: 500px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_OFFICE.TITLE_UPDATE"]</span>
         </div>
         <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="comOfficeUpdateForm" class="gi-row-100">
-                    <div class="gi-padding-30px ">
-                        <div class="">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-direction-column">
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_top_office_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</label>
-                                    <input data-field="top_office_code" id="update_top_office_code"
-                                        name="update_top_office_code" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        gi-maxlength="7" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_office_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</label>
-                                    <input data-field="office_name" id="update_office_name" name="update_office_name"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" gi-maxlength="100" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_office_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</label>
-                                    <input data-field="office_code" id="update_office_code" name="update_office_code"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" gi-maxlength="7" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_office_type" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</label>
-                                    <input data-field="office_type" id="update_office_type" name="update_office_type"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="false"
-                                        autocomplete="off" gi-maxlength="100" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_office_type_code" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE_CODE"]</label>
-                                    <input data-field="office_type_code" id="update_office_type_code"
-                                        name="update_office_type_code" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="4" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_system_create_userid" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_USERID"]</label>
-                                    <input data-field="system_create_userid" id="update_system_create_userid"
-                                        name="update_system_create_userid" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="32" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_system_create_date" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_DATE"]</label>
-                                    <input data-field="system_create_date" id="update_system_create_date"
-                                        name="update_system_create_date" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_system_update_userid" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_USERID"]</label>
-                                    <input data-field="system_update_userid" id="update_system_update_userid"
-                                        name="update_system_update_userid" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="32" />
-                                </div>
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="update_system_update_date" class="gi-input-label"
-                                        data-focus-label="true" data-focus-label-text-align="default"
-                                        data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_DATE"]</label>
-                                    <input data-field="system_update_date" id="update_system_update_date"
-                                        name="update_system_update_date" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="false" autocomplete="off"
-                                        gi-maxlength="" />
-                                </div>
-                            </div>
-                        </div>
+            <form id="comOfficeUpdateForm" class="gi-padding-20px">
+                <div class="gi-grid gi-grid-template-columns-1fr gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="update_top_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</label>
+                        <input data-field="top_office_code" id="update_top_office_code" name="update_top_office_code"
+                            class="gi-input" data-required="true" autocomplete="off" />
                     </div>
-                </form>
-            </div>
-            <!--/      팝업내용 삽입 영역      -->
+                    <div class="gi-input-container">
+                        <label for="update_office_name" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</label>
+                        <input data-field="office_name" id="update_office_name" name="update_office_name"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</label>
+                        <input data-field="office_code" id="update_office_code" name="update_office_code"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_office_type" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</label>
+                        <input data-field="office_type" id="update_office_type" name="update_office_type"
+                            class="gi-input" autocomplete="off" />
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="gi-popup-footer">
             <div
-                class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="popup-update_comOffice_confirm-btn" class="gi-popup-update-btn"
-                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
-                <button id="popup-update_comOffice_close-btn" class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+                class="gi-btn-section gi-row-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center gi-grid-gap-10px">
+                <button id="popup-update_comOffice_confirm-btn" class="gi-popup-update-btn" type="button">
+                    [Page.Message].Message.Label.Array["UPDATE_BTN"]
+                </button>
+                <button id="popup-update_comOffice_close-btn" class="gi-popup-close-btn" type="button">
+                    [Page.Message].Message.Label.Array["CLOSE_BTN"]
+                </button>
             </div>
         </div>
     </div>
@@ -308,148 +176,66 @@
 
 <!--상세 팝업 영역-->
 <article id="detail_comOffice_popup" class="gi-popup" data-popup-open="false">
-    <div class="gi-popup-body gi-row-500px">
+    <div class="gi-popup-body" style="width: 500px;">
         <div class="gi-popup-header">
             <span>[Page.Message].Message.Label.Array["COM_OFFICE.TITLE_DETAIL"]</span>
         </div>
-        <div class="gi-popup-contents">
-            <!--      팝업내용 삽입 영역      -->
-            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center gi-flex-direction-column">
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
+        <div class="gi-popup-contents gi-padding-20px">
+            <div class="gi-grid gi-grid-template-columns-1fr gi-grid-gap-16px">
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</span>
+                    <span data-field="top_office_code" class="gi-span"></span>
+                </div>
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</span>
+                    <span data-field="office_name" class="gi-span"></span>
+                </div>
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</span>
+                    <span data-field="office_code" class="gi-span"></span>
+                </div>
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</span>
+                    <span data-field="office_type" class="gi-span"></span>
+                </div>
+
+                <div class="gi-grid gi-grid-template-columns-1fr-1fr gi-grid-gap-10px">
+                    <div class="gi-span-container">
+                        <span class="gi-span-label" data-focus-label="true">작성자</span>
+                        <span data-field="system_create_userid" class="gi-span"></span>
                     </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</span>
-                            <span data-field="top_office_code" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</span>
-                        </div>
+                    <div class="gi-span-container">
+                        <span class="gi-span-label" data-focus-label="true">작성일</span>
+                        <span data-field="system_create_date" class="gi-span"></span>
                     </div>
                 </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
+
+                <div class="gi-grid gi-grid-template-columns-1fr-1fr gi-grid-gap-10px">
+                    <div class="gi-span-container">
+                        <span class="gi-span-label" data-focus-label="true">수정자</span>
+                        <span data-field="system_update_userid" class="gi-span"></span>
                     </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</span>
-                            <span data-field="office_name" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
-                    </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</span>
-                            <span data-field="office_code" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
-                    </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</span>
-                            <span data-field="office_type" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
-                    </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE_CODE"]</span>
-                            <span data-field="office_type_code" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE_CODE"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
-                    </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_USERID"]</span>
-                            <span data-field="system_create_userid" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_USERID"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
-                    </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_DATE"]</span>
-                            <span data-field="system_create_date" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_CREATE_DATE"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
-                    </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_USERID"]</span>
-                            <span data-field="system_update_userid" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_USERID"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="gi-row-100 gi-col-100 gi-flex">
-                    <div class="gi-row-100px gi-col-100 gi-flex gi-flex-center gi-layout-detail-title-2">
-                        <span>title</span>
-                    </div>
-                    <div class="gi-row-100 gi-col-100 gi-grid">
-                        <div
-                            class="gi-row-100 gi-min-row-100px gi-col-100 gi-span-container gi-flex gi-flex-center gi-col-35px-important">
-                            <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
-                                data-required="false">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_DATE"]</span>
-                            <span data-field="system_update_date" class="gi-span"
-                                data-focus-span-text-align="center">[Page.Message].Message.Label.Array["COM_OFFICE.SYSTEM_UPDATE_DATE"]</span>
-                        </div>
+                    <div class="gi-span-container">
+                        <span class="gi-span-label" data-focus-label="true">수정일</span>
+                        <span data-field="system_update_date" class="gi-span"></span>
                     </div>
                 </div>
 
             </div>
-            <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="popup-detail_comOffice_close-btn" class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+            <div class="gi-btn-section gi-row-100 gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+                <button id="popup-detail_comOffice_close-btn" class="gi-popup-close-btn" type="button">
+                    [Page.Message].Message.Label.Array["CLOSE_BTN"]
+                </button>
             </div>
         </div>
     </div>

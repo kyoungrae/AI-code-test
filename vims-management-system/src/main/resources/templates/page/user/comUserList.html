@@ -1,80 +1,56 @@
 <article class="gi-article-content gi-col-95 gi-row-100">
-    <section class="gi-col-100 gi-row-100">
-        <header class="gi-flex gi-flex-center gi-col-10">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+
+        <!-- 페이지 헤더 -->
+        <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
             <h1 class="gi-page-title">[Page.Message].Message.Label.Array["COM_USER.TITLE_LIST"]</h1>
+            <p class="gi-subtitle-main">사용자 정보를 관리하고 권한을 설정할 수 있습니다.</p>
         </header>
-        <article class=" gi-col-90 gi-row-100">
-            <!--      검색기능 영역      -->
-            <div id="search-area" class="gi-col-5 gi-padding-left-right-20px gi-flex">
-                <div class="gi-row-100 gi-flex gi-flex-space-around gi-col-30px-important">
-                    <!--      검색설정 영역      -->
-                    <div class="gi-row-20">
-                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="searchDesc1" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center" data-required="false">searchDesc1</label>
-                            <input class="gi-input gi-margin-1px" data-required="false" type="text" id="searchDesc1"
-                                name="searchDesc1" data-focus-input-text-align="center" autocomplete="off" />
-                        </div>
+
+        <article>
+            <!-- 검색기능 영역 -->
+            <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+                <div class="gi-grid gi-grid-template-columns-repeat-4-1fr gi-grid-gap-20px gi-flex-align-items-center">
+
+                    <div class="gi-input-container">
+                        <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+                        <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
                     </div>
-                    <!--/     검색설정 영역      -->
-                    <!--      날짜선택 영역      -->
-                    <div class="gi-row-24 gi-flex">
-                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="from_date" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center"
-                                data-required="false">[Page.Message].Message.Label.Array["START_DATE"]</label>
-                            <input id="from_date" class="gi-input gi-margin-1px" data-required="false" type="text"
-                                name="from_date" autocomplete="off" data-focus-input-text-align="center"
-                                data-datepicker />
-                        </div>
-                        <div class="gi-flex gi-flex-align-items-center">
-                            <span class="gi-date-middle-symbol"> ~ </span>
-                        </div>
-                        <div class="gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
-                            data-focus-line="false">
-                            <label for="to_date" class="gi-input-label" data-focus-label="false"
-                                data-focus-label-text-align="center"
-                                data-required="false">[Page.Message].Message.Label.Array["END_DATE"]</label>
-                            <input id="to_date" class="gi-input gi-margin-1px" data-required="false" type="text"
-                                name="to_date" autocomplete="off" data-focus-input-text-align="center"
-                                data-datepicker />
-                        </div>
+
+                    <div class="gi-input-container">
+                        <label for="from_date" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+                        <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off"
+                            data-datepicker />
                     </div>
-                    <!--/     날짜선택 영역      -->
-                    <!--      더보기,초기화 버튼 영역      -->
-                    <div class="gi-flex gi-flex-align-items-center">
-                        <div class="gi-btn-section gi-col-100 gi-flex gi-flex-justify-content-space-evenly">
-                            <button id="more-btn" class="gi-btn-more" type="button"><i
-                                    class="fa-solid fa-gear gi-row-15px"></i>[Page.Message].Message.Label.Array["MORE_BTN"]</button>
-                            <button id="reset-btn" class="gi-btn-reset" type="button"><i
-                                    class="fa-solid fa-rotate-right gi-row-15px"></i>[Page.Message].Message.Label.Array["RESET_BTN"]</button>
-                        </div>
+
+                    <div class="gi-input-container">
+                        <label for="to_date" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+                        <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off"
+                            data-datepicker />
                     </div>
-                    <!--/     더보기,초기화 버튼 영역      -->
-                    <!--     조회 버튼 영역      -->
-                    <div class="gi-row-40 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
-                        <div class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
-                            <button id="search-btn" class="gi-btn"
-                                type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
-                        </div>
+
+                    <div class="gi-flex gi-grid-gap-10px">
+                        <button id="search-btn" class="gi-btn-blue gi-row-100"
+                            type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                        <button id="reset-btn" class="gi-btn gi-row-100"
+                            type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+                        <button id="more-btn" class="gi-btn gi-row-100"
+                            type="button">[Page.Message].Message.Label.Array["MORE_BTN"]</button>
                     </div>
-                    <!--/     조회 버튼 영역      -->
                 </div>
             </div>
-            <!--/     검색기능 영역      -->
-            <!--      그리드 영역      -->
-            <div class="gi-row-100 gi-col-90">
+            <!--/ 검색기능 영역 -->
+            <!-- 그리드 영역 -->
+            <div class="gi-row-100 gi-padding-left-right-20px">
                 <div id="comUser_gi-Grid" class="gi-Grid"></div>
-                <!--                <div id="gi-Grid" class="gi-Grid" data-side-grid-open="true" data-side-grid-open-init="true"></div>-->
-                <!--                <div class="gi-Grid-side" id="comUser_gi-Grid-side" data-side-grid-open="false"></div>-->
             </div>
-            <!--/     그리드 영역      -->
+            <!--/ 그리드 영역 -->
             <!--      등록버튼 영역      -->
             <div class="gi-row-100">
                 <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
-                    <button id="insert-btn" class="gi-btn gi-float-right " type="button"
+                    <button id="insert-btn" class="gi-btn-blue gi-float-right " type="button"
                         gi-popup-open-id="register_user_popup">[Page.Message].Message.Label.Array["COM_USER.REGISTER_BTN"]</button>
                 </div>
             </div>

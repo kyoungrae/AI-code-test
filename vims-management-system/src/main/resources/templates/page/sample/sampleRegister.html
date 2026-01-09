@@ -1,0 +1,117 @@
+<article class="gi-article-content gi-col-95 gi-row-100">
+  <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+    <div class="gi-container-narrow">
+
+      <!-- 페이지 헤더 -->
+      <header class="gi-margin-bottom-40px">
+        <h1 class="gi-font-size-36px gi-title-main">샘플 추가</h1>
+        <p class="gi-subtitle-main">새로운 프로젝트를 위한 상세 정보를 입력해 주세요.</p>
+      </header>
+
+      <form id="sampleRegistrationForm">
+
+        <!-- [기본 정보 카드] -->
+        <div class="gi-article-content gi-margin-bottom-30px">
+          <h2 class="gi-title-section">기본 정보</h2>
+          <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-1fr gi-grid-gap-20px">
+
+            <div class="gi-input-container">
+              <label for="sample_name" class="gi-input-label" data-focus-label="true" data-required="true">샘플 명칭</label>
+              <input data-field="sample_name" id="sample_name" name="sample_name" class="gi-input" autocomplete="off" />
+            </div>
+
+            <div class="gi-input-container">
+              <label for="sample_code" class="gi-input-label" data-focus-label="true" data-required="true">샘플 코드</label>
+              <input data-field="sample_code" id="sample_code" name="sample_code" class="gi-input" autocomplete="off" />
+            </div>
+
+            <div class="gi-input-container">
+              <label for="sample_category" class="gi-input-label" data-focus-label="true"
+                data-required="true">카테고리</label>
+              <input data-field="sample_category" id="sample_category" name="sample_category" class="gi-select"
+                data-select />
+            </div>
+
+            <div class="gi-input-container">
+              <label for="reg_date" class="gi-input-label" data-focus-label="true">등록 일자</label>
+              <input data-field="reg_date" id="reg_date" name="reg_date" class="gi-input" data-datepicker
+                autocomplete="off" />
+            </div>
+          </div>
+        </div>
+
+        <!-- [상세 내용 카드] -->
+        <div class="gi-article-content">
+          <h2 class="gi-title-section">상세 내용</h2>
+          <div class="gi-grid gi-grid-template-rows-auto gi-grid-gap-25px">
+
+            <div class="gi-input-container gi-textarea-modern">
+              <label for="sample_desc" class="gi-input-label" data-focus-label="true">설명 내용</label>
+              <textarea data-field="sample_desc" id="sample_desc" name="sample_desc" class="gi-input"
+                style="border:none; resize: none; background: transparent;"></textarea>
+            </div>
+
+            <div class="gi-flex gi-flex-direction-column">
+              <span
+                class="gi-margin-bottom-10px gi-padding-left-5px gi-font-size-13px gi-text-secondary gi-font-weight-500">사용
+                여부</span>
+              <div class="gi-radio-modern-group">
+                <label class="gi-radio-modern-label">
+                  <input type="radio" data-field="use_yn" name="use_yn" value="Y" checked class="gi-radio-modern-input">
+                  사용함
+                </label>
+                <label class="gi-radio-modern-label">
+                  <input type="radio" data-field="use_yn" name="use_yn" value="N" class="gi-radio-modern-input">
+                  사용 안 함
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 버튼 영역 -->
+        <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
+          <button id="sample-reset-btn" class="gi-btn gi-btn-modern-reset" type="button">초기화</button>
+          <button id="sample-save-btn" class="gi-btn-blue gi-btn-modern-save" type="button">저장하기</button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+</article>
+
+<script type="text/javascript">
+  var PRGMID = "sampleRegistrationForm";
+
+  init();
+
+  function init() {
+    new PageInit();
+    clickEvent();
+    input.setSelectOption("#sample_category", "/cms/common/comCode/find", { code: "code_id", name: "code_name" });
+  }
+
+  function clickEvent() {
+    $("#sample-save-btn").on("click", function () {
+      if (formUtil.validationCheck(PRGMID, "CHECK.")) {
+        let data = dataBinding.getData(PRGMID);
+        saveSample(data);
+      }
+    });
+
+    $("#sample-reset-btn").on("click", function () {
+      formUtil.popup("reset_confirm", "입력된 모든 내용이 초기화됩니다. 계속하시겠습니까?", function () {
+        $("#" + PRGMID)[0].reset();
+        new AfterLoadDataEvent();
+        formUtil.toast("초기화되었습니다.");
+      });
+    });
+  }
+
+  function saveSample(data) {
+    formUtil.popup("save_confirm", "작성한 정보를 등록하시겠습니까?", function () {
+      console.log("Saving Data: ", data);
+      formUtil.toast("성공적으로 등록되었습니다.");
+    });
+  }
+</script>
