@@ -174,12 +174,54 @@ class createFileUploadHTML {
     //CLASS : 드래그 앤 드롭 영역 이벤트 파일 최종 업로드 이벤트 핸들러 및 리스트 관리
     dragAndDropAreaChangeEvent() {
         let that = this;
+        let $dropArea = $(".gi-upload-drop-area");
+
+        // Prevent default drag behaviors
+        $dropArea.on('dragenter dragover dragleave drop', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
+        // Add visual feedback
+        $dropArea.on('dragenter dragover', function () {
+            $(this).addClass('active');
+        });
+
+        $dropArea.on('dragleave drop', function () {
+            $(this).removeClass('active');
+        });
+
+        // Handle dropped files
+        $dropArea.on('drop', function (e) {
+            let files = e.originalEvent.dataTransfer.files;
+            handleFiles(files);
+        });
 
         $(that.DRAG_N_DROP_INPUT)
             .off("change.dragAndDropAreaChangeEventHandler")
             .on("change.dragAndDropAreaChangeEventHandler", function (e) {
-                dragAndDropAreaChangeEventHandler(e);
+                handleFiles(e.target.files);
             });
+
+        // Shared function to handle file adding
+        function handleFiles(files) {
+            if (!files || files.length === 0) return;
+
+            let fileSettingsList = Array.from(files);
+
+            //NOTE : 기존 파일 목록에 새 파일 추가
+            let currentAdded = that.ADDED_FILE_LIST.concat(fileSettingsList);
+            //NOTE : 중복된 파일 제거 (이름, 사이즈 기준)
+            that.ADDED_FILE_LIST = currentAdded.filter((file, index, self) =>
+                index === self.findIndex((f) => f.name === file.name && f.size === file.size)
+            );
+
+            //NOTE : 전체 리스트도 업데이트 (ADDED와 동일하게 처리)
+            that.TOTAL_FILE_LIST = [...that.ADDED_FILE_LIST];
+
+            //NOTE : 화면에 파일리스트 노출
+            showFileList();
+        }
 
         //FUN : 화면에 파일리스트 노출
         function showFileList() {
@@ -247,24 +289,6 @@ class createFileUploadHTML {
 
             //NOTE : 팝업내에 업로드할 파일 삭제 이벤트
             fileDeleteBtnClickEvent();
-        }
-
-        //FUN : 파일 업로드 영역 변경 이벤트
-        function dragAndDropAreaChangeEventHandler(e) {
-            let fileSettingsList = Array.from(e.target.files);
-
-            //NOTE : 기존 파일 목록에 새 파일 추가
-            let currentAdded = that.ADDED_FILE_LIST.concat(fileSettingsList);
-            //NOTE : 중복된 파일 제거 (이름, 사이즈 기준)
-            that.ADDED_FILE_LIST = currentAdded.filter((file, index, self) =>
-                index === self.findIndex((f) => f.name === file.name && f.size === file.size)
-            );
-
-            //NOTE : 전체 리스트도 업데이트 (ADDED와 동일하게 처리)
-            that.TOTAL_FILE_LIST = [...that.ADDED_FILE_LIST];
-
-            //NOTE : 화면에 파일리스트 노출
-            showFileList();
         }
 
         //FUN : 팝업내에 업로드할 파일 삭제 이벤트

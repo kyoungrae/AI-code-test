@@ -1496,7 +1496,8 @@ label[for="fileElem"]:hover {
     cursor: pointer;
 }
 
-.gi-upload-drop-area:hover {
+.gi-upload-drop-area:hover,
+.gi-upload-drop-area.active {
     border-color: #3b82f6 !important;
     background: #eff6ff;
 }
