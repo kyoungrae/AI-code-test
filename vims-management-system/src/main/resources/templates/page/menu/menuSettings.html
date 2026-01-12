@@ -438,8 +438,7 @@
                 //그리스 내부의 header click 정렬 이벤트 설정
                 //menu_grid.sortDataSet(findByComCodeMenuList);
 
-                menu_grid.sideOpenBtnClick("access_group_grid", "access_right_group");
-                menu_grid.detailBtnClick(accessGroupStatus, "access_right_group");
+                menu_grid.sideOpenBtnClick("access_group_grid", "access_right_group", accessGroupStatus);
                 menu_grid.gridColumResize("gi-Grid");
                 //그리드 row 선택 이벤트 설정
                 menu_grid.rowClick(rowClickEvent);
@@ -495,7 +494,7 @@
             + '    <div id="gi-Grid3" class="gi-Grid gi-row-100"></div>'
             + '  </div>'
             + '</div>';
-        await $("#access_group_grid").append(htmlSource);
+        $("#access_group_grid").html(htmlSource);
         await findByComDeptGroupList(null, null, null, null, data);
         await findByComAccsGroupMenuList(null, null, null, null, data);
     }

@@ -331,7 +331,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                         }
                     });
                 });
-                observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+                const gridTarget = $("#" + gridId)[0];
+                if (gridTarget) {
+                    observer.observe(gridTarget, { childList: true, subtree: true });
+                }
                 function detailBtnClickEventHandler(e) {
                     let rowId = $(e.target).data("rowNum");
                     let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
@@ -380,7 +383,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function updateBtnClickEventHandler(e) {
                 let rowId = $(e.target).data("rowNum");
                 let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
@@ -429,7 +435,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function deleteBtnClickEventHandler(e) {
                 let rowId = $(e.target).data("rowNum");
                 let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
@@ -477,7 +486,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function resendBtnClickEventHandler(e) {
                 let rowId = $(e.target).data("rowNum");
                 let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
@@ -524,7 +536,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function mapBtnClickEventHandler(e) {
                 let mapCloseBtn = '<div class="map_close-btn"></div>'
                 let $tagId = $("#" + tagId);
@@ -574,7 +589,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 });
             });
 
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
 
             function bindSideOpenEvent() {
                 $("." + btnName).off("click.sideOpenBtnClickEventHandler").on("click.sideOpenBtnClickEventHandler", function (e) {
@@ -608,6 +626,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
 
                 // 사이드 패널 활성화
                 $($tagId).attr("data-side-grid-open", "true");
+                $tagId.empty();
 
                 // 레이아웃 조정 (반반씩)
                 $("#" + gridId).removeClass("gi-col-100").addClass("gi-flex-1");
@@ -684,7 +703,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
 
             // rowClick 이벤트를 설정하는 함수
             function setRowClickEvent(fn) {
@@ -750,7 +772,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
 
             // rowClick 이벤트를 설정하는 함수
             function setRowDoubleClickEvent(fn) {
@@ -804,7 +829,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
 
             function setRowCheckBoxClickEvent(fn) {
                 let gridSelector = "#" + gridId;
@@ -864,7 +892,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 });
             });
 
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function setMultiRowClickEvent(fn) {
                 $(".gi-grid-list").addClass("gi-cursor-pointer");
                 $(".gi-grid-list").mouseenter(function () {
@@ -1144,28 +1175,16 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             if (formUtil.checkEmptyValue(visibleOptionKeys.length)) {
                                 visibleOptionKeys.map(ArrItem => {
                                     if (Object.keys(ArrItem)[0] === item.ID) {
-                                        let isExist = originalDataForVisibleOption.some(optionItem => {
-                                            return Object.keys(optionItem)[0] === item.ID;
-                                        });
-
-                                        if (!isExist) {
-                                            if (ArrItem[item.ID] === comCodeName) {
-                                                originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
-                                            }
+                                        if (ArrItem[item.ID] === comCodeName + "") {
+                                            originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
                                         }
                                     }
                                 })
                             } else {
                                 //NOTE: VISIBLE_OPTION_BTN:{"menu_level":"0"} 조건이 하나 일때
                                 if (Object.keys(visibleOptionKeys)[0] === item.ID) {
-                                    let isExist = originalDataForVisibleOption.some(optionItem => {
-                                        return Object.keys(optionItem)[0] === item.ID;
-                                    });
-
-                                    if (!isExist) {
-                                        if (visibleOptionKeys[item.ID] === comCodeName) {
-                                            originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
-                                        }
+                                    if (visibleOptionKeys[item.ID] === comCodeName + "") {
+                                        originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
                                     }
                                 }
                             }
@@ -1183,10 +1202,16 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             //     tag = '<input type="radio" class="gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-field="'+data[i][item.ID]+'"/>';
                             //     break;
                             case "button":
-                                if (!originalDataForVisibleOption[item.ID]) {
-                                    tag = '<button type="button" id="' + item.ID + "_" + i + '" class="resizer gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
-                                    break;
+                                // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                let hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
+                                if (hasVisibleOption) {
+                                    if (originalDataForVisibleOption[item.ID] === "true") {
+                                        tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
+                                    }
+                                } else {
+                                    tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
                                 }
+                                break;
                             // case "checkbox":
                             //     tag = '<input type="checkbox" class="gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" value="' + data[i][item.ID] + '" />';
                             //     break;
@@ -1428,7 +1453,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                         }
                     });
                 });
-                observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+                const gridTarget = $("#" + gridId)[0];
+                if (gridTarget) {
+                    observer.observe(gridTarget, { childList: true, subtree: true });
+                }
                 function detailBtnClickEventHandler(e) {
                     let rowId = $(e.target).data("rowNum");
                     let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
@@ -1477,7 +1505,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function updateBtnClickEventHandler(e) {
                 let rowId = $(e.target).data("rowNum");
                 let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
@@ -1526,7 +1557,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                     }
                 });
             });
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function deleteBtnClickEventHandler(e) {
                 let rowId = $(e.target).data("rowNum");
                 let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
@@ -1601,7 +1635,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 }
             });
 
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
 
             // rowClick 이벤트를 설정하는 함수
             function setRowClickEvent(fn) {
@@ -1668,7 +1705,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 });
             });
 
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
             function setMultiRowClickEvent(fn) {
                 $(".gi-grid-list").addClass("gi-cursor-pointer");
                 $(".gi-grid-list").mouseenter(function () {
@@ -1729,7 +1769,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 });
             });
 
-            observer.observe($("#" + gridId)[0], { childList: true, subtree: true });
+            const gridTarget = $("#" + gridId)[0];
+            if (gridTarget) {
+                observer.observe(gridTarget, { childList: true, subtree: true });
+            }
 
             function bindSideOpenEvent() {
                 $("." + btnName).off("click.sideOpenBtnClickEventHandler").on("click.sideOpenBtnClickEventHandler", function (e) {
@@ -1763,6 +1806,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
 
                 // 사이드 패널 활성화
                 $($tagId).attr("data-side-grid-open", "true");
+                $tagId.empty();
 
                 // 레이아웃 조정 (반반씩)
                 $("#" + gridId).removeClass("gi-col-100").addClass("gi-flex-1");
