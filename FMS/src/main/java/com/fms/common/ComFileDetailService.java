@@ -20,11 +20,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ComFileDetailService extends AbstractCommonService<ComFileDetail> {
     private final ComFileDetailMapper comFileDetailMapper;
+    private final ComFileMapper comFileMapper;
 
     private final MessageSource messageSource;
 
     private String getMessage(String code) {
-        return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+        return messageSource.getMessage(code, null, code, LocaleContextHolder.getLocale());
     }
 
     @Override
@@ -79,17 +80,44 @@ public class ComFileDetailService extends AbstractCommonService<ComFileDetail> {
 
     @Transactional(rollbackFor = Exception.class)
     protected int removeByFileIdAndUuid(ComFileDetail request) throws Exception {
-        int deletedRows = comFileDetailMapper.DELETE(request);
-        if (deletedRows == 0)
-            return 0;
-        deleteFile(request);
+        try {
+            // NOTE: Retrieve full information including file_path before deletion
+            List<ComFileDetail> details = comFileDetailMapper.SELECT(request);
+            if (details == null || details.isEmpty()) {
+                return 0;
+            }
 
-        return deletedRows;
+            ComFileDetail fileDetail = details.get(0);
+            int deletedRows = comFileDetailMapper.DELETE(request);
+
+            if (deletedRows > 0) {
+                deleteFile(fileDetail);
+            }
+            var isDetailParam = ComFileDetail.builder().uuid(request.getUuid()).build();
+
+            List<ComFileDetail> isDetails = comFileDetailMapper.SELECT(isDetailParam);
+            if (isDetails == null || isDetails.isEmpty()) {
+                var isComFileParam = ComFile.builder().uuid(request.getUuid()).build();
+                int deleteComFile = comFileMapper.COM_FILE_DELETE(isComFileParam);
+                if (deleteComFile > 0) {
+                    System.out.println("deleteComFile : " + deleteComFile);
+                }
+            }
+
+            return deletedRows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException(getMessage("EXCEPTION.REMOVE"));
+        }
     }
 
     protected void deleteFile(ComFileDetail param) throws IOException {
-        File file = new File(param.getFile_path());
-        Files.deleteIfExists(file.toPath());
+        if (param.getFile_path() != null && !param.getFile_path().isEmpty()) {
+            File file = new File(param.getFile_path() + param.getFile_name());
+            // System.out.println(file);
+            Files.deleteIfExists(file.toPath());
+
+        }
     }
 
     @Transactional(rollbackFor = Exception.class)

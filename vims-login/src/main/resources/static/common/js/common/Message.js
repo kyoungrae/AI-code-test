@@ -33,6 +33,7 @@ Message.Label.Array["CONFIRM.UPDATE"] = "수정하시겠습니까?";
 Message.Label.Array["CONFIRM.RESET"] = "초기화하시겠습니까?";
 Message.Label.Array["CONFIRM.CANCEL"] = "취소하시겠습니까?";
 Message.Label.Array["CONFIRM.RESEND"] = "재발송하시겠습니까?";
+Message.Label.Array["CONFIRM.RESET"] = "입력된 모든 내용이 초기화됩니다. 계속하시겠습니까?";
 
 Message.Label.Array["FAIL.INSERT"] = "등록실패";
 Message.Label.Array["FAIL.SELECT"] = "조회실패";
@@ -76,6 +77,7 @@ Message.Label.Array["SEARCH_BTN"] = "조회";
 Message.Label.Array["REGISTER_BTN"] = "등록";
 Message.Label.Array["RESET_BTN"] = "초기화";
 Message.Label.Array["UPLOAD_BTN"] = "업로드";
+Message.Label.Array["SIDE_BTN"] = "사이드";
 
 Message.Label.Array["START_DATE"] = "시작일";
 Message.Label.Array["END_DATE"] = "종료일";
@@ -85,7 +87,9 @@ Message.Label.Array["FAIL.DELETE.REASON.EXIST_CHILD_DATA"] = "하위 데이터�
 Message.Label.Array["MAXIMUM.UPLOAD.SIZE.100MB"] = "파일 업로드 용량은 100 MB를 초과할 수 없습니다";
 Message.Label.Array["ALERT.NO.FILE"] = "선택 된 파일이 없습니다";
 Message.Label.Array["FILE_DOWN_BTN"] = "첨부파일 다운로드";
-Message.Label.Array["FILE_NAME"] = "첨부파일";
+Message.Label.Array["FILE_ATTACH"] = "파일 첨부";
+Message.Label.Array["FILE_ATTACH_INFO"] = "첨부된 파일 목록을 아래에서 확인할 수 있습니다.";
+Message.Label.Array["FILE_ATTACH_AREA_NOT_EXIST_FILE"] = "첨부된 파일이 없습니다.";
 Message.Label.Array["FILE_REGISTER_BTN"] = "파일추가";
 Message.Label.Array["FILE_NAME"] = "파일명";
 Message.Label.Array["FILE_SIZE"] = "파일크기";

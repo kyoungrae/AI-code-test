@@ -72,7 +72,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         // grid_list_header += '<li class="gi-row-' + item.WIDTH + ' gi-flex gi-flex-center gi-overflow-scroll gi-col-30px '+hidden+'">' +
         switch (item.TYPE) {
             case "checkbox":
-                grid_list_header += '<li data-column="' + item.ID + '_checkbox_all" class="resizableBox gi-min-row-50px gi-row-' + item.WIDTH + ' gi-overflow-scroll gi-col-30px ' + hidden + '' + sort + '">' +
+                grid_list_header += '<li data-column="' + item.ID + '_checkbox_all" class="gi-flex-justify-content-center resizableBox gi-min-row-50px gi-row-' + item.WIDTH + ' gi-overflow-scroll gi-col-30px ' + hidden + '' + sort + '">' +
                     '<input type="checkbox" id="' + gridId + '_checkbox_all" class="gi-padding-left-right-10px"/>' +
                     '</li>';
                 break;
