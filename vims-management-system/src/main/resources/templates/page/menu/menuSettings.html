@@ -431,13 +431,15 @@
                     data[i]["icon_view"] = "<i class='fa-solid " + item.menu_icon + "'></i>";
                 })
                 menu_grid.DataSet(data);
+                //그리드 엑셀 다운로드 버튼 활성화
+                menu_grid.excelDownloadEvent(Message.Label.Array["COM_MENU.TITLE_LIST"]);
+
                 //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
                 menu_grid.updateBtnClick(menuUpdateSetting, "update_menu_btn");
                 menu_grid.deleteBtnClick(comMenuDelete, "delete_menu_btn");
 
                 //그리스 내부의 header click 정렬 이벤트 설정
                 //menu_grid.sortDataSet(findByComCodeMenuList);
-
                 menu_grid.sideOpenBtnClick("access_group_grid", "access_right_group", accessGroupStatus);
                 menu_grid.gridColumResize("gi-Grid");
                 //그리드 row 선택 이벤트 설정

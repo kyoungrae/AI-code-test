@@ -36,10 +36,29 @@
         </div>
       </div>
       <!--/ 검색기능 영역 -->
+      <!-- 탭 영역 -->
+      <div id="sample-tab-container" class="gi-padding-left-right-20px gi-margin-bottom-20px">
+        <ul id="sample-tabs" class="gi-flex gi-grid-gap-10px">
+          <li
+            class="gi-row-200px gi-tab gi-tab-active gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
+            Standard
+            Grid</li>
+          <li class="gi-row-200px gi-tab gi-flex gi-flex-justify-content-center gi-flex-align-items-center">Hierarchy
+            Grid</li>
+        </ul>
+      </div>
+
       <!-- 그리드 영역 -->
-      <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
-        <div id="sampleList_gi-Grid" class="gi-Grid gi-col-100"></div>
-        <div id="sample_gi-Grid-side" class="gi-Grid-side" data-side-grid-open="false"></div>
+      <div id="tab-content-0" class="tab-content">
+        <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
+          <div id="sampleList_gi-Grid" class="gi-Grid gi-col-100"></div>
+          <div id="sample_gi-Grid-side" class="gi-Grid-side" data-side-grid-open="false"></div>
+        </div>
+      </div>
+      <div id="tab-content-1" class="tab-content" style="display: none;">
+        <div class="gi-row-100 gi-padding-left-right-20px gi-flex">
+          <div id="sampleHierarchy_gi-Grid" class="gi-Grid gi-col-100"></div>
+        </div>
       </div>
       <!--/ 그리드 영역 -->
       <!--      등록버튼 영역      -->
@@ -143,22 +162,37 @@
   var DETAIL_POPUP_ID = "detail_sample_popup";
   init();
   function init() {
-
     //초기화
     resetEvent();
 
     //페이지 초기설정
     new PageInit();
 
+    // 탭 초기화 설정
+    formUtil.giTab("sample-tabs", onTabChange);
+
     //데이터 조회
     findBySampleList();
 
     setTimeout(function () {
-
       //클릭 이벤트
       clickEvent();
     });
+  }
 
+  /**
+   * 탭 변경 핸들러
+   */
+  function onTabChange(data) {
+    let tabIdx = data.tab_value;
+    $(".tab-content").hide();
+    $("#tab-content-" + tabIdx).show();
+
+    if (tabIdx == 1) {
+      findBySampleHierarchyList();
+    } else {
+      findBySampleList();
+    }
   }
 
   function resetEvent() {
@@ -279,6 +313,8 @@
     //let sample_grid = formUtil.giGridHierarchy(comUser_menuGrid_header,paging,page,"comUser_gi-Grid");
     //sample_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
 
+
+    sample_grid.excelDownloadEvent("test");
     //사이드 그리드 설정
     sample_grid.sideOpenBtnClick("sample_gi-Grid-side", "side_btn", function (data) {
       console.log("Side Panel Data:", data);
@@ -368,6 +404,52 @@
     //   formUtil.toast(error);
 
     // })
+  }
+
+  /**
+   * 하이라키 그리드 조회 샘플 (메뉴 설정 구조 기반)
+   */
+  function findBySampleHierarchyList() {
+    // 메뉴 설정 구조와 동일한 샘플 데이터 구성
+    let hierarchyData = [
+      { no: 1, menu_name_kr: "시스템 관리", menu_level: "0", top_menu_code: "-", menu_code: "SYS_MGMT", url: "/sys", use_yn: "1" },
+      { no: 2, menu_name_kr: "사용자 관리", menu_level: "1", top_menu_code: "SYS_MGMT", menu_code: "USER_MGMT", url: "/sys/user", use_yn: "1" },
+      { no: 3, menu_name_kr: "메뉴 설정", menu_level: "1", top_menu_code: "SYS_MGMT", menu_code: "MENU_MGMT", url: "/sys/menu", use_yn: "1" },
+      { no: 4, menu_name_kr: "권한 관리", menu_level: "2", top_menu_code: "MENU_MGMT", menu_code: "AUTH_MGMT", url: "/sys/menu/auth", use_yn: "1" },
+      { no: 5, menu_name_kr: "공통코드 관리", menu_level: "1", top_menu_code: "SYS_MGMT", menu_code: "CODE_MGMT", url: "/sys/code", use_yn: "1" },
+
+      { no: 6, menu_name_kr: "운영 관리", menu_level: "0", top_menu_code: "-", menu_code: "OPER_MGMT", url: "/oper", use_yn: "1" },
+      { no: 7, menu_name_kr: "게시판 관리", menu_level: "1", top_menu_code: "OPER_MGMT", menu_code: "BOARD_MGMT", url: "/oper/board", use_yn: "1" },
+      { no: 8, menu_name_kr: "공지사항", menu_level: "2", top_menu_code: "BOARD_MGMT", menu_code: "NOTICE_MGMT", url: "/oper/board/notice", use_yn: "1" }
+    ];
+
+    let header = {
+      title: "메뉴 구조 샘플 그리드",
+      list: [
+        { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+        { HEADER: '메뉴명', ID: 'menu_name_kr', WIDTH: '40', TYPE: 'text', FONT_SIZE: '14px', TEXT_ALIGN: 'left', HIDDEN: false },
+        { HEADER: '메뉴코드', ID: 'menu_code', WIDTH: '20', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+        { HEADER: '경로', ID: 'url', WIDTH: '33', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+        // 하이라키 동작 필수 컬럼 (숨김)
+        { HEADER: '레벨', ID: 'menu_level', WIDTH: '0', TYPE: 'text', HIDDEN: true },
+        { HEADER: '상위코드', ID: 'top_menu_code', WIDTH: '0', TYPE: 'text', HIDDEN: true }
+      ]
+    };
+
+    let grid = formUtil.giGridHierarchy(header, 1, 1, "sampleHierarchy_gi-Grid");
+
+    // 하이라키 옵션 설정 (메뉴 설정 페이지와 동일하게 설정)
+    grid.HierarchyOption({
+      level_column: "menu_level",
+      parent_depth_column: "menu_code",
+      child_depth_column: "top_menu_code"
+    });
+
+    // 데이터 바인딩
+    grid.DataSet(hierarchyData);
+
+    // 엑셀 다운로드 활성화
+    grid.excelDownloadEvent("메뉴_구조_샘플_리포트");
   }
   //FUN : 상세팝업 호출
   function sampleDetailPopupOpen(cont) {

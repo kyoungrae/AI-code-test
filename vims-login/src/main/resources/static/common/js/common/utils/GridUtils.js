@@ -17,6 +17,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
     let pagingAnimationClass = "";
 
     if (!formUtil.checkEmptyValue(gridId)) gridId = "gi-Grid";
+    let gridData = [];
 
     if (formUtil.checkEmptyValue(prePageAnimationCont)) {
         //애니메이션 효과 적용
@@ -121,10 +122,14 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         '            <figure class="gi-figure-content gi-overflow-scroll gi-col-100 gi-row-100 gi-flex gi-flex-justify-content-center gi-flex gi-flex-direction-column">' +
         '                <div class="gi-article-content gi-min-col-90 gi-col-100 gi-row-100">' +
         // '                    <header class="gi-row-100 gi-col-5 gi-margin-bottom-1"><h4>' + title + '</h4></header>' +
-        '                    <div class="gi-row-100 gi-flex gi-margin-bottom-1 ">' +
-        '                        <select class="gi-grid-row-selector" id="' + giGridRowSelectorId + '" class="gi-row-65px">' +
+        '                    <div class="gi-row-100 gi-flex gi-flex-justify-content-space-between gi-margin-bottom-1 ">' +
+        '                        <select class="gi-grid-row-selector gi-row-65px" id="' + giGridRowSelectorId + '">' +
         options +
         '                        </select>' +
+        '                        <button id="excel-download-btn_' + gridId + '" class="gi-excel-download-btn" type="button">' +
+        '                            <i class="fa-solid fa-file-excel"></i>' +
+        '                            <span>excel download</span>' +
+        '                        </button>' +
         '                    </div>' +
         '                    <div id="gi-grid-list-body" data-page-number="' + page + '" class="gi-row-100 gi-overflow-scroll gi-flex gi-flex-direction-column">' +
         '                        <ul class="gi-grid-list-header gi-row-100 gi-col-30px gi-ul gi-flex">' +
@@ -154,6 +159,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
     return {
         //그리드 데이터 설정
         DataSet: async function (data) {
+            gridData = data;
             let flag = formUtil.checkEmptyValue(data);
             let grid_list = "";
             let comCodeGroupIdArray = [];
@@ -938,6 +944,49 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         },
         gridColumResize: function (gridId) {
             formUtil.gridResize(gridId);
+        },
+        excelDownload: function (fileName) {
+            if (typeof XLSX === 'undefined') {
+                formUtil.toast("Excel library (SheetJS) is not loaded.", "error");
+                return;
+            }
+            if (!gridData || gridData.length === 0) {
+                formUtil.toast("No data to download.", "error");
+                return;
+            }
+
+            // 헤더 정보 구성 (HIDDEN 제외, 버튼/체크박스 제외)
+            let headers = headerItem.filter(item => {
+                let isHidden = item.HIDDEN === true;
+                return !isHidden && item.TYPE !== 'button' && item.TYPE !== 'checkbox';
+            });
+
+            let headerNames = headers.map(item => item.HEADER);
+
+            // 데이터 변환
+            let excelData = gridData.map(row => {
+                let newRow = {};
+                headers.forEach(header => {
+                    newRow[header.HEADER] = row[header.ID];
+                });
+                return newRow;
+            });
+
+            // 워크시트 생성
+            const worksheet = XLSX.utils.json_to_sheet(excelData, { header: headerNames });
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+
+            // 파일 다운로드
+            let name = fileName || (title || "grid_data");
+            XLSX.writeFile(workbook, name + ".xlsx");
+        },
+        excelDownloadEvent: function (fileName) {
+            let $btn = $("#excel-download-btn_" + gridId);
+            $btn.css("display", "flex");
+            $btn.off("click").on("click", function () {
+                this.excelDownload(fileName);
+            }.bind(this));
         }
     }
 }
@@ -998,6 +1047,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
     let application_sub_hierarchyOptionColumn = "";
 
     if (!formUtil.checkEmptyValue(gridId)) gridId = "gi-Grid";
+    let gridData = [];
 
     if (formUtil.checkEmptyValue(prePageAnimationCont)) {
         //애니메이션 효과 적용
@@ -1089,12 +1139,15 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
     let grid =
         '            <figure class="gi-figure-content gi-overflow-scroll gi-col-100 gi-row-100 gi-flex gi-flex-justify-content-center gi-flex gi-flex-direction-column">' +
         '                <div class="gi-article-content gi-min-col-90 gi-col-100 gi-row-100">' +
-        // '                    <header class="gi-row-100 gi-col-5 gi-margin-bottom-1"><h4>' + title + '</h4></header>' +
-        //'                    <div class="gi-row-100 gi-flex gi-margin-bottom-1 gi-col-25px">' +
-        // '                        <select id="gi-grid-row-selector" class="gi-row-65px">' +
-        // options+
-        // '                        </select>'+
-        //'                    </div>'+
+        '                    <div class="gi-row-100 gi-flex gi-flex-justify-content-space-between gi-margin-bottom-1 ">' +
+        '                        <select class="gi-grid-row-selector gi-row-65px" id="' + giGridRowSelectorId + '">' +
+        options +
+        '                        </select>' +
+        '                        <button id="excel-download-btn_' + gridId + '" class="gi-excel-download-btn" type="button">' +
+        '                            <i class="fa-solid fa-file-excel"></i>' +
+        '                            <span>excel download</span>' +
+        '                        </button>' +
+        '                    </div>' +
         '                    <div id="gi-grid-list-body" data-page-number="' + page + '" class="gi-row-100 gi-overflow-scroll gi-flex gi-flex-direction-column gi-margin-top-10px">' +
         '                        <ul class="gi-grid-list-header gi-row-100 gi-col-30px gi-ul gi-flex">' +
         grid_list_header +
@@ -1123,6 +1176,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
     return {
         //계층구조 기준 컬럼 설정
         DataSet: async function (data) {
+            gridData = data;
             let flag = formUtil.checkEmptyValue(data);
             let isHierarchy = formUtil.checkEmptyValue(application_level_hierarchyOptionColumn)
                 && formUtil.checkEmptyValue(application_parent_hierarchyOptionColumn)
@@ -1885,6 +1939,49 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
         },
         gridColumResize: function (gridId) {
             formUtil.gridResize(gridId);
+        },
+        excelDownload: function (fileName) {
+            if (typeof XLSX === 'undefined') {
+                formUtil.toast("Excel library (SheetJS) is not loaded.", "error");
+                return;
+            }
+            if (!gridData || gridData.length === 0) {
+                formUtil.toast("No data to download.", "error");
+                return;
+            }
+
+            // 헤더 정보 구성 (HIDDEN 제외, 버튼/체크박스 제외)
+            let headers = headerItem.filter(item => {
+                let isHidden = item.HIDDEN === true;
+                return !isHidden && item.TYPE !== 'button' && item.TYPE !== 'checkbox';
+            });
+
+            let headerNames = headers.map(item => item.HEADER);
+
+            // 데이터 변환
+            let excelData = gridData.map(row => {
+                let newRow = {};
+                headers.forEach(header => {
+                    newRow[header.HEADER] = row[header.ID];
+                });
+                return newRow;
+            });
+
+            // 워크시트 생성
+            const worksheet = XLSX.utils.json_to_sheet(excelData, { header: headerNames });
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+
+            // 파일 다운로드
+            let name = fileName || (title || "grid_data");
+            XLSX.writeFile(workbook, name + ".xlsx");
+        },
+        excelDownloadEvent: function (fileName) {
+            let $btn = $("#excel-download-btn_" + gridId);
+            $btn.css("display", "flex");
+            $btn.off("click").on("click", function () {
+                this.excelDownload(fileName);
+            }.bind(this));
         }
     }
 }
