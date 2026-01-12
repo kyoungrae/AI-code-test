@@ -217,28 +217,6 @@
     opacity: 0.5;
 }
 
-/* grid 정렬용 */
-.gi-grid-sort-asc {
-    background-image: url("../../img/grid_sort_asc.svg");
-    background-repeat: no-repeat;
-    background-position: right 5% center;
-    background-size: 15px 15px;
-}
-
-.gi-grid-sort-desc {
-    background-image: url("../../img/grid_sort_desc.svg");
-    background-repeat: no-repeat;
-    background-position: right 5% center;
-    background-size: 15px 15px;
-}
-
-/* grid sort hover. detail_btn(상세버튼)외에 hover로 이미지추가 */
-.gi-grid-list-header li:not(.gi-grid-sort-asc):not(.gi-grid-sort-desc):not([data-column$="detail_btn"]):hover {
-    background-image: url("../../img/grid_sort_default.svg");
-    background-repeat: no-repeat;
-    background-position: right 5% center;
-    background-size: 15px 15px;
-}
 
 /* 공동명의자 추가 hover */
 .gi-layout-detail-title.gi-super-joint-owner {

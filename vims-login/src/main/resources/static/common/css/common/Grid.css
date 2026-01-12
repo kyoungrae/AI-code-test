@@ -3831,6 +3831,84 @@
     height: 100%;
     right: 0px;
     position: relative;
-    cursor: default;
+    cursor: pointer;
     transition: 0.1s ease-in-out;
+}
+
+/* ========== Grid Sorting Styles ========== */
+.gi-grid-list-header li {
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    user-select: none;
+}
+
+.gi-grid-list-header li:hover {
+    background-color: #f8f9fa;
+    color: var(--primary-color, #4a90e2);
+}
+
+/* Base Sort Icon (Default state on hover) */
+.gi-grid-list-header li:not(.gi-grid-sort-asc):not(.gi-grid-sort-desc):not([data-column$="detail_btn"]):not([data-column$="_checkbox_all"]):hover::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background-image: url("../../img/grid_sort_default.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.5;
+}
+
+/* Active Sorting State - Ascending */
+.gi-grid-list-header li.gi-grid-sort-asc::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background-image: url("../../img/grid_sort_asc.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 1;
+}
+
+/* Active Sorting State - Descending */
+.gi-grid-list-header li.gi-grid-sort-desc::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background-image: url("../../img/grid_sort_desc.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 1;
+}
+
+/* Specific styling for header text when sorting is active */
+.gi-grid-list-header li.gi-grid-sort-asc,
+.gi-grid-list-header li.gi-grid-sort-desc {
+    background-color: #f0f4f8;
+    color: var(--secondary-color, #2c3e50);
+    font-weight: 600;
+}
+
+/* Prevent icon from overlapping with long text only when necessary, maintaining center alignment */
+.gi-grid-list-header li span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    /* Removed padding-right: 25px to fix center alignment bug */
 }
