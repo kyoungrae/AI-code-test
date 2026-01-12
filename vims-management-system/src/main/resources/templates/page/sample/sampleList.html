@@ -37,9 +37,9 @@
       </div>
       <!--/ 검색기능 영역 -->
       <!-- 그리드 영역 -->
-      <div class="gi-row-100 gi-padding-left-right-20px">
-        <div id="sampleList_gi-Grid" class="gi-Grid"></div>
-        <div id="sample_gi-Grid-side" class="gi-Grid" data-side-grid-open="false"></div>
+      <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
+        <div id="sampleList_gi-Grid" class="gi-Grid gi-col-100"></div>
+        <div id="sample_gi-Grid-side" class="gi-Grid-side" data-side-grid-open="false"></div>
       </div>
       <!--/ 그리드 영역 -->
       <!--      등록버튼 영역      -->
@@ -227,8 +227,8 @@
     for (let i = 0; i < 100; i++) {
       allData.push({
         "no": i + 1,
-        "test1": i + 1,
-        "test2": i + 1,
+        "use_yn": i % 2 === 0 ? "1" : "0",
+        "test2": i % 2 === 0 ? "1" : "0",
         "test3": i + 1,
         "test4": i + 1,
         "test5": i + 1,
@@ -256,9 +256,9 @@
       title: '[Page.Message].Message.Label.Array["SAMPLE.TITLE"]',
       list: [
         { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-        { HEADER: 'test1', ID: 'test1', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-        { HEADER: 'test2', ID: 'test2', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-        { HEADER: 'test3', ID: 'test3', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+        { HEADER: 'test1', ID: 'use_yn', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false }, // 공통코드 치환
+        { HEADER: 'test2', ID: "test2", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "test2": "0" }], HIDDEN: false }, // 조건에 따라 버튼 표시
+        { HEADER: 'test3', ID: 'test3', WIDTH: '7', TYPE: 'password', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false }, // 비밀번호
         { HEADER: 'test4', ID: 'test4', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
         { HEADER: 'test5', ID: 'test5', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
         { HEADER: 'test6', ID: 'test6', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
@@ -280,7 +280,39 @@
     //sample_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
 
     //사이드 그리드 설정
-    sample_grid.sideOpenBtnClick("sample_gi-Grid-side", "side_btn");
+    sample_grid.sideOpenBtnClick("sample_gi-Grid-side", "side_btn", function (data) {
+      console.log("Side Panel Data:", data);
+
+      // 1. 사이드 패널 내 그리드 컨테이너 생성
+      $("#sample_gi-Grid-side").html('<div class="gi-padding-20px gi-row-100 gi-flex gi-flex-direction-column gi-grid-gap-10px">' +
+        '<h3>[' + data.no + '] 로우 상세 내역</h3>' +
+        '<div id="sampleSub_gi-Grid" class="gi-Grid gi-row-100"></div>' +
+        '</div>');
+
+      // 2. 서브 그리드 헤더 설정
+      let subGridHeader = {
+        title: "상세 내역 리스트",
+        list: [
+          { HEADER: '순번', ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+          { HEADER: '항목명', ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+          { HEADER: '내용', ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
+        ]
+      };
+
+      // 3. 서브 그리드 데이터 생성 (샘플)
+      let subData = [];
+      for (let i = 1; i <= 5; i++) {
+        subData.push({
+          sub_no: i,
+          item_name: "상세 항목 " + data.no + "-" + i,
+          item_content: "이것은 " + data.no + "번 데이터의 상세 내용입니다."
+        });
+      }
+
+      // 4. 서브 그리드 초기화 및 데이터 바인딩
+      let sub_grid = formUtil.giGrid(subGridHeader, 1, 1, "sampleSub_gi-Grid");
+      sub_grid.DataSet(subData);
+    });
 
     //그리드 데이터 설정
     sample_grid.DataSet(data);
@@ -368,52 +400,22 @@
 
   //FUN : 사용자 등록
   function registerSample(cont) {
-    const url = "/cms/common/comUser/register";
-    const param = {
-      user_id: cont.user_id,
-    }
-    axios.post(url, param)
-      .then(response => {
-        popup.close(POPUP_REGISTER_FROM);
-        findBySampleList();
-        formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
-      })
-      .catch(error => {
-        formUtil.toast(error.response.data, "error");
-      })
+    popup.close(POPUP_REGISTER_FROM);
+    findBySampleList();
+    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"], "success");
   }
 
   //FUN : 사용자 수정
   function updateSample(cont) {
-    const url = "/cms/common/comUser/update";
-    const param = {
-      id: cont.id
-    }
-    axios.post(url, param)
-      .then(response => {
-        popup.close(UPDATE_POPUP_ID);
-        findBySampleList();
-        formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
-      })
-      .catch(error => {
-        formUtil.toast(error.response.data, "error");
-      })
+    popup.close(UPDATE_POPUP_ID);
+    findBySampleList();
+    formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"], "success");
   }
 
   //FUN : 사용자 삭제
   function deleteSample(cont) {
-    const url = "/cms/common/comUser/remove";
-    const param = {
-      id: cont.id
-    }
-    axios.post(url, param)
-      .then(response => {
-        findBySampleList();
-        formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
-      })
-      .catch(error => {
-        formUtil.toast(error.response.data, "error");
-      })
+    findBySampleList();
+    formUtil.toast(Message.Label.Array["COMPLETE.DELETE"], "success");
   }
 
 </script>
