@@ -3827,12 +3827,24 @@
 }
 
 .gridColumResizer {
-    width: 100%;
+    width: 6px;
+    /* Slightly wider hit area */
     height: 100%;
-    right: 0px;
-    position: relative;
-    cursor: pointer;
-    transition: 0.1s ease-in-out;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: col-resize;
+    z-index: 5;
+    /* Ensure it's above other elements */
+    transition: background-color 0.2s ease;
+    border-right: 1px solid transparent;
+    /* Guide line */
+}
+
+.gridColumResizer:hover {
+    background-color: rgba(74, 144, 226, 0.3);
+    /* Transparent blue on hover */
+    border-right: 2px solid var(--primary-color, #4a90e2);
 }
 
 /* ========== Grid Sorting Styles ========== */

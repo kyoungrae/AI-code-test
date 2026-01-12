@@ -80,7 +80,8 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 break;
             default:
                 grid_list_header += '<li data-column="' + item.ID + '" class="resizableBox gi-min-row-50px gi-row-' + item.WIDTH + ' gi-overflow-scroll gi-col-30px ' + hidden + '' + sort + '">' +
-                    '<span class="gridColumResizer gi-padding-left-right-10px gi-flex gi-flex-justify-content-center">' + item.HEADER + '</span>' +
+                    '<span class="gi-width-100 gi-padding-left-right-10px gi-flex gi-flex-justify-content-center">' + item.HEADER + '</span>' +
+                    '<div class="gridColumResizer"></div>' +
                     '</li>';
                 break;
         }
@@ -1102,7 +1103,8 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
         // grid_list_header += '<li class="gi-row-' + item.WIDTH + ' gi-flex gi-flex-center gi-overflow-scroll gi-col-30px '+hidden+'">' +
         grid_list_header +=
             '<li data-column="' + item.ID + '" class="resizableBox gi-min-row-50px gi-row-' + item.WIDTH + ' gi-overflow-scroll gi-col-30px ' + hidden + '' + sort + '">' +
-            '<span class="gridColumResizer gi-padding-left-right-10px gi-flex gi-flex-justify-content-center">' + item.HEADER + '</span>' +
+            '<span class="gi-width-100 gi-padding-left-right-10px gi-flex gi-flex-justify-content-center">' + item.HEADER + '</span>' +
+            '<div class="gridColumResizer"></div>' +
             '</li>';
     })
     let totalPageCount = Math.ceil(paging);
@@ -1986,42 +1988,54 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
     }
 }
 FormUtility.prototype.gridResize = function (gridId) {
-    $(".gridColumResizer").css("cursor", "ew-resize");
-    $("#" + gridId + " .gridColumResizer").on("mousedown", function (e) {
+    const $grid = $("#" + gridId);
+
+    // 리사이저 클릭 시 헤더의 정렬(Sort) 이벤트가 발생하는 것을 방지
+    $grid.find(".gridColumResizer").off("click.gridResize").on("click.gridResize", function (e) {
+        e.stopPropagation();
+    });
+
+    $grid.find(".gridColumResizer").off("mousedown.gridResize").on("mousedown.gridResize", function (e) {
         const $resizer = $(this);
         const $headerLi = $resizer.closest("li");
         const columnKey = $headerLi.data("column");
+
+        if (!columnKey) return;
+
         const startX = e.clientX;
+        const startWidth = $headerLi.outerWidth();
 
-        // 헤더: data-column
-        const $headerCols = $("#" + gridId + " li[data-column='" + columnKey + "']");
-        // 바디: data-field
-        const $bodyCols = $("#" + gridId + " li[data-field='" + columnKey + "']");
+        // 선택된 컬럼의 모든 헤더와 바디 셀 찾기
+        const $allCells = $grid.find(`li[data-column='${columnKey}'], li[data-field='${columnKey}']`);
 
-        const $allCols = $headerCols.add($bodyCols);
+        // 드래그 중 텍스트 선택 방지 및 커서 유지
+        $("body").css({
+            "user-select": "none",
+            "cursor": "col-resize"
+        });
 
-        // 각각의 시작 너비 저장
-        const startWidths = $allCols.map(function () {
-            return $(this).outerWidth();
-        }).get();
+        $(window).on("mousemove.gridResize", function (moveEvent) {
+            const currentX = moveEvent.clientX;
+            const diffX = currentX - startX;
+            const newWidth = Math.max(startWidth + diffX, 30); // 최소 너비 30px
 
-        // 마우스 이동 이벤트
-        $(window).on("mousemove.resize", function (e) {
-            const delta = e.clientX - startX;
-
-            $allCols.each(function (i) {
-                const newWidth = startWidths[i] + delta;
-                if (newWidth > 30) {
-                    $(this).width(newWidth);
-                }
+            $allCells.css({
+                "width": newWidth + "px",
+                "min-width": newWidth + "px",
+                "max-width": newWidth + "px",
+                "flex": "none"
             });
         });
 
-        // 마우스 해제 시 이벤트 제거
-        $(window).on("mouseup.resize", function () {
-            $(window).off(".resize");
+        $(window).on("mouseup.gridResize", function () {
+            $(window).off(".gridResize");
+            $("body").css({
+                "user-select": "",
+                "cursor": ""
+            });
         });
 
-        e.preventDefault(); // 드래그 시 텍스트 선택 방지
+        e.preventDefault();
+        e.stopPropagation();
     });
 }
