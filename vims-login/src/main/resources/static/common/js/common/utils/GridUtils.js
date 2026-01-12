@@ -96,8 +96,11 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
 
     let pagingArea = '';
     let giGridPagingBtn = gridId + "_gi-grid-paging-btn";
+    if (page > 1) {
+        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn" data-field="1"><i class="fa-solid fa-angles-left"></i></span>';
+    }
     if (startPage > 1) {
-        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-prev-btn" data-field="' + (startPage - maxPagesToShow) + '">&lsaquo;</span>';
+        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-prev-btn" data-field="' + (startPage - maxPagesToShow) + '"><i class="fa-solid fa-chevron-left"></i></span>';
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -105,7 +108,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
     }
 
     if (endPage < totalPageCount) {
-        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-next-btn" data-field="' + (startPage + maxPagesToShow) + '">&rsaquo;</span>';
+        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-next-btn" data-field="' + totalPageCount + '"><i class="fa-solid fa-chevron-right"></i></span>';
     }
 
     //페이징 row 개수 설정
@@ -1115,8 +1118,11 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
 
     let pagingArea = '';
     let giGridPagingBtn = gridId + "_gi-grid-paging-btn";
+    if (page > 1) {
+        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn" data-field="1"><i class="fa-solid fa-angles-left"></i></span>';
+    }
     if (startPage > 1) {
-        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-prev-btn" data-field="' + (startPage - maxPagesToShow) + '">&lsaquo;</span>';
+        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-prev-btn" data-field="' + (startPage - maxPagesToShow) + '"><i class="fa-solid fa-chevron-left"></i></span>';
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -1124,7 +1130,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
     }
 
     if (endPage < totalPageCount) {
-        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-next-btn" data-field="' + (startPage + maxPagesToShow) + '">&rsaquo;</span>';
+        pagingArea += '<span class="' + giGridPagingBtn + ' gi-grid-paging-btn gi-grid-paging-next-btn" data-field="' + totalPageCount + '"><i class="fa-solid fa-chevron-right"></i></span>';
     }
 
     //페이징 row 개수 설정
