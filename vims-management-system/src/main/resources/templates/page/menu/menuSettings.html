@@ -478,10 +478,10 @@
                     }
                 }
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error);
+            formUtil.toast(error);
         })
     }
     async function accessGroupStatus(data) {
@@ -549,10 +549,10 @@
                 }
 
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error);
+            formUtil.toast(error);
         })
     }
     function accessGroupInMenuRegister(row) {
@@ -571,10 +571,10 @@
                     findByComAccsGroupMenuList(null, null, null, null, row);
                     findByMenuList();
                 } else {
-                    formUtil.alertPopup("response status is :" + status);
+                    formUtil.toast("response status is :" + status);
                 }
             }).catch(error => {
-                formUtil.alertPopup(error.response.data);
+                formUtil.toast(error.response.data);
             })
         }
     }
@@ -658,10 +658,10 @@
                     commonAccessGroupIdRemove(row);
                 }
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error.response.data);
+            formUtil.toast(error.response.data);
         })
     }
     //NOTE: 메뉴 등록 팝업 데이터 설정
@@ -739,7 +739,7 @@
                     formUtil.toast(Message.Label.Array["FAIL.INSERT"])
                 }
             }).catch(error => {
-                formUtil.alertPopup(error.response.data);
+                formUtil.toast(error.response.data);
             })
         }
     }
@@ -773,7 +773,7 @@
                     formUtil.toast(Message.Label.Array["FAIL.INSERT"])
                 }
             }).catch(error => {
-                formUtil.alertPopup(error.response.data);
+                formUtil.toast(error.response.data);
             })
         }
     }
@@ -807,7 +807,7 @@
                     formUtil.toast(Message.Label.Array["FAIL.UPDATE"]);
                 }
             }).catch(error => {
-                formUtil.alertPopup(error + "");
+                formUtil.toast(error + "");
             })
         }
     }
@@ -827,7 +827,7 @@
             findByComCodeMenuList();
             findByMenuList();
         }).catch(error => {
-            formUtil.alertPopup(error.response.data);
+            formUtil.toast(error.response.data);
         })
     }
     function checkRegisterPopupValidation() {
@@ -855,7 +855,7 @@
                 findByMenuList();
             }
         }).catch(error => {
-            formUtil.alertPopup(error.response.data);
+            formUtil.toast(error.response.data);
         })
     }
     function findByComIconList(page, range, sortId, sortOrder) {
@@ -914,10 +914,10 @@
                     inputTageReset.commonTagSettings();
                 }
             } else {
-                formUtil.alertPopup("response status is :" + status);
+                formUtil.toast("response status is :" + status);
             }
         }).catch(error => {
-            formUtil.alertPopup(error.response.data);
+            formUtil.toast(error.response.data);
         })
     }
 </script>

@@ -1,3 +1,7 @@
+---
+description: 
+---
+
 # 사용자 관리 아키텍처 가이드 (User Management Architecture Guide)
 
 본 문서는 VIMS 시스템에서 `Core-lib`과 `Management System` 양쪽에서 사용자 관련 코드(`AuthUser`, `ComUser`)가 이중으로 관리되는 구조의 배경과 아키텍처적 의의, 그리고 관리지침을 설명합니다.

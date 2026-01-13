@@ -130,10 +130,16 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         '                        <select class="gi-grid-row-selector gi-row-65px" id="' + giGridRowSelectorId + '">' +
         options +
         '                        </select>' +
-        '                        <button id="excel-download-btn_' + gridId + '" class="gi-excel-download-btn" type="button">' +
-        '                            <i class="fa-solid fa-file-excel"></i>' +
-        '                            <span>excel download</span>' +
-        '                        </button>' +
+        '                       <div class="gi-flex gi-flex-justify-content-end gi-gap-3px">' +
+        '                             <button id="excel-upload-btn_' + gridId + '" class="gi-excel-upload-btn" type="button">' +
+        '                               <i class="fa-solid fa-file-excel"></i>' +
+        '                               <span>excel upload</span>' +
+        '                             </button>' +
+        '                             <button id="excel-download-btn_' + gridId + '" class="gi-excel-download-btn" type="button">' +
+        '                               <i class="fa-solid fa-file-excel"></i>' +
+        '                               <span>excel download</span>' +
+        '                             </button>' +
+        '                       </div>' +
         '                    </div>' +
         '                    <div id="gi-grid-list-body" data-page-number="' + page + '" class="gi-row-100 gi-overflow-scroll gi-flex gi-flex-direction-column">' +
         '                        <ul class="gi-grid-list-header gi-row-100 gi-col-30px gi-ul gi-flex">' +
@@ -234,7 +240,8 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                 // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
                                 let hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
                                 if (hasVisibleOption) {
-                                    if (originalDataForVisibleOption[item.ID] === "true") {
+                                    // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                    if (originalDataForVisibleOption[item.ID] !== "true") {
                                         tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
                                     }
                                 } else {
@@ -991,7 +998,20 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
             $btn.off("click").on("click", function () {
                 this.excelDownload(fileName);
             }.bind(this));
+        },
+        excelUpload: function (fileName) {
+
+        },
+        excelUploadEvent: function (fileName) {
+            let $btn = $("#excel-upload-btn_" + gridId);
+            $btn.css("display", "flex");
+            $btn.off("click").on("click", function () {
+                let $file = new file();
+                $file.customCreateFileUpload();
+                this.excelUpload(fileName);
+            }.bind(this));
         }
+
     }
 }
 
@@ -1151,10 +1171,16 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
         '                        <select class="gi-grid-row-selector gi-row-65px" id="' + giGridRowSelectorId + '">' +
         options +
         '                        </select>' +
-        '                        <button id="excel-download-btn_' + gridId + '" class="gi-excel-download-btn" type="button">' +
-        '                            <i class="fa-solid fa-file-excel"></i>' +
-        '                            <span>excel download</span>' +
-        '                        </button>' +
+        '                       <div class="gi-flex gi-flex-justify-content-end gi-gap-3px">' +
+        '                             <button id="excel-upload-btn_' + gridId + '" class="gi-excel-upload-btn" type="button">' +
+        '                               <i class="fa-solid fa-file-excel"></i>' +
+        '                               <span>excel upload</span>' +
+        '                             </button>' +
+        '                             <button id="excel-download-btn_' + gridId + '" class="gi-excel-download-btn" type="button">' +
+        '                               <i class="fa-solid fa-file-excel"></i>' +
+        '                               <span>excel download</span>' +
+        '                             </button>' +
+        '                       </div>' +
         '                    </div>' +
         '                    <div id="gi-grid-list-body" data-page-number="' + page + '" class="gi-row-100 gi-overflow-scroll gi-flex gi-flex-direction-column gi-margin-top-10px">' +
         '                        <ul class="gi-grid-list-header gi-row-100 gi-col-30px gi-ul gi-flex">' +
@@ -1267,7 +1293,8 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                                 // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
                                 let hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
                                 if (hasVisibleOption) {
-                                    if (originalDataForVisibleOption[item.ID] === "true") {
+                                    // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                    if (originalDataForVisibleOption[item.ID] !== "true") {
                                         tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
                                     }
                                 } else {

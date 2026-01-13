@@ -3417,6 +3417,45 @@
     column-gap: 100rem
 }
 
+.gi-gap-1px {
+    gap: 1px;
+}
+
+.gi-gap-2px {
+    gap: 2px;
+}
+
+.gi-gap-3px {
+    gap: 3px;
+}
+
+.gi-gap-4px {
+    gap: 4px;
+}
+
+.gi-gap-5px {
+    gap: 5px;
+}
+
+.gi-gap-6px {
+    gap: 6px;
+}
+
+.gi-gap-7px {
+    gap: 7px;
+}
+
+.gi-gap-8px {
+    gap: 8px;
+}
+
+.gi-gap-9px {
+    gap: 9px;
+}
+
+.gi-gap-10px {
+    gap: 10px;
+}
 
 .gi-Grid-side {
     display: flex;

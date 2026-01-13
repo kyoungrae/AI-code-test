@@ -80,9 +80,7 @@
             <!-- 파일 목록 표시 영역 -->
             <div id="attached-file-list" class="gi-margin-top-10px"
               style="min-height: 50px; border: 1px solid #f0f1f7; border-radius: 12px; padding: 16px; background: #f8f9fc;">
-              <p class="gi-text-center gi-text-secondary gi-font-size-13px gi-padding-24px" id="no-file-msg">
-                첨부된 파일이 없습니다.
-              </p>
+              <div class="gi-file-list-empty"> <span class="gi-file-list-empty-icon">📂</span> <p class="gi-file-list-empty-text">첨부된 파일이 없습니다.</p> </div>
             </div>
           </div>
         </div>

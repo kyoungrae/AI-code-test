@@ -20,8 +20,24 @@ class file {
     deleteFileUpload() {
 
     };
-}
 
+    /**
+     * @title 커스텀 파일 업로드 (서버 업로드 없이 파일 정보만 리턴)
+     * @param options {Object} - 옵션 객체 { multiple: true/false, accept: 'image/*', maxSize: 10485760 }
+     * @returns {Promise} - 선택된 파일 정보 배열을 반환하는 Promise
+     * @description 파일 업로드 팝업을 띄우고 사용자가 선택한 파일 정보를 Promise로 반환합니다.
+     * @example 
+     * // 단일 파일 선택
+     * fileUtil.customCreateFileUpload({ multiple: false }).then(files => console.log(files));
+     * // 다중 파일 선택
+     * fileUtil.customCreateFileUpload({ multiple: true, accept: 'image/*' }).then(files => console.log(files));
+     */
+    customCreateFileUpload(options = {}) {
+        return new Promise((resolve, reject) => {
+            new CustomFileUploadDialog(options, resolve, reject);
+        });
+    }
+}
 //CLASS : 파일 업로드 HTML 생성 클래스 파일 업로드 팝업 및 기능 관리 클래스
 class createFileUploadHTML {
     constructor(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME) {
@@ -395,7 +411,8 @@ class createFileUploadHTML {
             if (uuid) {
                 that.fetchAndRenderMainFileList(uuid);
             } else {
-                $(that.LIST_CONTAINER_ID).html('<p class="gi-text-center gi-text-secondary gi-font-size-13px gi-padding-24px">첨부된 파일이 없습니다.</p>');
+                let container = '<div class="gi-file-list-empty"> <span class="gi-file-list-empty-icon">📂</span> <p class="gi-file-list-empty-text">첨부된 파일이 없습니다.</p> </div>';
+                $(that.LIST_CONTAINER_ID).html(container);
             }
         });
 
@@ -496,5 +513,252 @@ class createFileUploadHTML {
                 console.error("Main file delete error:", error);
             });
         });
+    }
+}
+
+//CLASS : 커스텀 파일 업로드 다이얼로그 (서버 업로드 없이 파일 정보만 반환)
+class CustomFileUploadDialog {
+    constructor(options, resolve, reject) {
+        this.options = {
+            multiple: options.multiple !== false, // 기본값: true
+            accept: options.accept || '*/*',
+            maxSize: options.maxSize || 10485760, // 기본값: 10MB
+            maxFiles: options.maxFiles || 10
+        };
+        this.resolve = resolve;
+        this.reject = reject;
+        this.selectedFiles = [];
+        this.COM_FILE_UPLOAD_ID = "#formUtil_fileUpload";
+
+        this.init();
+    }
+
+    init() {
+        this.renderPopup();
+        this.bindEvents();
+    }
+
+    renderPopup() {
+        const multipleAttr = this.options.multiple ? 'multiple' : '';
+        const acceptAttr = this.options.accept;
+
+        const html = `
+            <div class="formUtil-fileUpload_body" data-fileupload-boxopen="on">
+                <div class="gi-row-500px formUtil-fileUpload gi-flex gi-flex-column slide-in-blurred-top gi-upload-popup-card">
+                    <div class="gi-flex gi-flex-justify-content-space-between gi-flex-align-items-center" style="margin-bottom: 24px;">
+                        <h2 class="gi-upload-popup-title">파일 선택</h2>
+                        <button type="button" class="custom-fileUpload_cancelBtn gi-upload-popup-close-btn">&times;</button>
+                    </div>
+                    
+                    <article class="formUtil-fileUpload_content" style="margin-bottom: 24px;">
+                        <form class="formUtil-fileUpload_form gi-col-100 gi-flex gi-flex-center" style="border: none !important; box-shadow: none !important;">
+                            <div class="custom-fileUpload_dropArea gi-upload-drop-area">
+                                <input type="file" id="customFileElem" ${multipleAttr} accept="${acceptAttr}" style="display: none" enctype="multipart/form-data">
+                                <label for="customFileElem" class="gi-cursor-open-folder" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin: 0 !important; cursor: pointer;">
+                                    <div class="gi-upload-drop-icon">
+                                        <span>↑</span>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <span class="gi-upload-drop-text">파일 클릭 또는 드래그 앤 드롭</span>
+                                        <span class="gi-upload-drop-subtext">최대 용량: ${this.formatBytes(this.options.maxSize)}</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </form>
+                    </article>
+                    
+                    <div class="custom-fileUpload_list gi-upload-list-wrapper">
+                        <div class="custom-fileUpload_list-contents gi-file-list-container gi-upload-list-container">
+                            <div class="gi-file-list-empty">
+                                <span class="gi-file-list-empty-icon">📂</span>
+                                <p class="gi-file-list-empty-text">선택된 파일이 없습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <article class="formUtil-fileUpload_footer gi-upload-popup-footer">
+                        <button type="button" class="custom-fileUpload_cancelBtn gi-upload-btn-cancel">
+                            <span>취소</span>
+                        </button>
+                        <button type="button" class="custom-fileUpload_confirmBtn gi-upload-btn-submit">
+                            <span>확인</span>
+                        </button>
+                    </article>
+                </div>
+            </div>
+        `;
+
+        $(this.COM_FILE_UPLOAD_ID).html(html);
+    }
+
+    bindEvents() {
+        const that = this;
+
+        // 취소 버튼
+        $(".custom-fileUpload_cancelBtn").on("click", function () {
+            that.close();
+            that.reject(new Error("User cancelled file upload"));
+        });
+
+        // 확인 버튼
+        $(".custom-fileUpload_confirmBtn").on("click", function () {
+            if (that.selectedFiles.length === 0) {
+                formUtil.toast("파일을 선택해주세요.", "warning");
+                return;
+            }
+            that.close();
+            that.resolve(that.getFileInfo());
+        });
+
+        // 파일 입력 변경 이벤트
+        $("#customFileElem").on("change", function (e) {
+            that.handleFiles(e.target.files);
+        });
+
+        // 드래그 앤 드롭 이벤트
+        const $dropArea = $(".custom-fileUpload_dropArea");
+
+        $dropArea.on('dragenter dragover dragleave drop', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
+        $dropArea.on('dragenter dragover', function () {
+            $(this).addClass('active');
+        });
+
+        $dropArea.on('dragleave drop', function () {
+            $(this).removeClass('active');
+        });
+
+        $dropArea.on('drop', function (e) {
+            const files = e.originalEvent.dataTransfer.files;
+            that.handleFiles(files);
+        });
+    }
+
+    handleFiles(files) {
+        if (!files || files.length === 0) return;
+
+        const fileArray = Array.from(files);
+
+        // 파일 개수 체크
+        if (!this.options.multiple && fileArray.length > 1) {
+            formUtil.toast("단일 파일만 선택 가능합니다.", "warning");
+            return;
+        }
+
+        if (this.selectedFiles.length + fileArray.length > this.options.maxFiles) {
+            formUtil.toast(`최대 ${this.options.maxFiles}개의 파일만 선택 가능합니다.`, "warning");
+            return;
+        }
+
+        // 파일 유효성 검사
+        for (let file of fileArray) {
+            // 파일 크기 체크
+            if (file.size > this.options.maxSize) {
+                formUtil.toast(`${file.name}의 용량이 너무 큽니다. (최대: ${this.formatBytes(this.options.maxSize)})`, "warning");
+                continue;
+            }
+
+            // 중복 체크
+            const isDuplicate = this.selectedFiles.some(f => f.name === file.name && f.size === file.size);
+            if (isDuplicate) {
+                formUtil.toast(`${file.name}은(는) 이미 선택되었습니다.`, "warning");
+                continue;
+            }
+
+            this.selectedFiles.push(file);
+        }
+
+        this.renderFileList();
+    }
+
+    renderFileList() {
+        const $container = $(".custom-fileUpload_list-contents");
+
+        if (this.selectedFiles.length === 0) {
+            $container.html(`
+                <div class="gi-file-list-empty">
+                    <span class="gi-file-list-empty-icon">📂</span>
+                    <p class="gi-file-list-empty-text">선택된 파일이 없습니다.</p>
+                </div>
+            `);
+            return;
+        }
+
+        let html = '';
+        this.selectedFiles.forEach((file, index) => {
+            const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
+            const extension = file.name.substring(file.name.lastIndexOf('.') + 1).toLowerCase();
+            const fileSize = this.formatBytes(file.size);
+
+            let typeClass = "";
+            if (['pdf', 'hwp', 'doc', 'docx'].includes(extension)) typeClass = "gi-file-type-doc";
+            else if (['xls', 'xlsx', 'csv'].includes(extension)) typeClass = "gi-file-type-xls";
+            else if (['zip', 'rar', '7z'].includes(extension)) typeClass = "gi-file-type-zip";
+            else if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) typeClass = "gi-file-type-img";
+
+            html += `
+                <div class="gi-file-item-card gi-upload-item-card">
+                    <div class="gi-file-badge-no">${index + 1}</div>
+                    <div class="gi-file-icon-box ${typeClass}">📄</div>
+                    <div class="gi-file-info">
+                        <span class="gi-file-name" title="${fileName}">${fileName}</span>
+                        <div class="gi-file-meta">
+                            <span class="gi-file-size-tag">${fileSize}</span>
+                            <span class="gi-file-ext-tag ${typeClass}" style="background: none !important;">${extension}</span>
+                        </div>
+                    </div>
+                    <div class="gi-file-delete-container">
+                        <button type="button" class="custom-file_delete gi-file-delete-btn" data-index="${index}">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        $container.html(html);
+
+        // 삭제 버튼 이벤트
+        const that = this;
+        $(".custom-file_delete").on("click", function () {
+            const index = $(this).data("index");
+            that.selectedFiles.splice(index, 1);
+            that.renderFileList();
+        });
+    }
+
+    getFileInfo() {
+        return this.selectedFiles.map(file => {
+            const fileName = file.name.substring(0, file.name.lastIndexOf('.'));
+            const extension = file.name.substring(file.name.lastIndexOf('.') + 1).toLowerCase();
+
+            return {
+                file: file,                    // File 객체
+                file_name: fileName,           // 파일명 (확장자 제외)
+                file_name_with_ext: file.name, // 파일명 (확장자 포함)
+                file_size: file.size,          // 바이트 단위
+                file_size_formatted: this.formatBytes(file.size), // 포맷된 크기
+                file_extension: extension,     // 확장자
+                file_type: file.type,          // MIME 타입
+                last_modified: file.lastModified // 마지막 수정 시간
+            };
+        });
+    }
+
+    formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
+    close() {
+        $(this.COM_FILE_UPLOAD_ID).empty();
+        this.selectedFiles = [];
     }
 }

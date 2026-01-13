@@ -152,7 +152,7 @@
                     <div class="gi-flex gi-flex-column gi-grid-gap-10px">
                         <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
                             <!-- UUID 입력창은 숨김 처리 -->
-                            <input data-field="file_uuid" id="sample_file_uuid" name="file_uuid" class="gi-hidden"
+                            <input data-field="file_uuid" id="file_uuid" name="file_uuid" class="gi-hidden"
                                 readonly />
 
                             <div class="gi-flex-1">
@@ -166,10 +166,7 @@
                         <!-- 파일 목록 표시 영역 -->
                         <div id="attached-file-list" class="gi-margin-top-10px"
                             style="min-height: 50px; border: 1px solid #f0f1f7; border-radius: 12px; padding: 16px; background: #f8f9fc;">
-                            <p class="gi-text-center gi-text-secondary gi-font-size-13px gi-padding-24px"
-                                id="no-file-msg">
-                                [Page.Message].Message.Label.Array["FILE_ATTACH_AREA_NOT_EXIST_FILE"]
-                            </p>
+                            <div class="gi-file-list-empty"> <span class="gi-file-list-empty-icon">📂</span> <p class="gi-file-list-empty-text">[Page.Message].Message.Label.Array["FILE_ATTACH_AREA_NOT_EXIST_FILE"]</p> </div>
                         </div>
                     </div>
                 </div>
@@ -237,7 +234,7 @@
         //input.setSelectOption("#sample_category", "/cms/common/comCode/find", { code: "code_id", name: "code_name" });
 
         // 파일 업로드 초기화 - 수정 로직 만들어야함;;
-        fileUtil.createFileUpload("/fms/common/file/comFileDetail", "sample_file_uuid", "sampleFolder");
+        fileUtil.createFileUpload("/fms/common/file/comFileDetail", "file_uuid", "sampleFolder");
     }
     function comUserModify(){
         let flag =  comUserModifyCheckValidation();
