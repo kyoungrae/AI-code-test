@@ -122,11 +122,11 @@ class createFileUploadHTML {
             + '            </div>'
             + '        </div>'
             + '        <article class="formUtil-fileUpload_footer gi-upload-popup-footer">'
-            + '            <button type="button" class="formUtil-fileUpload_cancelBtn gi-upload-btn-cancel">'
-            + '                <span>취소</span>'
-            + '            </button>'
-            + '            <button type="button" class="formUtil-fileUpload_uploadBtn gi-upload-btn-submit">'
+            + '            <button type="button" class="gi-btn formUtil-fileUpload_uploadBtn gi-upload-btn-submit">'
             + '                <span>업로드</span>'
+            + '            </button>'
+            + '            <button type="button" class="gi-btn formUtil-fileUpload_cancelBtn gi-upload-btn-cancel">'
+            + '                <span>취소</span>'
             + '            </button>'
             + '        </article>'
             + '    </div>'
@@ -577,11 +577,11 @@ class CustomFileUploadDialog {
                     </div>
                     
                     <article class="formUtil-fileUpload_footer gi-upload-popup-footer">
-                        <button type="button" class="custom-fileUpload_cancelBtn gi-upload-btn-cancel">
-                            <span>취소</span>
-                        </button>
-                        <button type="button" class="custom-fileUpload_confirmBtn gi-upload-btn-submit">
+                        <button type="button" class="gi-btn custom-fileUpload_confirmBtn gi-upload-btn-submit">
                             <span>확인</span>
+                        </button>
+                        <button type="button" class="gi-btn custom-fileUpload_cancelBtn gi-upload-btn-cancel">
+                            <span>취소</span>
                         </button>
                     </article>
                 </div>
