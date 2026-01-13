@@ -230,6 +230,23 @@
 
 **example end**
 
+## @title : grid 엑셀 업로드 (Excel Upload) 설정
+## @date : 2026-01-13
+## @author : 이경태
+## @extend : fms 시스템
+## @call : grid.excelUploadEvent("Controller endPoint(ex: /cms/common/comUser/excelUpload)")
+**example start**
+: 그리드의 데이터를 엑셀 파일로 업로드합니다. 
+: 엑셀 파일을 업로드한 후, Controller에서 파일을 처리하고 응답을 반환합니다.
+**1. Controller endPoint는 각 서비스 로직의 /excelUpload를 호출하여 사용**
+
+<script>
+    // 그리드 생성 후 엑셀 업로드 활성화
+    #service#_grid.excelUploadEvent("/cms/common/comUser/excelUpload");
+</script>
+
+**example end**
+
 ## @title : grid 계층형(Hierarchy) 구조 설정
 ## @date : 2026-01-12
 ## @author : 이경태

@@ -1004,14 +1004,13 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
 
             let formData = new FormData();
             formData.append("file", files[0].file);
-            console.log(formData)
             axios.post(url, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }, withCredentials: true
             }).then(response => {
 
-                if (response.data && response.data.headers) {
+                if (response.status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"], "success");
                 }
             }).catch(error => {
@@ -1033,11 +1032,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     });
                     this.excelUpload(files, url);
                 } catch (error) {
-                    console.log(error)
                     if (error.message !== "User cancelled file upload") {
                         formUtil.toast("파일 선택 중 오류가 발생했습니다.", "error");
                     } else {
-                        console.log("User cancelled file selection");
+                        formUtil.toast("User cancelled file selection.", "warning");
                     }
                 }
             }.bind(this));
