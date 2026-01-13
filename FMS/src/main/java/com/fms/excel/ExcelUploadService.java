@@ -49,9 +49,7 @@ public class ExcelUploadService {
             // log.info("추출된 헤더: {}", excelData.getHeaders());
             // log.info("데이터 행 개수: {}", excelData.getDataRows().size());
 
-            // TODO: 나중에 각 테이블에 insert 로직 추가
-            // insertToTable(excelData);
-
+            System.out.println("excelData" + "::" + excelData);
             return excelData;
 
         } catch (Exception e) {

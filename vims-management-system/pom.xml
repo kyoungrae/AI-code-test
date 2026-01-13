@@ -170,6 +170,24 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/lib/core-lib-1.0.jar</systemPath>
 		</dependency>
+		<!-- Spring Cloud OpenFeign for microservice communication -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+		<!-- Feign Core -->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-core</artifactId>
+			<version>13.1</version>
+		</dependency>
+		<!-- Feign SLF4J (로깅) -->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-slf4j</artifactId>
+			<version>13.1</version>
+		</dependency>
 	</dependencies>
 			<build>
 				<plugins>

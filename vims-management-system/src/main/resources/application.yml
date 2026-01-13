@@ -12,6 +12,13 @@ message:
     gateway:
         url: http://localhost:8080
 
+# FMS (File Management System) 서비스 연동 설정
+fms:
+    service:
+        url: http://localhost:8082  # FMS 서비스 주소
+    internal:
+        api-key: "your-secure-internal-api-key-here"  # 내부 서비스 간 인증용 API 키 (운영 환경에서는 환경변수로 관리)
+
 spring:
     profiles:
         active: local

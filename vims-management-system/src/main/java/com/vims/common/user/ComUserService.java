@@ -13,6 +13,8 @@ import com.vims.common.siteconfig.ComSiteConfig;
 import com.vims.common.siteconfig.ComSiteConfigService;
 import com.vims.common.usergroup.ComUserGroup;
 import com.vims.common.usergroup.ComUserGroupService;
+import com.vims.fmsClient.ExcelDataResponse;
+import com.vims.fmsClient.FmsExcelClient;
 import com.system.auth.domain.Token;
 import com.system.auth.domain.TokenType;
 import com.system.auth.mapper.SequenceMapper;
@@ -30,6 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.system.auth.authuser.Role;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.List;
 
 @Service
@@ -41,6 +45,10 @@ public class ComUserService extends AbstractCommonService<ComUser> {
     private final ComSiteConfigService comSiteConfigService;
     private final TokenService tokenService;
     private final ComUserGroupService comUserGroupService;
+    private final FmsExcelClient fmsExcelClient; // FMS 서비스 통신용 Feign Client
+
+    @Value("${fms.internal.api-key}")
+    private String fmsInternalApiKey; // 내부 API 키 (application.yml에서 주입)
 
     private String getMessage(String code) {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
@@ -269,7 +277,22 @@ public class ComUserService extends AbstractCommonService<ComUser> {
 
     @Override
     protected int excelUploadImpl(MultipartFile file) throws Exception {
-        System.out.println("file" + file);
-        return 0;
+        try {
+            // FMS 서비스의 엑셀 업로드 API 호출
+            ExcelDataResponse excelData = fmsExcelClient.uploadExcel(file, fmsInternalApiKey);
+            System.out.println("excelData::::" + excelData);
+            // 엑셀 데이터 검증
+            if (excelData == null || excelData.getDataRows() == null || excelData.getDataRows().isEmpty()) {
+                throw new CustomException(getMessage("EXCEPTION.FMS.NO_DATA"));
+            }
+            return 0;
+
+        } catch (IllegalArgumentException e) {
+            throw new CustomException(getMessage("EXCEPTION.FMS.INVALID_FILE_FORMAT"));
+        } catch (SecurityException e) {
+            throw new CustomException(getMessage("EXCEPTION.FMS.ACCESS_DENIED"));
+        } catch (Exception e) {
+            throw new CustomException(getMessage("EXCEPTION.FMS.UPLOAD_ERROR"));
+        }
     }
 }
