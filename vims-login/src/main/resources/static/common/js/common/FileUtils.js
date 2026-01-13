@@ -606,8 +606,8 @@ class CustomFileUploadDialog {
                 formUtil.toast("파일을 선택해주세요.", "warning");
                 return;
             }
-            that.close();
             that.resolve(that.getFileInfo());
+            that.close();
         });
 
         // 파일 입력 변경 이벤트

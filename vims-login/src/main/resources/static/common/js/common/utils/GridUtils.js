@@ -999,16 +999,55 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 this.excelDownload(fileName);
             }.bind(this));
         },
-        excelUpload: function (fileName) {
+        excelUpload: function (files) {
+            if (!files || files.length === 0) return;
 
+            let formData = new FormData();
+            formData.append("file", files[0].file);
+
+            const url = "/fms/excel/upload";
+
+
+            axios.post(url, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }).then(response => {
+                console.log("Excel Upload Response:", response.data);
+
+                if (response.data && response.data.headers) {
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"] || "업로드가 완료되었습니다.");
+                    // 서버에서 반환된 헤더 정보 로깅
+                    console.log("Uploaded Headers:", response.data.headers);
+                }
+            }).catch(error => {
+                console.error("Excel Upload API Error:", error);
+                formUtil.toast("엑셀 업로드 중 오류가 발생했습니다.", "error");
+            });
         },
-        excelUploadEvent: function (fileName) {
+        excelUploadEvent: function () {
             let $btn = $("#excel-upload-btn_" + gridId);
             $btn.css("display", "flex");
-            $btn.off("click").on("click", function () {
-                let $file = new file();
-                $file.customCreateFileUpload();
-                this.excelUpload(fileName);
+
+            $btn.off("click").on("click", async function () {
+
+                try {
+                    let fileInstance = new file();
+
+                    const files = await fileInstance.customCreateFileUpload({
+                        multiple: false,
+                        accept: '.xlsx,.xls'
+                    });
+
+                    this.excelUpload(files);
+                } catch (error) {
+                    console.log(error)
+                    if (error.message !== "User cancelled file upload") {
+                        formUtil.toast("파일 선택 중 오류가 발생했습니다.", "error");
+                    } else {
+                        console.log("User cancelled file selection");
+                    }
+                }
             }.bind(this));
         }
 
