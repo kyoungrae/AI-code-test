@@ -17,21 +17,19 @@
                         <!-- [입력 칸 1개] -->
                         <div class="gi-flex gi-grid-gap-20px">
                             <div class="gi-input-container gi-flex-1">
-                                <label for="sample_name" class="gi-input-label" data-focus-label="true"
+                                <label for="test3" class="gi-input-label" data-focus-label="true"
                                     data-required="true">샘플
                                     명칭</label>
-                                <input data-field="sample_name" id="sample_name" name="sample_name" class="gi-input"
-                                    autocomplete="off" />
+                                <input data-field="test3" id="test3" name="test3" class="gi-input" autocomplete="off" />
                             </div>
                         </div>
                         <!-- [입력 칸 2개] -->
                         <div class="gi-flex gi-grid-gap-20px">
                             <div class="gi-input-container gi-flex-1">
-                                <label for="sample_name" class="gi-input-label" data-focus-label="true"
+                                <label for="test4" class="gi-input-label" data-focus-label="true"
                                     data-required="true">샘플
                                     명칭</label>
-                                <input data-field="sample_name" id="sample_name" name="sample_name" class="gi-input"
-                                    autocomplete="off" />
+                                <input data-field="test4" id="test4" name="test4" class="gi-input" autocomplete="off" />
                             </div>
                             <div class="gi-input-container gi-flex-1">
                                 <label for="sample_code" class="gi-input-label" data-focus-label="true"
@@ -148,7 +146,8 @@
 
                 <!-- 버튼 영역 -->
                 <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
-                    <button id="sample-reset-btn" class="gi-btn gi-btn-modern-reset" type="button">초기화</button>
+                    <button id="sample-back-btn" class="gi-btn-blue gi-btn-modern-back"
+                        type="button">[Page.Message].Message.Label.Array["BACK_BTN"]</button>
                     <button id="sample-update-btn" class="gi-btn-blue gi-btn-modern-update" type="button">수정하기</button>
                 </div>
 
@@ -166,12 +165,20 @@
     function init() {
         new PageInit();
         clickEvent();
+        dataSetting();
 
         // select option 초기화
         input.setSelectOption("#sample_category", "/cms/common/comCode/find", { code: "code_id", name: "code_name" });
 
         // 파일 업로드 초기화
         fileUtil.createFileUpload("/fms/common/file/comFileDetail", "sample_file_uuid", "sampleFolder");
+    }
+    //리스트에서 받아온 데이터 바인딩처리
+    async function dataSetting() {
+        await dataBinding.setData(PRGMID);
+        let data = dataBinding.getData(PRGMID);
+        //초기 값 셋팅
+        initValueSetting(data);
     }
 
     function clickEvent() {
@@ -189,8 +196,14 @@
                 formUtil.toast("초기화되었습니다.");
             });
         });
+        //뒤로가기 버튼 클릭 이벤트
+        $("#sample-back-btn").click(function () {
+            redirectBackPage();
+        })
     }
-
+    function redirectBackPage() {
+        formUtil.apiLoadContent("cms", "/sample/sampleRedirectList", "");
+    }
     function updateSample(data) {
         formUtil.popup("update_confirm", "작성한 정보를 수정하시겠습니까?", function () {
             console.log("Updating Data: ", data);

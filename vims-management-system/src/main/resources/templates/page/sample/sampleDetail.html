@@ -19,7 +19,7 @@
               <div class="gi-span-container gi-flex-1">
                 <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
                   data-required="true">샘플 명칭</span>
-                <span data-field="sample_name" class="gi-span" data-focus-span-text-align="center">샘플 명칭</span>
+                <span data-field="test3" class="gi-span" data-focus-span-text-align="center">샘플 명칭</span>
               </div>
             </div>
             <!-- [입력 칸 2개] -->
@@ -27,12 +27,12 @@
               <div class="gi-span-container gi-flex-1">
                 <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
                   data-required="true">샘플 명칭</span>
-                <span data-field="sample_name" class="gi-span" data-focus-span-text-align="center">샘플 명칭</span>
+                <span data-field="test4" class="gi-span" data-focus-span-text-align="center">샘플 명칭</span>
               </div>
               <div class="gi-span-container gi-flex-1">
                 <span class="gi-span-label" data-focus-label="true" data-focus-label-text-align="default"
                   data-required="true">샘플 코드</span>
-                <span data-field="sample_name" class="gi-span" data-focus-span-text-align="center">샘플 명칭</span>
+                <span data-field="test5" class="gi-span" data-focus-span-text-align="center">샘플 명칭</span>
               </div>
             </div>
             <!-- [입력 칸 3개] -->
@@ -153,7 +153,8 @@
 
           <!-- 버튼 영역 -->
           <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
-            <button id="sample-back-btn" class="gi-btn-blue gi-btn-modern-back" type="button">뒤로가기</button>
+            <button id="sample-back-btn" class="gi-btn-blue gi-btn-modern-back"
+              type="button">[Page.Message].Message.Label.Array["BACK_BTN"]</button>
           </div>
 
       </form>
@@ -170,13 +171,26 @@
   function init() {
     new PageInit();
     clickEvent();
+    dataSetting();
+
     input.setSelectOption("#sample_category", "/cms/common/comCode/find", { code: "code_id", name: "code_name" });
 
     // 파일 업로드 초기화
     fileUtil.createFileUpload("/fms/common/file/comFileDetail", "sample_file_uuid", "sampleFolder");
   }
+  //리스트에서 받아온 데이터 바인딩처리
+  function dataSetting() {
+    dataBinding.setData(PRGMID);
+  }
 
   function clickEvent() {
+    //뒤로가기 버튼 클릭 이벤트
+    $("#sample-back-btn").click(function () {
+      redirectBackPage();
+    })
+    function redirectBackPage() {
+      formUtil.apiLoadContent("cms", "/sample/sampleRedirectList", "");
+    }
   }
 
 </script>

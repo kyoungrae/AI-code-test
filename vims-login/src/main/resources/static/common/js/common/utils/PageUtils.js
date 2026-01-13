@@ -52,8 +52,8 @@ FormUtility.prototype.activatedMenu = function (reqUrl) {
 FormUtility.prototype.loadContent = function (reqUrl, DATA) {
     let cont = JSON.stringify(DATA);
     let url = `/common/redirectPage/redirect?url=${encodeURIComponent(reqUrl + ".html")}`;
-
     axios.get(url).then(response => {
+        console.log(response)
         formUtil.resetFormUtilityValue();
         let pageSources = response.data;
 
@@ -81,7 +81,8 @@ FormUtility.prototype.loadContent = function (reqUrl, DATA) {
         formUtil.activatedMenu(reqUrl);
     })
         .catch(error => {
-            formUtil.alertPopup('Failed to load content:', error);
+            console.log(error)
+            formUtil.toast('Failed to load content:', 'error');
         });
 }
 /**
@@ -109,7 +110,7 @@ FormUtility.prototype.apiLoadContent = function (prefixUrl, reqUrl, DATA) {
             sessionStorage.setItem("DATA", cont);
         }
     }).catch(error => {
-        formUtil.alertPopup('Failed to load content:', error);
+        formUtil.toast('Failed to load content:', 'error');
     });
 }
 /**
@@ -136,7 +137,7 @@ FormUtility.prototype.loadToHtml = async function (cont) {
                 return resolve(response.data);
             }
         }).catch(error => {
-            formUtil.alertPopup('Failed to load content:', error);
+            formUtil.toast('Failed to load content:', 'error');
         });
     })
 }

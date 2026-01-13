@@ -165,7 +165,8 @@
 
         <!-- 버튼 영역 -->
         <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
-          <button id="sample-reset-btn" class="gi-btn gi-btn-modern-reset" type="button">초기화</button>
+          <button id="sample-back-btn" class="gi-btn-blue gi-btn-modern-back"
+            type="button">[Page.Message].Message.Label.Array["BACK_BTN"]</button>
           <button id="sample-save-btn" class="gi-btn-blue gi-btn-modern-save" type="button">저장하기</button>
         </div>
 
@@ -204,8 +205,15 @@
         formUtil.toast("초기화되었습니다.");
       });
     });
-  }
 
+    //뒤로가기 버튼 클릭 이벤트
+    $("#sample-back-btn").click(function () {
+      redirectBackPage();
+    })
+  }
+  function redirectBackPage() {
+    formUtil.apiLoadContent("cms", "/sample/sampleRedirectList", "");
+  }
   function saveSample(data) {
     formUtil.popup("save_confirm", "작성한 정보를 등록하시겠습니까?", function () {
       console.log("Saving Data: ", data);
