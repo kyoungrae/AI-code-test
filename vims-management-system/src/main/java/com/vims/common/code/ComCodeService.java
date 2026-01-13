@@ -3,6 +3,7 @@ package com.vims.common.code;
 import com.system.common.base.AbstractCommonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -50,6 +51,12 @@ public class ComCodeService extends AbstractCommonService<ComCode> {
     @Override
     protected int registerImpl(ComCode request) {
         return comCodeMapper.INSERT(request);
+    }
+
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'excelUploadImpl'");
     }
 
 }

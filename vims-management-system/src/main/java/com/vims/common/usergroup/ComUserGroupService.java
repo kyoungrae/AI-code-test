@@ -11,6 +11,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,5 +96,10 @@ public class ComUserGroupService extends AbstractCommonService<ComUserGroup> {
 
     protected int selectJoinComUserGroupPagingTotalNumber(ComUserGroup request) throws Exception {
         return comUserGroupMapper.SELECT_JOIN_COM_USER_GROUP_PAGING_TOTAL_NUMBER(request);
+    }
+
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return 0;
     }
 }

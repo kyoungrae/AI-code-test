@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/cms/common/excelUpload")
+@RequestMapping("/fms/excel/excelUpload")
 @RequiredArgsConstructor
 public class ExcelUploadController {
     private final ExcelUploadService excelUploadService;

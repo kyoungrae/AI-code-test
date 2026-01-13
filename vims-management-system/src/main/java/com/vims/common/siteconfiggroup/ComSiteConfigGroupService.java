@@ -13,6 +13,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -91,5 +92,10 @@ public class ComSiteConfigGroupService extends AbstractCommonService<ComSiteConf
             throw e;
         }
 
+    }
+
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return 0;
     }
 }

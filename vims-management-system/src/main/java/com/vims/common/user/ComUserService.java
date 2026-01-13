@@ -25,6 +25,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.system.auth.authuser.Role;
 
 import java.util.List;
@@ -262,5 +264,10 @@ public class ComUserService extends AbstractCommonService<ComUser> {
         List<ComUser> userList = comUserMapper.SELECT(comUser);
         String before_password_encoded = userList.get(0).getPassword();
         return passwordEncoder.matches(request.getBefore_password(), before_password_encoded);
+    }
+
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return 0;
     }
 }

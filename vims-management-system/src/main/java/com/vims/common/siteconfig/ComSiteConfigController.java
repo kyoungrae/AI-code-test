@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class ComSiteConfigController extends AbstractCommonController<ComSiteCon
     public Map<String, List<?>> findPage(@RequestBody ComSiteConfig reqeust) throws Exception {
         return comSiteConfigService.findPage(reqeust);
     }
+
     @PostMapping("/findAll")
     protected List<ComSiteConfig> findAll(@RequestBody ComSiteConfig request) throws Exception {
         return comSiteConfigRepository.findAll();
@@ -51,5 +53,11 @@ public class ComSiteConfigController extends AbstractCommonController<ComSiteCon
     @Override
     protected int registerImpl(@RequestBody ComSiteConfig request) throws Exception {
         return comSiteConfigService.registerImpl(request);
+    }
+
+    @PostMapping("/excelUpload")
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return comSiteConfigService.excelUploadImpl(arg0);
     }
 }

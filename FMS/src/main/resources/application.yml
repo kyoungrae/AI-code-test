@@ -35,9 +35,11 @@ spring:
 
         hikari:
                 maximum-pool-size: 10
-                idle-timeout: 300000         # 5분
+                minimum-idle: 5              # 최소 유휴 커넥션 수
+                idle-timeout: 600000         # 10분 (유휴 커넥션 제거 시간)
                 max-lifetime: 1800000        # 30분 (DB 커넥션 타임아웃보다 짧게)
-                connection-timeout: 30000
+                connection-timeout: 30000    # 30초
+                keepalive-time: 300000       # 5분 (커넥션 활성 상태 유지 - Thread starvation 방지)
 
     jpa:
         show-sql: false

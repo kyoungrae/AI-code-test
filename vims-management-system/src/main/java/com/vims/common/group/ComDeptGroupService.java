@@ -11,6 +11,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +74,10 @@ public class ComDeptGroupService extends AbstractCommonService<ComDeptGroup> {
         } catch (DuplicateKeyException dke) {
             throw new CustomException(getMessage("EXCEPTION.PK.EXIST"));
         }
+    }
+
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return 0;
     }
 }

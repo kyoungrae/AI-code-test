@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractCommonService<T> implements CommonService<T>{
+import org.springframework.web.multipart.MultipartFile;
+
+public abstract class AbstractCommonService<T> implements CommonService<T> {
     @Override
     public List<T> find(T request) throws Exception {
         return findImpl(request);
@@ -25,13 +27,20 @@ public abstract class AbstractCommonService<T> implements CommonService<T>{
     public int register(T request) throws Exception {
         return registerImpl(request);
     }
+
     protected abstract List<T> findImpl(T request) throws Exception;
+
     protected abstract int removeImpl(T request) throws Exception;
+
     protected abstract int updateImpl(T request) throws Exception;
+
     protected abstract int registerImpl(T request) throws Exception;
 
     protected abstract List<T> selectPage(T request) throws Exception;
+
     protected abstract int selectPagingTotalNumber(T request) throws Exception;
+
+    protected abstract int excelUploadImpl(MultipartFile file) throws Exception;
 
     public Map<String, List<?>> findPage(T request) throws Exception {
         List<T> list = new ArrayList<>();

@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -15,22 +17,22 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ComAccsGroupMenuController extends AbstractCommonController<ComAccsGroupMenu> {
 
-	private final ComAccsGroupMenuService comAccsGroupMenuService;
+    private final ComAccsGroupMenuService comAccsGroupMenuService;
     private final ComAccsGroupMenuRepository comAccsGroupMenuRepository;
 
-	@PostMapping("/findPage")
-    public Map<String,List<?>> findPage(@RequestBody ComAccsGroupMenu reqeust) throws Exception{
+    @PostMapping("/findPage")
+    public Map<String, List<?>> findPage(@RequestBody ComAccsGroupMenu reqeust) throws Exception {
         return comAccsGroupMenuService.findPage(reqeust);
     }
 
     @PostMapping("/findAll")
-    protected List<ComAccsGroupMenu> findAll(@RequestBody ComAccsGroupMenu request) throws Exception{
+    protected List<ComAccsGroupMenu> findAll(@RequestBody ComAccsGroupMenu request) throws Exception {
         return comAccsGroupMenuRepository.findAll();
     }
 
     @PostMapping("/find")
     @Override
-    protected List<ComAccsGroupMenu> findImpl(@RequestBody ComAccsGroupMenu request) throws Exception{
+    protected List<ComAccsGroupMenu> findImpl(@RequestBody ComAccsGroupMenu request) throws Exception {
         return comAccsGroupMenuService.findImpl(request);
     }
 
@@ -51,4 +53,11 @@ public class ComAccsGroupMenuController extends AbstractCommonController<ComAccs
     protected int registerImpl(@RequestBody ComAccsGroupMenu request) {
         return comAccsGroupMenuService.registerImpl(request);
     }
+
+    @PostMapping("/excelUpload")
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return comAccsGroupMenuService.excelUploadImpl(arg0);
+    }
+
 }

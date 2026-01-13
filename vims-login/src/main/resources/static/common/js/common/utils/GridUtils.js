@@ -999,19 +999,17 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 this.excelDownload(fileName);
             }.bind(this));
         },
-        excelUpload: function (files) {
+        excelUpload: function (files, url) {
             if (!files || files.length === 0) return;
 
             let formData = new FormData();
             formData.append("file", files[0].file);
-
-            const url = "/fms/excel/upload";
-
+            // const url = "/fms/excel/excelUpload/upload";
 
             axios.post(url, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
-                }
+                }, withCredentials: true
             }).then(response => {
                 console.log("Excel Upload Response:", response.data);
 
@@ -1025,7 +1023,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 formUtil.toast("엑셀 업로드 중 오류가 발생했습니다.", "error");
             });
         },
-        excelUploadEvent: function () {
+        excelUploadEvent: function (url) {
             let $btn = $("#excel-upload-btn_" + gridId);
             $btn.css("display", "flex");
 
@@ -1039,7 +1037,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                         accept: '.xlsx,.xls'
                     });
 
-                    this.excelUpload(files);
+                    this.excelUpload(files, url);
                 } catch (error) {
                     console.log(error)
                     if (error.message !== "User cancelled file upload") {

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,28 +23,30 @@ public class ComAccsGroupMenuService extends AbstractCommonService<ComAccsGroupM
     private String getMessage(String code) {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
     }
+
     @Override
     protected List<ComAccsGroupMenu> selectPage(ComAccsGroupMenu request) throws Exception {
-        try{
+        try {
             return comAccsGroupMenuMapper.SELECT_PAGE(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CustomException(getMessage("EXCEPTION.SELECT"));
         }
     }
 
     @Override
     protected int selectPagingTotalNumber(ComAccsGroupMenu request) throws Exception {
-        try{
-          return comAccsGroupMenuMapper.SELECT_PAGING_TOTAL_NUMBER(request);
-        }catch (Exception e){
+        try {
+            return comAccsGroupMenuMapper.SELECT_PAGING_TOTAL_NUMBER(request);
+        } catch (Exception e) {
             throw new CustomException(getMessage("EXCEPTION.SELECT"));
         }
     }
+
     @Override
     protected List<ComAccsGroupMenu> findImpl(ComAccsGroupMenu request) throws Exception {
-        try{
+        try {
             return comAccsGroupMenuMapper.SELECT(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CustomException(getMessage("EXCEPTION.SELECT"));
         }
 
@@ -51,29 +54,34 @@ public class ComAccsGroupMenuService extends AbstractCommonService<ComAccsGroupM
 
     @Override
     protected int removeImpl(ComAccsGroupMenu request) {
-        try{
+        try {
             return comAccsGroupMenuMapper.DELETE(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CustomException(getMessage("EXCEPTION.REMOVE"));
         }
     }
 
     @Override
     protected int updateImpl(ComAccsGroupMenu request) {
-        try{
+        try {
             return comAccsGroupMenuMapper.UPDATE(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CustomException(getMessage("EXCEPTION.UPDATE"));
         }
     }
 
     @Override
-    protected int registerImpl(ComAccsGroupMenu request){
-        try{
+    protected int registerImpl(ComAccsGroupMenu request) {
+        try {
             return comAccsGroupMenuMapper.INSERT(request);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CustomException(getMessage("EXCEPTION.REGIST"));
         }
 
+    }
+
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return 0;
     }
 }

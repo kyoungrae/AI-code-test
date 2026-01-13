@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -50,5 +51,11 @@ public class ComOfficeController extends AbstractCommonController<ComOffice> {
     @Override
     protected int registerImpl(@RequestBody ComOffice request) {
         return comOfficeService.registerImpl(request);
+    }
+
+    @PostMapping("/excelUpload")
+    @Override
+    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+        return comOfficeService.excelUploadImpl(arg0);
     }
 }
