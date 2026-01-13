@@ -25,6 +25,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.system.auth.authuser.Role;
@@ -267,7 +268,8 @@ public class ComUserService extends AbstractCommonService<ComUser> {
     }
 
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+    protected int excelUploadImpl(MultipartFile file) throws Exception {
+        System.out.println("file" + file);
         return 0;
     }
 }

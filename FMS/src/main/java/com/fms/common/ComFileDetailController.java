@@ -69,7 +69,7 @@ public class ComFileDetailController extends AbstractCommonController<ComFileDet
     }
 
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+    protected int excelUploadImpl(@RequestParam("file") MultipartFile arg0) throws Exception {
         return 0;
     }
 

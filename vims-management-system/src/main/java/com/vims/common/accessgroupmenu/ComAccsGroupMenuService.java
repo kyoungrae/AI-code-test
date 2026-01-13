@@ -81,7 +81,7 @@ public class ComAccsGroupMenuService extends AbstractCommonService<ComAccsGroupM
     }
 
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+    protected int excelUploadImpl(MultipartFile file) throws Exception {
         return 0;
     }
 }

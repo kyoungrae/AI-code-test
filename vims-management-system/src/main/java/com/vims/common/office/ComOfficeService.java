@@ -79,7 +79,7 @@ public class ComOfficeService extends AbstractCommonService<ComOffice> {
     }
 
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+    protected int excelUploadImpl(MultipartFile file) throws Exception {
         return 0;
     }
 }

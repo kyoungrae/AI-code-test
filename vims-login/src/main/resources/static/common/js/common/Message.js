@@ -52,6 +52,7 @@ Message.Label.Array["FAIL.NOT.EXIST.DISABLED"] = "data-disabled 태그가 설정
 Message.Label.Array["FAIL.SAME.PASSWORD"] = "새 비밀번호가 기존 비밀번호와 같습니다";
 Message.Label.Array["FAIL.NOT.MATCHED.PASSWORD"] = "기존 비밀번호가 일치 하지 않습니다";
 Message.Label.Array["FAIL.COMPARE.PASSWORD"] = "비밀번호가 일치하지 않습니다.";
+Message.Label.Array["FAIL.UPLOAD"] = "업로드 실패";
 
 Message.Label.Array["CHECK.FORMTYPE"] = "형식에 맞게 입력해 주세요";
 Message.Label.Array["CHECK.DATA_ATTRIBUTE"] = "태그 속성을 다시 확인해 주세요";

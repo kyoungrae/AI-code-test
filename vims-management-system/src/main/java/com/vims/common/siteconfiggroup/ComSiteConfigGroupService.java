@@ -95,7 +95,7 @@ public class ComSiteConfigGroupService extends AbstractCommonService<ComSiteConf
     }
 
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+    protected int excelUploadImpl(MultipartFile file) throws Exception {
         return 0;
     }
 }

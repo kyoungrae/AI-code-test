@@ -77,7 +77,7 @@ public class ComDeptGroupService extends AbstractCommonService<ComDeptGroup> {
     }
 
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
+    protected int excelUploadImpl(MultipartFile file) throws Exception {
         return 0;
     }
 }

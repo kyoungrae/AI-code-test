@@ -54,9 +54,8 @@ public class ComCodeService extends AbstractCommonService<ComCode> {
     }
 
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'excelUploadImpl'");
+    protected int excelUploadImpl(MultipartFile file) throws Exception {
+        return 0;
     }
 
 }

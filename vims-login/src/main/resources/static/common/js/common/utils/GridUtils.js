@@ -1004,23 +1004,18 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
 
             let formData = new FormData();
             formData.append("file", files[0].file);
-            // const url = "/fms/excel/excelUpload/upload";
-
+            console.log(formData)
             axios.post(url, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }, withCredentials: true
             }).then(response => {
-                console.log("Excel Upload Response:", response.data);
 
                 if (response.data && response.data.headers) {
-                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"] || "업로드가 완료되었습니다.");
-                    // 서버에서 반환된 헤더 정보 로깅
-                    console.log("Uploaded Headers:", response.data.headers);
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"], "success");
                 }
             }).catch(error => {
-                console.error("Excel Upload API Error:", error);
-                formUtil.toast("엑셀 업로드 중 오류가 발생했습니다.", "error");
+                formUtil.toast(Message.Label.Array["FAIL.UPLOAD"], "error");
             });
         },
         excelUploadEvent: function (url) {
@@ -1036,7 +1031,6 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                         multiple: false,
                         accept: '.xlsx,.xls'
                     });
-
                     this.excelUpload(files, url);
                 } catch (error) {
                     console.log(error)

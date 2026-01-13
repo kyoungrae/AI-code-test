@@ -36,6 +36,6 @@ public abstract class AbstractCommonController<T> implements CommonController<T>
 
     protected abstract int registerImpl(T request) throws Exception;
 
-    protected abstract int excelUploadImpl(MultipartFile file) throws Exception;
+    protected abstract int excelUploadImpl(@RequestParam("file") MultipartFile file) throws Exception;
 
 }

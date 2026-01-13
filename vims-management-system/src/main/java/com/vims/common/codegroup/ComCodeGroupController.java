@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,7 +60,7 @@ public class ComCodeGroupController extends AbstractCommonController<ComCodeGrou
 
     @PostMapping("/excelUpload")
     @Override
-    protected int excelUploadImpl(MultipartFile arg0) throws Exception {
-        return comCodeGroupService.excelUploadImpl(arg0);
+    protected int excelUploadImpl(@RequestParam("file") MultipartFile file) throws Exception {
+        return comCodeGroupService.excelUploadImpl(file);
     }
 }
