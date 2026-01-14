@@ -583,7 +583,7 @@
                 findBySiteConfigGroupList();
             }
         }).catch(error => {
-            formUtil.toast(error.response.data);
+            formUtil.toast(error.response.data, "warning");
         })
     }
     //NOTE : 설정키 등록

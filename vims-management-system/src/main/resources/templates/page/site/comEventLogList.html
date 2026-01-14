@@ -1,0 +1,773 @@
+<article id="comEventLogListPage" class="gi-article-content gi-col-95 gi-row-100">
+  <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+
+    <!-- 페이지 헤더 -->
+    <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
+      <h1 class="gi-page-title">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TITLE_LIST"]</h1>
+      <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["COM_EVENT_LOG.SUB_TITLE_LIST"]</p>
+    </header>
+
+    <article>
+      <!-- 검색기능 영역 -->
+      <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+        <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+          <div class="gi-input-container gi-flex-1">
+            <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+            <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
+          </div>
+
+          <div class="gi-input-container gi-flex-1">
+            <label for="from_date" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+            <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off" data-datepicker />
+          </div>
+
+          <div class="gi-input-container gi-flex-1">
+            <label for="to_date" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+            <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off" data-datepicker />
+          </div>
+
+          <div class="gi-flex gi-grid-gap-10px">
+            <button id="search-btn" class="gi-btn-blue"
+              type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+            <button id="comEventLog-reset-btn" class="gi-btn"
+              type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+          </div>
+        </div>
+      </div>
+      <!--/ 검색기능 영역 -->
+      <!-- 그리드 영역 -->
+      <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
+        <div id="comEventLogList_gi-Grid" class="gi-Grid gi-col-100"></div>
+        <!--   [사이드 그리드 사용 시 주석 해제]     -->
+        <!--        <div id="comEventLog_gi-Grid-side" class="gi-Grid-side" data-side-grid-open="false"></div>-->
+      </div>
+      <!--/ 그리드 영역 -->
+      <!--      등록버튼 영역      -->
+      <div class="gi-row-100">
+        <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
+          <button id="comEventLog-insert-btn" class="gi-btn-blue gi-float-right " type="button"
+            gi-popup-open-id="register_comEventLog_popup">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+        </div>
+      </div>
+      <!--/     추가버튼 영역      -->
+    </article>
+  </section>
+</article>
+<!--상세 팝업 영역-->
+<article id="detail_comEventLog_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 700px;">
+    <div class="gi-popup-header">
+      <span>[Page.Message].Message.Label.Array["COM_EVENT_LOG.TITLE_DETAIL"]</span>
+    </div>
+    <div class="gi-popup-contents">
+      <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ID"]</span>
+            <span data-field="id" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.USER_ID"]</span>
+            <span data-field="user_id" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.EMAIL"]</span>
+            <span data-field="email" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ROLE"]</span>
+            <span data-field="role" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"]</span>
+            <span data-field="action_type" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_TABLE"]</span>
+            <span data-field="target_table" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_ID"]</span>
+            <span data-field="target_id" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"]</span>
+            <span data-field="before_data" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"]</span>
+            <span data-field="after_data" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"]</span>
+            <span data-field="ip_address" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"]</span>
+            <span data-field="system_create_date" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="gi-popup-footer">
+      <button id="popup-detail_comEventLog_close-btn" class="gi-popup-close-btn"
+        type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+<!-- 등록 팝업 영역 -->
+<article id="register_comEventLog_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 700px;">
+    <div class="gi-popup-header">
+      <span>[Page.Message].Message.Label.Array["COM_EVENT_LOG.TITLE_REGISTER"]</span>
+    </div>
+    <div class="gi-popup-contents">
+      <form id="comEventLogRegisterForm">
+        <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ID"]</label>
+              <input data-field="id" id="register_id" name="id" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_user_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.USER_ID"]</label>
+              <input data-field="user_id" id="register_user_id" name="user_id" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_email" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.EMAIL"]</label>
+              <input data-field="email" id="register_email" name="email" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_role" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ROLE"]</label>
+              <input data-field="role" id="register_role" name="role" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_action_type" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"]</label>
+              <input data-field="action_type" id="register_action_type" name="action_type" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_target_table" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_TABLE"]</label>
+              <input data-field="target_table" id="register_target_table" name="target_table" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_target_id" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_ID"]</label>
+              <input data-field="target_id" id="register_target_id" name="target_id" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_before_data" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"]</label>
+              <input data-field="before_data" id="register_before_data" name="before_data" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_after_data" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"]</label>
+              <input data-field="after_data" id="register_after_data" name="after_data" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_ip_address" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"]</label>
+              <input data-field="ip_address" id="register_ip_address" name="ip_address" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_system_create_date" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"]</label>
+              <input data-field="system_create_date" id="register_system_create_date" name="system_create_date"
+                class="gi-input" data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="gi-popup-footer">
+      <button id="popup-register_comEventLog_confirm-btn" class="gi-popup-register-btn"
+        type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+      <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+
+<!-- 수정 팝업 영역 -->
+<article id="update_comEventLog_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 700px;">
+    <div class="gi-popup-header">
+      <span>[Page.Message].Message.Label.Array["COM_EVENT_LOG.TITLE_UPDATE"]</span>
+    </div>
+    <div class="gi-popup-contents">
+      <form id="comEventLogUpdateForm">
+        <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ID"]</label>
+              <input data-field="id" id="update_id" name="update_id" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_user_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.USER_ID"]</label>
+              <input data-field="user_id" id="update_user_id" name="update_user_id" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_email" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.EMAIL"]</label>
+              <input data-field="email" id="update_email" name="update_email" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_role" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ROLE"]</label>
+              <input data-field="role" id="update_role" name="update_role" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_action_type" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"]</label>
+              <input data-field="action_type" id="update_action_type" name="update_action_type" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_target_table" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_TABLE"]</label>
+              <input data-field="target_table" id="update_target_table" name="update_target_table" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_target_id" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_ID"]</label>
+              <input data-field="target_id" id="update_target_id" name="update_target_id" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_before_data" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"]</label>
+              <input data-field="before_data" id="update_before_data" name="update_before_data" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_after_data" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"]</label>
+              <input data-field="after_data" id="update_after_data" name="update_after_data" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_ip_address" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"]</label>
+              <input data-field="ip_address" id="update_ip_address" name="update_ip_address" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_system_create_date" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"]</label>
+              <input data-field="system_create_date" id="update_system_create_date" name="update_system_create_date"
+                class="gi-input" data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="gi-popup-footer">
+      <button id="popup-update_comEventLog_confirm-btn" class="gi-popup-update-btn"
+        type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+      <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+<!--/수정 팝업 영역-->
+<script type="text/javascript">
+  var PRGMID = "comEventLogList";	//page id
+  var MAIN_GRID_ID = "comEventLogList_gi-Grid"; //main grid id
+  var REGISTER_POPUP_ID = "register_comEventLog_popup";
+  var REGISTER_POPUP_FORM = "comEventLogRegisterForm";
+  var REGISTER_POPUP_CONFIRM_BTN = "popup-register_comEventLog_confirm-btn";
+
+  var UPDATE_POPUP_ID = "update_comEventLog_popup";
+  var UPDATE_POPUP_FORM = "comEventLogUpdateForm";
+  var UPDATE_POPUP_CONFIRM_BTN = "popup-update_comEventLog_confirm-btn";
+  var DETAIL_POPUP_ID = "detail_comEventLog_popup";
+  init();
+  function init() {
+
+
+    //초기화
+    resetEvent();
+
+    //데이터 조회
+    findByComEventLogList();
+
+    setTimeout(function () {
+      //페이지 초기설정
+      new PageInit();
+
+      //클릭 이벤트
+      clickEvent();
+    });
+  }
+
+  function resetEvent() {
+    //검색영역 값 초기화
+    $("#search-area input").val("");
+    $("#search-area select").val("");
+
+    //데이터 호출 후 이벤트 재설정
+    new AfterLoadDataEvent();
+  }
+
+  //클릭 이벤트
+  function clickEvent() {
+    // 초기화버튼 클릭 이벤트
+    $("#comEventLog-reset-btn").click(function () {
+      resetEvent();
+      findByComEventLogList();
+    });
+    //조회버튼 클릭 이벤트
+    $("#search-btn").click(function () {
+      findByComEventLogList();
+    });
+
+    //추가버튼 클릭 이벤트
+    $("#comEventLog-insert-btn").click(function () {
+      popup.open(REGISTER_POPUP_ID);
+      $("#" + REGISTER_POPUP_CONFIRM_BTN).off("click.registerPopupConfirmBtnClickEventHandler")
+        .on("click.registerPopupConfirmBtnClickEventHandler", registerPopupConfirmBtnClickEventHandler);
+      function registerPopupConfirmBtnClickEventHandler() {
+        comEventLogRegister();
+      }
+    });
+  }
+  function findByComEventLogList(page, range, sortId, sortOrder) {
+    //default page
+    if (!formUtil.checkEmptyValue(page)) page = 1;
+    //default range(row)
+    if (!formUtil.checkEmptyValue(range)) range = 10;
+
+    let url = "/cms/common/comEventLog/findPage";
+    let param = {
+      page_no: page,
+      row_range: range,
+      offset: (page - 1) * range
+    };
+    // 검색조건 설정 (추가해서 사용)
+    let cont1 = $("#searchDesc1").val();
+    let cont2 = $("#from_date").val();
+    let cont3 = $("#to_date").val();
+    if (formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+    if (formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+    if (formUtil.checkEmptyValue(cont3)) param.to_date = cont3;
+
+    // 정렬조건추가 (기준id, 순서)
+    if (formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+    if (formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+    axios.post(url, param).then(response => {
+      let status = response.status;
+      if (status === 200) {
+        let data = response.data.DATA;
+        let paging = response.data.TOTAL_PAGING[0];
+
+        // 그리드 헤더 설정
+        let comEventLog_grid_header = {
+          title: '[Page.Message].Message.Label.Array["COM_EVENT_LOG.TITLE"]',
+          list: [
+            { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.ID"], ID: 'id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.USER_ID"], ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.EMAIL"], ID: 'email', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.ROLE"], ID: 'role', WIDTH: '100', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"], ID: 'action_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.TARGET_TABLE"], ID: 'target_table', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.TARGET_ID"], ID: 'target_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"], ID: 'before_data', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"], ID: 'after_data', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"], ID: 'ip_address', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SIDE_BTN"], ID: 'side_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
+            //{ HEADER: 'test1', ID: 'use_yn', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', COM_CODE_GROUP_ID: "USE_YN", HIDDEN: true }, // 공통코드 치환
+            //{ HEADER: 'test2', ID: "test2", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "test2": "0" }], HIDDEN: true }, // 조건에 따라 버튼 표시
+            //{ HEADER: 'test3', ID: 'test3', WIDTH: '7', TYPE: 'password', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }, // 비밀번호
+          ]
+        }
+        //그리드 생성 <div id="gi-Grid"></div>
+        let comEventLog_grid = formUtil.giGrid(comEventLog_grid_header, paging, page, MAIN_GRID_ID);
+
+        //그리드 하이라키 구조로 변경
+        //let comEventLog_grid = formUtil.giGridHierarchy(comEventLogGrid_header,paging,page);
+        //comEventLog_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
+
+        //사이드 그리드 설정
+        //comEventLog_grid.sideOpenBtnClick("comEventLog_gi-Grid-side", "side_btn", function (data) {
+        //  console.log("Side Panel Data:", data);
+        //  // 1. 사이드 패널 내 그리드 컨테이너 생성
+        //  $("#comEventLog_gi-Grid-side").html('<div class="gi-padding-20px gi-row-100 gi-flex gi-flex-direction-column gi-grid-gap-10px">' +
+        //    '<h3>[' + data.no + '] 로우 상세 내역</h3>' +
+        //    '<div id="comEventLogSub_gi-Grid" class="gi-Grid gi-row-100"></div>' +
+        //    '</div>');
+        //  // 2. 서브 그리드 헤더 설정
+        //  let comEventLogSubGridHeader = {
+        //    title: "상세 내역 리스트",
+        //    list: [
+        //      { HEADER: '순번', ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+        //      { HEADER: '항목명', ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+        //      { HEADER: '내용', ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
+        //    ]
+        //  };
+        //  // 3. 서브 그리드 데이터 생성 (샘플)
+        //  let subData = [];
+        //  for (let i = 1; i <= 5; i++) {
+        //    subData.push({
+        //      sub_no: i,
+        //      item_name: "상세 항목 " + data.no + "-" + i,
+        //      item_content: "이것은 " + data.no + "번 데이터의 상세 내용입니다."
+        //    });
+        //  }
+        //  // 4. 서브 그리드 초기화 및 데이터 바인딩
+        //  let sub_grid = formUtil.giGrid(comEventLogSubGridHeader, 1, 1, "comEventLogSub_gi-Grid");
+        //  sub_grid.DataSet(subData);
+        //});
+
+        //그리드 데이터 설정
+        comEventLog_grid.DataSet(data);
+
+        //그리드 엑셀 다운로드 버튼 활성화
+        comEventLog_grid.excelDownloadEvent(Message.Label.Array["COM_EVENT_LOG.TITLE_LIST"]);
+
+        //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+        comEventLog_grid.pagingSet(findByComEventLogList);
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(상세 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        //comEventLog_grid.detailBtnClick(redirectDetailPage,"detail_btn");
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(수정 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        //comEventLog_grid.detailBtnClick(redirectDetailPage,"update_btn");
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(상세 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        comEventLog_grid.detailBtnClick(comEventLogDetailPopupOpen, "detail_btn");
+
+        //그리드 내부의 수정 버튼 클릭 이벤트(수정 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        comEventLog_grid.updateBtnClick(comEventLogUpdatePopupOpen, "update_btn");
+
+        //그리드 내부의 삭제 버튼 클릭 이벤트(삭제 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        comEventLog_grid.deleteBtnClick(comEventLogRemove, "delete_btn");
+
+        //그리스 내부의 header click 정렬 이벤트 설정
+        comEventLog_grid.sortDataSet(findByComEventLogList);
+
+        //그리드 row Double click 이벤트 설정
+        //comEventLog_grid.rowDoubleClick(comEventLogRowDoubleClickEvent);
+        //function comEventLogRowDoubleClickEvent(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 checkbox click 이벤트 설정
+        //comEventLog_grid.rowCheckboxClick(comEventLogRowCheckboxClick);
+        //function comEventLogRowCheckboxClick(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 row MultiSelect click 이벤트 설정
+        //comEventLog_grid.rowMultiSelectClick(comEventLogRowMultiSelectClick);
+
+        //function comEventLogRowMultiSelectClick(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 row 선택 이벤트 설정
+        //comEventLog_grid.rowClick(comEventLogRowClickEvent);
+        //function comEventLogRowClickEvent(rows){
+        //    console.log(rows);
+        //}
+
+
+      } else {
+        formUtil.toast("response status is :" + status, "error");
+      }
+    }).catch(error => {
+      formUtil.toast(error.response.data, "error");
+    })
+  }
+  //FUN : 등록 페이지 이동
+  function redirectRegisterPage(redirectDataList) {
+    let url = "/cms/comEventLogRegister";
+
+    //이전페이지 아이디 설정
+    redirectDataList["pre_page_id"] = "/cms/comEventLogList";
+    // console.log(redirectDataList)
+
+    formUtil.loadContent(url, redirectDataList);
+  }
+  //FUN : 상세 페이지 이동
+  function redirectDetailPage(redirectDataList) {
+    let url = "/cms/comEventLogDetail";
+
+    //이전페이지 아이디 설정
+    redirectDataList["pre_page_id"] = "/cms/comEventLogList";
+    // console.log(redirectDataList)
+
+    formUtil.loadContent(url, redirectDataList);
+  }
+  //FUN : 수정 페이지 이동
+  function redirectModifyPage(redirectDataList) {
+    let url = "/cms/comEventLogModify";
+
+    //이전페이지 아이디 설정
+    redirectDataList["pre_page_id"] = "/cms/comEventLogList";
+    // console.log(redirectDataList)
+
+    formUtil.loadContent(url, redirectDataList);
+  }
+  //FUN : 상세팝업 호출
+  function comEventLogDetailPopupOpen(cont) {
+    dataBinding.setDataForm(DETAIL_POPUP_ID, cont);
+    popup.open(DETAIL_POPUP_ID);
+  }
+  //FUN : 수정팝업 호출
+  function comEventLogUpdatePopupOpen(cont) {
+    //console.log(cont);
+    dataBinding.setDataForm(UPDATE_POPUP_ID, cont);
+    popup.open(UPDATE_POPUP_ID);
+
+    $("#" + UPDATE_POPUP_CONFIRM_BTN).off("click.updatePopupConfirmBtnClickEventHandler")
+      .on("click.updatePopupConfirmBtnClickEventHandler", updatePopupConfirmBtnClickEventHandler);
+    function updatePopupConfirmBtnClickEventHandler() {
+      comEventLogUpdate(cont);
+    }
+  }
+
+  function comEventLogRegister() {
+    let flag = comEventLogRegisterCheckValidation();
+    if (flag) {
+      let data = dataBinding.getData(REGISTER_POPUP_FORM);
+      let url = "/cms/common/comEventLog/register";
+      //console.log(data);
+      let param = {
+
+        id: data.id,
+        user_id: data.user_id,
+        email: data.email,
+        role: data.role,
+        action_type: data.action_type,
+        target_table: data.target_table,
+        target_id: data.target_id,
+        before_data: data.before_data,
+        after_data: data.after_data,
+        ip_address: data.ip_address,
+        system_create_date: data.system_create_date
+      };
+      axios.post(url, param).then(response => {
+        let status = response.status;
+        if (status === 200) {
+          formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
+          popup.close(REGISTER_POPUP_ID);
+          findByComEventLogList();
+        } else {
+          formUtil.toast("response status is :" + status, "error");
+        }
+      }).catch(error => {
+        formUtil.toast(error.response.data, "error");
+      })
+    }
+  }
+  function comEventLogRegisterCheckValidation() {
+    return formUtil.validationCheck(REGISTER_POPUP_FORM, "COM_EVENT_LOG.CHECK.");
+  }
+  function comEventLogUpdateCheckValidation() {
+    return formUtil.validationCheck(UPDATE_POPUP_FORM, "COM_EVENT_LOG.CHECK.");
+  }
+
+  //FUN : 수정 이벤트
+  function comEventLogUpdate() {
+    let flag = comEventLogUpdateCheckValidation();
+    if (flag) {
+      let data = dataBinding.getData(UPDATE_POPUP_FORM);
+      let url = "/cms/common/comEventLog/update";
+      //console.log(data);
+      let param = {
+
+        top_office_code: data.top_office_code,
+        office_name: data.office_name,
+        office_code: data.office_code,
+        office_type: data.office_type,
+        office_type_code: data.office_type_code,
+        system_create_userid: data.system_create_userid,
+        system_create_date: data.system_create_date,
+        system_update_userid: data.system_update_userid,
+        system_update_date: data.system_update_date
+      };
+      axios.post(url, param).then(response => {
+        let status = response.status;
+        if (status === 200) {
+          formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
+          popup.close(UPDATE_POPUP_ID);
+          findByComOfficeList();
+        } else {
+          formUtil.toast("response status is :" + status, "error");
+        }
+      }).catch(error => {
+        formUtil.toast(error.response.data, "error");
+      })
+    }
+  }
+
+  //FUN : 삭제 이벤트
+  function comEventLogRemove(data) {
+    let url = "/cms/common/comEventLog/remove";
+    //console.log(data);
+    let param = {
+
+      id: data.id,
+      user_id: data.user_id,
+      email: data.email,
+      role: data.role,
+      action_type: data.action_type,
+      target_table: data.target_table,
+      target_id: data.target_id,
+      before_data: data.before_data,
+      after_data: data.after_data,
+      ip_address: data.ip_address,
+      system_create_date: data.system_create_date
+    };
+    axios.post(url, param).then(response => {
+      let status = response.status;
+      if (status === 200) {
+        formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
+        findByComEventLogList();
+      } else {
+        resetEvent();
+        formUtil.toast("response status is :" + status, "error");
+      }
+    }).catch(error => {
+      formUtil.toast(error.response.data, "error");
+    })
+  }
+
+</script>

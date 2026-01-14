@@ -174,31 +174,32 @@
                 <div class="gi-span-container">
                     <span class="gi-span-label"
                         data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.TOP_OFFICE_CODE"]</span>
-                    <span data-field="top_office_code" class="gi-span"></span>
+                    <span data-field="top_office_code" class="gi-span" data-focus-span-text-align="center"></span>
                 </div>
 
                 <div class="gi-span-container">
                     <span class="gi-span-label"
                         data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_NAME"]</span>
-                    <span data-field="office_name" class="gi-span"></span>
+                    <span data-field="office_name" class="gi-span" data-focus-span-text-align="center"></span>
                 </div>
 
                 <div class="gi-span-container">
                     <span class="gi-span-label"
                         data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_CODE"]</span>
-                    <span data-field="office_code" class="gi-span"></span>
+                    <span data-field="office_code" class="gi-span" data-focus-span-text-align="center"></span>
                 </div>
 
                 <div class="gi-span-container">
                     <span class="gi-span-label"
                         data-focus-label="true">[Page.Message].Message.Label.Array["COM_OFFICE.OFFICE_TYPE"]</span>
-                    <span data-field="office_type" class="gi-span"></span>
+                    <span data-field="office_type" class="gi-span" data-focus-span-text-align="center"></span>
                 </div>
 
                 <div class="gi-flex gi-grid-gap-10px">
                     <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">작성자</span>
-                        <span data-field="system_create_userid" class="gi-span"></span>
+                        <span data-field="system_create_userid" class="gi-span"
+                            data-focus-span-text-align="center"></span>
                     </div>
                     <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">작성일</span>
@@ -209,7 +210,8 @@
                 <div class="gi-flex gi-grid-gap-10px">
                     <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">수정자</span>
-                        <span data-field="system_update_userid" class="gi-span"></span>
+                        <span data-field="system_update_userid" class="gi-span"
+                            data-focus-span-text-align="center"></span>
                     </div>
                     <div class="gi-span-container gi-flex-1">
                         <span class="gi-span-label" data-focus-label="true">수정일</span>
@@ -436,7 +438,8 @@
         formUtil.loadContent(url, redirectDataList);
     }
     //FUN : 상세팝업 호출
-    function comOfficeDetailPopupOpen() {
+    function comOfficeDetailPopupOpen(cont) {
+        dataBinding.setDataForm(DETAIL_POPUP_ID, cont);
         popup.open(DETAIL_POPUP_ID);
     }
     //FUN : 수정팝업 호출

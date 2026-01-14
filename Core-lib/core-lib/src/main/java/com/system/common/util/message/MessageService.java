@@ -48,35 +48,73 @@ public class MessageService {
         }
     }
 
-    // 기본 메시지 파일 목록 (Gateway를 통해 로드할 파일들)
+    // 기본 메시지 파일 목록 (Gateway 또는 로컬 messageConfig.js에서 동적으로 로드)
     private List<String> getDefaultMessageFiles() {
-        List<String> defaultFiles = new ArrayList<>();
-        defaultFiles.add("Message"); // common/Message.js
-        // management 관련 메시지들
-        defaultFiles.add("ComMenuMessage");
-        defaultFiles.add("ComIconMessage");
-        defaultFiles.add("ComDeptGroupMessage");
-        defaultFiles.add("ComUserMessage");
-        defaultFiles.add("ComCodeMessage");
-        defaultFiles.add("ComCodeGroupMessage");
-        defaultFiles.add("ComAccsGroupMenuMessage");
-        defaultFiles.add("ComAccsGroupMenuListMessage");
-        defaultFiles.add("ComUserGroupMessage");
-        defaultFiles.add("ComOfficeMessage");
-        defaultFiles.add("ComSiteConfigMessage");
-        defaultFiles.add("ComSiteConfigGroupMessage");
-        defaultFiles.add("IndexMessage");
-        defaultFiles.add("SiteBannerImageMessage");
-        defaultFiles.add("SiteConfigHistoryMessage");
-        defaultFiles.add("SiteConfigMessage");
-        defaultFiles.add("SitePopupNoticeMessage");
-        defaultFiles.add("SitePopupNoticeTargetGroupMessage");
-        defaultFiles.add("SiteScheduledMailMessage");
-        defaultFiles.add("SiteScheduledMailTargetGroupMessage");
-        defaultFiles.add("SiteSentMailManagementMessage");
+        System.out.println("🔍 messageConfig.js에서 메시지 파일 목록을 동적으로 조회를 시도합니다.");
+        List<String> dynamicFiles = loadFilesFromConfig();
 
-        System.out.println("📋 기본 메시지 파일 목록: " + defaultFiles.size() + "개");
-        return defaultFiles;
+        if (dynamicFiles != null && !dynamicFiles.isEmpty()) {
+            if (!dynamicFiles.contains("Message")) {
+                dynamicFiles.add(0, "Message");
+            }
+            System.out.println("✅ 메시지 파일 목록 (" + dynamicFiles.size() + "개)을 구성했습니다.");
+            return dynamicFiles;
+        }
+
+        // 최후의 보루: 최소한의 기본 파일만 반환 (혹은 로그 출력)
+        System.err.println("⚠️  messageConfig.js 로드 실패. 최소한의 기본 설정으로 진행합니다.");
+        List<String> fallback = new ArrayList<>();
+        fallback.add("Message");
+        return fallback;
+    }
+
+    private List<String> loadFilesFromConfig() {
+        List<String> files = new ArrayList<>();
+        String configPath = "static/common/js/messageConfig.js";
+        String content = "";
+
+        // 1. 로컬에서 먼저 시도
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(configPath)) {
+            if (is != null) {
+                content = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+                System.out.println("  ✓ 로컬에서 messageConfig.js를 발견했습니다.");
+            }
+        } catch (IOException e) {
+            System.err.println("  ✗ 로컬 messageConfig.js 읽기 오류");
+        }
+
+        // 2. 로컬에 없으면 Gateway에서 시도
+        if (content.isEmpty() && gatewayUrl != null && !gatewayUrl.isEmpty()) {
+            String fullUrl = gatewayUrl + "/common/js/messageConfig.js";
+            try {
+                URL url = new URL(fullUrl);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                if (conn.getResponseCode() == 200) {
+                    try (InputStream is = conn.getInputStream()) {
+                        content = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+                        System.out.println("  ✓ Gateway에서 messageConfig.js를 로드했습니다.");
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("  ✗ Gateway에서 messageConfig.js 로드 실패: " + fullUrl);
+            }
+        }
+
+        // 3. 내용이 있으면 파싱 (정규표현식으로 scriptsToLoad 배열 내부 추출)
+        if (!content.isEmpty()) {
+            // "management/ComMenuMessage" 또는 'management/ComMenuMessage' 형태 추출
+            Pattern pattern = Pattern.compile("[\"']([^\"']+)[\"']");
+            Matcher matcher = pattern.matcher(content);
+            while (matcher.find()) {
+                String fileName = matcher.group(1);
+                // js 확장자나 경로가 포함되어 있어도 처리 가능하게 함 (기존 로직 호환)
+                if (fileName.contains("Message")) {
+                    files.add(fileName);
+                }
+            }
+        }
+
+        return files;
     }
 
     // JS 파일 목록을 동적으로 조회
