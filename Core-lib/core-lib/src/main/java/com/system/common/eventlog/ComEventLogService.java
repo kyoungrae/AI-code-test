@@ -28,6 +28,7 @@ public class ComEventLogService extends AbstractCommonService<ComEventLog> {
         try {
             return comEventLogMapper.SELECT_PAGE(request);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException(getMessage("EXCEPTION.SELECT"));
         }
     }

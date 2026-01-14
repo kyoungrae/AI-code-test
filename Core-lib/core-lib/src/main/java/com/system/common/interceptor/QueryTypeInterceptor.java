@@ -5,7 +5,6 @@ import com.system.common.annotation.StringToIntegerRemoveComma;
 import com.system.common.enumlist.InterCeptorRemoveDataValueTransformFieldNameList;
 import com.system.common.util.DateUtil;
 import com.system.common.util.userinfo.UserInfo;
-import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
@@ -19,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.sql.Connection;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -29,21 +27,22 @@ import java.util.Properties;
  * text : 파라미터 가공 처리 interceptor
  * */
 @Intercepts({
-        @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})
+        @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class, Integer.class })
 })
 public class QueryTypeInterceptor implements Interceptor {
     private static final Logger logger = LoggerFactory.getLogger(QueryTypeInterceptor.class);
+
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
         BoundSql boundSql = statementHandler.getBoundSql();
         String sql = boundSql.getSql().toLowerCase().trim();
-//        System.out.println(boundSql.getParameterObject());
-        if(boundSql.getParameterObject() != null){
-//            logger.debug(boundSql.getParameterObject().toString());
+        // System.out.println(boundSql.getParameterObject());
+        if (boundSql.getParameterObject() != null) {
+            // logger.debug(boundSql.getParameterObject().toString());
         }
         // Create system authUser ID
-//        UserInfo userInfo = new UserInfo();
+        // UserInfo userInfo = new UserInfo();
         String userEmail = UserInfo.getUserEmail();
         if (sql.startsWith("select")) {
             Object parameterObject = boundSql.getParameterObject();
@@ -54,7 +53,7 @@ public class QueryTypeInterceptor implements Interceptor {
             Object parameterObject = boundSql.getParameterObject();
             if (parameterObject != null) {
                 applyTransformations(parameterObject);
-                if(userEmail != null){
+                if (userEmail != null) {
                     Date systemDateTime = DateUtil.getServerTimeTypeDate();
                     modifyField(parameterObject, "system_create_userid", userEmail);
                     modifyFieldDate(parameterObject, "system_create_date", systemDateTime);
@@ -64,22 +63,23 @@ public class QueryTypeInterceptor implements Interceptor {
             Object parameterObject = boundSql.getParameterObject();
             if (parameterObject != null) {
                 applyTransformations(parameterObject);
-                if(userEmail != null){
+                if (userEmail != null) {
                     if (parameterObject instanceof MapperMethod.ParamMap<?> paramMap) {
                         paramMap.values().stream()
                                 .filter(value -> value instanceof List<?>)
                                 .map(value -> (List<?>) value)
-                                .forEach(list -> list.forEach(obj -> modifyField(obj, "system_update_userid", userEmail)));
-                    } else{
+                                .forEach(list -> list
+                                        .forEach(obj -> modifyField(obj, "system_update_userid", userEmail)));
+                    } else {
                         modifyField(parameterObject, "system_update_userid", userEmail);
                     }
                 }
             }
-        } else if (sql.startsWith("merge")) {  //oracle upsert용
+        } else if (sql.startsWith("merge")) { // oracle upsert용
             Object parameterObject = boundSql.getParameterObject();
             if (parameterObject != null) {
                 applyTransformations(parameterObject);
-                if(userEmail != null){
+                if (userEmail != null) {
                     modifyField(parameterObject, "system_create_userid", userEmail);
                     modifyField(parameterObject, "system_update_userid", userEmail);
                 }
@@ -105,17 +105,21 @@ public class QueryTypeInterceptor implements Interceptor {
             clazz = clazz.getSuperclass();
         }
     }
-    //Remove Annotation
+
+    // Remove Annotation
     private static InterCeptorRemoveDataValueTransformFieldNameList findRemoveEnumConstant(String fieldName) {
-        for (InterCeptorRemoveDataValueTransformFieldNameList constant : InterCeptorRemoveDataValueTransformFieldNameList.values()) {
+        for (InterCeptorRemoveDataValueTransformFieldNameList constant : InterCeptorRemoveDataValueTransformFieldNameList
+                .values()) {
             if (constant.name().equals(fieldName)) {
                 return constant;
             }
         }
         return null;
     }
-    //데이터 가공 [삭제]
-    private static void checkAndApplyAnnotation(Object obj, Field field, InterCeptorRemoveDataValueTransformFieldNameList enumConstant) throws Exception {
+
+    // 데이터 가공 [삭제]
+    private static void checkAndApplyAnnotation(Object obj, Field field,
+            InterCeptorRemoveDataValueTransformFieldNameList enumConstant) throws Exception {
         Class<?> enumClass = enumConstant.getClass();
 
         for (Annotation annotation : enumClass.getField(enumConstant.name()).getAnnotations()) {
@@ -126,7 +130,7 @@ public class QueryTypeInterceptor implements Interceptor {
                     String newValue = value.toString().replaceAll("-", "");
                     field.set(obj, newValue);
                 }
-            }else if(annotation instanceof StringToIntegerRemoveComma){
+            } else if (annotation instanceof StringToIntegerRemoveComma) {
                 field.setAccessible(true);
                 Object value = field.get(obj);
                 if (value != null) {
@@ -148,12 +152,14 @@ public class QueryTypeInterceptor implements Interceptor {
             }
         } catch (NoSuchFieldException e) {
             // 필드가 존재하지 않을 경우의 처리
-//            System.err.println("Field '" + fieldName + "' not found: " + e.getMessage());
+            // System.err.println("Field '" + fieldName + "' not found: " + e.getMessage());
         } catch (IllegalAccessException e) {
             // 접근 예외 처리
-//            System.err.println("Error accessing field '" + fieldName + "': " + e.getMessage());
+            // System.err.println("Error accessing field '" + fieldName + "': " +
+            // e.getMessage());
         }
     }
+
     private void modifyFieldDate(Object obj, String fieldName, Date value) {
         try {
             Field field = findField(obj.getClass(), fieldName);
@@ -163,10 +169,11 @@ public class QueryTypeInterceptor implements Interceptor {
             }
         } catch (NoSuchFieldException e) {
             // 필드가 존재하지 않을 경우의 처리
-//            System.err.println("Field '" + fieldName + "' not found: " + e.getMessage());
+            // System.err.println("Field '" + fieldName + "' not found: " + e.getMessage());
         } catch (IllegalAccessException e) {
             // 접근 예외 처리
-//            System.err.println("Error accessing field '" + fieldName + "': " + e.getMessage());
+            // System.err.println("Error accessing field '" + fieldName + "': " +
+            // e.getMessage());
         }
     }
 
