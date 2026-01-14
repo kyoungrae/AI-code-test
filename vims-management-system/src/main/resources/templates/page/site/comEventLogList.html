@@ -499,14 +499,14 @@
             { HEADER: Message.Label.Array["COM_EVENT_LOG.ID"], ID: 'id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.USER_ID"], ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.EMAIL"], ID: 'email', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-            { HEADER: Message.Label.Array["COM_EVENT_LOG.ROLE"], ID: 'role', WIDTH: '100', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.ROLE"], ID: 'role', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"], ID: 'action_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.TARGET_TABLE"], ID: 'target_table', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.TARGET_ID"], ID: 'target_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"], ID: 'before_data', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"], ID: 'after_data', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"], ID: 'ip_address', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-            { HEADER: Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -557,6 +557,9 @@
 
         //그리드 데이터 설정
         comEventLog_grid.DataSet(data);
+
+        //그리드 컬럼 크기 조정 설정
+        comEventLog_grid.gridColumResize(MAIN_GRID_ID);
 
         //그리드 엑셀 다운로드 버튼 활성화
         comEventLog_grid.excelDownloadEvent(Message.Label.Array["COM_EVENT_LOG.TITLE_LIST"]);

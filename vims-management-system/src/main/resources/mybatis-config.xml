@@ -11,8 +11,4 @@
     <typeHandlers>
         <typeHandler handler="com.system.common.config.LowerCaseMapTypeHandler" javaType="java.util.Map"/>
     </typeHandlers>
-    <plugins>
-        <plugin interceptor="com.system.common.interceptor.QueryTypeInterceptor"/>
-        <plugin interceptor="com.system.common.interceptor.EventLogInterceptor"/>
-    </plugins>
 </configuration>
