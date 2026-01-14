@@ -25,7 +25,7 @@ spring:
 
 mybatis:
     config-location: classpath:/mybatis-config.xml
-    mapper-locations: classpath:/mybatis/**/*.xml
+    mapper-locations: classpath*:/mybatis/**/*.xml
 
 ---
 
@@ -47,10 +47,12 @@ spring:
 
         hikari:
                 maximum-pool-size: 10
-                idle-timeout: 120000         # 2분 (max-lifetime보다 작게 설정하여 경고 방지)
-                max-lifetime: 180000         # 3분
+                minimum-idle: 5
+                idle-timeout: 600000         # 10분 (유휴 커넥션 폐기 시간)
+                max-lifetime: 1800000        # 30분 (커넥션 최대 유지 시간)
                 connection-timeout: 30000
-                keepalive-time: 60000        # 1분 (커넥션 유효성 주기적 체크)
+                keepalive-time: 30000        # 30초마다 DB에 생존 신호(SELECT 1)를 보냄
+                connection-test-query: SELECT 1 # 커넥션 유효성 검사 쿼리
 
     jpa:
         show-sql: false
@@ -81,6 +83,7 @@ logging:
     level:
         root: INFO
         com: DEBUG
+        com.zaxxer.hikari: ERROR
         org.apache.ibatis: WARN
         java.sql: WARN
         org.springframework.jdbc: WARN
