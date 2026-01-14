@@ -39,3 +39,5 @@ Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"] = "변경 전 데이터";
 Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"] = "변경 후 데이터";
 Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"] = "IPv4 또는 IPv6 주소";
 Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"] = "로그 발생 일시";
+Message.Label.Array["COM_EVENT_LOG.FROM_SYSTEM_CREATE_DATE"] = "로그 발생 시작 일시";
+Message.Label.Array["COM_EVENT_LOG.TO_SYSTEM_CREATE_DATE"] = "로그 발생 종료 일시";

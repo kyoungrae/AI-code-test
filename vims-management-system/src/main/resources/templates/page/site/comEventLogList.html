@@ -1,3 +1,109 @@
+<style>
+  /* Action Type Badges */
+  .action-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 70px;
+    text-transform: uppercase;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .action-insert {
+    background-color: #ecfdf5;
+    color: #059669;
+    border: 1px solid #10b981;
+  }
+
+  .action-update {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #3b82f6;
+  }
+
+  .action-delete {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #ef4444;
+  }
+
+  /* Audit Log Data Boxes - T-Shape Comparison Layout */
+  .log-top-info {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+    padding: 20px !important;
+    background: #f9fafb !important;
+    border-radius: 8px !important;
+    border: 1px solid #e5e7eb !important;
+    margin-bottom: 24px !important;
+  }
+
+  .log-bottom-comparison {
+    display: flex !important;
+    gap: 20px !important;
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+
+  .log-compare-column {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+  }
+
+  .log-data-view {
+    display: block !important;
+    padding: 16px !important;
+    border-radius: 8px !important;
+    font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+    font-size: 11px !important;
+    line-height: 1.6 !important;
+    white-space: pre !important;
+    word-break: normal !important;
+    max-height: 230px !important;
+    overflow: auto !important;
+    border: 1px solid transparent !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .log-data-before {
+    background-color: #fff1f2 !important;
+    border-color: #fecaca !important;
+    color: #991b1b !important;
+  }
+
+  .log-data-after {
+    background-color: #f0fdf4 !important;
+    border-color: #bbf7d0 !important;
+    color: #166534 !important;
+  }
+
+  .log-label-strong {
+    display: block !important;
+    margin-bottom: 10px !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    color: #374151 !important;
+  }
+
+  /* 텍스트 짤림 방지 및 줄바꿈 처리 */
+  .log-top-info .gi-span {
+    display: block !important;
+    /* flex 대신 block 사용하여 줄바꿈 유도 */
+    word-break: break-all !important;
+    white-space: normal !important;
+    text-align: center !important;
+    height: auto !important;
+    min-height: 35px !important;
+    padding: 8px !important;
+  }
+</style>
 <article id="comEventLogListPage" class="gi-article-content gi-col-95 gi-row-100">
   <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
 
@@ -12,19 +118,20 @@
       <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
         <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
           <div class="gi-input-container gi-flex-1">
-            <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+            <label for="searchDesc1" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.EMAIL"]</label>
             <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
           </div>
 
           <div class="gi-input-container gi-flex-1">
             <label for="from_date" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.FROM_SYSTEM_CREATE_DATE"]</label>
             <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off" data-datepicker />
           </div>
 
           <div class="gi-input-container gi-flex-1">
             <label for="to_date" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TO_SYSTEM_CREATE_DATE"]</label>
             <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off" data-datepicker />
           </div>
 
@@ -57,102 +164,106 @@
 </article>
 <!--상세 팝업 영역-->
 <article id="detail_comEventLog_popup" class="gi-popup" data-popup-open="false">
-  <div class="gi-popup-body" style="width: 700px;">
+  <div class="gi-popup-body" style="max-width: 700px !important;">
     <div class="gi-popup-header">
       <span>[Page.Message].Message.Label.Array["COM_EVENT_LOG.TITLE_DETAIL"]</span>
     </div>
-    <div class="gi-popup-contents">
-      <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+    <div class="gi-popup-contents" style="padding: 24px 30px !important;">
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ID"]</span>
-            <span data-field="id" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+      <!-- Top Section: Basic Info (3-Column Grid) -->
+      <div class="log-top-info">
+
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ID"]</span>
+          <span data-field="id" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.USER_ID"]</span>
-            <span data-field="user_id" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.USER_ID"]</span>
+          <span data-field="user_id" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.EMAIL"]</span>
-            <span data-field="email" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.EMAIL"]</span>
+          <span data-field="email" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ROLE"]</span>
-            <span data-field="role" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ROLE"]</span>
+          <span data-field="role" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"]</span>
-            <span data-field="action_type" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"]</span>
+          <span data-field="action_type" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_TABLE"]</span>
-            <span data-field="target_table" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_TABLE"]</span>
+          <span data-field="target_table" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_ID"]</span>
-            <span data-field="target_id" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.TARGET_ID"]</span>
+          <span data-field="target_id" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"]</span>
-            <span data-field="before_data" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"]</span>
+          <span data-field="ip_address" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"]</span>
-            <span data-field="after_data" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
-        </div>
-
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.IP_ADDRESS"]</span>
-            <span data-field="ip_address" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
-        </div>
-
-        <div class="gi-flex gi-grid-gap-16px">
-          <div class="gi-span-container gi-flex-1">
-            <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"]</span>
-            <span data-field="system_create_date" class="gi-span" data-focus-span-text-align="default"></span>
-          </div>
+        <div class="gi-span-container"
+          style="margin-bottom:0px !important; display: flex !important; flex-direction: column !important;">
+          <span class="gi-span-label"
+            style="position:static !important; font-size:11px !important; margin-bottom:4px !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.SYSTEM_CREATE_DATE"]</span>
+          <span data-field="system_create_date" class="gi-span" data-focus-span-text-align="center"
+            style="min-height:30px !important; padding:4px 8px !important; font-size:12px !important;"></span>
         </div>
 
       </div>
+
+      <!-- Bottom Section: Side-by-Side Comparison -->
+      <div class="log-bottom-comparison">
+        <div class="log-compare-column">
+          <span class="log-label-strong"
+            style="color: #ef4444 !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.BEFORE_DATA"]</span>
+          <span data-field="before_data" class="gi-span log-data-view log-data-before"
+            data-focus-span-text-align="default"></span>
+        </div>
+
+        <div class="log-compare-column">
+          <span class="log-label-strong"
+            style="color: #10b981 !important;">[Page.Message].Message.Label.Array["COM_EVENT_LOG.AFTER_DATA"]</span>
+          <span data-field="after_data" class="gi-span log-data-view log-data-after"
+            data-focus-span-text-align="default"></span>
+        </div>
+      </div>
+
     </div>
     <div class="gi-popup-footer">
       <button id="popup-detail_comEventLog_close-btn" class="gi-popup-close-btn"
@@ -477,7 +588,7 @@
     let cont1 = $("#searchDesc1").val();
     let cont2 = $("#from_date").val();
     let cont3 = $("#to_date").val();
-    if (formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+    if (formUtil.checkEmptyValue(cont1)) param._email = cont1;
     if (formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
     if (formUtil.checkEmptyValue(cont3)) param.to_date = cont3;
 
@@ -497,7 +608,7 @@
           list: [
             { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.ID"], ID: 'id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-            { HEADER: Message.Label.Array["COM_EVENT_LOG.USER_ID"], ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["COM_EVENT_LOG.USER_ID"], ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.EMAIL"], ID: 'email', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.ROLE"], ID: 'role', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["COM_EVENT_LOG.ACTION_TYPE"], ID: 'action_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
@@ -554,6 +665,17 @@
         //  let sub_grid = formUtil.giGrid(comEventLogSubGridHeader, 1, 1, "comEventLogSub_gi-Grid");
         //  sub_grid.DataSet(subData);
         //});
+
+        // 그리드 데이터 가공 (작업 유형 디자인 적용)
+        data.forEach(item => {
+          if (item.action_type === 'INSERT') {
+            item.action_type = '<span class="action-badge action-insert">INSERT</span>';
+          } else if (item.action_type === 'UPDATE') {
+            item.action_type = '<span class="action-badge action-update">UPDATE</span>';
+          } else if (item.action_type === 'DELETE') {
+            item.action_type = '<span class="action-badge action-delete">DELETE</span>';
+          }
+        });
 
         //그리드 데이터 설정
         comEventLog_grid.DataSet(data);
@@ -650,7 +772,22 @@
   }
   //FUN : 상세팝업 호출
   function comEventLogDetailPopupOpen(cont) {
-    dataBinding.setDataForm(DETAIL_POPUP_ID, cont);
+    // JSON 데이터 가독성을 위한 포맷팅 처리
+    const formatJson = (val) => {
+      if (!val || val === 'No Data') return 'No Data';
+      try {
+        const obj = typeof val === 'string' ? JSON.parse(val) : val;
+        return JSON.stringify(obj, null, 2);
+      } catch (e) {
+        return val;
+      }
+    };
+
+    const formattedCont = { ...cont };
+    formattedCont.before_data = formatJson(cont.before_data);
+    formattedCont.after_data = formatJson(cont.after_data);
+
+    dataBinding.setDataForm(DETAIL_POPUP_ID, formattedCont);
     popup.open(DETAIL_POPUP_ID);
   }
   //FUN : 수정팝업 호출

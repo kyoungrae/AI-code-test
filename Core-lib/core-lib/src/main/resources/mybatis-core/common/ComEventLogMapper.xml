@@ -56,6 +56,21 @@
                 <if test="_after_data != null and _after_data != ''">AND after_data LIKE CONCAT('%', #{_after_data}, '%')</if>
                 <if test="_ip_address != null and _ip_address != ''">AND ip_address LIKE CONCAT('%', #{_ip_address}, '%')</if>
                 <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+
+                <if test="from_date != null and from_date != '' and to_date != null and to_date != ''">
+                    AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                    AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+
+                <if test="from_date != null and from_date != '' and (to_date == null or to_date == '')">
+                    AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                    AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{from_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+
+                <if test="(from_date == null or from_date == '') and to_date != null and to_date != ''">
+                    AND system_create_date &gt;= STR_TO_DATE(#{to_date}, '%Y%m%d')
+                    AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
             </where>
         ) AS sub
         <include refid="sortFilter"/>
@@ -89,6 +104,20 @@
             <if test="_after_data != null and _after_data != ''">AND after_data LIKE CONCAT('%', #{_after_data}, '%')</if>
             <if test="_ip_address != null and _ip_address != ''">AND ip_address LIKE CONCAT('%', #{_ip_address}, '%')</if>
             <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="from_date != null and from_date != '' and to_date != null and to_date != ''">
+                AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+
+            <if test="from_date != null and from_date != '' and (to_date == null or to_date == '')">
+                AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{from_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+
+            <if test="(from_date == null or from_date == '') and to_date != null and to_date != ''">
+                AND system_create_date &gt;= STR_TO_DATE(#{to_date}, '%Y%m%d')
+                AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
         </where>
     </select>
 
