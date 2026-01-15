@@ -64,6 +64,7 @@ public class ComOfficeService extends AbstractCommonService<ComOffice> {
         try {
             return comOfficeMapper.UPDATE(request);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException(getMessage("EXCEPTION.UPDATE"));
         }
     }
