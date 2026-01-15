@@ -72,85 +72,144 @@ public class EventLogInterceptor implements Interceptor {
     }
 
     private String captureBeforeData(Invocation invocation, MappedStatement ms, Object parameter) {
-        String targetId = extractIdFromParameter(parameter);
-        if (targetId == null || targetId.isEmpty()) {
-            logger.debug("EventLog: targetId is null or empty, skipping captureBeforeData. Parameter: " + parameter);
+        if (parameter == null) {
+            logger.debug("EventLog: Parameter is null, skipping captureBeforeData.");
             return null;
         }
+
+        // ID와 해당 필드명을 함께 추출
+        Map.Entry<String, String> idEntry = extractIdEntryFromParameter(parameter);
+        if (idEntry == null || idEntry.getValue() == null || idEntry.getValue().isEmpty()) {
+            logger.debug("EventLog: Could not extract ID from parameter, skipping captureBeforeData. Parameter: {}",
+                    parameter);
+            return null;
+        }
+
+        String idFieldName = idEntry.getKey();
+        String targetId = idEntry.getValue();
 
         try {
             String mapperNamespace = ms.getId().substring(0, ms.getId().lastIndexOf(".") + 1);
             String selectMapperId = mapperNamespace + "SELECT";
 
-            // 해당 매퍼에 SELECT 문이 있는지 확인
             if (!ms.getConfiguration().hasStatement(selectMapperId)) {
-                logger.debug("EventLog: No 'SELECT' statement found in " + mapperNamespace
-                        + ", skipping captureBeforeData.");
+                logger.debug(
+                        "EventLog: No 'SELECT' statement found for {} (looked for {}), skipping captureBeforeData.",
+                        ms.getId(), selectMapperId);
                 return null;
             }
 
             MappedStatement selectMs = ms.getConfiguration().getMappedStatement(selectMapperId);
             Executor executor = (Executor) invocation.getTarget();
 
-            // 조회를 위한 파라미터 설정
+            // 조회를 위한 파라미터 설정 - 추출된 특정 필드명과 공용 'id' 키만 사용함
             Map<String, Object> queryParam = new HashMap<>();
             queryParam.put("id", targetId);
+            queryParam.put("ID", targetId);
+            if (idFieldName != null && !idFieldName.equals("id") && !idFieldName.equals("ID")) {
+                queryParam.put(idFieldName, targetId);
+            }
 
-            logger.debug("EventLog: Capturing before_data for " + selectMapperId + " with id: " + targetId);
+            logger.debug("EventLog: Attempting select for before_data. Mapper: {}, QueryParam: {}", selectMapperId,
+                    queryParam);
 
-            // 데이터 조회 실행
             java.util.List<Object> list = executor.query(selectMs, queryParam,
                     org.apache.ibatis.session.RowBounds.DEFAULT, Executor.NO_RESULT_HANDLER);
 
             if (list != null && !list.isEmpty()) {
                 String captured = objectMapper.writeValueAsString(list.get(0));
-                logger.debug("EventLog: Captured before_data size: " + captured.length());
+                logger.debug("EventLog: Successfully captured before_data from {}. Length: {}", selectMapperId,
+                        captured.length());
                 return captured;
             } else {
-                logger.debug("EventLog: No data found for id: " + targetId);
+                logger.debug("EventLog: No record found in {} for ID {}", selectMapperId, targetId);
             }
         } catch (Exception e) {
-            logger.warn("EventLog: Failed to capture before_data: " + e.getMessage());
+            logger.warn("EventLog: Error during captureBeforeData for {}: {}", ms.getId(), e.getMessage());
         }
         return null;
     }
 
-    private String extractIdFromParameter(Object parameter) {
+    private Map.Entry<String, String> extractIdEntryFromParameter(Object parameter) {
         if (parameter == null)
             return null;
 
         // 1. Map 형태인 경우 (MyBatis의 ParamMap 포함)
         if (parameter instanceof Map) {
             Map<?, ?> map = (Map<?, ?>) parameter;
-            if (map.containsKey("id"))
-                return String.valueOf(map.get("id"));
-            if (map.containsKey("param1"))
-                return String.valueOf(map.get("param1")); // 첫 번째 인자
-            // 객체 자체가 value로 들어있는 경우 (예: "vo": {id: 123})
+
+            if (map.containsKey("id")) {
+                Object idObj = map.get("id");
+                if (idObj instanceof String || idObj instanceof Number) {
+                    return new AbstractMap.SimpleEntry<>("id", String.valueOf(idObj));
+                }
+                return extractIdEntryFromParameter(idObj);
+            }
+
+            // MyBatis 기본 파라미터명 확인 (param1, arg0 등)
+            if (map.containsKey("param1")) {
+                return extractIdEntryFromParameter(map.get("param1"));
+            }
+            if (map.containsKey("arg0")) {
+                return extractIdEntryFromParameter(map.get("arg0"));
+            }
+
             for (Object value : map.values()) {
-                String id = extractIdFromParameter(value);
-                if (id != null && !id.isEmpty())
-                    return id;
+                if (value == parameter)
+                    continue;
+                Map.Entry<String, String> entry = extractIdEntryFromParameter(value);
+                if (entry != null && entry.getValue() != null && !entry.getValue().isEmpty())
+                    return entry;
             }
         }
         // 2. 기본 타입(String, Number)인 경우 - 자체가 ID일 확률이 높음
         else if (parameter instanceof String || parameter instanceof Number) {
-            return String.valueOf(parameter);
+            return new AbstractMap.SimpleEntry<>("id", String.valueOf(parameter));
         }
         // 3. 일반 객체(VO 등)인 경우
         else {
             try {
+                // 1) "id" 라는 필드를 우선적으로 찾음
                 Field idField = findField(parameter.getClass(), "id");
                 if (idField != null) {
                     idField.setAccessible(true);
                     Object idObj = idField.get(parameter);
-                    return idObj != null ? idObj.toString() : "";
+                    return new AbstractMap.SimpleEntry<>("id", idObj != null ? idObj.toString() : "");
+                }
+
+                // 2) @Id 어노테이션이 붙은 필드를 찾음 (JPA 어노테이션 활용)
+                for (Field field : parameter.getClass().getDeclaredFields()) {
+                    if (field.isAnnotationPresent(jakarta.persistence.Id.class)) {
+                        field.setAccessible(true);
+                        Object idObj = field.get(parameter);
+                        return new AbstractMap.SimpleEntry<>(field.getName(), idObj != null ? idObj.toString() : "");
+                    }
+                }
+
+                // 3) "keys" 필드 분석 (시스템 관례)
+                Field keysField = findField(parameter.getClass(), "keys");
+                if (keysField != null) {
+                    keysField.setAccessible(true);
+                    Object keysObj = keysField.get(parameter);
+                    if (keysObj instanceof String) {
+                        String keysVal = (String) keysObj;
+                        if (!keysVal.isEmpty()) {
+                            String cleanKeys = keysVal.replace("[", "").replace("]", "");
+                            String firstKey = cleanKeys.split(",")[0].trim();
+                            Field pkField = findField(parameter.getClass(), firstKey);
+                            if (pkField != null) {
+                                pkField.setAccessible(true);
+                                Object idObj = pkField.get(parameter);
+                                return new AbstractMap.SimpleEntry<>(firstKey, idObj != null ? idObj.toString() : "");
+                            }
+                        }
+                    }
                 }
             } catch (Exception e) {
                 // ignore
             }
         }
-        return "";
+        return new AbstractMap.SimpleEntry<>("id", "");
     }
 
     private void saveEventLog(Invocation invocation, MappedStatement ms, Object parameter, String beforeData)
@@ -158,7 +217,8 @@ public class EventLogInterceptor implements Interceptor {
         // 비동기 실행을 위해 필요한 데이터들을 로컬 변수로 확정(effectively final)
         final String actionType = ms.getSqlCommandType().name();
         final String targetTable = extractTableName(ms);
-        final String targetId = extractIdFromParameter(parameter);
+        Map.Entry<String, String> idEntry = extractIdEntryFromParameter(parameter);
+        final String targetId = idEntry != null ? idEntry.getValue() : "";
 
         // IP 주소 추출
         String extractedIp = "";

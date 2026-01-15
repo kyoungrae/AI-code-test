@@ -115,32 +115,37 @@ public class ComUserService extends AbstractCommonService<ComUser> {
     }
 
     @Override
-    protected int updateImpl(ComUser request) {
+    protected int updateImpl(ComUser request) throws Exception {
         ValidationService validationService = new ValidationService();
         boolean isPasswordProvided = validationService.checkEmptyValue(request.getPassword());
+        try {
+            if (isPasswordProvided) {
+                // 1. 비밀번호 확인 체크
+                if (!request.getPassword().equals(request.getPassword_confirm())) {
+                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.CONFIRM_NOT_MATCH"));
+                }
 
-        if (isPasswordProvided) {
-            // 1. 비밀번호 확인 체크
-            if (!request.getPassword().equals(request.getPassword_confirm())) {
-                throw new CustomException(getMessage("EXCEPTION.PASSWORD.CONFIRM_NOT_MATCH"));
+                // 2. 기존 비밀번호와 동일한지 체크 (raw 패스워드와 비교)
+                ComUser existingUser = comUserMapper.SELECT(ComUser.builder().id(request.getId()).build()).get(0);
+                if (passwordEncoder.matches(request.getPassword(), existingUser.getPassword())) {
+                    throw new CustomException(getMessage("EXCEPTION.PASSWORD.SAME_AS_OLD"));
+                }
+
+                // 3. 비밀번호 정책 확인
+                validationPasswordPolicy(request.getPassword());
+
+                // 4. 비밀번호 암호화
+                request.setPassword(passwordEncoder.encode(request.getPassword()));
+            } else {
+                // 비밀번호가 입력되지 않은 경우 기존 비밀번호를 유지
+                request.setPassword(null);
             }
-
-            // 2. 기존 비밀번호와 동일한지 체크 (raw 패스워드와 비교)
-            ComUser existingUser = comUserMapper.SELECT(ComUser.builder().id(request.getId()).build()).get(0);
-            if (passwordEncoder.matches(request.getPassword(), existingUser.getPassword())) {
-                throw new CustomException(getMessage("EXCEPTION.PASSWORD.SAME_AS_OLD"));
-            }
-
-            // 3. 비밀번호 정책 확인
-            validationPasswordPolicy(request.getPassword());
-
-            // 4. 비밀번호 암호화
-            request.setPassword(passwordEncoder.encode(request.getPassword()));
-        } else {
-            // 비밀번호가 입력되지 않은 경우 기존 비밀번호를 유지
-            request.setPassword(null);
+            System.out.println(request);
+            return comUserMapper.UPDATE(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e + ": Fail to Update User");
         }
-        return comUserMapper.UPDATE(request);
     }
 
     @Transactional(rollbackFor = Exception.class)

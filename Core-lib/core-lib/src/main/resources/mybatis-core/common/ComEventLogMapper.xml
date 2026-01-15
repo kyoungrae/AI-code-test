@@ -43,7 +43,7 @@
                 <if test="before_data != null and before_data != ''">AND before_data = #{before_data}</if>
                 <if test="after_data != null and after_data != ''">AND after_data = #{after_data}</if>
                 <if test="ip_address != null and ip_address != ''">AND ip_address = #{ip_address}</if>
-                <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+                <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
                 
                 <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
                 <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
@@ -91,7 +91,7 @@
             <if test="before_data != null and before_data != ''">AND before_data = #{before_data}</if>
             <if test="after_data != null and after_data != ''">AND after_data = #{after_data}</if>
             <if test="ip_address != null and ip_address != ''">AND ip_address = #{ip_address}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             
             <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
             <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
@@ -148,7 +148,7 @@
             <if test="before_data != null and before_data != ''">AND before_data = #{before_data}</if>
             <if test="after_data != null and after_data != ''">AND after_data = #{after_data}</if>
             <if test="ip_address != null and ip_address != ''">AND ip_address = #{ip_address}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             
             <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
             <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>

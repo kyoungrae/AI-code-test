@@ -44,7 +44,7 @@ public class ComUserController extends AbstractCommonController<ComUser> {
 
     @PostMapping("/update")
     @Override
-    public int updateImpl(@RequestBody ComUser request) {
+    public int updateImpl(@RequestBody ComUser request) throws Exception {
         return comUserService.updateImpl(request);
     }
 

@@ -6,8 +6,6 @@ import com.system.common.enumlist.InterCeptorRemoveDataValueTransformFieldNameLi
 import com.system.common.util.DateUtil;
 import com.system.common.util.userinfo.UserInfo;
 import org.apache.ibatis.binding.MapperMethod;
-import org.apache.ibatis.executor.statement.StatementHandler;
-import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -30,65 +27,71 @@ import java.util.Properties;
  * */
 @Component
 @Intercepts({
-        @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class, Integer.class })
+        @Signature(type = org.apache.ibatis.executor.Executor.class, method = "update", args = {
+                org.apache.ibatis.mapping.MappedStatement.class, Object.class }),
+        @Signature(type = org.apache.ibatis.executor.Executor.class, method = "query", args = {
+                org.apache.ibatis.mapping.MappedStatement.class, Object.class,
+                org.apache.ibatis.session.RowBounds.class, org.apache.ibatis.session.ResultHandler.class })
 })
 public class QueryTypeInterceptor implements Interceptor {
     private static final Logger logger = LoggerFactory.getLogger(QueryTypeInterceptor.class);
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
-        BoundSql boundSql = statementHandler.getBoundSql();
-        String sql = boundSql.getSql().toLowerCase().trim();
-        // System.out.println(boundSql.getParameterObject());
-        if (boundSql.getParameterObject() != null) {
-            // logger.debug(boundSql.getParameterObject().toString());
+        Object[] args = invocation.getArgs();
+        org.apache.ibatis.mapping.MappedStatement ms = (org.apache.ibatis.mapping.MappedStatement) args[0];
+        Object parameterObject = args[1];
+
+        if (parameterObject == null) {
+            return invocation.proceed();
         }
-        // Create system authUser ID
-        // UserInfo userInfo = new UserInfo();
+
         String userEmail = UserInfo.getUserEmail();
-        if (sql.startsWith("select")) {
-            Object parameterObject = boundSql.getParameterObject();
-            if (parameterObject != null) {
-                applyTransformations(parameterObject);
+        org.apache.ibatis.mapping.SqlCommandType commandType = ms.getSqlCommandType();
+
+        // 1. 공통 데이터 변환 (Hyphen 제거 등) - 모든 명령에 대해 수행
+        applyTransformations(parameterObject);
+
+        // 2. 자동 감사 필드 주입 (Insert/Update/Merge)
+        if (commandType == org.apache.ibatis.mapping.SqlCommandType.INSERT) {
+            if (userEmail != null) {
+                Date systemDateTime = DateUtil.getServerTimeTypeDate();
+                modifyField(parameterObject, "system_create_userid", userEmail);
+                modifyFieldDate(parameterObject, "system_create_date", systemDateTime);
+                // INSERT 시에도 수정자 정보를 미리 넣어두는 관례 대응
+                modifyField(parameterObject, "system_update_userid", userEmail);
+                modifyFieldDate(parameterObject, "system_update_date", systemDateTime);
             }
-        } else if (sql.startsWith("insert")) {
-            Object parameterObject = boundSql.getParameterObject();
-            if (parameterObject != null) {
-                applyTransformations(parameterObject);
-                if (userEmail != null) {
-                    Date systemDateTime = DateUtil.getServerTimeTypeDate();
-                    modifyField(parameterObject, "system_create_userid", userEmail);
-                    modifyFieldDate(parameterObject, "system_create_date", systemDateTime);
-                }
-            }
-        } else if (sql.startsWith("update")) {
-            Object parameterObject = boundSql.getParameterObject();
-            if (parameterObject != null) {
-                applyTransformations(parameterObject);
-                if (userEmail != null) {
-                    if (parameterObject instanceof MapperMethod.ParamMap<?> paramMap) {
-                        paramMap.values().stream()
-                                .filter(value -> value instanceof List<?>)
-                                .map(value -> (List<?>) value)
-                                .forEach(list -> list
-                                        .forEach(obj -> modifyField(obj, "system_update_userid", userEmail)));
-                    } else {
-                        modifyField(parameterObject, "system_update_userid", userEmail);
+        } else if (commandType == org.apache.ibatis.mapping.SqlCommandType.UPDATE) {
+            if (userEmail != null) {
+                Date systemDateTime = DateUtil.getServerTimeTypeDate();
+
+                // 최상위 객체 수정
+                updateAuditFields(parameterObject, userEmail, systemDateTime);
+
+                // ParamMap인 경우 내부 객체들도 탐색
+                if (parameterObject instanceof MapperMethod.ParamMap<?> paramMap) {
+                    for (Object value : paramMap.values()) {
+                        if (value == null || value == parameterObject)
+                            continue;
+                        if (value instanceof List<?>) {
+                            for (Object item : (List<?>) value) {
+                                updateAuditFields(item, userEmail, systemDateTime);
+                            }
+                        } else {
+                            updateAuditFields(value, userEmail, systemDateTime);
+                        }
                     }
                 }
             }
-        } else if (sql.startsWith("merge")) { // oracle upsert용
-            Object parameterObject = boundSql.getParameterObject();
-            if (parameterObject != null) {
-                applyTransformations(parameterObject);
-                if (userEmail != null) {
-                    modifyField(parameterObject, "system_create_userid", userEmail);
-                    modifyField(parameterObject, "system_update_userid", userEmail);
-                }
-            }
         }
+
         return invocation.proceed();
+    }
+
+    private void updateAuditFields(Object obj, String userEmail, Date systemDateTime) {
+        modifyField(obj, "system_update_userid", userEmail);
+        modifyFieldDate(obj, "system_update_date", systemDateTime);
     }
 
     private void applyTransformations(Object obj) throws Exception {
@@ -147,6 +150,18 @@ public class QueryTypeInterceptor implements Interceptor {
     }
 
     private void modifyField(Object obj, String fieldName, String value) {
+        if (obj == null)
+            return;
+
+        // 1. Map 형태인 경우 처리
+        if (obj instanceof java.util.Map) {
+            @SuppressWarnings("unchecked")
+            java.util.Map<String, Object> map = (java.util.Map<String, Object>) obj;
+            map.put(fieldName, value);
+            return;
+        }
+
+        // 2. 일반 객체(VO)인 경우 리플렉션 처리
         try {
             Field field = findField(obj.getClass(), fieldName);
             if (field != null) {
@@ -154,16 +169,25 @@ public class QueryTypeInterceptor implements Interceptor {
                 field.set(obj, value);
             }
         } catch (NoSuchFieldException e) {
-            // 필드가 존재하지 않을 경우의 처리
-            // System.err.println("Field '" + fieldName + "' not found: " + e.getMessage());
+            // 필드가 없으면 무시
         } catch (IllegalAccessException e) {
-            // 접근 예외 처리
-            // System.err.println("Error accessing field '" + fieldName + "': " +
-            // e.getMessage());
+            // 접근 불가면 무시
         }
     }
 
     private void modifyFieldDate(Object obj, String fieldName, Date value) {
+        if (obj == null)
+            return;
+
+        // 1. Map 형태인 경우 처리
+        if (obj instanceof java.util.Map) {
+            @SuppressWarnings("unchecked")
+            java.util.Map<String, Object> map = (java.util.Map<String, Object>) obj;
+            map.put(fieldName, value);
+            return;
+        }
+
+        // 2. 일반 객체(VO)인 경우 리플렉션 처리
         try {
             Field field = findField(obj.getClass(), fieldName);
             if (field != null) {
@@ -171,12 +195,9 @@ public class QueryTypeInterceptor implements Interceptor {
                 field.set(obj, value);
             }
         } catch (NoSuchFieldException e) {
-            // 필드가 존재하지 않을 경우의 처리
-            // System.err.println("Field '" + fieldName + "' not found: " + e.getMessage());
+            // 필드가 없으면 무시
         } catch (IllegalAccessException e) {
-            // 접근 예외 처리
-            // System.err.println("Error accessing field '" + fieldName + "': " +
-            // e.getMessage());
+            // 접근 불가면 무시
         }
     }
 

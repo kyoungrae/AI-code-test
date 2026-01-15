@@ -45,9 +45,9 @@
             <if test="top_menu_code != null and top_menu_code != ''">AND top_menu_code = #{top_menu_code}</if>
             <if test="url != null and url != ''">AND url = #{url}</if>
             <if test="use_yn != null and use_yn != ''">AND use_yn = #{use_yn}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
-            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             <if test="menu_sequence != null and menu_sequence != ''">AND menu_sequence = #{menu_sequence}</if>
             <if test="menu_icon != null and menu_icon != ''">AND menu_icon = #{menu_icon}</if>
@@ -87,9 +87,9 @@
             <if test="top_menu_code != null and top_menu_code != ''">AND top_menu_code = #{top_menu_code}</if>
             <if test="url != null and url != ''">AND url = #{url}</if>
             <if test="use_yn != null and use_yn != ''">AND use_yn = #{use_yn}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
-            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             <if test="menu_sequence != null and menu_sequence != ''">AND menu_sequence = #{menu_sequence}</if>
             <if test="menu_icon != null and menu_icon != ''">AND menu_icon = #{menu_icon}</if>
@@ -145,9 +145,9 @@
             <if test="top_menu_code != null and top_menu_code != ''">AND top_menu_code = #{top_menu_code}</if>
             <if test="url != null and url != ''">AND url = #{url}</if>
             <if test="use_yn != null and use_yn != ''">AND use_yn = #{use_yn}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
-            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             <if test="menu_sequence != null and menu_sequence != ''">AND menu_sequence = #{menu_sequence}</if>
             <if test="menu_icon != null and menu_icon != ''">AND menu_icon = #{menu_icon}</if>
