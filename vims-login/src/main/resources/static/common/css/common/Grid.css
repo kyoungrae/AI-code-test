@@ -3580,7 +3580,7 @@
 #gi-grid-list-body {
     height: calc(100% - var(--grid-row-selector-height));
     /* height: 100%; */
-    min-height: 170px;
+    /* min-height: 170px; */
 }
 
 .gi-grid-row-selector {
