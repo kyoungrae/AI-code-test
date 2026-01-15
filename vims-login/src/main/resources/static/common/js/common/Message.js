@@ -34,6 +34,7 @@ Message.Label.Array["CONFIRM.RESET"] = "초기화하시겠습니까?";
 Message.Label.Array["CONFIRM.CANCEL"] = "취소하시겠습니까?";
 Message.Label.Array["CONFIRM.RESEND"] = "재발송하시겠습니까?";
 Message.Label.Array["CONFIRM.RESET"] = "입력된 모든 내용이 초기화됩니다. 계속하시겠습니까?";
+Message.Label.Array["CONFIRM.RESET_PASSWORD"] = "비밀번호를 초기화하시겠습니까?";
 
 Message.Label.Array["FAIL.INSERT"] = "등록실패";
 Message.Label.Array["FAIL.SELECT"] = "조회실패";
@@ -79,6 +80,7 @@ Message.Label.Array["REGISTER_BTN"] = "등록";
 Message.Label.Array["RESET_BTN"] = "초기화";
 Message.Label.Array["UPLOAD_BTN"] = "업로드";
 Message.Label.Array["SIDE_BTN"] = "사이드";
+Message.Label.Array["RESET_PASSWORD_BTN"] = "비밀번호 초기화";
 
 Message.Label.Array["START_DATE"] = "시작일";
 Message.Label.Array["END_DATE"] = "종료일";

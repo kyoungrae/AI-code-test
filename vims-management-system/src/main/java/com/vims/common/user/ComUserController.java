@@ -59,6 +59,11 @@ public class ComUserController extends AbstractCommonController<ComUser> {
         return comUserService.changePassword(request);
     }
 
+    @PostMapping("/updatePassword")
+    public int updatePassword(@RequestBody ComUser request) throws Exception {
+        return comUserService.updatePasswordImpl(request);
+    }
+
     @PostMapping("/excelUpload")
     @Override
     protected int excelUploadImpl(@RequestParam("file") MultipartFile arg0) throws Exception {

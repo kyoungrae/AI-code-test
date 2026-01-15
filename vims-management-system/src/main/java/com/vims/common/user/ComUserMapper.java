@@ -25,4 +25,5 @@ public interface ComUserMapper extends CommonMapper<ComUser> {
     int DELETE_TOKEN(AuthUser vo);
 
     String GET_USER_IMAGE_FILE_NAME_BY_EMAIL(String email);
+
 }

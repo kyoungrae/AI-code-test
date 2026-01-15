@@ -9,6 +9,7 @@ Message.Label.Array["COM_USER.TITLE_REGISTER"] = "사용자 등록";
 Message.Label.Array["COM_USER.CHECK.ID"] = "시퀀스 아이디(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.EMAIL"] = "이메일(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.PASSWORD"] = "비밀번호(을)를 입력해 주세요";
+Message.Label.Array["COM_USER.CHECK.PASSWORD_CONFIRM"] = "비밀번호 확인(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.ROLE"] = "역할(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.USER_ID"] = "아이디(을)를 입력해 주세요";
 Message.Label.Array["COM_USER.CHECK.OFFICE_CODE"] = "소속코드(을)를 입력해 주세요";

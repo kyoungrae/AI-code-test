@@ -140,11 +140,20 @@ public class ComUserService extends AbstractCommonService<ComUser> {
                 // 비밀번호가 입력되지 않은 경우 기존 비밀번호를 유지
                 request.setPassword(null);
             }
-            System.out.println(request);
             return comUserMapper.UPDATE(request);
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception(e + ": Fail to Update User");
+        }
+    }
+
+    protected int updatePasswordImpl(ComUser request) throws Exception {
+        try {
+            String pw = "1234";
+            var pwParam = ComUser.builder().id(request.getId()).password(passwordEncoder.encode(pw)).build();
+            return comUserMapper.UPDATE(pwParam);
+        } catch (Exception e) {
+            throw new CustomException(getMessage("EXCEPTION.PASSWORD.RESET"));
         }
     }
 

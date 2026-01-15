@@ -17,12 +17,30 @@
 ## @extend : input = new Input(); 
 ## @call : input.tagSelect("#ID", "url", {code:"", name : ""});
 **example start**
+: 임의의 테이블의 데이터를 select 옵션으로 설정
 
 <script>
     //Users/ikyoungtae/Documents/coding/AI-code-test/vims-login/src/main/resources/templates/layout/home.html 
     let input = new Input(); // login.html
     
     input.setSelectOption("#register_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
+</script>
+
+**example end**
+
+## @title : input 태그 공통코드 select 설정
+## @type : function
+## @date : 2026-01-15
+## @author : 이경태
+## @extend : input = new Input(); 
+## @call : input.setSelectOptionCom("#ID", "groupId");
+**example start**
+: 공통코드 테이블의 데이터를 select 옵션으로 설정
+
+<script>
+    let input = new Input();
+    
+    input.setSelectOptionCom("#register_role", "USER_ROLE");
 </script>
 
 **example end**

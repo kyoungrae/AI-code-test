@@ -16,8 +16,7 @@
 
     <select id="SELECT_PAGE" resultType="com.vims.common.user.ComUser">
         SELECT
-            row_number() over ()AS no,
-            
+            row_number() over (ORDER BY system_create_date DESC )AS no,
             id, 
             email, 
             password, 

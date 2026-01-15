@@ -429,10 +429,52 @@ class DataBinding {
             let fieldId = $(item).data("field");
             for (let key in setItemList) {
                 if (key === fieldId) {
+                    let value = setItemList[key];
                     if (item.nodeName === "SPAN") {
-                        $("#" + dataFieldList + " span[data-field='" + fieldId + "']").text(setItemList[key]);
+                        $(item).text(value);
                     } else if (item.nodeName === "INPUT") {
-                        $("#" + dataFieldList + " input[data-field='" + fieldId + "']").val(setItemList[key]);
+                        let $input = $(item);
+                        $input.val(value);
+
+                        // setSelectOption/Com 으로 생성된 동적 셀렉트 박스 처리
+                        let id = $input.attr("id");
+                        const updateDisplay = () => {
+                            let $selectDisplay = $("#" + id + "_select");
+                            if ($selectDisplay.length > 0) {
+                                let $dropDown = $selectDisplay.next(".slide-drop-down");
+                                if ($dropDown.length > 0) {
+                                    let selectText = "";
+                                    $dropDown.find("li button").each(function () {
+                                        if ($(this).val() == value) {
+                                            selectText = $(this).text();
+                                        }
+                                    });
+                                    if (selectText) {
+                                        $selectDisplay.val(selectText);
+                                        $(`label[for="${id}"]`).attr('data-focus-label', 'true');
+                                        return true; // 성공
+                                    }
+                                }
+                            }
+                            return false;
+                        };
+
+                        // 1. 이미 드롭다운이 있는 경우 즉시 업데이트
+                        if (!updateDisplay()) {
+                            // 2. 드롭다운이 비동기로 생성될 수 있으므로 MutationObserver로 감시
+                            const observer = new MutationObserver((mutations, obs) => {
+                                if (updateDisplay()) {
+                                    obs.disconnect(); // 성공하면 중단
+                                }
+                            });
+
+                            const parent = $input.parent()[0];
+                            if (parent) {
+                                observer.observe(parent, { childList: true, subtree: true });
+                                // 일정 시간이 지나도 안 나오면 포기 (메모리 누수 방지용)
+                                setTimeout(() => observer.disconnect(), 5000);
+                            }
+                        }
                     }
                 }
             }

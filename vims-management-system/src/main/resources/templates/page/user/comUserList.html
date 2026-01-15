@@ -94,6 +94,11 @@
                 </div>
                 <div class="gi-span-container">
                     <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.ROLE"]</span>
+                    <span data-field="role" class="gi-span" data-focus-span-text-align="default"></span>
+                </div>
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
                         data-focus-label="true">[Page.Message].Message.Label.Array["COM_USER.ADDRESS"]</span>
                     <span data-field="address" class="gi-span" data-focus-span-text-align="default"></span>
                 </div>
@@ -175,6 +180,12 @@
                             <input data-field="tel" id="register_tel" name="register_tel" class="gi-input"
                                 data-required="true" autocomplete="off" />
                         </div>
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="register_role" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["COM_USER.ROLE"]</label>
+                        <input gi-select data-field="role" id="register_role" name="register_role" class="gi-input"
+                            data-required="true" autocomplete="off" />
                     </div>
                     <div class="gi-input-container">
                         <label for="register_address" class="gi-input-label" data-focus-label="true"
@@ -267,6 +278,12 @@
                             autocomplete="off" />
                     </div>
                     <div class="gi-input-container">
+                        <label for="update_role" class="gi-input-label" data-focus-label="true"
+                            data-required="false">[Page.Message].Message.Label.Array["COM_USER.ROLE"]</label>
+                        <input gi-select data-field="role" id="update_role" name="update_role" class="gi-input"
+                            data-required="false" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
                         <label for="update_address" class="gi-input-label" data-focus-label="true"
                             data-required="false">[Page.Message].Message.Label.Array["COM_USER.ADDRESS"]</label>
                         <input data-field="address" id="update_address" name="update_address" class="gi-input"
@@ -309,6 +326,7 @@
     init();
     function init() {
 
+        input.setSelectOptionCom("#register_role", "USER_ROLE");
         //초기화
         resetEvent();
 
@@ -319,7 +337,6 @@
         findByComUserList();
 
         setTimeout(function () {
-
             //클릭 이벤트
             clickEvent();
         });
@@ -397,7 +414,7 @@
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ID"]', ID: 'id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.EMAIL"]', ID: 'email', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.PASSWORD"]', ID: 'password', WIDTH: '40', TYPE: 'password', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-                        { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ROLE"]', ID: 'role', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["COM_USER.ROLE"]', ID: 'role', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.USER_ID"]', ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.OFFICE_CODE"]', ID: 'office_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["COM_USER.OFFICE_NAME"]', ID: 'office_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
@@ -414,6 +431,7 @@
                         { HEADER: '[Page.Message].Message.Label.Array["DETAIL_BTN"]', ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["UPDATE_BTN"]', ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["SIDE_BTN"]', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["RESET_PASSWORD_BTN"]', ID: 'reset_pw_btn', WIDTH: '40', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
                     ]
@@ -438,6 +456,8 @@
 
                 //그리드 내부의 상세 버튼 클릭 이벤트(상세 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
                 comUser_grid.detailBtnClick(comUserDetailPopupOpen, "detail_btn");
+
+                comUser_grid.detailBtnClick(comUserResetPwPopupOpen, "reset_pw_btn");
 
 
                 //그리드 내부의 수정 버튼 클릭 이벤트(수정 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
@@ -485,6 +505,14 @@
 
         })
     }
+    //FUN : 비밀번호 초기화 호출
+    function comUserResetPwPopupOpen(cont) {
+        const btnId = "confirm_pw_reset_btn";
+        const message = Message.Label.Array["CONFIRM.RESET_PASSWORD"];
+        const funcParam = cont;
+
+        formUtil.popup(btnId, message, updateUserPw, funcParam);
+    }
     //FUN : 상세팝업 호출
     function comUserDetailPopupOpen(cont) {
         dataBinding.setDataForm(DETAIL_POPUP_ID, cont);
@@ -493,9 +521,11 @@
 
     //FUN : 수정팝업 호출
     function comUserUpdatePopupOpen(cont) {
-        //console.log(cont);
         input.setSelectOption("#update_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
+        input.setSelectOptionCom("#update_role", "USER_ROLE");
+        //console.log(cont);
         dataBinding.setDataForm(UPDATE_POPUP_ID, cont);
+
 
         // 비밀번호 필드는 보안상 비워둠
         $("#update_password").val("");
@@ -520,6 +550,7 @@
         const param = {
             user_id: cont.user_id,
             email: cont.email,
+            role: cont.role,
             user_name: cont.user_name,
             password: cont.password,
             password_confirm: cont.password_confirm,
@@ -547,6 +578,7 @@
             id: cont.id,
             user_id: cont.user_id,
             email: cont.email,
+            role: cont.role,
             user_name: cont.user_name,
             password: cont.password,
             password_confirm: cont.password_confirm,
@@ -555,6 +587,22 @@
             address: cont.address,
             address_detail: cont.address_detail,
             postal_code: cont.postal_code,
+        }
+        axios.post(url, param)
+            .then(response => {
+                popup.close(UPDATE_POPUP_ID);
+                findByComUserList();
+                formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
+            })
+            .catch(error => {
+                formUtil.toast(error.response.data, "error");
+            })
+    }
+    //FUN : 사용자 비밀번호 초기화
+    function updateUserPw(cont) {
+        const url = "/cms/common/comUser/updatePassword";
+        const param = {
+            id: cont.id
         }
         axios.post(url, param)
             .then(response => {
