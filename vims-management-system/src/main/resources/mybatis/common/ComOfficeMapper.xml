@@ -174,9 +174,9 @@
             <if test="office_type != null and office_type != '' ">,office_type = #{office_type}</if>
             <if test="office_type_code != null and office_type_code != '' ">,office_type_code = #{office_type_code}</if>
             <if test="system_create_userid != null and system_create_userid != '' ">,system_create_userid = #{system_create_userid}</if>
-            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_date != null">,system_create_date = #{system_create_date}</if>
             <if test="system_update_userid != null and system_update_userid != '' ">,system_update_userid = #{system_update_userid}</if>
-            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_date != null">,system_update_date = #{system_update_date}</if>
         </set>
         <where>
             
