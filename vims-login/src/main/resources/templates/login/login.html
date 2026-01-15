@@ -124,80 +124,31 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="loginPageAuthenticationForm" class="gi-row-100">
-                    <div class="gi-padding-30px gi-grid gi-grid-justify-items-center gi-grid-align-items-center">
-                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>email</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="authenticationTarget" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">email</label>
-                                    <input data-field="authenticationTarget" id="authenticationTarget"
-                                        name="authenticationTarget" class="gi-input" data-required="true"
-                                        autocomplete="off" gi-maxlength="500" />
-                                    <span class="authentication-timer gi-margin-right-3"></span>
-                                </div>
-                                <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
-                                    <button id="send-number-btn" class="gi-input-btn"
-                                        type="button">[Page.Message].Message.Label.Array["LOGIN.SEND_VERIFICATION_CODE"]</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>[Page.Message].Message.Label.Array["LOGIN.VERIFICATION_CODE"]</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="authenticationNumber" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["LOGIN.VERIFICATION_CODE"]</label>
-                                    <input data-field="authenticationNumber" id="authenticationNumber"
-                                        name="authenticationNumber" class="gi-input" data-required="true"
-                                        autocomplete="off" gi-maxlength="6" inputNumberOnly />
-                                </div>
-                                <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
-                                    <button id="number-check-btn" class="gi-input-btn"
-                                        type="button">[Page.Message].Message.Label.Array["LOGIN.CONFIRM_VERIFICATION_CODE"]</button>
-                                </div>
-                            </div>
-                            <span class="authentication-check-message gi-font-size-13px"></span>
-                        </div>
-
-                    </div>
-                </form>
-
                 <form id="loginPagePasswordInitializeForm" class="gi-row-100">
-                    <div class="gi-padding-30px gi-grid gi-grid-justify-items-center gi-grid-align-items-center">
-                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>[Page.Message].Message.Label.Array["LOGIN.NEW_PASSWORD"]</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="changePassword" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["LOGIN.PASSWORD_POLICY_GUIDE"]</label>
-                                    <input data-field="changePassword" id="changePassword" name="changePassword"
-                                        class="gi-input" data-required="true" autocomplete="off" gi-maxlength="12"
-                                        type="password" />
+                    <div class="gi-article-content gi-margin-bottom-30px">
+                        <div class="gi-flex gi-flex-column gi-grid-gap-20px">
+                            <div class="gi-flex gi-grid-gap-20px">
+                                <div class="gi-input-container gi-flex-1">
+                                    <label for="" class="gi-input-label" data-focus-label="true"
+                                        data-required="true">[]</label>
+                                    <input data-field="" id="" name="" class="gi-input"
+                                        data-focus-span-text-align="center" data-required="true" autocomplete="off" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>[Page.Message].Message.Label.Array["LOGIN.NEW_PASSWORD_CONFIRM"]</span>
+                            <div class="gi-flex gi-grid-gap-20px">
+                                <div class="gi-input-container gi-flex-1">
+                                    <label for="" class="gi-input-label" data-focus-label="true"
+                                        data-required="true">[]</label>
+                                    <input data-field="" id="" name="" class="gi-input"
+                                        data-focus-span-text-align="center" data-required="true" autocomplete="off" />
+                                </div>
                             </div>
-                            <div class="gi-row-100 gi-col-100 gi-flex">
-                                <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
-                                    <label for="changePasswordCheck" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default"
-                                        data-required="true">[Page.Message].Message.Label.Array["LOGIN.PASSWORD_CONFIRM"]</label>
-                                    <input data-field="changePasswordCheck" id="changePasswordCheck"
-                                        name="changePasswordCheck" class="gi-input" data-required="true"
-                                        autocomplete="off" gi-maxlength="12" type="password" />
+                            <div class="gi-flex gi-grid-gap-20px">
+                                <div class="gi-input-container gi-flex-1">
+                                    <label for="" class="gi-input-label" data-focus-label="true"
+                                        data-required="true">[]</label>
+                                    <input data-field="" id="" name="" class="gi-input"
+                                        data-focus-span-text-align="center" data-required="true" autocomplete="off" />
                                 </div>
                             </div>
                         </div>
@@ -206,16 +157,9 @@
             </div>
             <!--/      팝업내용 삽입 영역      -->
         </div>
-        <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="initialize-btn" class="gi-popup-register-btn gi-hidden"
-                    type="button">[Page.Message].Message.Label.Array["LOGIN.INITIALIZE_PASSWORD_BTN"]</button>
-                <button id="confirm-btn" class="gi-popup-register-btn gi-hidden"
-                    type="button">[Page.Message].Message.Label.Array["LOGIN.APPLY_BTN"]</button>
-                <button id="popup-close-btn" class="gi-popup-close-btn"
-                    type="button">[Page.Message].Message.Label.Array["LOGIN.CLOSE_BTN"]</button>
-            </div>
+        <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
+            <button id="popup-close-btn" class="gi-popup-close-btn"
+                type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -244,6 +188,21 @@
         clickEvent();
         $("body").addClass('animate-content-end');
         getEmailCookie();
+
+        // [New Feature] Move Popup Content to Main Container for Sliding Animation
+        // [New Feature] Move Popup Content to Main Container for Sliding Animation
+        if ($("#sliding-reset-container").length === 0) {
+            let originalPopup = $("#gi-popup2");
+            let popupContent = originalPopup.find(".gi-popup-body").html();
+
+            // Create the new sliding container
+            let resetContainer = $(`<div id="sliding-reset-container" class="gi-login-form-section gi-hidden" style="position:absolute; top:0; left:0; width:50%; height:100%; background:#fff; z-index:1; opacity:0; transition: all 0.6s ease-in-out;">${popupContent}</div>`);
+
+            $(".gi-login-main").prepend(resetContainer);
+
+            // CRITICAL: Remove the original popup from DOM to prevent it from ever opening
+            originalPopup.remove();
+        }
     }
     function clickEvent() {
         $("#add_userInfo").click(function () {
@@ -257,12 +216,25 @@
         $("#send-number-btn").on("click", function () {
             sendAuthenticationEmail();
         });
-        // $("#find-pw-btn").on("click", function (){
-        //    if(formUtil.checkEmptyValue($("#email").val())){
-        //        $("#authenticationTarget").val($("#email").val());
-        //        $("#authenticationTarget").siblings("label").attr("data-focus-label", true);
-        //    }
-        // });
+        $("#find-pw-btn").on("click", function (e) {
+            // Prevent any default popup handlers
+            e.preventDefault();
+            e.stopPropagation();
+
+            $(".gi-login-main").addClass("right-panel-active");
+            // Show the reset form container which we moved in init()
+            $("#sliding-reset-container").removeClass("gi-hidden");
+        });
+
+        // Close/Back button logic for the sliding panel
+        $(document).on("click", "#popup-close-btn", function () {
+            $(".gi-login-main").removeClass("right-panel-active");
+            setTimeout(() => {
+                $("#sliding-reset-container").addClass("gi-hidden");
+                popupInit(); // Reset form state
+            }, 600); // Matches CSS transition duration
+        });
+
 
         // $("#number-check-btn").on("click", function (){
         //     let timeRemaining = parseInt($(".authentication-timer").text().replaceAll(":", ""));

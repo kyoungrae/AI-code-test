@@ -39,6 +39,8 @@ body {
     overflow: hidden !important;
     border: none !important;
     display: flex !important;
+    position: relative !important;
+    /* Context for absolute positioning of sliding panels */
 }
 
 /* 3. Left Form Section - Structure only */
@@ -63,22 +65,24 @@ body {
 #loginForm {
     width: 100% !important;
     height: auto !important;
-    /* Prevent the form from stretching height-wise */
 }
 
-/* Overriding only the positioning of the wrappers if needed, not the inputs themselves */
-#loginForm>.gi-col-25,
-#loginForm>.gi-col-10 {
+/* 
+   Robustly handle the layout children of the form.
+   - .gi-col-25 (Inputs): Force full width and auto height to stack them.
+   - .gi-flex (Remember Me Row): Allow flex layout to control itself, but ensure spacing.
+*/
+#loginForm>.gi-col-25 {
     height: auto !important;
-    /* Collapse the fractional height wrappers to wrap inputs naturally */
-    margin-bottom: 15px !important;
     width: 100% !important;
+    margin-bottom: 20px !important;
 }
 
-/* Fix for the remember email row alignment without changing internal widget CSS */
-.gi-flex-justify-content-space-between {
+#loginForm>.gi-flex.gi-row-100 {
     width: 100% !important;
     height: auto !important;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
 }
 
 /* 4. Branding (Right Side) */
@@ -100,7 +104,6 @@ body {
     font-size: 5rem;
     font-weight: 950;
     color: rgba(255, 255, 255, 0.05);
-    /* Subtle ghost text */
     letter-spacing: 20px;
     pointer-events: none;
 }
@@ -133,4 +136,88 @@ body {
     .gi-login-nav2 {
         display: none !important;
     }
+
+    /* Disable sliding on mobile */
+    .gi-login-main.right-panel-active .gi-login-form-section {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* 6. Sliding Panel Animation Logic */
+
+/* Initial positions are handled by flexbox order/default flow for Desktop. 
+   We assume form is on left, image on right. */
+
+.gi-login-form-section {
+    transition: all 0.6s ease-in-out;
+    transform: translateX(0);
+    z-index: 2;
+    opacity: 1;
+}
+
+.gi-login-nav2 {
+    transition: all 0.6s ease-in-out;
+    transform: translateX(0);
+    z-index: 5;
+}
+
+/* Active State (Triggered by JS class on parent) */
+
+/* 1. Login Form Moves Right and Fades Out */
+.gi-login-main.right-panel-active>.gi-login-form-section:not(#sliding-reset-container) {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 2. Image overlay moves Left */
+.gi-login-main.right-panel-active .gi-login-nav2 {
+    transform: translateX(-100%);
+    border-radius: 32px 0 0 32px;
+    /* Optional: Rounded corners adjustment */
+}
+
+/* 3. Reset Form (Dynamically injected) Moves into View */
+/* It is initially at left:0, slightly scaled down or just hidden */
+/* JS sets it to visible. CSS handles the slide if we position it absolutely or use transforms. */
+/* Based on JS injection: style="position:absolute; top:0; left:0; width:50%; ... opacity:0;" */
+
+.gi-login-main.right-panel-active #sliding-reset-container {
+    transform: translateX(100%);
+    /* Move from left(0) to right side(50% width? No, container is 1000px wide. Form is 500px wide.) */
+    /* Wait, the main container is flex. Left is 0. Right is 500px. */
+    /* If reset container is injected at left:0, effectively covering the login form. */
+    /* We want it to end up on the RIGHT side (covering the image's original spot) or STAY on the LEFT side while image moves right? */
+    /* User request: "Image moves to LEFT and content appears". */
+    /* So content (Reset Form) should be on the RIGHT. */
+
+    opacity: 1 !important;
+    z-index: 5 !important;
+}
+
+/* Fix for injected container styling to match main form */
+#sliding-reset-container {
+    padding: 40px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    /* Clean up popup header for inline display */
+}
+
+#sliding-reset-container .gi-popup-header {
+    background: transparent !important;
+    color: #333 !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    padding-bottom: 20px !important;
+    border-bottom: 2px solid #f1f5f9 !important;
+    margin-bottom: 20px !important;
+}
+
+#sliding-reset-container .gi-popup-footer {
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-top: 20px !important;
 }
