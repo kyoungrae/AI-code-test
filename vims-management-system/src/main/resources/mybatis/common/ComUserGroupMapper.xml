@@ -29,14 +29,14 @@
             system_update_userid
         FROM COM_USER_GROUP
         <where>
-            <if test="id != null and id != ''">AND id=#{id}</if>
+            <if test="id != null ">AND id=#{id}</if>
             <if test="group_id != null and group_id != ''">AND group_id=#{group_id}</if>
             <if test="user_email != null and user_email != ''">AND user_email=#{user_email}</if>
             <if test="user_id != null and user_id != ''">AND user_id=#{user_id}</if>
             <if test="office_code != null and office_code != ''">AND office_code=#{office_code}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date=#{system_create_date}</if>
+            <if test="system_create_date != null ">AND system_create_date=#{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid=#{system_create_userid}</if>
-            <if test="system_update_date != null and system_update_date != ''">AND system_update_date=#{system_update_date}</if>
+            <if test="system_update_date != null ">AND system_update_date=#{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid=#{system_update_userid}</if>
 
             <if test="_group_id != null and _group_id != ''">AND group_id LIKE CONCAT('%', #{_group_id}, '%')</if>
@@ -55,14 +55,14 @@
     <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
         SELECT CEIL(COUNT(*)/#{row_range}) FROM COM_USER_GROUP
         <where>
-            <if test="id != null and id != ''">AND id=#{id}</if>
+            <if test="id != null ">AND id=#{id}</if>
             <if test="group_id != null and group_id != ''">AND group_id=#{group_id}</if>
             <if test="user_email != null and user_email != ''">AND user_email=#{user_email}</if>
             <if test="user_id != null and user_id != ''">AND user_id=#{user_id}</if>
             <if test="office_code != null and office_code != ''">AND office_code=#{office_code}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date=#{system_create_date}</if>
+            <if test="system_create_date != null ">AND system_create_date=#{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid=#{system_create_userid}</if>
-            <if test="system_update_date != null and system_update_date != ''">AND system_update_date=#{system_update_date}</if>
+            <if test="system_update_date != null ">AND system_update_date=#{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid=#{system_update_userid}</if>
 
             <if test="_group_id != null and _group_id != ''">AND group_id LIKE CONCAT('%', #{_group_id}, '%')</if>
@@ -91,14 +91,14 @@
         system_update_userid
         FROM COM_USER_GROUP a
         <where>
-            <if test="id != null and id != ''">AND id=#{id}</if>
+            <if test="id != null ">AND id=#{id}</if>
             <if test="group_id != null and group_id != ''">AND group_id=#{group_id}</if>
             <if test="user_email != null and user_email != ''">AND user_email=#{user_email}</if>
             <if test="user_id != null and user_id != ''">AND user_id=#{user_id}</if>
             <if test="office_code != null and office_code != ''">AND office_code=#{office_code}</if>
-            <if test="system_create_date != null and system_create_date != ''">AND system_create_date=#{system_create_date}</if>
+            <if test="system_create_date != null ">AND system_create_date=#{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid=#{system_create_userid}</if>
-            <if test="system_update_date != null and system_update_date != ''">AND system_update_date=#{system_update_date}</if>
+            <if test="system_update_date != null ">AND system_update_date=#{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid=#{system_update_userid}</if>
 
             <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
@@ -238,7 +238,7 @@
             WHERE a.user_id = b.user_id
             AND b.group_id = #{group_id}
             )
-            <if test="id != null and id != ''">AND a.id=#{id}</if>
+            <if test="id != null ">AND a.id=#{id}</if>
             <if test="user_email != null and user_email != ''">AND a.email=#{user_email}</if>
             <if test="user_id != null and user_id != ''">AND a.user_id=#{user_id}</if>
             <if test="office_code != null and office_code != ''">AND a.office_code=#{office_code}</if>
@@ -260,7 +260,7 @@
             WHERE a.user_id = b.user_id
             AND b.group_id = #{group_id}
             )
-            <if test="id != null and id != ''">AND a.id=#{id}</if>
+            <if test="id != null ">AND a.id=#{id}</if>
             <if test="user_email != null and user_email != ''">AND a.email=#{user_email}</if>
             <if test="user_id != null and user_id != ''">AND a.user_id=#{user_id}</if>
             <if test="office_code != null and office_code != ''">AND a.office_code=#{office_code}</if>
