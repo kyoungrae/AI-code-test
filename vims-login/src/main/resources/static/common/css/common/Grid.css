@@ -3920,7 +3920,7 @@
 }
 
 /* Base Sort Icon (Default state on hover) */
-.gi-grid-list-header li:not(.gi-grid-sort-asc):not(.gi-grid-sort-desc):not([data-column$="detail_btn"]):not([data-column$="_checkbox_all"]):hover::after {
+.gi-grid-list-header li:not(.gi-grid-sort-asc):not(.gi-grid-sort-desc):not([data-column$="detail_btn"]):not([data-column$="delete_btn"]):not([data-column$="update_btn"]):not([data-column$="reset_pw_btn"]):not([data-column$="_checkbox_all"]):hover::after {
     content: "";
     position: absolute;
     right: 8px;

@@ -447,6 +447,7 @@
 
                 //그리드 데이터 설정
                 comUser_grid.DataSet(data);
+                comUser_grid.gridColumResize("comUser_gi-Grid");
 
                 // 엑셀 다운로드 버튼 활성화
                 comUser_grid.excelDownloadEvent(Message.Label.Array["COM_USER.TITLE_LIST"]);
