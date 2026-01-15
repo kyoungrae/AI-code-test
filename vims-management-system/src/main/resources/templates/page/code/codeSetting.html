@@ -97,8 +97,8 @@
                             <div class="gi-row-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-flex-end">
                                 <div
                                     class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
-                                    <button id="register-btn2" class="gi-btn-blue" type="button"
-                                        gi-popup-open-id="gi-code_register-popup">코드 추가</button>
+                                    <!-- <button id="register-btn2" class="gi-btn-blue" type="button" gi-popup-open-id="gi-code_register-popup">코드 추가</button> -->
+                                    <button id="register-btn2" class="gi-btn-blue" type="button">코드 추가</button>
                                 </div>
                             </div>
                         </div>
@@ -120,50 +120,32 @@
                 <form id="comDeptGroupCodeRegister" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>그룹아이디</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="group_id1" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">그룹아이디</label>
-                                    <input data-field="group_id" id="group_id1" name="group_id" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
+                        <div class="gi-row-100 gi-col-100">
+                            <div
+                                class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                <label for="group_id1" class="gi-input-label" data-focus-label="true"
+                                    data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                <input data-field="group_id" id="group_id1" name="group_id" class="gi-input"
+                                    data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
                         </div>
-                        <div
-                            class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>그룹명</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="group_name1" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">그룹명</label>
-                                    <input data-field="group_name" id="group_name1" name="group_name" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
+                        <div class="gi-row-100 gi-col-100">
+                            <div
+                                class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                <label for="group_name1" class="gi-input-label" data-focus-label="true"
+                                    data-focus-label-text-align="default" data-required="true">그룹명</label>
+                                <input data-field="group_name" id="group_name1" name="group_name" class="gi-input"
+                                    data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
                         </div>
-                        <div
-                            class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>사용여부</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="use_yn1" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn1"
-                                        name="use_yn" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
+                        <div class="gi-row-100 gi-col-100">
+                            <div
+                                class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                <label for="use_yn1" class="gi-input-label" data-focus-label="true"
+                                    data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn1"
+                                    name="use_yn" class="gi-input" data-focus-span-text-align="default"
+                                    data-required="true" autocomplete="off" />
                             </div>
                         </div>
                     </div>
@@ -172,11 +154,9 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="commonGroUpCodeRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
-                <button class="gi-popup-close-btn" type="button">닫기</button>
-            </div>
+            <button id="commonGroUpCodeRegister-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -266,66 +246,42 @@
                 <form id="comCodeRegister" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
-                        <div
-                            class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>그룹아이디</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="group_id2" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">그룹아이디</label>
-                                    <input data-disabled data-field="group_id" id="group_id2" name="group_id"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" />
-                                </div>
+                        <div class="gi-row-100 gi-col-100">
+                            <div
+                                class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                <label for="group_id2" class="gi-input-label" data-focus-label="true"
+                                    data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                <input data-disabled data-field="group_id" id="group_id2" name="group_id"
+                                    class="gi-input" data-focus-span-text-align="default" data-required="true"
+                                    autocomplete="off" />
                             </div>
                         </div>
-                        <div
-                            class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>코드아이디</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="code_id" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">코드아이디</label>
-                                    <input data-field="code_id" id="code_id" name="code_id" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
+                        <div class="gi-row-100 gi-col-100">
+                            <div
+                                class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                <label for="code_id" class="gi-input-label" data-focus-label="true"
+                                    data-focus-label-text-align="default" data-required="true">코드아이디</label>
+                                <input data-field="code_id" id="code_id" name="code_id" class="gi-input"
+                                    data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
                         </div>
-                        <div
-                            class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>코드명</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="code_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">코드명</label>
-                                    <input data-field="code_name" id="code_name" name="code_name" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off" />
-                                </div>
+                        <div class="gi-row-100 gi-col-100">
+                            <div
+                                class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                <label for="code_name" class="gi-input-label" data-focus-label="true"
+                                    data-focus-label-text-align="default" data-required="true">코드명</label>
+                                <input data-field="code_name" id="code_name" name="code_name" class="gi-input"
+                                    data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
                         </div>
-                        <div
-                            class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
-                            <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>사용여부</span>
-                            </div>
-                            <div class="gi-row-100 gi-col-100">
-                                <div
-                                    class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
-                                    <label for="use_yn2" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
-                                    <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn2"
-                                        name="use_yn" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" />
-                                </div>
+                        <div class="gi-row-100 gi-col-100">
+                            <div
+                                class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
+                                <label for="use_yn2" class="gi-input-label" data-focus-label="true"
+                                    data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn2"
+                                    name="use_yn" class="gi-input" data-focus-span-text-align="default"
+                                    data-required="true" autocomplete="off" />
                             </div>
                         </div>
                     </div>
@@ -334,15 +290,13 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <div
-                class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="comCodeRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
-                <button class="gi-popup-close-btn" type="button">닫기</button>
-            </div>
+            <button id="comCodeRegister-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
-<article id="gi-code_update-popup" class="gi-popup" data-popup-open="false">
+<article id="gi-code_update-popup" class="gi-popup" data-popup-open="false">1
     <div class="gi-popup-body">
         <div class="gi-popup-header">
             <span>공통코드 수정</span>
@@ -552,7 +506,6 @@
             if (status === 200) {
                 let data = response.data.DATA;
                 let paging = response.data.TOTAL_PAGING[0];
-                console.log(data)
                 // 그리드 헤더 설정
                 let comCodeGroup_menuGrid_header = {
                     title: "공통코드그룹 목록",
@@ -591,8 +544,13 @@
                     if (clickFlag) {
                         global_group_id = rows.group_id;
                         $("#register-area2").removeClass("gi-hidden");
-                        dataBinding.setDataForm("gi-code_register-popup", rows);
+
                         findByComCodeList('', '', '', '', rows.group_id);
+
+                        $("#register-btn2").off("click.").on("click", function () {
+                            popup.open("gi-code_register-popup");
+                            dataBinding.setDataForm("gi-code_register-popup", rows);
+                        })
                     } else {
                         global_group_id = "";
                         $("#register-area2").addClass("gi-hidden");
