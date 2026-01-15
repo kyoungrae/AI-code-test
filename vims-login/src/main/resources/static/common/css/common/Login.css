@@ -2,34 +2,118 @@
 
 /* ======================================================================================================== 
    MVIMS SHELL STYLES
-   - Strictly no overrides for .gi-input, .gi-input-container, or .gi-input-label.
-   - Strictly no HTML modifications.
-   - Focuses only on the outer shell, background, and card layout.
    ======================================================================================================== */
 
 :root {
-    --mvims-bg: radial-gradient(circle at center, #1e293b 0%, #080c14 100%);
+    /* Lighter base gradient */
+    --mvims-bg: radial-gradient(circle at 50% 50%, #f8fafc 0%, #e2e8f0 40%, #cbd5e1 100%);
 }
 
-/* 1. Global Shell Fixes */
+/* 1. Global Shell Fixes + Matrix BG Animation */
 html,
 body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    background: var(--mvims-bg) !important;
+    /* Use distinct background layers to create depth:
+       1. Base radial gradient
+       2. Moving "Matrix" Grid Lines (CSS Pattern)
+    */
+    background:
+        /* Top Layer: Subtle Grid Moving */
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        /* Bottom Layer: Base Color */
+        var(--mvims-bg) !important;
+
+    background-size:
+        60px 60px,
+        /* Grid Size */
+        60px 60px,
+        100% 100% !important;
+
     overflow: hidden;
     font-family: 'Pretendard', sans-serif;
+    position: relative;
 }
 
-/* Fix the 'White Line' issue by making the framework's main wrapper transparent */
+/* 
+   CSS ANIMATED MATRIX EFFECT
+   Using a pseudo-element to create a "wave" or "bending" overlay
+   that moves across the grid, simulating the matrix feel.
+*/
+body::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+    background:
+        repeating-linear-gradient(45deg,
+            transparent,
+            transparent 40px,
+            rgba(99, 102, 241, 0.04) 40px,
+            rgba(99, 102, 241, 0.04) 41px),
+        repeating-linear-gradient(-45deg,
+            transparent,
+            transparent 60px,
+            rgba(79, 70, 229, 0.03) 60px,
+            rgba(79, 70, 229, 0.03) 61px);
+    animation: matrix-shift 30s linear infinite;
+    pointer-events: none;
+}
+
+/* Second layer for "curved/bending" feel using rotation */
+body::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -2;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 60%);
+    opacity: 0.6;
+    animation: pulse-glow 15s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes matrix-shift {
+    0% {
+        transform: rotate(0deg) translate(0, 0);
+    }
+
+    50% {
+        transform: rotate(2deg) translate(-20px, 20px);
+    }
+
+    100% {
+        transform: rotate(0deg) translate(0, 0);
+    }
+}
+
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+}
+
+
 .gi-main-body,
 .gi-main {
     background: transparent !important;
 }
 
-/* 2. Main Login Card (Outer Shell) */
+/* 2. Main Login Card */
 .gi-login-main {
     width: 1000px !important;
     height: 600px !important;
@@ -40,10 +124,10 @@ body {
     border: none !important;
     display: flex !important;
     position: relative !important;
-    /* Context for absolute positioning of sliding panels */
+    z-index: 10;
 }
 
-/* 3. Left Form Section - Structure only */
+/* 3. Left Form Section */
 .gi-login-form-section {
     flex: 1 !important;
     padding: 60px 80px !important;
@@ -61,17 +145,11 @@ body {
     justify-content: center !important;
 }
 
-/* Adjusting the Form layout without touching input CSS properties */
 #loginForm {
     width: 100% !important;
     height: auto !important;
 }
 
-/* 
-   Robustly handle the layout children of the form.
-   - .gi-col-25 (Inputs): Force full width and auto height to stack them.
-   - .gi-flex (Remember Me Row): Allow flex layout to control itself, but ensure spacing.
-*/
 #loginForm>.gi-col-25 {
     height: auto !important;
     width: 100% !important;
@@ -108,7 +186,7 @@ body {
     pointer-events: none;
 }
 
-/* 5. Framework-Friendly Animations */
+/* 5. Animations */
 @keyframes mvims-zoom-in {
     from {
         opacity: 0;
@@ -125,7 +203,6 @@ body {
     animation: mvims-zoom-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
 }
 
-/* Responsive */
 @media (max-width: 1000px) {
     .gi-login-main {
         width: 400px !important;
@@ -137,18 +214,13 @@ body {
         display: none !important;
     }
 
-    /* Disable sliding on mobile */
     .gi-login-main.right-panel-active .gi-login-form-section {
         transform: none !important;
         opacity: 1 !important;
     }
 }
 
-/* 6. Sliding Panel Animation Logic */
-
-/* Initial positions are handled by flexbox order/default flow for Desktop. 
-   We assume form is on left, image on right. */
-
+/* 6. Sliding Panel Logic & Styling */
 .gi-login-form-section {
     transition: all 0.6s ease-in-out;
     transform: translateX(0);
@@ -162,62 +234,97 @@ body {
     z-index: 5;
 }
 
-/* Active State (Triggered by JS class on parent) */
-
-/* 1. Login Form Moves Right and Fades Out */
+/* Active State */
 .gi-login-main.right-panel-active>.gi-login-form-section:not(#sliding-reset-container) {
     transform: translateX(100%);
     opacity: 0;
     pointer-events: none;
 }
 
-/* 2. Image overlay moves Left */
 .gi-login-main.right-panel-active .gi-login-nav2 {
     transform: translateX(-100%);
     border-radius: 32px 0 0 32px;
-    /* Optional: Rounded corners adjustment */
 }
-
-/* 3. Reset Form (Dynamically injected) Moves into View */
-/* It is initially at left:0, slightly scaled down or just hidden */
-/* JS sets it to visible. CSS handles the slide if we position it absolutely or use transforms. */
-/* Based on JS injection: style="position:absolute; top:0; left:0; width:50%; ... opacity:0;" */
 
 .gi-login-main.right-panel-active #sliding-reset-container {
     transform: translateX(100%);
-    /* Move from left(0) to right side(50% width? No, container is 1000px wide. Form is 500px wide.) */
-    /* Wait, the main container is flex. Left is 0. Right is 500px. */
-    /* If reset container is injected at left:0, effectively covering the login form. */
-    /* We want it to end up on the RIGHT side (covering the image's original spot) or STAY on the LEFT side while image moves right? */
-    /* User request: "Image moves to LEFT and content appears". */
-    /* So content (Reset Form) should be on the RIGHT. */
-
     opacity: 1 !important;
-    z-index: 5 !important;
+    z-index: 10 !important;
 }
 
-/* Fix for injected container styling to match main form */
-#sliding-reset-container {
-    padding: 40px !important;
-    box-sizing: border-box !important;
+/* Container for the injected Reset Form */
+.gi-login-sliding-panel {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 50% !important;
+    height: 100% !important;
+    background: #ffffff !important;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.6s ease-in-out;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    /* Clean up popup header for inline display */
+    padding: 40px !important;
 }
 
-#sliding-reset-container .gi-popup-header {
+/* Fixing Popup Content Layout */
+.gi-login-sliding-panel .gi-popup-header {
     background: transparent !important;
-    color: #333 !important;
+    color: #1e293b !important;
     font-size: 1.5rem !important;
     font-weight: 700 !important;
-    padding-bottom: 20px !important;
+    padding: 0 0 20px 0 !important;
     border-bottom: 2px solid #f1f5f9 !important;
     margin-bottom: 20px !important;
+    text-align: center !important;
 }
 
-#sliding-reset-container .gi-popup-footer {
+.gi-login-sliding-panel .gi-grid-template-columns-repeat-1-1fr-2fr {
     display: flex !important;
-    justify-content: flex-end !important;
-    margin-top: 20px !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    grid-template-columns: none !important;
+}
+
+.gi-login-sliding-panel .gi-grid-template-columns-repeat-1-1fr-2fr>.gi-col-100.gi-flex-center {
+    justify-content: flex-start !important;
+    margin-bottom: 8px !important;
+    margin-top: 15px !important;
+}
+
+.gi-login-sliding-panel .gi-grid-template-columns-repeat-1-1fr-2fr>.gi-col-100.gi-flex-center span {
+    font-weight: 600 !important;
+    color: #475569 !important;
+}
+
+.gi-login-sliding-panel .gi-input-container {
+    width: 100% !important;
+}
+
+.gi-login-sliding-panel .gi-input-btn {
+    width: 100% !important;
+    margin-left: 10px !important;
+    white-space: nowrap !important;
+    padding: 0 15px !important;
+}
+
+.gi-login-sliding-panel .gi-popup-footer {
+    background: transparent !important;
+    margin-top: 30px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+}
+
+.gi-login-sliding-panel .gi-btn-section {
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 10px !important;
+}
+
+.gi-login-sliding-panel button {
+    height: 48px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
 }

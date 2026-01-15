@@ -192,17 +192,20 @@
         // [New Feature] Move Popup Content to Main Container for Sliding Animation
         // [New Feature] Move Popup Content to Main Container for Sliding Animation
         if ($("#sliding-reset-container").length === 0) {
-            let originalPopup = $("#gi-popup2");
-            let popupContent = originalPopup.find(".gi-popup-body").html();
+            const originalPopup = $("#gi-popup2");
+            const popupContent = originalPopup.find(".gi-popup-body").html();
 
-            // Create the new sliding container
-            let resetContainer = $(`<div id="sliding-reset-container" class="gi-login-form-section gi-hidden" style="position:absolute; top:0; left:0; width:50%; height:100%; background:#fff; z-index:1; opacity:0; transition: all 0.6s ease-in-out;">${popupContent}</div>`);
+            const resetContainer = $("<div>", {
+                id: "sliding-reset-container",
+                class: "gi-login-form-section gi-login-sliding-panel gi-hidden",
+                html: popupContent
+            });
 
             $(".gi-login-main").prepend(resetContainer);
-
-            // CRITICAL: Remove the original popup from DOM to prevent it from ever opening
             originalPopup.remove();
         }
+
+        // Background Animation is handled via CSS in Login.css
     }
     function clickEvent() {
         $("#add_userInfo").click(function () {
