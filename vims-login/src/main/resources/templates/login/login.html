@@ -48,44 +48,59 @@
 <body>
     <div class="gi-main-body gi-flex-column gi-flex-center">
         <main class="gi-login-main gi-flex gi-flex-center">
-            <nav class="gi-login-nav gi-flex gi-flex-center">
-                <header>
-                    <img src="common/img/nrtclogo.png" width="150">
-                </header>
-            </nav>
             <section class="gi-login-form-section gi-flex gi-flex-column gi-flex-center">
+                <nav class="gi-login-nav gi-flex gi-flex-center">
+                    <header>
+                        <img src="common/img/nrtclogo.png" width="150">
+                    </header>
+                </nav>
                 <form id="loginForm" class="gi-row-100 gi-col-80 gi-flex gi-flex-column gi-flex-center">
                     <div class="gi-col-25 gi-row-100">
-                        <div class="gi-input-container gi-flex gi-flex-center" data-focus-line="false">
+                        <div class="gi-input-container" data-focus-line="false">
                             <label class="gi-input-label" data-focus-label="false" data-required="true"
                                 for="email">email</label>
-                            <input class="gi-input gi-margin-1px" data-required="true" type="text" id="email"
-                                name="email" autocomplete="off" data-focus-input-text-align="default" />
+                            <input class="gi-input" data-required="true" type="text" id="email" name="email"
+                                autocomplete="off" />
                         </div>
                     </div>
                     <div class="gi-col-25 gi-row-100">
-                        <div class="gi-input-container gi-flex gi-flex-center" data-focus-line="false">
+                        <div class="gi-input-container" data-focus-line="false">
                             <label class="gi-input-label" data-focus-label="false" data-required="true"
                                 for="password">password</label>
-                            <input class="gi-input gi-margin-1px" data-required="true" type="password" id="password"
-                                name="password" autocomplete="off" data-focus-input-text-align="default" />
+                            <input class="gi-input" data-required="true" type="password" id="password" name="password"
+                                autocomplete="off" />
                         </div>
                     </div>
-                    <div class="gi-col-10 gi-row-100 gi-margin-top-1 gi-font-size-15px">
-                        <div class="gi-col-100 gi-input-container gi-flex gi-flex-justify-content-space-between"
-                            data-focus-line="false">
-                            <div class="gi-row-100 gi-flex gi-flex-center" style="height:var(--default-input-height)">
+                    <!-- <div class="gi-flex gi-flex-column gi-grid-gap-20px">
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
                                 <input type="checkbox" id="remember_email" name="remember_email"
                                     class="gi-margin-left-4 gi-input gi-cursor-pointer" data-required="false"
                                     autocomplete="off" />
                                 <label id="remember_email_label" for="remember_email"
-                                    class="gi-row-50 gi-margin-left-2 gi-cursor-pointer">로그인 유지</label>
-
+                                    class="gi-row-50 gi-margin-left-2 gi-cursor-pointer">[Page.Message].Message.Label.Array["LOGIN.KEEP_LOGGED_IN"]</label>
+                            </div>
+                            <div class="gi-span-container gi-flex-1">
                                 <span class="gi-margin-right-3">
                                     <a id="find-pw-btn" class="gi-row-50 gi-login-forgot-password  gi-cursor-pointer"
-                                        gi-popup-open-id="gi-popup2">비밀번호 찾기</a>
+                                        gi-popup-open-id="gi-popup2">[Page.Message].Message.Label.Array["LOGIN.FORGOT_PASSWORD"]</a>
                                 </span>
                             </div>
+                        </div>
+                    </div> -->
+                    <div class="gi-flex gi-grid-gap-20px gi-row-100">
+                        <div class="gi-input-container gi-flex-1" style="border:unset;">
+                            <input type="checkbox" id="remember_email" name="remember_email"
+                                class="gi-input gi-cursor-pointer gi-margin-5px" data-required="false"
+                                autocomplete="off" />
+                            <label id="remember_email_label" for="remember_email"
+                                class="gi-cursor-pointer">[Page.Message].Message.Label.Array["LOGIN.KEEP_LOGGED_IN"]</label>
+                        </div>
+                        <div class="gi-span-container gi-flex-1" style="border:unset;">
+                            <span class="gi-margin-right-3">
+                                <a id="find-pw-btn" class="gi-row-50 gi-login-forgot-password  gi-cursor-pointer"
+                                    gi-popup-open-id="gi-popup2">[Page.Message].Message.Label.Array["LOGIN.FORGOT_PASSWORD"]</a>
+                            </span>
                         </div>
                     </div>
                 </form>
@@ -96,13 +111,15 @@
                     </div>
                 </div>
             </section>
+            <section class="gi-login-nav2 gi-flex gi-flex-center">
+            </section>
         </main>
     </div>
 </body>
 <article id="gi-popup2" class="gi-popup login-page" data-popup-open="false">
     <div class="gi-popup-body login-page">
         <div class="gi-popup-header">
-            <span>비밀번호 초기화</span>
+            <span>[Page.Message].Message.Label.Array["LOGIN.RESET_PASSWORD_TITLE"]</span>
         </div>
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
@@ -118,35 +135,37 @@
                                     <label for="authenticationTarget" class="gi-input-label" data-focus-label="true"
                                         data-focus-label-text-align="default" data-required="true">email</label>
                                     <input data-field="authenticationTarget" id="authenticationTarget"
-                                        name="authenticationTarget" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        gi-maxlength="500" />
+                                        name="authenticationTarget" class="gi-input" data-required="true"
+                                        autocomplete="off" gi-maxlength="500" />
                                     <span class="authentication-timer gi-margin-right-3"></span>
                                 </div>
                                 <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
-                                    <button id="send-number-btn" class="gi-input-btn" type="button">인증번호 전송</button>
+                                    <button id="send-number-btn" class="gi-input-btn"
+                                        type="button">[Page.Message].Message.Label.Array["LOGIN.SEND_VERIFICATION_CODE"]</button>
                                 </div>
                             </div>
                         </div>
                         <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>인증번호</span>
+                                <span>[Page.Message].Message.Label.Array["LOGIN.VERIFICATION_CODE"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
                                     <label for="authenticationNumber" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">인증번호</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["LOGIN.VERIFICATION_CODE"]</label>
                                     <input data-field="authenticationNumber" id="authenticationNumber"
-                                        name="authenticationNumber" class="gi-input"
-                                        data-focus-span-text-align="default" data-required="true" autocomplete="off"
-                                        gi-maxlength="6" inputNumberOnly />
+                                        name="authenticationNumber" class="gi-input" data-required="true"
+                                        autocomplete="off" gi-maxlength="6" inputNumberOnly />
                                 </div>
                                 <div class="gi-row-100 gi-flex gi-flex-center " style="width: 30%;">
-                                    <button id="number-check-btn" class="gi-input-btn" type="button">인증번호 확인</button>
+                                    <button id="number-check-btn" class="gi-input-btn"
+                                        type="button">[Page.Message].Message.Label.Array["LOGIN.CONFIRM_VERIFICATION_CODE"]</button>
                                 </div>
                             </div>
                             <span class="authentication-check-message gi-font-size-13px"></span>
                         </div>
+
                     </div>
                 </form>
 
@@ -154,30 +173,31 @@
                     <div class="gi-padding-30px gi-grid gi-grid-justify-items-center gi-grid-align-items-center">
                         <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>새 비밀번호</span>
+                                <span>[Page.Message].Message.Label.Array["LOGIN.NEW_PASSWORD"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
                                     <label for="changePassword" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">4~12자리 영문
-                                        대소문자,숫자,특수문자 조합</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["LOGIN.PASSWORD_POLICY_GUIDE"]</label>
                                     <input data-field="changePassword" id="changePassword" name="changePassword"
-                                        class="gi-input" data-focus-span-text-align="default" data-required="true"
-                                        autocomplete="off" gi-maxlength="12" type="password" />
+                                        class="gi-input" data-required="true" autocomplete="off" gi-maxlength="12"
+                                        type="password" />
                                 </div>
                             </div>
                         </div>
                         <div class="gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-col-60-important">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>새 비밀번호 확인</span>
+                                <span>[Page.Message].Message.Label.Array["LOGIN.NEW_PASSWORD_CONFIRM"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100 gi-flex">
                                 <div class="gi-row-100 gi-input-container gi-flex gi-flex-center ">
                                     <label for="changePasswordCheck" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">비밀번호 확인</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["LOGIN.PASSWORD_CONFIRM"]</label>
                                     <input data-field="changePasswordCheck" id="changePasswordCheck"
-                                        name="changePasswordCheck" class="gi-input" data-focus-span-text-align="default"
-                                        data-required="true" autocomplete="off" gi-maxlength="12" type="password" />
+                                        name="changePasswordCheck" class="gi-input" data-required="true"
+                                        autocomplete="off" gi-maxlength="12" type="password" />
                                 </div>
                             </div>
                         </div>
@@ -189,9 +209,12 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-40 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="initialize-btn" class="gi-popup-register-btn gi-hidden" type="button">비밀번호 초기화</button>
-                <button id="confirm-btn" class="gi-popup-register-btn gi-hidden" type="button">적용</button>
-                <button id="popup-close-btn" class="gi-popup-close-btn" type="button">닫기</button>
+                <button id="initialize-btn" class="gi-popup-register-btn gi-hidden"
+                    type="button">[Page.Message].Message.Label.Array["LOGIN.INITIALIZE_PASSWORD_BTN"]</button>
+                <button id="confirm-btn" class="gi-popup-register-btn gi-hidden"
+                    type="button">[Page.Message].Message.Label.Array["LOGIN.APPLY_BTN"]</button>
+                <button id="popup-close-btn" class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["LOGIN.CLOSE_BTN"]</button>
             </div>
         </div>
     </div>
@@ -327,7 +350,7 @@
             } catch (error) {
                 const errorData = error.response?.data;
                 console.log(error);
-                formUtil.alertPopup(errorData || error.message || error);
+                formUtil.toast(errorData || error.message || error);
             }
         });
     }
@@ -340,9 +363,9 @@
         let url = "/api/v1/auth/register";
         axios.post(url, cont).then(response => {
             let data = response.data;
-            formUtil.alertPopup("등록완료");
+            formUtil.toast(Message.Label.Array["LOGIN.COMPLETE_REGISTER"], "success");
         }).catch(error => {
-            formUtil.alertPopup("" + error);
+            formUtil.toast(error, "error");
         })
     }
     // 로그인 함수
@@ -364,7 +387,7 @@
             setEmailCookie();
             requestPageRedirect(redirectUrl);
         }).catch(error => {
-            formUtil.alertPopup(Message.Label.Array["FAIL.IDPWD"]);
+            formUtil.toast(Message.Label.Array["FAIL.IDPWD"], "error");
         })
     }
 
@@ -418,7 +441,7 @@
         authenticationNumber = generateRandomNumber();
         let content = authenticationMailTemplate();
         let authenticationInfo = {
-            title: "[giens] 인증코드 발송",
+            title: Message.Label.Array["LOGIN.MAIL_TITLE_VERIFICATION"],
             content: content,
             email_list: targetEmail
         }
@@ -435,7 +458,7 @@
             if (status === 200) {
             } else {
                 // custom alert 적용 필요
-                formUtil.showMessage("인증번호 전송 실패");
+                formUtil.showMessage(Message.Label.Array["LOGIN.FAIL_SEND_VERIFICATION_CODE"]);
                 commonTag.tagDisabled(true, disabledTag);
             }
         });
@@ -445,7 +468,7 @@
         let target = $(".authentication-check-message");
         let enableTags = ['authenticationTarget', 'send-number-btn'];
         target.removeClass("gi-hidden");
-        target.text("인증번호가 만료되었습니다.");
+        target.text(Message.Label.Array["LOGIN.EXPIRED_VERIFICATION_CODE"]);
         commonTag.tagDisabled(false, enableTags);
     }
 
@@ -524,9 +547,9 @@
             + "</div>"
             + "<div class='gi-row-100 gi-mail-content-area'>"
             + "<div class='gi-row-100 gi-mail-content'>"
-            + "[giens] 이메일 인증코드<br>"
-            + "비밀번호 초기화를 위한 인증 코드를 발송하였습니다.<br>"
-            + "아래의 인증 코드를 인증번호에 입력해주시기 바랍니다.<br>"
+            + Message.Label.Array["LOGIN.MAIL_CONTENT_HEADER"] + "<br>"
+            + Message.Label.Array["LOGIN.MAIL_CONTENT_BODY1"] + "<br>"
+            + Message.Label.Array["LOGIN.MAIL_CONTENT_BODY2"] + "<br>"
             + "<span>" + authenticationNumber + "</span>"
             + "</div>"
             + "</div>";

@@ -1,100 +1,136 @@
-/* ========== Login Page Styles ========== */
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap');
 
-/* ======================================================================================================== Login 영역*/
-.gi-login-main {
-    border-radius: 25px;
-    background-color: #ffffff;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+/* ======================================================================================================== 
+   MVIMS SHELL STYLES
+   - Strictly no overrides for .gi-input, .gi-input-container, or .gi-input-label.
+   - Strictly no HTML modifications.
+   - Focuses only on the outer shell, background, and card layout.
+   ======================================================================================================== */
+
+:root {
+    --mvims-bg: radial-gradient(circle at center, #1e293b 0%, #080c14 100%);
+}
+
+/* 1. Global Shell Fixes */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--mvims-bg) !important;
     overflow: hidden;
-    width: 45%;
-    height: 30%;
-    min-width: 340px;
-    max-height: 400px;
-    min-height: 300px;
+    font-family: 'Pretendard', sans-serif;
 }
 
-#loginForm {
-    position: relative;
-    transition: transform 300ms, box-shadow 300ms;
-    z-index: 1;
+/* Fix the 'White Line' issue by making the framework's main wrapper transparent */
+.gi-main-body,
+.gi-main {
+    background: transparent !important;
 }
 
-#loginForm::before,
-#loginForm::after {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 40% 45% 40% 35%;
-    z-index: -1;
-    top: 78%;
-    right: 100%;
+/* 2. Main Login Card (Outer Shell) */
+.gi-login-main {
+    width: 1000px !important;
+    height: 600px !important;
+    background: #ffffff !important;
+    border-radius: 32px !important;
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6) !important;
+    overflow: hidden !important;
+    border: none !important;
+    display: flex !important;
 }
 
-#loginForm::before {
-    background-color: rgba(69, 105, 144, 0.15);
-    animation: wawes 6s infinite linear;
-}
-
-#loginForm::after {
-    background-color: rgba(2, 128, 144, 0.2);
-    animation: wawes 7s infinite;
-}
-
-@keyframes wawes {
-    from {
-        transform: rotate(0);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+/* 3. Left Form Section - Structure only */
+.gi-login-form-section {
+    flex: 1 !important;
+    padding: 60px 80px !important;
+    background: #ffffff !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
 }
 
 .gi-login-nav {
-    width: 50%;
+    margin-bottom: 20px !important;
+    height: auto !important;
+    display: flex !important;
+    justify-content: center !important;
 }
 
-.gi-login-form-section {
-    width: 50%;
-    height: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+/* Adjusting the Form layout without touching input CSS properties */
+#loginForm {
+    width: 100% !important;
+    height: auto !important;
+    /* Prevent the form from stretching height-wise */
 }
 
-#checkLogin {
-    background: none;
-    position: relative;
-    transition: transform 300ms, box-shadow 300ms;
-    box-shadow: none !important;
+/* Overriding only the positioning of the wrappers if needed, not the inputs themselves */
+#loginForm>.gi-col-25,
+#loginForm>.gi-col-10 {
+    height: auto !important;
+    /* Collapse the fractional height wrappers to wrap inputs naturally */
+    margin-bottom: 15px !important;
+    width: 100% !important;
 }
 
-#checkLogin::before,
-#checkLogin::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 60px;
-    border-radius: 40% 45% 40% 35%;
-    z-index: -1;
-    top: 0%;
-    right: 0%;
+/* Fix for the remember email row alignment without changing internal widget CSS */
+.gi-flex-justify-content-space-between {
+    width: 100% !important;
+    height: auto !important;
 }
 
-#checkLogin::before {
-    background-color: rgba(69, 105, 144, 0.15);
-    animation: wawes 2s infinite linear;
+/* 4. Branding (Right Side) */
+.gi-login-nav2 {
+    flex: 1 !important;
+    height: 100% !important;
+    background-image: linear-gradient(to right, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.1)), url("../../img/vims_bg.png") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    padding: 60px !important;
 }
 
-#checkLogin::after {
-    background-color: rgba(2, 128, 144, 0.2);
-    animation: wawes 5s infinite;
+.gi-login-nav2::before {
+    content: 'MVIMS';
+    font-size: 5rem;
+    font-weight: 950;
+    color: rgba(255, 255, 255, 0.05);
+    /* Subtle ghost text */
+    letter-spacing: 20px;
+    pointer-events: none;
 }
 
-.animate-content-start {
-    animation: animate-start 1.3s ease-in-out;
+/* 5. Framework-Friendly Animations */
+@keyframes mvims-zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .animate-content-end {
-    animation: animate-end 1.3s ease-in-out;
+    animation: mvims-zoom-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .gi-login-main {
+        width: 400px !important;
+        height: auto !important;
+        flex-direction: column !important;
+    }
+
+    .gi-login-nav2 {
+        display: none !important;
+    }
 }

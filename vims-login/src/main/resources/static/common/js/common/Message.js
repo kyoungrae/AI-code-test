@@ -101,3 +101,26 @@ Message.Label.Array["FILE_DESCRIPTION"] = "설명";
 
 Message.Label.Array["USE_YN"] = "사용여부";
 
+// LOGIN PAGE
+Message.Label.Array["LOGIN.KEEP_LOGGED_IN"] = "로그인 유지";
+Message.Label.Array["LOGIN.FORGOT_PASSWORD"] = "비밀번호 찾기";
+Message.Label.Array["LOGIN.RESET_PASSWORD_TITLE"] = "비밀번호 초기화";
+Message.Label.Array["LOGIN.SEND_VERIFICATION_CODE"] = "인증번호 전송";
+Message.Label.Array["LOGIN.VERIFICATION_CODE"] = "인증번호";
+Message.Label.Array["LOGIN.CONFIRM_VERIFICATION_CODE"] = "인증번호 확인";
+Message.Label.Array["LOGIN.NEW_PASSWORD"] = "새 비밀번호";
+Message.Label.Array["LOGIN.PASSWORD_POLICY_GUIDE"] = "4~12자리 영문 대소문자,숫자,특수문자 조합";
+Message.Label.Array["LOGIN.NEW_PASSWORD_CONFIRM"] = "새 비밀번호 확인";
+Message.Label.Array["LOGIN.PASSWORD_CONFIRM"] = "비밀번호 확인";
+Message.Label.Array["LOGIN.INITIALIZE_PASSWORD_BTN"] = "비밀번호 초기화";
+Message.Label.Array["LOGIN.APPLY_BTN"] = "적용";
+Message.Label.Array["LOGIN.CLOSE_BTN"] = "닫기";
+Message.Label.Array["LOGIN.MAIL_TITLE_VERIFICATION"] = "[giens] 인증코드 발송";
+Message.Label.Array["LOGIN.FAIL_SEND_VERIFICATION_CODE"] = "인증번호 전송 실패";
+Message.Label.Array["LOGIN.EXPIRED_VERIFICATION_CODE"] = "인증번호가 만료되었습니다.";
+Message.Label.Array["LOGIN.MAIL_CONTENT_HEADER"] = "[giens] 이메일 인증코드";
+Message.Label.Array["LOGIN.MAIL_CONTENT_BODY1"] = "비밀번호 초기화를 위한 인증 코드를 발송하였습니다.";
+Message.Label.Array["LOGIN.MAIL_CONTENT_BODY2"] = "아래의 인증 코드를 인증번호에 입력해주시기 바랍니다.";
+Message.Label.Array["LOGIN.COMPLETE_REGISTER"] = "등록완료";
+
+

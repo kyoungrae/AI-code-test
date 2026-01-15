@@ -1,0 +1,100 @@
+/* ========== Login Page Styles ========== */
+
+/* ======================================================================================================== Login 영역*/
+.gi-login-main {
+    border-radius: 25px;
+    background-color: #ffffff;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    width: 45%;
+    height: 30%;
+    min-width: 340px;
+    max-height: 400px;
+    min-height: 300px;
+}
+
+#loginForm {
+    position: relative;
+    transition: transform 300ms, box-shadow 300ms;
+    z-index: 1;
+}
+
+#loginForm::before,
+#loginForm::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 40% 45% 40% 35%;
+    z-index: -1;
+    top: 78%;
+    right: 100%;
+}
+
+#loginForm::before {
+    background-color: rgba(69, 105, 144, 0.15);
+    animation: wawes 6s infinite linear;
+}
+
+#loginForm::after {
+    background-color: rgba(2, 128, 144, 0.2);
+    animation: wawes 7s infinite;
+}
+
+@keyframes wawes {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.gi-login-nav {
+    width: 50%;
+}
+
+.gi-login-form-section {
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#checkLogin {
+    background: none;
+    position: relative;
+    transition: transform 300ms, box-shadow 300ms;
+    box-shadow: none !important;
+}
+
+#checkLogin::before,
+#checkLogin::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    border-radius: 40% 45% 40% 35%;
+    z-index: -1;
+    top: 0%;
+    right: 0%;
+}
+
+#checkLogin::before {
+    background-color: rgba(69, 105, 144, 0.15);
+    animation: wawes 2s infinite linear;
+}
+
+#checkLogin::after {
+    background-color: rgba(2, 128, 144, 0.2);
+    animation: wawes 5s infinite;
+}
+
+.animate-content-start {
+    animation: animate-start 1.3s ease-in-out;
+}
+
+.animate-content-end {
+    animation: animate-end 1.3s ease-in-out;
+}
