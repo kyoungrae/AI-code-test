@@ -6,10 +6,10 @@ echo "=== 🛑 VIMS 애플리케이션 중지 시작 ==="
 # 중지 대상 Application 메인 클래스명
 # pgrep/ps 검색을 위해 메인 클래스 키워드를 사용합니다.
 APPS=(
-    "VimsLoginApplication"
-    "VimsManagementApplication"
-    "FileManagementSystemApplication"
-    "VimsGatewayApplication"
+    "vims-login-ROOT.jar"
+    "vims-management-ROOT.jar"
+    "FMS-ROOT.jar"
+    "vims-gateway-ROOT.jar"
 )
 
 # 사용자 친화적인 이름 매핑
@@ -36,7 +36,7 @@ for i in "${!APPS[@]}"; do
         done
         
         # 종료 대기
-        sleep 2
+        sleep 5
         
         # 여전히 살아있는지 재확인
         PIDS_RECHECK=$(ps -ef | grep "$APP" | grep -v grep | awk '{print $2}')
