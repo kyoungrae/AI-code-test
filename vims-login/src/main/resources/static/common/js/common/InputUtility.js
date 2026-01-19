@@ -137,9 +137,9 @@ class InputUtility {
 
     /**
      * @title : 공통 코드 Select 옵션 설정
-     * @text : COM_CODE 테이블에서 GROUP_ID로 조회하여 select 옵션을 채워주는 공통 함수
+     * @text : SYS_CODE 테이블에서 GROUP_ID로 조회하여 select 옵션을 채워주는 공통 함수
      * @param selector (String) : 이벤트 부여할 select 요소의 ID (예: "#register_role")
-     * @param groupId (String) : COM_CODE 테이블의 GROUP_ID (예: "USER_ROLE")
+     * @param groupId (String) : SYS_CODE 테이블의 GROUP_ID (예: "USER_ROLE")
      * @writer : 이경태
      */
     async setSelectOptionCom(selector, groupId) {
@@ -156,8 +156,8 @@ class InputUtility {
 
         let data = [];
         try {
-            // COM_CODE 테이블에서 group_id로 조회
-            const response = await axios.post('/cms/common/comCode/findComCode', { group_id: groupId });
+            // SYS_CODE 테이블에서 group_id로 조회
+            const response = await axios.post('/cms/common/sysCode/findSysCode', { group_id: groupId });
             data = response.data;
         } catch (error) {
             console.error("setSelectOptionCommon data load failed:", error);
@@ -199,7 +199,7 @@ class InputUtility {
         $defaultLi.html(`<button type="button" value="" style="width:100%; text-align:left; border:none; background:transparent; cursor:pointer; color:#8b8b8b; padding: 5px;">선택</button>`);
         $ulElement.append($defaultLi);
 
-        // COM_CODE 테이블의 code_id와 code_name으로 매핑
+        // SYS_CODE 테이블의 code_id와 code_name으로 매핑
         if (Array.isArray(data)) {
             data.forEach(item => {
                 let code = item.code_id;

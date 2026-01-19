@@ -298,7 +298,7 @@ public interface FmsExcelClient {
 
 // Service 사용 예시
 @Service
-public class ComUserService {
+public class SysUserService {
     @Value("${fms.internal.api-key}")
     private String apiKey;
 

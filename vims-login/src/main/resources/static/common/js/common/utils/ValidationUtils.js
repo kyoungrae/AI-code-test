@@ -43,7 +43,7 @@ FormUtility.prototype.checkObjectEmptyValue = function (value) {
  * @title : 유효성 검사
  * @text : formId와 messagePrefix를 받아 필수 입력 항목을 검사합니다.
  * @param formId (String) : 검사할 Form의 ID
- * @param messagePrefix (String) : 메시지 키의 접두사 (예: "COM_CODE_GROUP.CHECK.")
+ * @param messagePrefix (String) : 메시지 키의 접두사 (예: "SYS_CODE_GROUP.CHECK.")
  */
 FormUtility.prototype.validationCheck = function (formId, messagePrefix) {
     if (!formId || !messagePrefix) {

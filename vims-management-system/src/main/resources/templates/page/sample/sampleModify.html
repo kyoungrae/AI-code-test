@@ -168,17 +168,16 @@
         dataSetting();
 
         // select option 초기화
-        input.setSelectOption("#sample_category", "/cms/common/comCode/find", { code: "code_id", name: "code_name" });
+        input.setSelectOption("#sample_category", "/cms/common/sysCode/find", { code: "code_id", name: "code_name" });
 
         // 파일 업로드 초기화
-        fileUtil.createFileUpload("/fms/common/file/comFileDetail", "sample_file_uuid", "sampleFolder");
+        fileUtil.createFileUpload("/fms/common/file/sysFileDetail", "sample_file_uuid", "sampleFolder");
     }
     //리스트에서 받아온 데이터 바인딩처리
     async function dataSetting() {
         await dataBinding.setData(PRGMID);
         let data = dataBinding.getData(PRGMID);
         //초기 값 셋팅
-        initValueSetting(data);
     }
 
     function clickEvent() {

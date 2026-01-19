@@ -42,7 +42,7 @@ class file {
 class createFileUploadHTML {
     constructor(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME) {
         this.BTN_ID = $('button[data-file-upload-btn]')
-        this.PATH = PATH; //NOTE : COM_FILE 테이블이 아닌 특정 파일 테이블이 있으면 해당 경로 작성
+        this.PATH = PATH; //NOTE : SYS_FILE 테이블이 아닌 특정 파일 테이블이 있으면 해당 경로 작성
         this.ID_TO_RECEIVE_VALUE = ID_TO_RECEIVE_VALUE;
         this.FOLDER_NAME = FOLDER_NAME;
         this.COMMON_UPLOAD_PATH = "/fms/fileManager/upload";
@@ -72,7 +72,7 @@ class createFileUploadHTML {
         this.FINAL_UPLOAD_FILE_LIST = {};   //NOTE : 최종 upload 대상 파일 목록
         this.FILE_TEXT_LIST = [];
         this.CONTENTS = "";
-        this.COM_FILE_UPLOAD_ID = "#formUtil_fileUpload"; //NOTE: home.html 내에 있는 파일 업로드용 layout ID
+        this.SYS_FILE_UPLOAD_ID = "#formUtil_fileUpload"; //NOTE: home.html 내에 있는 파일 업로드용 layout ID
         this.CANCEL_BTN = ".formUtil-fileUpload_cancelBtn";
         this.UPLOAD_BTN = ".formUtil-fileUpload_uploadBtn";
         this.DRAG_N_DROP_INPUT = "#fileElem";
@@ -151,7 +151,7 @@ class createFileUploadHTML {
     //CLASS : 팝업 UI 노출 및 숨김
     clearFileUploadBody() {
         let isEmpty = $(".fileUpload_body").length === 0;
-        let $fileUpload = $(this.COM_FILE_UPLOAD_ID);
+        let $fileUpload = $(this.SYS_FILE_UPLOAD_ID);
         isEmpty ? $fileUpload.append(this.CONTENTS) : $fileUpload.empty();
     }
     //CLASS : 팝업 오픈 버튼 이벤트
@@ -173,7 +173,7 @@ class createFileUploadHTML {
             .off("click.formUtilFileUploadCancelBtnClickEventHandler")
             .on("click.formUtilFileUploadCancelBtnClickEventHandler", formUtilFileUploadCancelBtnClickEventHandler);
         function formUtilFileUploadCancelBtnClickEventHandler() {
-            $(that.COM_FILE_UPLOAD_ID).empty();
+            $(that.SYS_FILE_UPLOAD_ID).empty();
             that.resetVariable();
         }
     }
@@ -184,7 +184,7 @@ class createFileUploadHTML {
             .off("click.fileUploadBtnClickEventHandler")
             .on("click.fileUploadBtnClickEventHandler", fileUploadBtnClickEventHandler);
         function fileUploadBtnClickEventHandler() {
-            that.comFileUpload();
+            that.sysFileUpload();
         }
     }
     //CLASS : 드래그 앤 드롭 영역 이벤트 파일 최종 업로드 이벤트 핸들러 및 리스트 관리
@@ -330,7 +330,7 @@ class createFileUploadHTML {
         }
     }
     //CLASS : 공통 파일 업로드 실행
-    comFileUpload() {
+    sysFileUpload() {
         let that = this;
         let url = that.COMMON_UPLOAD_PATH;
         let param = new FormData();
@@ -370,7 +370,7 @@ class createFileUploadHTML {
                     axios.post(registerUrl, fileListData, {
                         withCredentials: true
                     }).then(regResponse => {
-                        //NOTE : 파일을 저장 후 전달 받은 COM_FILE의 FILE_UUID를 설정한 값에 전달
+                        //NOTE : 파일을 저장 후 전달 받은 SYS_FILE의 FILE_UUID를 설정한 값에 전달
                         $("#" + that.ID_TO_RECEIVE_VALUE).val(file_uuid).trigger('change');
 
                         // 명시적으로 리스트 갱신 호출 (trigger가 작동하지 않을 경우 대비)
@@ -528,7 +528,7 @@ class CustomFileUploadDialog {
         this.resolve = resolve;
         this.reject = reject;
         this.selectedFiles = [];
-        this.COM_FILE_UPLOAD_ID = "#formUtil_fileUpload";
+        this.SYS_FILE_UPLOAD_ID = "#formUtil_fileUpload";
 
         this.init();
     }
@@ -588,7 +588,7 @@ class CustomFileUploadDialog {
             </div>
         `;
 
-        $(this.COM_FILE_UPLOAD_ID).html(html);
+        $(this.SYS_FILE_UPLOAD_ID).html(html);
     }
 
     bindEvents() {
@@ -758,7 +758,7 @@ class CustomFileUploadDialog {
     }
 
     close() {
-        $(this.COM_FILE_UPLOAD_ID).empty();
+        $(this.SYS_FILE_UPLOAD_ID).empty();
         this.selectedFiles = [];
     }
 }

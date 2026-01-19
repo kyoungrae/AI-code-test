@@ -102,7 +102,7 @@ public class MessageService {
 
         // 3. 내용이 있으면 파싱 (정규표현식으로 scriptsToLoad 배열 내부 추출)
         if (!content.isEmpty()) {
-            // "management/ComMenuMessage" 또는 'management/ComMenuMessage' 형태 추출
+            // "management/SysMenuMessage" 또는 'management/SysMenuMessage' 형태 추출
             Pattern pattern = Pattern.compile("[\"']([^\"']+)[\"']");
             Matcher matcher = pattern.matcher(content);
             while (matcher.find()) {

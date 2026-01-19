@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/common/common/comUser")
+@RequestMapping("/common/common/sysUser")
 @RequiredArgsConstructor
 public class AuthUserController extends AbstractCommonController<AuthUser> {
     @Override

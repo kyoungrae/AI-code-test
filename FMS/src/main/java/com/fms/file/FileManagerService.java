@@ -1,7 +1,7 @@
 package com.fms.file;
 
-import com.fms.common.ComFile;
-import com.fms.common.ComFileMapper;
+import com.fms.common.SysFile;
+import com.fms.common.SysFileMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -23,12 +23,12 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class FileManagerService extends FileProcessManager {
-    private final ComFileMapper comFileMapper;
+    private final SysFileMapper sysFileMapper;
 
     // private final String applicationFileName = "application.properties";
     // public List<Map<String,Object>> fileSearch(Map<String,Object> param) throws
     // Exception{
-    // return comFileMapper.COM_FILE_SELECT(param);
+    // return sysFileMapper.SYS_FILE_SELECT(param);
     // }
     // public void fileCreate(Map<String , Object> map) throws Exception{
     // String folderName = (String) map.get("folder_name");
@@ -51,13 +51,13 @@ public class FileManagerService extends FileProcessManager {
                 list.put("system_create_userid", userId);
             }
             if (!result.isEmpty()) {
-                var comFile = ComFile.builder()
+                var sysFile = SysFile.builder()
                         .uuid(uid)
                         .temp_yn(0) // NOTE : 파일 임시 저장, 사용자가 작성 취소 하거나, 화면을 나갈 경우 삭제하기 위한 flag
                         .system_create_userid(userId)
                         .system_create_date(new java.util.Date())
                         .build();
-                comFileMapper.COM_FILE_INSERT(comFile);
+                sysFileMapper.SYS_FILE_INSERT(sysFile);
                 return result;
             } else {
                 throw new Exception("File upload failed");

@@ -117,7 +117,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="comDeptGroupCodeRegister" class="gi-row-100">
+                <form id="sysDeptGroupCodeRegister" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div class="gi-row-100 gi-col-100">
@@ -168,7 +168,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="comDeptGroupCodeUpdate" class="gi-row-100">
+                <form id="sysDeptGroupCodeUpdate" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div
@@ -227,7 +227,7 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="comCodeGroupUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
+                <button id="sysCodeGroupUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
         </div>
@@ -243,7 +243,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="comCodeRegister" class="gi-row-100">
+                <form id="sysCodeRegister" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div class="gi-row-100 gi-col-100">
@@ -290,7 +290,7 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <button id="comCodeRegister-btn" class="gi-popup-register-btn"
+            <button id="sysCodeRegister-btn" class="gi-popup-register-btn"
                 type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
             <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
@@ -304,7 +304,7 @@
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                <form id="comCodeUpdate" class="gi-row-100">
+                <form id="sysCodeUpdate" class="gi-row-100">
                     <div
                         class="gi-row-100 gi-padding-5px gi-grid-container gi-grid gi-grid-justify-items-center gi-grid-gap-10px gi-margin-bottom-15px">
                         <div
@@ -395,7 +395,7 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="comCodeUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
+                <button id="sysCodeUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
                 <button class="gi-popup-close-btn" type="button">닫기</button>
             </div>
         </div>
@@ -403,11 +403,11 @@
 </article>
 <!--/ common_code 팝업 영역-->
 <script type="text/javascript">
-    var PRGMID = "comCodeGroupList";	//page id
-    var COM_CODE_GROUP_PRGMID = "comDeptGroupCodeRegister";
-    var COM_CODE_PRGMID = "comCodeRegister";
-    var COM_CODE_UPDATE_PRGMID = "comCodeUpdate";
-    var COM_CODE_GROUP_UPDATE_PRGMID = "comDeptGroupCodeUpdate";
+    var PRGMID = "sysCodeGroupList";	//page id
+    var SYS_CODE_GROUP_PRGMID = "sysDeptGroupCodeRegister";
+    var SYS_CODE_PRGMID = "sysCodeRegister";
+    var SYS_CODE_UPDATE_PRGMID = "sysCodeUpdate";
+    var SYS_CODE_GROUP_UPDATE_PRGMID = "sysDeptGroupCodeUpdate";
 
     var global_group_id = "";
     init();
@@ -418,8 +418,8 @@
         //초기화
         resetEvent();
         //데이터 조회
-        findByComCodeGroupList();
-        findByComCodeList();
+        findBySysCodeGroupList();
+        findBySysCodeList();
         setTimeout(function () {
             //클릭 이벤트
             clickEvent();
@@ -438,7 +438,7 @@
         //검색영역2 값 초기화
         $("#search-area2 input").val("");
         $("#search-area2 select").val("");
-        $("#comCodeRegister input").val("");
+        $("#sysCodeRegister input").val("");
         $("#register-area2").addClass("gi-hidden");
 
         commonTag.inputTagReset($(".gi-input"));
@@ -449,37 +449,37 @@
         // 초기화버튼 클릭 이벤트
         $("#reset-btn").click(function () {
             resetEvent();
-            findByComCodeGroupList();
+            findBySysCodeGroupList();
         });
         //조회버튼 클릭 이벤트
         $("#search-btn").click(function () {
-            findByComCodeGroupList();
+            findBySysCodeGroupList();
         });
 
         //공통 그룹코드 등록버튼 클릭 이벤트
         $("#commonGroUpCodeRegister-btn").click(function () {
-            comCodeGroupRegister();
+            sysCodeGroupRegister();
         })
         //공통 코드 등록버튼 클릭 이벤트
-        $("#comCodeRegister-btn").click(function () {
-            comCodeRegister();
+        $("#sysCodeRegister-btn").click(function () {
+            sysCodeRegister();
         })
         //공통 코드 수정버튼 클릭 이벤트
-        $("#comCodeUpdate-btn").click(function () {
-            comCodeUpdate();
+        $("#sysCodeUpdate-btn").click(function () {
+            sysCodeUpdate();
         })
         //공통 그룹코드 수정버튼 클릭 이벤트
-        $("#comCodeGroupUpdate-btn").click(function () {
-            comCodeGroupUpdate();
+        $("#sysCodeGroupUpdate-btn").click(function () {
+            sysCodeGroupUpdate();
         })
     }
-    function findByComCodeGroupList(page, range, sortId, sortOrder) {
+    function findBySysCodeGroupList(page, range, sortId, sortOrder) {
         //default page
         if (!formUtil.checkEmptyValue(page)) page = 1;
         //default range(row)
         if (!formUtil.checkEmptyValue(range)) range = 10;
 
-        let url = "/cms/common/comCodeGroup/findPage";
+        let url = "/cms/common/sysCodeGroup/findPage";
         let param = {
             page_no: page,
             row_range: range,
@@ -507,7 +507,7 @@
                 let data = response.data.DATA;
                 let paging = response.data.TOTAL_PAGING[0];
                 // 그리드 헤더 설정
-                let comCodeGroup_menuGrid_header = {
+                let sysCodeGroup_menuGrid_header = {
                     title: "공통코드그룹 목록",
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
@@ -517,35 +517,35 @@
                         { HEADER: "생성자ID", ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
                         { HEADER: "수정일", ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
                         { HEADER: "수정자ID", ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
                         { HEADER: "수정", ID: "update_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "삭제", ID: "delete_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let comCodeGroup_menu_grid = formUtil.giGrid(comCodeGroup_menuGrid_header, paging, page, "gi-Grid");
+                let sysCodeGroup_menu_grid = formUtil.giGrid(sysCodeGroup_menuGrid_header, paging, page, "gi-Grid");
 
                 //그리드 데이터 설정
-                comCodeGroup_menu_grid.DataSet(data);
+                sysCodeGroup_menu_grid.DataSet(data);
 
                 //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
-                comCodeGroup_menu_grid.pagingSet(findByComCodeGroupList);
+                sysCodeGroup_menu_grid.pagingSet(findBySysCodeGroupList);
 
                 //그리드 내부의 수정 버튼 클릭 이벤트 설정
-                comCodeGroup_menu_grid.updateBtnClick(comCodeGroupUpdateSetting, "update_group_code_btn");
+                sysCodeGroup_menu_grid.updateBtnClick(sysCodeGroupUpdateSetting, "update_group_code_btn");
 
                 //그리드 내부의 삭제 버튼 클릭 이벤트 설정
-                comCodeGroup_menu_grid.deleteBtnClick(comCodeGroupDelete, "delete_group_code_btn");
+                sysCodeGroup_menu_grid.deleteBtnClick(sysCodeGroupDelete, "delete_group_code_btn");
 
                 //그리드 row 선택 이벤트 설정
-                comCodeGroup_menu_grid.rowClick(rowClickEvent);
+                sysCodeGroup_menu_grid.rowClick(rowClickEvent);
                 function rowClickEvent(rows, e) {
                     let clickFlag = $(e.currentTarget).hasClass("gi-grid-list-select");
                     if (clickFlag) {
                         global_group_id = rows.group_id;
                         $("#register-area2").removeClass("gi-hidden");
 
-                        findByComCodeList('', '', '', '', rows.group_id);
+                        findBySysCodeList('', '', '', '', rows.group_id);
 
                         $("#register-btn2").off("click.").on("click", function () {
                             popup.open("gi-code_register-popup");
@@ -555,7 +555,7 @@
                         global_group_id = "";
                         $("#register-area2").addClass("gi-hidden");
                         dataBinding.setDataForm("gi-code_register-popup", {});
-                        findByComCodeList('', '', '', '', "");
+                        findBySysCodeList('', '', '', '', "");
                     }
                 }
             } else {
@@ -565,8 +565,8 @@
             formUtil.toast(error);
         })
     }
-    async function comCodeGroupDelete(deleteParamDataList) {
-        let url = "/cms/common/comCodeGroup/remove";
+    async function sysCodeGroupDelete(deleteParamDataList) {
+        let url = "/cms/common/sysCodeGroup/remove";
         let data = deleteParamDataList;
         let param = {
             group_id: data.group_id,
@@ -576,7 +576,7 @@
             let status = response.status;
             if (status === 200) {
                 formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
-                findByComCodeGroupList();
+                findBySysCodeGroupList();
             } else {
                 formUtil.toast("response status is :" + status);
             }
@@ -584,8 +584,8 @@
             formUtil.toast(error.response.data);
         })
     } 1
-    function comCodeDelete(deleteParamDataList) {
-        let url = "/cms/common/comCode/remove";
+    function sysCodeDelete(deleteParamDataList) {
+        let url = "/cms/common/sysCode/remove";
         let data = deleteParamDataList;
         let flag = false;
         // console.log(data);
@@ -597,7 +597,7 @@
             let status = response.status;
             if (status === 200) {
                 formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
-                findByComCodeList("", "", "", "", data.group_id);
+                findBySysCodeList("", "", "", "", data.group_id);
             } else {
                 formUtil.toast("response status is :" + status);
             }
@@ -606,13 +606,13 @@
         })
     }
 
-    function findByComCodeList(page, range, sortId, sortOrder, groupId) {
+    function findBySysCodeList(page, range, sortId, sortOrder, groupId) {
         //default page
         if (!formUtil.checkEmptyValue(page)) page = 1;
         //default range(row)
         if (!formUtil.checkEmptyValue(range)) range = 10;
 
-        let url = "/cms/common/comCode/findPage";
+        let url = "/cms/common/sysCode/findPage";
         let param = {
             page_no: page,
             row_range: range,
@@ -641,7 +641,7 @@
                 let paging = response.data.TOTAL_PAGING[0];
 
                 // 그리드 헤더 설정
-                let comCode_menuGrid_header = {
+                let sysCode_menuGrid_header = {
                     title: "공통코드 목록",
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
@@ -649,7 +649,7 @@
                         { HEADER: "코드ID", ID: "code_id", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "그룹ID", ID: "group_id", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "그룹명", ID: "code_name", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
                         { HEADER: "수정", ID: "update_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: "삭제", ID: "delete_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
 
@@ -661,31 +661,31 @@
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
-                let comCode_menu_grid = formUtil.giGrid(comCode_menuGrid_header, paging, page, "gi-Grid2");
+                let sysCode_menu_grid = formUtil.giGrid(sysCode_menuGrid_header, paging, page, "gi-Grid2");
 
 
                 if (!formUtil.checkEmptyValue(global_group_id)) {
-                    comCode_menu_grid.DataSet();
+                    sysCode_menu_grid.DataSet();
                 } else {
                     //그리드 데이터 설정
-                    comCode_menu_grid.DataSet(data);
+                    sysCode_menu_grid.DataSet(data);
                 }
 
                 //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
-                comCode_menu_grid.pagingSet(findByComCodeList);
+                sysCode_menu_grid.pagingSet(findBySysCodeList);
 
                 //그리드 내부의 삭제 버튼 클릭 이벤트 설정
-                comCode_menu_grid.deleteBtnClick(comCodeDelete, "delete_code_btn");
+                sysCode_menu_grid.deleteBtnClick(sysCodeDelete, "delete_code_btn");
 
                 //그리드 내부의 수정 버튼 클릭 이벤트 설정
-                comCode_menu_grid.updateBtnClick(comCodeUpdateSetting, "update_code_btn");
+                sysCode_menu_grid.updateBtnClick(sysCodeUpdateSetting, "update_code_btn");
 
                 $("#search-btn2").off().on("click", function () {
-                    findByComCodeList("", "", "", "", groupId);
+                    findBySysCodeList("", "", "", "", groupId);
                 });
                 $("#reset-btn2").off().on("click", function () {
                     resetEvent2();
-                    findByComCodeList();
+                    findBySysCodeList();
                 });
             } else {
                 formUtil.toast("response status is :" + status);
@@ -694,8 +694,8 @@
             formUtil.toast(error);
         })
     }
-    async function findByComCodeLength(cont) {
-        let url = "common/common/comCode/find";
+    async function findBySysCodeLength(cont) {
+        let url = "common/common/sysCode/find";
         let param = {
             group_id: cont.group_id
         };
@@ -710,13 +710,13 @@
             })
         })
     }
-    function comCodeGroupUpdateSetting(cont) {
+    function sysCodeGroupUpdateSetting(cont) {
         $("#gi-group_code_update-popup").attr("data-popup-open", "true");
         $("#gi-group_code_update-popup #update_group_id1").val(cont.group_id);
         $("#gi-group_code_update-popup #update_group_name").val(cont.group_name);
         dataBinding.setDataSelectBox("update_group_use_yn", cont.use_yn);
     }
-    function comCodeUpdateSetting(cont) {
+    function sysCodeUpdateSetting(cont) {
         $("#gi-code_update-popup").attr("data-popup-open", "true");
         $("#gi-code_update-popup #update_group_id").val(cont.group_id);
         $("#gi-code_update-popup #update_code_id").val(cont.code_id);
@@ -726,11 +726,11 @@
         dataBinding.setDataSelectBox("update_use_yn", cont.use_yn);
     }
 
-    function comCodeGroupRegister() {
-        let flag = comCodeGroupCheckValidation();
+    function sysCodeGroupRegister() {
+        let flag = sysCodeGroupCheckValidation();
         if (flag) {
-            let data = dataBinding.getData(COM_CODE_GROUP_PRGMID);
-            let url = "/cms/common/comCodeGroup/register";
+            let data = dataBinding.getData(SYS_CODE_GROUP_PRGMID);
+            let url = "/cms/common/sysCodeGroup/register";
             // console.log(data);
             let param = {
 
@@ -743,7 +743,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     popup.close("gi-group_code_register-popup");
-                    findByComCodeGroupList();
+                    findBySysCodeGroupList();
                 } else {
                     resetEvent();
                     formUtil.toast("response status is :" + status);
@@ -754,11 +754,11 @@
             })
         }
     }
-    function comCodeRegister() {
-        let flag = comCodeCheckValidation();
+    function sysCodeRegister() {
+        let flag = sysCodeCheckValidation();
         if (flag) {
-            let data = dataBinding.getData(COM_CODE_PRGMID);
-            let url = "/cms/common/comCode/register";
+            let data = dataBinding.getData(SYS_CODE_PRGMID);
+            let url = "/cms/common/sysCode/register";
             // console.log(data);
             let param = {
 
@@ -772,7 +772,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
                     popup.close("gi-code_register-popup");
-                    findByComCodeList("", "", "", "", data.group_id);
+                    findBySysCodeList("", "", "", "", data.group_id);
                 } else {
                     resetEvent();
                     formUtil.toast("response status is :" + status);
@@ -783,11 +783,11 @@
             })
         }
     }
-    function comCodeUpdate() {
-        let flag = comCodeUpdateCheckValidation();
+    function sysCodeUpdate() {
+        let flag = sysCodeUpdateCheckValidation();
         if (flag) {
-            let data = dataBinding.getData(COM_CODE_UPDATE_PRGMID);
-            let url = "/cms/common/comCode/update";
+            let data = dataBinding.getData(SYS_CODE_UPDATE_PRGMID);
+            let url = "/cms/common/sysCode/update";
             // console.log(data);
             let param = {
 
@@ -802,7 +802,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                     popup.close("gi-code_update-popup");
-                    findByComCodeList("", "", "", "", data.group_id);
+                    findBySysCodeList("", "", "", "", data.group_id);
                 } else {
                     resetEvent();
                     formUtil.toast("response status is :" + status);
@@ -813,11 +813,11 @@
             })
         }
     }
-    function comCodeGroupUpdate() {
-        let flag = comCodeGroupUpdateCheckValidation();
+    function sysCodeGroupUpdate() {
+        let flag = sysCodeGroupUpdateCheckValidation();
         if (flag) {
-            let data = dataBinding.getData(COM_CODE_GROUP_UPDATE_PRGMID);
-            let url = "/cms/common/comCodeGroup/update";
+            let data = dataBinding.getData(SYS_CODE_GROUP_UPDATE_PRGMID);
+            let url = "/cms/common/sysCodeGroup/update";
             // console.log(data);
             let param = {
                 group_id: data.group_id,
@@ -829,7 +829,7 @@
                 if (status === 200) {
                     formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
                     popup.close("gi-group_code_update-popup");
-                    findByComCodeGroupList();
+                    findBySysCodeGroupList();
                 } else {
                     resetEvent();
                     formUtil.toast("response status is :" + status);
@@ -840,16 +840,16 @@
             })
         }
     }
-    function comCodeGroupCheckValidation() {
-        return formUtil.validationCheck(COM_CODE_GROUP_PRGMID, "COM_CODE_GROUP.CHECK.");
+    function sysCodeGroupCheckValidation() {
+        return formUtil.validationCheck(SYS_CODE_GROUP_PRGMID, "SYS_CODE_GROUP.CHECK.");
     }
-    function comCodeCheckValidation() {
-        return formUtil.validationCheck(COM_CODE_PRGMID, "COM_CODE.CHECK.");
+    function sysCodeCheckValidation() {
+        return formUtil.validationCheck(SYS_CODE_PRGMID, "SYS_CODE.CHECK.");
     }
-    function comCodeUpdateCheckValidation() {
-        return formUtil.validationCheck(COM_CODE_UPDATE_PRGMID, "COM_CODE.CHECK.");
+    function sysCodeUpdateCheckValidation() {
+        return formUtil.validationCheck(SYS_CODE_UPDATE_PRGMID, "SYS_CODE.CHECK.");
     }
-    function comCodeGroupUpdateCheckValidation() {
-        return formUtil.validationCheck(COM_CODE_GROUP_UPDATE_PRGMID, "COM_CODE_GROUP.CHECK.");
+    function sysCodeGroupUpdateCheckValidation() {
+        return formUtil.validationCheck(SYS_CODE_GROUP_UPDATE_PRGMID, "SYS_CODE_GROUP.CHECK.");
     }
 </script>

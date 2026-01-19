@@ -217,7 +217,7 @@
     });
 
     $("#insert-btn").off("click.insertBtnClickEventHandler").on("click.insertBtnClickEventHandler", function () {
-      input.setSelectOption("#register_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
+      input.setSelectOption("#register_office_code", "/cms/common/sysOffice/find", { code: "office_code", name: "office_name" });
     });
     //추가버튼 클릭 이벤트
     $(POPUP_REGISTER_BTN).off("click.popupRegisterBtnClickEventHandler")
@@ -234,7 +234,7 @@
     //default range(row)
     if (!formUtil.checkEmptyValue(range)) range = 10;
 
-    // let url = "/cms/common/comUser/findPage";
+    // let url = "/cms/common/sysUser/findPage";
     let param = {
       page_no: page,
       row_range: range,
@@ -290,7 +290,7 @@
       title: '[Page.Message].Message.Label.Array["SAMPLE.TITLE"]',
       list: [
         { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-        { HEADER: 'test1', ID: 'use_yn', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false }, // 공통코드 치환
+        { HEADER: 'test1', ID: 'use_yn', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false }, // 공통코드 치환
         { HEADER: 'test2', ID: "test2", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "test2": "0" }], HIDDEN: false }, // 조건에 따라 버튼 표시
         { HEADER: 'test3', ID: 'test3', WIDTH: '7', TYPE: 'password', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false }, // 비밀번호
         { HEADER: 'test4', ID: 'test4', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
@@ -310,7 +310,7 @@
     let sample_grid = formUtil.giGrid(sample_menuGrid_header, paging.total_page, page, "sampleList_gi-Grid");
 
     //그리드 하이라키 구조로 변경
-    //let sample_grid = formUtil.giGridHierarchy(comUser_menuGrid_header,paging,page,"comUser_gi-Grid");
+    //let sample_grid = formUtil.giGridHierarchy(sysUser_menuGrid_header,paging,page,"sysUser_gi-Grid");
     //sample_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
 
 
@@ -461,7 +461,7 @@
   //FUN : 수정팝업 호출
   function sampleUpdatePopupOpen(cont) {
     //console.log(cont);
-    input.setSelectOption("#update_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
+    input.setSelectOption("#update_office_code", "/cms/common/sysOffice/find", { code: "office_code", name: "office_name" });
     dataBinding.setDataForm(UPDATE_POPUP_ID, cont);
 
     // 비밀번호 필드는 보안상 비워둠

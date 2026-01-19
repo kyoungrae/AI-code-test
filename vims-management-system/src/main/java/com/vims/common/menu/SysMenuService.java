@@ -1,0 +1,120 @@
+/**
+ *  ++ giens Product ++
+ */
+package com.vims.common.menu;
+
+import com.system.common.base.AbstractCommonService;
+import com.system.common.exception.CustomException;
+import com.system.common.util.userinfo.UserInfo;
+import com.vims.common.accessgroupmenu.SysAccsGroupMenu;
+import com.vims.common.accessgroupmenu.SysAccsGroupMenuMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class SysMenuService extends AbstractCommonService<SysMenu> {
+    private final SysMenuMapper sysMenuMapper;
+    private final SysMenuRepository sysMenuRepository;
+    private final MessageSource messageSource;
+    private final SysAccsGroupMenuMapper sysAccsGroupMenuMapper;
+
+    private String getMessage(String code) {
+        return messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+    }
+
+    public List<SysMenu> findHierarchy(SysMenu request) throws Exception {
+        return sysMenuMapper.SELECT_HIERARCHY(request);
+    }
+
+    public List<SysMenu> findAccessRightGroupForMenu(SysMenu request) throws Exception {
+        String userEmail = UserInfo.getUserEmail();
+        var sysMenu = SysMenu.builder().user_email(userEmail).build();
+        return sysMenuMapper.SELECT_ACCESS_RIGHTS_GROUP_FOR_MENU(sysMenu);
+    }
+
+    @Override
+    protected List<SysMenu> selectPage(SysMenu request) throws Exception {
+        return sysMenuMapper.SELECT_PAGE(request);
+    }
+
+    @Override
+    protected int selectPagingTotalNumber(SysMenu request) throws Exception {
+        return sysMenuMapper.SELECT_PAGING_TOTAL_NUMBER(request);
+    }
+
+    @Override
+    protected List<SysMenu> findImpl(SysMenu request) throws Exception {
+        return sysMenuMapper.SELECT(request);
+    }
+
+    public int removeMenuCode(SysMenu request) throws Exception {
+        var containTopMenuCode = SysMenu.builder()
+                .top_menu_code(request.getMenu_code())
+                .build();
+        var containMenuCode = SysMenu.builder()
+                .menu_code(request.getMenu_code())
+                .menu_sequence(request.getMenu_sequence())
+                .build();
+        var containAccessRightGroupCode = SysAccsGroupMenu.builder()
+                .menu_code(request.getMenu_code())
+                .build();
+        List<SysAccsGroupMenu> acList = sysAccsGroupMenuMapper.SELECT(containAccessRightGroupCode);
+        List<SysMenu> list = sysMenuMapper.SELECT(containTopMenuCode);
+        boolean childNodeExist = !list.isEmpty();
+        boolean accessRightGroupExist = !acList.isEmpty();
+        try {
+            if (childNodeExist) {
+                throw new CustomException(getMessage("EXCEPTION.DELETE.EXIST.SBU_DATA"));
+            } else if (accessRightGroupExist) {
+                throw new CustomException(getMessage("EXCEPTION.DELETE.EXIST.ACCESS_RIGHTS_GROUP_DATA"));
+            } else {
+                return sysMenuMapper.DELETE(containMenuCode);
+            }
+        } catch (CustomException ce) {
+            throw ce;
+        } catch (Exception e) {
+            throw new Exception("FAIL TO REMOVE MENU", e);
+        }
+    }
+
+    @Override
+    protected int removeImpl(SysMenu request) {
+        try {
+            return sysMenuMapper.DELETE(request);
+        } catch (Exception e) {
+            throw new CustomException(getMessage("EXCEPTION.PK.EXIST.USER"));
+        }
+    }
+
+    @Override
+    protected int updateImpl(SysMenu request) {
+        try {
+            return sysMenuMapper.UPDATE(request);
+        } catch (Exception e) {
+            throw new CustomException(getMessage(""));
+        }
+    }
+
+    @Override
+    protected int registerImpl(SysMenu request) throws Exception {
+        try {
+            return sysMenuMapper.INSERT(request);
+        } catch (DuplicateKeyException dke) {
+            throw new CustomException(getMessage("EXCEPTION.PK.EXIST"));
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    @Override
+    protected int excelUploadImpl(MultipartFile file) throws Exception {
+        return 0;
+    }
+}

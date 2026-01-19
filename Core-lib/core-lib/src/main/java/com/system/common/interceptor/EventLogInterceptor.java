@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 
 /**
  * CRUD 감사 로그 인터셉터
- * INSERT, UPDATE, DELETE 수행 시 COM_EVENT_LOG 테이블에 로그를 남깁니다.
+ * INSERT, UPDATE, DELETE 수행 시 SYS_EVENT_LOG 테이블에 로그를 남깁니다.
  */
 @Component
 @Intercepts({
@@ -46,7 +46,7 @@ public class EventLogInterceptor implements Interceptor {
         Object parameter = invocation.getArgs()[1];
 
         // 1. 감사 로그 자체가 다시 기록되는 무한 루프 방지
-        if (ms.getId().contains("ComEventLog")) {
+        if (ms.getId().contains("SysEventLog")) {
             return invocation.proceed();
         }
 
@@ -257,7 +257,7 @@ public class EventLogInterceptor implements Interceptor {
                     logData.put("after_data", parameter != null ? parameter.toString() : "");
                 }
 
-                sqlSession.insert("com.system.common.eventlog.ComEventLogMapper.INSERT", logData);
+                sqlSession.insert("com.system.common.eventlog.SysEventLogMapper.INSERT", logData);
 
             } catch (Exception e) {
                 logger.error("Async EventLog INSERT failed: ", e);
@@ -269,7 +269,7 @@ public class EventLogInterceptor implements Interceptor {
         String id = ms.getId();
         String[] parts = id.split("\\.");
         if (parts.length > 1) {
-            // Mapper 클래스 이름에서 테이블명을 추측 (예: ComUserMapper -> ComUser)
+            // Mapper 클래스 이름에서 테이블명을 추측 (예: SysUserMapper -> SysUser)
             String mapperName = parts[parts.length - 2];
             return mapperName.replace("Mapper", "");
         }

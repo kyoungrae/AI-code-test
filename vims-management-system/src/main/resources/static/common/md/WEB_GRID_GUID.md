@@ -2,14 +2,14 @@
 ## @date : 2026-01-08
 ## @author : 이경태
 ## @extend : ""
-## @call : COM_CODE_GROUP_ID: "공통코드 그룹 아이디"
+## @call : SYS_CODE_GROUP_ID: "공통코드 그룹 아이디"
 **example start**
 
 <script>
      let service_Grid_header = {
                     title: "서비스 목록",
                     list: [
-                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", COM_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
                         .
                         .
                         .
@@ -234,7 +234,7 @@
 ## @date : 2026-01-13
 ## @author : 이경태
 ## @extend : fms 시스템
-## @call : grid.excelUploadEvent("Controller endPoint(ex: /cms/common/comUser/excelUpload)")
+## @call : grid.excelUploadEvent("Controller endPoint(ex: /cms/common/sysUser/excelUpload)")
 **example start**
 : 그리드의 데이터를 엑셀 파일로 업로드합니다. 
 : 엑셀 파일을 업로드한 후, Controller에서 파일을 처리하고 응답을 반환합니다.
@@ -242,7 +242,7 @@
 
 <script>
     // 그리드 생성 후 엑셀 업로드 활성화
-    #service#_grid.excelUploadEvent("/cms/common/comUser/excelUpload");
+    #service#_grid.excelUploadEvent("/cms/common/sysUser/excelUpload");
 </script>
 
 **example end**

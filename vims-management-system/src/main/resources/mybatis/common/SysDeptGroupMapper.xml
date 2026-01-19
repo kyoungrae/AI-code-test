@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vims.common.group.SysDeptGroupMapper">
+    <sql id="sortFilter">
+        ORDER BY
+        <choose>
+            <when test="sort_id != null and sort_id != '' and sort_order != null and sort_order != ''">
+                ${sort_id} ${sort_order}
+            </when>
+            <otherwise>
+                system_create_date DESC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="SELECT_PAGE" resultType="com.vims.common.group.SysDeptGroup">
+        SELECT
+        row_number() over ()AS no,
+        group_id,
+        group_name,
+        group_level,
+        top_group_id,
+        use_yn,
+        system_create_date,
+        system_create_userid,
+        system_update_date,
+        system_update_userid
+        FROM SYS_DEPT_GROUP
+        <where>
+            <if test="group_id != null and group_id != ''">AND group_id=#{group_id}</if>
+            <if test="group_name != null and group_name != ''">AND group_name=#{group_name}</if>
+            <if test="group_level != null and group_level != ''">AND group_level=#{group_level}</if>
+            <if test="top_group_id != null and top_group_id != ''">AND top_group_id=#{top_group_id}</if>
+            <if test="use_yn != null and use_yn != ''">AND use_yn=#{use_yn}</if>
+            <if test="system_create_date != null">AND system_create_date=#{system_create_date}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid=#{system_create_userid}</if>
+            <if test="system_update_date != null">AND system_update_date=#{system_update_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid=#{system_update_userid}</if>
+
+            <if test="_group_id != null and _group_id != ''">AND group_id LIKE CONCAT('%', #{_group_id}, '%')</if>
+            <if test="_group_name != null and _group_name != ''">AND group_name LIKE CONCAT('%', #{_group_name}, '%')</if>
+            <if test="_group_level != null and _group_level != ''">AND group_level LIKE CONCAT('%', #{_group_level}, '%')</if>
+            <if test="_top_group_id != null and _top_group_id != ''">AND top_group_id LIKE CONCAT('%', #{_top_group_id}, '%')</if>
+            <if test="_use_yn != null and _use_yn != ''">AND use_yn LIKE CONCAT('%', #{_use_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+        </where>
+        <include refid="sortFilter"/>
+        LIMIT #{row_range} OFFSET #{offset}
+    </select>
+
+    <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
+        SELECT CEIL(COUNT(*)/#{row_range}) FROM SYS_DEPT_GROUP
+        <where>
+            <if test="group_id != null and group_id != ''">AND group_id=#{group_id}</if>
+            <if test="group_name != null and group_name != ''">AND group_name=#{group_name}</if>
+            <if test="group_level != null and group_level != ''">AND group_level=#{group_level}</if>
+            <if test="top_group_id != null and top_group_id != ''">AND top_group_id=#{top_group_id}</if>
+            <if test="use_yn != null and use_yn != ''">AND use_yn=#{use_yn}</if>
+            <if test="system_create_date != null">AND system_create_date=#{system_create_date}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid=#{system_create_userid}</if>
+            <if test="system_update_date != null">AND system_update_date=#{system_update_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid=#{system_update_userid}</if>
+
+            <if test="_group_id != null and _group_id != ''">AND group_id LIKE CONCAT('%', #{_group_id}, '%')</if>
+            <if test="_group_name != null and _group_name != ''">AND group_name LIKE CONCAT('%', #{_group_name}, '%')</if>
+            <if test="_group_level != null and _group_level != ''">AND group_level LIKE CONCAT('%', #{_group_level}, '%')</if>
+            <if test="_top_group_id != null and _top_group_id != ''">AND top_group_id LIKE CONCAT('%', #{_top_group_id}, '%')</if>
+            <if test="_use_yn != null and _use_yn != ''">AND use_yn LIKE CONCAT('%', #{_use_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+        </where>
+    </select>
+
+    <select id="SELECT" resultType="com.vims.common.group.SysDeptGroup">
+        SELECT
+        group_id,
+        group_name,
+        group_level,
+        top_group_id,
+        use_yn,
+        system_create_date,
+        system_create_userid,
+        system_update_date,
+        system_update_userid
+        FROM SYS_DEPT_GROUP
+        <where>
+            <if test="group_id != null and group_id != ''">AND group_id=#{group_id}</if>
+            <if test="group_name != null and group_name != ''">AND group_name=#{group_name}</if>
+            <if test="group_level != null and group_level != ''">AND group_level=#{group_level}</if>
+            <if test="top_group_id != null and top_group_id != ''">AND top_group_id=#{top_group_id}</if>
+            <if test="use_yn != null and use_yn != ''">AND use_yn=#{use_yn}</if>
+            <if test="system_create_date != null">AND system_create_date=#{system_create_date}</if>
+            <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid=#{system_create_userid}</if>
+            <if test="system_update_date != null">AND system_update_date=#{system_update_date}</if>
+            <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid=#{system_update_userid}</if>
+
+            <if test="_group_id != null and _group_id != ''">AND group_id LIKE CONCAT('%', #{_group_id}, '%')</if>
+            <if test="_group_name != null and _group_name != ''">AND group_name LIKE CONCAT('%', #{_group_name}, '%')</if>
+            <if test="_group_level != null and _group_level != ''">AND group_level LIKE CONCAT('%', #{_group_level}, '%')</if>
+            <if test="_top_group_id != null and _top_group_id != ''">AND top_group_id LIKE CONCAT('%', #{_top_group_id}, '%')</if>
+            <if test="_use_yn != null and _use_yn != ''">AND use_yn LIKE CONCAT('%', #{_use_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
+        </where>
+    </select>
+
+    <insert id="INSERT">
+        INSERT INTO SYS_DEPT_GROUP(
+        group_id
+        , group_name
+        , group_level
+        , system_create_date
+        , system_create_userid
+        <if test="top_group_id != null">, top_group_id</if>
+        <if test="use_yn != null">, use_yn</if>
+        <if test="system_update_date != null">, system_update_date</if>
+        <if test="system_update_userid != null">, system_update_userid</if>
+        )
+        VALUES(
+        #{group_id}
+        , #{group_name}
+        , #{group_level}
+        , NOW()
+        , #{system_create_userid}
+        <if test="top_group_id != null">, #{top_group_id}</if>
+        <if test="use_yn != null">, #{use_yn}</if>
+        <if test="system_update_date != null">, #{system_update_date}</if>
+        <if test="system_update_userid != null">, #{system_update_userid}</if>
+        )
+    </insert>
+
+    <delete id="DELETE">
+        DELETE FROM SYS_DEPT_GROUP
+        <where>
+            AND group_id = #{group_id}
+            <if test="group_name != null">AND group_name = #{group_name}</if>
+            <if test="group_level != null">AND group_level = #{group_level}</if>
+            <if test="top_group_id != null">AND top_group_id = #{top_group_id}</if>
+            <if test="use_yn != null">AND use_yn = #{use_yn}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
+            <if test="system_create_userid != null">AND system_create_userid = #{system_create_userid}</if>
+            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
+            <if test="system_update_userid != null">AND system_update_userid = #{system_update_userid}</if>
+        </where>
+    </delete>
+
+    <update id="UPDATE">
+        UPDATE  SYS_DEPT_GROUP
+        <set>
+            <if test="group_name != null">group_name=#{group_name},</if>
+            <if test="group_level != null">group_level=#{group_level},</if>
+            <if test="top_group_id != null">top_group_id=#{top_group_id},</if>
+            <if test="use_yn != null">use_yn=#{use_yn},</if>
+            <if test="system_create_date != null">system_create_date=#{system_create_date},</if>
+            <if test="system_create_userid != null">system_create_userid=#{system_create_userid},</if>
+            <if test="system_update_date != null">system_update_date=#{system_update_date},</if>
+            <if test="system_update_userid != null">system_update_userid=#{system_update_userid},</if>
+        </set>
+        <where>
+            group_id = #{group_id}
+        </where>
+    </update>
+
+    <select id="SELECT_NOT_EXISTS_SYS_ACCS_GROUP_MENU" resultType="com.vims.common.group.SysDeptGroup">
+        SELECT
+            group_id,
+            group_name,
+            group_level,
+            top_group_id,
+            use_yn,
+            system_create_date,
+            system_create_userid,
+            system_update_date,
+            system_update_userid
+        FROM SYS_DEPT_GROUP a
+        WHERE NOT EXISTS(
+            SELECT * FROM SYS_ACCS_GROUP_MENU b
+                     WHERE b.access_rights_group_id = a.group_id
+                     AND b.menu_code = #{menu_code}
+        )
+    </select>
+
+</mapper>

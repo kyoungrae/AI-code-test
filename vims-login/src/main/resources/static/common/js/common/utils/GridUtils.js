@@ -42,7 +42,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
             FONT_SIZE: item.FONT_SIZE,
             TYPE: item.TYPE,
             HEADER: item.HEADER,
-            COM_CODE_GROUP_ID: item.COM_CODE_GROUP_ID,
+            SYS_CODE_GROUP_ID: item.SYS_CODE_GROUP_ID,
             TARGET: item.TARGET,
             HIDDEN: item.HIDDEN,
             VISIBLE_OPTION_BTN: item.VISIBLE_OPTION_BTN
@@ -172,7 +172,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
             gridData = data;
             let flag = formUtil.checkEmptyValue(data);
             let grid_list = "";
-            let comCodeGroupIdArray = [];
+            let sysCodeGroupIdArray = [];
             //NOTE: rows BTN 노출 이벤트 로직 설정
             let visibleOptionArray = [];
             headerItem.map(item => {
@@ -190,14 +190,14 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     for (let j = 0; j < headerItem.length; j++) {
                         let item = headerItem[j];
                         let tag = "";
-                        let comCodeName = "";
-                        let comCodeValue = "";
+                        let sysCodeName = "";
+                        let sysCodeValue = "";
                         let hidden = "";
-                        if (formUtil.checkEmptyValue(item.COM_CODE_GROUP_ID)) {
-                            comCodeName = await checkSameCode(comCodeGroupIdArray, item.COM_CODE_GROUP_ID, data[i]);
-                            comCodeValue = data[i][item.ID];
+                        if (formUtil.checkEmptyValue(item.SYS_CODE_GROUP_ID)) {
+                            sysCodeName = await checkSameCode(sysCodeGroupIdArray, item.SYS_CODE_GROUP_ID, data[i]);
+                            sysCodeValue = data[i][item.ID];
                         } else {
-                            comCodeName = data[i][item.ID];
+                            sysCodeName = data[i][item.ID];
                         }
                         if (formUtil.checkEmptyValue(item.HIDDEN)) {
                             if (item.HIDDEN) {
@@ -212,29 +212,29 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                             if (formUtil.checkEmptyValue(visibleOptionKeys.length)) {
                                 visibleOptionKeys.map(ArrItem => {
                                     if (Object.keys(ArrItem)[0] === item.ID) {
-                                        if (ArrItem[item.ID] === comCodeName + "") {
+                                        if (ArrItem[item.ID] === sysCodeName + "") {
                                             originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
                                         }
                                     }
                                 })
                             } else {
                                 if (Object.keys(visibleOptionKeys)[0] === item.ID) {
-                                    if (visibleOptionKeys[item.ID] === comCodeName + "") {
+                                    if (visibleOptionKeys[item.ID] === sysCodeName + "") {
                                         originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
                                     }
                                 }
                             }
                         })
 
-                        if (!formUtil.checkEmptyValue(comCodeName)) comCodeName = "";
+                        if (!formUtil.checkEmptyValue(sysCodeName)) sysCodeName = "";
 
                         switch (item.TYPE) {
                             case "text":
-                                comCodeValue
+                                sysCodeValue
                                     ?
-                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + comCodeValue + '">' + comCodeName + '</span>'
+                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + sysCodeValue + '">' + sysCodeName + '</span>'
                                     :
-                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '">' + comCodeName + '</span>';
+                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '">' + sysCodeName + '</span>';
                                 break;
                             case "button":
                                 // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
@@ -252,7 +252,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                 tag = '<span id="' + item.ID + "_" + i + '" class="gi-map-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '</span>';
                                 break;
                             case "password":
-                                tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + comCodeValue + '">••••••••</span>';
+                                tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + sysCodeValue + '">••••••••</span>';
                                 break;
                             case "checkbox":
                                 tag = '<input type="checkbox" id="' + gridId + '_checkbox_' + i + '" class="gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" value="' + data[i][item.ID] + '" />';
@@ -281,7 +281,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
 
             function unUsedMenuUISettings(e) {
                 let flag = $(e).find("li[data-field='use_yn']").not(".hidden").find("span[data-grid-value]").length === 0;
-                let a = ""; //NOTE: 그리드 내부에 COM_CODE_GROUP_ID 함수로 인해 값이 동적으로 변화 하는걸 대비(공통코드 적용시 text, 미적용시 interger)
+                let a = ""; //NOTE: 그리드 내부에 SYS_CODE_GROUP_ID 함수로 인해 값이 동적으로 변화 하는걸 대비(공통코드 적용시 text, 미적용시 interger)
                 let b = "";
                 let c = "";
 
@@ -1044,33 +1044,33 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
     }
 }
 
-//NOTE: 불필요한 COM_CODE 조회 차단 로직
-async function checkSameCode(comCodeGroupIdArray, comDeptGroupCodeId, cont) {
-    let param = { group_id: comDeptGroupCodeId };
-    let comCodeArray = [];
-    //NOTE: 공통코드 Array에 그리드 COM_CODE_GROUP_ID 값과 일치하는 값이 있는지 여부
-    let isExist = comCodeGroupIdArray.some(item => {
-        return Object.keys(item)[0] === comDeptGroupCodeId;
+//NOTE: 불필요한 SYS_CODE 조회 차단 로직
+async function checkSameCode(sysCodeGroupIdArray, sysDeptGroupCodeId, cont) {
+    let param = { group_id: sysDeptGroupCodeId };
+    let sysCodeArray = [];
+    //NOTE: 공통코드 Array에 그리드 SYS_CODE_GROUP_ID 값과 일치하는 값이 있는지 여부
+    let isExist = sysCodeGroupIdArray.some(item => {
+        return Object.keys(item)[0] === sysDeptGroupCodeId;
     });
 
-    //NOTE : 그리드 DataSet 호출 시 그리드 내의 COM_CODE_GROUP_ID로 COM_CODE 조회 후 comCodeGroupIdArray 배열에 추가
+    //NOTE : 그리드 DataSet 호출 시 그리드 내의 SYS_CODE_GROUP_ID로 SYS_CODE 조회 후 sysCodeGroupIdArray 배열에 추가
     if (!isExist) {
-        let comCodeList = await findComCode(param);
-        comCodeList.map(item => {
-            comCodeArray.push({ [item.code_id]: item.code_name });
+        let sysCodeList = await findSysCode(param);
+        sysCodeList.map(item => {
+            sysCodeArray.push({ [item.code_id]: item.code_name });
         })
-        comCodeGroupIdArray.push({ [comDeptGroupCodeId]: comCodeArray });
+        sysCodeGroupIdArray.push({ [sysDeptGroupCodeId]: sysCodeArray });
     }
-    //NOTE: comCodeGroupIdArray 배열의 COM_CODE 키:값 으로 데이터 바인딩
+    //NOTE: sysCodeGroupIdArray 배열의 SYS_CODE 키:값 으로 데이터 바인딩
     for (let key in cont) {
         let returnVALUE = "";
-        let lowerKey = comDeptGroupCodeId.toLowerCase();
-        //NOTE : 그리드 row의 키가 COM_CODE_GROUP_ID와 일치 하는지 여부 파악
+        let lowerKey = sysDeptGroupCodeId.toLowerCase();
+        //NOTE : 그리드 row의 키가 SYS_CODE_GROUP_ID와 일치 하는지 여부 파악
         if (key.toLowerCase() === lowerKey) {
-            //NOTE: comCodeGroupIdArray 배열안의 키:값과 일치 하면 CODE_NAME 리턴
-            comCodeGroupIdArray.find(item => {
-                if (formUtil.checkEmptyValue(item[comDeptGroupCodeId])) {
-                    item[comDeptGroupCodeId].find(valueItem => {
+            //NOTE: sysCodeGroupIdArray 배열안의 키:값과 일치 하면 CODE_NAME 리턴
+            sysCodeGroupIdArray.find(item => {
+                if (formUtil.checkEmptyValue(item[sysDeptGroupCodeId])) {
+                    item[sysDeptGroupCodeId].find(valueItem => {
                         if (Object.keys(valueItem)[0] === cont[key]) {
                             returnVALUE = valueItem[cont[key]];
                         }
@@ -1080,7 +1080,7 @@ async function checkSameCode(comCodeGroupIdArray, comDeptGroupCodeId, cont) {
             return returnVALUE;
         }
     }
-    // console.log("푸쉬 푸쉬::", JSON.parse(JSON.stringify(comCodeGroupIdArray)));
+    // console.log("푸쉬 푸쉬::", JSON.parse(JSON.stringify(sysCodeGroupIdArray)));
 }
 FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) {
     let gridSortManager = formUtil.gridSortManager;
@@ -1125,7 +1125,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
             FONT_SIZE: item.FONT_SIZE,
             TYPE: item.TYPE,
             HEADER: item.HEADER,
-            COM_CODE_GROUP_ID: item.COM_CODE_GROUP_ID,
+            SYS_CODE_GROUP_ID: item.SYS_CODE_GROUP_ID,
             TARGET: item.TARGET,
             HIDDEN: item.HIDDEN,
             VISIBLE_OPTION_BTN: item.VISIBLE_OPTION_BTN
@@ -1245,7 +1245,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 && formUtil.checkEmptyValue(application_parent_hierarchyOptionColumn)
                 && formUtil.checkEmptyValue(application_sub_hierarchyOptionColumn);
             let grid_list = "";
-            let comCodeGroupIdArray = [];
+            let sysCodeGroupIdArray = [];
 
             //NOTE: rows BTN 노출 이벤트 로직 설정
             let visibleOptionArray = [];
@@ -1268,15 +1268,15 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                     for (let j = 0; j < headerItem.length; j++) {
                         let item = headerItem[j];
                         let tag = "";
-                        let comCodeName = "";
-                        let comCodeValue = "";
+                        let sysCodeName = "";
+                        let sysCodeValue = "";
                         let hidden = true;
 
-                        if (formUtil.checkEmptyValue(item.COM_CODE_GROUP_ID)) {
-                            comCodeName = await checkSameCode(comCodeGroupIdArray, item.COM_CODE_GROUP_ID, data[i]);
-                            comCodeValue = data[i][item.ID];
+                        if (formUtil.checkEmptyValue(item.SYS_CODE_GROUP_ID)) {
+                            sysCodeName = await checkSameCode(sysCodeGroupIdArray, item.SYS_CODE_GROUP_ID, data[i]);
+                            sysCodeValue = data[i][item.ID];
                         } else {
-                            comCodeName = data[i][item.ID];
+                            sysCodeName = data[i][item.ID];
                         }
                         if (formUtil.checkEmptyValue(item.HIDDEN)) {
                             if (item.HIDDEN) {
@@ -1292,7 +1292,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             if (formUtil.checkEmptyValue(visibleOptionKeys.length)) {
                                 visibleOptionKeys.map(ArrItem => {
                                     if (Object.keys(ArrItem)[0] === item.ID) {
-                                        if (ArrItem[item.ID] === comCodeName + "") {
+                                        if (ArrItem[item.ID] === sysCodeName + "") {
                                             originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
                                         }
                                     }
@@ -1300,20 +1300,20 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             } else {
                                 //NOTE: VISIBLE_OPTION_BTN:{"menu_level":"0"} 조건이 하나 일때
                                 if (Object.keys(visibleOptionKeys)[0] === item.ID) {
-                                    if (visibleOptionKeys[item.ID] === comCodeName + "") {
+                                    if (visibleOptionKeys[item.ID] === sysCodeName + "") {
                                         originalDataForVisibleOption[visibleOptionKeys.BTN_ID] = "true";
                                     }
                                 }
                             }
                         })
-                        if (!formUtil.checkEmptyValue(comCodeName)) comCodeName = "";
+                        if (!formUtil.checkEmptyValue(sysCodeName)) sysCodeName = "";
                         switch (item.TYPE) {
                             case "text":
-                                comCodeValue
+                                sysCodeValue
                                     ?
-                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + comCodeValue + '">' + comCodeName + '</span>'
+                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + sysCodeValue + '">' + sysCodeName + '</span>'
                                     :
-                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '">' + comCodeName + '</span>';
+                                    tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '">' + sysCodeName + '</span>';
                                 break;
                             // case "radio":
                             //     tag = '<input type="radio" class="gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-field="'+data[i][item.ID]+'"/>';
@@ -1404,7 +1404,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                     function unUsedMenuUISettings(e) {
                         //NOTE: 미사용시 메뉴 비활성화
                         let flag = e.$row.find("li[data-field='use_yn']").not(".hidden").find("span[data-grid-value]").length === 0;
-                        let a = ""; //NOTE: 그리드 내부에 COM_CODE_GROUP_ID 함수로 인해 값이 동적으로 변화 하는걸 대비(공통코드 적용시 text, 미적용시 interger)
+                        let a = ""; //NOTE: 그리드 내부에 SYS_CODE_GROUP_ID 함수로 인해 값이 동적으로 변화 하는걸 대비(공통코드 적용시 text, 미적용시 interger)
                         let b = "";
                         let c = "";
 

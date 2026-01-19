@@ -23,7 +23,7 @@
     //Users/ikyoungtae/Documents/coding/AI-code-test/vims-login/src/main/resources/templates/layout/home.html 
     let input = new Input(); // login.html
     
-    input.setSelectOption("#register_office_code", "/cms/common/comOffice/find", { code: "office_code", name: "office_name" });
+    input.setSelectOption("#register_office_code", "/cms/common/sysOffice/find", { code: "office_code", name: "office_name" });
 </script>
 
 **example end**
@@ -76,7 +76,7 @@
 
 <script>
     let fileUtil = new FileUtil();
-    fileUtil.createFileUpload("/fms/common/file/comFileDetail", "sample_file_uuid", "sampleFolder");
+    fileUtil.createFileUpload("/fms/common/file/sysFileDetail", "sample_file_uuid", "sampleFolder");
 </script>
 <html>
 <!-- [파일 첨부 카드] -->

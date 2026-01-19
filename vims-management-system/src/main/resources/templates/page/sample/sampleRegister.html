@@ -184,10 +184,10 @@
   function init() {
     new PageInit();
     clickEvent();
-    input.setSelectOption("#sample_category", "/cms/common/comCode/find", { code: "code_id", name: "code_name" });
+    input.setSelectOption("#sample_category", "/cms/common/sysCode/find", { code: "code_id", name: "code_name" });
 
     // 파일 업로드 초기화
-    fileUtil.createFileUpload("/fms/common/file/comFileDetail", "sample_file_uuid", "sampleFolder");
+    fileUtil.createFileUpload("/fms/common/file/sysFileDetail", "sample_file_uuid", "sampleFolder");
   }
 
   function clickEvent() {

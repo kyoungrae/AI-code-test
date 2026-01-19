@@ -153,7 +153,7 @@ server:
 - **Body**: `multipart/form-data` (Key: `file`)
 
 ### Step 2: Management Controller 수신 (AbstractCommonController)
-`ComUserController` 등의 컨트롤러가 요청을 받습니다.
+`SysUserController` 등의 컨트롤러가 요청을 받습니다.
 
 ```java
 // AbstractCommonController.java (부모 클래스)
@@ -169,7 +169,7 @@ public int excelUpload(@RequestParam(value = "file", required = false) Multipart
 Service 계층에서 FMS로 파일을 보내기 위해 Feign Client를 사용합니다.
 
 ```java
-// ComUserService.java
+// SysUserService.java
 @Value("${fms.internal.api-key}")
 private String fmsInternalApiKey; // application.yml에서 주입
 
@@ -280,7 +280,7 @@ public class ExcelDataResponse {
 Management Service가 응답을 받아 비즈니스 로직을 수행합니다.
 
 ```java
-// ComUserService.java
+// SysUserService.java
 try {
     ExcelDataResponse excelData = fmsExcelClient.uploadExcel(file, fmsInternalApiKey);
 

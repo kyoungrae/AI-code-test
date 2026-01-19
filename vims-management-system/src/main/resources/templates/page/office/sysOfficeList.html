@@ -1,0 +1,561 @@
+<article class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+
+        <!-- 페이지 헤더 -->
+        <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
+            <h1 class="gi-page-title">[Page.Message].Message.Label.Array["SYS_OFFICE.TITLE_LIST"]</h1>
+            <p class="gi-subtitle-main">지사 및 사무소 정보를 통합적으로 관리합니다.</p>
+        </header>
+
+        <article>
+            <!-- 검색기능 영역 -->
+            <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+                <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+                        <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
+                    </div>
+
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="from_date" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+                        <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off"
+                            data-datepicker />
+                    </div>
+
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="to_date" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+                        <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off"
+                            data-datepicker />
+                    </div>
+
+                    <div class="gi-flex gi-grid-gap-10px">
+                        <button id="search-btn" class="gi-btn-blue"
+                            type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                        <button id="reset-btn" class="gi-btn"
+                            type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+                    </div>
+                </div>
+            </div>
+            <!--/ 검색기능 영역 -->
+
+            <!-- 그리드 영역 -->
+            <div class="gi-row-100 gi-padding-left-right-20px">
+                <div id="gi-Grid" class="gi-Grid"></div>
+            </div>
+            <!--/ 그리드 영역 -->
+
+            <!-- 하단 버튼 영역 -->
+            <div class="gi-flex gi-flex-justify-content-flex-end gi-padding-20px">
+                <button id="sysOffice_insert-btn" class="gi-btn-blue" style="width: 120px;" type="button">
+                    [Page.Message].Message.Label.Array["REGISTER_BTN"]
+                </button>
+            </div>
+            <!--/ 하단 버튼 영역 -->
+        </article>
+    </section>
+</article>
+
+<!--등록 팝업 영역-->
+<article id="register_sysOffice_popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="width: 500px;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["SYS_OFFICE.TITLE_REGISTER"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <form id="sysOfficeRegisterForm">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="register_top_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_OFFICE.TOP_OFFICE_CODE"]</label>
+                        <input data-field="top_office_code" id="register_top_office_code"
+                            name="register_top_office_code" class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="register_office_name" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_NAME"]</label>
+                        <input data-field="office_name" id="register_office_name" name="register_office_name"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="register_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_CODE"]</label>
+                        <input data-field="office_code" id="register_office_code" name="register_office_code"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="register_office_type" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_TYPE"]</label>
+                        <input data-field="office_type" id="register_office_type" name="register_office_type"
+                            class="gi-input" autocomplete="off" />
+                    </div>
+                    <div class="gi-flex gi-grid-gap-10px">
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="register_system_create_userid" class="gi-input-label"
+                                data-focus-label="true">작성자</label>
+                            <input data-field="system_create_userid" id="register_system_create_userid"
+                                name="register_system_create_userid" class="gi-input" data-disabled />
+                        </div>
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="register_system_create_date" class="gi-input-label"
+                                data-focus-label="true">작성일</label>
+                            <input data-field="system_create_date" id="register_system_create_date"
+                                name="register_system_create_date" class="gi-input" data-disabled />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="gi-popup-footer">
+            <button id="popup-register_sysOffice_confirm-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button id="popup-register_sysOffice_close-btn" class="gi-popup-close-btn"
+                type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+        </div>
+    </div>
+</article>
+
+<!--수정 팝업 영역-->
+<article id="update_sysOffice_popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="width: 500px;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["SYS_OFFICE.TITLE_UPDATE"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <form id="sysOfficeUpdateForm">
+                <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+                    <div class="gi-input-container">
+                        <label for="update_top_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_OFFICE.TOP_OFFICE_CODE"]</label>
+                        <input data-field="top_office_code" id="update_top_office_code" name="update_top_office_code"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_office_name" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_NAME"]</label>
+                        <input data-field="office_name" id="update_office_name" name="update_office_name"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_office_code" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_CODE"]</label>
+                        <input data-field="office_code" id="update_office_code" name="update_office_code"
+                            class="gi-input" data-required="true" autocomplete="off" />
+                    </div>
+                    <div class="gi-input-container">
+                        <label for="update_office_type" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_TYPE"]</label>
+                        <input data-field="office_type" id="update_office_type" name="update_office_type"
+                            class="gi-input" autocomplete="off" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="gi-popup-footer">
+            <button id="popup-update_sysOffice_confirm-btn" class="gi-popup-update-btn"
+                type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+            <button id="popup-update_sysOffice_close-btn" class="gi-popup-close-btn"
+                type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+        </div>
+    </div>
+</article>
+<!--/수정 팝업 영역-->
+
+<!--상세 팝업 영역-->
+<article id="detail_sysOffice_popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="width: 500px;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["SYS_OFFICE.TITLE_DETAIL"]</span>
+        </div>
+        <div class="gi-popup-contents gi-padding-20px">
+            <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["SYS_OFFICE.TOP_OFFICE_CODE"]</span>
+                    <span data-field="top_office_code" class="gi-span" data-focus-span-text-align="center"></span>
+                </div>
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_NAME"]</span>
+                    <span data-field="office_name" class="gi-span" data-focus-span-text-align="center"></span>
+                </div>
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_CODE"]</span>
+                    <span data-field="office_code" class="gi-span" data-focus-span-text-align="center"></span>
+                </div>
+
+                <div class="gi-span-container">
+                    <span class="gi-span-label"
+                        data-focus-label="true">[Page.Message].Message.Label.Array["SYS_OFFICE.OFFICE_TYPE"]</span>
+                    <span data-field="office_type" class="gi-span" data-focus-span-text-align="center"></span>
+                </div>
+
+                <div class="gi-flex gi-grid-gap-10px">
+                    <div class="gi-span-container gi-flex-1">
+                        <span class="gi-span-label" data-focus-label="true">작성자</span>
+                        <span data-field="system_create_userid" class="gi-span"
+                            data-focus-span-text-align="center"></span>
+                    </div>
+                    <div class="gi-span-container gi-flex-1">
+                        <span class="gi-span-label" data-focus-label="true">작성일</span>
+                        <span data-field="system_create_date" class="gi-span"></span>
+                    </div>
+                </div>
+
+                <div class="gi-flex gi-grid-gap-10px">
+                    <div class="gi-span-container gi-flex-1">
+                        <span class="gi-span-label" data-focus-label="true">수정자</span>
+                        <span data-field="system_update_userid" class="gi-span"
+                            data-focus-span-text-align="center"></span>
+                    </div>
+                    <div class="gi-span-container gi-flex-1">
+                        <span class="gi-span-label" data-focus-label="true">수정일</span>
+                        <span data-field="system_update_date" class="gi-span"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="gi-popup-footer">
+            <button id="popup-detail_sysOffice_close-btn" class="gi-popup-close-btn" type="button">
+                [Page.Message].Message.Label.Array["CLOSE_BTN"]
+            </button>
+        </div>
+    </div>
+</article>
+<!--/수정 팝업 영역-->
+<script type="text/javascript">
+    var PRGMID = "sysOfficeList";	//page id
+    var REGISTER_POPUP_ID = "register_sysOffice_popup";
+    var REGISTER_POPUP_FORM = "sysOfficeRegisterForm";
+    var REGISTER_POPUP_CONFIRM_BTN = "popup-register_sysOffice_confirm-btn";
+
+    var UPDATE_POPUP_ID = "update_sysOffice_popup";
+    var UPDATE_POPUP_FORM = "sysOfficeUpdateForm";
+    var UPDATE_POPUP_CONFIRM_BTN = "popup-update_sysOffice_confirm-btn";
+    var DETAIL_POPUP_ID = "detail_sysOffice_popup";
+    init();
+    function init() {
+
+
+        //초기화
+        resetEvent();
+
+        //데이터 조회
+        findBySysOfficeList();
+
+        setTimeout(function () {
+            //페이지 초기설정
+            new PageInit();
+
+            //클릭 이벤트
+            clickEvent();
+        });
+    }
+
+    function resetEvent() {
+        //검색영역 값 초기화
+        $("#search-area input").val("");
+        $("#search-area select").val("");
+
+        //데이터 호출 후 이벤트 재설정
+        new AfterLoadDataEvent();
+    }
+
+    //클릭 이벤트
+    function clickEvent() {
+        // 초기화버튼 클릭 이벤트
+        $(".gi-btn-reset").click(function () {
+            resetEvent();
+            findBySysOfficeList();
+        });
+        //조회버튼 클릭 이벤트
+        $("#search-btn").click(function () {
+            findBySysOfficeList();
+        });
+
+        //추가버튼 클릭 이벤트
+        $("#sysOffice_insert-btn").click(function () {
+            popup.open(REGISTER_POPUP_ID);
+            $("#" + REGISTER_POPUP_CONFIRM_BTN).off("click.registerPopupConfirmBtnClickEventHandler")
+                .on("click.registerPopupConfirmBtnClickEventHandler", registerPopupConfirmBtnClickEventHandler);
+            function registerPopupConfirmBtnClickEventHandler() {
+                sysOfficeRegister();
+            }
+        });
+    }
+    function findBySysOfficeList(page, range, sortId, sortOrder) {
+        //default page
+        if (!formUtil.checkEmptyValue(page)) page = 1;
+        //default range(row)
+        if (!formUtil.checkEmptyValue(range)) range = 10;
+
+        let url = "/cms/common/sysOffice/findPage";
+        let param = {
+            page_no: page,
+            row_range: range,
+            offset: (page - 1) * range
+        };
+        // 검색조건 설정 (추가해서 사용)
+        let cont1 = $("#searchDesc1").val();
+        let cont2 = $("#from_date").val();
+        let cont3 = $("#to_date").val();
+        if (formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+        if (formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+        if (formUtil.checkEmptyValue(cont3)) param.to_date = cont3;
+
+        // 정렬조건추가 (기준id, 순서)
+        if (formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+        if (formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+
+                // 그리드 헤더 설정
+                let sysOffice_menuGrid_header = {
+                    title: '[Page.Message].Message.Label.Array["SYS_OFFICE.TITLE"]',
+                    list: [
+                        { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.TOP_OFFICE_CODE"], ID: 'top_office_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.OFFICE_NAME"], ID: 'office_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.OFFICE_CODE"], ID: 'office_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.OFFICE_TYPE"], ID: 'office_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.OFFICE_TYPE_CODE"], ID: 'office_type_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_USERID"], ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_USERID"], ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_DATE"], ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+                        { HEADER: '사이드 그리드', ID: 'sideGridOpen_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
+                    ]
+                }
+                //그리드 생성 <div id="gi-Grid"></div>
+                let sysOffice_menu_grid = formUtil.giGrid(sysOffice_menuGrid_header, paging, page);
+
+                //그리드 하이라키 구조로 변경
+                //let sysOffice_menu_grid = formUtil.giGridHierarchy(sysOffice_menuGrid_header,paging,page);
+                //sysOffice_menu_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
+
+                //사이드 그리드 설정
+                //sysOffice_menu_grid.sideOpenBtnClick("gi-Grid-side","sideGridOpen_btn");
+
+                //그리드 데이터 설정
+                sysOffice_menu_grid.DataSet(data);
+
+                //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+                sysOffice_menu_grid.pagingSet(findBySysOfficeList);
+
+                //그리드 내부의 상세 버튼 클릭 이벤트(상세 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                //sysOffice_menu_grid.detailBtnClick(redirectDetailPage,"detail_btn");
+
+                //그리드 내부의 상세 버튼 클릭 이벤트(수정 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                //sysOffice_menu_grid.detailBtnClick(redirectDetailPage,"update_btn");
+
+                //그리드 내부의 상세 버튼 클릭 이벤트(상세 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                sysOffice_menu_grid.detailBtnClick(sysOfficeDetailPopupOpen, "detail_btn");
+
+                //그리드 내부의 수정 버튼 클릭 이벤트(수정 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                sysOffice_menu_grid.updateBtnClick(sysOfficeUpdatePopupOpen, "update_btn");
+
+                //그리드 내부의 삭제 버튼 클릭 이벤트(삭제 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+                sysOffice_menu_grid.deleteBtnClick(sysOfficeRemove, "delete_btn");
+
+                //그리스 내부의 header click 정렬 이벤트 설정
+                sysOffice_menu_grid.sortDataSet(findBySysOfficeList);
+
+                //그리드 row Double click 이벤트 설정
+                //sysOffice_menu_grid.rowDoubleClick(sysOfficeRowDoubleClickEvent);
+                //function sysOfficeRowDoubleClickEvent(rows){
+                //    console.log(rows);
+                //}
+
+                //그리드 checkbox click 이벤트 설정
+                //sysOffice_menu_grid.rowCheckboxClick(sysOfficeRowCheckboxClick);
+                //function sysOfficeRowCheckboxClick(rows){
+                //    console.log(rows);
+                //}
+
+                //그리드 row MultiSelect click 이벤트 설정
+                //sysOffice_menu_grid.rowMultiSelectClick(sysOfficeRowMultiSelectClick);
+
+                //function sysOfficeRowMultiSelectClick(rows){
+                //    console.log(rows);
+                //}
+
+                //그리드 row 선택 이벤트 설정
+                //sysOffice_menu_grid.rowClick(sysOfficeRowClickEvent);
+                //function sysOfficeRowClickEvent(rows){
+                //    console.log(rows);
+                //}
+
+
+            } else {
+                formUtil.alertPopup("response status is :" + status);
+            }
+        }).catch(error => {
+            formUtil.alertPopup(error);
+        })
+    }
+    //FUN : 등록 페이지 이동
+    function redirectRegisterPage(redirectDataList) {
+        let url = "/cms/sysOfficeRegister";
+
+        //이전페이지 아이디 설정
+        redirectDataList["pre_page_id"] = "/cms/sysOfficeList";
+        // console.log(redirectDataList)
+
+        formUtil.loadContent(url, redirectDataList);
+    }
+    //FUN : 상세 페이지 이동
+    function redirectDetailPage(redirectDataList) {
+        let url = "/cms/sysOfficeDetail";
+
+        //이전페이지 아이디 설정
+        redirectDataList["pre_page_id"] = "/cms/sysOfficeList";
+        // console.log(redirectDataList)
+
+        formUtil.loadContent(url, redirectDataList);
+    }
+    //FUN : 수정 페이지 이동
+    function redirectModifyPage(redirectDataList) {
+        let url = "/cms/sysOfficeModify";
+
+        //이전페이지 아이디 설정
+        redirectDataList["pre_page_id"] = "/cms/sysOfficeList";
+        // console.log(redirectDataList)
+
+        formUtil.loadContent(url, redirectDataList);
+    }
+    //FUN : 상세팝업 호출
+    function sysOfficeDetailPopupOpen(cont) {
+        dataBinding.setDataForm(DETAIL_POPUP_ID, cont);
+        popup.open(DETAIL_POPUP_ID);
+    }
+    //FUN : 수정팝업 호출
+    function sysOfficeUpdatePopupOpen(cont) {
+        //console.log(cont);
+        dataBinding.setDataForm(UPDATE_POPUP_ID, cont);
+        popup.open(UPDATE_POPUP_ID);
+
+        $("#" + UPDATE_POPUP_CONFIRM_BTN).off("click.updatePopupConfirmBtnClickEventHandler")
+            .on("click.updatePopupConfirmBtnClickEventHandler", updatePopupConfirmBtnClickEventHandler);
+        function updatePopupConfirmBtnClickEventHandler() {
+            sysOfficeUpdate();
+        }
+    }
+
+    function sysOfficeRegister() {
+        let flag = sysOfficeRegisterCheckValidation();
+        if (flag) {
+            let data = dataBinding.getData(REGISTER_POPUP_FORM);
+            let url = "/cms/common/sysOffice/register";
+            //console.log(data);
+            let param = {
+
+                top_office_code: data.top_office_code,
+                office_name: data.office_name,
+                office_code: data.office_code,
+                office_type: data.office_type,
+                office_type_code: data.office_type_code,
+                system_create_userid: data.system_create_userid,
+                system_create_date: data.system_create_date,
+                system_update_userid: data.system_update_userid,
+                system_update_date: data.system_update_date
+            };
+            axios.post(url, param).then(response => {
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
+                    popup.close(REGISTER_POPUP_ID);
+                    findBySysOfficeList();
+                } else {
+                    formUtil.toast("response status is :" + status, "error");
+                }
+            }).catch(error => {
+                formUtil.toast(error.response.data, "error");
+            })
+        }
+    }
+    function sysOfficeRegisterCheckValidation() {
+        return formUtil.validationCheck(REGISTER_POPUP_FORM, "SYS_OFFICE.CHECK.");
+    }
+    function sysOfficeUpdateCheckValidation() {
+        return formUtil.validationCheck(UPDATE_POPUP_FORM, "SYS_OFFICE.CHECK.");
+    }
+
+    //FUN : 수정 이벤트
+    function sysOfficeUpdate() {
+        let flag = sysOfficeUpdateCheckValidation();
+        if (flag) {
+            let data = dataBinding.getData(UPDATE_POPUP_FORM);
+            let url = "/cms/common/sysOffice/update";
+            //console.log(data);
+            let param = {
+
+                top_office_code: data.top_office_code,
+                office_name: data.office_name,
+                office_code: data.office_code,
+                office_type: data.office_type,
+                office_type_code: data.office_type_code,
+                system_create_userid: data.system_create_userid,
+                system_create_date: data.system_create_date,
+                system_update_userid: data.system_update_userid,
+                system_update_date: data.system_update_date
+            };
+            axios.post(url, param).then(response => {
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
+                    popup.close(UPDATE_POPUP_ID);
+                    findBySysOfficeList();
+                } else {
+                    formUtil.toast("response status is :" + status, "error");
+                }
+            }).catch(error => {
+                formUtil.toast(error.response.data, "error");
+            })
+        }
+    }
+
+    //FUN : 삭제 이벤트
+    function sysOfficeRemove(data) {
+        let url = "/cms/common/sysOffice/remove";
+        //console.log(data);
+        let param = {
+
+            top_office_code: data.top_office_code,
+            office_name: data.office_name,
+            office_code: data.office_code,
+            office_type: data.office_type,
+            office_type_code: data.office_type_code,
+            system_create_userid: data.system_create_userid,
+            system_create_date: data.system_create_date,
+            system_update_userid: data.system_update_userid,
+            system_update_date: data.system_update_date
+        };
+        axios.post(url, param).then(response => {
+            let status = response.status;
+            if (status === 200) {
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
+                findBySysOfficeList();
+            } else {
+                resetEvent();
+                formUtil.toast("response status is :" + status, "error");
+            }
+        }).catch(error => {
+            formUtil.toast(error.response.data, "error");
+        })
+    }
+
+</script>
