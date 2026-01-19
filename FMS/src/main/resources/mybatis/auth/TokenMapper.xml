@@ -2,11 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.system.auth.token.TokenMapper">
-    <select id="SELECT_TOKEN" resultType="com.system.auth.domain.Token">
+    <resultMap id="TokenResult" type="com.system.auth.domain.Token">
+        <id property="id" column="id" />
+        <result property="token" column="token" />
+        <result property="token_type" column="token_type" />
+        <result property="revoked" column="revoked" />
+        <result property="expired" column="expired" />
+        <association property="auth_user" javaType="com.system.auth.authuser.AuthUser">
+            <id property="id" column="user_id" />
+            <result property="user_id" column="user_id_string" />
+            <result property="email" column="email" />
+        </association>
+    </resultMap>
+
+    <select id="SELECT_TOKEN" resultMap="TokenResult">
         SELECT
-            T.*
+            T.*,
+            U.user_id as user_id_string,
+            U.email as email
         FROM
             TOKEN T
+        LEFT JOIN SYS_USER U ON T.user_id = U.id
         WHERE T.token = #{token}
     </select>
 

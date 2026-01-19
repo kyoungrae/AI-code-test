@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
+import com.system.accslog.SysAccsLog;
+import com.system.accslog.SysAccsLogService;
+import com.system.auth.authuser.AuthUser;
+
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
@@ -33,13 +37,15 @@ public class LoginController {
     private final JwtService jwtService;
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @GetMapping("")
-    public String loginPage(HttpServletRequest request){
-        if(request.getCookies() == null){
+    public String loginPage(HttpServletRequest request) {
+        if (request.getCookies() == null) {
             return "login/login";
         } else {
-            Cookie[] cookies  = request.getCookies();
-            Optional<Cookie> optionalCookie = Arrays.stream(cookies).filter(cookie -> "Authorization".equals(cookie.getName())).findFirst();
+            Cookie[] cookies = request.getCookies();
+            Optional<Cookie> optionalCookie = Arrays.stream(cookies)
+                    .filter(cookie -> "Authorization".equals(cookie.getName())).findFirst();
 
             if (optionalCookie.isEmpty()) {
                 return "login/login";
@@ -49,19 +55,23 @@ public class LoginController {
             userEmail = jwtService.extractUsername(jwt);
             if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() != null) {
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                if (authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken)) {
+                if (authentication != null && authentication.isAuthenticated()
+                        && !(authentication instanceof AnonymousAuthenticationToken)) {
                     return "layout/home";
-                }else{
+                } else {
                     return "redirect:/api/v1/auth/logout";
                 }
-            }else{
-                    return "redirect:/api/v1/auth/logout";
+            } else {
+                return "redirect:/api/v1/auth/logout";
             }
         }
     }
 
+    private final SysAccsLogService sysAccsLogService;
+
     @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody Map<String, Object> param, HttpServletResponse response) {
+    public ResponseEntity<?> login(@RequestBody Map<String, Object> param, HttpServletResponse response,
+            HttpServletRequest request) {
         AuthenticationRequest ar = AuthenticationRequest.builder()
                 .email((String) param.get("email"))
                 .password((String) param.get("password"))
@@ -74,6 +84,59 @@ public class LoginController {
         authrizationCookie.setSecure(false);
         authrizationCookie.setPath("/"); // 쿠키 경로 설정
         response.addCookie(authrizationCookie);
+
+        // Log Access
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication != null && authentication.getPrincipal() instanceof AuthUser) {
+                AuthUser user = (AuthUser) authentication.getPrincipal();
+
+                String userAgent = request.getHeader("User-Agent");
+                String ip = request.getHeader("X-Forwarded-For");
+                if (ip == null)
+                    ip = request.getRemoteAddr();
+
+                SysAccsLog log = new SysAccsLog();
+                log.setId(UUID.randomUUID().toString());
+                log.setUser_id(user.getUser_id());
+                log.setEmail(user.getEmail());
+                log.setIp_address(ip);
+
+                // Simple User-Agent parsing
+                String os = "Unknown";
+                if (userAgent.toLowerCase().contains("windows"))
+                    os = "Windows";
+                else if (userAgent.toLowerCase().contains("mac"))
+                    os = "Mac OS";
+                else if (userAgent.toLowerCase().contains("x11"))
+                    os = "Unix";
+                else if (userAgent.toLowerCase().contains("android"))
+                    os = "Android";
+                else if (userAgent.toLowerCase().contains("iphone"))
+                    os = "iOS";
+                log.setOs_name(os);
+
+                String browser = "Unknown";
+                if (userAgent.toLowerCase().contains("edg"))
+                    browser = "Edge";
+                else if (userAgent.toLowerCase().contains("chrome"))
+                    browser = "Chrome";
+                else if (userAgent.toLowerCase().contains("firefox"))
+                    browser = "Firefox";
+                else if (userAgent.toLowerCase().contains("safari"))
+                    browser = "Safari";
+                log.setBrowser_name(browser);
+
+                log.setDevice_type("PC"); // Default or infer from UA
+                if (userAgent.toLowerCase().contains("mobile"))
+                    log.setDevice_type("Mobile");
+
+                sysAccsLogService.logAccess(log);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // 리다이렉트 URL 포함
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("redirectUrl", "/");

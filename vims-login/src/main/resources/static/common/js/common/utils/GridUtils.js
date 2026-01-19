@@ -29,7 +29,20 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
             pagingAnimationClass = "fade-in";
         }
     }
+    function typeTransferDateToString(v) {
+        if (v === null || v === undefined || v === "") return "";
+        const r = new Date(v);
+        if (isNaN(r.getTime())) return "";
 
+        const yyyy = String(r.getFullYear());
+        const MM = String(r.getMonth() + 1).padStart(2, "0");
+        const dd = String(r.getDate()).padStart(2, "0");
+        const hh = String(r.getHours()).padStart(2, "0");
+        const mm = String(r.getMinutes()).padStart(2, "0");
+        const ss = String(r.getSeconds()).padStart(2, "0");
+
+        return yyyy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm + ":" + ss;
+    }
 
     layout.list.map((item) => {
         let hidden = "";
@@ -256,6 +269,9 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                 break;
                             case "checkbox":
                                 tag = '<input type="checkbox" id="' + gridId + '_checkbox_' + i + '" class="gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" value="' + data[i][item.ID] + '" />';
+                                break;
+                            case "date":
+                                tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + typeTransferDateToString(data[i][item.ID]) + '">' + typeTransferDateToString(data[i][item.ID]) + '</span>';
                                 break;
                         }
 

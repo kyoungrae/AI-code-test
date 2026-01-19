@@ -58,6 +58,7 @@ public class QueryTypeInterceptor implements Interceptor {
                 Date systemDateTime = DateUtil.getServerTimeTypeDate();
                 modifyField(parameterObject, "system_create_userid", userEmail);
                 modifyFieldDate(parameterObject, "system_create_date", systemDateTime);
+                modifyFieldDate(parameterObject, "system_login_date", systemDateTime);
                 // INSERT 시에도 수정자 정보를 미리 넣어두는 관례 대응
                 modifyField(parameterObject, "system_update_userid", userEmail);
                 modifyFieldDate(parameterObject, "system_update_date", systemDateTime);

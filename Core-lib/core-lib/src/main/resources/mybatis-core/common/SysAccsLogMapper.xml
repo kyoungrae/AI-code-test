@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.accslog.SysAccsLogMapper">
+    <sql id="sortFilter">
+        ORDER BY
+        <choose>
+            <when test="sort_id != null and sort_order != null">
+                ${sort_id} ${sort_order}
+            </when>
+            <otherwise>
+                sub.no ASC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="SELECT_PAGE" resultType="com.system.accslog.SysAccsLog">
+        SELECT * FROM (
+            SELECT
+                row_number() over (ORDER BY system_login_date DESC )AS no,
+                
+                id, 
+                user_id, 
+                email, 
+                system_login_date, 
+                system_logout_date, 
+                ip_address, 
+                device_type, 
+                os_name, 
+                browser_name 
+            FROM SYS_ACCS_LOG
+            <where>
+                
+                <if test="id != null and id != ''">AND id = #{id}</if>
+                <if test="user_id != null and user_id != ''">AND user_id = #{user_id}</if>
+                <if test="email != null and email != ''">AND email = #{email}</if>
+                <if test="system_login_date != null and system_login_date != ''">AND system_login_date = #{system_login_date}</if>
+                <if test="system_logout_date != null and system_logout_date != ''">AND system_logout_date = #{system_logout_date}</if>
+                <if test="ip_address != null and ip_address != ''">AND ip_address = #{ip_address}</if>
+                <if test="device_type != null and device_type != ''">AND device_type = #{device_type}</if>
+                <if test="os_name != null and os_name != ''">AND os_name = #{os_name}</if>
+                <if test="browser_name != null and browser_name != ''">AND browser_name = #{browser_name}</if>
+                
+                <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
+                <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
+                <if test="_email != null and _email != ''">AND email LIKE CONCAT('%', #{_email}, '%')</if>
+                <if test="_system_login_date != null and _system_login_date != ''">AND system_login_date LIKE CONCAT('%', #{_system_login_date}, '%')</if>
+                <if test="_system_logout_date != null and _system_logout_date != ''">AND system_logout_date LIKE CONCAT('%', #{_system_logout_date}, '%')</if>
+                <if test="_ip_address != null and _ip_address != ''">AND ip_address LIKE CONCAT('%', #{_ip_address}, '%')</if>
+                <if test="_device_type != null and _device_type != ''">AND device_type LIKE CONCAT('%', #{_device_type}, '%')</if>
+                <if test="_os_name != null and _os_name != ''">AND os_name LIKE CONCAT('%', #{_os_name}, '%')</if>
+                <if test="_browser_name != null and _browser_name != ''">AND browser_name LIKE CONCAT('%', #{_browser_name}, '%')</if>
+
+                <if test="from_date != null and from_date != '' and to_date != null and to_date != ''">
+                    AND system_login_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                    AND system_login_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+
+                <if test="from_date != null and from_date != '' and (to_date == null or to_date == '')">
+                    AND system_login_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                    AND system_login_date &lt; DATE_ADD(STR_TO_DATE(#{from_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+
+                <if test="(from_date == null or from_date == '') and to_date != null and to_date != ''">
+                    AND system_login_date &gt;= STR_TO_DATE(#{to_date}, '%Y%m%d')
+                    AND system_login_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+            </where>
+        ) AS sub
+        <include refid="sortFilter"/>
+        LIMIT #{row_range} OFFSET #{offset}
+    </select>
+
+    <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
+        SELECT CEIL(COUNT(*) / #{row_range}) FROM SYS_ACCS_LOG
+        <where>
+            
+            <if test="id != null and id != ''">AND id = #{id}</if>
+            <if test="user_id != null and user_id != ''">AND user_id = #{user_id}</if>
+            <if test="email != null and email != ''">AND email = #{email}</if>
+            <if test="system_login_date != null and system_login_date != ''">AND system_login_date = #{system_login_date}</if>
+            <if test="system_logout_date != null and system_logout_date != ''">AND system_logout_date = #{system_logout_date}</if>
+            <if test="ip_address != null and ip_address != ''">AND ip_address = #{ip_address}</if>
+            <if test="device_type != null and device_type != ''">AND device_type = #{device_type}</if>
+            <if test="os_name != null and os_name != ''">AND os_name = #{os_name}</if>
+            <if test="browser_name != null and browser_name != ''">AND browser_name = #{browser_name}</if>
+            
+            <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
+            <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
+            <if test="_email != null and _email != ''">AND email LIKE CONCAT('%', #{_email}, '%')</if>
+            <if test="_system_login_date != null and _system_login_date != ''">AND system_login_date LIKE CONCAT('%', #{_system_login_date}, '%')</if>
+            <if test="_system_logout_date != null and _system_logout_date != ''">AND system_logout_date LIKE CONCAT('%', #{_system_logout_date}, '%')</if>
+            <if test="_ip_address != null and _ip_address != ''">AND ip_address LIKE CONCAT('%', #{_ip_address}, '%')</if>
+            <if test="_device_type != null and _device_type != ''">AND device_type LIKE CONCAT('%', #{_device_type}, '%')</if>
+            <if test="_os_name != null and _os_name != ''">AND os_name LIKE CONCAT('%', #{_os_name}, '%')</if>
+            <if test="_browser_name != null and _browser_name != ''">AND browser_name LIKE CONCAT('%', #{_browser_name}, '%')</if>
+            <if test="from_date != null and from_date != '' and to_date != null and to_date != ''">
+                AND system_login_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                AND system_login_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+
+            <if test="from_date != null and from_date != '' and (to_date == null or to_date == '')">
+                AND system_login_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                AND system_login_date &lt; DATE_ADD(STR_TO_DATE(#{from_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+
+            <if test="(from_date == null or from_date == '') and to_date != null and to_date != ''">
+                AND system_login_date &gt;= STR_TO_DATE(#{to_date}, '%Y%m%d')
+                AND system_login_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+        </where>
+    </select>
+
+    <select id="SELECT" resultType="com.system.accslog.SysAccsLog">
+        SELECT
+            
+            id,
+            user_id,
+            email,
+            system_login_date,
+            system_logout_date,
+            ip_address,
+            device_type,
+            os_name,
+            browser_name
+        FROM SYS_ACCS_LOG
+        <where>
+            
+            <if test="id != null and id != ''">AND id = #{id}</if>
+            <if test="user_id != null and user_id != ''">AND user_id = #{user_id}</if>
+            <if test="email != null and email != ''">AND email = #{email}</if>
+            <if test="system_login_date != null and system_login_date != ''">AND system_login_date = #{system_login_date}</if>
+            <if test="system_logout_date != null and system_logout_date != ''">AND system_logout_date = #{system_logout_date}</if>
+            <if test="ip_address != null and ip_address != ''">AND ip_address = #{ip_address}</if>
+            <if test="device_type != null and device_type != ''">AND device_type = #{device_type}</if>
+            <if test="os_name != null and os_name != ''">AND os_name = #{os_name}</if>
+            <if test="browser_name != null and browser_name != ''">AND browser_name = #{browser_name}</if>
+            
+            <if test="_id != null and _id != ''">AND id LIKE CONCAT('%', #{_id}, '%')</if>
+            <if test="_user_id != null and _user_id != ''">AND user_id LIKE CONCAT('%', #{_user_id}, '%')</if>
+            <if test="_email != null and _email != ''">AND email LIKE CONCAT('%', #{_email}, '%')</if>
+            <if test="_system_login_date != null and _system_login_date != ''">AND system_login_date LIKE CONCAT('%', #{_system_login_date}, '%')</if>
+            <if test="_system_logout_date != null and _system_logout_date != ''">AND system_logout_date LIKE CONCAT('%', #{_system_logout_date}, '%')</if>
+            <if test="_ip_address != null and _ip_address != ''">AND ip_address LIKE CONCAT('%', #{_ip_address}, '%')</if>
+            <if test="_device_type != null and _device_type != ''">AND device_type LIKE CONCAT('%', #{_device_type}, '%')</if>
+            <if test="_os_name != null and _os_name != ''">AND os_name LIKE CONCAT('%', #{_os_name}, '%')</if>
+            <if test="_browser_name != null and _browser_name != ''">AND browser_name LIKE CONCAT('%', #{_browser_name}, '%')</if>
+        </where>
+    </select>
+
+    <insert id="INSERT">
+        INSERT INTO SYS_ACCS_LOG(
+            id 
+            , user_id 
+            , email 
+            , ip_address 
+            <if test="system_login_date != null">, system_login_date</if>
+            <if test="system_logout_date != null">, system_logout_date</if>
+            <if test="device_type != null">, device_type</if>
+            <if test="os_name != null">, os_name</if>
+            <if test="browser_name != null">, browser_name</if>
+        )
+        VALUES(
+            #{id}
+            , #{user_id}
+            , #{email}
+            , #{ip_address}
+            <if test="system_login_date != null">, #{system_login_date}</if>
+            <if test="system_logout_date != null">, #{system_logout_date}</if>
+            <if test="device_type != null">, #{device_type}</if>
+            <if test="os_name != null">, #{os_name}</if>
+            <if test="browser_name != null">, #{browser_name}</if>
+        )
+    </insert>
+
+    <delete id="DELETE">
+        DELETE FROM SYS_ACCS_LOG
+        <where>
+            
+             id = #{id}
+             AND user_id = #{user_id}
+             AND device_type = #{device_type}
+             AND os_name = #{os_name}
+            
+            <if test="email != null">AND email = #{email}</if>
+            <if test="system_logout_date != null">AND system_logout_date = #{system_logout_date}</if>
+            <if test="ip_address != null">AND ip_address = #{ip_address}</if>
+            <if test="browser_name != null">AND browser_name = #{browser_name}</if>
+        </where>
+    </delete>
+
+    <update id="UPDATE">
+        UPDATE SYS_ACCS_LOG
+        <set>
+            <if test="email != null">email = #{email},</if>
+            <if test="system_logout_date != null">system_logout_date = #{system_logout_date},</if>
+            <if test="ip_address != null">ip_address = #{ip_address},</if>
+            <if test="browser_name != null">browser_name = #{browser_name},</if>
+            <if test="system_update_date != null">system_update_date = #{system_update_date},</if>
+        </set>
+        <where>
+             id = #{id}
+        </where>
+    </update>
+    <update id="UPDATE_LOGOUT_BY_USER">
+        UPDATE SYS_ACCS_LOG
+        SET system_logout_date = NOW()
+        WHERE id = (
+            SELECT id FROM (
+                SELECT id 
+                FROM SYS_ACCS_LOG 
+                WHERE user_id = #{user_id} 
+                  AND system_logout_date IS NULL 
+                ORDER BY system_login_date DESC 
+                LIMIT 1
+            ) AS current_session
+        )
+    </update>
+</mapper>

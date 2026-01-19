@@ -10,6 +10,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -70,14 +71,31 @@ public class SysEventLogService extends AbstractCommonService<SysEventLog> {
         }
     }
 
+    // 로그 기록에서 제외할 테이블 목록
+    private static final List<String> EXCLUDED_TABLES = Arrays.asList(
+            "sysAccsLog");
+
     @Override
     protected int registerImpl(SysEventLog request) {
+        // 제외 대상 테이블인지 확인
+        if (isExcludedTable(request.getTarget_table())) {
+            return 0;
+        }
+
         try {
             return sysEventLogMapper.INSERT(request);
         } catch (DuplicateKeyException dke) {
             throw new CustomException(getMessage("EXCEPTION.PK.EXIST"));
         }
 
+    }
+
+    private boolean isExcludedTable(String tableName) {
+        if (tableName == null || tableName.isEmpty()) {
+            return false;
+        }
+        return EXCLUDED_TABLES.stream()
+                .anyMatch(excluded -> excluded.equalsIgnoreCase(tableName));
     }
 
     @Override

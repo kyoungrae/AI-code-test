@@ -212,11 +212,21 @@ public class EventLogInterceptor implements Interceptor {
         return new AbstractMap.SimpleEntry<>("id", "");
     }
 
+    // 로그 기록에서 제외할 테이블 목록
+    private static final List<String> EXCLUDED_TABLES = Arrays.asList(
+            "SYS_ACCS_LOG",
+            "TOKEN");
+
     private void saveEventLog(Invocation invocation, MappedStatement ms, Object parameter, String beforeData)
             throws Exception {
-        // 비동기 실행을 위해 필요한 데이터들을 로컬 변수로 확정(effectively final)
         final String actionType = ms.getSqlCommandType().name();
         final String targetTable = extractTableName(ms);
+
+        // 1. 제외 대상 테이블인지 확인
+        if (isExcludedTable(targetTable)) {
+            return;
+        }
+
         Map.Entry<String, String> idEntry = extractIdEntryFromParameter(parameter);
         final String targetId = idEntry != null ? idEntry.getValue() : "";
 
@@ -232,8 +242,18 @@ public class EventLogInterceptor implements Interceptor {
         }
         final String ipAddress = extractedIp;
 
-        final String userEmail = UserInfo.getUserEmail();
-        final String userRoles = UserInfo.getUserRoles();
+        // 2. 유저 정보 추출 및 Null 처리
+        String userEmailTemp = UserInfo.getUserEmail();
+        if (userEmailTemp == null || userEmailTemp.trim().isEmpty()) {
+            userEmailTemp = "ANONYMOUS";
+        }
+        final String userEmail = userEmailTemp;
+
+        String userRolesTemp = UserInfo.getUserRoles();
+        if (userRolesTemp == null || userRolesTemp.trim().isEmpty()) {
+            userRolesTemp = "GUEST";
+        }
+        final String userRoles = userRolesTemp;
 
         // 실제 저장은 스레드 풀에서 비동기로 처리 (성능 최적화 핵심)
         logExecutor.execute(() -> {
@@ -263,6 +283,15 @@ public class EventLogInterceptor implements Interceptor {
                 logger.error("Async EventLog INSERT failed: ", e);
             }
         });
+    }
+
+    private boolean isExcludedTable(String tableName) {
+        if (tableName == null || tableName.isEmpty()) {
+            return false;
+        }
+        System.out.println("Interceptor tableName:::" + tableName);
+        return EXCLUDED_TABLES.stream()
+                .anyMatch(excluded -> excluded.equalsIgnoreCase(tableName));
     }
 
     private String extractTableName(MappedStatement ms) {

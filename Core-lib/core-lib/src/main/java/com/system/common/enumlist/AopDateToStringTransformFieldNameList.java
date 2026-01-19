@@ -16,6 +16,5 @@ public enum AopDateToStringTransformFieldNameList {
     @DateToString
     erase_date,
     @DateToString
-    latest_sent_date,
-
+    latest_sent_date
 }

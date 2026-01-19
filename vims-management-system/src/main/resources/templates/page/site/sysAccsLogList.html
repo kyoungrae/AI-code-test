@@ -1,0 +1,402 @@
+<article id="sysAccsLogListPage" class="gi-article-content gi-col-95 gi-row-100">
+  <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+
+    <!-- 페이지 헤더 -->
+    <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
+      <h1 class="gi-page-title">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.TITLE_LIST"]</h1>
+      <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.SUB_TITLE_LIST"]</p>
+    </header>
+
+    <article>
+      <!-- 검색기능 영역 -->
+      <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+        <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+          <div class="gi-input-container gi-flex-1">
+            <label for="searchDesc1" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.EMAIL"]</label>
+            <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
+          </div>
+
+          <div class="gi-input-container gi-flex-1">
+            <label for="from_date" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+            <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off" data-datepicker />
+          </div>
+
+          <div class="gi-input-container gi-flex-1">
+            <label for="to_date" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+            <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off" data-datepicker />
+          </div>
+
+          <div class="gi-flex gi-grid-gap-10px">
+            <button id="search-btn" class="gi-btn-blue"
+              type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+            <button id="sysAccsLog-reset-btn" class="gi-btn"
+              type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+          </div>
+        </div>
+      </div>
+      <!--/ 검색기능 영역 -->
+      <!-- 그리드 영역 -->
+      <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
+        <div id="sysAccsLogList_gi-Grid" class="gi-Grid gi-col-100"></div>
+        <!--   [사이드 그리드 사용 시 주석 해제]     -->
+        <!--        <div id="sysAccsLog_gi-Grid-side" class="gi-Grid-side" data-side-grid-open="false"></div>-->
+      </div>
+      <!--/ 그리드 영역 -->
+    </article>
+  </section>
+</article>
+<!--상세 팝업 영역-->
+<article id="detail_sysAccsLog_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 700px;">
+    <div class="gi-popup-header">
+      <span>[Page.Message].Message.Label.Array["SYS_ACCS_LOG.TITLE_DETAIL"]</span>
+    </div>
+    <div class="gi-popup-contents">
+      <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.ID"]</span>
+            <span data-field="id" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.USER_ID"]</span>
+            <span data-field="user_id" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.EMAIL"]</span>
+            <span data-field="email" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.SYSTEM_LOGIN_DATE"]</span>
+            <span data-field="system_login_date" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.SYSTEM_LOGOUT_DATE"]</span>
+            <span data-field="system_logout_date" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.IP_ADDRESS"]</span>
+            <span data-field="ip_address" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.DEVICE_TYPE"]</span>
+            <span data-field="device_type" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.OS_NAME"]</span>
+            <span data-field="os_name" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_ACCS_LOG.BROWSER_NAME"]</span>
+            <span data-field="browser_name" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="gi-popup-footer">
+      <button id="popup-detail_sysAccsLog_close-btn" class="gi-popup-close-btn"
+        type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+<script type="text/javascript">
+  var PRGMID = "sysAccsLogList";	//page id
+  var MAIN_GRID_ID = "sysAccsLogList_gi-Grid"; //main grid id
+  var REGISTER_POPUP_ID = "register_sysAccsLog_popup";
+  var REGISTER_POPUP_FORM = "sysAccsLogRegisterForm";
+  var REGISTER_POPUP_CONFIRM_BTN = "popup-register_sysAccsLog_confirm-btn";
+
+  var UPDATE_POPUP_ID = "update_sysAccsLog_popup";
+  var UPDATE_POPUP_FORM = "sysAccsLogUpdateForm";
+  var UPDATE_POPUP_CONFIRM_BTN = "popup-update_sysAccsLog_confirm-btn";
+  var DETAIL_POPUP_ID = "detail_sysAccsLog_popup";
+  init();
+  function init() {
+
+
+    //초기화
+    resetEvent();
+
+    //데이터 조회
+    findBySysAccsLogList();
+
+    setTimeout(function () {
+      //페이지 초기설정
+      new PageInit();
+
+      //클릭 이벤트
+      clickEvent();
+    });
+  }
+
+  function resetEvent() {
+    //검색영역 값 초기화
+    $("#search-area input").val("");
+    $("#search-area select").val("");
+
+    //데이터 호출 후 이벤트 재설정
+    new AfterLoadDataEvent();
+  }
+
+  //클릭 이벤트
+  function clickEvent() {
+    // 초기화버튼 클릭 이벤트
+    $("#sysAccsLog-reset-btn").click(function () {
+      resetEvent();
+      findBySysAccsLogList();
+    });
+    //조회버튼 클릭 이벤트
+    $("#search-btn").click(function () {
+      findBySysAccsLogList();
+    });
+  }
+
+  // 그리드 아이콘 주입 함수
+  function injectAccsLogIcons() {
+    const gridId = MAIN_GRID_ID;
+    $(`#${gridId} .gi-grid-list`).each(function () {
+      const $row = $(this);
+
+      // Device Type Icon
+      const $deviceCell = $row.find("li[data-field='device_type'] span");
+      const deviceVal = $deviceCell.text();
+      let deviceImg = "";
+      if (deviceVal === "PC") deviceImg = "pc.png";
+      else if (deviceVal === "Mobile") deviceImg = "mobile.png";
+      if (deviceImg) {
+        $deviceCell.html(`<div class="gi-flex gi-flex-center"><img src="/common/img/${deviceImg}" style="width:20px; height:20px; margin-right:8px;"><span>${deviceVal}</span></div>`);
+      }
+
+      // OS Name Icon
+      const $osCell = $row.find("li[data-field='os_name'] span");
+      const osVal = $osCell.text();
+      let osImg = "";
+      if (osVal.toLowerCase().includes("android")) osImg = "androidOs.png";
+      else if (osVal.toLowerCase().includes("mac")) osImg = "macOs.png";
+      if (osImg) {
+        $osCell.html(`<div class="gi-flex gi-flex-center"><img src="/common/img/${osImg}" style="width:20px; height:20px; margin-right:8px;"><span>${osVal}</span></div>`);
+      }
+
+      // Browser Name Icon
+      const $browserCell = $row.find("li[data-field='browser_name'] span");
+      const browserVal = $browserCell.text();
+      let browserImg = "";
+      const lowerBrowser = browserVal.toLowerCase();
+      if (lowerBrowser.includes("chrome")) browserImg = "browser_chrome.png";
+      else if (lowerBrowser.includes("edge") || lowerBrowser.includes("edg")) browserImg = "browser_edge.png";
+      else if (lowerBrowser.includes("safari")) browserImg = "browser_safari.png";
+      else if (lowerBrowser.includes("opera")) browserImg = "browser_opera.png";
+      else if (lowerBrowser.includes("firefox")) browserImg = "browser_firefox.png";
+      if (browserImg) {
+        let iconStyle = "width:20px; height:20px; margin-right:8px;";
+        if (browserImg === "browser_firefox.png") {
+          // Firefox icon often looks visually larger, scale it slightly to match
+          iconStyle = "width:18px; height:18px; margin-right:10px; margin-left:1px;";
+        }
+        $browserCell.html(`<div class="gi-flex gi-flex-align-items-center"><img src="/common/img/${browserImg}" style="${iconStyle}"><span>${browserVal}</span></div>`);
+      }
+    });
+  }
+
+  function findBySysAccsLogList(page, range, sortId, sortOrder) {
+    //default page
+    if (!formUtil.checkEmptyValue(page)) page = 1;
+    //default range(row)
+    if (!formUtil.checkEmptyValue(range)) range = 10;
+
+    let url = "/cms/common/sysAccsLog/findPage";
+    let param = {
+      page_no: page,
+      row_range: range,
+      offset: (page - 1) * range
+    };
+    // 검색조건 설정 (추가해서 사용)
+    let cont1 = $("#searchDesc1").val();
+    let cont2 = $("#from_date").val();
+    let cont3 = $("#to_date").val();
+    if (formUtil.checkEmptyValue(cont1)) param._email = cont1;
+    if (formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+    if (formUtil.checkEmptyValue(cont3)) param.to_date = cont3;
+
+    // 정렬조건추가 (기준id, 순서)
+    if (formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+    if (formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+    axios.post(url, param).then(response => {
+      let status = response.status;
+      if (status === 200) {
+        let data = response.data.DATA;
+        let paging = response.data.TOTAL_PAGING[0];
+
+        // 그리드 헤더 설정
+        let sysAccsLog_grid_header = {
+          title: '[Page.Message].Message.Label.Array["SYS_ACCS_LOG.TITLE"]',
+          list: [
+            { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.ID"], ID: 'id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.USER_ID"], ID: 'user_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.EMAIL"], ID: 'email', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.SYSTEM_LOGIN_DATE"], ID: 'system_login_date', WIDTH: '40', TYPE: 'date', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.SYSTEM_LOGOUT_DATE"], ID: 'system_logout_date', WIDTH: '40', TYPE: 'date', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.IP_ADDRESS"], ID: 'ip_address', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.DEVICE_TYPE"], ID: 'device_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.OS_NAME"], ID: 'os_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_LOG.BROWSER_NAME"], ID: 'browser_name', WIDTH: '30', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+            { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SIDE_BTN"], ID: 'side_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
+            //{ HEADER: 'test1', ID: 'use_yn', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', COM_CODE_GROUP_ID: "USE_YN", HIDDEN: true }, // 공통코드 치환
+            //{ HEADER: 'test2', ID: "test2", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "test2": "0" }], HIDDEN: true }, // 조건에 따라 버튼 표시
+            //{ HEADER: 'test3', ID: 'test3', WIDTH: '7', TYPE: 'password', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }, // 비밀번호
+          ]
+        }
+        //그리드 생성 <div id="gi-Grid"></div>
+        let sysAccsLog_grid = formUtil.giGrid(sysAccsLog_grid_header, paging, page, MAIN_GRID_ID);
+
+        //그리드 하이라키 구조로 변경
+        //let sysAccsLog_grid = formUtil.giGridHierarchy(sysAccsLogGrid_header,paging,page);
+        //sysAccsLog_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
+
+        //사이드 그리드 설정
+        //sysAccsLog_grid.sideOpenBtnClick("sysAccsLog_gi-Grid-side", "side_btn", function (data) {
+        //  console.log("Side Panel Data:", data);
+        //  // 1. 사이드 패널 내 그리드 컨테이너 생성
+        //  $("#sysAccsLog_gi-Grid-side").html('<div class="gi-padding-20px gi-row-100 gi-flex gi-flex-direction-column gi-grid-gap-10px">' +
+        //    '<h3>[' + data.no + '] 로우 상세 내역</h3>' +
+        //    '<div id="sysAccsLogSub_gi-Grid" class="gi-Grid gi-row-100"></div>' +
+        //    '</div>');
+        //  // 2. 서브 그리드 헤더 설정
+        //  let sysAccsLogSubGridHeader = {
+        //    title: "상세 내역 리스트",
+        //    list: [
+        //      { HEADER: '순번', ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+        //      { HEADER: '항목명', ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+        //      { HEADER: '내용', ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
+        //    ]
+        //  };
+        //  // 3. 서브 그리드 데이터 생성 (샘플)
+        //  let subData = [];
+        //  for (let i = 1; i <= 5; i++) {
+        //    subData.push({
+        //      sub_no: i,
+        //      item_name: "상세 항목 " + data.no + "-" + i,
+        //      item_content: "이것은 " + data.no + "번 데이터의 상세 내용입니다."
+        //    });
+        //  }
+        //  // 4. 서브 그리드 초기화 및 데이터 바인딩
+        //  let sub_grid = formUtil.giGrid(sysAccsLogSubGridHeader, 1, 1, "sysAccsLogSub_gi-Grid");
+        //  sub_grid.DataSet(subData);
+        //});
+
+        //그리드 데이터 설정
+        sysAccsLog_grid.DataSet(data);
+
+        // 아이콘 주입
+        injectAccsLogIcons();
+
+        //그리드 컬럼 크기 조정 설정
+        sysAccsLog_grid.gridColumResize(MAIN_GRID_ID);
+
+        //그리드 엑셀 다운로드 버튼 활성화
+        sysAccsLog_grid.excelDownloadEvent(Message.Label.Array["SYS_ACCS_LOG.TITLE_LIST"]);
+
+        //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+        sysAccsLog_grid.pagingSet(findBySysAccsLogList);
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(상세 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        //sysAccsLog_grid.detailBtnClick(redirectDetailPage,"detail_btn");
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(수정 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        //sysAccsLog_grid.detailBtnClick(redirectDetailPage,"update_btn");
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(상세 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        sysAccsLog_grid.detailBtnClick(sysAccsLogDetailPopupOpen, "detail_btn");
+
+        //그리드 내부의 수정 버튼 클릭 이벤트(수정 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        sysAccsLog_grid.updateBtnClick(sysAccsLogUpdatePopupOpen, "update_btn");
+
+        //그리드 내부의 삭제 버튼 클릭 이벤트(삭제 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        sysAccsLog_grid.deleteBtnClick(sysAccsLogRemove, "delete_btn");
+
+        //그리스 내부의 header click 정렬 이벤트 설정
+        sysAccsLog_grid.sortDataSet(findBySysAccsLogList);
+
+        //그리드 row Double click 이벤트 설정
+        //sysAccsLog_grid.rowDoubleClick(sysAccsLogRowDoubleClickEvent);
+        //function sysAccsLogRowDoubleClickEvent(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 checkbox click 이벤트 설정
+        //sysAccsLog_grid.rowCheckboxClick(sysAccsLogRowCheckboxClick);
+        //function sysAccsLogRowCheckboxClick(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 row MultiSelect click 이벤트 설정
+        //sysAccsLog_grid.rowMultiSelectClick(sysAccsLogRowMultiSelectClick);
+
+        //function sysAccsLogRowMultiSelectClick(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 row 선택 이벤트 설정
+        //sysAccsLog_grid.rowClick(sysAccsLogRowClickEvent);
+        //function sysAccsLogRowClickEvent(rows){
+        //    console.log(rows);
+        //}
+
+
+      } else {
+        formUtil.toast("response status is :" + status, "error");
+      }
+    }).catch(error => {
+      formUtil.toast(error.response.data, "error");
+    })
+  }
+  //FUN : 상세팝업 호출
+  function sysAccsLogDetailPopupOpen(cont) {
+    dataBinding.setDataForm(DETAIL_POPUP_ID, cont);
+    popup.open(DETAIL_POPUP_ID);
+  }
+</script>

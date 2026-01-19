@@ -97,7 +97,7 @@ public class SysEventLog extends Common {
      *  system_create_date : 로그 발생 일시
      * </pre>
      */
-    private String system_create_date;
+    private Date system_create_date;
 
     /***
      * <pre>

@@ -2,6 +2,7 @@ package com.system.auth.service;
 
 import com.system.auth.jwt.JwtService;
 import com.system.auth.token.TokenService;
+import com.system.accslog.SysAccsLogService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ public class LogoutService implements LogoutHandler {
 
     private final TokenService tokenService;
     private final JwtService jwtService;
+    private final SysAccsLogService sysAccsLogService;
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
@@ -46,6 +48,16 @@ public class LogoutService implements LogoutHandler {
         var storedToken = tokenService.findByToken(jwt)
                 .orElse(null);
         if (storedToken != null) {
+
+            // Log logout event
+            try {
+                if (storedToken.getAuth_user() != null) {
+                    sysAccsLogService.logLogoutByUser(storedToken.getAuth_user().getUser_id());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             // storedToken.setExpired(true);
             // storedToken.setRevoked(true);
             // tokenService.update(storedToken);
