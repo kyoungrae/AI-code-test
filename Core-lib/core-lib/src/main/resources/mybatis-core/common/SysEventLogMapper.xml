@@ -178,6 +178,7 @@
             <if test="target_id != null">, target_id</if>
             <if test="before_data != null">, before_data</if>
             <if test="after_data != null">, after_data</if>
+            , system_create_date
         )
         VALUES(
             
@@ -192,6 +193,7 @@
             <if test="target_id != null">, #{target_id}</if>
             <if test="before_data != null">, #{before_data}</if>
             <if test="after_data != null">, #{after_data}</if>
+            , #{system_create_date}
         )
     </insert>
 

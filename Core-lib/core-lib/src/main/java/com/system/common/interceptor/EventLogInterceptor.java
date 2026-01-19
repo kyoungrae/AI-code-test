@@ -212,10 +212,9 @@ public class EventLogInterceptor implements Interceptor {
         return new AbstractMap.SimpleEntry<>("id", "");
     }
 
-    // 로그 기록에서 제외할 테이블 목록
+    // 로그 기록에서 제외할 테이블 목록 (Mapper 명칭 기준)
     private static final List<String> EXCLUDED_TABLES = Arrays.asList(
-            "SYS_ACCS_LOG",
-            "TOKEN");
+            "SysAccsLog");
 
     private void saveEventLog(Invocation invocation, MappedStatement ms, Object parameter, String beforeData)
             throws Exception {
@@ -289,7 +288,6 @@ public class EventLogInterceptor implements Interceptor {
         if (tableName == null || tableName.isEmpty()) {
             return false;
         }
-        System.out.println("Interceptor tableName:::" + tableName);
         return EXCLUDED_TABLES.stream()
                 .anyMatch(excluded -> excluded.equalsIgnoreCase(tableName));
     }

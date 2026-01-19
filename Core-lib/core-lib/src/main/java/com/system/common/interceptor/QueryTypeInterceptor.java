@@ -54,34 +54,32 @@ public class QueryTypeInterceptor implements Interceptor {
 
         // 2. 자동 감사 필드 주입 (Insert/Update/Merge)
         if (commandType == org.apache.ibatis.mapping.SqlCommandType.INSERT) {
+            Date systemDateTime = DateUtil.getServerTimeTypeDate();
+            modifyFieldDate(parameterObject, "system_create_date", systemDateTime);
+            modifyFieldDate(parameterObject, "system_login_date", systemDateTime);
+            modifyFieldDate(parameterObject, "system_update_date", systemDateTime);
+
             if (userEmail != null) {
-                Date systemDateTime = DateUtil.getServerTimeTypeDate();
                 modifyField(parameterObject, "system_create_userid", userEmail);
-                modifyFieldDate(parameterObject, "system_create_date", systemDateTime);
-                modifyFieldDate(parameterObject, "system_login_date", systemDateTime);
-                // INSERT 시에도 수정자 정보를 미리 넣어두는 관례 대응
                 modifyField(parameterObject, "system_update_userid", userEmail);
-                modifyFieldDate(parameterObject, "system_update_date", systemDateTime);
             }
         } else if (commandType == org.apache.ibatis.mapping.SqlCommandType.UPDATE) {
-            if (userEmail != null) {
-                Date systemDateTime = DateUtil.getServerTimeTypeDate();
+            Date systemDateTime = DateUtil.getServerTimeTypeDate();
 
-                // 최상위 객체 수정
-                updateAuditFields(parameterObject, userEmail, systemDateTime);
+            // 최상위 객체 수정
+            updateAuditFields(parameterObject, userEmail, systemDateTime);
 
-                // ParamMap인 경우 내부 객체들도 탐색
-                if (parameterObject instanceof MapperMethod.ParamMap<?> paramMap) {
-                    for (Object value : paramMap.values()) {
-                        if (value == null || value == parameterObject)
-                            continue;
-                        if (value instanceof List<?>) {
-                            for (Object item : (List<?>) value) {
-                                updateAuditFields(item, userEmail, systemDateTime);
-                            }
-                        } else {
-                            updateAuditFields(value, userEmail, systemDateTime);
+            // ParamMap인 경우 내부 객체들도 탐색
+            if (parameterObject instanceof MapperMethod.ParamMap<?> paramMap) {
+                for (Object value : paramMap.values()) {
+                    if (value == null || value == parameterObject)
+                        continue;
+                    if (value instanceof List<?>) {
+                        for (Object item : (List<?>) value) {
+                            updateAuditFields(item, userEmail, systemDateTime);
                         }
+                    } else {
+                        updateAuditFields(value, userEmail, systemDateTime);
                     }
                 }
             }

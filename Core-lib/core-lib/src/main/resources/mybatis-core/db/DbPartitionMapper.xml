@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.common.db.DbPartitionMapper">
+
+    <select id="selectPartitions" resultType="string">
+        SELECT PARTITION_NAME
+        FROM INFORMATION_SCHEMA.PARTITIONS
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = #{tableName}
+          AND PARTITION_NAME IS NOT NULL
+    </select>
+
+    <update id="addPartition">
+        ALTER TABLE ${tableName} ADD PARTITION (
+            PARTITION ${partitionName} VALUES LESS THAN (TO_DAYS(#{lessThanValue}))
+        )
+    </update>
+
+</mapper>
