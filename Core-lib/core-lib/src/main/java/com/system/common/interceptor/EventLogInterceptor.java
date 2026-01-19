@@ -213,8 +213,7 @@ public class EventLogInterceptor implements Interceptor {
     }
 
     // 로그 기록에서 제외할 테이블 목록 (Mapper 명칭 기준)
-    private static final List<String> EXCLUDED_TABLES = Arrays.asList(
-            "SysAccsLog");
+    private static final List<String> EXCLUDED_TABLES = Arrays.asList("SysAccsLog", "DbPartition");
 
     private void saveEventLog(Invocation invocation, MappedStatement ms, Object parameter, String beforeData)
             throws Exception {
