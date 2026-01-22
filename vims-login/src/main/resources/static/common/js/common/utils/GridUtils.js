@@ -275,7 +275,17 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                             case "img":
                                 console.log(typeof item.ID)
                                 switch (item.ID) {
-                                    // case "detail_btn": tag = item.ID;
+                                    case "detail_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/detail.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/detail.png"></button>';
+                                        };
+                                        break;
                                     case "update_btn":
                                         // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
                                         if (hasVisibleOption) {
