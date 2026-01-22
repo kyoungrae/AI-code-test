@@ -3552,7 +3552,10 @@
     backdrop-filter: blur(10px);
     color: #4f4f4f;
     z-index: 1;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background-color: #f8f8f8;
+    border-radius: 5px 5px 0 0;
+    font-size: 14px;
 }
 
 .gi-grid-list {
@@ -3982,4 +3985,22 @@
     text-overflow: ellipsis;
     width: 100%;
     /* Removed padding-right: 25px to fix center alignment bug */
+}
+
+.grid-img {
+    width: 20px;
+    height: 20px;
+}
+
+.grid-button-img:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.grid-button-img {
+    background-color: #fff0;
+    border: unset;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
 }

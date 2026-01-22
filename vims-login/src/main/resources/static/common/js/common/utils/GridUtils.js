@@ -240,7 +240,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                         })
 
                         if (!formUtil.checkEmptyValue(sysCodeName)) sysCodeName = "";
-
+                        let hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
                         switch (item.TYPE) {
                             case "text":
                                 sysCodeValue
@@ -251,7 +251,6 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                 break;
                             case "button":
                                 // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
-                                let hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
                                 if (hasVisibleOption) {
                                     // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
                                     if (originalDataForVisibleOption[item.ID] !== "true") {
@@ -272,6 +271,35 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                 break;
                             case "date":
                                 tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + typeTransferDateToString(data[i][item.ID]) + '">' + typeTransferDateToString(data[i][item.ID]) + '</span>';
+                                break;
+                            case "img":
+                                console.log(typeof item.ID)
+                                switch (item.ID) {
+                                    // case "detail_btn": tag = item.ID;
+                                    case "update_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/pen.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/pen.png"></button>';
+                                        };
+                                        break;
+                                    case "delete_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/trash.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/trash.png"></button>';
+                                        };
+                                        break;
+
+                                }
                                 break;
                         }
 
