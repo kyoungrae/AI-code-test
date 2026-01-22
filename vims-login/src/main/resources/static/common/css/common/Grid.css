@@ -4004,3 +4004,14 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.grid-no-data {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    border-radius: 50%;
+    margin-top: 20px;
+}

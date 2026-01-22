@@ -1,0 +1,789 @@
+<article id="sysBbsMstListPage" class="gi-article-content gi-col-95 gi-row-100">
+  <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+
+    <!-- 페이지 헤더 -->
+    <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
+      <h1 class="gi-page-title">[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE_LIST"]</h1>
+      <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_BBS_MST.SUB_TITLE_LIST"]</p>
+    </header>
+
+    <article>
+      <!-- 검색기능 영역 -->
+      <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+        <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+          <div class="gi-input-container gi-flex-1">
+            <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+            <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
+          </div>
+
+          <div class="gi-input-container gi-flex-1">
+            <label for="from_date" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+            <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off" data-datepicker />
+          </div>
+
+          <div class="gi-input-container gi-flex-1">
+            <label for="to_date" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+            <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off" data-datepicker />
+          </div>
+
+          <div class="gi-flex gi-grid-gap-10px">
+            <button id="search-btn" class="gi-btn-blue"
+              type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+            <button id="sysBbsMst-reset-btn" class="gi-btn"
+              type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+          </div>
+        </div>
+      </div>
+      <!--/ 검색기능 영역 -->
+      <!-- 그리드 영역 -->
+      <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
+        <div id="sysBbsMstList_hirarchy" class="gi-Grid gi-col-100 gi-row-100">
+          <figure
+            class="gi-figure-content gi-overflow-scroll gi-col-100 gi-row-100 gi-flex gi-flex-justify-content-center gi-flex gi-flex-direction-column">
+            <div class="gi-article-content gi-min-col-90 gi-col-100 gi-row-100">
+            </div>
+          </figure>
+        </div>
+        <div id="sysBbsMstList_gi-Grid" class="gi-Grid gi-col-100 gi-row-100"></div>
+        <!--   [사이드 그리드 사용 시 주석 해제]     -->
+        <!--        <div id="sysBbsMst_gi-Grid-side" class="gi-Grid-side" data-side-grid-open="false"></div>-->
+      </div>
+      <!--/ 그리드 영역 -->
+      <!--      등록버튼 영역      -->
+      <div class="gi-row-100">
+        <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
+          <button id="sysBbsMst-insert-btn" class="gi-btn-blue gi-float-right " type="button"
+            gi-popup-open-id="register_sysBbsMst_popup">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+        </div>
+      </div>
+      <!--/     추가버튼 영역      -->
+    </article>
+  </section>
+</article>
+<!--상세 팝업 영역-->
+<article id="detail_sysBbsMst_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 700px;">
+    <div class="gi-popup-header">
+      <span>[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE_DETAIL"]</span>
+    </div>
+    <div class="gi-popup-contents">
+      <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_ID"]</span>
+            <span data-field="bbs_id" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_NM"]</span>
+            <span data-field="bbs_nm" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_TYPE"]</span>
+            <span data-field="bbs_type" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.READ_AUTH"]</span>
+            <span data-field="read_auth" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.WRITE_AUTH"]</span>
+            <span data-field="write_auth" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.MODIFY_AUTH"]</span>
+            <span data-field="modify_auth" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.DELETE_AUTH"]</span>
+            <span data-field="delete_auth" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.REPLY_AUTH"]</span>
+            <span data-field="reply_auth" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.FILE_YN"]</span>
+            <span data-field="file_yn" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.REPLY_YN"]</span>
+            <span data-field="reply_yn" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.SYSTEM_CREATE_DATE"]</span>
+            <span data-field="system_create_date" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.SYSTEM_UPDATE_DATE"]</span>
+            <span data-field="system_update_date" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="gi-popup-footer">
+      <button id="popup-detail_sysBbsMst_close-btn" class="gi-popup-close-btn"
+        type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+<!-- 등록 팝업 영역 -->
+<article id="register_sysBbsMst_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 900px;">
+    <div class="gi-popup-header">
+      <span>[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE_REGISTER"]</span>
+    </div>
+    <div class="gi-popup-contents">
+      <form id="sysBbsMstRegisterForm">
+        <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_bbs_type" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_TYPE"]</label>
+              <input data-select data-field="bbs_type" id="register_bbs_type" name="bbs_type" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_bbs_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_ID"]</label>
+              <input data-field="bbs_id" id="register_bbs_id" name="bbs_id" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_bbs_nm" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_NM"]</label>
+              <input data-field="bbs_nm" id="register_bbs_nm" name="bbs_nm" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_read_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.READ_AUTH"]</label>
+              <input data-field="read_auth" id="register_read_auth" name="read_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_write_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.WRITE_AUTH"]</label>
+              <input data-field="write_auth" id="register_write_auth" name="write_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_reply_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.REPLY_AUTH"]</label>
+              <input data-field="reply_auth" id="register_reply_auth" name="reply_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-flex gi-flex-1 gi-flex-align-items-center gi-grid-gap-20px gi-padding-top-20px">
+              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
+                <input type="checkbox" id="register_file_yn" name="file_yn" data-field="file_yn" value="Y"
+                  class="gi-input">
+                <label for="register_file_yn" class="gi-input-label" style="cursor: pointer;">첨부파일</label>
+              </div>
+              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
+                <input type="checkbox" id="register_reply_yn" name="reply_yn" data-field="reply_yn" value="Y"
+                  class="gi-input">
+                <label for="register_reply_yn" class="gi-input-label" style="cursor: pointer;">댓글허용</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_modify_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.MODIFY_AUTH"]</label>
+              <input data-field="modify_auth" id="register_modify_auth" name="modify_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_delete_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.DELETE_AUTH"]</label>
+              <input data-field="delete_auth" id="register_delete_auth" name="delete_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="gi-popup-footer">
+      <button id="popup-register_sysBbsMst_confirm-btn" class="gi-popup-register-btn"
+        type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+      <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+
+<!-- 수정 팝업 영역 -->
+<article id="update_sysBbsMst_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 900px;">
+    <div class="gi-popup-header">
+      <span>[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE_UPDATE"]</span>
+    </div>
+    <div class="gi-popup-contents">
+      <form id="sysBbsMstUpdateForm">
+        <div class="gi-flex gi-flex-column gi-grid-gap-16px">
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_bbs_type" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_TYPE"]</label>
+              <input data-field="bbs_type" id="update_bbs_type" name="update_bbs_type" class="gi-input"
+                data-required="true" autocomplete="off" readonly />
+            </div>
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_bbs_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_ID"]</label>
+              <input data-field="bbs_id" id="update_bbs_id" name="bbs_id" class="gi-input" data-required="true"
+                autocomplete="off" readonly />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_bbs_nm" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_NM"]</label>
+              <input data-field="bbs_nm" id="update_bbs_nm" name="update_bbs_nm" class="gi-input" data-required="true"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_read_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.READ_AUTH"]</label>
+              <input data-field="read_auth" id="update_read_auth" name="update_read_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_write_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.WRITE_AUTH"]</label>
+              <input data-field="write_auth" id="update_write_auth" name="update_write_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_reply_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.REPLY_AUTH"]</label>
+              <input data-field="reply_auth" id="update_reply_auth" name="update_reply_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-flex gi-flex-1 gi-flex-align-items-center gi-grid-gap-20px gi-padding-top-20px">
+              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
+                <input type="checkbox" id="update_file_yn" name="file_yn" data-field="file_yn" value="Y"
+                  class="gi-input">
+                <label for="update_file_yn" class="gi-checkbox-label" style="cursor: pointer;">첨부파일</label>
+              </div>
+              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
+                <input type="checkbox" id="update_reply_yn" name="reply_yn" data-field="reply_yn" value="Y"
+                  class="gi-input">
+                <label for="update_reply_yn" class="gi-checkbox-label" style="cursor: pointer;">댓글허용</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_modify_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.MODIFY_AUTH"]</label>
+              <input data-field="modify_auth" id="update_modify_auth" name="update_modify_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_delete_auth" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.DELETE_AUTH"]</label>
+              <input data-field="delete_auth" id="update_delete_auth" name="update_delete_auth" class="gi-input"
+                data-required="false" autocomplete="off" />
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="gi-popup-footer">
+      <button id="popup-update_sysBbsMst_confirm-btn" class="gi-popup-update-btn"
+        type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+      <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+<!--/수정 팝업 영역-->
+<script type="text/javascript">
+  var PRGMID = "sysBbsMstList";	//page id
+  var MAIN_GRID_ID = "sysBbsMstList_gi-Grid"; //main grid id
+  var REGISTER_POPUP_ID = "register_sysBbsMst_popup";
+  var REGISTER_POPUP_FORM = "sysBbsMstRegisterForm";
+  var REGISTER_POPUP_CONFIRM_BTN = "popup-register_sysBbsMst_confirm-btn";
+
+  var UPDATE_POPUP_ID = "update_sysBbsMst_popup";
+  var UPDATE_POPUP_FORM = "sysBbsMstUpdateForm";
+  var UPDATE_POPUP_CONFIRM_BTN = "popup-update_sysBbsMst_confirm-btn";
+  var DETAIL_POPUP_ID = "detail_sysBbsMst_popup";
+  init();
+  function init() {
+
+    input.setSelectOptionCom("#register_bbs_type", "BBS_TYPE");
+    //초기화
+    resetEvent();
+
+    //데이터 조회
+    findBySysBbsMstList();
+
+    setTimeout(function () {
+      //페이지 초기설정
+      new PageInit();
+
+      //클릭 이벤트
+      clickEvent();
+
+      // 게시판 유형 변경 시 접두사 자동 입력 이벤트
+      handleBbsTypeChange();
+    });
+  }
+
+  function handleBbsTypeChange() {
+    // dataBinding 및 레이아웃 구조상 동적 셀렉트박스 변경 감지를 위해 body 또는 상위 컨테이너에서 위임하거나 
+    // 직접 input에 이벤트를 겁니다.
+    $(document).on("change", "#register_bbs_type", function () {
+      const type = $(this).val();
+      let prefix = "";
+
+      // 유형별 접두사 mapping
+      if (type === "NOTICE") prefix = "NOTIC_";
+      else if (type === "BASIC") prefix = "BASIC_";
+      else if (type === "IMG") prefix = "IMAGE_";
+      else if (type === "COMMENT") prefix = "COMME_";
+
+      const $idInput = $("#register_bbs_id");
+      const currentVal = $idInput.val() || "";
+
+      // 기존 접두사가 있으면 제거하고 새로운 접두사 추가
+      const cleanVal = currentVal.replace(/^(NOTIC_|BASIC_|IMAGE_|COMME_)/, "");
+      $idInput.val(prefix + cleanVal);
+
+      // 라벨 포커스 효과 갱신
+      if ($idInput.val()) {
+        $idInput.siblings("label").attr("data-focus-label", "true");
+      }
+    });
+  }
+
+  function resetEvent() {
+    //검색영역 값 초기화
+    $("#search-area input").val("");
+    $("#search-area select").val("");
+
+    //데이터 호출 후 이벤트 재설정
+    new AfterLoadDataEvent();
+  }
+
+  //클릭 이벤트
+  function clickEvent() {
+    // 초기화버튼 클릭 이벤트
+    $("#sysBbsMst-reset-btn").click(function () {
+      resetEvent();
+      findBySysBbsMstList();
+    });
+    //조회버튼 클릭 이벤트
+    $("#search-btn").click(function () {
+      findBySysBbsMstList();
+    });
+
+    //추가버튼 클릭 이벤트
+    $("#sysBbsMst-insert-btn").click(function () {
+      popup.open(REGISTER_POPUP_ID);
+      $("#" + REGISTER_POPUP_CONFIRM_BTN).off("click.registerPopupConfirmBtnClickEventHandler")
+        .on("click.registerPopupConfirmBtnClickEventHandler", registerPopupConfirmBtnClickEventHandler);
+      function registerPopupConfirmBtnClickEventHandler() {
+        sysBbsMstRegister();
+      }
+    });
+  }
+  function findBySysBbsMstList(page, range, sortId, sortOrder) {
+    //default page
+    if (!formUtil.checkEmptyValue(page)) page = 1;
+    //default range(row)
+    if (!formUtil.checkEmptyValue(range)) range = 10;
+
+    let url = "/cms/common/sysBbsMst/findPage";
+    let param = {
+      page_no: page,
+      row_range: range,
+      offset: (page - 1) * range
+    };
+    // 검색조건 설정 (추가해서 사용)
+    let cont1 = $("#searchDesc1").val();
+    let cont2 = $("#from_date").val();
+    let cont3 = $("#to_date").val();
+    if (formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+    if (formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
+    if (formUtil.checkEmptyValue(cont3)) param.to_date = cont3;
+
+    // 정렬조건추가 (기준id, 순서)
+    if (formUtil.checkEmptyValue(sortId)) param.sort_id = sortId;
+    if (formUtil.checkEmptyValue(sortOrder)) param.sort_order = sortOrder;
+
+    axios.post(url, param).then(response => {
+      let status = response.status;
+      if (status === 200) {
+        let data = response.data.DATA;
+        let paging = response.data.TOTAL_PAGING[0];
+
+        // 그리드 헤더 설정
+        let sysBbsMst_grid_header = {
+          title: '[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE"]',
+          list: [
+            { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_ID"], ID: 'bbs_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_NM"], ID: 'bbs_nm', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_TYPE"], ID: 'bbs_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.READ_AUTH"], ID: 'read_auth', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.WRITE_AUTH"], ID: 'write_auth', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.MODIFY_AUTH"], ID: 'modify_auth', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.DELETE_AUTH"], ID: 'delete_auth', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.REPLY_AUTH"], ID: 'reply_auth', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.FILE_YN"], ID: 'file_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.REPLY_YN"], ID: 'reply_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.SYSTEM_UPDATE_DATE"], ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SIDE_BTN"], ID: 'side_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
+            //{ HEADER: 'test1', ID: 'use_yn', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', COM_CODE_GROUP_ID: "USE_YN", HIDDEN: true }, // 공통코드 치환
+            //{ HEADER: 'test2', ID: "test2", WIDTH: "5", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: [{ "test2": "0" }], HIDDEN: true }, // 조건에 따라 버튼 표시
+            //{ HEADER: 'test3', ID: 'test3', WIDTH: '7', TYPE: 'password', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }, // 비밀번호
+          ]
+        }
+        //그리드 생성 <div id="gi-Grid"></div>
+        let sysBbsMst_grid = formUtil.giGrid(sysBbsMst_grid_header, paging, page, MAIN_GRID_ID);
+
+        //그리드 하이라키 구조로 변경
+        //let sysBbsMst_grid = formUtil.giGridHierarchy(sysBbsMstGrid_header,paging,page);
+        //sysBbsMst_grid.HierarchyOption({level_column:"",parent_depth_column:"",child_depth_column:""});
+
+        //사이드 그리드 설정
+        //sysBbsMst_grid.sideOpenBtnClick("sysBbsMst_gi-Grid-side", "side_btn", function (data) {
+        //  console.log("Side Panel Data:", data);
+        //  // 1. 사이드 패널 내 그리드 컨테이너 생성
+        //  $("#sysBbsMst_gi-Grid-side").html('<div class="gi-padding-20px gi-row-100 gi-flex gi-flex-direction-column gi-grid-gap-10px">' +
+        //    '<h3>[' + data.no + '] 로우 상세 내역</h3>' +
+        //    '<div id="sysBbsMstSub_gi-Grid" class="gi-Grid gi-row-100"></div>' +
+        //    '</div>');
+        //  // 2. 서브 그리드 헤더 설정
+        //  let sysBbsMstSubGridHeader = {
+        //    title: "상세 내역 리스트",
+        //    list: [
+        //      { HEADER: '순번', ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+        //      { HEADER: '항목명', ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+        //      { HEADER: '내용', ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
+        //    ]
+        //  };
+        //  // 3. 서브 그리드 데이터 생성 (샘플)
+        //  let subData = [];
+        //  for (let i = 1; i <= 5; i++) {
+        //    subData.push({
+        //      sub_no: i,
+        //      item_name: "상세 항목 " + data.no + "-" + i,
+        //      item_content: "이것은 " + data.no + "번 데이터의 상세 내용입니다."
+        //    });
+        //  }
+        //  // 4. 서브 그리드 초기화 및 데이터 바인딩
+        //  let sub_grid = formUtil.giGrid(sysBbsMstSubGridHeader, 1, 1, "sysBbsMstSub_gi-Grid");
+        //  sub_grid.DataSet(subData);
+        //});
+
+        //그리드 데이터 설정
+        sysBbsMst_grid.DataSet(data);
+
+        //그리드 컬럼 크기 조정 설정
+        sysBbsMst_grid.gridColumResize(MAIN_GRID_ID);
+
+        //그리드 엑셀 다운로드 버튼 활성화
+        sysBbsMst_grid.excelDownloadEvent(Message.Label.Array["SYS_BBS_MST.TITLE_LIST"]);
+
+        //그리드 row 개수 변경 및 페이징 버튼 이벤트 설정
+        sysBbsMst_grid.pagingSet(findBySysBbsMstList);
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(상세 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        //sysBbsMst_grid.detailBtnClick(redirectDetailPage,"detail_btn");
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(수정 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        //sysBbsMst_grid.detailBtnClick(redirectDetailPage,"update_btn");
+
+        //그리드 내부의 상세 버튼 클릭 이벤트(상세 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        sysBbsMst_grid.detailBtnClick(sysBbsMstDetailPopupOpen, "detail_btn");
+
+        //그리드 내부의 수정 버튼 클릭 이벤트(수정 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        sysBbsMst_grid.updateBtnClick(sysBbsMstUpdatePopupOpen, "update_btn");
+
+        //그리드 내부의 삭제 버튼 클릭 이벤트(삭제 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
+        sysBbsMst_grid.deleteBtnClick(sysBbsMstRemove, "delete_btn");
+
+        //그리스 내부의 header click 정렬 이벤트 설정
+        sysBbsMst_grid.sortDataSet(findBySysBbsMstList);
+
+        //그리드 row Double click 이벤트 설정
+        //sysBbsMst_grid.rowDoubleClick(sysBbsMstRowDoubleClickEvent);
+        //function sysBbsMstRowDoubleClickEvent(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 checkbox click 이벤트 설정
+        //sysBbsMst_grid.rowCheckboxClick(sysBbsMstRowCheckboxClick);
+        //function sysBbsMstRowCheckboxClick(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 row MultiSelect click 이벤트 설정
+        //sysBbsMst_grid.rowMultiSelectClick(sysBbsMstRowMultiSelectClick);
+
+        //function sysBbsMstRowMultiSelectClick(rows){
+        //    console.log(rows);
+        //}
+
+        //그리드 row 선택 이벤트 설정
+        //sysBbsMst_grid.rowClick(sysBbsMstRowClickEvent);
+        //function sysBbsMstRowClickEvent(rows){
+        //    console.log(rows);
+        //}
+
+
+      } else {
+        formUtil.toast("response status is :" + status, "error");
+      }
+    }).catch(error => {
+      formUtil.toast(error.response.data, "error");
+    })
+  }
+  //FUN : 등록 페이지 이동
+  function redirectRegisterPage(redirectDataList) {
+    let url = "/cms/sysBbsMstRegister";
+
+    //이전페이지 아이디 설정
+    redirectDataList["pre_page_id"] = "/cms/sysBbsMstList";
+    // console.log(redirectDataList)
+
+    formUtil.loadContent(url, redirectDataList);
+  }
+  //FUN : 상세 페이지 이동
+  function redirectDetailPage(redirectDataList) {
+    let url = "/cms/sysBbsMstDetail";
+
+    //이전페이지 아이디 설정
+    redirectDataList["pre_page_id"] = "/cms/sysBbsMstList";
+    // console.log(redirectDataList)
+
+    formUtil.loadContent(url, redirectDataList);
+  }
+  //FUN : 수정 페이지 이동
+  function redirectModifyPage(redirectDataList) {
+    let url = "/cms/sysBbsMstModify";
+
+    //이전페이지 아이디 설정
+    redirectDataList["pre_page_id"] = "/cms/sysBbsMstList";
+    // console.log(redirectDataList)
+
+    formUtil.loadContent(url, redirectDataList);
+  }
+  //FUN : 상세팝업 호출
+  function sysBbsMstDetailPopupOpen(cont) {
+    dataBinding.setDataForm(DETAIL_POPUP_ID, cont);
+    popup.open(DETAIL_POPUP_ID);
+  }
+  //FUN : 수정팝업 호출
+  function sysBbsMstUpdatePopupOpen(cont) {
+    //console.log(cont);
+    dataBinding.setDataForm(UPDATE_POPUP_ID, cont);
+
+    // 체크박스 상태 설정
+    $("#update_file_yn").prop("checked", cont.file_yn === "Y");
+    $("#update_reply_yn").prop("checked", cont.reply_yn === "Y");
+
+    popup.open(UPDATE_POPUP_ID);
+
+    $("#" + UPDATE_POPUP_CONFIRM_BTN).off("click.updatePopupConfirmBtnClickEventHandler")
+      .on("click.updatePopupConfirmBtnClickEventHandler", updatePopupConfirmBtnClickEventHandler);
+    function updatePopupConfirmBtnClickEventHandler() {
+      sysBbsMstUpdate(cont);
+    }
+  }
+
+  function sysBbsMstRegister() {
+    let flag = sysBbsMstRegisterCheckValidation();
+    if (flag) {
+      let data = dataBinding.getData(REGISTER_POPUP_FORM);
+      let url = "/cms/common/sysBbsMst/register";
+
+      // 체크박스 값 처리 (Y/N)
+      data.file_yn = $("#register_file_yn").is(":checked") ? "Y" : "N";
+      data.reply_yn = $("#register_reply_yn").is(":checked") ? "Y" : "N";
+
+      let param = {
+        bbs_id: data.bbs_id,
+        bbs_nm: data.bbs_nm,
+        bbs_type: data.bbs_type,
+        read_auth: data.read_auth,
+        write_auth: data.write_auth,
+        modify_auth: data.modify_auth,
+        delete_auth: data.delete_auth,
+        reply_auth: data.reply_auth,
+        file_yn: data.file_yn,
+        reply_yn: data.reply_yn
+      };
+      axios.post(url, param).then(response => {
+        let status = response.status;
+        if (status === 200) {
+          formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
+          popup.close(REGISTER_POPUP_ID);
+          findBySysBbsMstList();
+        } else {
+          formUtil.toast("response status is :" + status, "error");
+        }
+      }).catch(error => {
+        formUtil.toast(error.response.data, "error");
+      })
+    }
+  }
+  function sysBbsMstRegisterCheckValidation() {
+    return formUtil.validationCheck(REGISTER_POPUP_FORM, "SYS_BBS_MST.CHECK.");
+  }
+  function sysBbsMstUpdateCheckValidation() {
+    return formUtil.validationCheck(UPDATE_POPUP_FORM, "SYS_BBS_MST.CHECK.");
+  }
+
+  //FUN : 수정 이벤트
+  function sysBbsMstUpdate() {
+    let flag = sysBbsMstUpdateCheckValidation();
+    if (flag) {
+      let data = dataBinding.getData(UPDATE_POPUP_FORM);
+      let url = "/cms/common/sysBbsMst/update";
+
+      // 체크박스 값 처리 (Y/N)
+      data.file_yn = $("#update_file_yn").is(":checked") ? "Y" : "N";
+      data.reply_yn = $("#update_reply_yn").is(":checked") ? "Y" : "N";
+
+      let param = {
+        bbs_id: data.bbs_id,
+        bbs_nm: data.bbs_nm,
+        bbs_type: data.bbs_type,
+        read_auth: data.read_auth,
+        write_auth: data.write_auth,
+        modify_auth: data.modify_auth,
+        delete_auth: data.delete_auth,
+        reply_auth: data.reply_auth,
+        file_yn: data.file_yn,
+        reply_yn: data.reply_yn
+      };
+      axios.post(url, param).then(response => {
+        let status = response.status;
+        if (status === 200) {
+          formUtil.toast(Message.Label.Array["COMPLETE.UPDATE"]);
+          popup.close(UPDATE_POPUP_ID);
+          findBySysBbsMstList();
+        } else {
+          formUtil.toast("response status is :" + status, "error");
+        }
+      }).catch(error => {
+        formUtil.toast(error.response.data, "error");
+      })
+    }
+  }
+
+  //FUN : 삭제 이벤트
+  function sysBbsMstRemove(data) {
+    let url = "/cms/common/sysBbsMst/remove";
+    //console.log(data);
+    let param = {
+
+      bbs_id: data.bbs_id,
+      bbs_nm: data.bbs_nm,
+      bbs_type: data.bbs_type,
+      read_auth: data.read_auth,
+      write_auth: data.write_auth,
+      modify_auth: data.modify_auth,
+      delete_auth: data.delete_auth,
+      reply_auth: data.reply_auth,
+      file_yn: data.file_yn,
+      reply_yn: data.reply_yn,
+      system_create_date: data.system_create_date,
+      system_update_date: data.system_update_date
+    };
+    axios.post(url, param).then(response => {
+      let status = response.status;
+      if (status === 200) {
+        formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
+        findBySysBbsMstList();
+      } else {
+        resetEvent();
+        formUtil.toast("response status is :" + status, "error");
+      }
+    }).catch(error => {
+      formUtil.toast(error.response.data, "error");
+    })
+  }
+
+</script>

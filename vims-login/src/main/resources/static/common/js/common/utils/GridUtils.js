@@ -318,7 +318,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     grid_list += '</ul>';
                 }
             } else {
-                grid_list = '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center bounce-in-top">No Data</div>';
+                grid_list = '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center bounce-in-top"><div class="grid-no-data"><img src="../common/img/doc.png"><span class="gi-text-align-center">No Data</span></div></div>';
                 $("#" + gridId + " .gi-grid-paging-content").html('');
             }
 
@@ -1387,13 +1387,51 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             // case "checkbox":
                             //     tag = '<input type="checkbox" class="gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" value="' + data[i][item.ID] + '" />';
                             //     break;
+                            case "img":
+                                console.log(typeof item.ID)
+                                switch (item.ID) {
+                                    case "detail_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/detail.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/detail.png"></button>';
+                                        };
+                                        break;
+                                    case "update_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/pen.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/pen.png"></button>';
+                                        };
+                                        break;
+                                    case "delete_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/trash.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/trash.png"></button>';
+                                        };
+                                        break;
+
+                                }
                         }
                         grid_list += '<li class="resizableBox gi-min-row-50px gi-row-' + item.WIDTH + ' gi-col-16px gi-flex gi-overflow-scroll gi-flex-justify-content-' + item.TEXT_ALIGN + ' gi-text-align-' + item.TEXT_ALIGN + ' ' + hidden + '" data-grid-row="' + j + '" data-field="' + item.ID + '">' + tag + '</li>';
                     }
                     grid_list += '</ul>';
                 }
             } else {
-                grid_list = '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center bounce-in-top">No Data</div>';
+                grid_list = '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-align-items-center gi-flex-justify-content-center bounce-in-top"><div class="grid-no-data"><img src="../common/img/doc.png"><span class="gi-text-align-center">No Data</span></div></div>';
                 $("#" + gridId + " .gi-grid-paging-content").html('');
             }
 

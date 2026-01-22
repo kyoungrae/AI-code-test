@@ -94,31 +94,39 @@ CommonTag.prototype.inputTagFocus = function (input) {
  */
 CommonTag.prototype.inputLabelTagFocus = function (label) {
     label.on("click", function (e) {
-        let inputId = $(e.target).attr("for");
-        let input = $(this).siblings("input")[0];
-        let inputType = input.type;
-        let disabledFlag = $("#" + inputId).attr("data-disabled");
-        if (disabledFlag !== "undefined") {
-            if ("radio" === inputType || "checkbox" === inputType) {
+        let inputId = $(this).attr("for");
+        if (!inputId) return;
 
-            } else {
+        // 브라우저 기본 동작(for 대상 클릭) 방지
+        e.preventDefault();
 
-            }
-        } else {
+        let $target = $("#" + inputId);
+        let $surrogate = $("#" + inputId + "_select");
+
+        // 셀렉트박스로 변환된 경우 대용 태그를 기본 타겟으로 설정
+        let $actualTarget = $surrogate.length > 0 ? $surrogate : $target;
+
+        if ($actualTarget.length === 0) return;
+
+        let disabledFlag = $actualTarget.attr("data-disabled");
+        let isDisabled = $actualTarget.prop("disabled") || (disabledFlag !== undefined && disabledFlag !== "false" && disabledFlag !== "undefined");
+
+        if (!isDisabled) {
+            let inputType = $actualTarget.attr("type");
+
             if ("radio" === inputType) {
-                let isChecked = input.checked
-                if (!isChecked) {
-                    $(input).prop("checked", true);
-                } else {
-                    $(input).prop("checked", false);
+                if (!$actualTarget.prop("checked")) {
+                    $actualTarget.prop("checked", true).trigger("change");
                 }
-                $(input).focus();
-                $(input).off("blur.giInputBlurHandlerEvent").on("blur.giInputBlurHandlerEvent", giInputBlurHandlerEvent);
-                $(input).off("focus.giInputFocusHandlerEvent").on("focus.giInputFocusHandlerEvent", giInputFocusHandlerEvent);
+                $actualTarget.focus();
+            } else if ("checkbox" === inputType) {
+                // 체크박스 토글
+                $actualTarget.prop("checked", !$actualTarget.prop("checked")).trigger("change");
+                $actualTarget.focus();
             } else {
-                $(input).focus();
-                $(input).off("blur.giInputBlurHandlerEvent").on("blur.giInputBlurHandlerEvent", giInputBlurHandlerEvent);
-                $(input).off("focus.giInputFocusHandlerEvent").on("focus.giInputFocusHandlerEvent", giInputFocusHandlerEvent);
+                $actualTarget.focus();
+                // 셀렉트박스 대용 태그인 경우나 클릭 이벤트가 필요한 경우 트리거
+                $actualTarget.trigger("click");
             }
         }
     });

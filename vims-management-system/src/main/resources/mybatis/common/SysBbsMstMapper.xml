@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vims.common.bbs.SysBbsMstMapper">
+    <sql id="sortFilter">
+        ORDER BY
+        <choose>
+            <when test="sort_id != null and sort_order != null">
+                ${sort_id} ${sort_order}
+            </when>
+            <otherwise>
+                sub.no ASC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="SELECT_PAGE" resultType="com.vims.common.bbs.SysBbsMst">
+        SELECT * FROM (
+            SELECT
+                row_number() over (ORDER BY system_create_date DESC )AS no,
+                
+                bbs_id, 
+                bbs_nm, 
+                bbs_type, 
+                read_auth, 
+                write_auth, 
+                modify_auth, 
+                delete_auth, 
+                reply_auth, 
+                file_yn, 
+                reply_yn, 
+                system_create_date, 
+                system_update_date 
+            FROM SYS_BBS_MST
+            <where>
+                
+                <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+                <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
+                <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
+                <if test="read_auth != null and read_auth != ''">AND read_auth = #{read_auth}</if>
+                <if test="write_auth != null and write_auth != ''">AND write_auth = #{write_auth}</if>
+                <if test="modify_auth != null and modify_auth != ''">AND modify_auth = #{modify_auth}</if>
+                <if test="delete_auth != null and delete_auth != ''">AND delete_auth = #{delete_auth}</if>
+                <if test="reply_auth != null and reply_auth != ''">AND reply_auth = #{reply_auth}</if>
+                <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
+                <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
+                <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+                <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+                
+                <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
+                <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
+                <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
+                <if test="_read_auth != null and _read_auth != ''">AND read_auth LIKE CONCAT('%', #{_read_auth}, '%')</if>
+                <if test="_write_auth != null and _write_auth != ''">AND write_auth LIKE CONCAT('%', #{_write_auth}, '%')</if>
+                <if test="_modify_auth != null and _modify_auth != ''">AND modify_auth LIKE CONCAT('%', #{_modify_auth}, '%')</if>
+                <if test="_delete_auth != null and _delete_auth != ''">AND delete_auth LIKE CONCAT('%', #{_delete_auth}, '%')</if>
+                <if test="_reply_auth != null and _reply_auth != ''">AND reply_auth LIKE CONCAT('%', #{_reply_auth}, '%')</if>
+                <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
+                <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
+                <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+                <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+
+                <if test="from_date != null and from_date != '' and to_date != null and to_date != ''">
+                    AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                    AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+
+                <if test="from_date != null and from_date != '' and (to_date == null or to_date == '')">
+                    AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                    AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{from_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+
+                <if test="(from_date == null or from_date == '') and to_date != null and to_date != ''">
+                    AND system_create_date &gt;= STR_TO_DATE(#{to_date}, '%Y%m%d')
+                    AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+                </if>
+            </where>
+        ) AS sub
+        <include refid="sortFilter"/>
+        LIMIT #{row_range} OFFSET #{offset}
+    </select>
+
+    <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
+        SELECT CEIL(COUNT(*) / #{row_range}) FROM SYS_BBS_MST
+        <where>
+            
+            <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+            <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
+            <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
+            <if test="read_auth != null and read_auth != ''">AND read_auth = #{read_auth}</if>
+            <if test="write_auth != null and write_auth != ''">AND write_auth = #{write_auth}</if>
+            <if test="modify_auth != null and modify_auth != ''">AND modify_auth = #{modify_auth}</if>
+            <if test="delete_auth != null and delete_auth != ''">AND delete_auth = #{delete_auth}</if>
+            <if test="reply_auth != null and reply_auth != ''">AND reply_auth = #{reply_auth}</if>
+            <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
+            <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            
+            <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
+            <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
+            <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
+            <if test="_read_auth != null and _read_auth != ''">AND read_auth LIKE CONCAT('%', #{_read_auth}, '%')</if>
+            <if test="_write_auth != null and _write_auth != ''">AND write_auth LIKE CONCAT('%', #{_write_auth}, '%')</if>
+            <if test="_modify_auth != null and _modify_auth != ''">AND modify_auth LIKE CONCAT('%', #{_modify_auth}, '%')</if>
+            <if test="_delete_auth != null and _delete_auth != ''">AND delete_auth LIKE CONCAT('%', #{_delete_auth}, '%')</if>
+            <if test="_reply_auth != null and _reply_auth != ''">AND reply_auth LIKE CONCAT('%', #{_reply_auth}, '%')</if>
+            <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
+            <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+            <if test="from_date != null and from_date != '' and to_date != null and to_date != ''">
+                AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+
+            <if test="from_date != null and from_date != '' and (to_date == null or to_date == '')">
+                AND system_create_date &gt;= STR_TO_DATE(#{from_date}, '%Y%m%d')
+                AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{from_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+
+            <if test="(from_date == null or from_date == '') and to_date != null and to_date != ''">
+                AND system_create_date &gt;= STR_TO_DATE(#{to_date}, '%Y%m%d')
+                AND system_create_date &lt; DATE_ADD(STR_TO_DATE(#{to_date}, '%Y%m%d'), INTERVAL 1 DAY)
+            </if>
+        </where>
+    </select>
+
+    <select id="SELECT" resultType="com.vims.common.bbs.SysBbsMst">
+        SELECT
+            
+            bbs_id,
+            bbs_nm,
+            bbs_type,
+            read_auth,
+            write_auth,
+            modify_auth,
+            delete_auth,
+            reply_auth,
+            file_yn,
+            reply_yn,
+            system_create_date,
+            system_update_date
+        FROM SYS_BBS_MST
+        <where>
+            
+            <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+            <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
+            <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
+            <if test="read_auth != null and read_auth != ''">AND read_auth = #{read_auth}</if>
+            <if test="write_auth != null and write_auth != ''">AND write_auth = #{write_auth}</if>
+            <if test="modify_auth != null and modify_auth != ''">AND modify_auth = #{modify_auth}</if>
+            <if test="delete_auth != null and delete_auth != ''">AND delete_auth = #{delete_auth}</if>
+            <if test="reply_auth != null and reply_auth != ''">AND reply_auth = #{reply_auth}</if>
+            <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
+            <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
+            <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
+            <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
+            
+            <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
+            <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
+            <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
+            <if test="_read_auth != null and _read_auth != ''">AND read_auth LIKE CONCAT('%', #{_read_auth}, '%')</if>
+            <if test="_write_auth != null and _write_auth != ''">AND write_auth LIKE CONCAT('%', #{_write_auth}, '%')</if>
+            <if test="_modify_auth != null and _modify_auth != ''">AND modify_auth LIKE CONCAT('%', #{_modify_auth}, '%')</if>
+            <if test="_delete_auth != null and _delete_auth != ''">AND delete_auth LIKE CONCAT('%', #{_delete_auth}, '%')</if>
+            <if test="_reply_auth != null and _reply_auth != ''">AND reply_auth LIKE CONCAT('%', #{_reply_auth}, '%')</if>
+            <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
+            <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
+            <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
+            <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
+        </where>
+    </select>
+
+    <insert id="INSERT">
+        INSERT INTO SYS_BBS_MST(
+            
+              bbs_id 
+            , bbs_nm 
+            , bbs_type 
+            
+            <if test="read_auth != null">, read_auth</if>
+            <if test="write_auth != null">, write_auth</if>
+            <if test="modify_auth != null">, modify_auth</if>
+            <if test="delete_auth != null">, delete_auth</if>
+            <if test="reply_auth != null">, reply_auth</if>
+            <if test="file_yn != null">, file_yn</if>
+            <if test="reply_yn != null">, reply_yn</if>
+            <if test="system_create_date != null">, system_create_date</if>
+            <if test="system_update_date != null">, system_update_date</if>
+        )
+        VALUES(
+            
+              #{bbs_id}
+            , #{bbs_nm}
+            , #{bbs_type}
+            
+            <if test="read_auth != null">, #{read_auth}</if>
+            <if test="write_auth != null">, #{write_auth}</if>
+            <if test="modify_auth != null">, #{modify_auth}</if>
+            <if test="delete_auth != null">, #{delete_auth}</if>
+            <if test="reply_auth != null">, #{reply_auth}</if>
+            <if test="file_yn != null">, #{file_yn}</if>
+            <if test="reply_yn != null">, #{reply_yn}</if>
+            <if test="system_create_date != null">, #{system_create_date}</if>
+            <if test="system_update_date != null">, #{system_update_date}</if>
+        )
+    </insert>
+
+    <delete id="DELETE">
+        DELETE FROM SYS_BBS_MST
+        <where>
+            
+            AND bbs_id = #{bbs_id}
+            
+            <if test="bbs_nm != null">AND bbs_nm = #{bbs_nm}</if>
+            <if test="bbs_type != null">AND bbs_type = #{bbs_type}</if>
+            <if test="read_auth != null">AND read_auth = #{read_auth}</if>
+            <if test="write_auth != null">AND write_auth = #{write_auth}</if>
+            <if test="modify_auth != null">AND modify_auth = #{modify_auth}</if>
+            <if test="delete_auth != null">AND delete_auth = #{delete_auth}</if>
+            <if test="reply_auth != null">AND reply_auth = #{reply_auth}</if>
+            <if test="file_yn != null">AND file_yn = #{file_yn}</if>
+            <if test="reply_yn != null">AND reply_yn = #{reply_yn}</if>
+            <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
+            <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
+        </where>
+    </delete>
+
+    <update id="UPDATE">
+        UPDATE SYS_BBS_MST
+        <set>
+            
+            <if test="bbs_nm != null">,bbs_nm = #{bbs_nm}</if>
+            <if test="bbs_type != null">,bbs_type = #{bbs_type}</if>
+            <if test="read_auth != null">,read_auth = #{read_auth}</if>
+            <if test="write_auth != null">,write_auth = #{write_auth}</if>
+            <if test="modify_auth != null">,modify_auth = #{modify_auth}</if>
+            <if test="delete_auth != null">,delete_auth = #{delete_auth}</if>
+            <if test="reply_auth != null">,reply_auth = #{reply_auth}</if>
+            <if test="file_yn != null">,file_yn = #{file_yn}</if>
+            <if test="reply_yn != null">,reply_yn = #{reply_yn}</if>
+            <if test="system_create_date != null">,system_create_date = #{system_create_date}</if>
+            <if test="system_update_date != null">,system_update_date = #{system_update_date}</if>
+        </set>
+        <where>
+            
+            AND bbs_id = #{bbs_id}
+        </where>
+    </update>
+</mapper>
