@@ -99,6 +99,8 @@ CommonTag.prototype.inputLabelTagFocus = function (label) {
 
         // 브라우저 기본 동작(for 대상 클릭) 방지
         e.preventDefault();
+        // 이벤트 버블링 방지 - 외부 클릭 핸들러와의 충돌 방지
+        e.stopPropagation();
 
         let $target = $("#" + inputId);
         let $surrogate = $("#" + inputId + "_select");
@@ -126,7 +128,10 @@ CommonTag.prototype.inputLabelTagFocus = function (label) {
             } else {
                 $actualTarget.focus();
                 // 셀렉트박스 대용 태그인 경우나 클릭 이벤트가 필요한 경우 트리거
-                $actualTarget.trigger("click");
+                // 버블링 방지를 위해 jQuery 이벤트 객체를 생성하여 전달
+                let clickEvent = $.Event("click");
+                clickEvent.stopPropagation();
+                $actualTarget.trigger(clickEvent);
             }
         }
     });

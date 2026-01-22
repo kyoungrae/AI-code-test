@@ -43,7 +43,7 @@ class InputUtility {
             "background-color": "#ffffff",
             "border": "1px solid #E2E8F0",
             "border-radius": "0 0 5px 5px",
-            "z-index": "1000",
+            "z-index": "10000", // 팝업(z-index: 999)보다 높게 설정
             "list-style": "none",
             "padding": "0",
             "margin": "0",
@@ -85,6 +85,8 @@ class InputUtility {
         // 이벤트 핸들러: 클릭 시 열고 닫기 (slideDown/Up 적용)
         $copySelectBox.off('click keydown').on('click keydown', (e) => {
             if (e.type === 'click' || (e.type === 'keydown' && e.keyCode === 13)) {
+                // 이벤트 버블링 방지 - 외부 클릭 핸들러와의 충돌 방지
+                e.stopPropagation();
 
                 // 다른 열린 셀렉트 박스 닫기
                 $('input[id$="_select"].active').not($copySelectBox).each(function () {
@@ -107,7 +109,19 @@ class InputUtility {
 
         // 외부 클릭 시 닫기
         $(document).off(`click.selectbox_${id}`).on(`click.selectbox_${id}`, (e) => {
-            if ($(e.target).closest(`#${id}_select`).length === 0 && $(e.target).closest($ulElement).length === 0) {
+            // 셀렉트박스, 드롭다운, 라벨 클릭은 제외
+            let $label = $(`label[for="${id}"]`);
+            let $popup = $copySelectBox.closest('.gi-popup');
+            
+            // 팝업 내부에 있는 경우 팝업 내부의 모든 클릭은 무시 (드롭다운 유지)
+            if ($popup.length > 0 && $(e.target).closest('.gi-popup-body').length > 0) {
+                return;
+            }
+            
+            // 팝업 외부에서 셀렉트박스 관련 요소가 아닌 경우에만 닫기
+            if ($(e.target).closest(`#${id}_select`).length === 0 && 
+                $(e.target).closest($ulElement).length === 0 &&
+                $(e.target).closest($label).length === 0) {
                 if ($copySelectBox.hasClass('active')) {
                     $copySelectBox.removeClass('active');
                     $ulElement.slideUp(200);
@@ -117,6 +131,9 @@ class InputUtility {
 
         // 옵션 선택 시
         $ulElement.find('li button').off('click').on('click', (e) => {
+            // 이벤트 버블링 방지
+            e.stopPropagation();
+            
             const $selectedItem = $(e.currentTarget);
             let selectedText = $selectedItem.text();
             let selectedValue = $selectedItem.attr('value');
@@ -183,7 +200,7 @@ class InputUtility {
             "background-color": "#ffffff",
             "border": "1px solid #E2E8F0",
             "border-radius": "0 0 5px 5px",
-            "z-index": "1000",
+            "z-index": "10000", // 팝업(z-index: 999)보다 높게 설정
             "list-style": "none",
             "padding": "0",
             "margin": "0",
@@ -226,6 +243,8 @@ class InputUtility {
         // 이벤트 핸들러: 클릭 시 열고 닫기 (slideDown/Up 적용)
         $copySelectBox.off('click keydown').on('click keydown', (e) => {
             if (e.type === 'click' || (e.type === 'keydown' && e.keyCode === 13)) {
+                // 이벤트 버블링 방지 - 외부 클릭 핸들러와의 충돌 방지
+                e.stopPropagation();
 
                 // 다른 열린 셀렉트 박스 닫기
                 $('input[id$="_select"].active').not($copySelectBox).each(function () {
@@ -248,7 +267,19 @@ class InputUtility {
 
         // 외부 클릭 시 닫기
         $(document).off(`click.selectbox_${id}`).on(`click.selectbox_${id}`, (e) => {
-            if ($(e.target).closest(`#${id}_select`).length === 0 && $(e.target).closest($ulElement).length === 0) {
+            // 셀렉트박스, 드롭다운, 라벨 클릭은 제외
+            let $label = $(`label[for="${id}"]`);
+            let $popup = $copySelectBox.closest('.gi-popup');
+            
+            // 팝업 내부에 있는 경우 팝업 내부의 모든 클릭은 무시 (드롭다운 유지)
+            if ($popup.length > 0 && $(e.target).closest('.gi-popup-body').length > 0) {
+                return;
+            }
+            
+            // 팝업 외부에서 셀렉트박스 관련 요소가 아닌 경우에만 닫기
+            if ($(e.target).closest(`#${id}_select`).length === 0 && 
+                $(e.target).closest($ulElement).length === 0 &&
+                $(e.target).closest($label).length === 0) {
                 if ($copySelectBox.hasClass('active')) {
                     $copySelectBox.removeClass('active');
                     $ulElement.slideUp(200);
@@ -258,6 +289,9 @@ class InputUtility {
 
         // 옵션 선택 시
         $ulElement.find('li button').off('click').on('click', (e) => {
+            // 이벤트 버블링 방지
+            e.stopPropagation();
+            
             const $selectedItem = $(e.currentTarget);
             let selectedText = $selectedItem.text();
             let selectedValue = $selectedItem.attr('value');
