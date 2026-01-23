@@ -509,20 +509,25 @@ class DataBinding {
 
 class Session {
     constructor() {
-
     }
     getItem(itemName) {
-        if (formUtil.checkEmptyValue(sessionStorage.getItem(itemName))) {
-            return JSON.parse(sessionStorage.getItem(itemName));
-        } else {
-            return false;
+        let item = sessionStorage.getItem(itemName);
+        if (item && item !== "undefined" && item !== "null") {
+            try {
+                return JSON.parse(item);
+            } catch (e) {
+                return item;
+            }
         }
+        return null;
     }
     setItem(itemName, cont) {
         let item = JSON.stringify(cont);
         sessionStorage.setItem(itemName, item);
     }
-
+    removeItem(itemName) {
+        sessionStorage.removeItem(itemName);
+    }
 }
 
 class Popup {

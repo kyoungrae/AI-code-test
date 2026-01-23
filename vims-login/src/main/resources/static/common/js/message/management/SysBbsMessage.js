@@ -3,6 +3,7 @@
 //Message.Label.Array = {};
 Message.Label.Array["SYS_BBS.TITLE_DETAIL"] = "게시판 상세";
 Message.Label.Array["SYS_BBS.TITLE_LIST"] = "게시판 목록";
+Message.Label.Array["SYS_BBS.TITLE_MANAGEMENT"] = "게시물 관리";
 Message.Label.Array["SYS_BBS.TITLE_UPDATE"] = "게시판 수정";
 Message.Label.Array["SYS_BBS.TITLE_REGISTER"] = "게시판 등록";
 
