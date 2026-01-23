@@ -19,7 +19,7 @@
             SELECT
                 row_number() over (ORDER BY system_create_date DESC )AS no,
                 
-                bbs_id, 
+                bbs_mst_id, 
                 bbs_nm, 
                 bbs_type, 
                 system_create_userid, 
@@ -29,7 +29,7 @@
             FROM SYS_BBS_MST
             <where>
                 
-                <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+                <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
                 <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
                 <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
                 <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
@@ -37,7 +37,7 @@
                 <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
                 <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
                 
-                <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
+                <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
                 <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
                 <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
                 <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
@@ -69,7 +69,7 @@
         SELECT CEIL(COUNT(*) / #{row_range}) FROM SYS_BBS_MST
         <where>
             
-            <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+            <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
             <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
@@ -77,7 +77,7 @@
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
             
-            <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
+            <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
             <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
             <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
@@ -104,7 +104,7 @@
     <select id="SELECT" resultType="com.vims.common.bbs.SysBbsMst">
         SELECT
             
-            bbs_id,
+            bbs_mst_id,
             bbs_nm,
             bbs_type,
             system_create_userid,
@@ -114,7 +114,7 @@
         FROM SYS_BBS_MST
         <where>
             
-            <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+            <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
             <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
@@ -122,7 +122,7 @@
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
             
-            <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
+            <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
             <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
             <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
@@ -135,7 +135,7 @@
     <insert id="INSERT">
         INSERT INTO SYS_BBS_MST(
             
-              bbs_id 
+              bbs_mst_id 
             , bbs_nm 
             , bbs_type 
             
@@ -146,7 +146,7 @@
         )
         VALUES(
             
-              #{bbs_id}
+              #{bbs_mst_id}
             , #{bbs_nm}
             , #{bbs_type}
             
@@ -161,7 +161,7 @@
         DELETE FROM SYS_BBS_MST
         <where>
             
-            AND bbs_id = #{bbs_id}
+            AND bbs_mst_id = #{bbs_mst_id}
             
             <if test="bbs_nm != null">AND bbs_nm = #{bbs_nm}</if>
             <if test="bbs_type != null">AND bbs_type = #{bbs_type}</if>
@@ -185,7 +185,7 @@
         </set>
         <where>
             
-            AND bbs_id = #{bbs_id}
+            AND bbs_mst_id = #{bbs_mst_id}
         </where>
     </update>
 </mapper>

@@ -19,15 +19,15 @@ import java.util.Arrays;
 @SuperBuilder
 public class SysBbsMst extends Common {
     @Transient
-    private String keys = Arrays.toString(new String[] { "bbs_id" });
+    private String keys = Arrays.toString(new String[] { "bbs_mst_id" });
 
     @Id
     /***
      * <pre>
-     *  bbs_id : 게시판 고유 코드
+     *  bbs_mst_id : 게시판 고유 코드
      * </pre>
      */
-    private String bbs_id;
+    private String bbs_mst_id;
 
     /***
      * <pre>
@@ -73,11 +73,11 @@ public class SysBbsMst extends Common {
 
     /***
      * <pre>
-     *  bbs_id : 게시판 고유 코드
+     *  bbs_mst_id : 게시판 고유 코드
      * </pre>
      */
     @Transient
-    private String _bbs_id;
+    private String _bbs_mst_id;
 
     /***
      * <pre>

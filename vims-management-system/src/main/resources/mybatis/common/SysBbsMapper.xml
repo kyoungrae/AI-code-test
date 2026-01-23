@@ -14,7 +14,7 @@
         </choose>
     </sql>
 
-    <select id="SELECT_PAGE" resultType="com.vims.common.bbs.SysBbsMst">
+    <select id="SELECT_PAGE" resultType="com.vims.common.bbs.SysBbs">
         SELECT * FROM (
             SELECT
                 row_number() over (ORDER BY system_create_date DESC )AS no,

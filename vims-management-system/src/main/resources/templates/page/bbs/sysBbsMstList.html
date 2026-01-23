@@ -67,8 +67,8 @@
         <div class="gi-flex gi-grid-gap-16px">
           <div class="gi-span-container gi-flex-1">
             <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_ID"]</span>
-            <span data-field="bbs_id" class="gi-span" data-focus-span-text-align="default"></span>
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_MST_ID"]</span>
+            <span data-field="bbs_mst_id" class="gi-span" data-focus-span-text-align="default"></span>
           </div>
         </div>
 
@@ -140,10 +140,10 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="register_bbs_id" class="gi-input-label" data-focus-label="true"
-                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_ID"]</label>
-              <input data-field="bbs_id" id="register_bbs_id" name="bbs_id" class="gi-input" data-required="true"
-                autocomplete="off" />
+              <label for="register_bbs_mst_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_MST_ID"]</label>
+              <input data-field="bbs_mst_id" id="register_bbs_mst_id" name="bbs_mst_id" class="gi-input"
+                data-required="true" autocomplete="off" />
             </div>
           </div>
 
@@ -187,10 +187,10 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="update_bbs_id" class="gi-input-label" data-focus-label="true"
-                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_ID"]</label>
-              <input data-field="bbs_id" id="update_bbs_id" name="update_bbs_id" class="gi-input" data-required="true"
-                autocomplete="off" />
+              <label for="update_bbs_mst_id" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_MST_ID"]</label>
+              <input data-field="bbs_mst_id" id="update_bbs_mst_id" name="update_bbs_mst_id" class="gi-input"
+                data-required="true" autocomplete="off" />
             </div>
           </div>
 
@@ -216,7 +216,7 @@
             <div class="gi-input-container gi-flex-1">
               <label for="update_system_create_userid" class="gi-input-label" data-focus-label="true"
                 data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.SYSTEM_CREATE_USERID"]</label>
-              <input data-field="system_create_userid" id="update_system_create_userid"
+              <input data-disabled data-field="system_create_userid" id="update_system_create_userid"
                 name="update_system_create_userid" class="gi-input" data-required="false" autocomplete="off" />
             </div>
           </div>
@@ -225,8 +225,8 @@
             <div class="gi-input-container gi-flex-1">
               <label for="update_system_create_date" class="gi-input-label" data-focus-label="true"
                 data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.SYSTEM_CREATE_DATE"]</label>
-              <input data-field="system_create_date" id="update_system_create_date" name="update_system_create_date"
-                class="gi-input" data-required="false" autocomplete="off" />
+              <input data-disabled data-field="system_create_date" id="update_system_create_date"
+                name="update_system_create_date" class="gi-input" data-required="false" autocomplete="off" />
             </div>
           </div>
 
@@ -234,7 +234,7 @@
             <div class="gi-input-container gi-flex-1">
               <label for="update_system_update_userid" class="gi-input-label" data-focus-label="true"
                 data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.SYSTEM_UPDATE_USERID"]</label>
-              <input data-field="system_update_userid" id="update_system_update_userid"
+              <input data-disabled data-field="system_update_userid" id="update_system_update_userid"
                 name="update_system_update_userid" class="gi-input" data-required="false" autocomplete="off" />
             </div>
           </div>
@@ -243,8 +243,8 @@
             <div class="gi-input-container gi-flex-1">
               <label for="update_system_update_date" class="gi-input-label" data-focus-label="true"
                 data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_MST.SYSTEM_UPDATE_DATE"]</label>
-              <input data-field="system_update_date" id="update_system_update_date" name="update_system_update_date"
-                class="gi-input" data-required="false" autocomplete="off" />
+              <input data-disabled data-field="system_update_date" id="update_system_update_date"
+                name="update_system_update_date" class="gi-input" data-required="false" autocomplete="off" />
             </div>
           </div>
 
@@ -354,7 +354,7 @@
           title: '[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE"]',
           list: [
             { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-            { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_ID"], ID: 'bbs_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_MST_ID"], ID: 'bbs_mst_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_NM"], ID: 'bbs_nm', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_TYPE"], ID: 'bbs_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["SYS_BBS_MST.SYSTEM_CREATE_USERID"], ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -532,7 +532,7 @@
       //console.log(data);
       let param = {
 
-        bbs_id: data.bbs_id,
+        bbs_mst_id: data.bbs_mst_id,
         bbs_nm: data.bbs_nm,
         bbs_type: data.bbs_type
       };
@@ -565,13 +565,9 @@
       let url = "/cms/common/sysBbsMst/update";
       //console.log(data);
       let param = {
-        bbs_id: data.bbs_id,
+        bbs_mst_id: data.bbs_mst_id,
         bbs_nm: data.bbs_nm,
-        bbs_type: data.bbs_type,
-        system_create_userid: data.system_create_userid,
-        system_create_date: data.system_create_date,
-        system_update_userid: data.system_update_userid,
-        system_update_date: data.system_update_date
+        bbs_type: data.bbs_type
       };
       axios.post(url, param).then(response => {
         let status = response.status;
@@ -594,13 +590,9 @@
     //console.log(data);
     let param = {
 
-      bbs_id: data.bbs_id,
+      bbs_mst_id: data.bbs_mst_id,
       bbs_nm: data.bbs_nm,
-      bbs_type: data.bbs_type,
-      system_create_userid: data.system_create_userid,
-      system_create_date: data.system_create_date,
-      system_update_userid: data.system_update_userid,
-      system_update_date: data.system_update_date
+      bbs_type: data.bbs_type
     };
     axios.post(url, param).then(response => {
       let status = response.status;

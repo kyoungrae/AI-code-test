@@ -13,6 +13,7 @@ import com.vims.fmsClient.FmsExcelClient;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -78,6 +79,9 @@ public class SysBbsService extends AbstractCommonService<SysBbs> {
     @Override
     protected int registerImpl(SysBbs request) {
         try {
+            UUID uuid = UUID.randomUUID();
+            request.setBbs_id(uuid.toString());
+            System.out.println(request.getBbs_id());
             return sysBbsMapper.INSERT(request);
         } catch (DuplicateKeyException dke) {
             throw new CustomException(getMessage("EXCEPTION.PK.EXIST"));

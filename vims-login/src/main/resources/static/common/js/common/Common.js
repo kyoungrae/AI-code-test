@@ -434,7 +434,19 @@ class DataBinding {
                         $(item).text(value);
                     } else if (item.nodeName === "INPUT") {
                         let $input = $(item);
-                        $input.val(value);
+
+                        // 체크박스 처리
+                        if (item.type === "checkbox") {
+                            if (value === "1" || value === 1 || value === true || value === "true") {
+                                $input.prop("checked", true);
+                                $input.val("1");
+                            } else {
+                                $input.prop("checked", false);
+                                $input.val("0");
+                            }
+                        } else {
+                            $input.val(value);
+                        }
 
                         // setSelectOption/Com 으로 생성된 동적 셀렉트 박스 처리
                         let id = $input.attr("id");
