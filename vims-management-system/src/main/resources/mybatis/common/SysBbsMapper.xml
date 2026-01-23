@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.vims.common.bbs.SysBbsMstMapper">
+<mapper namespace="com.vims.common.bbs.SysBbsMapper">
     <sql id="sortFilter">
         ORDER BY
         <choose>
@@ -19,27 +19,36 @@
             SELECT
                 row_number() over (ORDER BY system_create_date DESC )AS no,
                 
+                bbs_mst_id, 
                 bbs_id, 
                 bbs_nm, 
-                bbs_type, 
+                crud_auth, 
+                file_yn, 
+                reply_yn, 
                 system_create_userid, 
-                system_create_date,
+                system_create_date, 
                 system_update_userid, 
                 system_update_date 
-            FROM SYS_BBS_MST
+            FROM SYS_BBS
             <where>
                 
+                <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
                 <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
                 <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
-                <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
+                <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
+                <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
+                <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
                 <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
                 <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
                 <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
                 <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
                 
+                <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
                 <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
                 <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
-                <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
+                <if test="_crud_auth != null and _crud_auth != ''">AND crud_auth LIKE CONCAT('%', #{_crud_auth}, '%')</if>
+                <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
+                <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
                 <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
                 <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
                 <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
@@ -66,20 +75,26 @@
     </select>
 
     <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
-        SELECT CEIL(COUNT(*) / #{row_range}) FROM SYS_BBS_MST
+        SELECT CEIL(COUNT(*) / #{row_range}) FROM SYS_BBS
         <where>
             
+            <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
             <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
-            <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
+            <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
+            <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
+            <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
             <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
             
+            <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
             <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
             <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
-            <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
+            <if test="_crud_auth != null and _crud_auth != ''">AND crud_auth LIKE CONCAT('%', #{_crud_auth}, '%')</if>
+            <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
+            <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
             <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
             <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
@@ -101,30 +116,39 @@
         </where>
     </select>
 
-    <select id="SELECT" resultType="com.vims.common.bbs.SysBbsMst">
+    <select id="SELECT" resultType="com.vims.common.bbs.SysBbs">
         SELECT
             
+            bbs_mst_id,
             bbs_id,
             bbs_nm,
-            bbs_type,
+            crud_auth,
+            file_yn,
+            reply_yn,
             system_create_userid,
             system_create_date,
             system_update_userid,
             system_update_date
-        FROM SYS_BBS_MST
+        FROM SYS_BBS
         <where>
             
+            <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
             <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
-            <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
+            <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
+            <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
+            <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
             <if test="system_create_date != null and system_create_date != ''">AND system_create_date = #{system_create_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             <if test="system_update_date != null and system_update_date != ''">AND system_update_date = #{system_update_date}</if>
             
+            <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
             <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
             <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
-            <if test="_bbs_type != null and _bbs_type != ''">AND bbs_type LIKE CONCAT('%', #{_bbs_type}, '%')</if>
+            <if test="_crud_auth != null and _crud_auth != ''">AND crud_auth LIKE CONCAT('%', #{_crud_auth}, '%')</if>
+            <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
+            <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
             <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
             <if test="_system_update_userid != null and _system_update_userid != ''">AND system_update_userid LIKE CONCAT('%', #{_system_update_userid}, '%')</if>
@@ -133,12 +157,15 @@
     </select>
 
     <insert id="INSERT">
-        INSERT INTO SYS_BBS_MST(
+        INSERT INTO SYS_BBS(
             
-              bbs_id 
+              bbs_mst_id 
+            , bbs_id 
             , bbs_nm 
-            , bbs_type 
             
+            <if test="crud_auth != null">, crud_auth</if>
+            <if test="file_yn != null">, file_yn</if>
+            <if test="reply_yn != null">, reply_yn</if>
             <if test="system_create_userid != null">, system_create_userid</if>
             <if test="system_create_date != null">, system_create_date</if>
             <if test="system_update_userid != null">, system_update_userid</if>
@@ -146,10 +173,13 @@
         )
         VALUES(
             
-              #{bbs_id}
+            #{bbs_mst_id}
+            , #{bbs_id}
             , #{bbs_nm}
-            , #{bbs_type}
             
+            <if test="crud_auth != null">, #{crud_auth}</if>
+            <if test="file_yn != null">, #{file_yn}</if>
+            <if test="reply_yn != null">, #{reply_yn}</if>
             <if test="system_create_userid != null">, #{system_create_userid}</if>
             <if test="system_create_date != null">, #{system_create_date}</if>
             <if test="system_update_userid != null">, #{system_update_userid}</if>
@@ -158,13 +188,16 @@
     </insert>
 
     <delete id="DELETE">
-        DELETE FROM SYS_BBS_MST
+        DELETE FROM SYS_BBS
         <where>
             
             AND bbs_id = #{bbs_id}
             
+            <if test="bbs_mst_id != null">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_nm != null">AND bbs_nm = #{bbs_nm}</if>
-            <if test="bbs_type != null">AND bbs_type = #{bbs_type}</if>
+            <if test="crud_auth != null">AND crud_auth = #{crud_auth}</if>
+            <if test="file_yn != null">AND file_yn = #{file_yn}</if>
+            <if test="reply_yn != null">AND reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null">AND system_create_userid = #{system_create_userid}</if>
             <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             <if test="system_update_userid != null">AND system_update_userid = #{system_update_userid}</if>
@@ -173,11 +206,14 @@
     </delete>
 
     <update id="UPDATE">
-        UPDATE SYS_BBS_MST
+        UPDATE SYS_BBS
         <set>
             
+            <if test="bbs_mst_id != null">,bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_nm != null">,bbs_nm = #{bbs_nm}</if>
-            <if test="bbs_type != null">,bbs_type = #{bbs_type}</if>
+            <if test="crud_auth != null">,crud_auth = #{crud_auth}</if>
+            <if test="file_yn != null">,file_yn = #{file_yn}</if>
+            <if test="reply_yn != null">,reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null">,system_create_userid = #{system_create_userid}</if>
             <if test="system_create_date != null">,system_create_date = #{system_create_date}</if>
             <if test="system_update_userid != null">,system_update_userid = #{system_update_userid}</if>

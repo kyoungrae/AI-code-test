@@ -8,6 +8,7 @@ class loadToScript {
             "login/SysUserMessage",
             "management/SysUserGroupMessage",
             "management/SysBbsMstMessage",
+            "management/SysBbsMessage",
             "management/SysAccsLogMessage",
             "management/SysDeptGroupMessage",
             "management/SysAccsGroupMenuListMessage",

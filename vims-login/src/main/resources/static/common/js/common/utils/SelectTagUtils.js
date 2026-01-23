@@ -109,7 +109,7 @@ CommonTag.prototype.selectTagReset = function (select) {
  * @writer : 진은영
  */
 class GiSelectBox {
-    static defaultSelector = 'input[gi-selectbox], input[data-select]';
+    static defaultSelector = 'input[gi-selectbox]';
 
     constructor() {
         this.selector = GiSelectBox.defaultSelector;
@@ -221,7 +221,7 @@ class GiSelectBox {
                 });
 
                 // gi-selectbox 요소 감시
-                $('[gi-selectbox], [data-select]').each(function () {
+                $('[gi-selectbox]').each(function () {
                     observer2.observe(this, { attributes: true, attributeFilter: ['class'] });
                 });
 

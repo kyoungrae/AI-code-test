@@ -17,31 +17,52 @@ import java.util.Arrays;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class SysBbsMst extends Common {
+public class SysBbs extends Common {
     @Transient
     private String keys = Arrays.toString(new String[] { "bbs_id" });
 
     @Id
     /***
      * <pre>
-     *  bbs_id : 게시판 고유 코드
+     *  bbs_mst_id : 게시판 마스터 ID
+     * </pre>
+     */
+    private String bbs_mst_id;
+
+    /***
+     * <pre>
+     *  bbs_id : 게시판 ID
      * </pre>
      */
     private String bbs_id;
 
     /***
      * <pre>
-     *  bbs_nm : 게시판 명칭
+     *  bbs_nm : 게시판 이름
      * </pre>
      */
     private String bbs_nm;
 
     /***
      * <pre>
-     *  bbs_type : 게시판 유형
+     *  crud_auth : 권한
      * </pre>
      */
-    private String bbs_type;
+    private String crud_auth;
+
+    /***
+     * <pre>
+     *  file_yn : 파일첨부 가능 여부
+     * </pre>
+     */
+    private String file_yn;
+
+    /***
+     * <pre>
+     *  reply_yn : 댓글 가능 여부
+     * </pre>
+     */
+    private String reply_yn;
 
     /***
      * <pre>
@@ -73,7 +94,15 @@ public class SysBbsMst extends Common {
 
     /***
      * <pre>
-     *  bbs_id : 게시판 고유 코드
+     *  bbs_mst_id : 게시판 마스터 ID
+     * </pre>
+     */
+    @Transient
+    private String _bbs_mst_id;
+
+    /***
+     * <pre>
+     *  bbs_id : 게시판 ID
      * </pre>
      */
     @Transient
@@ -81,7 +110,7 @@ public class SysBbsMst extends Common {
 
     /***
      * <pre>
-     *  bbs_nm : 게시판 명칭
+     *  bbs_nm : 게시판 이름
      * </pre>
      */
     @Transient
@@ -89,11 +118,27 @@ public class SysBbsMst extends Common {
 
     /***
      * <pre>
-     *  bbs_type : 게시판 유형
+     *  crud_auth : 권한
      * </pre>
      */
     @Transient
-    private String _bbs_type;
+    private String _crud_auth;
+
+    /***
+     * <pre>
+     *  file_yn : 파일첨부 가능 여부
+     * </pre>
+     */
+    @Transient
+    private String _file_yn;
+
+    /***
+     * <pre>
+     *  reply_yn : 댓글 가능 여부
+     * </pre>
+     */
+    @Transient
+    private String _reply_yn;
 
     /***
      * <pre>
