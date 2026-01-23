@@ -232,15 +232,13 @@
                 data-required="false" autocomplete="off" />
             </div>
             <div class="gi-flex gi-flex-1 gi-flex-align-items-center gi-grid-gap-20px gi-padding-top-20px">
-              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
-                <input type="checkbox" id="register_file_yn" name="file_yn" data-field="file_yn" value="Y"
-                  class="gi-input">
-                <label for="register_file_yn" class="gi-input-label" style="cursor: pointer;">첨부파일</label>
+              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-10px">
+                <input type="checkbox" id="register_file_yn" name="file_yn" data-field="file_yn" class="gi-input">
+                <label for="register_file_yn" style="cursor: pointer;">첨부파일</label>
               </div>
-              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
-                <input type="checkbox" id="register_reply_yn" name="reply_yn" data-field="reply_yn" value="Y"
-                  class="gi-input">
-                <label for="register_reply_yn" class="gi-input-label" style="cursor: pointer;">댓글허용</label>
+              <div class="gi-flex gi-flex-align-items-center gi-grid-gap-10px">
+                <input type="checkbox" id="register_reply_yn" name="reply_yn" data-field="reply_yn" class="gi-input">
+                <label for="register_reply_yn" style="cursor: pointer;">댓글허용</label>
               </div>
             </div>
           </div>
@@ -329,14 +327,12 @@
             </div>
             <div class="gi-flex gi-flex-1 gi-flex-align-items-center gi-grid-gap-20px gi-padding-top-20px">
               <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
-                <input type="checkbox" id="update_file_yn" name="file_yn" data-field="file_yn" value="Y"
-                  class="gi-input">
-                <label for="update_file_yn" class="gi-checkbox-label" style="cursor: pointer;">첨부파일</label>
+                <input type="checkbox" id="update_file_yn" name="file_yn" data-field="file_yn" class="gi-input">
+                <!-- <label for="update_file_yn" style="cursor: pointer;">첨부파일</label> -->
               </div>
               <div class="gi-flex gi-flex-align-items-center gi-grid-gap-8px">
-                <input type="checkbox" id="update_reply_yn" name="reply_yn" data-field="reply_yn" value="Y"
-                  class="gi-input">
-                <label for="update_reply_yn" class="gi-checkbox-label" style="cursor: pointer;">댓글허용</label>
+                <input type="checkbox" id="update_reply_yn" name="reply_yn" data-field="reply_yn" class="gi-input">
+                <!-- <label for="update_reply_yn" style="cursor: pointer;">댓글허용</label> -->
               </div>
             </div>
           </div>
@@ -403,22 +399,26 @@
   function handleBbsTypeChange() {
     // dataBinding 및 레이아웃 구조상 동적 셀렉트박스 변경 감지를 위해 body 또는 상위 컨테이너에서 위임하거나 
     // 직접 input에 이벤트를 겁니다.
-    $(document).on("change", "#register_bbs_type", function () {
+    $(document).on("change", "#register_bbs_type", function (e) {
       const type = $(this).val();
+      console.log($(this))
       let prefix = "";
 
       // 유형별 접두사 mapping
-      if (type === "NOTICE") prefix = "NOTIC_";
-      else if (type === "BASIC") prefix = "BASIC_";
-      else if (type === "IMG") prefix = "IMAGE_";
-      else if (type === "COMMENT") prefix = "COMME_";
+      if (type) {
+        prefix = type + "_";
+      }
 
       const $idInput = $("#register_bbs_id");
       const currentVal = $idInput.val() || "";
 
       // 기존 접두사가 있으면 제거하고 새로운 접두사 추가
-      const cleanVal = currentVal.replace(/^(NOTIC_|BASIC_|IMAGE_|COMME_)/, "");
+      let cleanVal = currentVal;
+      if (currentVal.indexOf("_") > -1) {
+        cleanVal = currentVal.substring(currentVal.indexOf("_") + 1);
+      }
       $idInput.val(prefix + cleanVal);
+
 
       // 라벨 포커스 효과 갱신
       if ($idInput.val()) {
@@ -673,6 +673,8 @@
   }
 
   function sysBbsMstRegister() {
+    let data = dataBinding.getData(REGISTER_POPUP_FORM);
+    console.log(data);
     let flag = sysBbsMstRegisterCheckValidation();
     if (flag) {
       let data = dataBinding.getData(REGISTER_POPUP_FORM);

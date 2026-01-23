@@ -228,8 +228,8 @@ class DataBinding {
                         } else {
                             nodeName ? $(items).text(data[field]) : $(items).val(data[field]);
                             // selectBox setting 영역
-                            let selectBox = $(items).next().attr("data-selectbox-field");
-                            let isSelectBox = formUtil.checkEmptyValue(selectBox);
+                            let $next = $(items).next();
+                            let isSelectBox = $next.is("[data-selectbox-field], [data-select], [gi-selectbox]");
                             if (isSelectBox) {
                                 let $dropDown = $(items).next().next(".slide-drop-down");
                                 if ($dropDown.length > 0) {
@@ -319,8 +319,8 @@ class DataBinding {
             subtree: true // 하위 트리의 모든 노드 감시
         };
         console.log(!formUtil.checkEmptyValue(target_select))
-        if (!formUtil.checkEmptyValue(target_select)) {
-            if (target_select[0].hasAttribute("gi-selectbox") && target.closest("div").hasClass("gi-input-container")) {
+        if (formUtil.checkEmptyValue(target_select)) {
+            if ((target_select[0].hasAttribute("gi-selectbox") || target_select[0].hasAttribute("data-select")) && target.closest("div").hasClass("gi-input-container")) {
                 // MutationObserver 생성
                 const observer = new MutationObserver((mutationsList, observer) => {
                     for (let mutation of mutationsList) {

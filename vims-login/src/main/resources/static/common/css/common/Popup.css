@@ -133,7 +133,8 @@
 /* ======================================================================================================== select box */
 [gi-selectbox],
 [gi-selectbox-year],
-[gi-selectbox-custom] {
+[gi-selectbox-custom],
+[data-select] {
     cursor: pointer;
     border: none;
     position: relative;
@@ -145,7 +146,8 @@
 
 [gi-selectbox].active+ul,
 [gi-selectbox-year].active+ul,
-[gi-selectbox-custom].active+ul {
+[gi-selectbox-custom].active+ul,
+[data-select].active+ul {
     display: block;
     position: absolute;
     left: 0;
@@ -166,7 +168,8 @@
 
 [gi-selectbox]+ul,
 [gi-selectbox-year]+ul,
-[gi-selectbox-custom]+ul {
+[gi-selectbox-custom]+ul,
+[data-select]+ul {
     display: none;
 }
 
@@ -178,7 +181,8 @@
 
 [gi-selectbox]+ul li button,
 [gi-selectbox-year]+ul li button,
-[gi-selectbox-custom]+ul li button {
+[gi-selectbox-custom]+ul li button,
+[data-select]+ul li button {
     padding: 0 0.8rem;
     background-color: #fff;
     width: 100%;

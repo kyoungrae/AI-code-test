@@ -109,7 +109,7 @@ CommonTag.prototype.selectTagReset = function (select) {
  * @writer : 진은영
  */
 class GiSelectBox {
-    static defaultSelector = 'input[gi-selectbox]';
+    static defaultSelector = 'input[gi-selectbox], input[data-select]';
 
     constructor() {
         this.selector = GiSelectBox.defaultSelector;
@@ -124,21 +124,23 @@ class GiSelectBox {
 
     async initSelectboxOption() {
         const selectboxs = $(this.selector);
-        selectboxs.each(async (i, selectbox) => {
+        for (let selectbox of selectboxs) {
+            let $selectbox = $(selectbox);
             //if ($(selectbox).attr('id').endsWith('_select')) return;
 
-            let copySelectBoxHtml = $(selectbox)[0].outerHTML;
-            let fieldValue = $(selectbox).attr('data-selectbox-field').toUpperCase();
-            let id = $(selectbox).attr('id');
-            $(selectbox).addClass("gi-hidden");
-            $(selectbox).removeAttr("gi-selectbox");
-            $(selectbox).removeAttr("data-selectbox-field");
+            let copySelectBoxHtml = $selectbox[0].outerHTML;
+            let fieldValue = ($selectbox.attr('data-selectbox-field') || $selectbox.attr('data-field')).toUpperCase();
+            let id = $selectbox.attr('id');
+            $selectbox.addClass("gi-hidden");
+            $selectbox.removeAttr("gi-selectbox");
+            $selectbox.removeAttr("data-select");
+            $selectbox.removeAttr("data-selectbox-field");
 
             let copySelectBox = $(copySelectBoxHtml);
             copySelectBox.attr("id", id + "_select");
             copySelectBox.removeAttr("data-field");
             copySelectBox.removeAttr("data-required");  //필수 값 속성 삭제
-            $(selectbox).after(copySelectBox);
+            $selectbox.after(copySelectBox);
             copySelectBox.attr("readonly", "readonly");
 
             let url = '/cms/common/sysCode/findSysCode';
@@ -219,14 +221,14 @@ class GiSelectBox {
                 });
 
                 // gi-selectbox 요소 감시
-                $('[gi-selectbox]').each(function () {
+                $('[gi-selectbox], [data-select]').each(function () {
                     observer2.observe(this, { attributes: true, attributeFilter: ['class'] });
                 });
 
             } catch (error) {
                 formUtil.alertPopup(error + "");
             }
-        });
+        }
     }
     initSelectBox() {
         // selectbox click/enter Event
@@ -616,7 +618,7 @@ class GiSelectBoxYear {
     }
     async initSelectboxOption() {
         const selectboxs = $(this.selector);
-        selectboxs.each(async (i, selectbox) => {
+        for (let selectbox of selectboxs) {
             let startYear = $(selectbox).attr('gi-selectbox-start-year') === 'NOW'
                 ? new Date().getFullYear()
                 : +$(selectbox).attr('gi-selectbox-start-year');
@@ -720,7 +722,7 @@ class GiSelectBoxYear {
             } catch (error) {
                 formUtil.alertPopup(error + "");
             }
-        });
+        }
     }
 
     initSelectBox() {
