@@ -401,3 +401,9 @@ option {
 [id^="search-area"] .gi-select-container {
     height: 40px;
 }
+
+.label-checkbox {
+    font-size: 12px;
+    color: #7b7b7b;
+    cursor: pointer;
+}

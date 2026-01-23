@@ -93,48 +93,26 @@ CommonTag.prototype.inputTagFocus = function (input) {
  * @writer : 이경태
  */
 CommonTag.prototype.inputLabelTagFocus = function (label) {
-    label.on("click", function (e) {
+    // 기존 이벤트 핸들러 제거 후 재등록 (중복 방지)
+    label.off("click.inputLabelTagFocus").on("click.inputLabelTagFocus", function (e) {
         let inputId = $(this).attr("for");
         if (!inputId) return;
 
-        // 브라우저 기본 동작(for 대상 클릭) 방지
-        e.preventDefault();
-        // 이벤트 버블링 방지 - 외부 클릭 핸들러와의 충돌 방지
-        e.stopPropagation();
-
         let $target = $("#" + inputId);
-        let $surrogate = $("#" + inputId + "_select");
 
-        // 셀렉트박스로 변환된 경우 대용 태그를 기본 타겟으로 설정
-        let $actualTarget = $surrogate.length > 0 ? $surrogate : $target;
-
-        if ($actualTarget.length === 0) return;
-
-        let disabledFlag = $actualTarget.attr("data-disabled");
-        let isDisabled = $actualTarget.prop("disabled") || (disabledFlag !== undefined && disabledFlag !== "false" && disabledFlag !== "undefined");
-
-        if (!isDisabled) {
-            let inputType = $actualTarget.attr("type");
-
-            if ("radio" === inputType) {
-                if (!$actualTarget.prop("checked")) {
-                    $actualTarget.prop("checked", true).trigger("change");
-                }
-                $actualTarget.focus();
-            } else if ("checkbox" === inputType) {
-                // 체크박스 토글
-                $actualTarget.prop("checked", !$actualTarget.prop("checked")).trigger("change");
-                $actualTarget.focus();
-            } else {
-                $actualTarget.focus();
-                // 셀렉트박스 대용 태그인 경우나 클릭 이벤트가 필요한 경우 트리거
-                // 버블링 방지를 위해 jQuery 이벤트 객체를 생성하여 전달
-                let clickEvent = $.Event("click");
-                clickEvent.stopPropagation();
-                $actualTarget.trigger(clickEvent);
-            }
+        // 타겟이 없거나 비활성화 상태면 클릭 무시
+        if ($target.length === 0 || $target.prop("disabled") || $target.attr("data-disabled") === "true") {
+            e.preventDefault();
+            return;
         }
+
+        // Checkbox나 Radio는 브라우저 기본 동작(라벨 클릭 시 토글/선택)을 따르도록 함.
+        // 따라서 preventDefault()를 호출하지 않음.
+
+        // 단, SelectBox 커스텀 구현체의 경우 별도 처리가 필요할 수 있으나,
+        // 일반적인 input/checkbox/radio는 여기서 추가 개입하지 않는 것이 안전함.
     });
+
 
     function giInputBlurHandlerEvent(e) {
         $(this).parent().attr('data-focus-line', false);
