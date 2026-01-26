@@ -28,7 +28,8 @@
                 system_create_userid, 
                 system_create_date, 
                 system_update_userid, 
-                system_update_date 
+                system_update_date,
+                p_menu_code 
             FROM SYS_BBS
             <where>
                 
@@ -128,7 +129,8 @@
             system_create_userid,
             system_create_date,
             system_update_userid,
-            system_update_date
+            system_update_date,
+            p_menu_code
         FROM SYS_BBS
         <where>
             
@@ -162,6 +164,7 @@
               bbs_mst_id 
             , bbs_id 
             , bbs_nm 
+            , p_menu_code 
             
             <if test="crud_auth != null">, crud_auth</if>
             <if test="file_yn != null">, file_yn</if>
@@ -176,6 +179,7 @@
             #{bbs_mst_id}
             , #{bbs_id}
             , #{bbs_nm}
+            , #{p_menu_code}
             
             <if test="crud_auth != null">, #{crud_auth}</if>
             <if test="file_yn != null">, #{file_yn}</if>
@@ -211,6 +215,7 @@
             
             <if test="bbs_mst_id != null">,bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_nm != null">,bbs_nm = #{bbs_nm}</if>
+            <if test="p_menu_code != null">,p_menu_code = #{p_menu_code}</if>
             <if test="crud_auth != null">,crud_auth = #{crud_auth}</if>
             <if test="file_yn != null">,file_yn = #{file_yn}</if>
             <if test="reply_yn != null">,reply_yn = #{reply_yn}</if>

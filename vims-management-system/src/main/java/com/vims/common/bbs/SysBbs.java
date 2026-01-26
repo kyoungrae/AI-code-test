@@ -94,6 +94,13 @@ public class SysBbs extends Common {
 
     /***
      * <pre>
+     *  p_menu_code : 상위 메뉴 코드
+     * </pre>
+     */
+    private String p_menu_code;
+
+    /***
+     * <pre>
      *  bbs_mst_id : 게시판 마스터 ID
      * </pre>
      */

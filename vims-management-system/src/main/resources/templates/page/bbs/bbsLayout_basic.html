@@ -1,0 +1,64 @@
+<article id="bbsLayoutBasicPage" class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+
+        <!-- 페이지 헤더 -->
+        <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
+            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm}">게시판 제목</h1>
+            <p class="gi-subtitle-main">게시판 목록</p>
+        </header>
+
+        <article>
+            <!-- 검색기능 영역 -->
+            <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+                <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+                        <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
+                    </div>
+                    <div class="gi-flex gi-grid-gap-10px">
+                        <button id="search-btn" class="gi-btn-blue" type="button">검색</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 그리드 영역 -->
+            <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
+                <div id="bbs_gi-Grid" class="gi-Grid gi-col-100"></div>
+            </div>
+
+            <!-- 등록버튼 영역 -->
+            <div class="gi-row-100">
+                <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
+                    <button id="bbs-write-btn" class="gi-btn-blue gi-float-right" type="button">글쓰기</button>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    var bbsId = /*[[${bbsInfo.bbs_id}]]*/ 'default_id';
+    var bbsNm = /*[[${bbsInfo.bbs_nm}]]*/ 'default_nm';
+
+    init();
+
+    function init() {
+        new PageInit();
+
+        // 임시 그리드 설정 (데이터 API가 아직 없으므로 껍데기만)
+        let grid_header = {
+            title: bbsNm,
+            list: [
+                { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
+                { HEADER: '제목', ID: 'title', WIDTH: '60', TYPE: 'text', TEXT_ALIGN: 'left' },
+                { HEADER: '작성자', ID: 'writer', WIDTH: '15', TYPE: 'text', TEXT_ALIGN: 'center' },
+                { HEADER: '작성일', ID: 'reg_date', WIDTH: '15', TYPE: 'text', TEXT_ALIGN: 'center' }
+            ]
+        };
+
+        let grid = formUtil.giGrid(grid_header, { current: 1, total: 0 }, 1, "bbs_gi-Grid");
+        grid.DataSet([]); // 빈 데이터
+    }
+    /*]]>*/
+</script>

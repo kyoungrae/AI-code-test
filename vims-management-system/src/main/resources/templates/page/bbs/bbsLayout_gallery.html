@@ -1,0 +1,30 @@
+<article id="bbsLayoutGalleryPage" class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+        <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
+            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm} + ' (갤러리)'">갤러리</h1>
+            <p class="gi-subtitle-main">이미지 갤러리 목록</p>
+        </header>
+        <article>
+            <div class="gi-row-100 gi-padding-left-right-20px">
+                <div id="bbs_gallery_grid" class="gi-Grid gi-col-100"></div>
+            </div>
+        </article>
+    </section>
+</article>
+<script type="text/javascript" th:inline="javascript">
+    init();
+    function init() {
+        new PageInit();
+        // 갤러리 전용 초기화 로직 (여기서는 기본 그리드로 대체)
+        let grid_header = {
+            title: "갤러리 목록",
+            list: [
+                { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
+                { HEADER: '이미지', ID: 'img', WIDTH: '30', TYPE: 'img', TEXT_ALIGN: 'center' },
+                { HEADER: '제목', ID: 'title', WIDTH: '60', TYPE: 'text', TEXT_ALIGN: 'left' }
+            ]
+        };
+        let grid = formUtil.giGrid(grid_header, { current: 1, total: 0 }, 1, "bbs_gallery_grid");
+        grid.DataSet([]);
+    }
+</script>

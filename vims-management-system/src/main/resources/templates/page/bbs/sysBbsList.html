@@ -155,6 +155,18 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
+              <label for="register_p_menu_code" class="gi-input-label" data-focus-label="true" data-required="false">상위
+                메뉴</label>
+              <div class="gi-flex gi-grid-gap-5px">
+                <input data-field="p_menu_code" id="register_p_menu_code" name="p_menu_code" class="gi-input"
+                  data-required="false" readonly autocomplete="off" />
+                <button type="button" class="gi-btn-blue gi-btn-sm" id="register-menu-search-btn">선택</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
               <label for="register_crud_auth" class="gi-input-label" data-focus-label="true"
                 data-required="false">[Page.Message].Message.Label.Array["SYS_BBS.CRUD_AUTH"]</label>
               <input data-field="crud_auth" id="register_crud_auth" name="crud_auth" class="gi-input"
@@ -230,6 +242,18 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
+              <label for="update_p_menu_code" class="gi-input-label" data-focus-label="true" data-required="false">상위
+                메뉴</label>
+              <div class="gi-flex gi-grid-gap-5px">
+                <input data-field="p_menu_code" id="update_p_menu_code" name="p_menu_code" class="gi-input"
+                  data-required="false" readonly autocomplete="off" />
+                <button type="button" class="gi-btn-blue gi-btn-sm" id="update-menu-search-btn">선택</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
               <label for="update_crud_auth" class="gi-input-label" data-focus-label="true"
                 data-required="false">[Page.Message].Message.Label.Array["SYS_BBS.CRUD_AUTH"]</label>
               <input data-field="crud_auth" id="update_crud_auth" name="update_crud_auth" class="gi-input"
@@ -261,6 +285,22 @@
   </div>
 </article>
 <!--/수정 팝업 영역-->
+
+<!-- 메뉴 선택 팝업 영역 -->
+<article id="menu_tree_popup" class="gi-popup" data-popup-open="false">
+  <div class="gi-popup-body" style="width: 600px; height: 500px;">
+    <div class="gi-popup-header">
+      <span>상위 메뉴 선택</span>
+    </div>
+    <div class="gi-popup-contents">
+      <div id="menu_tree_grid" class="gi-Grid gi-row-100"></div>
+    </div>
+    <div class="gi-popup-footer">
+      <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
+  </div>
+</article>
+
 <script type="text/javascript">
   var PRGMID = "sysBbsList";	//page id
   var MAIN_GRID_ID = "sysBbsList_gi-Grid"; //main grid id
@@ -271,8 +311,12 @@
   var UPDATE_POPUP_ID = "update_sysBbs_popup";
   var UPDATE_POPUP_FORM = "sysBbsUpdateForm";
   var UPDATE_POPUP_CONFIRM_BTN = "popup-update_sysBbs_confirm-btn";
+  var UPDATE_POPUP_CONFIRM_BTN = "popup-update_sysBbs_confirm-btn";
   var DETAIL_POPUP_ID = "detail_sysBbs_popup";
+  var MENU_TREE_POPUP_ID = "menu_tree_popup";
+  var MENU_TREE_GRID_ID = "menu_tree_grid";
   var currentBbsMstId = ""; // To store the received bbs_id from MstList
+  var targetMenuInputId = ""; // Stores which input to update (register or update)
 
   init();
   function init() {
@@ -342,6 +386,18 @@
       function registerPopupConfirmBtnClickEventHandler() {
         sysBbsRegister();
       }
+    });
+
+    // 메뉴 검색 버튼 클릭 (등록)
+    $("#register-menu-search-btn").click(function () {
+      targetMenuInputId = "register_p_menu_code";
+      openMenuTreePopup();
+    });
+
+    // 메뉴 검색 버튼 클릭 (수정)
+    $("#update-menu-search-btn").click(function () {
+      targetMenuInputId = "update_p_menu_code";
+      openMenuTreePopup();
     });
   }
   function redirectBackPage() {
@@ -466,7 +522,8 @@
         bbs_nm: data.bbs_nm,
         crud_auth: data.crud_auth,
         file_yn: data.file_yn,
-        reply_yn: data.reply_yn
+        reply_yn: data.reply_yn,
+        p_menu_code: data.p_menu_code
       };
       axios.post(url, param).then(response => {
         let status = response.status;
@@ -498,12 +555,12 @@
       let url = "/cms/common/sysBbs/update";
       //console.log(data);
       let param = {
-        bbs_mst_id: data.bbs_mst_id,
         bbs_id: data.bbs_id,
         bbs_nm: data.bbs_nm,
         crud_auth: data.crud_auth,
         file_yn: data.file_yn,
-        reply_yn: data.reply_yn
+        reply_yn: data.reply_yn,
+        p_menu_code: data.p_menu_code
       };
       axios.post(url, param).then(response => {
         let status = response.status;
@@ -545,6 +602,46 @@
     }).catch(error => {
       formUtil.toast(error.response.data, "error");
     })
+  }
+
+  function openMenuTreePopup() {
+    popup.open(MENU_TREE_POPUP_ID);
+    // 팝업 열 때마다 데이터 로드 (또는 init에서 한 번만 로드하고 refresh)
+    findBySysHierarchyMenuList();
+  }
+
+  function findBySysHierarchyMenuList() {
+    let url = "/cms/common/sysMenu/findHierarchy";
+    let param = {};
+    param.sort_id = "menu_level, menu_number";
+    param.sort_order = "ASC";
+
+    axios.post(url, param).then(response => {
+      if (response.status === 200) {
+        let data = response.data;
+        let menuGrid = {
+          title: "메뉴 목록",
+          list: [
+            { HEADER: '메뉴명', ID: "menu_name_kr", WIDTH: "50", TYPE: "text", TEXT_ALIGN: "left" },
+            { HEADER: '메뉴코드', ID: "menu_code", WIDTH: "30", TYPE: "text", TEXT_ALIGN: "center" },
+            { HEADER: '레벨', ID: "menu_level", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true },
+            { HEADER: '상위코드', ID: "top_menu_code", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true }
+          ]
+        }
+
+        let grid = formUtil.giGridHierarchy(menuGrid, "", "", MENU_TREE_GRID_ID);
+        grid.HierarchyOption({ level_column: "menu_level", parent_depth_column: "menu_code", child_depth_column: "top_menu_code" });
+        grid.DataSet(data);
+
+        grid.rowClick(function (row) {
+          if (targetMenuInputId) {
+            $("#" + targetMenuInputId).val(row.menu_code);
+            popup.close(MENU_TREE_POPUP_ID);
+          }
+        });
+
+      }
+    });
   }
 
 </script>

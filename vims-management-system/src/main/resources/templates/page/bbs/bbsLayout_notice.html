@@ -1,0 +1,37 @@
+<article id="bbsLayoutNoticePage" class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+        <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
+            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm} + ' (공지)'">공지사항</h1>
+            <p class="gi-subtitle-main">중요 소식</p>
+        </header>
+        <article>
+            <!-- 공지사항은 상단 고정 등이 필요할 수 있음 -->
+            <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+                <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+                    <input class="gi-input" type="text" placeholder="공지 검색" />
+                    <button class="gi-btn-blue">검색</button>
+                </div>
+            </div>
+            <div class="gi-row-100 gi-padding-left-right-20px">
+                <div id="bbs_notice_grid" class="gi-Grid gi-col-100"></div>
+            </div>
+        </article>
+    </section>
+</article>
+<script type="text/javascript" th:inline="javascript">
+    init();
+    function init() {
+        new PageInit();
+        // 공지사항 초기화
+        let grid_header = {
+            title: "공지사항",
+            list: [
+                { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
+                { HEADER: '제목', ID: 'title', WIDTH: '70', TYPE: 'text', TEXT_ALIGN: 'left' },
+                { HEADER: '등록일', ID: 'reg_date', WIDTH: '20', TYPE: 'text', TEXT_ALIGN: 'center' }
+            ]
+        };
+        let grid = formUtil.giGrid(grid_header, { current: 1, total: 0 }, 1, "bbs_notice_grid");
+        grid.DataSet([]);
+    }
+</script>
