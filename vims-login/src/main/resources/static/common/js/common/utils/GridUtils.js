@@ -734,11 +734,11 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 });
             }
 
-            function sideOpenBtnClickEventHandler(e) {
+            async function sideOpenBtnClickEventHandler(e) {
                 // 다른 열려있는 사이드 패널 닫기
                 $("[data-side-grid-open]").not($tagId).attr("data-side-grid-open", "false");
 
-                // 데이터 추출 (detailBtnClick과 동일한 로직)
+                // 데이터 추출
                 let dataItems = $(e.currentTarget).parents(".gi-grid-list").children("li");
                 let dataList = {};
 
@@ -758,36 +758,37 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                     dataList[columnName] = columnValue;
                 });
 
-                // 사이드 패널 활성화
-                $($tagId).attr("data-side-grid-open", "true");
-                $tagId.empty();
-
-                // 레이아웃 조정 (반반씩)
+                // 레이아웃 조정
                 $("#" + gridId).removeClass("gi-col-100").addClass("gi-flex-1");
                 $tagId.addClass("gi-flex-1");
+                $($tagId).attr("data-side-grid-open", "true");
 
-                // 콜백 함수 실행 (데이터 전달)
+                // 상시 버튼 감시 및 유지 로직 (MutationObserver)
+                const buttonObserver = new MutationObserver(() => {
+                    if ($tagId.attr("data-side-grid-open") === "true") {
+                        if ($tagId.find(".side_grid_close-btn").length === 0) {
+                            $tagId.prepend(sideGridOpenCloseBtn);
+                            sideGridCloseBtnEvent();
+                        }
+                    }
+                });
+                buttonObserver.observe($tagId[0], { childList: true });
+
+                // 1. 컨텐츠 초기화 및 콜백 실행
+                $tagId.empty();
                 if (typeof fn === "function") {
-                    fn(dataList);
-                }
-
-                // 닫기 버튼 처리 (콜백 후 실행하여 사용자 오버라이드 방지)
-                if ($tagId.find(".side_grid_close-btn").length === 0) {
-                    $tagId.prepend(sideGridOpenCloseBtn);
+                    await fn(dataList);
                 }
 
                 sideGridCloseBtnEvent();
             }
 
             function sideGridCloseBtnEvent() {
-                $(".side_grid_close-btn").off("click.sideGridCloseBtnClickEventHandler").on("click.sideGridCloseBtnClickEventHandler", function (e) {
+                $tagId.find(".side_grid_close-btn").off("click.sideGridCloseBtnClickEventHandler").on("click.sideGridCloseBtnClickEventHandler", function (e) {
                     $($tagId).attr("data-side-grid-open", "false");
-
-                    // 레이아웃 복구 (애니메이션 대기)
-                    setTimeout(() => {
-                        $("#" + gridId).removeClass("gi-flex-1").addClass("gi-col-100");
-                        $tagId.removeClass("gi-flex-1");
-                    }, 300);
+                    $("#" + gridId).removeClass("gi-flex-1").addClass("gi-col-100");
+                    $tagId.removeClass("gi-flex-1");
+                    $tagId.empty();
                 });
             }
         },
@@ -1218,6 +1219,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
 
     if (!formUtil.checkEmptyValue(gridId)) gridId = "gi-Grid";
     let gridData = [];
+    let rowWarningFn = null;
 
     if (formUtil.checkEmptyValue(prePageAnimationCont)) {
         //애니메이션 효과 적용
@@ -1364,6 +1366,16 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
             let grid_list = "";
             let sysCodeGroupIdArray = [];
 
+            // RowWarning 설정이 있는 경우 실행
+            if (rowWarningFn && data) {
+                data.forEach(item => {
+                    let msg = rowWarningFn(item);
+                    if (msg) {
+                        item.ROW_WARN_MSG = msg;
+                    }
+                });
+            }
+
             //NOTE: rows BTN 노출 이벤트 로직 설정
             let visibleOptionArray = [];
             let originalDataForVisibleOption = [];
@@ -1380,7 +1392,15 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 //NOTE: rows BTN 노출 이벤트 함수 호출
                 constSetVisibleOption();
                 for (let i = 0; i < data.length; i++) {
-                    grid_list += '<ul class="gi-grid-list gi-row-100 gi-ul gi-flex ' + pagingAnimationClass + '" data-row-num="' + i + '">';
+                    let warnClass = "";
+                    let warnMsgAttr = "";
+
+                    if (formUtil.checkEmptyValue(data[i].ROW_WARN_MSG)) {
+                        warnClass = "gi-grid-list-warn";
+                        warnMsgAttr = ' data-warn-msg="' + data[i].ROW_WARN_MSG + '"';
+                    }
+
+                    grid_list += '<ul class="gi-grid-list gi-row-100 gi-ul gi-flex ' + pagingAnimationClass + ' ' + warnClass + '" ' + warnMsgAttr + ' data-row-num="' + i + '">';
                     originalDataForVisibleOption = [];
                     for (let j = 0; j < headerItem.length; j++) {
                         let item = headerItem[j];
@@ -1724,6 +1744,23 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 range = parseInt($("#" + giGridRowSelectorId + " option:selected").val());
                 fn(pagingNum, range);
             })
+        },
+        RowWarning: function (arg1, arg2, arg3) {
+            if (typeof arg1 === 'function') {
+                rowWarningFn = arg1;
+            } else if (arg1 && arg3 !== undefined) {
+                rowWarningFn = function (item) {
+                    let val = item[arg1];
+                    let isMatch = false;
+                    if (typeof arg2 === 'function') {
+                        isMatch = arg2(val);
+                    } else {
+                        isMatch = (val == arg2);
+                    }
+                    return isMatch ? arg3 : null;
+                };
+            }
+            return this;
         },
         //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
         detailBtnClick: function (fn, btnName) {

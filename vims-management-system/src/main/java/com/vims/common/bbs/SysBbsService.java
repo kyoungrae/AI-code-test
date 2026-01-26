@@ -137,7 +137,8 @@ public class SysBbsService extends AbstractCommonService<SysBbs> {
                         .menu_code(request.getBbs_id()) // 게시판 ID를 메뉴 코드로 사용
                         .menu_name_kr(request.getBbs_nm())
                         .top_menu_code(request.getP_menu_code())
-                        .url("/bbs/view?bbsId=" + request.getBbs_id())
+                        .url("/bbs/view")
+                        .prgm_url("cms") // Gateway용 prefix 추가
                         .use_yn("1") // 기본 사용
                         .menu_level("2") // 게시판은 2레벨
                         .menu_number("1")

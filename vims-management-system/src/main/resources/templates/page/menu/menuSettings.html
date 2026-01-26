@@ -430,6 +430,7 @@
                 data.map((item, i) => {
                     data[i]["icon_view"] = "<i class='fa-solid " + item.menu_icon + "'></i>";
                 })
+                menu_grid.RowWarning("use_yn", "0", Message.Label.Array["NOT_USED"]);
                 menu_grid.DataSet(data);
                 //그리드 엑셀 다운로드 버튼 활성화
                 menu_grid.excelDownloadEvent(Message.Label.Array["SYS_MENU.TITLE_LIST"]);

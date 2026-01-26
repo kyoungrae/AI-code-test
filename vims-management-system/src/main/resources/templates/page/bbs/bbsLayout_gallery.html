@@ -5,6 +5,11 @@
             <p class="gi-subtitle-main">이미지 갤러리 목록</p>
         </header>
         <article>
+            <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
+                <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
+                    <button id="bbs-gallery-write-btn" class="gi-btn-blue gi-margin-left-auto">사진 등록</button>
+                </div>
+            </div>
             <div class="gi-row-100 gi-padding-left-right-20px">
                 <div id="bbs_gallery_grid" class="gi-Grid gi-col-100"></div>
             </div>
@@ -12,19 +17,56 @@
     </section>
 </article>
 <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
+    var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : '갤러리';
+
     init();
+
     function init() {
         new PageInit();
-        // 갤러리 전용 초기화 로직 (여기서는 기본 그리드로 대체)
-        let grid_header = {
-            title: "갤러리 목록",
-            list: [
-                { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
-                { HEADER: '이미지', ID: 'img', WIDTH: '30', TYPE: 'img', TEXT_ALIGN: 'center' },
-                { HEADER: '제목', ID: 'title', WIDTH: '60', TYPE: 'text', TEXT_ALIGN: 'left' }
-            ]
-        };
-        let grid = formUtil.giGrid(grid_header, { current: 1, total: 0 }, 1, "bbs_gallery_grid");
-        grid.DataSet([]);
+        findByGalleryList();
+        clickEvent();
     }
+
+    function clickEvent() {
+        $("#bbs-gallery-write-btn").on("click", function () {
+            formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardWrite", { bbs_id: bbsId });
+        });
+    }
+
+    function findByGalleryList(page, range) {
+        if (!page) page = 1;
+        if (!range) range = 9; // 갤러리는 보통 3x3 느낌으로 9개씩
+
+        let url = "/cms/common/sysBbsBoard/findPage";
+        let param = {
+            bbs_id: bbsId,
+            page_no: page,
+            row_range: range,
+            offset: (page - 1) * range
+        };
+
+        axios.post(url, param).then(response => {
+            if (response.status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+
+                let grid_header = {
+                    title: bbsNm,
+                    list: [
+                        { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center', FONT_SIZE: '12px' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.IMAGE"], ID: 'thumbnail', WIDTH: '30', TYPE: 'img', TEXT_ALIGN: 'center', FONT_SIZE: '12px' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.TITLE"], ID: 'title', WIDTH: '60', TYPE: 'text', TEXT_ALIGN: 'left', FONT_SIZE: '12px' }
+                    ]
+                };
+
+                let grid = formUtil.giGrid(grid_header, paging, page, "bbs_gallery_grid");
+                grid.DataSet(data);
+                grid.pagingSet(findByGalleryList);
+            }
+        });
+    }
+    /*]]>*/
 </script>

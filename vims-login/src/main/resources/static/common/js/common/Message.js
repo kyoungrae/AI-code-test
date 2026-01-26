@@ -101,6 +101,8 @@ Message.Label.Array["FILE_EXTENSION"] = "확장자";
 Message.Label.Array["FILE_DESCRIPTION"] = "설명";
 
 Message.Label.Array["USE_YN"] = "사용여부";
+Message.Label.Array["NOT_USED"] = "미사용";
+Message.Label.Array["USED"] = "사용";
 
 // LOGIN PAGE
 Message.Label.Array["LOGIN.KEEP_LOGGED_IN"] = "로그인 유지";

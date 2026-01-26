@@ -1,0 +1,111 @@
+<article id="sysBbsBoardDetailPage" class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+        <!-- 헤더 영역 -->
+        <header class="gi-margin-bottom-30px gi-padding-left-20px gi-padding-top-20px">
+            <h1 class="gi-page-title" id="detail-board-title">게시글 상세</h1>
+            <div class="gi-flex gi-flex-justify-content-between gi-flex-align-items-center gi-margin-top-10px">
+                <div class="gi-flex gi-grid-gap-20px gi-text-secondary">
+                    <span>작성자: <b id="detail-writer" class="gi-color-black"></b></span>
+                    <span>작성일: <b id="detail-date" class="gi-color-black"></b></span>
+                    <span>조회수: <b id="detail-hit" class="gi-color-black">0</b></span>
+                </div>
+            </div>
+        </header>
+
+        <article class="gi-padding-left-right-20px">
+            <hr class="gi-margin-bottom-30px" style="border: 0; border-top: 1px solid #eee;" />
+
+            <!-- 본문 내용 -->
+            <div class="ql-container ql-snow"
+                style="border: none; background: #fff; border-radius: 8px; border: 1px solid #efefef;">
+                <div id="detail-content" class="gi-padding-20px ql-editor"
+                    style="min-height: 300px; color: #333 !important;">
+                    <!-- 게시글 본문 내용이 여기에 로드됩니다. -->
+                </div>
+            </div>
+
+            <!-- 하단 버튼 -->
+            <div
+                class="gi-flex gi-flex-justify-content-center gi-grid-gap-20px gi-margin-top-40px gi-margin-bottom-20px">
+                <button id="detail-list-btn"
+                    class="gi-btn gi-flex gi-flex-align-items-center gi-flex-justify-content-center"
+                    style="width: 90px; height: 20px;" type="button">
+                    <img src="/common/img/back-white.png" style="width: 20px;" alt="목록으로">
+                </button>
+                <button id="detail-update-btn"
+                    class="gi-btn-blue gi-flex gi-flex-align-items-center gi-flex-justify-content-center"
+                    style="width: 90px; height: 20px;" type="button">
+                    <img src="/common/img/pen-white.png" style="width: 20px;" alt="수정">
+                </button>
+                <button id="detail-delete-btn"
+                    class="gi-btn-red gi-flex gi-flex-align-items-center gi-flex-justify-content-center"
+                    style="width: 90px; height: 20px;" type="button">
+                    <img src="/common/img/trash-white.png" style="width: 20px;" alt="삭제" />
+                </button>
+            </div>
+        </article>
+    </section>
+</article>
+
+<script type="text/javascript">
+    var detailSessionData = JSON.parse(sessionStorage.getItem("DATA"));
+    var boardId = detailSessionData.board_id;
+    var bbsId = detailSessionData.bbs_id;
+
+    init();
+
+    function init() {
+        new PageInit();
+        fetchBoardDetail();
+        clickEvent();
+    }
+
+    function clickEvent() {
+        $("#detail-list-btn").on("click", function () {
+            formUtil.apiLoadContent("cms", "/bbs/view", { bbs_id: bbsId });
+        });
+
+        $("#detail-update-btn").on("click", function () {
+            formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardWrite", { ...detailSessionData, mode: 'modify' });
+        });
+
+        $("#detail-delete-btn").on("click", async function () {
+            if (await formUtil.confirm("정말로 삭제하시겠습니까?")) {
+                deleteBoard();
+            }
+        });
+    }
+
+    function fetchBoardDetail() {
+        let url = "/cms/common/sysBbsBoard/find";
+        axios.post(url, { board_id: boardId }).then(response => {
+            if (response.status === 200 && response.data && response.data.length > 0) {
+                let data = response.data[0];
+                $("#detail-board-title").text(data.title || "제목 없음");
+                $("#detail-writer").text(data.writer_name || "알 수 없음");
+
+                // API 날짜 데이터 직접 사용
+                $("#detail-date").text(data.system_create_date || "-");
+                $("#detail-hit").text(data.hit_count || 0);
+
+                if (data.content && data.content.trim() !== "") {
+                    $("#detail-content").html(data.content).css("color", "#333");
+                } else {
+                    $("#detail-content").html("<p style='color:#999; text-align:center; margin-top:100px;'>내용이 없습니다.</p>");
+                }
+            } else {
+                formUtil.toast("게시글 정보를 찾을 수 없습니다.", "error");
+            }
+        });
+    }
+
+    function deleteBoard() {
+        let url = "/cms/common/sysBbsBoard/remove";
+        axios.post(url, { board_id: boardId }).then(response => {
+            if (response.status === 200) {
+                formUtil.toast("정상적으로 삭제되었습니다.", "success");
+                formUtil.apiLoadContent("cms", "/bbs/view", { bbs_id: bbsId });
+            }
+        });
+    }
+</script>

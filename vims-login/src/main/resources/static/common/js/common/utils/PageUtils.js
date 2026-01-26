@@ -4,7 +4,9 @@
  * @text : 현재 페이지에 맞는 메뉴를 활성화하고 세션에 저장
  */
 FormUtility.prototype.activatedMenu = function (reqUrl) {
-    let sessionUrl = JSON.parse(sessionStorage.getItem("recentPage")).url;
+    let sessionRecentPage = sessionStorage.getItem("recentPage");
+    if (!sessionRecentPage) return;
+    let sessionUrl = JSON.parse(sessionRecentPage).url;
 
     if (sessionUrl !== "/index/index" && sessionUrl !== "/" && sessionUrl !== "/common/myinfo" && (!reqUrl.includes("Register") || !reqUrl.includes("Modify"))) {
         if (sessionUrl.startsWith('/safety/safetyInspection')) sessionUrl = sessionUrl.replaceAll('New', '').replaceAll('Continuous', '');
@@ -21,24 +23,59 @@ FormUtility.prototype.activatedMenu = function (reqUrl) {
         }
         sessionStorage.setItem("activatedMenu", JSON.stringify(activatedMenuInfo));
 
-        // 모든 버튼 닫기 처리 후
-        let allLiButtonList = $("#side_nav_menu > li");
-
-        allLiButtonList.each(function () {
-            let $button = $(this);
-            $button.find("a:not(.sideNavPageLoad)").removeClass("active").addClass("collapsed");
-            $button.find("a.sideNavPageLoad").removeClass("active page");
-            $button.find("ul").stop(true, true).slideUp(150);
-        });
+        // [중요] 전체 리셋 제거: 기존에 활성화된 페이지 아이템만 클래스 제거
+        $("#side_nav_menu .active.page").removeClass("active page");
 
         if (formUtil.checkEmptyValue(reqUrl) && reqUrl !== "/index/index" && reqUrl !== "/common/myinfo") {
-            let $activatedMenu = $("[data-page-name='" + reqUrl.toString() + "']");
-            let menuLevel1 = $activatedMenu.parents("li").last().children("a");
-            let menuLevel2 = $activatedMenu.closest("ul").closest("li").children("a");
+            let $activatedMenu;
 
-            menuLevel1.trigger("click");
-            menuLevel2.trigger("click");
-            $activatedMenu.addClass("active page");
+            // 게시판 동적 경로 체크
+            if (reqUrl === "/bbs/view") {
+                let data = JSON.parse(sessionStorage.getItem("DATA"));
+                let bbsId = data ? data.bbs_id : null;
+                if (bbsId) {
+                    $activatedMenu = $("[data-page-name='/bbs/view'][data-menu-code='" + bbsId + "']");
+                }
+            }
+
+            if (!$activatedMenu || $activatedMenu.length === 0) {
+                $activatedMenu = $("[data-page-name='" + reqUrl.toString() + "']");
+            }
+
+            if ($activatedMenu && $activatedMenu.length > 0) {
+                // 1. 정확한 경로 추적
+                let $targetLiPath = $activatedMenu.parents("li");
+
+                // 2. 다른 브랜치(타겟 경로가 아닌 것)들을 부드럽게 정리
+                $("#side_nav_menu > li").each(function () {
+                    let $topLi = $(this);
+                    if (!$targetLiPath.is($topLi)) {
+                        $topLi.find("a.gi-side-nav-title.active").removeClass("active").addClass("collapsed");
+                        $topLi.find("ul.gi-side-nav-menu-level:visible").stop(true).slideUp(250);
+                    }
+                });
+
+                // 3. 페이지 하이라이트 정리 및 타겟 활성화
+                $("#side_nav_menu .active.page").not($activatedMenu).removeClass("active page");
+                $activatedMenu.addClass("active page");
+
+                // 4. 조상 경로를 따라가며 필요한 요소만 정확히 펼치기
+                $activatedMenu.parents("li").each(function () {
+                    let $parentLi = $(this);
+                    let $parentTitle = $parentLi.children("a.gi-side-nav-title");
+                    let $targetSubmenu = $parentLi.children("ul.gi-side-nav-menu-level");
+
+                    if ($parentTitle.length > 0) {
+                        $parentTitle.removeClass("collapsed").addClass("active");
+                    }
+
+                    if ($targetSubmenu.length > 0 && !$targetSubmenu.is(":visible")) {
+                        $targetSubmenu.stop(true).slideDown(250);
+                    } else if ($targetSubmenu.length > 0) {
+                        $targetSubmenu.show();
+                    }
+                });
+            }
         }
     }
 }
@@ -94,24 +131,36 @@ FormUtility.prototype.loadContent = function (reqUrl, DATA) {
  */
 FormUtility.prototype.apiLoadContent = function (prefixUrl, reqUrl, DATA) {
     let cont = JSON.stringify(DATA);
-    let url = prefixUrl + `/page/load` + `?url=${encodeURIComponent(reqUrl + ".html")}`;
+    let url = "";
 
-    axios.get(url).then(response => {
-        formUtil.resetFormUtilityValue();
-        let pageSources = response.data;
+    // 동적 컨트롤러 호출 여부 판단 (여기서는 /bbs/view 등 특정 경로)
+    // 기존의 모든 관리 페이지(List, Detail, Register 등)는 정적 템플릿 로딩 방식을 유지해야 함
+    let isDynamicRoute = reqUrl === "/bbs/view";
 
-        $("#gi-road-content").empty().html(pageSources);
-
-        if (!formUtil.checkEmptyValue(sessionStorage.getItem("DATA"))) {
-            sessionStorage.removeItem("DATA");
+    if (isDynamicRoute && typeof DATA === 'object' && DATA !== null) {
+        url = prefixUrl + reqUrl;
+        axios.post(url, DATA).then(response => {
+            formUtil.resetFormUtilityValue();
+            let pageSources = response.data;
             sessionStorage.setItem("DATA", cont);
-        } else {
-            sessionStorage.removeItem("DATA");
+            $("#gi-road-content").empty().html(pageSources);
+            formUtil.activatedMenu(reqUrl);
+        }).catch(error => {
+            formUtil.toast('Failed to load content:', 'error');
+        });
+    } else {
+        // 기존의 정적 페이지(.html) 로딩 방식 유지
+        url = prefixUrl + `/page/load` + `?url=${encodeURIComponent(reqUrl + ".html")}`;
+        axios.get(url).then(response => {
+            formUtil.resetFormUtilityValue();
+            let pageSources = response.data;
             sessionStorage.setItem("DATA", cont);
-        }
-    }).catch(error => {
-        formUtil.toast('Failed to load content:', 'error');
-    });
+            $("#gi-road-content").empty().html(pageSources);
+            formUtil.activatedMenu(reqUrl);
+        }).catch(error => {
+            formUtil.toast('Failed to load content:', 'error');
+        });
+    }
 }
 /**
  * @title : HTML 파일 로드

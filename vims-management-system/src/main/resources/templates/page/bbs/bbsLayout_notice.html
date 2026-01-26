@@ -10,6 +10,7 @@
                 <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
                     <input class="gi-input" type="text" placeholder="공지 검색" />
                     <button class="gi-btn-blue">검색</button>
+                    <button id="bbs-notice-write-btn" class="gi-btn-blue gi-margin-left-auto">공지 등록</button>
                 </div>
             </div>
             <div class="gi-row-100 gi-padding-left-right-20px">
@@ -19,19 +20,58 @@
     </section>
 </article>
 <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
+    var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : '공지사항';
+
     init();
+
     function init() {
         new PageInit();
-        // 공지사항 초기화
-        let grid_header = {
-            title: "공지사항",
-            list: [
-                { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
-                { HEADER: '제목', ID: 'title', WIDTH: '70', TYPE: 'text', TEXT_ALIGN: 'left' },
-                { HEADER: '등록일', ID: 'reg_date', WIDTH: '20', TYPE: 'text', TEXT_ALIGN: 'center' }
-            ]
-        };
-        let grid = formUtil.giGrid(grid_header, { current: 1, total: 0 }, 1, "bbs_notice_grid");
-        grid.DataSet([]);
+        findByNoticeList();
+        clickEvent();
     }
+
+    function clickEvent() {
+        $("#bbs-notice-write-btn").on("click", function () {
+            formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardWrite", { bbs_id: bbsId });
+        });
+    }
+
+    function findByNoticeList(page, range) {
+        if (!page) page = 1;
+        if (!range) range = 10;
+
+        let url = "/cms/common/sysBbsBoard/findPage";
+        let param = {
+            bbs_id: bbsId,
+            page_no: page,
+            row_range: range,
+            offset: (page - 1) * range
+        };
+
+        axios.post(url, param).then(response => {
+            if (response.status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+
+                let grid_header = {
+                    title: bbsNm,
+                    list: [
+                        { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.PRIORITY"], ID: 'priority', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.TITLE"], ID: 'title', WIDTH: '60', TYPE: 'text', TEXT_ALIGN: 'left' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.HIT_COUNT"], ID: 'hit_count', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.CREATE_DATE"], ID: 'system_create_date', WIDTH: '15', TYPE: 'date', TEXT_ALIGN: 'center' }
+                    ]
+                };
+
+                let grid = formUtil.giGrid(grid_header, paging, page, "bbs_notice_grid");
+                grid.DataSet(data);
+                grid.pagingSet(findByNoticeList);
+            }
+        });
+    }
+    /*]]>*/
 </script>

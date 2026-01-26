@@ -281,6 +281,11 @@ html {
     transition: transform 0.3s ease;
 }
 
+/* 하위 메뉴 단계에서는 중복된 파란 배경색 제거 (화살표 회전 기능은 유지) */
+.gi-side-nav-menu-level .gi-side-nav-title.active:not(.page) {
+    background-color: transparent !important;
+}
+
 .gi-side-nav-title.active.page {
     /* version 1*/
     /*background-color: #8C8CCC; !* 금색 배경 *!*/

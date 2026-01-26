@@ -24,6 +24,7 @@ Message.Label.Array["SYS_BBS_MST.CHECK.SYSTEM_UPDATE_DATE"] = "시스템 수정 
 
 
 Message.Label.Array["SYS_BBS_MST.BBS_ID"] = "게시판 고유 코드";
+Message.Label.Array["SYS_BBS_MST.BBS_MST_ID"] = "게시판 마스터 ID";
 Message.Label.Array["SYS_BBS_MST.BBS_NM"] = "게시판 명칭";
 Message.Label.Array["SYS_BBS_MST.BBS_TYPE"] = "게시판 유형";
 Message.Label.Array["SYS_BBS_MST.SYSTEM_CREATE_USERID"] = "시스템 작성자ID";

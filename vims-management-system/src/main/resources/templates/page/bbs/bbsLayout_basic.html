@@ -38,27 +38,61 @@
 
 <script type="text/javascript" th:inline="javascript">
     /*<![CDATA[*/
-    var bbsId = /*[[${bbsInfo.bbs_id}]]*/ 'default_id';
-    var bbsNm = /*[[${bbsInfo.bbs_nm}]]*/ 'default_nm';
+    var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
+    var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : '게시판';
 
     init();
 
     function init() {
         new PageInit();
+        findByBoardList();
+        clickEvent();
+    }
 
-        // 임시 그리드 설정 (데이터 API가 아직 없으므로 껍데기만)
-        let grid_header = {
-            title: bbsNm,
-            list: [
-                { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
-                { HEADER: '제목', ID: 'title', WIDTH: '60', TYPE: 'text', TEXT_ALIGN: 'left' },
-                { HEADER: '작성자', ID: 'writer', WIDTH: '15', TYPE: 'text', TEXT_ALIGN: 'center' },
-                { HEADER: '작성일', ID: 'reg_date', WIDTH: '15', TYPE: 'text', TEXT_ALIGN: 'center' }
-            ]
+    function clickEvent() {
+        $("#bbs-write-btn").on("click", function () {
+            formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardWrite", { bbs_id: bbsId });
+        });
+    }
+
+    function findByBoardList(page, range) {
+        if (!page) page = 1;
+        if (!range) range = 10;
+
+        let url = "/cms/common/sysBbsBoard/findPage";
+        let param = {
+            bbs_id: bbsId,
+            page_no: page,
+            row_range: range,
+            offset: (page - 1) * range
         };
 
-        let grid = formUtil.giGrid(grid_header, { current: 1, total: 0 }, 1, "bbs_gi-Grid");
-        grid.DataSet([]); // 빈 데이터
+        axios.post(url, param).then(response => {
+            if (response.status === 200) {
+                let data = response.data.DATA;
+                let paging = response.data.TOTAL_PAGING[0];
+
+                let grid_header = {
+                    title: bbsNm,
+                    list: [
+                        { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center', FONT_SIZE: '12px' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.TITLE"], ID: 'title', WIDTH: '50', TYPE: 'text', TEXT_ALIGN: 'left', FONT_SIZE: '12px' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.WRITER_NAME"], ID: 'writer_name', WIDTH: '15', TYPE: 'text', TEXT_ALIGN: 'center', FONT_SIZE: '12px' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.HIT_COUNT"], ID: 'hit_count', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center', FONT_SIZE: '12px' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.CREATE_DATE"], ID: 'system_create_date', WIDTH: '15', TYPE: 'date', TEXT_ALIGN: 'center', FONT_SIZE: '12px' },
+                        { HEADER: 'ID', ID: 'board_id', WIDTH: '0', TYPE: 'text', HIDDEN: true }
+                    ]
+                };
+
+                let grid = formUtil.giGrid(grid_header, paging, page, "bbs_gi-Grid");
+                grid.DataSet(data);
+                grid.pagingSet(findByBoardList);
+                grid.rowClick(function (rowData) {
+                    formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardDetail", { board_id: rowData.board_id, bbs_id: bbsId });
+                });
+            }
+        });
     }
     /*]]>*/
 </script>

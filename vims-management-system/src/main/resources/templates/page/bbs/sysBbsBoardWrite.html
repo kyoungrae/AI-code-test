@@ -1,0 +1,146 @@
+<article id="sysBbsBoardWritePage" class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+        <!-- 헤더 영역 -->
+        <header class="gi-margin-bottom-30px gi-padding-left-20px gi-padding-top-20px">
+            <h1 class="gi-page-title" id="write-page-title">게시글 작성</h1>
+            <p class="gi-subtitle-main">새로운 소식을 공유하세요.</p>
+        </header>
+
+        <article class="gi-padding-left-right-20px">
+            <form id="bbsBoardWriteForm">
+                <div class="gi-flex gi-flex-column gi-grid-gap-20px">
+                    <!-- 제목 입력 -->
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="board_title" class="gi-input-label" data-focus-label="true"
+                            data-required="true">제목</label>
+                        <input data-field="title" id="board_title" name="title" class="gi-input" data-required="true"
+                            autocomplete="off" />
+                    </div>
+
+                    <!-- 작성자명 (기본 로그인 정보 사용 예정) -->
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="board_writer" class="gi-input-label" data-focus-label="true">작성자</label>
+                        <input data-field="writer_name" id="board_writer" name="writer_name" class="gi-input"
+                            autocomplete="off" />
+                    </div>
+
+                    <!-- 내용 입력 (Quill Editor 영역) -->
+                    <div class="gi-flex gi-flex-column gi-grid-gap-10px">
+                        <label class="gi-input-label-static">내용</label>
+                        <div id="editor-container" style="height: 400px; background: #fff;"></div>
+                        <input type="hidden" data-field="content" id="board_content" name="content" />
+                    </div>
+
+                    <!-- 버튼 영역 -->
+                    <div class="gi-flex gi-flex-justify-content-end gi-grid-gap-10px gi-margin-top-20px">
+                        <button id="bbs-save-btn" class="gi-btn-blue" type="button">저장하기</button>
+                        <button id="bbs-cancel-btn" class="gi-btn" type="button">취소</button>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </section>
+</article>
+
+<script type="text/javascript">
+    var quill;
+    var writeSessionData = JSON.parse(sessionStorage.getItem("DATA"));
+    var targetBbsId = writeSessionData.bbs_id;
+    var boardId = writeSessionData.board_id; // 수정 모드일 때 존재
+    var mode = writeSessionData.mode || 'register';
+
+    init();
+
+    async function init() {
+        new PageInit();
+
+        // 1. 페이지 헤더/타이틀 설정
+        if (mode === 'modify') {
+            $("#write-page-title").text(Message.Label.Array["SYS_BBS_BOARD.TITLE_UPDATE"]);
+            $("#bbs-save-btn").text("수정하기");
+        }
+
+        // 2. 에디터 초기화
+        quill = new Quill('#editor-container', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['image', 'link', 'code-block'],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            }
+        });
+
+        // 3. 데이터 로드 (수정 모드)
+        if (mode === 'modify' && boardId) {
+            fetchBoardData();
+        } else {
+            // 작성자 이름 기본값 세팅
+            $("#board_writer").val(JwtUtils.getUserEmailFromJWT().split('@')[0]);
+        }
+
+        // 4. 버튼 이벤트
+        clickEvent();
+    }
+
+    function fetchBoardData() {
+        let url = "/cms/common/sysBbsBoard/find";
+        axios.post(url, { board_id: boardId }).then(response => {
+            if (response.status === 200 && response.data.length > 0) {
+                let data = response.data[0];
+                $("#board_title").val(data.title);
+                $("#board_writer").val(data.writer_name);
+                quill.root.innerHTML = data.content;
+            }
+        });
+    }
+
+    function clickEvent() {
+        // 저장/수정 버튼
+        $("#bbs-save-btn").on("click", function () {
+            saveBoard();
+        });
+
+        // 취소 버튼
+        $("#bbs-cancel-btn").on("click", async function () {
+            if (await formUtil.confirm("작성을 취소하시겠습니까?")) {
+                formUtil.apiLoadContent("cms", "/bbs/view", { bbs_id: targetBbsId });
+            }
+        });
+    }
+
+    function saveBoard() {
+        if (!formUtil.validationCheck("bbsBoardWriteForm", "SYS_BBS_BOARD.CHECK.")) return;
+
+        // 에디터 내용 추출
+        let content = quill.root.innerHTML;
+        if (quill.getText().trim().length === 0) {
+            formUtil.toast(Message.Label.Array["SYS_BBS_BOARD.CHECK.CONTENT"], "warn");
+            return;
+        }
+
+        let isUpdate = (mode === 'modify' && boardId);
+        let url = isUpdate ? "/cms/common/sysBbsBoard/update" : "/cms/common/sysBbsBoard/register";
+
+        let param = {
+            bbs_id: targetBbsId,
+            title: $("#board_title").val(),
+            content: content,
+            writer_name: $("#board_writer").val()
+        };
+
+        if (isUpdate) param.board_id = boardId;
+
+        axios.post(url, param).then(response => {
+            if (response.status === 200) {
+                formUtil.toast(isUpdate ? "수정되었습니다." : "등록되었습니다.", "success");
+                formUtil.apiLoadContent("cms", "/bbs/view", { bbs_id: targetBbsId });
+            }
+        }).catch(error => {
+            formUtil.toast("처리 중 오류가 발생했습니다.", "error");
+        });
+    }
+</script>

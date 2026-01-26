@@ -413,50 +413,36 @@
 
             // 비활성화 된 메뉴 클릭 시
             if (!$this.hasClass("active")) {
-                // 그 중 최하위 메뉴 버튼을 클릭했을 때
+                // 활성화 되지 않은 로드 버튼 클릭 시
                 if ($this.hasClass("sideNavPageLoad")) {
-                    // 세션에 저장된 url 없을 수가 없다 이제는!
-                    if ($this.data("page-name") === recentPage.toString) {
-                        // 세션에 저장된 url과 버튼 url이 동일하면 그냥 화면 다시 로드 처리
-                    } else {
-                        // 현재 url 과 동일하지 않을 경우(다른 메뉴 버튼인 경우)
-                        // 현재 선택한 버튼이 포함된 메뉴 그룹만 제외하고 나머지는 모두 비활성화 처리
-                        let liButtonList = $("#side_nav_menu > li").not($this.parents("li").last());
+                    // 1. 현재 클릭한 페이지가 속한 경로가 아닌 다른 1뎁스 브랜치들을 부드럽게 정리
+                    let $currentTopLi = $this.parents("li").last();
+                    $("#side_nav_menu > li").not($currentTopLi).each(function () {
+                        let $otherTopLi = $(this);
+                        $otherTopLi.find("a.gi-side-nav-title.active").removeClass("active").addClass("collapsed");
+                        $otherTopLi.find("ul.gi-side-nav-menu-level:visible").stop(true).slideUp(250);
+                    });
 
-                        liButtonList.each(function () {
-                            let $button = $(this);
-                            $button.find("a:not(.sideNavPageLoad)").removeClass("active").addClass("collapsed");
-                            $button.find("a.sideNavPageLoad").removeClass("active page");
-                            $button.find("ul").stop(true, true).slideUp(150);
-                        });
+                    // 2. 현재 브랜치 내의 다른 페이지 하이라이트만 정리 (카테고리는 유지)
+                    $currentTopLi.find(".sideNavPageLoad.active").removeClass("active page");
 
-                        // 현재 클릭한 버튼을 포함해서 해당 버튼과 level1 디렉토리를 공유하는 모든 버튼들은 비활성화 처리
-                        $this.parents("li").last().find(".sideNavPageLoad").removeClass("active page");
-                        let currentLevel2 = $this.closest("ul").closest("li").closest("ul");
+                    // 3. 마지막으로 클릭한 버튼 활성화 및 페이지 로드
+                    $this.addClass("active page");
+                    let url = $this.data("page-name");
+                    let prgmUrl = $this.data("prgm-url");
+                    let menuCode = $this.data("menu-code");
+                    let urlInfo = { url: url }
+                    common_session.setItem("recentPage", urlInfo);
+                    common_session.setItem("activatedMenu", urlInfo);
 
-                        // 그 다음 현재 클릭한 버튼의 level2와 다른 level2 들은 모두 비활성화 처리
-                        let anotherLevel2 = $this.parents("li").last().children("ul").not(currentLevel2);
-
-                        anotherLevel2.each(function () {
-                            let menuLevel2 = $(this).children("li").children("a");
-                            if (menuLevel2.hasClass("active")) {
-                                menuLevel2.removeClass("active").addClass("collapsed");
-                                menuLevel2.nextAll(".gi-side-nav-menu-level").stop(true, true).slideUp(150);
-                            }
-                        });
-
-                        // 마지막으로 클릭한 버튼 및 해당 페이지 활성화
-                        $this.addClass("active page");
-                        let url = $this.data("page-name");
-                        let prgmUrl = $this.data("prgm-url");
-                        let urlInfo = { url: url }
-                        common_session.setItem("recentPage", urlInfo);
-                        common_session.setItem("activatedMenu", urlInfo);
-                        formUtil.apiLoadContent(prgmUrl, url, $this.text());
-                    }
+                    let payload = url === "/bbs/view" ? { bbs_id: menuCode, bbs_nm: $this.text().trim() } : $this.text();
+                    formUtil.apiLoadContent(prgmUrl, url, payload);
                 } else {
-                    // 메뉴 노출처리 시에는 첫 번째 메뉴와 두 번째 메뉴는 기본 처리 외 부가적인 처리가 필요 없다.
-                    $currentSubMenu.stop(true, true).slideDown(150);
+                    // 카테고리(서브메뉴) 펼침 동작 - 다른 같은 레벨의 서브메뉴만 부드럽게 닫기
+                    $this.closest("ul").children("li").find("ul.gi-side-nav-menu-level:visible").not($currentSubMenu).stop(true).slideUp(250);
+                    $this.closest("ul").children("li").find("a.gi-side-nav-title.active").not($this).removeClass("active").addClass("collapsed");
+
+                    $currentSubMenu.stop(true).slideDown(250);
                     $this.removeClass("collapsed").addClass("active");
                 }
             } else {
@@ -464,10 +450,13 @@
                 if ($this.hasClass("sideNavPageLoad")) {
                     let url = $this.data("page-name");
                     let prgmUrl = $this.data("prgm-url");
+                    let menuCode = $this.data("menu-code");
                     let urlInfo = { url: url }
                     common_session.setItem("recentPage", urlInfo);
                     common_session.setItem("activatedMenu", urlInfo);
-                    formUtil.apiLoadContent(prgmUrl, url, $this.text());
+
+                    let payload = url === "/bbs/view" ? { bbs_id: menuCode, bbs_nm: $this.text().trim() } : $this.text();
+                    formUtil.apiLoadContent(prgmUrl, url, payload);
                 } else {
                     // 활성화 된 최상위 메뉴 클릭 시
                     if (menuLevel.toString() === "0") {
@@ -478,7 +467,7 @@
                             // 하위 메뉴 버튼과 영역들은 숨김 처리하지만 로드 버튼 비활성화 처리는 하지 않는다.
                             allSubMenu.each(function (i, subMenu) {
                                 let $menu = $(subMenu);
-                                $menu.stop(true, true).slideUp(150);
+                                $menu.stop(true, true).slideUp(250);
                                 $menu.find("a:not(.sideNavPageLoad)").removeClass("active").addClass("collapsed");
                             });
                             $this.removeClass("active").addClass("collapsed");
@@ -487,7 +476,7 @@
                             // 하위 메뉴 버튼과 영역들을 숨김 처리하면서 비활성화 처리도 한다.
                             allSubMenu.each(function (i, subMenu) {
                                 let $menu = $(subMenu);
-                                $menu.stop(true, true).slideUp(150);
+                                $menu.stop(true, true).slideUp(250);
                                 $menu.find(".gi-side-nav-title").removeClass("active");
                             });
                             $this.removeClass("active").addClass("collapsed");
@@ -509,23 +498,15 @@
     }
     function existsNavSelected() {
         let recentPage = common_session.getItem("recentPage").url;
-
-        if (formUtil.checkEmptyValue(recentPage) && recentPage !== "/index/index" && recentPage !== "/common/myinfo") {
-            let $activatedMenu = $("[data-page-name='" + recentPage.toString() + "']");
-            let menuLevel1 = $activatedMenu.parents("li").last().children("a");
-            let menuLevel2 = $activatedMenu.closest("ul").closest("li").children("a");
-
-            menuLevel1.trigger("click");
-            menuLevel2.trigger("click");
-            $activatedMenu.addClass("active page");
+        if (formUtil.checkEmptyValue(recentPage)) {
+            formUtil.activatedMenu(recentPage);
         } else {
             let allLiButtonList = $("#side_nav_menu > li");
-
             allLiButtonList.each(function () {
                 let $button = $(this);
                 $button.find("a:not(.sideNavPageLoad)").removeClass("active").addClass("collapsed");
                 $button.find("a.sideNavPageLoad").removeClass("active page");
-                $button.find("ul").stop(true, true).slideUp(150);
+                $button.find("ul").hide(); // 초기 로드 시에는 애니메이션 없이 즉시 숨김
             });
         }
     }
