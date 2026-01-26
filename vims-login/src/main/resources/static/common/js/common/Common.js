@@ -594,13 +594,13 @@ class Popup {
             //라인 초기화
             let p = $parent.find("div[data-focus-line]");
             p.map((i, item) => {
-                $(item).attr("data-focus-line", "true");
+                $(item).attr("data-focus-line", "false");
             });
 
             //라벨 초기화
             let k = $parent.find("label[data-focus-label]");
             k.map((i, item) => {
-                $(item).attr("data-focus-label", "true");
+                $(item).attr("data-focus-label", "false");
             });
 
             //사이드 그리드 초기화
@@ -630,13 +630,13 @@ class Popup {
         //라인 초기화
         let p = popupId.find("div[data-focus-line]");
         p.map((i, item) => {
-            $(item).attr("data-focus-line", "true");
+            $(item).attr("data-focus-line", "false");
         });
 
         //라벨 초기화
         let k = popupId.find("label[data-focus-label]");
         k.map((i, item) => {
-            $(item).attr("data-focus-label", "true");
+            $(item).attr("data-focus-label", "false");
         });
 
         // 폼 필드 초기화

@@ -4021,3 +4021,34 @@
     width: 50px;
     height: 50px;
 }
+
+/* Warning Row Styling */
+.gi-grid-list-warn {
+    background-color: #fff9db !important;
+    /* Very light yellow */
+    position: relative;
+    border-left: 5px solid #fab005 !important;
+    transition: background-color 0.3s ease;
+}
+
+.gi-grid-list-warn:hover {
+    background-color: #fff3bf !important;
+}
+
+.gi-grid-list-warn::after {
+    content: attr(data-warn-msg);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fab005b0;
+    color: #ffffff;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    opacity: 0.9;
+}

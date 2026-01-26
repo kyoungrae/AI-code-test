@@ -101,6 +101,14 @@ public class SysBbs extends Common {
 
     /***
      * <pre>
+     *  access_group_count : 권한 그룹 개수
+     * </pre>
+     */
+    @Transient
+    private int access_group_count;
+
+    /***
+     * <pre>
      *  bbs_mst_id : 게시판 마스터 ID
      * </pre>
      */

@@ -155,12 +155,11 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="register_p_menu_code" class="gi-input-label" data-focus-label="true"
-                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.TOP_MENU_CODE"]</label>
               <div class="gi-flex gi-grid-gap-5px">
+                <label for="register_p_menu_code" class="gi-input-label" data-focus-label="true"
+                  data-required="true">[Page.Message].Message.Label.Array["SYS_BBS.P_MENU_CODE"]</label>
                 <input data-disabled data-field="p_menu_code" id="register_p_menu_code" name="p_menu_code"
-                  class="gi-input gi-flex-1" data-required="false" readonly autocomplete="off"
-                  placeholder='[Page.Message].Message.Label.Array["SYS_MENU.SELECT_TOP_MENU_DESC"]' />
+                  class="gi-input gi-flex-1" data-required="true" autocomplete="off" />
               </div>
             </div>
             <div class="gi-flex gi-grid-gap-5px">
@@ -246,15 +245,16 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="update_p_menu_code" class="gi-input-label" data-focus-label="true"
-                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.TOP_MENU_CODE"]</label>
               <div class="gi-flex gi-grid-gap-5px">
+                <label for="update_p_menu_code" class="gi-input-label" data-focus-label="true"
+                  data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.TOP_MENU_CODE"]</label>
                 <input data-field="p_menu_code" id="update_p_menu_code" name="p_menu_code" class="gi-input gi-flex-1"
-                  data-required="false" readonly autocomplete="off"
-                  placeholder='[Page.Message].Message.Label.Array["SYS_MENU.SELECT_TOP_MENU_DESC"]' />
-                <button type="button" class="gi-btn-blue" id="update-menu-search-btn"
-                  style="min-width: 80px;">[Page.Message].Message.Label.Array["SELECT_BTN"]</button>
+                  data-required="true" readonly autocomplete="off" />
               </div>
+            </div>
+            <div class="gi-flex gi-grid-gap-5px">
+              <button type="button" class="gi-btn-blue" id="update-menu-search-btn"
+                style="min-width: 80px;">[Page.Message].Message.Label.Array["SELECT_BTN"]</button>
             </div>
           </div>
 
@@ -390,6 +390,7 @@
     //추가버튼 클릭 이벤트
     $("#sysBbs-insert-btn").click(function () {
       popup.open(REGISTER_POPUP_ID);
+      console.log("register_p_menu_code : " + $("#register_p_menu_code").val());
       $("#" + REGISTER_POPUP_CONFIRM_BTN).off("click.registerPopupConfirmBtnClickEventHandler")
         .on("click.registerPopupConfirmBtnClickEventHandler", registerPopupConfirmBtnClickEventHandler);
       function registerPopupConfirmBtnClickEventHandler() {
@@ -443,6 +444,7 @@
       if (status === 200) {
         let data = response.data.DATA;
         let paging = response.data.TOTAL_PAGING[0];
+
         // 그리드 헤더 설정
         let sysBbs_grid_header = {
           title: '[Page.Message].Message.Label.Array["SYS_BBS.TITLE"]',
@@ -454,6 +456,7 @@
             { HEADER: Message.Label.Array["SYS_BBS.CRUD_AUTH"], ID: 'crud_auth', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.FILE_YN"], ID: 'file_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.REPLY_YN"], ID: 'reply_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS.P_MENU_CODE"], ID: 'p_menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.SYSTEM_CREATE_USERID"], ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_USERID"], ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -471,6 +474,9 @@
         }
         //그리드 생성 <div id="gi-Grid"></div>
         let sysBbs_grid = formUtil.giGrid(sysBbs_grid_header, paging, page, MAIN_GRID_ID);
+
+        // 로우 경고 공통 컴포넌트 기능
+        sysBbs_grid.RowWarning("access_group_count", 0, Message.Label.Array["SYS_BBS.ACCESS_RIGHTS_REQUIRED"]);
 
         //그리드 데이터 설정
         sysBbs_grid.DataSet(data);
@@ -616,6 +622,7 @@
       if (status === 200) {
         formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
         findBySysBbsList();
+        findByMenuList();
       } else {
         resetEvent();
         formUtil.toast("response status is :" + status, "error");
@@ -663,7 +670,7 @@
 
         function selectBtnClick(row) {
           if (targetMenuInputId) {
-            $("#" + targetMenuInputId).val(row.menu_code);
+            $("#" + targetMenuInputId).val(row.menu_code).trigger("change");
             popup.close(MENU_TREE_POPUP_ID);
           }
         };
@@ -676,12 +683,12 @@
     let htmlSource =
       '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-column gi-padding-10px" style="gap: 20px; overflow-y: auto;">'
       + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
-      + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_DEPT_GROUP.TITLE"] + ' ]</span>'
+      + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_DEPT_GROUP.TITLE_LIST"] + ' ]</span>'
       + '    <div id="gi-Grid2" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
       + '  </div>'
       + '  <div style="border-top: 1px dashed #cbd5e1; margin: 0 10px;"></div>'
       + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
-      + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE"] + ' ]</span>'
+      + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE_LIST"] + ' ]</span>'
       + '    <div id="gi-Grid3" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
       + '  </div>'
       + '</div>';
@@ -740,6 +747,7 @@
         formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
         accessGroupStatus(originCont);
         findByMenuList();
+        findBySysBbsList();
       }
     }).catch(error => {
       formUtil.toast(error.response.data, "error");
@@ -798,6 +806,7 @@
       if (response.status === 200) {
         formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
         accessGroupStatus(originCont);
+        findBySysBbsList();
       }
     }).catch(error => {
       formUtil.toast(error.response.data, "error");

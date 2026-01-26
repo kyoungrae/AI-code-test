@@ -18,6 +18,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
 
     if (!formUtil.checkEmptyValue(gridId)) gridId = "gi-Grid";
     let gridData = [];
+    let rowWarningFn = null;
 
     if (formUtil.checkEmptyValue(prePageAnimationCont)) {
         //애니메이션 효과 적용
@@ -183,6 +184,17 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         //그리드 데이터 설정
         DataSet: async function (data) {
             gridData = data;
+
+            // RowWarning 설정이 있는 경우 실행
+            if (rowWarningFn && data) {
+                data.forEach(item => {
+                    let msg = rowWarningFn(item);
+                    if (msg) {
+                        item.ROW_WARN_MSG = msg;
+                    }
+                });
+            }
+
             let flag = formUtil.checkEmptyValue(data);
             let grid_list = "";
             let sysCodeGroupIdArray = [];
@@ -198,7 +210,15 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
             if (flag) {
                 for (let i = 0; i < data.length; i++) {
                     let originalDataForVisibleOption = [];
-                    grid_list += '<ul class="gi-grid-list gi-row-100 gi-ul gi-flex ' + pagingAnimationClass + '" data-row-num="' + i + '">';
+                    let warnClass = "";
+                    let warnMsgAttr = "";
+
+                    if (formUtil.checkEmptyValue(data[i].ROW_WARN_MSG)) {
+                        warnClass = "gi-grid-list-warn";
+                        warnMsgAttr = ' data-warn-msg="' + data[i].ROW_WARN_MSG + '"';
+                    }
+
+                    grid_list += '<ul class="gi-grid-list gi-row-100 gi-ul gi-flex ' + pagingAnimationClass + ' ' + warnClass + '" ' + warnMsgAttr + ' data-row-num="' + i + '">';
 
                     for (let j = 0; j < headerItem.length; j++) {
                         let item = headerItem[j];
@@ -273,7 +293,6 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                 tag = '<span class="resizer gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" data-grid-value="' + typeTransferDateToString(data[i][item.ID]) + '">' + typeTransferDateToString(data[i][item.ID]) + '</span>';
                                 break;
                             case "img":
-                                console.log(typeof item.ID)
                                 switch (item.ID) {
                                     case "detail_btn":
                                         // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
@@ -401,24 +420,44 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 fn(pagingNum, range);
             })
         },
+        // 로우 경고 설정 (재사용 가능한 공통 컴포넌트 기능)
+        // 1. 함수 방식: RowWarning(function(item) { return msg; })
+        // 2. 선언적 방식: RowWarning(columnId, conditionValue, message)
+        RowWarning: function (arg1, arg2, arg3) {
+            if (typeof arg1 === 'function') {
+                rowWarningFn = arg1;
+            } else if (arg1 && arg3 !== undefined) {
+                rowWarningFn = function (item) {
+                    let val = item[arg1];
+                    let isMatch = false;
+                    if (typeof arg2 === 'function') {
+                        isMatch = arg2(val);
+                    } else {
+                        isMatch = (val == arg2);
+                    }
+                    return isMatch ? arg3 : null;
+                };
+            }
+            return this;
+        },
         //그리드 내부의 상세 버튼 클릭 이벤트 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
         detailBtnClick: function (fn, btnName) {
             let flag = formUtil.checkEmptyValue(fn);
             if (flag) {
 
                 //최초 한번은 이벤트 등록
-                $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                     detailBtnClickEventHandler(e);
                 });
                 // grid 안에 상세버튼 클릭 이벤트
                 const observer = new MutationObserver((mutations) => {
                     mutations.forEach((mutation) => {
                         if (mutation.addedNodes.length > 0) {
-                            let $giGridList = $(".gi-grid-list");
+                            let $giGridList = $("#" + gridId).find(".gi-grid-list");
                             if ($giGridList.length > 0) {
                                 observer.disconnect();
                             }
-                            $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                            $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                                 detailBtnClickEventHandler(e);
                             });
                         }
@@ -460,17 +499,17 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         },
         //수정 버튼 설정
         updateBtnClick: function (fn, btnName) {
-            $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+            $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                 updateBtnClickEventHandler(e);
             });
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.addedNodes.length > 0) {
-                        let $giGridList = $(".gi-grid-list");
+                        let $giGridList = $("#" + gridId).find(".gi-grid-list");
                         if ($giGridList.length > 0) {
                             observer.disconnect();
                         }
-                        $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                        $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                             updateBtnClickEventHandler(e);
                         });
                     }
@@ -512,17 +551,18 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         //삭제 버튼 설정
         deleteBtnClick: function (fn, btnName) {
             //최초 한번 이벤트 바인딩
-            $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+            //최초 한번 이벤트 바인딩
+            $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                 deleteBtnClickEventHandler(e);
             });
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.addedNodes.length > 0) {
-                        let $giGridList = $(".gi-grid-list");
+                        let $giGridList = $("#" + gridId).find(".gi-grid-list");
                         if ($giGridList.length > 0) {
                             observer.disconnect();
                         }
-                        $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                        $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                             deleteBtnClickEventHandler(e);
                         });
                     }
@@ -563,17 +603,17 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         },
         //수정 버튼 설정
         resendBtnClick: function (fn, btnName) {
-            $("." + btnName).off("click.resendBtnClickEventHandler").on("click.resendBtnClickEventHandler", function (e) {
+            $("#" + gridId).find("." + btnName).off("click.resendBtnClickEventHandler").on("click.resendBtnClickEventHandler", function (e) {
                 resendBtnClickEventHandler(e);
             });
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.addedNodes.length > 0) {
-                        let $giGridList = $(".gi-grid-list");
+                        let $giGridList = $("#" + gridId).find(".gi-grid-list");
                         if ($giGridList.length > 0) {
                             observer.disconnect();
                         }
-                        $("." + btnName).off("click.resendBtnClickEventHandler").on("click.resendBtnClickEventHandler", function (e) {
+                        $("#" + gridId).find("." + btnName).off("click.resendBtnClickEventHandler").on("click.resendBtnClickEventHandler", function (e) {
                             resendBtnClickEventHandler(e);
                         });
                     }
@@ -613,17 +653,18 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         mapBtnClick: function (tagId, keywordColumnName, btnName) {
             let map = new kakaoMap();
             //최초 한번 이벤트 바인딩
-            $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+            //최초 한번 이벤트 바인딩
+            $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                 mapBtnClickEventHandler(e);
             });
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.addedNodes.length > 0) {
-                        let $giGridList = $(".gi-grid-list");
+                        let $giGridList = $("#" + gridId).find(".gi-grid-list");
                         if ($giGridList.length > 0) {
                             observer.disconnect();
                         }
-                        $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                        $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                             mapBtnClickEventHandler(e);
                         });
                     }
@@ -673,7 +714,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.addedNodes.length > 0) {
-                        let $giGridList = $(".gi-grid-list");
+                        let $giGridList = $("#" + gridId).find(".gi-grid-list");
                         if ($giGridList.length > 0) {
                             observer.disconnect();
                         }
@@ -990,15 +1031,15 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                 observer.observe(gridTarget, { childList: true, subtree: true });
             }
             function setMultiRowClickEvent(fn) {
-                $(".gi-grid-list").addClass("gi-cursor-pointer");
-                $(".gi-grid-list").mouseenter(function () {
+                $("#" + gridId).find(".gi-grid-list").addClass("gi-cursor-pointer");
+                $("#" + gridId).find(".gi-grid-list").mouseenter(function () {
                     $(this).addClass("gi-grid-list-hover");
                 }).mouseleave(function () {
                     $(this).removeClass("gi-grid-list-hover");
                 });
 
                 // 클릭 시 이벤트 설정
-                $("ul[data-row-num]").off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                $("#" + gridId).find("ul[data-row-num]").off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                     if (!$(e.target).is("button")) {
                         rowMultiClickEventHandler(e, fn);
                     }
@@ -1410,7 +1451,6 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             //     tag = '<input type="checkbox" class="gi-row-100 gi-padding-left-right-10px gi-font-size-' + item.FONT_SIZE + '" value="' + data[i][item.ID] + '" />';
                             //     break;
                             case "img":
-                                console.log(typeof item.ID)
                                 switch (item.ID) {
                                     case "detail_btn":
                                         // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
@@ -1691,18 +1731,18 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
             if (flag) {
 
                 //최초 한번은 이벤트 등록
-                $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                     detailBtnClickEventHandler(e);
                 });
                 // grid 안에 상세버튼 클릭 이벤트
                 const observer = new MutationObserver((mutations) => {
                     mutations.forEach((mutation) => {
                         if (mutation.addedNodes.length > 0) {
-                            let $giGridList = $(".gi-grid-list");
+                            let $giGridList = $("#" + gridId).find(".gi-grid-list");
                             if ($giGridList.length > 0) {
                                 observer.disconnect();
                             }
-                            $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                            $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                                 detailBtnClickEventHandler(e);
                             });
                         }
@@ -1744,17 +1784,17 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
         },
         //수정 버튼 설정
         updateBtnClick: function (fn, btnName) {
-            $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+            $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                 updateBtnClickEventHandler(e);
             });
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.addedNodes.length > 0) {
-                        let $giGridList = $(".gi-grid-list");
+                        let $giGridList = $("#" + gridId).find(".gi-grid-list");
                         if ($giGridList.length > 0) {
                             observer.disconnect();
                         }
-                        $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                        $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                             updateBtnClickEventHandler(e);
                         });
                     }
@@ -1796,17 +1836,18 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
         //삭제 버튼 설정
         deleteBtnClick: function (fn, btnName) {
             //최초 한번 이벤트 바인딩
-            $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+            //최초 한번 이벤트 바인딩
+            $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                 deleteBtnClickEventHandler(e);
             });
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.addedNodes.length > 0) {
-                        let $giGridList = $(".gi-grid-list");
+                        let $giGridList = $("#" + gridId).find(".gi-grid-list");
                         if ($giGridList.length > 0) {
                             observer.disconnect();
                         }
-                        $("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                        $("#" + gridId).find("." + btnName).off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                             deleteBtnClickEventHandler(e);
                         });
                     }
@@ -1910,14 +1951,14 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                         if ($(this).hasClass("gi-grid-list-select")) {
                             $(this).removeClass("gi-grid-list-select");
                         } else {
-                            $(".gi-grid-list").removeClass("gi-grid-list-select");
+                            $("#" + gridId).find(".gi-grid-list").removeClass("gi-grid-list-select");
                             $(this).addClass("gi-grid-list-select");
                         }
                     })
                     ;
 
                 // 클릭 시 이벤트 설정
-                $("ul[data-row-num]").off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                $("#" + gridId).find("ul[data-row-num]").off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                     if (!$(e.target).is("button")) {
                         rowClickEventHandler(e, fn);
                     }
@@ -1965,15 +2006,15 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                 observer.observe(gridTarget, { childList: true, subtree: true });
             }
             function setMultiRowClickEvent(fn) {
-                $(".gi-grid-list").addClass("gi-cursor-pointer");
-                $(".gi-grid-list").mouseenter(function () {
+                $("#" + gridId).find(".gi-grid-list").addClass("gi-cursor-pointer");
+                $("#" + gridId).find(".gi-grid-list").mouseenter(function () {
                     $(this).addClass("gi-grid-list-hover");
                 }).mouseleave(function () {
                     $(this).removeClass("gi-grid-list-hover");
                 });
 
                 // 클릭 시 이벤트 설정
-                $("ul[data-row-num]").off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
+                $("#" + gridId).find("ul[data-row-num]").off("click.rowClickEventHandler").on("click.rowClickEventHandler", function (e) {
                     if (!$(e.target).is("button")) {
                         rowMultiClickEventHandler(e, fn);
                     }

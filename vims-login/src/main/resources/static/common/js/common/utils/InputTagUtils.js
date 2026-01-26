@@ -30,32 +30,20 @@ CommonTag.prototype.inputTagFocus = function (input) {
 
     function giInputFocusHandlerEvent(e) {
         if ("radio" !== this.type && "checkbox" !== this.type) {
-            let flag = $(this).parent(".gi-input-container").data("focusLine");
-            if (!flag) {
-                $(this).parent().attr('data-focus-line', true);
-                $(this).parent().children("label").attr('data-focus-label', true);
-            } else {
-                $(this).parent().attr('data-focus-line', false);
-                $(this).parent().children("label").attr('data-focus-label', false);
-            }
-
-            if (!formUtil.checkEmptyValue($(this).val())) {
-                $(this).parent().attr('data-focus-line', true);
-                $(this).parent().children("label").attr('data-focus-label', true);
-            } else {
-                $(this).parent().attr('data-focus-line', false);
-                $(this).parent().children("label").attr('data-focus-label', true);
-            }
+            let $container = $(this).closest(".gi-input-container");
+            $container.attr('data-focus-line', true);
+            $container.find("label").attr('data-focus-label', true);
         }
     }
     function giInputChangeHandlerEvent(e) {
+        let $container = $(this).closest(".gi-input-container");
         if ("radio" !== this.type && "checkbox" !== this.type) {
-            if (!formUtil.checkEmptyValue(e.target.value)) {
-                $(this).parent().attr('data-focus-line', false);
-                $(this).parent().children("label").attr('data-focus-label', false);
+            if (formUtil.checkEmptyValue(e.target.value)) {
+                $container.attr('data-focus-line', false);
+                $container.find("label").attr('data-focus-label', true);
             } else {
-                $(this).parent().attr('data-focus-line', false);
-                $(this).parent().children("label").attr('data-focus-label', true);
+                $container.attr('data-focus-line', false);
+                $container.find("label").attr('data-focus-label', false);
             }
         } else {
             let volumeName = e.target.name;
@@ -73,13 +61,14 @@ CommonTag.prototype.inputTagFocus = function (input) {
         }
     }
     function giInputBlurHandlerEvent(e) {
+        let $container = $(this).closest(".gi-input-container");
         if ("radio" !== this.type && "checkbox" !== this.type) {
-            if (!formUtil.checkEmptyValue(e.target.value)) {
-                $(this).parent().attr('data-focus-line', false);
-                $(this).parent().children("label").attr('data-focus-label', false);
+            if (formUtil.checkEmptyValue(e.target.value)) {
+                $container.attr('data-focus-line', false);
+                $container.find("label").attr('data-focus-label', true);
             } else {
-                $(this).parent().attr('data-focus-line', false);
-                $(this).parent().children("label").attr('data-focus-label', true);
+                $container.attr('data-focus-line', false);
+                $container.find("label").attr('data-focus-label', false);
             }
         }
     }
@@ -144,12 +133,15 @@ CommonTag.prototype.inputTagReset = function (input) {
         if ("radio" === e.type || "checkbox" === e.type) {
 
         } else {
-            if (formUtil.checkEmptyValue($(e).val())) {
-                $(e).parent().attr('data-focus-line', false);
-                $(e).parent().children("label").attr('data-focus-label', true);
+            let val = $(e).val();
+            let $container = $(e).closest(".gi-input-container");
+            if (formUtil.checkEmptyValue(val)) {
+                $container.attr('data-focus-line', false);
+                $container.find("label").attr('data-focus-label', true); // UP
             } else {
-                $(e).parent().attr('data-focus-line', false);
-                $(e).parent().children("label").attr('data-focus-label', false);
+                $(e).val(""); // If it had only whitespace, clear it strictly
+                $container.attr('data-focus-line', false);
+                $container.find("label").attr('data-focus-label', false); // MIDDLE
             }
         }
     });

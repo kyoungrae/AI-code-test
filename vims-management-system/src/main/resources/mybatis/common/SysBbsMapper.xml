@@ -29,7 +29,8 @@
                 system_create_date, 
                 system_update_userid, 
                 system_update_date,
-                p_menu_code 
+                p_menu_code,
+                (SELECT COUNT(*) FROM SYS_ACCS_GROUP_MENU SAGM WHERE SAGM.MENU_CODE = SYS_BBS.BBS_ID) AS access_group_count
             FROM SYS_BBS
             <where>
                 
@@ -130,7 +131,8 @@
             system_create_date,
             system_update_userid,
             system_update_date,
-            p_menu_code
+            p_menu_code,
+            (SELECT COUNT(*) FROM SYS_ACCS_GROUP_MENU SAGM WHERE SAGM.MENU_CODE = SYS_BBS.BBS_ID) AS access_group_count
         FROM SYS_BBS
         <where>
             
