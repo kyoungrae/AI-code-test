@@ -7,7 +7,7 @@ spring:
   cloud:
     gateway:
       default-filters :
-        - AuthorizationHeaderFilter
+        - AuthorizationHeader
       routes:
         # NOTE: 정적 파일 라우팅 (common, assets)
         - id: vims-login-static-common
