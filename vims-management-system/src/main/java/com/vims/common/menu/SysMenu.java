@@ -22,124 +22,254 @@ import java.util.Date;
 @SuperBuilder
 public class SysMenu extends Common {
     @Transient
-	private String keys = Arrays.toString(new String[]{"menu_code","menu_sequence"});
+    private String keys = Arrays.toString(new String[] { "menu_code", "menu_sequence" });
 
     @Id
-    /***<pre> menu_code : 메뉴코드 </pre> */
-	private String menu_code;
+    /***
+     * <pre>
+     *  menu_code : 메뉴코드
+     * </pre>
+     */
+    private String menu_code;
 
-    /***<pre> menu_name_kr : 메뉴명_한국어 </pre> */
-	private String menu_name_kr;
+    /***
+     * <pre>
+     *  menu_name_kr : 메뉴명_한국어
+     * </pre>
+     */
+    private String menu_name_kr;
 
-    /***<pre> menu_name_en : 메뉴명_영어 </pre> */
-	private String menu_name_en;
+    /***
+     * <pre>
+     *  menu_name_en : 메뉴명_영어
+     * </pre>
+     */
+    private String menu_name_en;
 
-    /***<pre> menu_name_mn : 메뉴명_몽어 </pre> */
-	private String menu_name_mn;
+    /***
+     * <pre>
+     *  menu_name_mn : 메뉴명_몽어
+     * </pre>
+     */
+    private String menu_name_mn;
 
-    /***<pre> menu_number : 메뉴순서 </pre> */
-	private String menu_number;
+    /***
+     * <pre>
+     *  menu_number : 메뉴순서
+     * </pre>
+     */
+    private String menu_number;
 
-    /***<pre> menu_level : 메뉴레벨 </pre> */
-	private String menu_level;
+    /***
+     * <pre>
+     *  menu_level : 메뉴레벨
+     * </pre>
+     */
+    private String menu_level;
 
-    /***<pre> top_menu_code : 상위 메뉴코드 </pre> */
-	private String top_menu_code;
+    /***
+     * <pre>
+     *  top_menu_code : 상위 메뉴코드
+     * </pre>
+     */
+    private String top_menu_code;
 
-    /***<pre> url : URL </pre> */
-	private String url;
+    /***
+     * <pre>
+     *  url : URL
+     * </pre>
+     */
+    private String url;
 
-    /***<pre> use_yn : 사용여부 </pre> */
-	private String use_yn;
+    /***
+     * <pre>
+     *  use_yn : 사용여부
+     * </pre>
+     */
+    private String use_yn;
 
-    /***<pre> system_create_date : 작성일자 </pre> */
-	private Date system_create_date;
+    /***
+     * <pre>
+     *  system_create_date : 작성일자
+     * </pre>
+     */
+    private Date system_create_date;
 
-    /***<pre> system_create_userid : 작성자ID </pre> */
-	private String system_create_userid;
+    /***
+     * <pre>
+     *  system_create_userid : 작성자ID
+     * </pre>
+     */
+    private String system_create_userid;
 
-    /***<pre> system_update_date : 수정일자 </pre> */
-	private Date system_update_date;
+    /***
+     * <pre>
+     *  system_update_date : 수정일자
+     * </pre>
+     */
+    private Date system_update_date;
 
-    /***<pre> system_update_userid : 수정자ID </pre> */
-	private String system_update_userid;
+    /***
+     * <pre>
+     *  system_update_userid : 수정자ID
+     * </pre>
+     */
+    private String system_update_userid;
 
-    /***<pre> menu_sequence : 메뉴노출순서 </pre> */
-	private String menu_sequence;
+    /***
+     * <pre>
+     *  menu_sequence : 메뉴노출순서
+     * </pre>
+     */
+    private String menu_sequence;
 
-    /***<pre> menu_icon :  </pre> */
-	private String menu_icon;
+    /***
+     * <pre>
+     *  menu_icon :
+     * </pre>
+     */
+    private String menu_icon;
 
-    /***<pre> prgm_url :  </pre> */
-	private String prgm_url;
+    /***
+     * <pre>
+     *  prgm_url :
+     * </pre>
+     */
+    private String prgm_url;
 
-
-    /***<pre> user_email : 사용자 이메일 </pre> */
+    /***
+     * <pre>
+     *  user_email : 사용자 이메일
+     * </pre>
+     */
     @Transient
     private String user_email;
-    /***<pre> menu_code : 메뉴코드 </pre> */
+    /***
+     * <pre>
+     *  menu_code : 메뉴코드
+     * </pre>
+     */
     @Transient
-	private String _menu_code;
+    private String _menu_code;
 
-    /***<pre> menu_name_kr : 메뉴명_한국어 </pre> */
+    /***
+     * <pre>
+     *  menu_name_kr : 메뉴명_한국어
+     * </pre>
+     */
     @Transient
-	private String _menu_name_kr;
+    private String _menu_name_kr;
 
-    /***<pre> menu_name_en : 메뉴명_영어 </pre> */
+    /***
+     * <pre>
+     *  menu_name_en : 메뉴명_영어
+     * </pre>
+     */
     @Transient
-	private String _menu_name_en;
+    private String _menu_name_en;
 
-    /***<pre> menu_name_mn : 메뉴명_몽어 </pre> */
+    /***
+     * <pre>
+     *  menu_name_mn : 메뉴명_몽어
+     * </pre>
+     */
     @Transient
-	private String _menu_name_mn;
+    private String _menu_name_mn;
 
-    /***<pre> menu_number : 메뉴순서 </pre> */
+    /***
+     * <pre>
+     *  menu_number : 메뉴순서
+     * </pre>
+     */
     @Transient
-	private String _menu_number;
+    private String _menu_number;
 
-    /***<pre> menu_level : 메뉴레벨 </pre> */
+    /***
+     * <pre>
+     *  menu_level : 메뉴레벨
+     * </pre>
+     */
     @Transient
-	private String _menu_level;
+    private String _menu_level;
 
-    /***<pre> top_menu_code : 상위 메뉴코드 </pre> */
+    /***
+     * <pre>
+     *  top_menu_code : 상위 메뉴코드
+     * </pre>
+     */
     @Transient
-	private String _top_menu_code;
+    private String _top_menu_code;
 
-    /***<pre> url : URL </pre> */
+    /***
+     * <pre>
+     *  url : URL
+     * </pre>
+     */
     @Transient
-	private String _url;
+    private String _url;
 
-    /***<pre> use_yn : 사용여부 </pre> */
+    /***
+     * <pre>
+     *  use_yn : 사용여부
+     * </pre>
+     */
     @Transient
-	private String _use_yn;
+    private String _use_yn;
 
-    /***<pre> system_create_date : 작성일자 </pre> */
+    /***
+     * <pre>
+     *  system_create_date : 작성일자
+     * </pre>
+     */
     @Transient
-	private String _system_create_date;
+    private String _system_create_date;
 
-    /***<pre> system_create_userid : 작성자ID </pre> */
+    /***
+     * <pre>
+     *  system_create_userid : 작성자ID
+     * </pre>
+     */
     @Transient
-	private String _system_create_userid;
+    private String _system_create_userid;
 
-    /***<pre> system_update_date : 수정일자 </pre> */
+    /***
+     * <pre>
+     *  system_update_date : 수정일자
+     * </pre>
+     */
     @Transient
-	private String _system_update_date;
+    private String _system_update_date;
 
-    /***<pre> system_update_userid : 수정자ID </pre> */
+    /***
+     * <pre>
+     *  system_update_userid : 수정자ID
+     * </pre>
+     */
     @Transient
-	private String _system_update_userid;
+    private String _system_update_userid;
 
-    /***<pre> menu_sequence : 메뉴노출순서 </pre> */
+    /***
+     * <pre>
+     *  menu_sequence : 메뉴노출순서
+     * </pre>
+     */
     @Transient
-	private String _menu_sequence;
+    private String _menu_sequence;
 
-    /***<pre> menu_icon :  </pre> */
+    /***
+     * <pre>
+     *  menu_icon :
+     * </pre>
+     */
     @Transient
-	private String _menu_icon;
+    private String _menu_icon;
 
-    /***<pre> prgm_url :  </pre> */
+    /***
+     * <pre>
+     *  prgm_url :
+     * </pre>
+     */
     @Transient
-	private String _prgm_url;
-
+    private String _prgm_url;
 
 }

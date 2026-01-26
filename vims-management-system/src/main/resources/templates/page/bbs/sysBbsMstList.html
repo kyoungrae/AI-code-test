@@ -155,23 +155,22 @@
             </div>
           </div>
 
-          <div class="gi-input-container gi-flex-1">
-            <label for="register_bbs_type" class="gi-input-label" data-focus-label="true"
-              data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_TYPE"]</label>
-            <input data-select data-field="bbs_type" id="register_bbs_type" name="bbs_type" class="gi-input"
-              data-required="true" autocomplete="off" />
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_bbs_type" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_MST.BBS_TYPE"]</label>
+              <input data-select data-field="bbs_type" id="register_bbs_type" name="bbs_type" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
           </div>
         </div>
-
-
+      </form>
     </div>
-    </form>
-  </div>
-  <div class="gi-popup-footer">
-    <button id="popup-register_sysBbsMst_confirm-btn" class="gi-popup-register-btn"
-      type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
-    <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
-  </div>
+    <div class="gi-popup-footer">
+      <button id="popup-register_sysBbsMst_confirm-btn" class="gi-popup-register-btn"
+        type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+      <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+    </div>
   </div>
 </article>
 
@@ -361,7 +360,7 @@
             { HEADER: Message.Label.Array["SYS_BBS_MST.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS_MST.SYSTEM_UPDATE_USERID"], ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS_MST.SYSTEM_UPDATE_DATE"], ID: 'system_update_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
-            { HEADER: Message.Label.Array["REDIRECT_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["REDIRECT_BTN"], ID: 'redirect_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -425,7 +424,7 @@
         sysBbsMst_grid.pagingSet(findBySysBbsMstList);
 
         //그리드 내부의 상세 버튼 클릭 이벤트(상세 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
-        sysBbsMst_grid.detailBtnClick(redirectDetailPage, "detail_btn");
+        sysBbsMst_grid.detailBtnClick(redirectDetailPage, "redirect_btn");
 
         //그리드 내부의 상세 버튼 클릭 이벤트(수정 페이지 이동) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
         //sysBbsMst_grid.detailBtnClick(redirectDetailPage,"update_btn");

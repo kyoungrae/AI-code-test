@@ -32,7 +32,7 @@
 <article id="gi-menu_register-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body gi-row-40-important">
         <div class="gi-popup-header">
-            <span>메뉴등록</span>
+            <span>[Page.Message].Message.Label.Array["SYS_MENU.TITLE_REGISTER"]</span>
         </div>
         <div class="gi-popup-contents" style="height: 50% !important;">
             <!--      팝업내용 삽입 영역      -->
@@ -486,14 +486,15 @@
     }
     async function accessGroupStatus(data) {
         let htmlSource =
-            '<div class="gi-row-100 gi-col-100 gi-grid gi-grid-template-rows-repeat-2-1fr">'
-            + '  <div class="gi-row-100 gi-grid gi-col-360px">'
-            + '    <span class="gi-text-align-center">그룹 목록</span>'
-            + '    <div id="gi-Grid2" class="gi-Grid gi-row-100"></div>'
+            '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-column gi-padding-10px" style="gap: 20px; overflow-y: auto;">'
+            + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
+            + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_DEPT_GROUP.TITLE"] + ' ]</span>'
+            + '    <div id="gi-Grid2" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
             + '  </div>'
-            + '  <div class="gi-row-100 gi-grid gi-col-400px">'
-            + '    <span class="gi-text-align-center">권한 적용 그룹 목록</span>'
-            + '    <div id="gi-Grid3" class="gi-Grid gi-row-100"></div>'
+            + '  <div style="border-top: 1px dashed #cbd5e1; margin: 0 10px;"></div>'
+            + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
+            + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE"] + ' ]</span>'
+            + '    <div id="gi-Grid3" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
             + '  </div>'
             + '</div>';
         $("#access_group_grid").html(htmlSource);
@@ -520,7 +521,7 @@
                 let data = response.data;
                 // 그리드 헤더 설정
                 let sysDeptGroup_menuGrid_header = {
-                    title: "그룹아이디 목록",
+                    title: Message.Label.Array["SYS_DEPT_GROUP.TITLE"],
                     list: [
                         { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: Message.Label.Array["SYS_DEPT_GROUP.TOP_GROUP_ID"], ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },

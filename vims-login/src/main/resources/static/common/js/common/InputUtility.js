@@ -112,14 +112,14 @@ class InputUtility {
             // 셀렉트박스, 드롭다운, 라벨 클릭은 제외
             let $label = $(`label[for="${id}"]`);
             let $popup = $copySelectBox.closest('.gi-popup');
-            
+
             // 팝업 내부에 있는 경우 팝업 내부의 모든 클릭은 무시 (드롭다운 유지)
             if ($popup.length > 0 && $(e.target).closest('.gi-popup-body').length > 0) {
                 return;
             }
-            
+
             // 팝업 외부에서 셀렉트박스 관련 요소가 아닌 경우에만 닫기
-            if ($(e.target).closest(`#${id}_select`).length === 0 && 
+            if ($(e.target).closest(`#${id}_select`).length === 0 &&
                 $(e.target).closest($ulElement).length === 0 &&
                 $(e.target).closest($label).length === 0) {
                 if ($copySelectBox.hasClass('active')) {
@@ -133,7 +133,7 @@ class InputUtility {
         $ulElement.find('li button').off('click').on('click', (e) => {
             // 이벤트 버블링 방지
             e.stopPropagation();
-            
+
             const $selectedItem = $(e.currentTarget);
             let selectedText = $selectedItem.text();
             let selectedValue = $selectedItem.attr('value');
@@ -270,14 +270,14 @@ class InputUtility {
             // 셀렉트박스, 드롭다운, 라벨 클릭은 제외
             let $label = $(`label[for="${id}"]`);
             let $popup = $copySelectBox.closest('.gi-popup');
-            
+
             // 팝업 내부에 있는 경우 팝업 내부의 모든 클릭은 무시 (드롭다운 유지)
             if ($popup.length > 0 && $(e.target).closest('.gi-popup-body').length > 0) {
                 return;
             }
-            
+
             // 팝업 외부에서 셀렉트박스 관련 요소가 아닌 경우에만 닫기
-            if ($(e.target).closest(`#${id}_select`).length === 0 && 
+            if ($(e.target).closest(`#${id}_select`).length === 0 &&
                 $(e.target).closest($ulElement).length === 0 &&
                 $(e.target).closest($label).length === 0) {
                 if ($copySelectBox.hasClass('active')) {
@@ -291,7 +291,7 @@ class InputUtility {
         $ulElement.find('li button').off('click').on('click', (e) => {
             // 이벤트 버블링 방지
             e.stopPropagation();
-            
+
             const $selectedItem = $(e.currentTarget);
             let selectedText = $selectedItem.text();
             let selectedValue = $selectedItem.attr('value');

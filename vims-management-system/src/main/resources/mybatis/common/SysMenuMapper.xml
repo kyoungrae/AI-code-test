@@ -273,9 +273,8 @@
     <delete id="DELETE">
         DELETE FROM SYS_MENU
         <where>
-            
-             menu_code = #{menu_code}
-            AND menu_sequence = #{menu_sequence}
+            menu_code = #{menu_code}
+            <if test="menu_sequence != null">AND menu_sequence = #{menu_sequence}</if>
             
             <if test="menu_name_kr != null">AND menu_name_kr = #{menu_name_kr}</if>
             <if test="menu_name_en != null">AND menu_name_en = #{menu_name_en}</if>

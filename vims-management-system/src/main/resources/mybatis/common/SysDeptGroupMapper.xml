@@ -171,6 +171,7 @@
 
     <select id="SELECT_NOT_EXISTS_SYS_ACCS_GROUP_MENU" resultType="com.vims.common.group.SysDeptGroup">
         SELECT
+            row_number() over (ORDER BY group_level, group_id) AS no,
             group_id,
             group_name,
             group_level,
@@ -186,6 +187,7 @@
                      WHERE b.access_rights_group_id = a.group_id
                      AND b.menu_code = #{menu_code}
         )
+        ORDER BY group_level, group_id
     </select>
 
 </mapper>

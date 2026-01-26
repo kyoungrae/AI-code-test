@@ -8,5 +8,6 @@ import java.util.List;
 @Mapper
 public interface SysMenuMapper extends CommonMapper<SysMenu> {
     List<SysMenu> SELECT_HIERARCHY(SysMenu request);
+
     List<SysMenu> SELECT_ACCESS_RIGHTS_GROUP_FOR_MENU(SysMenu request);
 }

@@ -240,7 +240,7 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                         })
 
                         if (!formUtil.checkEmptyValue(sysCodeName)) sysCodeName = "";
-                        let hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
+                        var hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
                         switch (item.TYPE) {
                             case "text":
                                 sysCodeValue
@@ -306,6 +306,28 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                             }
                                         } else {
                                             tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/trash.png"></button>';
+                                        };
+                                        break;
+                                    case "select_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/select.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/select.png"></button>';
+                                        };
+                                        break;
+                                    case "redirect_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/redirect.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/redirect.png"></button>';
                                         };
                                         break;
 
@@ -1361,6 +1383,7 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             }
                         })
                         if (!formUtil.checkEmptyValue(sysCodeName)) sysCodeName = "";
+                        var hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
                         switch (item.TYPE) {
                             case "text":
                                 sysCodeValue
@@ -1374,7 +1397,6 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                             //     break;
                             case "button":
                                 // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
-                                let hasVisibleOption = headerItem.some(h => h.ID === item.ID && formUtil.checkEmptyValue(h.VISIBLE_OPTION_BTN));
                                 if (hasVisibleOption) {
                                     // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
                                     if (originalDataForVisibleOption[item.ID] !== "true") {
@@ -1423,6 +1445,29 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                                             tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/trash.png"></button>';
                                         };
                                         break;
+                                    case "select_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/select.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/select.png"></button>';
+                                        };
+                                        break;
+                                    case "redirect_btn":
+                                        // VISIBLE_OPTION_BTN 조건이 있는 경우 체크
+                                        if (hasVisibleOption) {
+                                            // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
+                                            if (originalDataForVisibleOption[item.ID] !== "true") {
+                                                tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/redirect.png"></button>';
+                                            }
+                                        } else {
+                                            tag = '<button type="button" id="' + item.ID + "_" + i + '" class="grid-button-img gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + '<img class="grid-img" src="../common/img/redirect.png"></button>';
+                                        };
+                                        break;
+
 
                                 }
                         }

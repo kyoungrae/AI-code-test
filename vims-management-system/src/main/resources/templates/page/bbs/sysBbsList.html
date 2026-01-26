@@ -12,7 +12,8 @@
       <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
         <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
           <div class="gi-input-container gi-flex-1">
-            <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+            <label for="searchDesc1" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SEARCH.TITLE"]</label>
             <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
           </div>
 
@@ -39,9 +40,8 @@
       <!--/ 검색기능 영역 -->
       <!-- 그리드 영역 -->
       <div class="gi-row-100 gi-padding-left-right-20px gi-flex gi-grid-gap-20px">
-        <div id="sysBbsList_gi-Grid" class="gi-Grid gi-col-100"></div>
-        <!--   [사이드 그리드 사용 시 주석 해제]     -->
-        <!--        <div id="sysBbs_gi-Grid-side" class="gi-Grid-side" data-side-grid-open="false"></div>-->
+        <div id="sysBbsList_gi-Grid" class="gi-Grid"></div>
+        <div class="gi-Grid-side" id="access_group_grid" data-side-grid-open="false"></div>
       </div>
       <!--/ 그리드 영역 -->
       <!--      등록버튼 영역      -->
@@ -155,13 +155,17 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="register_p_menu_code" class="gi-input-label" data-focus-label="true" data-required="false">상위
-                메뉴</label>
+              <label for="register_p_menu_code" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.TOP_MENU_CODE"]</label>
               <div class="gi-flex gi-grid-gap-5px">
-                <input data-field="p_menu_code" id="register_p_menu_code" name="p_menu_code" class="gi-input"
-                  data-required="false" readonly autocomplete="off" />
-                <button type="button" class="gi-btn-blue gi-btn-sm" id="register-menu-search-btn">선택</button>
+                <input data-disabled data-field="p_menu_code" id="register_p_menu_code" name="p_menu_code"
+                  class="gi-input gi-flex-1" data-required="false" readonly autocomplete="off"
+                  placeholder='[Page.Message].Message.Label.Array["SYS_MENU.SELECT_TOP_MENU_DESC"]' />
               </div>
+            </div>
+            <div class="gi-flex gi-grid-gap-5px">
+              <button type="button" class="gi-btn-blue" id="register-menu-search-btn"
+                style="min-width: 80px;">[Page.Message].Message.Label.Array["SELECT_BTN"]</button>
             </div>
           </div>
 
@@ -175,7 +179,7 @@
           </div>
 
           <div class="gi-flex gi-grid-gap-16px">
-            <div class="gi-flex-1 gi-flex gi-flex-align-items-center gi-grid-gap-20px gi-padding-top-20px">
+            <div class="gi-flex-1 gi-flex gi-flex-align-items-center gi-grid-gap-20px gi-padding-top-10px">
               <div class="gi-flex gi-flex-align-items-center gi-grid-gap-10px">
                 <input data-field="file_yn" type="checkbox" id="register_file_yn" name="file_yn" class="gi-input"
                   data-required="false" autocomplete="off" />
@@ -242,12 +246,14 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="update_p_menu_code" class="gi-input-label" data-focus-label="true" data-required="false">상위
-                메뉴</label>
+              <label for="update_p_menu_code" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.TOP_MENU_CODE"]</label>
               <div class="gi-flex gi-grid-gap-5px">
-                <input data-field="p_menu_code" id="update_p_menu_code" name="p_menu_code" class="gi-input"
-                  data-required="false" readonly autocomplete="off" />
-                <button type="button" class="gi-btn-blue gi-btn-sm" id="update-menu-search-btn">선택</button>
+                <input data-field="p_menu_code" id="update_p_menu_code" name="p_menu_code" class="gi-input gi-flex-1"
+                  data-required="false" readonly autocomplete="off"
+                  placeholder='[Page.Message].Message.Label.Array["SYS_MENU.SELECT_TOP_MENU_DESC"]' />
+                <button type="button" class="gi-btn-blue" id="update-menu-search-btn"
+                  style="min-width: 80px;">[Page.Message].Message.Label.Array["SELECT_BTN"]</button>
               </div>
             </div>
           </div>
@@ -262,7 +268,7 @@
           </div>
 
           <div class="gi-flex gi-grid-gap-16px">
-            <div class="gi-flex gi-flex-align-items-center gi-grid-gap-10px gi-flex-1">
+            <div class="gi-flex gi-flex-align-items-center gi-grid-gap-10px gi-flex-1 gi-padding-top-10px">
               <input data-field="file_yn" id="update_file_yn" type="checkbox" name="update_file_yn" class="gi-input"
                 data-required="false" autocomplete="off" />
               <label for="update_file_yn" class="label-checkbox" data-focus-label="true"
@@ -288,12 +294,14 @@
 
 <!-- 메뉴 선택 팝업 영역 -->
 <article id="menu_tree_popup" class="gi-popup" data-popup-open="false">
-  <div class="gi-popup-body" style="width: 600px; height: 500px;">
+  <div class="gi-popup-body" style="max-width: 40%; height: 700px; max-height: 90vh; font-size:12px;">
     <div class="gi-popup-header">
-      <span>상위 메뉴 선택</span>
+      <span>[Page.Message].Message.Label.Array["SYS_MENU.SELECT_TOP_MENU"]</span>
     </div>
-    <div class="gi-popup-contents">
-      <div id="menu_tree_grid" class="gi-Grid gi-row-100"></div>
+    <div class="gi-popup-contents gi-padding-20px" style="height: 550px; overflow-y: auto;">
+      <p class="gi-subtitle-main gi-margin-bottom-20px">
+        [Page.Message].Message.Label.Array["SYS_MENU.SELECT_TOP_MENU_DESC"]</p>
+      <div id="menu_tree_grid" class="gi-Grid gi-row-100" style="height: calc(100% - 60px) !important;"></div>
     </div>
     <div class="gi-popup-footer">
       <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
@@ -348,6 +356,7 @@
       if (currentBbsMstId) {
         $("#register_bbs_mst_id").val(currentBbsMstId);
       }
+
 
     }); // 100ms 지연
   }
@@ -455,6 +464,7 @@
             { HEADER: Message.Label.Array["DETAIL_BTN"], ID: 'detail_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["UPDATE_BTN"], ID: 'update_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"], ID: "access_right_group", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
             { HEADER: Message.Label.Array["SIDE_BTN"], ID: 'side_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: 'checkbox', ID: 'checkbox', WIDTH: '25', TYPE: 'checkbox', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true }
           ]
@@ -485,6 +495,17 @@
 
         //그리스 내부의 header click 정렬 이벤트 설정
         sysBbs_grid.sortDataSet(findBySysBbsList);
+
+        // 사이드 그리드 연동 (권한 그룹 설정)
+        sysBbs_grid.sideOpenBtnClick("access_group_grid", "access_right_group", accessGroupStatus);
+
+        // 그리드 row 선택 시 사이드 그리드 갱신
+        sysBbs_grid.rowClick(function (row, e) {
+          let sideGridOpenFlag = $("#access_group_grid").attr("data-side-grid-open");
+          if (sideGridOpenFlag === "true" && $(e.currentTarget).hasClass("gi-grid-list-select")) {
+            accessGroupStatus(row);
+          }
+        });
 
       } else {
         formUtil.toast("response status is :" + status, "error");
@@ -619,29 +640,167 @@
     axios.post(url, param).then(response => {
       if (response.status === 200) {
         let data = response.data;
+
+        // 사용 여부(use_yn)가 'N'이 아닌 메뉴만 표시 (NULL이거나 'Y'인 경우 포함)
+        let activeMenus = data.filter(item => item.use_yn !== "0");
+
         let menuGrid = {
           title: "메뉴 목록",
           list: [
-            { HEADER: '메뉴명', ID: "menu_name_kr", WIDTH: "50", TYPE: "text", TEXT_ALIGN: "left" },
-            { HEADER: '메뉴코드', ID: "menu_code", WIDTH: "30", TYPE: "text", TEXT_ALIGN: "center" },
+            { HEADER: '메뉴명', ID: "menu_name_kr", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "left" },
+            { HEADER: '메뉴코드', ID: "menu_code", WIDTH: "40", TYPE: "text", TEXT_ALIGN: "center" },
             { HEADER: '레벨', ID: "menu_level", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true },
-            { HEADER: '상위코드', ID: "top_menu_code", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true }
+            { HEADER: '상위코드', ID: "top_menu_code", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true },
+            { HEADER: Message.Label.Array["SELECT_BTN"], ID: 'select_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', VISIBLE_OPTION_BTN: [{ "menu_level": "0" }, { "menu_level": "2" }], HIDDEN: false },
           ]
         }
 
         let grid = formUtil.giGridHierarchy(menuGrid, "", "", MENU_TREE_GRID_ID);
         grid.HierarchyOption({ level_column: "menu_level", parent_depth_column: "menu_code", child_depth_column: "top_menu_code" });
-        grid.DataSet(data);
+        grid.DataSet(activeMenus);
 
-        grid.rowClick(function (row) {
+        grid.detailBtnClick(selectBtnClick, "select_btn");
+
+        function selectBtnClick(row) {
           if (targetMenuInputId) {
             $("#" + targetMenuInputId).val(row.menu_code);
             popup.close(MENU_TREE_POPUP_ID);
           }
-        });
+        };
+      }
+    });
+  }
+  // === 권한 설정 관련 함수 (menuSettings.html 에서 복사/수정) ===
 
+  async function accessGroupStatus(data) {
+    let htmlSource =
+      '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-column gi-padding-10px" style="gap: 20px; overflow-y: auto;">'
+      + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
+      + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_DEPT_GROUP.TITLE"] + ' ]</span>'
+      + '    <div id="gi-Grid2" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
+      + '  </div>'
+      + '  <div style="border-top: 1px dashed #cbd5e1; margin: 0 10px;"></div>'
+      + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
+      + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE"] + ' ]</span>'
+      + '    <div id="gi-Grid3" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
+      + '  </div>'
+      + '</div>';
+    $("#access_group_grid").html(htmlSource);
+    await findBySysDeptGroupList(null, null, null, null, data);
+    await findBySysAccsGroupMenuList(null, null, null, null, data);
+  }
+
+  function findBySysDeptGroupList(page, range, sortId, sortOrder, cont) {
+    let url = "/cms/common/sysDeptGroup/findNotExistsSysAccsGroupMenu";
+    let param = {};
+    if (cont !== null) if (formUtil.checkEmptyValue(cont.bbs_id)) param.menu_code = cont.bbs_id; // bbs_id 를 menu_code로 사용
+
+    axios.post(url, param).then(response => {
+      if (response.status === 200) {
+        let data = response.data;
+        console.log(data)
+        let sysDeptGroup_menuGrid_header = {
+          title: Message.Label.Array["SYS_DEPT_GROUP.TITLE"],
+          list: [
+            { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '11px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "40", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "left" },
+            { HEADER: Message.Label.Array["SYS_DEPT_GROUP.TOP_GROUP_ID"], ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center", HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"], ID: "group_id", WIDTH: "30", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center" },
+            { HEADER: Message.Label.Array["SYS_DEPT_GROUP.USE_YN"], ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_LEVEL"], ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center", HIDDEN: true },
+            { HEADER: Message.Label.Array["REGISTER_BTN"], ID: "register_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "11px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: { "group_level": "0" }, HIDDEN: false }
+          ]
+        }
+        let sysDeptGroup_menu_grid = formUtil.giGridHierarchy(sysDeptGroup_menuGrid_header, null, null, "gi-Grid2");
+        sysDeptGroup_menu_grid.HierarchyOption({ level_column: "group_level", parent_depth_column: "group_id", child_depth_column: "top_group_id" });
+
+        if (cont !== null) {
+          sysDeptGroup_menu_grid.DataSet(data);
+        } else {
+          sysDeptGroup_menu_grid.DataSet();
+        }
+
+        sysDeptGroup_menu_grid.detailBtnClick(function (row) {
+          row["menu_code"] = cont.bbs_id;
+          accessGroupInMenuRegister(row, cont);
+        }, "register_btn");
+        sysDeptGroup_menu_grid.gridColumResize("gi-Grid2");
       }
     });
   }
 
+  function accessGroupInMenuRegister(row, originCont) {
+    let url = "/cms/common/sysAccsGroupMenu/register";
+    let param = {
+      menu_code: row.menu_code,
+      access_rights_group_id: row.group_id
+    };
+    axios.post(url, param).then(response => {
+      if (response.status === 200) {
+        formUtil.toast(Message.Label.Array["COMPLETE.INSERT"]);
+        accessGroupStatus(originCont);
+        findByMenuList();
+      }
+    }).catch(error => {
+      formUtil.toast(error.response.data, "error");
+    })
+  }
+
+  function findBySysAccsGroupMenuList(page, range, sortId, sortOrder, cont) {
+    if (!formUtil.checkEmptyValue(page)) page = 1;
+    if (!formUtil.checkEmptyValue(range)) range = 10;
+
+    let url = "/cms/common/sysAccsGroupMenu/findPage";
+    let param = {
+      page_no: page,
+      row_range: range,
+      offset: (page - 1) * range
+    };
+    if (cont !== null) if (formUtil.checkEmptyValue(cont.bbs_id)) param.menu_code = cont.bbs_id;
+
+    axios.post(url, param).then(response => {
+      if (response.status === 200) {
+        let data = response.data.DATA;
+        let paging = response.data.TOTAL_PAGING[0];
+
+        let sysAccsGroupMenu_menuGrid_header = {
+          title: Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE"],
+          list: [
+            { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '11px', TEXT_ALIGN: 'center', HIDDEN: false },
+            { HEADER: Message.Label.Array["SYS_ACCS_GROUP_MENU.MENU_CODE"], ID: 'menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '11px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_ACCS_GROUP_MENU.ACCESS_RIGHTS_GROUP_ID"], ID: 'access_rights_group_id', WIDTH: '70', TYPE: 'text', FONT_SIZE: '11px', TEXT_ALIGN: 'center' },
+            { HEADER: Message.Label.Array["DELETE_BTN"], ID: 'delete_btn', WIDTH: '15', TYPE: 'button', FONT_SIZE: '11px', TEXT_ALIGN: 'center' },
+          ]
+        }
+        let sysAccsGroupMenu_menu_grid = formUtil.giGrid(sysAccsGroupMenu_menuGrid_header, paging, page, "gi-Grid3");
+
+        if (cont !== null) {
+          sysAccsGroupMenu_menu_grid.DataSet(data);
+        } else {
+          sysAccsGroupMenu_menu_grid.DataSet();
+        }
+
+        sysAccsGroupMenu_menu_grid.pagingSet(function (p, r) { findBySysAccsGroupMenuList(p, r, null, null, cont); });
+        sysAccsGroupMenu_menu_grid.deleteBtnClick(function (row) {
+          commonAccessGroupIdRemove(row, cont);
+        }, "delete_btn");
+      }
+    });
+  }
+
+  function commonAccessGroupIdRemove(row, originCont) {
+    let url = "/cms/common/sysAccsGroupMenu/remove";
+    let param = {
+      menu_code: originCont.bbs_id,
+      access_rights_group_id: row.access_rights_group_id
+    };
+    axios.post(url, param).then(response => {
+      if (response.status === 200) {
+        formUtil.toast(Message.Label.Array["COMPLETE.DELETE"]);
+        accessGroupStatus(originCont);
+      }
+    }).catch(error => {
+      formUtil.toast(error.response.data, "error");
+    });
+  }
 </script>
