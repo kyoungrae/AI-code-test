@@ -37,6 +37,35 @@ class file {
             new CustomFileUploadDialog(options, resolve, reject);
         });
     }
+
+    /**
+     * @title 파일 첨부 카드 로드 (컴포넌트)
+     * @param containerId  target container id
+     * @param options {Object} - { inputId: 'uuid_input_id', isReadOnly: true/false }
+     */
+    async loadFileCard(containerId, options = {}) {
+        const inputId = options.inputId || 'file_uuid';
+        const isReadOnly = options.isReadOnly || false;
+
+        const html = await formUtil.loadToHtml({ url: "/common/file", data: {} });
+        const $container = $("#" + containerId);
+        $container.html(html).removeClass("gi-hidden");
+
+        // UI 설정
+        if (isReadOnly) {
+            $container.find('button[data-file-upload-btn]').remove();
+            $container.find('[data-file-info-text]').text(Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"]);
+            $container.find('[data-file-empty-msg]').remove();
+        } else {
+            $container.find('[data-file-info-text]').text(Message.Label.Array["FILE_ATTACH_INFO"]);
+        }
+
+        // input ID 설정
+        $container.find('[data-file-uuid-input]').attr('id', inputId);
+
+        // 데이터 바인딩을 위해 PageInit의 메시지 처리를 다시 수행할 필요가 있을 수 있음
+        new PageInit().messageLabelSettings();
+    }
 }
 //CLASS : 파일 업로드 HTML 생성 클래스 파일 업로드 팝업 및 기능 관리 클래스
 class createFileUploadHTML {

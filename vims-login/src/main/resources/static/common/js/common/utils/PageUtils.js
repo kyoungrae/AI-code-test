@@ -39,7 +39,10 @@ FormUtility.prototype.activatedMenu = function (reqUrl) {
             }
 
             if (!$activatedMenu || $activatedMenu.length === 0) {
-                $activatedMenu = $("[data-page-name='" + reqUrl.toString() + "']");
+                // 게시판처럼 URL이 겹치는 경우 광범위한 매칭 방지
+                if (reqUrl !== "/bbs/view") {
+                    $activatedMenu = $("[data-page-name='" + reqUrl.toString() + "']");
+                }
             }
 
             if ($activatedMenu && $activatedMenu.length > 0) {
@@ -175,14 +178,6 @@ FormUtility.prototype.loadToHtml = async function (cont) {
 
         axios.get(url).then(response => {
             if (formUtil.checkEmptyValue(response)) {
-                if (!formUtil.checkEmptyValue(sessionStorage.getItem("DATA"))) {
-                    sessionStorage.removeItem("DATA");
-                    sessionStorage.setItem("DATA", data);
-                } else {
-                    sessionStorage.removeItem("DATA");
-                    sessionStorage.setItem("DATA", data);
-                }
-
                 return resolve(response.data);
             }
         }).catch(error => {
