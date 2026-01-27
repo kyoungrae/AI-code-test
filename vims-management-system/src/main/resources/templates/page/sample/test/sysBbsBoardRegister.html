@@ -1,0 +1,208 @@
+<article id="sysBbsBoardRegisterPage" class="gi-article-content gi-col-95 gi-row-100">
+    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
+        <div class="gi-container-narrow">
+
+            <!-- 페이지 헤더 -->
+            <header class="gi-margin-bottom-40px">
+                <h1 class="gi-font-size-36px gi-title-main">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.TITLE_REGISTER"]</h1>
+                <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SUB_TITLE_REGISTER"]</p>
+            </header>
+
+            <form id="sysBbsBoardRegisterFrom">
+
+                <!-- [기본 정보 카드] -->
+                <div class="gi-article-content gi-margin-bottom-30px">
+                    <h2 class="gi-title-section">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.INFO"]</h2>
+                    <div class="gi-flex gi-flex-column gi-grid-gap-20px">
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="board_id" class="gi-input-label" data-focus-label="true"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.BOARD_ID"]</label>
+                               <input data-field="board_id" id="board_id" name="board_id" class="gi-input" data-focus-span-text-align="center" data-required="true" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="bbs_id" class="gi-input-label" data-focus-label="true"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.BBS_ID"]</label>
+                               <input data-field="bbs_id" id="bbs_id" name="bbs_id" class="gi-input" data-focus-span-text-align="center" data-required="true" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="title" class="gi-input-label" data-focus-label="true"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.TITLE"]</label>
+                               <input data-field="title" id="title" name="title" class="gi-input" data-focus-span-text-align="center" data-required="true" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="content" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.CONTENT"]</label>
+                               <input data-field="content" id="content" name="content" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="writer_name" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITER_NAME"]</label>
+                               <input data-field="writer_name" id="writer_name" name="writer_name" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="hit_count" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.HIT_COUNT"]</label>
+                               <input data-field="hit_count" id="hit_count" name="hit_count" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="thumbnail" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL"]</label>
+                               <input data-field="thumbnail" id="thumbnail" name="thumbnail" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="system_create_userid" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SYSTEM_CREATE_USERID"]</label>
+                               <input data-field="system_create_userid" id="system_create_userid" name="system_create_userid" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="system_create_date" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SYSTEM_CREATE_DATE"]</label>
+                               <input data-field="system_create_date" id="system_create_date" name="system_create_date" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="system_update_userid" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_USERID"]</label>
+                               <input data-field="system_update_userid" id="system_update_userid" name="system_update_userid" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="system_update_date" class="gi-input-label" data-focus-label="true"
+                                    data-required="false">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_DATE"]</label>
+                               <input data-field="system_update_date" id="system_update_date" name="system_update_date" class="gi-input" data-focus-span-text-align="center" data-required="false" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- [파일 첨부 카드] -->
+                 <div id="sample-file-section" data-file-card data-input-id="sysBbsBoard_file_uuid"
+                    data-folder-name="sysBbsBoardFolder" data-api-path="/fms/common/file/sysFileDetail"
+                    data-read-only="false">
+                </div>
+
+                <!-- 버튼 영역 -->
+                <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
+                    <button id="register-reset-btn" class="gi-btn gi-btn-modern-reset" type="button">초기화</button>
+                    <button id="register-btn" class="gi-btn-blue gi-btn-modern-save" type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+</article>
+<script type="text/javascript">
+    var PRGMID = "sysBbsBoardRegisterPage";	//page id
+    var PRGFID = "sysBbsBoardRegisterFrom";	//form id
+    init();
+
+
+    function init(){
+         //초기 값 셋팅
+        initValueSetting();
+
+        //초기화
+        resetEvent();
+
+        setTimeout(function(){
+            //페이지 초기설정
+            new PageInit();
+            //클릭 이벤트
+            clickEvent();
+        });
+
+    }
+
+    function initValueSetting(){
+        // select option 초기화
+        //input.setSelectOption("#sample_category", "/cms/common/comCode/find", { code: "code_id", name: "code_name" });
+    }
+
+    function resetEvent(){
+        //데이터 호출 후 이벤트 재설정
+        new AfterLoadDataEvent();
+
+    }
+
+    //클릭 이벤트
+    function clickEvent(){
+        // 초기화 버튼 클릭 이벤트
+        $("#register-reset-btn").on("click", function () {
+            formUtil.popup("reset_confirm", Message.Label.Array["CONFIRM.RESET"], function () {
+                $("#" + PRGFID)[0].reset();
+                new AfterLoadDataEvent();
+                formUtil.toast("초기화되었습니다.");
+            });
+        });
+        //등록 버튼 클릭 이벤트
+        $("#register-btn").click(function(){
+            sysBbsBoardRegister();
+        })
+    }
+    function sysBbsBoardRegister(){
+        let flag =  sysBbsBoardRegisterCheckValidation();
+        if(flag){
+            let data = dataBinding.getData(PRGFID);
+            let url = "/cms/common/sysBbsBoard/register";
+                //console.log(data);
+            let param = {
+
+                board_id : data.board_id ,
+                bbs_id : data.bbs_id ,
+                title : data.title ,
+                content : data.content ,
+                writer_name : data.writer_name ,
+                hit_count : data.hit_count ,
+                thumbnail : data.thumbnail ,
+                system_create_userid : data.system_create_userid ,
+                system_create_date : data.system_create_date ,
+                system_update_userid : data.system_update_userid ,
+                system_update_date : data.system_update_date 
+            };
+            axios.post(url,param).then(response =>{
+                let status = response.status;
+                if (status === 200) {
+                    formUtil.toast(Message.Label.Array["COMPLETE.INSERT"],"success");
+                } else {
+                    formUtil.toast("response status is :" + status,"error");
+                }
+            }).catch(error => {
+                formUtil.toast(error.response.data,"error");
+            })
+        }
+    }
+    function sysBbsBoardRegisterCheckValidation(){
+        return formUtil.validationCheck(PRGFID,"SYS_BBS_BOARD.CHECK.");
+    }
+</script>

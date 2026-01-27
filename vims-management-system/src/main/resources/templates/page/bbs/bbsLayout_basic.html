@@ -17,6 +17,8 @@
                     </div>
                     <div class="gi-flex gi-grid-gap-10px">
                         <button id="search-btn" class="gi-btn-blue" type="button">검색</button>
+                        <button id="bbsLayoutBasicPage-reset-btn" class="gi-btn"
+                            type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
                     </div>
                 </div>
             </div>
@@ -54,6 +56,14 @@
         $("#bbs-write-btn").on("click", function () {
             formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardWrite", { bbs_id: bbsId });
         });
+
+        $("#search-btn").on("click", function () {
+            findByBoardList();
+        })
+        $("#bbsLayoutBasicPage-reset-btn").on("click", function () {
+            $("#searchDesc1").val("");
+            findByBoardList();
+        })
     }
 
     function findByBoardList(page, range) {
@@ -67,7 +77,9 @@
             row_range: range,
             offset: (page - 1) * range
         };
-
+        let cont1 = $("#searchDesc1").val();
+        if (formUtil.checkEmptyValue(cont1)) param._title = cont1;
+        console.log(param)
         axios.post(url, param).then(response => {
             if (response.status === 200) {
                 let data = response.data.DATA;
