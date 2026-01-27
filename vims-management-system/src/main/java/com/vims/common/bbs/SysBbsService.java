@@ -24,6 +24,7 @@ public class SysBbsService extends AbstractCommonService<SysBbs> {
     private final FmsExcelClient fmsExcelClient; // FMS 서비스 통신용 Feign Client
     private final com.vims.common.menu.SysMenuService sysMenuService;
     private final com.vims.common.accessgroupmenu.SysAccsGroupMenuMapper sysAccsGroupMenuMapper;
+    private final SysBbsBoardMapper sysBbsBoardMapper;
 
     @Value("${fms.internal.api-key}")
     private String fmsInternalApiKey; // 내부 API 키 (application.yml에서 주입)
@@ -74,6 +75,17 @@ public class SysBbsService extends AbstractCommonService<SysBbs> {
             if (!acList.isEmpty()) {
                 // 권한 데이터가 존재하면 삭제 중단 및 예외 발생
                 throw new CustomException(getMessage("EXCEPTION.DELETE.EXIST.ACCESS_RIGHTS_GROUP_DATA"));
+            }
+
+            // 2. 해당 게시판에 게시물 데이터가 존재하는지 확인
+            SysBbsBoard boardParam = SysBbsBoard.builder()
+                    .bbs_id(request.getBbs_id())
+                    .build();
+            List<SysBbsBoard> boardList = sysBbsBoardMapper.SELECT(boardParam);
+
+            if (!boardList.isEmpty()) {
+                // 게시물 데이터가 존재하면 삭제 중단 및 예외 발생
+                throw new CustomException(getMessage("EXCEPTION.DELETE.EXIST.BOARD_DATA"));
             }
 
             // 2. 게시판 삭제 시 관련 메뉴도 삭제 시도 (종속 관계)
