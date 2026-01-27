@@ -6,16 +6,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.io.IOException;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,12 +49,11 @@ public class JwtService {
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extreactAllClaims(token);
+        final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        // 만료 체크 시 리다이렉트 발생 방지
         try {
             final String username = extractUsername(token);
             return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
@@ -79,39 +73,16 @@ public class JwtService {
     }
 
     private Date extractExpiration(String token) {
-        // extractClaim 대신 직접 파싱하여 리다이렉트 회피
-        final Claims claims = extractAllClaimsPlain(token);
+        final Claims claims = extractAllClaims(token);
         return claims.getExpiration();
     }
 
-    private Claims extractAllClaimsPlain(String token) throws ExpiredJwtException {
+    private Claims extractAllClaims(String token) throws ExpiredJwtException {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInkey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    private Claims extreactAllClaims(String token) {
-        try {
-            return extractAllClaimsPlain(token);
-        } catch (ExpiredJwtException e) {
-            Cookie cookie = new Cookie("Authorization", null);
-            cookie.setMaxAge(0);
-            cookie.setPath("/");
-            HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-                    .getResponse();
-            if (response != null) {
-                response.addCookie(cookie);
-                try {
-                    response.sendRedirect("/login/login");
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-
-            throw e;
-        }
     }
 
     private Key getSignInkey() {

@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Map;
+
 /*
 * writer : 이경태
 * text : 쿼리 조회 결과값 가공 처리 AOP
@@ -35,12 +36,14 @@ public class SelectResultSqlAop {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ValidationService validationService = new ValidationService();
 
-    @Around("execution(* com.*.*Service.*(..)) && execution(* com.system.*..*.*(..))" )
+    @Around("execution(* com.*.*Service.*(..)) && execution(* com.system.*..*.*(..))")
     public Object transFormResultDataAop(ProceedingJoinPoint joinPoint) throws Throwable {
-//        //String currentDateTime = LocalDateTime.now().format(formatter);
-//        // logger.debug(currentDateTime + " Entering method: " + joinPoint.getSignature().toShortString());
-//        // logger.debug(currentDateTime + " Request Parameter: " + Arrays.toString(joinPoint.getArgs()));
-//
+        // //String currentDateTime = LocalDateTime.now().format(formatter);
+        // // logger.debug(currentDateTime + " Entering method: " +
+        // joinPoint.getSignature().toShortString());
+        // // logger.debug(currentDateTime + " Request Parameter: " +
+        // Arrays.toString(joinPoint.getArgs()));
+        //
         Object result = joinPoint.proceed();
 
         // 객체를 JSON 문자열로 변환
@@ -49,7 +52,7 @@ public class SelectResultSqlAop {
         JsonNode rootNode = objectMapper.readTree(resultJson);
         // JsonNode를 사용하여 JSON 데이터 접근 및 가공
         JsonNode modifiedNode = processJsonNode(rootNode);
-//        System.out.println("Modified JSON: " + modifiedNode);
+        // System.out.println("Modified JSON: " + modifiedNode);
 
         // 수정된 JsonNode를 Object로 변환하여 반환
         return objectMapper.treeToValue(modifiedNode, result.getClass());
@@ -78,7 +81,7 @@ public class SelectResultSqlAop {
                         String formattedValue = applyTransformation(fieldName, fieldValue.asText());
 
                         objectNode.put(fieldName, formattedValue); // 필드 값을 업데이트
-//                        System.out.println("Updated " + fieldName + " to: " + formattedValue);
+                        // System.out.println("Updated " + fieldName + " to: " + formattedValue);
                     }
                 }
             }
@@ -91,19 +94,20 @@ public class SelectResultSqlAop {
     private boolean isTransformField(String fieldName, String fieldValue) {
         // AopSetDataValueTransformFieldNameList 열거형에서 필드 이름 검사
         for (AopSetDataValueTransformFieldNameList transformField : AopSetDataValueTransformFieldNameList.values()) {
-            if (transformField.name().equals(fieldName) && validationService.checkEmptyValue(fieldValue)) {
+            if (transformField.name().equalsIgnoreCase(fieldName) && validationService.checkEmptyValue(fieldValue)) {
                 return true;
             }
         }
         // AopDateToStringTransformFieldNameList 열거형에서 필드 이름 검사
         for (AopDateToStringTransformFieldNameList transformField : AopDateToStringTransformFieldNameList.values()) {
-            if (transformField.name().equals(fieldName) && validationService.checkEmptyValue(fieldValue)) {
+            if (transformField.name().equalsIgnoreCase(fieldName) && validationService.checkEmptyValue(fieldValue)) {
                 return true;
             }
         }
         // AopIntegerToStringSetCommaFieldNameList 열거형에서 필드 이름 검사
-        for (AopIntegerToStringSetCommaFieldNameList transformField : AopIntegerToStringSetCommaFieldNameList.values()) {
-            if (transformField.name().equals(fieldName) && validationService.checkEmptyValue(fieldValue)) {
+        for (AopIntegerToStringSetCommaFieldNameList transformField : AopIntegerToStringSetCommaFieldNameList
+                .values()) {
+            if (transformField.name().equalsIgnoreCase(fieldName) && validationService.checkEmptyValue(fieldValue)) {
                 return true;
             }
         }
@@ -114,24 +118,33 @@ public class SelectResultSqlAop {
     // 필드 이름에 따라 어노테이션 기반으로 변환 함수 적용
     private String applyTransformation(String fieldName, String value) throws Exception {
         try {
-            if (EnumSet.allOf(AopSetDataValueTransformFieldNameList.class).stream().anyMatch(e -> e.name().equals(fieldName))) {
-                AopSetDataValueTransformFieldNameList transformField = AopSetDataValueTransformFieldNameList.valueOf(fieldName);
-                if (transformField.getClass().getField(fieldName).isAnnotationPresent(SetHypenRegident.class)) {
+            if (EnumSet.allOf(AopSetDataValueTransformFieldNameList.class).stream()
+                    .anyMatch(e -> e.name().equalsIgnoreCase(fieldName))) {
+                String enumName = EnumSet.allOf(AopSetDataValueTransformFieldNameList.class).stream()
+                        .filter(e -> e.name().equalsIgnoreCase(fieldName)).findFirst().get().name();
+                AopSetDataValueTransformFieldNameList transformField = AopSetDataValueTransformFieldNameList
+                        .valueOf(enumName);
+                if (transformField.getClass().getField(enumName).isAnnotationPresent(SetHypenRegident.class)) {
                     return formatResidentRegistrationNumber(value);
-                } else if (transformField.getClass().getField(fieldName).isAnnotationPresent(SetHypenCorporation.class)) {
+                } else if (transformField.getClass().getField(enumName)
+                        .isAnnotationPresent(SetHypenCorporation.class)) {
                     return formatCorporationRegistrationNumber(value);
-                } else if (transformField.getClass().getField(fieldName).isAnnotationPresent(SetHypenPhone.class)) {
+                } else if (transformField.getClass().getField(enumName).isAnnotationPresent(SetHypenPhone.class)) {
                     return formatPhoneNumber(value);
-                } else if (transformField.getClass().getField(fieldName).isAnnotationPresent(SetHypenCompany.class)){
+                } else if (transformField.getClass().getField(enumName).isAnnotationPresent(SetHypenCompany.class)) {
                     return formatCompanyRegistrationNumber(value);
-                } else if (transformField.getClass().getField(fieldName).isAnnotationPresent(SetHypen.class)) {
+                } else if (transformField.getClass().getField(enumName).isAnnotationPresent(SetHypen.class)) {
                     return formatDate(value);
-                } else if (transformField.getClass().getField(fieldName).isAnnotationPresent(SetColonTime.class)) {
+                } else if (transformField.getClass().getField(enumName).isAnnotationPresent(SetColonTime.class)) {
                     return formatTime(value);
-                    }
-            }else if (EnumSet.allOf(AopDateToStringTransformFieldNameList.class).stream().anyMatch(e -> e.name().equals(fieldName))) {
-                AopDateToStringTransformFieldNameList transformFieldDateToString = AopDateToStringTransformFieldNameList.valueOf(fieldName);
-                if (transformFieldDateToString.getClass().getField(fieldName).isAnnotationPresent(DateToString.class)) {
+                }
+            } else if (EnumSet.allOf(AopDateToStringTransformFieldNameList.class).stream()
+                    .anyMatch(e -> e.name().equalsIgnoreCase(fieldName))) {
+                String enumName = EnumSet.allOf(AopDateToStringTransformFieldNameList.class).stream()
+                        .filter(e -> e.name().equalsIgnoreCase(fieldName)).findFirst().get().name();
+                AopDateToStringTransformFieldNameList transformFieldDateToString = AopDateToStringTransformFieldNameList
+                        .valueOf(enumName);
+                if (transformFieldDateToString.getClass().getField(enumName).isAnnotationPresent(DateToString.class)) {
                     return formatDateToString(value);
                 }
             }
@@ -140,20 +153,25 @@ public class SelectResultSqlAop {
         }
         return value;
     }
+
     private String formatDate(String value) {
         // 주민등록번호 formatting 로직
         if (value != null && value.length() > 6) {
-            return value.substring(0, 4) + "-" + value.substring(4,6)+ "-" + value.substring(6,8);
+            return value.substring(0, 4) + "-" + value.substring(4, 6) + "-" + value.substring(6, 8);
         }
         return value;
     }
-    private String formatDateToString(String value) {
-        long timeStamp = Long.parseLong(value);
-        Date date = new Date(timeStamp);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = sdf.format(date);
 
-        return dateString;
+    private String formatDateToString(String value) {
+        try {
+            long timeStamp = Long.parseLong(value);
+            Date date = new Date(timeStamp);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return sdf.format(date);
+        } catch (NumberFormatException e) {
+            // Already formatted or not a timestamp, return as is
+            return value;
+        }
     }
 
     private String formatNumberToStringSetComma(String value) {
@@ -170,7 +188,7 @@ public class SelectResultSqlAop {
     }
 
     private String formatCorporationRegistrationNumber(String value) {
-        //법인등록번호는 주민등록번호와 같은 로직 수행
+        // 법인등록번호는 주민등록번호와 같은 로직 수행
         return formatResidentRegistrationNumber(value);
     }
 
@@ -214,6 +232,5 @@ public class SelectResultSqlAop {
             throw new IllegalArgumentException("Invalid time length: " + value.length());
         }
     }
-
 
 }
