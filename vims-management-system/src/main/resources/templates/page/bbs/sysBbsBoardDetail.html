@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- 섹션 3: 첨부 파일 -->
-                <div class="gi-form-section">
+                <div id="file-section-container" class="gi-form-section gi-hidden">
                     <h3 class="gi-form-section-title">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"]
                     </h3>
                     <div id="detail-file-section" data-file-card data-input-id="board_file_uuid" data-read-only="true">
@@ -87,8 +87,27 @@
         if (pageInit.fileInitPromise) {
             await pageInit.fileInitPromise;
         }
+
+        // BBS 설정 확인 (파일 첨부 가능 여부 등)
+        await checkBbsConfiguration();
+
         fetchBoardDetail();
         clickEvent();
+    }
+
+    async function checkBbsConfiguration() {
+        let url = "/cms/common/sysBbs/find";
+        try {
+            const response = await axios.post(url, { bbs_id: bbsId });
+            if (response.status === 200 && response.data.length > 0) {
+                let bbsInfo = response.data[0];
+                if (bbsInfo.file_yn === '1') {
+                    $("#file-section-container").removeClass("gi-hidden");
+                }
+            }
+        } catch (e) {
+            console.error("BBS Config fetch failed", e);
+        }
     }
 
     function clickEvent() {

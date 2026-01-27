@@ -47,12 +47,12 @@
                     </div>
 
                     <!-- 섹션 3: 첨부 파일 -->
-                    <div class="gi-form-section">
+                    <div id="file-section-container" class="gi-form-section gi-hidden">
                         <h3 class="gi-form-section-title">
                             [Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"]</h3>
-                        <div id="file-attachment-section" class="gi-hidden" data-file-card
-                            data-input-id="board_file_uuid" data-folder-name="bbs_attachments"
-                            data-api-path="/fms/common/file/sysFileDetail" data-read-only="false">
+                        <div id="file-attachment-section" data-file-card data-input-id="board_file_uuid"
+                            data-folder-name="bbs_attachments" data-api-path="/fms/common/file/sysFileDetail"
+                            data-read-only="false">
                         </div>
                     </div>
 
@@ -119,6 +119,8 @@
 
         // 5. 버튼 이벤트
         clickEvent();
+
+        commonTag.inputTagReset($(".gi-input"));
     }
 
     async function checkBbsConfiguration() {
@@ -129,6 +131,7 @@
                 let bbsInfo = response.data[0];
                 if (bbsInfo.file_yn === '1') {
                     // 조건 충족 시 파일 첨부 영역 활성화
+                    $("#file-section-container").removeClass("gi-hidden");
                     await fileUtil.activateFileCard("file-attachment-section");
                 }
             }
