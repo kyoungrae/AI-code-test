@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "FileManagementSystemApplication",
+            "request": "launch",
+            "mainClass": "com.FileManagementSystemApplication",
+            "projectName": "FMS"
+        },
+        {
+            "type": "java",
+            "name": "VimsGatewayApplication",
+            "request": "launch",
+            "mainClass": "com.gigateway.VimsGatewayApplication",
+            "projectName": "vims-gateway"
+        },
+        {
+            "type": "java",
+            "name": "VimsLoginApplication",
+            "request": "launch",
+            "mainClass": "com.VimsLoginApplication",
+            "projectName": "vims-login"
+        },
+        {
+            "type": "java",
+            "name": "VimsManagementApplication",
+            "request": "launch",
+            "mainClass": "com.VimsManagementApplication",
+            "projectName": "vims-management"
+        }
+    ]
+}

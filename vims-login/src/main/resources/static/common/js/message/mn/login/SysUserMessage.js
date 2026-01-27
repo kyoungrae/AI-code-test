@@ -1,0 +1,66 @@
+Message.Label.Array["SYS_USER.TITLE_DETAIL"] = " Дэлгэрэнгүй";
+Message.Label.Array["SYS_USER.TITLE_LIST"] = " Хэрэглэгчийн удирдлага";
+Message.Label.Array["SYS_USER.TITLE_MODIFY"] = " Засах";
+Message.Label.Array["SYS_USER.TITLE_REGISTER"] = " Бүртгэх";
+
+Message.Label.Array["SYS_USER.CHECK.USER_NAME"] = "Нэр (KR) оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.USER_ID"] = "ID оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.USER_PWD"] = "Нууц үг оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.OFFICE_CODE"] = "Харьяалал сонгоно уу";
+Message.Label.Array["SYS_USER.CHECK.EMAIL"] = "И-мэйл оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.HP_NUMBER"] = "Утасны дугаар оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.USER_STATUS"] = "Төлөв сонгоно уу";
+Message.Label.Array["SYS_USER.CHECK.USE_YN"] = "Ашиглах эсэх сонгоно уу";
+Message.Label.Array["SYS_USER.CHECK.USER_PWD_CHECK"] = "Нууц үг баталгаажуулалт таарахгүй байна";
+Message.Label.Array["SYS_USER.CHECK.EMAIL_FORMAT"] = "И-мэйл буруу байна";
+Message.Label.Array["SYS_USER.CHECK.USER_NAME_EN"] = "Нэр (EN) оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.USER_NAME_MN"] = "Нэр (MN) оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.TEL_NUMBER"] = "Утас оруулна уу";
+Message.Label.Array["SYS_USER.CHECK.USER_GROUP_CODE"] = "Хэрэглэгчийн бүлэг сонгоно уу";
+
+
+Message.Label.Array["SYS_USER.USER_NAME"] = "Нэр (KR)";
+Message.Label.Array["SYS_USER.USER_ID"] = "ID";
+Message.Label.Array["SYS_USER.OFFICE_CODE"] = "Харьяалал";
+Message.Label.Array["SYS_USER.OFFICE_NAME"] = "Харьяаллын нэр";
+Message.Label.Array["SYS_USER.EMAIL"] = "И-мэйл";
+Message.Label.Array["SYS_USER.HP_NUMBER"] = "Утас";
+Message.Label.Array["SYS_USER.USER_STATUS"] = "Төлөв";
+Message.Label.Array["SYS_USER.USE_YN"] = "Ашиглах эсэх";
+Message.Label.Array["SYS_USER.SYSTEM_CREATE_DATE"] = "Үүсгэсэн огноо";
+Message.Label.Array["SYS_USER.USER_PWD"] = "Нууц үг";
+Message.Label.Array["SYS_USER.USER_PWD_CHECK"] = "Нууц үг баталгаажуулах";
+Message.Label.Array["SYS_USER.USER_NAME_EN"] = "Нэр (EN)";
+Message.Label.Array["SYS_USER.USER_NAME_MN"] = "Нэр (MN)";
+Message.Label.Array["SYS_USER.TEL_NUMBER"] = "Утас";
+Message.Label.Array["SYS_USER.ZIP_CODE"] = "Зип код";
+Message.Label.Array["SYS_USER.ADDRESS"] = "Хаяг";
+Message.Label.Array["SYS_USER.DETAIL_ADDRESS"] = "Дэлгэрэнгүй хаяг";
+Message.Label.Array["SYS_USER.USER_GROUP_CODE"] = "Хэрэглэгчийн бүлэг";
+Message.Label.Array["SYS_USER.USER_ROLE"] = "Эрх";
+
+Message.Label.Array["SYS_USER.REGISTER_ADDRESS_BTN"] = "Хаяг хайх";
+Message.Label.Array["SYS_USER.REGISTER_INIT_PASSWORD"] = "Нууц үг сэргээх";
+
+Message.Label.Array["SYS_USER.MYINFO.TITLE"] = " Миний мэдээлэл";
+Message.Label.Array["SYS_USER.MYINFO.MY_USER_ID"] = "ID";
+Message.Label.Array["SYS_USER.MYINFO.MY_USER_NAME"] = "Нэр";
+Message.Label.Array["SYS_USER.MYINFO.MY_USER_NAME_EN"] = "Нэр (EN)";
+Message.Label.Array["SYS_USER.MYINFO.MY_USER_NAME_MN"] = "Нэр (MN)";
+Message.Label.Array["SYS_USER.MYINFO.MY_EMAIL"] = "И-мэйл";
+Message.Label.Array["SYS_USER.MYINFO.MY_HP_NUMBER"] = "Утас";
+Message.Label.Array["SYS_USER.MYINFO.MY_TEL_NUMBER"] = "Утас";
+Message.Label.Array["SYS_USER.MYINFO.MY_ROLE"] = "Эрх";
+Message.Label.Array["SYS_USER.MYINFO.MY_OFFICE_NAME"] = "Харьяалал";
+Message.Label.Array["SYS_USER.MYINFO.MY_OFFICE_CODE"] = "Харьяаллын код";
+Message.Label.Array["SYS_USER.MYINFO.MY_UPDATE_DATE"] = "Зассан огноо";
+Message.Label.Array["SYS_USER.MYINFO.MY_CREATE_DATE"] = "Үүсгэсэн огноо";
+Message.Label.Array["SYS_USER.MYINFO.MY_LAST_UPDATE_DATE"] = "Сүүлд зассан";
+Message.Label.Array["SYS_USER.MYINFO.MY_PASSWORD_CHANGE"] = "Нууц үг солих";
+Message.Label.Array["SYS_USER.MYINFO.MY_BEFORE_PASSWORD"] = "Хуучин нууц үг";
+Message.Label.Array["SYS_USER.MYINFO.MY_AFTER_PASSWORD"] = "Шинэ нууц үг";
+Message.Label.Array["SYS_USER.MYINFO.MY_AFTER_PASSWORD_CONFIRM"] = "Шинэ нууц үг баталгаажуулах";
+Message.Label.Array["SYS_USER.MYINFO.CHECK_PASSWORD_DOUBLE_CHECK"] = "Нууц үг баталгаажуулалт таарахгүй байна";
+Message.Label.Array["SAVE"] = "Хадгалах";
+Message.Label.Array["CONFIRM"] = "Баталгаажуулах";
+Message.Label.Array["CANCEL"] = "Цуцлах";

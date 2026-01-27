@@ -74,7 +74,6 @@
                     <!--메뉴삽입영역-->
                 </ul>
             </div>
-            <div class="gi-home-setting"></div>
             <!-- 여기에 search, 유저 영역 추가 -->
             <article class="gi-col-auto side-nav-profile-container collapsed">
                 <div class="side-nav-profile-dropdown">
@@ -97,16 +96,34 @@
                     </div>
                 </div>
             </article>
-            <article class="gi-home-setting-article gi-hidden slide-drop-down">
-                <label class="gi-row-100">
-                    <select class="gi-select" style="border: 1px solid #a7a7a7 !important; border-radius: 8px;">
-                        <option>Language</option>
-                        <option value="en">English</option>
-                        <option value="mo">Монгол хэл</option>
-                        <option value="ko">한국어</option>
-                    </select>
-                </label>
-            </article>
+            <div class="gi-language-trigger" id="languageTrigger">
+                <i class="fa-solid fa-globe"></i>
+                <span class="gi-current-lang" id="currentLangCode">KO</span>
+                <!-- 언어 선택 패널 - 버튼 내부에 위치 -->
+                <article class="gi-home-setting-article lang-panel-closed">
+                    <div class="gi-language-selector">
+                        <div class="gi-language-label">
+                            <i class="fa-solid fa-earth-asia"></i>
+                            <span>Language</span>
+                        </div>
+                        <div class="gi-language-toggle" id="languageToggle">
+                            <div class="gi-language-slider" id="languageSlider"></div>
+                            <button type="button" class="gi-language-option active" data-lang="ko">
+                                <span class="gi-lang-flag">🇰🇷</span>
+                                <span class="gi-lang-text">한국어</span>
+                            </button>
+                            <button type="button" class="gi-language-option" data-lang="mn">
+                                <span class="gi-lang-flag">🇲🇳</span>
+                                <span class="gi-lang-text">Монгол</span>
+                            </button>
+                            <button type="button" class="gi-language-option" data-lang="en">
+                                <span class="gi-lang-flag">🇺🇸</span>
+                                <span class="gi-lang-text">English</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
 
             <div class="gi-row-100 gi-col-70" id="side_nav_menu_container">
                 <ul class="gi-row-98 gi-col-100 gi-overflow gi-ul" id="side_nav_menu"></ul>
@@ -150,6 +167,7 @@
         sideNaveOpenCloseEvent();
         findByMenuList();
         findUserName();
+        initLanguageSelector();
     }
     function layoutClickEvent() {
         /**
@@ -264,6 +282,9 @@
                 let menuTree = [];
                 let menuMap = {};
 
+                // 현재 언어 설정 가져오기
+                const currentLang = localStorage.getItem("selectedLanguage") || "ko";
+
                 data.sort((a, b) => parseInt(a.menu_level) - parseInt(b.menu_level));
 
                 data.map((item) => {
@@ -272,12 +293,17 @@
                         return false;
                     }
 
+                    // 언어에 따른 메뉴명 결정
+                    let menuName = item.menu_name_kr;
+                    if (currentLang === "mn" && item.menu_name_mn) menuName = item.menu_name_mn;
+                    else if (currentLang === "en" && item.menu_name_en) menuName = item.menu_name_en;
+
                     switch (item.menu_level) {
                         case '0':
                             sideNavMenuList1Depth.push({
                                 menu_code: item.menu_code,
                                 top_menu_code: item.top_menu_code,
-                                menu_name: item.menu_name_kr,
+                                menu_name: menuName,
                                 menu_level: item.menu_level,
                                 url: item.URL,
                                 menu_icon: item.menu_icon,
@@ -289,7 +315,7 @@
                             sideNavMenuList2Depth.push({
                                 menu_code: item.menu_code,
                                 top_menu_code: item.top_menu_code,
-                                menu_name: item.menu_name_kr,
+                                menu_name: menuName,
                                 menu_level: item.menu_level,
                                 url: item.url,
                                 menu_icon: item.menu_icon,
@@ -301,7 +327,7 @@
                             sideNavMenuList3Depth.push({
                                 menu_code: item.menu_code,
                                 top_menu_code: item.top_menu_code,
-                                menu_name: item.menu_name_kr,
+                                menu_name: menuName,
                                 menu_level: item.menu_level,
                                 url: item.url,
                                 prgm_url: item.prgm_url,
@@ -318,7 +344,7 @@
                     let menuItem = {
                         menu_code: item.menu_code,
                         top_menu_code: item.top_menu_code,
-                        menu_name: item.menu_name_kr,
+                        menu_name: menuName,
                         menu_level: item.menu_level,
                         url: item.url,
                         menu_icon: item.menu_icon,
@@ -551,6 +577,71 @@
             if (!$(e.target).closest(".dropdown-menu , .side-nav-profile-dropdown").length) {
                 dropDownMenu("close");
             }
+        }
+    }
+
+    /**
+     * NOTE: 언어 선택 세그먼트 컨트롤 초기화
+     */
+    function initLanguageSelector() {
+        const $languageToggle = $("#languageToggle");
+        const $slider = $("#languageSlider");
+        const $options = $(".gi-language-option");
+        const $currentLangCode = $("#currentLangCode");
+
+        // 언어 코드 매핑
+        const langCodeMap = {
+            ko: "KO",
+            mn: "MN",
+            en: "EN"
+        };
+
+        // 저장된 언어 설정 복원
+        const savedLang = localStorage.getItem("selectedLanguage") || "ko";
+        setActiveLanguage(savedLang);
+
+        // 언어 옵션 클릭 이벤트
+        $options.on("click", function () {
+            const $this = $(this);
+            const lang = $this.data("lang");
+
+            setActiveLanguage(lang);
+            localStorage.setItem("selectedLanguage", lang);
+
+            // 언어 변경 이벤트 발생 (다른 컴포넌트에서 사용 가능)
+            $(document).trigger("languageChanged", [lang]);
+
+            // 페이지 새로고침 (언어 적용)
+            setTimeout(() => location.reload(), 300);
+        });
+
+        // 언어 트리거 버튼 클릭 이벤트
+        $("#languageTrigger").on("click", function (e) {
+            e.stopPropagation();
+            $(".gi-home-setting-article").toggleClass("lang-panel-closed");
+        });
+
+        // 설정 영역 외부 클릭 시 닫기
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest("#languageTrigger, .gi-home-setting-article").length) {
+                $(".gi-home-setting-article").addClass("lang-panel-closed");
+            }
+        });
+
+        function setActiveLanguage(lang) {
+            const $targetOption = $options.filter(`[data-lang="${lang}"]`);
+            const index = $options.index($targetOption);
+
+            // 활성화 상태 변경
+            $options.removeClass("active");
+            $targetOption.addClass("active");
+
+            // 슬라이더 위치 변경
+            $slider.removeClass("position-0 position-1 position-2");
+            $slider.addClass(`position-${index}`);
+
+            // 현재 언어 코드 업데이트
+            $currentLangCode.text(langCodeMap[lang] || "KO");
         }
     }
 </script>

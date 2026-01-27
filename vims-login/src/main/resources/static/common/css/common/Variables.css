@@ -33,7 +33,8 @@
     box-sizing: border-box;
 
     --default-input-height: 52px;
-    --logo-image: url("../../img/GI.png");
+    /* --logo-image: url("../../img/GI.png"); */
+    --logo-image: url("../../img/nrtclogo.png");
 
     --border-radius-btn: 12px;
     --border-radius-grid-btn: 8px;
