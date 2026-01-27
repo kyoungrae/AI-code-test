@@ -46,6 +46,9 @@ Message.Label.Array["SYS_BBS_BOARD.WRITER"] = "작성자";
 Message.Label.Array["SYS_BBS_BOARD.DATE"] = "작성일";
 Message.Label.Array["SYS_BBS_BOARD.HIT"] = "조회수";
 Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"] = "본문에 포함된 첨부 파일 목록입니다.";
+Message.Label.Array["SYS_BBS_BOARD.SECTION.BASIC"] = "기본 정보";
+Message.Label.Array["SYS_BBS_BOARD.SECTION.CONTENT"] = "상세 내용";
+Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"] = "첨부 파일";
 
 Message.Label.Array["SYS_LAYOUT.CREATE_DATE"] = "등록 일시";
 Message.Label.Array["SYS_LAYOUT.TITLE"] = "제목";

@@ -1,57 +1,78 @@
-<article id="sysBbsBoardDetailPage" class="gi-article-content gi-col-95 gi-row-100">
-    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
-        <!-- 헤더 영역 -->
-        <header class="gi-margin-bottom-30px gi-padding-left-20px gi-padding-top-20px">
-            <h1 class="gi-page-title" id="detail-board-title">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.DETAIL"]
-            </h1>
-            <div class="gi-flex gi-flex-justify-content-between gi-flex-align-items-center gi-margin-top-10px">
-                <div class="gi-flex gi-grid-gap-20px gi-text-secondary">
-                    <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITER"]: <b id="detail-writer"
-                            class="gi-color-black"></b></span>
-                    <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.DATE"]: <b id="detail-date"
-                            class="gi-color-black"></b></span>
-                    <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.HIT"]: <b id="detail-hit"
-                            class="gi-color-black">0</b></span>
-                </div>
-            </div>
+<article id="sysBbsBoardDetailPage" class="gi-article-content gi-col-95 gi-row-100 gi-overflow-scroll"
+    style="background: #f8fafc; border: none; box-shadow: none;">
+    <div class="gi-padding-left-right-20px">
+        <!-- 헤더 영역 (카드 외부) -->
+        <header class="gi-margin-bottom-30px gi-padding-left-10px">
+            <h1 class="gi-page-title" id="detail-board-title-header">
+                [Page.Message].Message.Label.Array["SYS_BBS_BOARD.DETAIL"]</h1>
+            <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SUB_TITLE_DETAIL"]</p>
         </header>
 
-        <article class="gi-padding-left-right-20px">
-            <hr class="gi-margin-bottom-30px" style="border: 0; border-top: 1px solid #eee;" />
+        <!-- 메인 카드 -->
+        <div class="gi-form-card">
+            <div class="gi-flex gi-flex-column gi-grid-gap-30px">
 
-            <!-- 본문 내용 -->
-            <div class="ql-container ql-snow"
-                style="border: none; background: #fff; border-radius: 8px; border: 1px solid #efefef;">
-                <div id="detail-content" class="gi-padding-20px ql-editor"
-                    style="min-height: 300px; color: #333 !important;">
-                    <!-- 게시글 본문 내용이 여기에 로드됩니다. -->
+                <!-- 섹션 1: 게시글 정보 -->
+                <div class="gi-form-section">
+                    <h3 class="gi-form-section-title">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.BASIC"]
+                    </h3>
+                    <div class="gi-flex gi-flex-column gi-grid-gap-15px gi-padding-20px"
+                        style="background: #f8fafc; border-radius: 12px; border: 1px solid #f1f5f9; gap: 10px;">
+                        <div class="gi-flex gi-flex-justify-content-between">
+                            <h2 id="detail-board-title"
+                                style="font-size: 20px; font-weight: 700; color: #1e293b; margin: 0;"></h2>
+                        </div>
+                        <div class="gi-flex gi-grid-gap-20px gi-text-secondary" style="font-size: 14px;">
+                            <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITER"]: <b id="detail-writer"
+                                    class="gi-color-black"></b></span>
+                            <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.DATE"]: <b id="detail-date"
+                                    class="gi-color-black"></b></span>
+                            <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.HIT"]: <b id="detail-hit"
+                                    class="gi-color-black">0</b></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 섹션 2: 상세 내용 -->
+                <div class="gi-form-section">
+                    <h3 class="gi-form-section-title">
+                        [Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.CONTENT"]</h3>
+                    <div class="gi-editor-wrapper" style="border: 1px solid #e2e8f0; background: #fff;">
+                        <div class="ql-container ql-snow" style="border: none;">
+                            <div id="detail-content" class="gi-padding-30px ql-editor"
+                                style="min-height: 400px; color: #333 !important; font-size: 16px; line-height: 1.8;">
+                                <!-- 게시글 본문 내용이 여기에 로드됩니다. -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 섹션 3: 첨부 파일 -->
+                <div class="gi-form-section">
+                    <h3 class="gi-form-section-title">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"]
+                    </h3>
+                    <div id="detail-file-section" data-file-card data-input-id="board_file_uuid" data-read-only="true">
+                    </div>
+                </div>
+
+                <!-- 액션 버튼 -->
+                <div class="gi-form-actions">
+                    <button id="detail-list-btn" class="gi-btn gi-flex gi-flex-center" type="button"
+                        style="min-width: 120px; height: 42px;">
+                        <img src="/common/img/back-white.png" style="width: 20px;" alt="목록">
+                    </button>
+                    <button id="detail-update-btn" class="gi-btn-blue gi-flex gi-flex-center" type="button"
+                        style="min-width: 120px; height: 42px;">
+                        <img src="/common/img/pen-white.png" style="width: 20px;" alt="수정">
+                    </button>
+                    <button id="detail-delete-btn" class="gi-btn-red gi-flex gi-flex-center" type="button"
+                        style="min-width: 120px; height: 42px;">
+                        <img src="/common/img/trash-white.png" style="width: 20px;" alt="삭제" />
+                    </button>
                 </div>
             </div>
-
-            <!-- 첨부 파일 영역 -->
-            <div id="detail-file-section" data-file-card data-input-id="board_file_uuid" data-read-only="true"></div>
-
-            <!-- 하단 버튼 -->
-            <div
-                class="gi-flex gi-flex-justify-content-center gi-grid-gap-20px gi-margin-top-40px gi-margin-bottom-20px">
-                <button id="detail-list-btn"
-                    class="gi-btn gi-flex gi-flex-align-items-center gi-flex-justify-content-center"
-                    style="width: 90px; height: 20px;" type="button">
-                    <img src="/common/img/back-white.png" style="width: 20px;" alt="목록으로">
-                </button>
-                <button id="detail-update-btn"
-                    class="gi-btn-blue gi-flex gi-flex-align-items-center gi-flex-justify-content-center"
-                    style="width: 90px; height: 20px;" type="button">
-                    <img src="/common/img/pen-white.png" style="width: 20px;" alt="수정">
-                </button>
-                <button id="detail-delete-btn"
-                    class="gi-btn-red gi-flex gi-flex-align-items-center gi-flex-justify-content-center"
-                    style="width: 90px; height: 20px;" type="button">
-                    <img src="/common/img/trash-white.png" style="width: 20px;" alt="삭제" />
-                </button>
-            </div>
-        </article>
-    </section>
+        </div>
+    </div>
 </article>
 
 <script type="text/javascript">

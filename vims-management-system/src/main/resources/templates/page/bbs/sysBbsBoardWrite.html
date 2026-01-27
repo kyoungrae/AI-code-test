@@ -1,55 +1,77 @@
-<article id="sysBbsBoardWritePage" class="gi-article-content gi-col-95 gi-row-100">
-    <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
-        <!-- 헤더 영역 -->
-        <header class="gi-margin-bottom-30px gi-padding-left-20px gi-padding-top-20px">
+<article id="sysBbsBoardWritePage" class="gi-article-content gi-col-95 gi-row-100 gi-overflow-scroll"
+    style="background: #f8fafc; border: none; box-shadow: none;">
+    <div class="gi-padding-left-right-20px">
+        <!-- 헤더 영역 (카드 외부) -->
+        <header class="gi-margin-bottom-30px gi-padding-left-10px">
             <h1 class="gi-page-title" id="write-page-title">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITE"]
             </h1>
             <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SUB_TITLE_WRITE"]</p>
         </header>
 
-        <article class="gi-padding-left-right-20px">
+        <!-- 메인 카드 -->
+        <div class="gi-form-card">
             <form id="bbsBoardWriteForm">
-                <div class="gi-flex gi-flex-column gi-grid-gap-20px">
-                    <!-- 제목 입력 -->
-                    <div class="gi-input-container gi-flex-1">
-                        <label for="board_title" class="gi-input-label" data-focus-label="true"
-                            data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.TITLE"]</label>
-                        <input data-field="title" id="board_title" name="title" class="gi-input" data-required="true"
-                            autocomplete="off" />
+                <div class="gi-flex gi-flex-column gi-grid-gap-30px">
+
+                    <!-- 섹션 1: 기본 정보 -->
+                    <div class="gi-form-section">
+                        <h3 class="gi-form-section-title">
+                            [Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.BASIC"]</h3>
+                        <div class="gi-flex gi-grid-gap-20px">
+                            <!-- 제목 입력 -->
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="board_title" class="gi-input-label" data-focus-label="true"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.TITLE"]</label>
+                                <input data-field="title" id="board_title" name="title" class="gi-input"
+                                    data-required="true" autocomplete="off" />
+                            </div>
+
+                            <!-- 작성자명 -->
+                            <div class="gi-input-container gi-flex-1">
+                                <label for="board_writer" class="gi-input-label"
+                                    data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITER_NAME"]</label>
+                                <input data-field="writer_name" id="board_writer" name="writer_name" class="gi-input"
+                                    autocomplete="off" />
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- 작성자명 (기본 로그인 정보 사용 예정) -->
-                    <div class="gi-input-container gi-flex-1">
-                        <label for="board_writer" class="gi-input-label"
-                            data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITER_NAME"]</label>
-                        <input data-field="writer_name" id="board_writer" name="writer_name" class="gi-input"
-                            autocomplete="off" />
-                    </div>
-
-                    <!-- 내용 입력 (Quill Editor 영역) -->
-                    <div class="gi-flex gi-flex-column gi-grid-gap-10px">
-                        <label
-                            class="gi-input-label-static">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.CONTENT"]</label>
-                        <div id="editor-container" style="height: 400px; background: #fff;"></div>
+                    <!-- 섹션 2: 내용 작성 -->
+                    <div class="gi-form-section">
+                        <h3 class="gi-form-section-title">
+                            [Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.CONTENT"]</h3>
+                        <div class="gi-editor-wrapper">
+                            <div id="editor-container"></div>
+                        </div>
                         <input type="hidden" data-field="content" id="board_content" name="content" />
                     </div>
 
-                    <!-- 파일 첨부 영역 (file_yn이 '1'일 때만 활성화) -->
-                    <div id="file-attachment-section" class="gi-hidden" data-file-card data-input-id="board_file_uuid"
-                        data-folder-name="bbs_attachments" data-api-path="/fms/common/file/sysFileDetail"
-                        data-read-only="false">
+                    <!-- 섹션 3: 첨부 파일 -->
+                    <div class="gi-form-section">
+                        <h3 class="gi-form-section-title">
+                            [Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"]</h3>
+                        <div id="file-attachment-section" class="gi-hidden" data-file-card
+                            data-input-id="board_file_uuid" data-folder-name="bbs_attachments"
+                            data-api-path="/fms/common/file/sysFileDetail" data-read-only="false">
+                        </div>
                     </div>
-                    <!-- 버튼 영역 -->
-                    <div class="gi-flex gi-flex-justify-content-end gi-grid-gap-10px gi-margin-top-20px">
-                        <button id="bbs-save-btn" class="gi-btn-blue"
-                            type="button">[Page.Message].Message.Label.Array["SAVE_BTN"]</button>
-                        <button id="bbs-cancel-btn" class="gi-btn"
-                            type="button">[Page.Message].Message.Label.Array["CANCEL_BTN"]</button>
+
+                    <!-- 액션 버튼 -->
+                    <div class="gi-form-actions">
+                        <button id="bbs-cancel-btn" class="gi-btn" type="button"
+                            style="min-width: 120px; height: 42px;">
+                            <span>[Page.Message].Message.Label.Array["CANCEL_BTN"]</span>
+                        </button>
+                        <button id="bbs-save-btn" class="gi-btn-blue gi-flex gi-flex-center gi-grid-gap-8px"
+                            type="button" style="min-width: 120px; height: 42px;">
+                            <img src="/common/img/save-white.png" style="width: 18px;" alt="저장">
+                            <!-- <span>[Page.Message].Message.Label.Array["SAVE_BTN"]</span> -->
+                        </button>
                     </div>
                 </div>
             </form>
-        </article>
-    </section>
+        </div>
+    </div>
 </article>
 
 <script type="text/javascript">
@@ -71,7 +93,6 @@
         if (mode === 'modify') {
             $("#write-page-title").text(Message.Label.Array["SYS_BBS_BOARD.TITLE_UPDATE"]);
             $("#bbs-save-btn").text(Message.Label.Array["UPDATE_BTN"]);
-            commonTag.inputTagReset(".gi-input");
         }
 
         // 3. 에디터 초기화
@@ -124,6 +145,7 @@
                 $("#board_title").val(data.title);
                 $("#board_writer").val(data.writer_name);
                 $("#board_file_uuid").val(data.file_uuid).trigger('change');
+                commonTag.inputTagReset($(".gi-input"));
                 quill.root.innerHTML = data.content;
             }
         });
