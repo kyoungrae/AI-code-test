@@ -65,15 +65,16 @@ public class SysFileDetailService extends AbstractCommonService<SysFileDetail> {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    protected int registerImpl(List<SysFileDetail> request) throws Exception {
+    public int registerImpl(List<SysFileDetail> request) throws Exception {
         int rtn = 0;
         try {
             for (SysFileDetail map : request) {
-                if (map.getFile_name() != null || !map.getFile_name().equals("")) {
-                    rtn = sysFileDetailMapper.INSERT(map);
+                if (map.getFile_name() != null && !map.getFile_name().isEmpty()) {
+                    rtn += sysFileDetailMapper.INSERT(map);
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException(getMessage("EXCEPTION.FILE.TYPE"));
         }
         return rtn;

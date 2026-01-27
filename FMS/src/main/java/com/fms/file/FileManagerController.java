@@ -1,17 +1,9 @@
 package com.fms.file;
 
-import com.fms.common.SysFileDetail;
-import com.system.common.util.ApplicationResource;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +24,10 @@ public class FileManagerController {
     // public List<Map<String ,Object>> uploadFile(@RequestParam("folder_name")
     // String folder_name, @RequestParam(value = "uuid", required = false) String
     // uuid, @RequestParam("files") MultipartFile[] files) throws Exception {
-    public List<Map<String, Object>> uploadFile(@RequestParam("folder_name") String folder_name, String file_uuid,
+    public List<Map<String, Object>> uploadFile(@RequestParam("folder_name") String folder_name,
+            @RequestParam(value = "file_uuid", required = false) String file_uuid,
             @RequestParam("files") MultipartFile[] files) throws Exception {
-        List<Map<String, Object>> map = fileManagerService.fileUpload(folder_name, files);
+        List<Map<String, Object>> map = fileManagerService.fileUpload(folder_name, file_uuid, files);
         return map;
     }
     // @PostMapping("/search")

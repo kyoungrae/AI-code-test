@@ -34,8 +34,11 @@
                         <input type="hidden" data-field="content" id="board_content" name="content" />
                     </div>
 
-                    <!-- 파일 첨부 영역 -->
-                    <div id="file-attachment-section"></div>
+                    <!-- 파일 첨부 영역 (file_yn이 '1'일 때만 활성화) -->
+                    <div id="file-attachment-section" class="gi-hidden" data-file-card data-input-id="board_file_uuid"
+                        data-folder-name="bbs_attachments" data-api-path="/fms/common/file/sysFileDetail"
+                        data-read-only="false">
+                    </div>
                     <!-- 버튼 영역 -->
                     <div class="gi-flex gi-flex-justify-content-end gi-grid-gap-10px gi-margin-top-20px">
                         <button id="bbs-save-btn" class="gi-btn-blue"
@@ -103,18 +106,13 @@
             if (response.status === 200 && response.data.length > 0) {
                 let bbsInfo = response.data[0];
                 if (bbsInfo.file_yn === '1') {
-                    await fileUtil.loadFileCard("file-attachment-section", { inputId: "board_file_uuid", isReadOnly: false });
-                    initializeFileUtility();
+                    // 조건 충족 시 파일 첨부 영역 활성화
+                    await fileUtil.activateFileCard("file-attachment-section");
                 }
             }
         } catch (e) {
             console.error("BBS Config fetch failed", e);
         }
-    }
-
-    function initializeFileUtility() {
-        // fileUtil.createFileUpload(API_PATH, UUID_INPUT_ID, FOLDER_NAME)
-        fileUtil.createFileUpload("/fms/common/file/sysFileDetail", "board_file_uuid", "bbs_attachments");
     }
 
     function fetchBoardData() {

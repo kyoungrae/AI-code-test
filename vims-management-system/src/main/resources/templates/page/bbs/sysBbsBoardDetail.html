@@ -29,7 +29,7 @@
             </div>
 
             <!-- 첨부 파일 영역 -->
-            <div id="detail-file-section"></div>
+            <div id="detail-file-section" data-file-card data-input-id="board_file_uuid" data-read-only="true"></div>
 
             <!-- 하단 버튼 -->
             <div
@@ -62,8 +62,10 @@
     init();
 
     async function init() {
-        new PageInit();
-        await fileUtil.loadFileCard("detail-file-section", { inputId: "board_file_uuid", isReadOnly: true });
+        const pageInit = new PageInit();
+        if (pageInit.fileInitPromise) {
+            await pageInit.fileInitPromise;
+        }
         fetchBoardDetail();
         clickEvent();
     }
@@ -84,79 +86,32 @@
         });
     }
 
-    function fetchBoardDetail() {
+    async function fetchBoardDetail() {
         let url = "/cms/common/sysBbsBoard/find";
-        axios.post(url, { board_id: boardId }).then(response => {
-            if (response.status === 200 && response.data && response.data.length > 0) {
-                let data = response.data[0];
-                $("#detail-board-title").text(data.title || "제목 없음");
-                $("#detail-writer").text(data.writer_name || "알 수 없음");
+        const response = await axios.post(url, { board_id: boardId });
 
-                // API 날짜 데이터 직접 사용
-                $("#detail-date").text(data.system_create_date || "-");
-                $("#detail-hit").text(data.hit_count || 0);
+        if (response.status === 200 && response.data && response.data.length > 0) {
+            let data = response.data[0];
+            $("#detail-board-title").text(data.title || "제목 없음");
+            $("#detail-writer").text(data.writer_name || "알 수 없음");
+            $("#detail-date").text(data.system_create_date || "-");
+            $("#detail-hit").text(data.hit_count || 0);
 
-                if (data.content && data.content.trim() !== "") {
-                    $("#detail-content").html(data.content).css("color", "#333");
-                } else {
-                    $("#detail-content").html("<p style='color:#999; text-align:center; margin-top:100px;'>" + Message.Label.Array["FAIL.SELECT_NO_DATA"] + "</p>");
-                }
-
-                // 첨부 파일 조회
-                if (data.file_uuid) {
-                    fetchAttachedFiles(data.file_uuid);
-                }
+            if (data.content && data.content.trim() !== "") {
+                $("#detail-content").html(data.content).css("color", "#333");
             } else {
-                formUtil.toast(Message.Label.Array["FAIL.SELECT_NO_DATA"], "error");
+                $("#detail-content").html("<p style='color:#999; text-align:center; margin-top:100px;'>" + Message.Label.Array["FAIL.SELECT_NO_DATA"] + "</p>");
             }
-        });
-    }
 
-    function fetchAttachedFiles(fileUuid) {
-        let url = "/fms/common/file/sysFileDetail/find";
-        axios.post(url, { file_uuid: fileUuid }).then(response => {
-            if (response.status === 200 && response.data.length > 0) {
-                $("#detail-file-section").removeClass("gi-hidden");
-                renderFiles(response.data);
+            // 첨부 파일 영역: 데이터 바인딩
+            if (data.file_uuid) {
+                await fileUtil.bindFileUuid("detail-file-section", data.file_uuid);
             }
-        });
+        } else {
+            formUtil.toast(Message.Label.Array["FAIL.SELECT_NO_DATA"], "error");
+        }
     }
 
-    function renderFiles(files) {
-        let html = '<div class="gi-file-list-container">';
-        files.forEach((file, index) => {
-            const extension = (file.file_extension || '').toLowerCase();
-            let typeClass = "";
-
-            if (['pdf', 'hwp', 'doc', 'docx'].includes(extension)) typeClass = "gi-file-type-doc";
-            else if (['xls', 'xlsx', 'csv'].includes(extension)) typeClass = "gi-file-type-xls";
-            else if (['zip', 'rar', '7z'].includes(extension)) typeClass = "gi-file-type-zip";
-            else if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) typeClass = "gi-file-type-img";
-
-            html += `
-                <div class="gi-file-item-card" style="cursor: pointer;" onclick="downloadFile('${file.file_id}', '${file.file_name_with_ext}')">
-                    <div class="gi-file-badge-no">${index + 1}</div>
-                    <div class="gi-file-icon-box ${typeClass}">📄</div>
-                    <div class="gi-file-info">
-                        <span class="gi-file-name" title="${file.file_name}">${file.file_name}</span>
-                        <div class="gi-file-meta">
-                            <span class="gi-file-size-tag">${formUtil.formatBytes(file.file_size)}</span>
-                            <span class="gi-file-ext-tag ${typeClass}" style="background: none;">${extension}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        html += '</div>';
-        $("#detail-file-list").html(html);
-    }
-
-    // 파일 다운로드 함수 (추가 필요 시 구현)
-    window.downloadFile = function (fileId, fileName) {
-        // 실제 다운로드 로직은 프로젝트의 파일 다운로드 API에 맞춰 구현
-        console.log("Downloading:", fileId, fileName);
-        // 예: window.location.href = `/fms/fileManager/download?fileId=${fileId}`;
-    };
 
     function deleteBoard() {
         let url = "/cms/common/sysBbsBoard/remove";

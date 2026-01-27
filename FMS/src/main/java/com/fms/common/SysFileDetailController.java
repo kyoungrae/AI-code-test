@@ -26,25 +26,25 @@ public class SysFileDetailController extends AbstractCommonController<SysFileDet
     }
 
     @PostMapping("/findAll")
-    protected List<SysFileDetail> findAll(@RequestBody SysFileDetail request) throws Exception {
+    public List<SysFileDetail> findAll(@RequestBody SysFileDetail request) throws Exception {
         return sysFileDetailRepository.findAll();
     }
 
     @PostMapping("/find")
     @Override
-    protected List<SysFileDetail> findImpl(@RequestBody SysFileDetail request) throws Exception {
+    public List<SysFileDetail> findImpl(@RequestBody SysFileDetail request) throws Exception {
         return sysFileDetailService.findImpl(request);
     }
 
     @PostMapping("/remove")
     @Override
-    protected int removeImpl(@RequestBody SysFileDetail request) {
+    public int removeImpl(@RequestBody SysFileDetail request) {
         return sysFileDetailService.removeImpl(request);
     }
 
     @PostMapping("/update")
     @Override
-    protected int updateImpl(@RequestBody SysFileDetail request) {
+    public int updateImpl(@RequestBody SysFileDetail request) {
         return sysFileDetailService.updateImpl(request);
     }
 
@@ -54,17 +54,17 @@ public class SysFileDetailController extends AbstractCommonController<SysFileDet
     }
 
     @PostMapping("/register")
-    protected int registerImpl(@RequestBody List<SysFileDetail> fileList) throws Exception {
+    public int registerImpl(@RequestBody List<SysFileDetail> fileList) throws Exception {
         return sysFileDetailService.registerImpl(fileList);
     }
 
     @PostMapping("/removeByFileIdAndUuid")
-    protected int removeByFileIdAndUuid(@RequestBody SysFileDetail request) throws Exception {
+    public int removeByFileIdAndUuid(@RequestBody SysFileDetail request) throws Exception {
         return sysFileDetailService.removeByFileIdAndUuid(request);
     }
 
     @PostMapping("/updateList")
-    protected int updateList(@RequestBody List<SysFileDetail> fileList) throws Exception {
+    public int updateList(@RequestBody List<SysFileDetail> fileList) throws Exception {
         return sysFileDetailService.updateList(fileList);
     }
 

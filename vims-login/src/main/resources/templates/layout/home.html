@@ -142,7 +142,6 @@
     var changedHomeType = true;
     var common_session = new Session();
     var menuInfoList = "";
-    let fileUtil = new file();
     var input = new InputUtility();
     layoutInit();
 
@@ -409,7 +408,8 @@
             let $this = $(this);
             let $currentSubMenu = $this.nextAll(".gi-side-nav-menu-level");
             let menuLevel = $this.data("menu-level");
-            let recentPage = common_session.getItem("recentPage").url || "";
+            let recentPageItem = common_session.getItem("recentPage");
+            let recentPage = recentPageItem ? recentPageItem.url : "";
 
             // 비활성화 된 메뉴 클릭 시
             if (!$this.hasClass("active")) {
@@ -497,7 +497,8 @@
         });
     }
     function existsNavSelected() {
-        let recentPage = common_session.getItem("recentPage").url;
+        let recentPageItem = common_session.getItem("recentPage");
+        let recentPage = recentPageItem ? recentPageItem.url : null;
         if (formUtil.checkEmptyValue(recentPage)) {
             formUtil.activatedMenu(recentPage);
         } else {

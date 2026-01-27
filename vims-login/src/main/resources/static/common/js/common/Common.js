@@ -9,6 +9,12 @@ class PageInit {
         this.commonTagSettings();
         this.messageLabelSettings();
         new Popup();
+
+        // Data Attribute 기반 파일 카드 자동 초기화
+        if (typeof fileUtil !== 'undefined') {
+            this.fileInitPromise = fileUtil.initFileCards();
+        }
+
         setTimeout(function () {
             // new scrollAnimationInit;
         })

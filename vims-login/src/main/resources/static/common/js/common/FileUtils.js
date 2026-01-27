@@ -10,8 +10,8 @@ class file {
      * @param FOLDER_NAME  file upload folder name
      * @text button 태그에 data-file-upload-btn 속성 추가 해야 버튼 활성화 가능
      */
-    createFileUpload(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME) {
-        new createFileUploadHTML(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME);
+    createFileUpload(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME, CONTAINER_ID) {
+        new createFileUploadHTML(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME, CONTAINER_ID);
     };
     /**
      * @title : 파일 삭제 기능
@@ -39,13 +39,27 @@ class file {
     }
 
     /**
-     * @title 파일 첨부 카드 로드 (컴포넌트)
-     * @param containerId  target container id
-     * @param options {Object} - { inputId: 'uuid_input_id', isReadOnly: true/false }
+     * @title 파일 첨부 카드 로드 (완전한 컴포넌트)
+     * @param containerId  target container id (예: 'detail-file-section')
+     * @param options {Object} - 옵션 객체
+     *   - inputId: UUID를 저장할 input ID (기본값: 'file_uuid')
+     *   - isReadOnly: 읽기 전용 여부 (기본값: false)
+     *   - fileUuid: 기존 파일을 불러올 UUID (상세 페이지용)
+     *   - folderName: 파일 저장 폴더명 (기본값: 'commonFolder')
+     *   - apiPath: 파일 상세 API 경로 (기본값: '/fms/common/file/sysFileDetail')
+     * @description 이 함수 하나로 파일 첨부 UI 로드, 업로드 기능 초기화, 기존 파일 조회/렌더링, 다운로드가 모두 처리됩니다.
+     * @example
+     *   // 작성/수정 페이지
+     *   await fileUtil.loadFileCard("file-section", { inputId: "board_file_uuid", folderName: "bbsFolder" });
+     *   // 상세 페이지 (기존 파일 표시)
+     *   await fileUtil.loadFileCard("file-section", { inputId: "board_file_uuid", isReadOnly: true, fileUuid: data.file_uuid });
      */
     async loadFileCard(containerId, options = {}) {
         const inputId = options.inputId || 'file_uuid';
         const isReadOnly = options.isReadOnly || false;
+        const fileUuid = options.fileUuid || null;
+        const folderName = options.folderName || 'commonFolder';
+        const apiPath = options.apiPath || '/fms/common/file/sysFileDetail';
 
         const html = await formUtil.loadToHtml({ url: "/common/file", data: {} });
         const $container = $("#" + containerId);
@@ -54,23 +68,205 @@ class file {
         // UI 설정
         if (isReadOnly) {
             $container.find('button[data-file-upload-btn]').remove();
-            $container.find('[data-file-info-text]').text(Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"]);
+            $container.find('[data-file-info-text]').text(Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"] || "본문에 포함된 첨부 파일 목록입니다.");
             $container.find('[data-file-empty-msg]').remove();
         } else {
-            $container.find('[data-file-info-text]').text(Message.Label.Array["FILE_ATTACH_INFO"]);
+            $container.find('[data-file-info-text]').text(Message.Label.Array["FILE_ATTACH_INFO"] || "첨부된 파일 목록을 아래에서 확인할 수 있습니다.");
         }
 
         // input ID 설정
         $container.find('[data-file-uuid-input]').attr('id', inputId);
 
-        // 데이터 바인딩을 위해 PageInit의 메시지 처리를 다시 수행할 필요가 있을 수 있음
+        // 메시지 라벨 재적용
         new PageInit().messageLabelSettings();
+
+        // 파일 업로드 기능 초기화 (읽기 전용이 아닐 때만)
+        if (!isReadOnly) {
+            // 버튼 ID 유니크하게 변경 (다중 파일 카드 지원)
+            const $btn = $container.find('button[data-file-upload-btn]');
+            if ($btn.length > 0) {
+                const newBtnId = containerId + '-upload-btn';
+                $btn.attr('id', newBtnId);
+                $btn.attr('data-auto-initialized', 'true');
+            }
+            this.createFileUpload(apiPath, inputId, folderName, containerId);
+        }
+
+        // 초기화 완료 표시
+        $container.attr('data-file-initialized', 'true');
+
+        // 기존 파일 조회 및 렌더링 (fileUuid가 있으면)
+        if (fileUuid) {
+            await this.fetchAndRenderFiles(fileUuid, $container);
+        }
+    }
+
+    /**
+     * @title 파일 조회 및 렌더링
+     * @param fileUuid 파일 UUID
+     * @param $container jQuery 컨테이너 (optional, 기본 #attached-file-list 사용)
+     */
+    async fetchAndRenderFiles(fileUuid, $container = null) {
+        const listSelector = $container ? $container.find("#attached-file-list") : $("#attached-file-list");
+        const url = "/fms/common/file/sysFileDetail/find";
+
+        try {
+            const response = await axios.post(url, { file_uuid: fileUuid });
+            if (response.status === 200 && response.data && response.data.length > 0) {
+                this.renderFileList(response.data, listSelector);
+            }
+        } catch (e) {
+            console.error("Failed to fetch attached files:", e);
+        }
+    }
+
+    /**
+     * @title 파일 목록 렌더링
+     * @param files 파일 배열
+     * @param $listContainer 렌더링 타겟 (jQuery 객체)
+     */
+    renderFileList(files, $listContainer) {
+        let html = '<div class="gi-file-list-container">';
+        files.forEach((file, index) => {
+            const extension = (file.file_extension || '').toLowerCase();
+            let typeClass = "";
+
+            if (['pdf', 'hwp', 'doc', 'docx'].includes(extension)) typeClass = "gi-file-type-doc";
+            else if (['xls', 'xlsx', 'csv'].includes(extension)) typeClass = "gi-file-type-xls";
+            else if (['zip', 'rar', '7z'].includes(extension)) typeClass = "gi-file-type-zip";
+            else if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) typeClass = "gi-file-type-img";
+
+            html += `
+                <div class="gi-file-item-card" style="cursor: pointer;" onclick="fileUtil.downloadFile('${file.file_id}', '${file.file_name_with_ext || file.file_name}')">
+                    <div class="gi-file-badge-no">${index + 1}</div>
+                    <div class="gi-file-icon-box ${typeClass}">📄</div>
+                    <div class="gi-file-info">
+                        <span class="gi-file-name" title="${file.file_name}">${file.file_name}</span>
+                        <div class="gi-file-meta">
+                            <span class="gi-file-size-tag">${formUtil.formatBytes(file.file_size)}</span>
+                            <span class="gi-file-ext-tag ${typeClass}" style="background: none;">${extension}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        $listContainer.html(html);
+    }
+
+    /**
+     * @title 파일 다운로드
+     * @param fileId 파일 ID
+     * @param fileName 파일 이름
+     */
+    downloadFile(fileId, fileName) {
+        const downloadUrl = `/fms/fileManager/download?fileId=${encodeURIComponent(fileId)}`;
+        // 새 탭 또는 다운로드 링크 생성
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    /**
+     * @title Data Attribute 기반 파일 카드 자동 초기화
+     * @description [data-file-card] 속성을 가진 요소들을 스캔하여 자동으로 파일 카드를 초기화합니다.
+     * @usage HTML에서 다음과 같이 정의:
+     *   <div data-file-card
+     *        data-input-id="board_file_uuid"
+     *        data-folder-name="bbsFolder"
+     *        data-api-path="/fms/common/file/sysFileDetail"
+     *        data-read-only="false"
+     *        data-file-uuid="">
+     *   </div>
+     * PageInit 또는 페이지 로드 시 fileUtil.initFileCards() 호출로 자동 초기화
+     */
+    async initFileCards() {
+        const $fileCards = $('[data-file-card]');
+
+        for (let i = 0; i < $fileCards.length; i++) {
+            const $card = $($fileCards[i]);
+
+            // gi-hidden 클래스가 있으면 스킵 (조건부 활성화 대상)
+            // 이미 초기화된 카드면 스킵
+            if ($card.hasClass('gi-hidden') || $card.attr('data-file-initialized') === 'true') {
+                continue;
+            }
+
+            // data 속성에서 옵션 추출
+            const containerId = $card.attr('id') || `file-card-${i}`;
+            const inputId = $card.data('input-id') || 'file_uuid';
+            const folderName = $card.data('folder-name') || 'commonFolder';
+            const apiPath = $card.data('api-path') || '/fms/common/file/sysFileDetail';
+            const isReadOnly = $card.data('read-only') === true || $card.data('read-only') === 'true';
+            const fileUuid = $card.data('file-uuid') || null;
+
+            // ID가 없으면 설정
+            if (!$card.attr('id')) {
+                $card.attr('id', containerId);
+            }
+
+            // loadFileCard 호출
+            await this.loadFileCard(containerId, {
+                inputId,
+                isReadOnly,
+                fileUuid,
+                folderName,
+                apiPath
+            });
+        }
+    }
+
+    /**
+     * @title 동적 fileUuid 바인딩
+     * @description 데이터 로드 후 file_uuid를 동적으로 설정하고 파일 목록을 렌더링합니다.
+     * @param containerId 파일 카드 컨테이너 ID
+     * @param fileUuid 파일 UUID
+     */
+    async bindFileUuid(containerId, fileUuid) {
+        const $container = $("#" + containerId);
+        if ($container.length > 0 && fileUuid) {
+            $container.data('file-uuid', fileUuid);
+            await this.fetchAndRenderFiles(fileUuid, $container);
+        }
+    }
+
+    /**
+     * @title 파일 카드 수동 활성화 (조건부 표시용)
+     * @description gi-hidden 클래스가 있는 파일 카드 요소를 활성화하고 초기화합니다.
+     * @param containerId 파일 카드 컨테이너 ID
+     */
+    async activateFileCard(containerId) {
+        const $card = $("#" + containerId);
+        if ($card.length > 0 && $card.hasClass('gi-hidden')) {
+            $card.removeClass('gi-hidden');
+
+            // data 속성에서 옵션 추출 및 초기화
+            const inputId = $card.data('input-id') || 'file_uuid';
+            const folderName = $card.data('folder-name') || 'commonFolder';
+            const apiPath = $card.data('api-path') || '/fms/common/file/sysFileDetail';
+            const isReadOnly = $card.data('read-only') === true || $card.data('read-only') === 'true';
+            const fileUuid = $card.data('file-uuid') || null;
+
+            await this.loadFileCard(containerId, {
+                inputId,
+                isReadOnly,
+                fileUuid,
+                folderName,
+                apiPath
+            });
+        }
     }
 }
 //CLASS : 파일 업로드 HTML 생성 클래스 파일 업로드 팝업 및 기능 관리 클래스
 class createFileUploadHTML {
-    constructor(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME) {
-        this.BTN_ID = $('button[data-file-upload-btn]')
+    constructor(PATH, ID_TO_RECEIVE_VALUE, FOLDER_NAME, CONTAINER_ID) {
+        this.CONTAINER_ID = CONTAINER_ID;
+        this.BTN_ID = CONTAINER_ID
+            ? $('#' + CONTAINER_ID).find('button[data-file-upload-btn]')
+            : $('button[data-file-upload-btn]').not('[data-auto-initialized="true"]');
         this.PATH = PATH; //NOTE : SYS_FILE 테이블이 아닌 특정 파일 테이블이 있으면 해당 경로 작성
         this.ID_TO_RECEIVE_VALUE = ID_TO_RECEIVE_VALUE;
         this.FOLDER_NAME = FOLDER_NAME;
@@ -179,7 +375,7 @@ class createFileUploadHTML {
     }
     //CLASS : 팝업 UI 노출 및 숨김
     clearFileUploadBody() {
-        let isEmpty = $(".fileUpload_body").length === 0;
+        let isEmpty = $(".formUtil-fileUpload_body").length === 0;
         let $fileUpload = $(this.SYS_FILE_UPLOAD_ID);
         isEmpty ? $fileUpload.append(this.CONTENTS) : $fileUpload.empty();
     }
@@ -193,6 +389,33 @@ class createFileUploadHTML {
             //NOTE : 파일업로드 버튼 활성화 아이디 (같은 화면에서 두개 이상의 버튼을 생성 할때 사용)
             that.ACTIVE_BTN_ID = "#" + e.currentTarget.id
             that.openPopupEventBinding();
+            that.loadExistingFiles(); // 기존 파일 로드
+        }
+    }
+    //CLASS : 기존 파일 로드
+    loadExistingFiles() {
+        let that = this;
+        let uuid = $("#" + that.ID_TO_RECEIVE_VALUE).val();
+
+        // 리스트 초기화
+        that.resetVariable();
+
+        if (uuid) {
+            let url = that.PATH + "/find";
+            let param = { file_uuid: uuid };
+
+            axios.post(url, param, { withCredentials: true }).then(response => {
+                let files = response.data;
+                if (files && files.length > 0) {
+                    that.EXISTS_FILE_LIST = files;
+                    that.TOTAL_FILE_LIST = [...files]; // 기존 파일 추가
+                }
+                that.showFileList(); // 리스트 렌더링 호출
+            }).catch(error => {
+                console.error("Failed to load existing files:", error);
+            });
+        } else {
+            that.showFileList();
         }
     }
     //CLASS : 닫기 버튼 이벤트 파일 업로드 CLOSE 이벤트 (취소)
@@ -261,24 +484,24 @@ class createFileUploadHTML {
                 index === self.findIndex((f) => f.name === file.name && f.size === file.size)
             );
 
-            //NOTE : 전체 리스트도 업데이트 (ADDED와 동일하게 처리)
-            that.TOTAL_FILE_LIST = [...that.ADDED_FILE_LIST];
+            //NOTE : 전체 리스트도 업데이트 (기존 파일 + 신규 파일)
+            that.TOTAL_FILE_LIST = [...that.EXISTS_FILE_LIST, ...that.ADDED_FILE_LIST];
 
             //NOTE : 화면에 파일리스트 노출
-            showFileList();
+            that.showFileList();
         }
 
         //FUN : 화면에 파일리스트 노출
-        function showFileList() {
+        that.showFileList = function () {
             let fileSettingsHtml = "";
             if (that.TOTAL_FILE_LIST.length > 0) {
                 for (let i = 0; i < that.TOTAL_FILE_LIST.length; i++) {
                     let file = that.TOTAL_FILE_LIST[i];
-                    let fileNameWithExt = file.name;
+                    let fileNameWithExt = file.name || file.file_name || "";
                     let lastDotIndex = fileNameWithExt.lastIndexOf('.');
                     let fileName = lastDotIndex !== -1 ? fileNameWithExt.substring(0, lastDotIndex) : fileNameWithExt;
-                    let fileExtension = lastDotIndex !== -1 ? fileNameWithExt.substring(lastDotIndex + 1).toLowerCase() : '';
-                    let fileSize = that.formatBytes(file.size);
+                    let fileExtension = file.file_extension || (lastDotIndex !== -1 ? fileNameWithExt.substring(lastDotIndex + 1).toLowerCase() : '');
+                    let fileSize = that.formatBytes(file.size || file.file_size || 0);
 
                     let typeClass = "";
                     if (['pdf', 'hwp', 'doc', 'docx'].includes(fileExtension)) typeClass = "gi-file-type-doc";
@@ -349,15 +572,37 @@ class createFileUploadHTML {
 
             formUtil.popup("deleteFileBtn", fileNameWithExt + " 파일을 삭제 하시겠습니까?", remove);
             function remove() {
-                //NOTE : 최종 파일 리스트에 삭제된 파일 제외하고 업데이트
-                that.TOTAL_FILE_LIST = that.TOTAL_FILE_LIST.filter(file => file.name !== fileNameWithExt);
-                that.ADDED_FILE_LIST = [...that.TOTAL_FILE_LIST];
+                // 기존 파일인지 확인 (file_id가 있으면 기존 파일)
+                let targetFile = that.TOTAL_FILE_LIST.find(f => (f.file_name_with_ext || f.file_name || f.name) === fileNameWithExt);
 
-                //NOTE : 화면에 파일리스트 노출
-                showFileList();
+                if (targetFile && targetFile.file_id) {
+                    // 기존 파일이면 즉시 서버 삭제
+                    let url = that.PATH + "/removeByFileIdAndUuid";
+                    let param = { file_id: targetFile.file_id, file_uuid: targetFile.file_uuid };
+
+                    axios.post(url, param, { withCredentials: true }).then(response => {
+                        if (response.data > 0) {
+                            formUtil.toast("파일이 삭제되었습니다.");
+                            // 리스트 및 로컬 상태 업데이트
+                            that.EXISTS_FILE_LIST = that.EXISTS_FILE_LIST.filter(f => f.file_id !== targetFile.file_id);
+                            that.TOTAL_FILE_LIST = [...that.EXISTS_FILE_LIST, ...that.ADDED_FILE_LIST];
+                            that.showFileList();
+                            // 메인 리스트도 갱신
+                            that.fetchAndRenderMainFileList(targetFile.file_uuid);
+                        }
+                    }).catch(error => {
+                        formUtil.toast("파일 삭제 실패", "error");
+                    });
+                } else {
+                    // 신규 추가된 파일이면 배열에서만 제거
+                    that.ADDED_FILE_LIST = that.ADDED_FILE_LIST.filter(file => file.name !== fileNameWithExt);
+                    that.TOTAL_FILE_LIST = [...that.EXISTS_FILE_LIST, ...that.ADDED_FILE_LIST];
+                    that.showFileList();
+                }
             }
         }
     }
+
     //CLASS : 공통 파일 업로드 실행
     sysFileUpload() {
         let that = this;
@@ -384,6 +629,12 @@ class createFileUploadHTML {
             //NOTE : 파라미터에 폴더이름 설정
             param.append("folder_name", that.FOLDER_NAME);
 
+            // 수정 모드인 경우 기존 UUID 전달
+            let currentUuid = $("#" + that.ID_TO_RECEIVE_VALUE).val();
+            if (currentUuid) {
+                param.append("file_uuid", currentUuid);
+            }
+
             axios.post(url, param, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -395,6 +646,15 @@ class createFileUploadHTML {
                     let file_uuid = fileListData[0].file_uuid;
 
                     //NOTE: 업로드 성공 후 파일 상세 정보 저장 (detail 테이블 insert)
+                    // 만약 기존 UUID가 있다면, 새로 업로드된 파일들의 UUID를 기존 UUID로 교체
+                    let currentUuid = $("#" + that.ID_TO_RECEIVE_VALUE).val();
+                    if (currentUuid) {
+                        fileListData.forEach(item => {
+                            item.file_uuid = currentUuid;
+                        });
+                        file_uuid = currentUuid; // 최종 UUID도 기존 것으로 유지
+                    }
+
                     let registerUrl = that.PATH + "/register";
                     axios.post(registerUrl, fileListData, {
                         withCredentials: true
@@ -790,4 +1050,4 @@ class CustomFileUploadDialog {
         $(this.SYS_FILE_UPLOAD_ID).empty();
         this.selectedFiles = [];
     }
-}
+} var fileUtil = new file();

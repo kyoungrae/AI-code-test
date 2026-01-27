@@ -65,7 +65,7 @@
         </where>
     </select>
 
-    <select id="SELECT" resultType="com.fms.common.SysFile">
+    <select id="SYS_FILE_SELECT" resultType="com.fms.common.SysFile">
         SELECT
             
             file_uuid,

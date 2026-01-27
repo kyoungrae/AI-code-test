@@ -138,8 +138,10 @@
           </div>
         </div>
 
-        <!-- [파일 첨부 카드] -->
-        <div id="sample-file-section"></div>
+        <!-- [파일 첨부 카드] - Data Attribute 방식 -->
+        <div id="sample-file-section" data-file-card data-input-id="sample_file_uuid" data-folder-name="sampleFolder"
+          data-api-path="/fms/common/file/sysFileDetail" data-read-only="false">
+        </div>
 
         <!-- 버튼 영역 -->
         <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
@@ -164,10 +166,7 @@
     new PageInit();
     clickEvent();
     input.setSelectOption("#sample_category", "/cms/common/sysCode/find", { code: "code_id", name: "code_name" });
-
-    // 파일 업로드 초기화
-    await fileUtil.loadFileCard("sample-file-section", { inputId: "sample_file_uuid", isReadOnly: false });
-    fileUtil.createFileUpload("/fms/common/file/sysFileDetail", "sample_file_uuid", "sampleFolder");
+    // 파일 카드는 data-file-card 속성으로 자동 초기화됨
   }
 
   function clickEvent() {

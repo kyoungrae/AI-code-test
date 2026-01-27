@@ -30,12 +30,14 @@ public class FileManagerService extends FileProcessManager {
     //
     // createFile(folderName, fileName, fileContent, fileExtension);
     // }
-    public List<Map<String, Object>> fileUpload(String folder_name, MultipartFile[] files) throws Exception {
+    public List<Map<String, Object>> fileUpload(String folder_name, String file_uuid, MultipartFile[] files)
+            throws Exception {
         // NOTE : 인가 정보 확인
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // NOTE : unique ID 생성
-        String uid = String.valueOf(UUID.randomUUID());
-        String userId = authentication.getName();
+        // NOTE : unique ID 생성 (전달받은 uuid가 있으면 사용, 없으면 생성)
+        String uid = (file_uuid != null && !file_uuid.isEmpty()) ? file_uuid : String.valueOf(UUID.randomUUID());
+        String userId = (authentication != null) ? authentication.getName() : "anonymousUser";
+
         try {
             List<Map<String, Object>> result = uploadFile(folder_name, files);
             for (Map<String, Object> list : result) {
@@ -43,19 +45,32 @@ public class FileManagerService extends FileProcessManager {
                 list.put("system_create_userid", userId);
             }
             if (!result.isEmpty()) {
-                var sysFile = SysFile.builder()
-                        .file_uuid(uid)
-                        .temp_yn(0) // NOTE : 파일 임시 저장, 사용자가 작성 취소 하거나, 화면을 나갈 경우 삭제하기 위한 flag
-                        .system_create_userid(userId)
-                        .system_create_date(new java.util.Date())
-                        .build();
-                sysFileMapper.SYS_FILE_INSERT(sysFile);
+                // 기존 UUID인 경우 SYS_FILE 테이블에 이미 존재할 수 있으므로 존재 여부 체크 후 인서트
+                List<SysFile> existingFile = null;
+                try {
+                    existingFile = sysFileMapper.SYS_FILE_SELECT(SysFile.builder().file_uuid(uid).build());
+                } catch (Exception e) {
+                    System.err.println("Error selecting existing file: " + e.getMessage());
+                    e.printStackTrace();
+                }
+
+                if (existingFile == null || existingFile.isEmpty()) {
+                    var sysFile = SysFile.builder()
+                            .file_uuid(uid)
+                            .temp_yn(0) // NOTE : 파일 임시 저장, 사용자가 작성 취소 하거나, 화면을 나갈 경우 삭제하기 위한 flag
+                            .system_create_userid(userId)
+                            .system_create_date(new java.util.Date())
+                            .build();
+                    sysFileMapper.SYS_FILE_INSERT(sysFile);
+                }
                 return result;
             } else {
-                throw new Exception("File upload failed");
+                throw new Exception("Uploaded file list is empty");
             }
         } catch (Exception e) {
-            throw new Exception("File upload failed");
+            System.err.println("File upload exception: " + e.getMessage());
+            e.printStackTrace();
+            throw new Exception("File upload failed: [" + e.getClass().getSimpleName() + "] " + e.getMessage());
         }
     }
     // public void fileDownload(List<Map<String,Object>> params, HttpServletResponse

@@ -72,7 +72,7 @@
 ## @author : 이경태
 ## @extend : ""
 ## @call : new FileUtil();
-**example start**
+**note used xample start**
 
 <script>
     let fileUtil = new FileUtil();

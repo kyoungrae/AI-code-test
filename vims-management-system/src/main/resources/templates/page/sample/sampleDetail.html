@@ -136,8 +136,9 @@
             </div>
           </div>
 
-          <!-- [파일 첨부 카드] -->
-          <div id="sample-file-section"></div>
+          <!-- [파일 첨부 카드] - Data Attribute 방식 (읽기 전용) -->
+          <div id="sample-file-section" data-file-card data-input-id="sample_file_uuid" data-read-only="true">
+          </div>
         </div>
 
         <!-- 버튼 영역 -->
@@ -158,19 +159,27 @@
   init();
 
   async function init() {
-    new PageInit();
+    const pageInit = new PageInit();
+    if (pageInit.fileInitPromise) {
+      await pageInit.fileInitPromise;
+    }
     clickEvent();
     dataSetting();
 
     input.setSelectOption("#sample_category", "/cms/common/sysCode/find", { code: "code_id", name: "code_name" });
 
-    // 파일 업로드 초기화
-    await fileUtil.loadFileCard("sample-file-section", { inputId: "sample_file_uuid", isReadOnly: true });
-    fileUtil.createFileUpload("/fms/common/file/sysFileDetail", "sample_file_uuid", "sampleFolder");
+    // 파일 조회는 dataSetting에서 처리
   }
+
   //리스트에서 받아온 데이터 바인딩처리
-  function dataSetting() {
-    dataBinding.setData(PRGMID);
+  async function dataSetting() {
+    await dataBinding.setData(PRGMID);
+
+    // 세션에서 file_uuid 가져와서 파일 목록 렌더링 (UI는 자동 초기화됨)
+    let data = new Session().getItem("DATA");
+    if (data && data.file_uuid) {
+      await fileUtil.bindFileUuid("sample-file-section", data.file_uuid);
+    }
   }
 
   function clickEvent() {
