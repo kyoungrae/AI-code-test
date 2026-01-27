@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: vims-gateway
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Seoul
   cloud:
     gateway:
       default-filters :

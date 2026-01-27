@@ -36,6 +36,8 @@ mybatis:
 spring:
     jackson:
         property-naming-strategy: LOWER_CAMEL_CASE
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: Asia/Seoul
     datasource:
         # OracleDB JDBC URL
 #        url: jdbc:log4jdbc:oracle:thin:@192.168.0.140:11521:orcl

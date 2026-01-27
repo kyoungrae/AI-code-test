@@ -69,13 +69,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
         // }
 
         //컬럼 히든처리
-        if (formUtil.checkEmptyValue(item.HIDDEN)) {
-            if (item.HIDDEN) {
-                hidden = "gi-hidden ";
-            } else {
-                hidden = "gi-show-li ";
-            }
+        if (formUtil.checkEmptyValue(item.HIDDEN) && item.HIDDEN) {
+            hidden = "gi-hidden ";
         } else {
+            hidden = "gi-show-li ";
         }
 
         let sortArray = gridSortManager.getSort();
@@ -1257,13 +1254,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
         // }
 
         //컬럼 히든처리
-        if (formUtil.checkEmptyValue(item.HIDDEN)) {
-            if (item.HIDDEN) {
-                hidden = "gi-hidden ";
-            } else {
-                hidden = "gi-show-li ";
-            }
+        if (formUtil.checkEmptyValue(item.HIDDEN) && item.HIDDEN) {
+            hidden = "gi-hidden ";
         } else {
+            hidden = "gi-show-li ";
         }
         let sortArray = gridSortManager.getSort();
         if (sortArray.order !== null) {
