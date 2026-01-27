@@ -1,7 +1,6 @@
 package com.fms.file;
 
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,10 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 @Component
 public class FileProcessManager implements FileProcessManagerImpl {
@@ -195,27 +191,36 @@ public class FileProcessManager implements FileProcessManagerImpl {
         return 0;
     }
 
-    // @Override
-    // public void downloadFile(Map<String, Object> param , HttpServletResponse
-    // response) throws IOException {
-    // String filePath = (String) param.get("file_path");
-    // String fileName = (String) param.get("file_name");
-    // String downloadFile = filePath + "/" + fileName;
-    // File file = new File(downloadFile);
-    // if (file.exists()) {
-    // try (InputStream inputStream = new FileInputStream(file)) {
-    // response.setHeader("Content-Disposition", "attachment; filename="+fileName);
-    // response.setContentType("application/octet-stream; charset=utf-8");
-    // IOUtils.copy(inputStream, response.getOutputStream());
-    // response.flushBuffer();
-    // System.out.println("downloadFile:"+downloadFile);
-    // } catch (IOException e) {
-    // System.err.println(e.getMessage());
-    // }
-    // } else {
-    // response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-    // }
-    // }
+    @Override
+    public void downloadFile(Map<String, Object> param, HttpServletResponse response) throws IOException {
+        String filePath = (String) param.get("file_path");
+        String fileId = (String) param.get("file_id");
+        String extension = (String) param.get("file_extension");
+        String originalFileName = (String) param.get("file_name");
+
+        String physicalFileName = fileId + (extension != null && !extension.isEmpty() ? "." + extension : "");
+        Path path = Paths.get(filePath, physicalFileName);
+        File file = path.toFile();
+
+        if (file.exists()) {
+            String encodedFileName = URLEncoder.encode(originalFileName, StandardCharsets.UTF_8).replaceAll("\\+",
+                    "%20");
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedFileName + "\"");
+            response.setContentType("application/octet-stream");
+            response.setContentLength((int) file.length());
+
+            try (InputStream inputStream = new FileInputStream(file)) {
+                StreamUtils.copy(inputStream, response.getOutputStream());
+                response.flushBuffer();
+            } catch (IOException e) {
+                System.err.println("Download Error: " + e.getMessage());
+                throw e;
+            }
+        } else {
+            System.err.println("File not found: " + path.toString());
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
     //
     // @Override
     // public List<File> downloadZipFileList(List<Map<String,Object>> params) throws

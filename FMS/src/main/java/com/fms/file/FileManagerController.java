@@ -1,5 +1,6 @@
 package com.fms.file;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,17 +31,17 @@ public class FileManagerController {
         List<Map<String, Object>> map = fileManagerService.fileUpload(folder_name, file_uuid, files);
         return map;
     }
+
     // @PostMapping("/search")
     // public List<Map<String,Object>> searchFile(@RequestBody Map<String,Object>
     // param) throws Exception{
     // return fileManagerService.fileSearch(param);
     // }
     //
-    // @PostMapping("/download")
-    // public void downloadFile(@RequestBody List<Map<String,Object>> param ,
-    // HttpServletResponse response) throws Exception{
-    // fileManagerService.fileDownload(param,response);
-    // }
+    @GetMapping("/download")
+    public void downloadFile(@RequestParam("fileId") String fileId, HttpServletResponse response) throws Exception {
+        fileManagerService.fileDownload(fileId, response);
+    }
     // @PostMapping("/downloadZipFile")
     // public void downloadZipFile(@RequestBody List<Map<String,Object>> param ,
     // HttpServletResponse response) throws Exception{

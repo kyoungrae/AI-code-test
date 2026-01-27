@@ -2,12 +2,16 @@ package com.fms.file;
 
 import com.fms.common.SysFile;
 import com.fms.common.SysFileMapper;
+import com.fms.common.SysFileDetail;
+import com.fms.common.SysFileDetailMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -16,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileManagerService extends FileProcessManager {
     private final SysFileMapper sysFileMapper;
+    private final SysFileDetailMapper sysFileDetailMapper;
 
     // private final String applicationFileName = "application.properties";
     // public List<Map<String,Object>> fileSearch(Map<String,Object> param) throws
@@ -73,15 +78,25 @@ public class FileManagerService extends FileProcessManager {
             throw new Exception("File upload failed: [" + e.getClass().getSimpleName() + "] " + e.getMessage());
         }
     }
-    // public void fileDownload(List<Map<String,Object>> params, HttpServletResponse
-    // response) throws Exception{
-    // for(Map<String ,Object> param : params){
-    // Map<String ,Object> paramMap = new HashMap<>();
-    // System.out.println(param.get("file_name"));
-    // paramMap = param;
-    // downloadFile(paramMap , response);
-    // }
-    // }
+
+    public void fileDownload(String file_id, HttpServletResponse response) throws Exception {
+        SysFileDetail searchParam = new SysFileDetail();
+        searchParam.setFile_id(file_id);
+        List<SysFileDetail> details = sysFileDetailMapper.SELECT(searchParam);
+
+        if (details != null && !details.isEmpty()) {
+            SysFileDetail detail = details.get(0);
+            Map<String, Object> param = new HashMap<>();
+            param.put("file_path", detail.getFile_path());
+            param.put("file_id", detail.getFile_id());
+            param.put("file_name", detail.getFile_name());
+            param.put("file_extension", detail.getFile_extension());
+
+            downloadFile(param, response);
+        } else {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
     // public void zipFileDownload(List<Map<String,Object>> params,
     // HttpServletResponse response) throws Exception{
     // String zipFileName = (String) params.get(0).get("file_zip_file_name");
