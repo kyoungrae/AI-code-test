@@ -137,7 +137,7 @@ class file {
             else if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) typeClass = "gi-file-type-img";
 
             html += `
-                <div class="gi-file-item-card" style="cursor: pointer;" onclick="fileUtil.downloadFile('${file.file_id}', '${file.file_name_with_ext || file.file_name}')">
+                <div class="gi-file-item-card">
                     <div class="gi-file-badge-no">${index + 1}</div>
                     <div class="gi-file-icon-box ${typeClass}">📄</div>
                     <div class="gi-file-info">
@@ -146,6 +146,11 @@ class file {
                             <span class="gi-file-size-tag">${formUtil.formatBytes(file.file_size)}</span>
                             <span class="gi-file-ext-tag ${typeClass}" style="background: none;">${extension}</span>
                         </div>
+                    </div>
+                    <div class="gi-file-download-container">
+                        <button type="button" class="gi-file-download-btn" onclick="fileUtil.downloadFile('${file.file_id}', '${file.file_name_with_ext || file.file_name}')">
+                            <span>↓</span>
+                        </button>
                     </div>
                 </div>
             `;
@@ -753,9 +758,7 @@ class createFileUploadHTML {
             html += `
                 <div class="gi-file-item-card">
                     <div class="gi-file-badge-no">${index + 1}</div>
-
                     <div class="gi-file-icon-box ${typeClass}">📄</div>
-
                     <div class="gi-file-info">
                         <span class="gi-file-name" title="${file.file_name}">${file.file_name}</span>
                         <div class="gi-file-meta">
@@ -763,12 +766,18 @@ class createFileUploadHTML {
                             <span class="gi-file-ext-tag ${typeClass}" style="background: none;">${extension}</span>
                         </div>
                     </div>
-
-                    <div class="gi-file-delete-container">
-                        <button type="button" class="formUtil-file_delete gi-file-delete-btn" 
-                            data-file-id="${file.file_id}" data-file-uuid="${file.file_uuid}">
-                            <span>&times;</span>
-                        </button>
+                    <div class="gi-flex gi-flex-align-items-center gi-margin-left-auto">
+                        <div class="gi-file-download-container">
+                            <button type="button" class="gi-file-download-btn" onclick="fileUtil.downloadFile('${file.file_id}', '${file.file_name_with_ext || file.file_name}')">
+                                <span>↓</span>
+                            </button>
+                        </div>
+                        <div class="gi-file-delete-container">
+                            <button type="button" class="formUtil-file_delete gi-file-delete-btn" 
+                                data-file-id="${file.file_id}" data-file-uuid="${file.file_uuid}">
+                                <span>&times;</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;

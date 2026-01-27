@@ -1408,10 +1408,56 @@ label[for="fileElem"]:hover {
     /* default */
 }
 
+.gi-file-download-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.gi-file-download-btn {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: #eff6ff;
+    color: #3b82f6;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gi-file-download-btn span {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.gi-file-download-btn:hover {
+    background: #3b82f6;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
 .gi-file-delete-container {
-    margin-left: 12px;
-    padding-left: 12px;
-    border-left: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    position: relative;
+}
+
+.gi-file-delete-container::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background-color: #f1f5f9;
 }
 
 .gi-file-delete-btn {
@@ -1434,9 +1480,11 @@ label[for="fileElem"]:hover {
     line-height: 1;
 }
 
-.gi-file-item-card:hover .gi-file-delete-btn {
+.gi-file-delete-btn:hover {
     background: #ef4444;
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 /* --- File Upload Popup Modern UI --- */
