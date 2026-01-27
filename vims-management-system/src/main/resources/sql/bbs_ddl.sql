@@ -35,6 +35,7 @@ CREATE TABLE SYS_BBS_BOARD (
     content              LONGTEXT      NULL     COMMENT '글 내용',
     writer_name          VARCHAR(50)   NULL     COMMENT '작성자 이름',
     hit_count            INT           DEFAULT 0 COMMENT '조회수',
+    file_uuid            VARCHAR(50)   NULL     COMMENT '파일 UUID',
     thumbnail            VARCHAR(255)  NULL     COMMENT '갤러리용 썸네일 경로',
     system_create_userid VARCHAR(50)   NULL     COMMENT '시스템 등록자 ID',
     system_create_date   DATETIME      NULL     COMMENT '시스템 등록 일시',

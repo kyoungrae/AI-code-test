@@ -292,3 +292,35 @@
 - **Root 레벨**: 최상위 노드의 `level_column` 값은 반드시 문자열 "0" (또는 숫자 0) 이어야 합니다.
 - **매핑 방식**: `parent_depth_column`은 '기준이 되는 ID', `child_depth_column`은 '내가 누구의 자식인지를 나타내는 FK' 개념입니다.
 **example end**
+
+## @title : grid 로우 경고 메시지 (Row Warning) 설정
+## @date : 2026-01-27
+## @author : 이경태
+## @extend : ""
+## @call : grid.RowWarning(columnId, condition, message) / grid.RowWarning(function)
+**example start**
+: 그리드의 특정 데이터 조건에 따라 로우(Row)에 경고 스타일(배경색 등)을 적용하고 툴팁 메시지를 표시합니다.
+
+**1. 선언적 방식 (Declarative)**
+: 특정 컬럼의 값과 비교하여 일치할 경우 경고를 표시합니다.
+<script>
+    // 'use_yn' 컬럼의 값이 '0'인 경우, '미사용' 메시지와 함께 경고 표시
+    #service#_grid.RowWarning("use_yn", "0", Message.Label.Array["NOT_USED"]);
+</script>
+
+**2. 함수 방식 (Functional)**
+: 복잡한 조건이나 다중 컬럼 비교가 필요한 경우 사용합니다.
+<script>
+    #service#_grid.RowWarning(function(item) {
+        if (item.status === 'ERROR' || item.count > 100) {
+            return "위험 데이터 감지: " + item.error_msg;
+        }
+        return null; // 경고가 필요 없는 경우 null 반환
+    });
+</script>
+
+**특징**
+- 경고가 적용된 로우는 CSS 클래스 `gi-grid-list-warn`이 추가됩니다.
+- 로우에 마우스를 올리거나 배지를 통해 설정한 경고 메시지가 노출됩니다.
+- 메서드 체이닝을 지원합니다. (예: `grid.RowWarning(...).DataSet(data);`)
+**example end**

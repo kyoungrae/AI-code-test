@@ -363,7 +363,7 @@ class createFileUploadHTML {
             }).then(response => {
                 if (response.status === 200 && response.data.length > 0) {
                     let fileListData = response.data;
-                    let file_uuid = fileListData[0].uuid;
+                    let file_uuid = fileListData[0].file_uuid;
 
                     //NOTE: 업로드 성공 후 파일 상세 정보 저장 (detail 테이블 insert)
                     let registerUrl = that.PATH + "/register";
@@ -378,7 +378,7 @@ class createFileUploadHTML {
 
                         // 추가적인 필드 업데이트 (존재할 경우)
                         if ($("#file_id").length) $("#file_id").val(file_uuid);
-                        if ($("#uuid").length) $("#uuid").val(file_uuid);
+                        if ($("#file_uuid").length) $("#file_uuid").val(file_uuid);
 
                         //NOTE : 파일업로드 팝업 초기화 및 변수 초기화
                         $("#formUtil_fileUpload").empty();
@@ -426,7 +426,7 @@ class createFileUploadHTML {
     fetchAndRenderMainFileList(uuid) {
         let that = this;
         let url = that.PATH + "/find";
-        let param = { uuid: uuid };
+        let param = { file_uuid: uuid };
 
         axios.post(url, param, { withCredentials: true }).then(response => {
             let files = response.data;
@@ -477,7 +477,7 @@ class createFileUploadHTML {
 
                     <div class="gi-file-delete-container">
                         <button type="button" class="formUtil-file_delete gi-file-delete-btn" 
-                            data-file-id="${file.file_id}" data-uuid="${file.uuid}">
+                            data-file-id="${file.file_id}" data-file-uuid="${file.file_uuid}">
                             <span>&times;</span>
                         </button>
                     </div>
@@ -492,7 +492,7 @@ class createFileUploadHTML {
         // 삭제 버튼 이벤트 바인딩
         $container.find(".formUtil-file_delete").on("click", function () {
             let fileId = $(this).data("fileId");
-            let uuid = $(this).data("uuid");
+            let uuid = $(this).data("fileUuid");
             that.deleteMainFile(fileId, uuid);
         });
     }
@@ -502,7 +502,7 @@ class createFileUploadHTML {
         let that = this;
         formUtil.popup("delete_file_confirm", "해당 파일을 삭제하시겠습니까?", function () {
             let url = that.PATH + "/removeByFileIdAndUuid";
-            let param = { file_id: fileId, uuid: uuid };
+            let param = { file_id: fileId, file_uuid: uuid };
 
             axios.post(url, param, { withCredentials: true }).then(response => {
                 if (response.data > 0) {

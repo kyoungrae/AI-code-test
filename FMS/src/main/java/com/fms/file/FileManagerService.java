@@ -2,20 +2,12 @@ package com.fms.file;
 
 import com.fms.common.SysFile;
 import com.fms.common.SysFileMapper;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -47,12 +39,12 @@ public class FileManagerService extends FileProcessManager {
         try {
             List<Map<String, Object>> result = uploadFile(folder_name, files);
             for (Map<String, Object> list : result) {
-                list.put("uuid", uid);
+                list.put("file_uuid", uid);
                 list.put("system_create_userid", userId);
             }
             if (!result.isEmpty()) {
                 var sysFile = SysFile.builder()
-                        .uuid(uid)
+                        .file_uuid(uid)
                         .temp_yn(0) // NOTE : 파일 임시 저장, 사용자가 작성 취소 하거나, 화면을 나갈 경우 삭제하기 위한 flag
                         .system_create_userid(userId)
                         .system_create_date(new java.util.Date())

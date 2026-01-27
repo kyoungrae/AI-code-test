@@ -19,7 +19,7 @@
             SELECT
                 row_number() over (ORDER BY system_create_date DESC )AS no,
                 
-                uuid,
+                file_uuid,
                 temp_yn,
                 system_create_date, 
                 system_create_userid, 
@@ -28,14 +28,14 @@
             FROM SYS_FILE
             <where>
                 
-                <if test="uuid != null and uuid != ''">AND uuid = #{uuid}</if>
+                <if test="file_uuid != null and file_uuid != ''">AND file_uuid = #{file_uuid}</if>
                 <if test="temp_yn != null and temp_yn != ''">AND temp_yn = #{temp_yn}</if>
                 <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
                 <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
                 <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
                 <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
                 
-                <if test="_uuid != null and _uuid != ''">AND uuid LIKE CONCAT('%', #{_uuid}, '%')</if>
+                <if test="_file_uuid != null and _file_uuid != ''">AND file_uuid LIKE CONCAT('%', #{_file_uuid}, '%')</if>
                 <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
                 <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
                 <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
@@ -50,14 +50,14 @@
         SELECT CEIL(COUNT(*) / #{row_range}) FROM SYS_FILE
         <where>
             
-            <if test="uuid != null and uuid != ''">AND uuid = #{uuid}</if>
+            <if test="file_uuid != null and file_uuid != ''">AND file_uuid = #{file_uuid}</if>
             <if test="temp_yn != null and temp_yn != ''">AND temp_yn = #{temp_yn}</if>
             <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
             <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             
-            <if test="_uuid != null and _uuid != ''">AND uuid LIKE CONCAT('%', #{_uuid}, '%')</if>
+            <if test="_file_uuid != null and _file_uuid != ''">AND file_uuid LIKE CONCAT('%', #{_file_uuid}, '%')</if>
             <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
             <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
@@ -68,7 +68,7 @@
     <select id="SELECT" resultType="com.fms.common.SysFile">
         SELECT
             
-            uuid,
+            file_uuid,
             temp_yn,
             system_create_date,
             system_create_userid,
@@ -77,14 +77,14 @@
         FROM SYS_FILE
         <where>
             
-            <if test="uuid != null and uuid != ''">AND uuid = #{uuid}</if>
+            <if test="file_uuid != null and file_uuid != ''">AND file_uuid = #{file_uuid}</if>
             <if test="temp_yn != null and temp_yn != ''">AND temp_yn = #{temp_yn}</if>
             <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
             <if test="system_update_date != null">AND system_update_date = #{system_update_date}</if>
             <if test="system_update_userid != null and system_update_userid != ''">AND system_update_userid = #{system_update_userid}</if>
             
-            <if test="_uuid != null and _uuid != ''">AND uuid LIKE CONCAT('%', #{_uuid}, '%')</if>
+            <if test="_file_uuid != null and _file_uuid != ''">AND file_uuid LIKE CONCAT('%', #{_file_uuid}, '%')</if>
             <if test="_system_create_date != null and _system_create_date != ''">AND system_create_date LIKE CONCAT('%', #{_system_create_date}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
             <if test="_system_update_date != null and _system_update_date != ''">AND system_update_date LIKE CONCAT('%', #{_system_update_date}, '%')</if>
@@ -95,7 +95,7 @@
     <insert id="SYS_FILE_INSERT" parameterType="com.fms.common.SysFile">
         INSERT INTO SYS_FILE(
             
-             uuid
+             file_uuid
             , temp_yn
             , system_create_date 
             , system_create_userid 
@@ -105,7 +105,7 @@
         )
         VALUES(
             
-             #{uuid}
+             #{file_uuid}
             , #{temp_yn}
             , #{system_create_date}
             , #{system_create_userid}
@@ -117,29 +117,29 @@
     <insert id="SYS_FILE_DETAIL_INSERT" parameterType="com.fms.common.SysFileDetail">
         INSERT INTO SYS_FILE_DETAIL(
         file_id
-        ,uuid
+        ,file_uuid
         , file_name
         , file_size
         , file_extension
         , file_path
         , system_create_date
         , system_create_userid
-
+ 
         <if test="system_update_date != null">, system_update_date</if>
         <if test="system_update_userid != null">, system_update_userid</if>
         <if test="menu_code != null">, menu_code</if>
         )
         VALUES(
-
+ 
           #{file_id}
-        , #{uuid}
+        , #{file_uuid}
         , #{file_name}
         , #{file_size}
         , #{file_extension}
         , #{file_path}
         , #{system_create_date}
         , #{system_create_userid}
-
+ 
         <if test="system_update_date != null">, #{system_update_date}</if>
         <if test="system_update_userid != null">, #{system_update_userid}</if>
         <if test="menu_code != null">, #{menu_code}</if>
@@ -150,7 +150,7 @@
         DELETE FROM SYS_FILE
         <where>
             
-            AND uuid = #{uuid}
+            AND file_uuid = #{file_uuid}
             
             <if test="temp_yn != null">AND temp_yn = #{temp_yn}</if>
             <if test="system_create_date != null">AND system_create_date = #{system_create_date}</if>
@@ -172,7 +172,7 @@
         </set>
         <where>
             
-            AND uuid = #{uuid}
+            AND file_uuid = #{file_uuid}
         </where>
     </update>
 </mapper>

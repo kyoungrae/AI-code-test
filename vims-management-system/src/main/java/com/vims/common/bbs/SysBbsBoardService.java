@@ -25,6 +25,9 @@ public class SysBbsBoardService extends AbstractCommonService<SysBbsBoard> {
 
     @Override
     protected List<SysBbsBoard> findImpl(SysBbsBoard request) throws Exception {
+        if (request.getBoard_id() != null && !request.getBoard_id().isEmpty()) {
+            sysBbsBoardMapper.INCREMENT_HIT_COUNT(request);
+        }
         return sysBbsBoardMapper.SELECT(request);
     }
 

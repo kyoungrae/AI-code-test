@@ -12,7 +12,8 @@
       <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
         <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
           <div class="gi-input-container gi-flex-1">
-            <label for="searchDesc1" class="gi-input-label" data-focus-label="true">검색어</label>
+            <label for="searchDesc1" class="gi-input-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SAMPLE.SEARCH_KEYWORD"]</label>
             <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
           </div>
 
@@ -195,17 +196,17 @@
 
       // 1. 사이드 패널 내 그리드 컨테이너 생성
       $("#sample_gi-Grid-side").html('<div class="gi-padding-20px gi-row-100 gi-flex gi-flex-direction-column gi-grid-gap-10px">' +
-        '<h3>[' + data.no + '] 로우 상세 내역</h3>' +
+        '<h3>[' + data.no + '] ' + Message.Label.Array["SYS_BBS_BOARD.DETAIL"] + '</h3>' +
         '<div id="sampleSub_gi-Grid" class="gi-Grid gi-row-100"></div>' +
         '</div>');
 
       // 2. 서브 그리드 헤더 설정
       let subGridHeader = {
-        title: "상세 내역 리스트",
+        title: Message.Label.Array["SYS_BBS_BOARD.DETAIL"],
         list: [
-          { HEADER: '순번', ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-          { HEADER: '항목명', ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
-          { HEADER: '내용', ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
+          { HEADER: 'No', ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+          { HEADER: Message.Label.Array["FILE_NAME"], ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+          { HEADER: Message.Label.Array["SYS_BBS_BOARD.CONTENT"], ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
         ]
       };
 
@@ -214,8 +215,8 @@
       for (let i = 1; i <= 5; i++) {
         subData.push({
           sub_no: i,
-          item_name: "상세 항목 " + data.no + "-" + i,
-          item_content: "이것은 " + data.no + "번 데이터의 상세 내용입니다."
+          item_name: Message.Label.Array["SYS_BBS_BOARD.DETAIL"] + " " + data.no + "-" + i,
+          item_content: Message.Label.Array["SYS_BBS_BOARD.CONTENT"] + " " + data.no + "-" + i
         });
       }
 

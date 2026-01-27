@@ -24,6 +24,7 @@
                 content,
                 writer_name,
                 hit_count,
+                file_uuid,
                 system_create_userid,
                 system_create_date,
                 system_update_userid,
@@ -49,7 +50,7 @@
 
     <select id="SELECT" resultType="com.vims.common.bbs.SysBbsBoard">
         SELECT
-            board_id, bbs_id, title, content, writer_name, hit_count,
+            board_id, bbs_id, title, content, writer_name, hit_count, file_uuid,
             system_create_userid, system_create_date, system_update_userid, system_update_date
         FROM SYS_BBS_BOARD
         <where>
@@ -60,11 +61,11 @@
 
     <insert id="INSERT">
         INSERT INTO SYS_BBS_BOARD(
-            board_id, bbs_id, title, content, writer_name, hit_count,
+            board_id, bbs_id, title, content, writer_name, hit_count, file_uuid,
             system_create_userid, system_create_date, system_update_userid, system_update_date
         )
         VALUES(
-            #{board_id}, #{bbs_id}, #{title}, #{content}, #{writer_name}, 0,
+            #{board_id}, #{bbs_id}, #{title}, #{content}, #{writer_name}, 0, #{file_uuid},
             #{system_create_userid}, NOW(), #{system_update_userid}, NOW()
         )
     </insert>
@@ -76,12 +77,19 @@
             <if test="content != null">content = #{content},</if>
             <if test="writer_name != null">writer_name = #{writer_name},</if>
             <if test="hit_count != 0">hit_count = #{hit_count},</if>
+            <if test="file_uuid != null">file_uuid = #{file_uuid},</if>
             system_update_userid = #{system_update_userid},
             system_update_date = NOW()
         </set>
         <where>
             AND board_id = #{board_id}
         </where>
+    </update>
+
+    <update id="INCREMENT_HIT_COUNT">
+        UPDATE SYS_BBS_BOARD
+        SET hit_count = hit_count + 1
+        WHERE board_id = #{board_id}
     </update>
 
     <delete id="DELETE">

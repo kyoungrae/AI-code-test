@@ -94,11 +94,11 @@ public class SysFileDetailService extends AbstractCommonService<SysFileDetail> {
             if (deletedRows > 0) {
                 deleteFile(fileDetail);
             }
-            var isDetailParam = SysFileDetail.builder().uuid(request.getUuid()).build();
+            var isDetailParam = SysFileDetail.builder().file_uuid(request.getFile_uuid()).build();
 
             List<SysFileDetail> isDetails = sysFileDetailMapper.SELECT(isDetailParam);
             if (isDetails == null || isDetails.isEmpty()) {
-                var isSysFileParam = SysFile.builder().uuid(request.getUuid()).build();
+                var isSysFileParam = SysFile.builder().file_uuid(request.getFile_uuid()).build();
                 int deleteSysFile = sysFileMapper.SYS_FILE_DELETE(isSysFileParam);
                 if (deleteSysFile > 0) {
                     System.out.println("deleteSysFile : " + deleteSysFile);
@@ -126,7 +126,7 @@ public class SysFileDetailService extends AbstractCommonService<SysFileDetail> {
         int rtn = 0;
         try {
             for (SysFileDetail map : request) {
-                if (map.getUuid() != null && !map.getUuid().isEmpty()) {
+                if (map.getFile_uuid() != null && !map.getFile_uuid().isEmpty()) {
                     rtn = sysFileDetailMapper.UPDATE(map);
                 }
             }

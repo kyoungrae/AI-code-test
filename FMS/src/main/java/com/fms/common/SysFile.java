@@ -25,15 +25,15 @@ import java.util.Arrays;
 public class SysFile extends Common {
     @Transient
     @Builder.Default
-    private String keys = Arrays.toString(new String[] { "uuid" });
+    private String keys = Arrays.toString(new String[] { "file_uuid" });
 
     /***
      * <pre>
-     *  uuid : 공통아이디
+     *  file_uuid : 공통아이디
      * </pre>
      */
     @Id
-    private String uuid;
+    private String file_uuid;
 
     /***
      * <pre>
@@ -71,11 +71,11 @@ public class SysFile extends Common {
 
     /***
      * <pre>
-     *  uuid : 공통아이디
+     *  file_uuid : 공통아이디
      * </pre>
      */
     @Transient
-    private String _uuid;
+    private String _file_uuid;
 
     /***
      * <pre>

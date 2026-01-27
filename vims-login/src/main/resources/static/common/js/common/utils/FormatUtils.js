@@ -381,3 +381,18 @@ FormUtility.prototype.dateFormatting = function (date, type) {
         return `${year}${month}${day}`;
     }
 }
+
+/**
+ * @title : 파일 크기 계산 Bytes 단위를 KB, MB 등으로 변환
+ * @bytes : 바이트 단위의 크기 [Number]
+ * @decimals : 소수점 자리수 [Number]
+ * @writer : 이경태
+ */
+FormUtility.prototype.formatBytes = function (bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}

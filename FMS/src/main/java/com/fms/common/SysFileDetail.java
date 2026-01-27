@@ -25,7 +25,7 @@ public class SysFileDetail extends Common {
 
     @Transient
     @Builder.Default
-    private String keys = Arrays.toString(new String[] { "file_id", "uuid" });
+    private String keys = Arrays.toString(new String[] { "file_id", "file_uuid" });
 
     /***
      * <pre>
@@ -37,10 +37,10 @@ public class SysFileDetail extends Common {
 
     /***
      * <pre>
-     *  uuid : 공통아이디
+     *  file_uuid : 공통아이디
      * </pre>
      */
-    private String uuid;
+    private String file_uuid;
 
     /***
      * <pre>
@@ -119,11 +119,11 @@ public class SysFileDetail extends Common {
 
     /***
      * <pre>
-     *  uuid : 공통아이디
+     *  file_uuid : 공통아이디
      * </pre>
      */
     @Transient
-    private String _uuid;
+    private String _file_uuid;
 
     /***
      * <pre>

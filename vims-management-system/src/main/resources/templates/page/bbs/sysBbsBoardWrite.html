@@ -2,8 +2,9 @@
     <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
         <!-- 헤더 영역 -->
         <header class="gi-margin-bottom-30px gi-padding-left-20px gi-padding-top-20px">
-            <h1 class="gi-page-title" id="write-page-title">게시글 작성</h1>
-            <p class="gi-subtitle-main">새로운 소식을 공유하세요.</p>
+            <h1 class="gi-page-title" id="write-page-title">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITE"]
+            </h1>
+            <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.SUB_TITLE_WRITE"]</p>
         </header>
 
         <article class="gi-padding-left-right-20px">
@@ -12,29 +13,56 @@
                     <!-- 제목 입력 -->
                     <div class="gi-input-container gi-flex-1">
                         <label for="board_title" class="gi-input-label" data-focus-label="true"
-                            data-required="true">제목</label>
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.TITLE"]</label>
                         <input data-field="title" id="board_title" name="title" class="gi-input" data-required="true"
                             autocomplete="off" />
                     </div>
 
                     <!-- 작성자명 (기본 로그인 정보 사용 예정) -->
                     <div class="gi-input-container gi-flex-1">
-                        <label for="board_writer" class="gi-input-label" data-focus-label="true">작성자</label>
+                        <label for="board_writer" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITER_NAME"]</label>
                         <input data-field="writer_name" id="board_writer" name="writer_name" class="gi-input"
                             autocomplete="off" />
                     </div>
 
                     <!-- 내용 입력 (Quill Editor 영역) -->
                     <div class="gi-flex gi-flex-column gi-grid-gap-10px">
-                        <label class="gi-input-label-static">내용</label>
+                        <label
+                            class="gi-input-label-static">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.CONTENT"]</label>
                         <div id="editor-container" style="height: 400px; background: #fff;"></div>
                         <input type="hidden" data-field="content" id="board_content" name="content" />
                     </div>
 
+                    <!-- 파일 첨부 영역 (file_yn이 '1'일 때만 활성화) -->
+                    <div id="file-attachment-section" class="gi-article-content gi-margin-top-40px gi-hidden">
+                        <div
+                            class="gi-flex gi-flex-justify-content-between gi-flex-align-items-end gi-margin-bottom-16px">
+                            <div>
+                                <h2 class="gi-title-section gi-margin-bottom-4px">
+                                    [Page.Message].Message.Label.Array["FILE_ATTACH"]</h2>
+                                <p class="gi-text-secondary gi-font-size-14px">
+                                    [Page.Message].Message.Label.Array["FILE_ATTACH_INFO"]</p>
+                            </div>
+                            <button type="button" class="gi-btn-blue" data-file-upload-btn id="file-upload-btn"
+                                style="width: 120px;">[Page.Message].Message.Label.Array["UPLOAD_BTN"]</button>
+                            <input type="hidden" id="board_file_uuid" data-field="file_uuid" name="file_uuid" />
+                        </div>
+                        <div id="attached-file-list" class="gi-margin-top-10px"
+                            style="min-height: 50px; border: 1px solid #f0f1f7; border-radius: 12px; padding: 16px; background: #f8f9fc;">
+                            <div class="gi-file-list-empty">
+                                <span class="gi-file-list-empty-icon">📂</span>
+                                <p class="gi-file-list-empty-text">
+                                    [Page.Message].Message.Label.Array["FILE_ATTACH_AREA_NOT_EXIST_FILE"]</p>
+                            </div>
+                        </div>
+                    </div>
                     <!-- 버튼 영역 -->
                     <div class="gi-flex gi-flex-justify-content-end gi-grid-gap-10px gi-margin-top-20px">
-                        <button id="bbs-save-btn" class="gi-btn-blue" type="button">저장하기</button>
-                        <button id="bbs-cancel-btn" class="gi-btn" type="button">취소</button>
+                        <button id="bbs-save-btn" class="gi-btn-blue"
+                            type="button">[Page.Message].Message.Label.Array["SAVE_BTN"]</button>
+                        <button id="bbs-cancel-btn" class="gi-btn"
+                            type="button">[Page.Message].Message.Label.Array["CANCEL_BTN"]</button>
                     </div>
                 </div>
             </form>
@@ -54,13 +82,16 @@
     async function init() {
         new PageInit();
 
-        // 1. 페이지 헤더/타이틀 설정
+        // 1. BBS 설정 확인 (파일 첨부 가능 여부 등)
+        await checkBbsConfiguration();
+
+        // 2. 페이지 헤더/타이틀 설정
         if (mode === 'modify') {
             $("#write-page-title").text(Message.Label.Array["SYS_BBS_BOARD.TITLE_UPDATE"]);
-            $("#bbs-save-btn").text("수정하기");
+            $("#bbs-save-btn").text(Message.Label.Array["UPDATE_BTN"]);
         }
 
-        // 2. 에디터 초기화
+        // 3. 에디터 초기화
         quill = new Quill('#editor-container', {
             theme: 'snow',
             modules: {
@@ -74,7 +105,7 @@
             }
         });
 
-        // 3. 데이터 로드 (수정 모드)
+        // 4. 데이터 로드 (수정 모드)
         if (mode === 'modify' && boardId) {
             fetchBoardData();
         } else {
@@ -82,8 +113,29 @@
             $("#board_writer").val(JwtUtils.getUserEmailFromJWT().split('@')[0]);
         }
 
-        // 4. 버튼 이벤트
+        // 5. 버튼 이벤트
         clickEvent();
+    }
+
+    async function checkBbsConfiguration() {
+        let url = "/cms/common/sysBbs/find";
+        try {
+            const response = await axios.post(url, { bbs_id: targetBbsId });
+            if (response.status === 200 && response.data.length > 0) {
+                let bbsInfo = response.data[0];
+                if (bbsInfo.file_yn === '1') {
+                    $("#file-attachment-section").removeClass("gi-hidden");
+                    initializeFileUtility();
+                }
+            }
+        } catch (e) {
+            console.error("BBS Config fetch failed", e);
+        }
+    }
+
+    function initializeFileUtility() {
+        // fileUtil.createFileUpload(API_PATH, UUID_INPUT_ID, FOLDER_NAME)
+        fileUtil.createFileUpload("/fms/common/file/sysFileDetail", "board_file_uuid", "bbs_attachments");
     }
 
     function fetchBoardData() {
@@ -93,6 +145,7 @@
                 let data = response.data[0];
                 $("#board_title").val(data.title);
                 $("#board_writer").val(data.writer_name);
+                $("#board_file_uuid").val(data.file_uuid).trigger('change');
                 quill.root.innerHTML = data.content;
             }
         });
@@ -106,7 +159,7 @@
 
         // 취소 버튼
         $("#bbs-cancel-btn").on("click", async function () {
-            if (await formUtil.confirm("작성을 취소하시겠습니까?")) {
+            if (await formUtil.confirm(Message.Label.Array["CONFIRM.CANCEL"])) {
                 formUtil.apiLoadContent("cms", "/bbs/view", { bbs_id: targetBbsId });
             }
         });
@@ -129,18 +182,19 @@
             bbs_id: targetBbsId,
             title: $("#board_title").val(),
             content: content,
-            writer_name: $("#board_writer").val()
+            writer_name: $("#board_writer").val(),
+            file_uuid: $("#board_file_uuid").val()
         };
 
         if (isUpdate) param.board_id = boardId;
 
         axios.post(url, param).then(response => {
             if (response.status === 200) {
-                formUtil.toast(isUpdate ? "수정되었습니다." : "등록되었습니다.", "success");
+                formUtil.toast(isUpdate ? Message.Label.Array["COMPLETE.UPDATE"] : Message.Label.Array["COMPLETE.INSERT"], "success");
                 formUtil.apiLoadContent("cms", "/bbs/view", { bbs_id: targetBbsId });
             }
         }).catch(error => {
-            formUtil.toast("처리 중 오류가 발생했습니다.", "error");
+            formUtil.toast(Message.Label.Array["FAIL.UPDATE"], "error");
         });
     }
 </script>

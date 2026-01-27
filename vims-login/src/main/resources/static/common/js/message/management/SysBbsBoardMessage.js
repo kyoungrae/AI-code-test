@@ -39,6 +39,14 @@ Message.Label.Array["SYS_BBS_BOARD.SYSTEM_CREATE_DATE"] = "시스템 등록 일�
 Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_USERID"] = "시스템 수정자 ID";
 Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_DATE"] = "시스템 수정 일시";
 
+Message.Label.Array["SYS_BBS_BOARD.WRITE"] = "게시글 작성";
+Message.Label.Array["SYS_BBS_BOARD.DETAIL"] = "게시글 상세";
+Message.Label.Array["SYS_BBS_BOARD.SUB_TITLE_WRITE"] = "새로운 소식을 공유하세요.";
+Message.Label.Array["SYS_BBS_BOARD.WRITER"] = "작성자";
+Message.Label.Array["SYS_BBS_BOARD.DATE"] = "작성일";
+Message.Label.Array["SYS_BBS_BOARD.HIT"] = "조회수";
+Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"] = "본문에 포함된 첨부 파일 목록입니다.";
+
 Message.Label.Array["SYS_LAYOUT.CREATE_DATE"] = "등록 일시";
 Message.Label.Array["SYS_LAYOUT.TITLE"] = "제목";
 Message.Label.Array["SYS_LAYOUT.WRITER_NAME"] = "작성자";

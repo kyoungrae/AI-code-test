@@ -2,12 +2,16 @@
     <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
         <!-- 헤더 영역 -->
         <header class="gi-margin-bottom-30px gi-padding-left-20px gi-padding-top-20px">
-            <h1 class="gi-page-title" id="detail-board-title">게시글 상세</h1>
+            <h1 class="gi-page-title" id="detail-board-title">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.DETAIL"]
+            </h1>
             <div class="gi-flex gi-flex-justify-content-between gi-flex-align-items-center gi-margin-top-10px">
                 <div class="gi-flex gi-grid-gap-20px gi-text-secondary">
-                    <span>작성자: <b id="detail-writer" class="gi-color-black"></b></span>
-                    <span>작성일: <b id="detail-date" class="gi-color-black"></b></span>
-                    <span>조회수: <b id="detail-hit" class="gi-color-black">0</b></span>
+                    <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.WRITER"]: <b id="detail-writer"
+                            class="gi-color-black"></b></span>
+                    <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.DATE"]: <b id="detail-date"
+                            class="gi-color-black"></b></span>
+                    <span>[Page.Message].Message.Label.Array["SYS_BBS_BOARD.HIT"]: <b id="detail-hit"
+                            class="gi-color-black">0</b></span>
                 </div>
             </div>
         </header>
@@ -21,6 +25,22 @@
                 <div id="detail-content" class="gi-padding-20px ql-editor"
                     style="min-height: 300px; color: #333 !important;">
                     <!-- 게시글 본문 내용이 여기에 로드됩니다. -->
+                </div>
+            </div>
+
+            <!-- 첨부 파일 영역 -->
+            <div id="detail-file-section" class="gi-article-content gi-margin-top-40px gi-hidden">
+                <div class="gi-flex gi-flex-justify-content-between gi-flex-align-items-end gi-margin-bottom-16px">
+                    <div>
+                        <h2 class="gi-title-section gi-margin-bottom-4px">
+                            [Page.Message].Message.Label.Array["FILE_ATTACH"]</h2>
+                        <p class="gi-text-secondary gi-font-size-14px">
+                            [Page.Message].Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"]</p>
+                    </div>
+                </div>
+                <div id="detail-file-list" class="gi-margin-top-10px"
+                    style="min-height: 50px; border: 1px solid #f0f1f7; border-radius: 12px; padding: 16px; background: #f8f9fc;">
+                    <!-- Files will be rendered here -->
                 </div>
             </div>
 
@@ -70,7 +90,7 @@
         });
 
         $("#detail-delete-btn").on("click", async function () {
-            if (await formUtil.confirm("정말로 삭제하시겠습니까?")) {
+            if (await formUtil.confirm(Message.Label.Array["CONFIRM.DELETE"])) {
                 deleteBoard();
             }
         });
@@ -91,19 +111,70 @@
                 if (data.content && data.content.trim() !== "") {
                     $("#detail-content").html(data.content).css("color", "#333");
                 } else {
-                    $("#detail-content").html("<p style='color:#999; text-align:center; margin-top:100px;'>내용이 없습니다.</p>");
+                    $("#detail-content").html("<p style='color:#999; text-align:center; margin-top:100px;'>" + Message.Label.Array["FAIL.SELECT_NO_DATA"] + "</p>");
+                }
+
+                // 첨부 파일 조회
+                if (data.file_uuid) {
+                    fetchAttachedFiles(data.file_uuid);
                 }
             } else {
-                formUtil.toast("게시글 정보를 찾을 수 없습니다.", "error");
+                formUtil.toast(Message.Label.Array["FAIL.SELECT_NO_DATA"], "error");
             }
         });
     }
+
+    function fetchAttachedFiles(fileUuid) {
+        let url = "/fms/common/file/sysFileDetail/find";
+        axios.post(url, { file_uuid: fileUuid }).then(response => {
+            if (response.status === 200 && response.data.length > 0) {
+                $("#detail-file-section").removeClass("gi-hidden");
+                renderFiles(response.data);
+            }
+        });
+    }
+
+    function renderFiles(files) {
+        let html = '<div class="gi-file-list-container">';
+        files.forEach((file, index) => {
+            const extension = (file.file_extension || '').toLowerCase();
+            let typeClass = "";
+
+            if (['pdf', 'hwp', 'doc', 'docx'].includes(extension)) typeClass = "gi-file-type-doc";
+            else if (['xls', 'xlsx', 'csv'].includes(extension)) typeClass = "gi-file-type-xls";
+            else if (['zip', 'rar', '7z'].includes(extension)) typeClass = "gi-file-type-zip";
+            else if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) typeClass = "gi-file-type-img";
+
+            html += `
+                <div class="gi-file-item-card" style="cursor: pointer;" onclick="downloadFile('${file.file_id}', '${file.file_name_with_ext}')">
+                    <div class="gi-file-badge-no">${index + 1}</div>
+                    <div class="gi-file-icon-box ${typeClass}">📄</div>
+                    <div class="gi-file-info">
+                        <span class="gi-file-name" title="${file.file_name}">${file.file_name}</span>
+                        <div class="gi-file-meta">
+                            <span class="gi-file-size-tag">${formUtil.formatBytes(file.file_size)}</span>
+                            <span class="gi-file-ext-tag ${typeClass}" style="background: none;">${extension}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        $("#detail-file-list").html(html);
+    }
+
+    // 파일 다운로드 함수 (추가 필요 시 구현)
+    window.downloadFile = function (fileId, fileName) {
+        // 실제 다운로드 로직은 프로젝트의 파일 다운로드 API에 맞춰 구현
+        console.log("Downloading:", fileId, fileName);
+        // 예: window.location.href = `/fms/fileManager/download?fileId=${fileId}`;
+    };
 
     function deleteBoard() {
         let url = "/cms/common/sysBbsBoard/remove";
         axios.post(url, { board_id: boardId }).then(response => {
             if (response.status === 200) {
-                formUtil.toast("정상적으로 삭제되었습니다.", "success");
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"], "success");
                 formUtil.apiLoadContent("cms", "/bbs/view", { bbs_id: bbsId });
             }
         });
