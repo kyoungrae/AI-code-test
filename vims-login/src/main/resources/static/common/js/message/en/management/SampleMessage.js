@@ -16,7 +16,7 @@ Message.Label.Array["SAMPLE.INFO_BASIC"] = "기본 정보";
 Message.Label.Array["SAMPLE.INFO_DETAIL"] = "Detail Content";
 
 Message.Label.Array["SAMPLE.NAME"] = "샘플 명칭";
-Message.Label.Array["SAMPLE.CODE"] = "샘플 코드";
+Message.Label.Array["SAMPLE.CODE"] = "샘플 Code";
 Message.Label.Array["SAMPLE.CATEGORY"] = "카테고리";
 Message.Label.Array["SAMPLE.REG_DATE"] = "Register 일자";
 Message.Label.Array["SAMPLE.DESC"] = "Description Content";

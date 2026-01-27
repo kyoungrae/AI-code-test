@@ -1,29 +1,29 @@
 //const Message = {};
 //Message.Label = {};
 //Message.Label.Array = {};
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_DETAIL"] = " 상세";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_LIST"] = " 목록";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_MODIFY"] = " 수정";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_REGISTER"] = " 등록";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_REGISTER_CONFIG_GROUP"] = "시스템설정 그룹 등록";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_UPDATE_CONFIG_GROUP"] = "시스템설정 그룹 수정";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_DETAIL"] = " Дэлгэрэнгүй";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_LIST"] = " Жагсаалт";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_MODIFY"] = " Засах";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_REGISTER"] = " Бүртгэх";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_REGISTER_CONFIG_GROUP"] = "시스템설정 Бүлэг Бүртгэх";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_UPDATE_CONFIG_GROUP"] = "시스템설정 Бүлэг Засах";
 
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.CONFIG_GROUP_ID"] = "설정그룹아이디(을)를 입력해 주세요";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.CONFIG_GROUP_NAME"] = "설정그룹이름(을)를 입력해 주세요";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.USE_YN"] = "사용여부(을)를 입력해 주세요";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_CREATE_DATE"] = "등록일자(을)를 입력해 주세요";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_CREATE_USERID"] = "작성자ID(을)를 입력해 주세요";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_UPDATE_DATE"] = "수정일자(을)를 입력해 주세요";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_UPDATE_USERID"] = "수정자ID(을)를 입력해 주세요";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.CONFIG_GROUP_ID"] = "설정БүлэгID(을)를 оруулна уу";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.CONFIG_GROUP_NAME"] = "설정БүлэгНэр(을)를 оруулна уу";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.USE_YN"] = "Ашиглах эсэх(을)를 оруулна уу";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_CREATE_DATE"] = "Бүртгэх일자(을)를 оруулна уу";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_CREATE_USERID"] = "작성자ID(을)를 оруулна уу";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_UPDATE_DATE"] = "Засах일자(을)를 оруулна уу";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CHECK.SYSTEM_UPDATE_USERID"] = "Засах자ID(을)를 оруулна уу";
 
 
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"] = "설정그룹아이디";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"] = "설정그룹이름";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.USE_YN"] = "사용여부";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_CREATE_DATE"] = "등록일자";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"] = "설정БүлэгID";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.CONFIG_GROUP_NAME"] = "설정БүлэгНэр";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.USE_YN"] = "Ашиглах эсэх";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_CREATE_DATE"] = "Бүртгэх일자";
 Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_CREATE_USERID"] = "작성자ID";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_UPDATE_DATE"] = "수정일자";
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_UPDATE_USERID"] = "수정자ID";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_UPDATE_DATE"] = "Засах일자";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_UPDATE_USERID"] = "Засах자ID";
 
 
-Message.Label.Array["SYS_SITE_CONFIG_GROUP.REGISTER_CONFIG_GROUP_ID_BTN"] = "그룹추가";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.REGISTER_CONFIG_GROUP_ID_BTN"] = "Бүлэг추가";

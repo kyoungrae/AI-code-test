@@ -9,7 +9,7 @@ Message.Label.Array["SYS_SITE_CONFIG.TITLE_REGISTER_CONFIG_KEY"] = "시스템 �
 Message.Label.Array["SYS_SITE_CONFIG.TITLE_MODIFY_CONFIG_KEY"] = "시스템 설정키 Update";
 
 
-Message.Label.Array["SYS_SITE_CONFIG.CHECK.CONFIG_GROUP_ID"] = "설정그룹ID(을)를 Please enter";
+Message.Label.Array["SYS_SITE_CONFIG.CHECK.CONFIG_GROUP_ID"] = "설정GroupID(을)를 Please enter";
 Message.Label.Array["SYS_SITE_CONFIG.CHECK.CONFIG_KEY"] = "설정키(을)를 Please enter";
 Message.Label.Array["SYS_SITE_CONFIG.CHECK.CONFIG_VALUE"] = "설정값(을)를 Please enter";
 Message.Label.Array["SYS_SITE_CONFIG.CHECK.DESCRIPTION"] = "Description(을)를 Please enter";
@@ -20,7 +20,7 @@ Message.Label.Array["SYS_SITE_CONFIG.CHECK.SYSTEM_UPDATE_DATE"] = "Update일자(
 Message.Label.Array["SYS_SITE_CONFIG.CHECK.SYSTEM_UPDATE_USERID"] = "Update자ID(을)를 Please enter";
 
 
-Message.Label.Array["SYS_SITE_CONFIG.CONFIG_GROUP_ID"] = "설정그룹ID";
+Message.Label.Array["SYS_SITE_CONFIG.CONFIG_GROUP_ID"] = "설정GroupID";
 Message.Label.Array["SYS_SITE_CONFIG.CONFIG_KEY"] = "설정키";
 Message.Label.Array["SYS_SITE_CONFIG.CONFIG_VALUE"] = "설정값";
 Message.Label.Array["SYS_SITE_CONFIG.DESCRIPTION"] = "Description";
