@@ -3588,6 +3588,8 @@
 
 .gi-grid-list-header {
     border-bottom: 1px solid #bbbbbb6e;
+    border-left: 5px solid transparent;
+    /* Alignment with warn rows */
     position: sticky;
     top: 0;
     backdrop-filter: blur(10px);
@@ -3603,6 +3605,8 @@
     margin-bottom: 5px;
     padding: 10px 0;
     box-sizing: border-box;
+    border-left: 5px solid transparent;
+    /* Base alignment */
 }
 
 .gi-grid-list-header>li,
@@ -3727,9 +3731,19 @@
 
 .gi-tree-toggle {
     cursor: pointer;
-    margin-right: 5px;
-    float: left;
-    color: #bdbdbd;
+    margin-right: 8px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.gi-tree-toggle:hover {
+    background-color: #f1f5f9;
+    color: #3b82f6;
 }
 
 /* .gi-grid-hierarchy-depth0::before {
@@ -3750,6 +3764,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    padding-left: 8px;
 }
 
 .gi-grid-hierarchy-depth1::before,
@@ -3758,55 +3773,55 @@
     position: relative;
     display: block;
     flex-shrink: 0;
+    transition: all 0.2s ease;
 }
 
-/* Level 1 Lines */
+/* Level 1: Single branch */
 .gi-grid-hierarchy-depth1::before {
-    width: 25px;
-    height: calc(100% + 5px);
-    /* Matches margin-bottom of .gi-grid-list */
+    width: 24px;
+    height: 100%;
+    margin-right: 8px;
     background:
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
-        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 12px 50% / 12px 1px no-repeat;
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 10px 0 / 2px 100% no-repeat,
+        linear-gradient(to bottom, #e2e8f0 2px, transparent 2px) 10px 50% / 10px 2px no-repeat;
 }
 
 .gi-grid-hierarchy-depth1.gi-grid-hierarchy-last::before {
     background:
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 50% no-repeat,
-        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 12px 50% / 12px 1px no-repeat;
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 10px 0 / 2px 50% no-repeat,
+        linear-gradient(to bottom, #e2e8f0 2px, transparent 2px) 10px 50% / 10px 2px no-repeat;
 }
 
-/* Level 2 Lines */
+/* Level 2: Double branch */
 .gi-grid-hierarchy-depth2::before {
-    width: 45px;
-    height: calc(100% + 5px);
+    width: 44px;
+    height: 100%;
+    margin-right: 8px;
     background:
-        /* Parent Line */
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
-        /* Self Line */
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 100% no-repeat,
-        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+        /* vertical line from parent */
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 10px 0 / 2px 100% no-repeat,
+        /* self vertical and horizontal branch */
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 30px 0 / 2px 100% no-repeat,
+        linear-gradient(to bottom, #e2e8f0 2px, transparent 2px) 30px 50% / 10px 2px no-repeat;
 }
 
 .gi-grid-hierarchy-depth2.gi-grid-hierarchy-parent-last::before {
-    /* Hide parent vertical line part below the horizontal branch if needed, but usually we just hide the whole parent trail */
     background:
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 100% no-repeat,
-        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 30px 0 / 2px 100% no-repeat,
+        linear-gradient(to bottom, #e2e8f0 2px, transparent 2px) 30px 50% / 10px 2px no-repeat;
 }
 
 .gi-grid-hierarchy-depth2.gi-grid-hierarchy-last::before {
-    /* Truncate self vertical line */
     background:
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 12px 0 / 1px 100% no-repeat,
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 50% no-repeat,
-        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 10px 0 / 2px 100% no-repeat,
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 30px 0 / 2px 50% no-repeat,
+        linear-gradient(to bottom, #e2e8f0 2px, transparent 2px) 30px 50% / 10px 2px no-repeat;
 }
 
 .gi-grid-hierarchy-depth2.gi-grid-hierarchy-parent-last.gi-grid-hierarchy-last::before {
     background:
-        linear-gradient(to right, #bdbdbd 1px, transparent 1px) 32px 0 / 1px 50% no-repeat,
-        linear-gradient(to bottom, #bdbdbd 1px, transparent 1px) 32px 50% / 12px 1px no-repeat;
+        linear-gradient(to right, #e2e8f0 2px, transparent 2px) 30px 0 / 2px 50% no-repeat,
+        linear-gradient(to bottom, #e2e8f0 2px, transparent 2px) 30px 50% / 10px 2px no-repeat;
 }
 
 .gi-grid-border {
@@ -4082,13 +4097,12 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fab005b0;
+    background-color: #fab005;
     color: #ffffff;
     padding: 4px 16px;
     border-radius: 20px;
     font-size: 11px;
     font-weight: 700;
-    /* z-index: 10; */
     pointer-events: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     opacity: 0.9;
