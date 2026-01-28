@@ -13,7 +13,7 @@ Message.Label.Array["SYS_OFFICE.CHECK.OFFICE_TYPE"] = "Байгууллагын 
 Message.Label.Array["SYS_OFFICE.CHECK.OFFICE_TYPE_CODE"] = "Бүртгэлийн газрын ангиллын кодыг оруулна уу";
 Message.Label.Array["SYS_OFFICE.CHECK.SYSTEM_CREATE_USERID"] = "Үүсгэсэн хэрэглэгчийн ID-г оруулна уу";
 Message.Label.Array["SYS_OFFICE.CHECK.SYSTEM_CREATE_DATE"] = "Үүсгэсэн огноог оруулна уу";
-Message.Label.Array["SYS_OFFICE.CHECK.SYSTEM_UPDATE_USERID"] = "Зассан хэрэглэгчийн ID-г оруулна уу";
+Message.Label.Array["SYS_OFFICE.CHECK.SYSTEM_UPDATE_USERID"] = "Зассан хэрэглэгчийн ID-г ору울на уу";
 Message.Label.Array["SYS_OFFICE.CHECK.SYSTEM_UPDATE_DATE"] = "Зассан огноог оруулна уу";
 
 
@@ -26,3 +26,9 @@ Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_USERID"] = "Үүсгэсэн хэ�
 Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_DATE"] = "Үүсгэсэн огноо";
 Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_USERID"] = "Зассан хэрэглэгчийн ID";
 Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_DATE"] = "Зассан огноо";
+
+Message.Label.Array["SYS_OFFICE.WRITER"] = "Бичсэн хүн";
+Message.Label.Array["SYS_OFFICE.WRITE_DATE"] = "Бичсэн огноо";
+Message.Label.Array["SYS_OFFICE.UPDATER"] = "Зассан хүн";
+Message.Label.Array["SYS_OFFICE.UPDATE_DATE"] = "Зассан огноо";
+Message.Label.Array["SYS_OFFICE.SIDE_GRID"] = "Хажуугийн хүснэг트";

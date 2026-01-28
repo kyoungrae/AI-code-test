@@ -21,7 +21,8 @@
 
 .gi-grid-btn {
     height: 100%;
-    min-width: 80%;
+    width: auto;
+    padding: 0 10px;
     border: 1px solid #cfcfcf;
     background-color: #fffefe;
     font-size: 10px;

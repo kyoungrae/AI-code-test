@@ -271,10 +271,10 @@ FormUtility.prototype.giGrid = function (layout, paging, page, gridId) {
                                 if (hasVisibleOption) {
                                     // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
                                     if (originalDataForVisibleOption[item.ID] !== "true") {
-                                        tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
+                                        tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
                                     }
                                 } else {
-                                    tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
+                                    tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
                                 }
                                 break;
                             case "map":
@@ -1455,10 +1455,10 @@ FormUtility.prototype.giGridHierarchy = function (layout, paging, page, gridId) 
                                 if (hasVisibleOption) {
                                     // 조건이 맞지 않을 때만 버튼 표시 (기존 로직)
                                     if (originalDataForVisibleOption[item.ID] !== "true") {
-                                        tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
+                                        tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
                                     }
                                 } else {
-                                    tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-row-50 gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
+                                    tag = '<button type="button" id="' + item.ID + "_" + i + '" class="gi-grid-btn gi-font-size-' + item.FONT_SIZE + ' ' + item.ID + '" data-row-num="' + i + '" data-btn-target="' + item.TARGET + '">' + item.HEADER + '</button>';
                                 }
                                 break;
                             // case "checkbox":

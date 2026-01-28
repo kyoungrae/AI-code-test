@@ -3,6 +3,7 @@
 //Message.Label.Array = {};
 Message.Label.Array["SYS_OFFICE.TITLE_DETAIL"] = "기관 상세";
 Message.Label.Array["SYS_OFFICE.TITLE_LIST"] = "기관 목록";
+Message.Label.Array["SYS_OFFICE.SUB_TITLE"] = "지사 및 사무소 정보를 통합적으로 관리합니다.";
 Message.Label.Array["SYS_OFFICE.TITLE_UPDATE"] = "기관 수정";
 Message.Label.Array["SYS_OFFICE.TITLE_REGISTER"] = "기관 등록";
 
@@ -26,3 +27,9 @@ Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_USERID"] = "생성자ID";
 Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_DATE"] = "생성일자";
 Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_USERID"] = "수정자ID";
 Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_DATE"] = "수정일자";
+
+Message.Label.Array["SYS_OFFICE.WRITER"] = "작성자";
+Message.Label.Array["SYS_OFFICE.WRITE_DATE"] = "작성일";
+Message.Label.Array["SYS_OFFICE.UPDATER"] = "수정자";
+Message.Label.Array["SYS_OFFICE.UPDATE_DATE"] = "수정일";
+Message.Label.Array["SYS_OFFICE.SIDE_GRID"] = "사이드 그리드";

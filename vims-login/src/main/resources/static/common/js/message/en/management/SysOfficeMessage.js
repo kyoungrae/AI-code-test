@@ -26,3 +26,9 @@ Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_USERID"] = "Creator ID";
 Message.Label.Array["SYS_OFFICE.SYSTEM_CREATE_DATE"] = "Creation Date";
 Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_USERID"] = "Modifier ID";
 Message.Label.Array["SYS_OFFICE.SYSTEM_UPDATE_DATE"] = "Modification Date";
+
+Message.Label.Array["SYS_OFFICE.WRITER"] = "Writer";
+Message.Label.Array["SYS_OFFICE.WRITE_DATE"] = "Write Date";
+Message.Label.Array["SYS_OFFICE.UPDATER"] = "Updater";
+Message.Label.Array["SYS_OFFICE.UPDATE_DATE"] = "Update Date";
+Message.Label.Array["SYS_OFFICE.SIDE_GRID"] = "Side Grid";
