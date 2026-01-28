@@ -17,34 +17,16 @@ fms:
     service:
         url: http://localhost:8082  # FMS 서비스 주소
     internal:
-        api-key: "your-secure-internal-api-key-here"  # 내부 서비스 간 인증용 API 키 (운영 환경에서는 환경변수로 관리)
+        api-key: "your-secure-internal-api-key-here"  # 내부 서비스 간 인증용 API 키
 
 spring:
     profiles:
         active: local
-db:
-    partition:
-        maintenance:
-            enabled: true  # DB파티너닝을 management system 에서만 동작 하도록 하기위함
-
-mybatis:
-    config-location: classpath:/mybatis-config.xml
-    mapper-locations: classpath*:/mybatis*/**/*.xml
-
----
-
-spring:
     jackson:
         property-naming-strategy: LOWER_CAMEL_CASE
         date-format: yyyy-MM-dd HH:mm:ss
         time-zone: Asia/Seoul
     datasource:
-        # OracleDB JDBC URL
-#        url: jdbc:log4jdbc:oracle:thin:@192.168.0.140:11521:orcl
-#        username: vims2
-#        password: oracle12c$vims2#
-#        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-
         # MariaDB JDBC URL
         url: jdbc:mariadb://192.168.0.232:3306/MVIMS?autoReconnect=true&tcpKeepAlive=true
         username: mvims
@@ -52,13 +34,13 @@ spring:
         driver-class-name: org.mariadb.jdbc.Driver
 
         hikari:
-                maximum-pool-size: 10
-                minimum-idle: 5
-                idle-timeout: 600000         # 10분 (유휴 커넥션 폐기 시간)
-                max-lifetime: 1800000        # 30분 (커넥션 최대 유지 시간)
-                connection-timeout: 30000
-                keepalive-time: 30000        # 30초마다 DB에 생존 신호(SELECT 1)를 보냄
-                connection-test-query: SELECT 1 # 커넥션 유효성 검사 쿼리
+            maximum-pool-size: 10
+            minimum-idle: 5
+            idle-timeout: 600000         # 10분 (유휴 커넥션 폐기 시간)
+            max-lifetime: 1800000        # 30분 (커넥션 최대 유지 시간)
+            connection-timeout: 30000
+            keepalive-time: 30000        # 30초마다 DB에 생존 신호(SELECT 1)를 보냄
+            connection-test-query: SELECT 1 # 커넥션 유효성 검사 쿼리
 
     jpa:
         show-sql: false
@@ -68,8 +50,6 @@ spring:
                     auto: none
                 format_sql: true
                 use_sql_comments: false  # SQL 주석을 비활성화하여 주석 없이 출력
-#        database: oracle
-#        database-platform: org.hibernate.dialect.Oracle12cDialect
         database: mysql
         database-platform: org.hibernate.dialect.MariaDB103Dialect
     thymeleaf:
@@ -85,6 +65,16 @@ spring:
     messages:
         basename : exceptionMessage
         encoding : UTF-8
+
+db:
+    partition:
+        maintenance:
+            enabled: true  # DB파티너닝을 management system 에서만 동작 하도록 하기위함
+
+mybatis:
+    config-location: classpath:/mybatis-config.xml
+    mapper-locations: classpath*:/mybatis*/**/*.xml
+
 logging:
     level:
         root: INFO

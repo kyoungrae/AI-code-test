@@ -104,6 +104,11 @@ Message.Label.Array["USE_YN"] = "사용여부";
 Message.Label.Array["NOT_USED"] = "미사용";
 Message.Label.Array["USED"] = "사용";
 
+Message.Label.Array["LOGIN"] = "로그인";
+Message.Label.Array["EMAIL"] = "이메일";
+Message.Label.Array["PASSWORD"] = "비밀번호";
+Message.Label.Array["REMEMBER_ME"] = "이메일 저장";
+
 // LOGIN PAGE
 Message.Label.Array["LOGIN.KEEP_LOGGED_IN"] = "로그인 유지";
 Message.Label.Array["LOGIN.FORGOT_PASSWORD"] = "비밀번호 찾기";

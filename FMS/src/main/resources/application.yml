@@ -7,33 +7,18 @@ server:
             enabled: true
             force: true
 
-spring:
-    profiles:
-        active: local
-
-# 내부 서비스 간 인증용 API 키
 fms:
     internal:
         api-key: "your-secure-internal-api-key-here"  # management와 동일한 키 사용
 
-mybatis:
-    config-location: classpath:/mybatis-config.xml
-    mapper-locations: classpath*:/mybatis*/**/*.xml
-
----
-
 spring:
+    profiles:
+        active: local
     jackson:
         property-naming-strategy: LOWER_CAMEL_CASE
         date-format: yyyy-MM-dd HH:mm:ss
         time-zone: Asia/Seoul
     datasource:
-        # OracleDB JDBC URL
-#        url: jdbc:log4jdbc:oracle:thin:@192.168.0.140:11521:orcl
-#        username: vims2
-#        password: oracle12c$vims2#
-#        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-
         # MariaDB JDBC URL
         url: jdbc:mariadb://192.168.0.232:3306/MVIMS
         username: mvims
@@ -41,12 +26,12 @@ spring:
         driver-class-name: org.mariadb.jdbc.Driver
 
         hikari:
-                maximum-pool-size: 10
-                minimum-idle: 5              # 최소 유휴 커넥션 수
-                idle-timeout: 600000         # 10분 (유휴 커넥션 제거 시간)
-                max-lifetime: 1800000        # 30분 (DB 커넥션 타임아웃보다 짧게)
-                connection-timeout: 30000    # 30초
-                keepalive-time: 300000       # 5분 (커넥션 활성 상태 유지 - Thread starvation 방지)
+            maximum-pool-size: 10
+            minimum-idle: 5              # 최소 유휴 커넥션 수
+            idle-timeout: 600000         # 10분 (유휴 커넥션 제거 시간)
+            max-lifetime: 1800000        # 30분 (DB 커넥션 타임아웃보다 짧게)
+            connection-timeout: 30000    # 30초
+            keepalive-time: 300000       # 5분 (커넥션 활성 상태 유지 - Thread starvation 방지)
 
     jpa:
         show-sql: false
@@ -56,8 +41,6 @@ spring:
                     auto: none
                 format_sql: true
                 use_sql_comments: false  # SQL 주석을 비활성화하여 주석 없이 출력
-#        database: oracle
-#        database-platform: org.hibernate.dialect.Oracle12cDialect
         database: mysql
         database-platform: org.hibernate.dialect.MariaDB103Dialect
     thymeleaf:
@@ -70,11 +53,15 @@ spring:
             enabled: true
         restart:
             enabled: true
-#    스프링 부트에서 1차적으로 대용량 파일 접근 제어 (2차 업로드 제한은 파일 로직에 있음)
     servlet:
         multipart:
             max-file-size: 200MB
             max-request-size: 200MB
+
+mybatis:
+    config-location: classpath:/mybatis-config.xml
+    mapper-locations: classpath*:/mybatis*/**/*.xml
+
 logging:
     level:
         root: INFO

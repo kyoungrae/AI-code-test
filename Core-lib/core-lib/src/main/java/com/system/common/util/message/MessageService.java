@@ -44,8 +44,13 @@ public class MessageService {
 
         for (String baseName : jsFiles) {
             String fileName;
-            if (baseName.equals("Message")) {
-                fileName = locale.equals("ko") ? "Message.js" : "Message." + locale + ".js";
+            // baseName이 Message로 시작하거나 Message인 경우 (Message, Message.en, Message.mn 등)
+            if (baseName.equals("Message") || baseName.startsWith("Message.")) {
+                if (locale.equals("ko")) {
+                    fileName = "Message.js";
+                } else {
+                    fileName = "Message." + locale + ".js";
+                }
             } else {
                 // locale 경로가 이미 포함되어 있으면 무시, 아니면 추가
                 if (baseName.startsWith(locale + "/")) {
@@ -169,7 +174,13 @@ public class MessageService {
                     }
 
                     if (fileName != null && fileName.endsWith(".js")) {
-                        jsFiles.add(fileName.replace(".js", "")); // 확장자 제거 후 추가
+                        String baseName = fileName.replace(".js", "");
+                        // Message.en.js 같은 파일은 'Message'로 인식하게 함
+                        if (baseName.equals("Message") || baseName.startsWith("Message.")) {
+                            jsFiles.add("Message");
+                        } else {
+                            jsFiles.add(baseName);
+                        }
                         System.out.println("  ✓ 추가: " + fileName + " (URI: " + resource.getURI() + ")");
                     }
                 } catch (Exception e) {

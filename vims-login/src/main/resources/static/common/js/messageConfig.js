@@ -3,6 +3,7 @@ class loadToScript {
     constructor() {
         const lang = localStorage.getItem("selectedLanguage") || "ko";
         const scriptsToLoad = [
+            "management/SysLayoutMessage",
             "management/SysEventLogMessage",
             "login/SysMenuMessage",
             "login/SysUserGroupMessage",
@@ -40,26 +41,40 @@ class loadToScript {
         // Special case for common Message.js
         const commonMessageScript = lang === "ko" ? "/common/js/common/Message.js" : `/common/js/common/Message.${lang}.js`;
 
-        this.loadScripts([commonMessageScript], true); // true means absolute path
-        this.loadScripts(localizedScripts);
+        console.log(`[messageConfig] Loading messages for language: ${lang}`);
+
+        const allScripts = [commonMessageScript, ...localizedScripts.map(s => `/common/js/message/${s}.js`)];
+        this.loadAllScripts(allScripts);
     }
 
-    loadScripts(scripts, isAbsolutePath = false) {
-        scripts.forEach((script, index) => {
-            const scriptElement = document.createElement('script');
-            scriptElement.src = isAbsolutePath ? script : `/common/js/message/${script}.js`;
-            scriptElement.async = false; // Execute in order
+    loadAllScripts(scripts) {
+        let loadedCount = 0;
+        const total = scripts.length;
 
-            // If it's the last script of the localized batch, trigger DOM translation scan
-            if (!isAbsolutePath && index === scripts.length - 1) {
-                scriptElement.onload = () => {
-                    console.log("All message scripts loaded. Triggering DOM translation scan.");
-                    if (typeof PageInit !== 'undefined') {
-                        new PageInit().messageLabelSettings();
-                    }
-                };
+        const checkDone = () => {
+            loadedCount++;
+            if (loadedCount === total) {
+                console.log("[messageConfig] All scripts handled. Triggering DOM translation.");
+                if (typeof PageInit !== 'undefined') {
+                    new PageInit().messageLabelSettings();
+                } else {
+                    console.warn("[messageConfig] PageInit not defined. Scan skipped.");
+                }
             }
+        };
 
+        scripts.forEach(src => {
+            const scriptElement = document.createElement('script');
+            scriptElement.src = src;
+            scriptElement.async = false;
+            scriptElement.onload = () => {
+                console.log(`[messageConfig] Loaded: ${src}`);
+                checkDone();
+            };
+            scriptElement.onerror = () => {
+                console.error(`[messageConfig] FAILED to load: ${src}`);
+                checkDone(); // Proceed anyway
+            };
             document.head.appendChild(scriptElement);
         });
     }

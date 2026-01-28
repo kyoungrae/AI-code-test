@@ -104,8 +104,13 @@ Message.Label.Array["USE_YN"] = "Usage Status";
 Message.Label.Array["NOT_USED"] = "Inactive";
 Message.Label.Array["USED"] = "Active";
 
+Message.Label.Array["LOGIN"] = "Login";
+Message.Label.Array["EMAIL"] = "Email";
+Message.Label.Array["PASSWORD"] = "Password";
+Message.Label.Array["REMEMBER_ME"] = "Remember Email";
+
 // LOGIN PAGE
-Message.Label.Array["LOGIN.KEEP_LOGGED_IN"] = "Keep me logged in";
+Message.Label.Array["LOGIN.KEEP_LOGGED_IN"] = "Keep Logged In";
 Message.Label.Array["LOGIN.FORGOT_PASSWORD"] = "Forgot Password";
 Message.Label.Array["LOGIN.RESET_PASSWORD_TITLE"] = "Reset Password";
 Message.Label.Array["LOGIN.SEND_VERIFICATION_CODE"] = "Send Verification Code";

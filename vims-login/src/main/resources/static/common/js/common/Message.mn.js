@@ -104,6 +104,11 @@ Message.Label.Array["USE_YN"] = "Ашиглах эсэх";
 Message.Label.Array["NOT_USED"] = "Ашиглахгүй";
 Message.Label.Array["USED"] = "Ашиглах";
 
+Message.Label.Array["LOGIN"] = "Нэвтрэх";
+Message.Label.Array["EMAIL"] = "И-мэйл";
+Message.Label.Array["PASSWORD"] = "Нууц үг";
+Message.Label.Array["REMEMBER_ME"] = "И-мэйл хадгалах";
+
 // LOGIN PAGE
 Message.Label.Array["LOGIN.KEEP_LOGGED_IN"] = "Нэвтрэлтийг хадгалах";
 Message.Label.Array["LOGIN.FORGOT_PASSWORD"] = "Нууц үг сэргээх";

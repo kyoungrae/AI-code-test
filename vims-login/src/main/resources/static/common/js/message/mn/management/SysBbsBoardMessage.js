@@ -52,7 +52,5 @@ Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"] = "Хавсаргасан фа
 
 Message.Label.Array["SYS_LAYOUT.CREATE_DATE"] = "Бүртгэсэн огноо";
 Message.Label.Array["SYS_LAYOUT.TITLE"] = "Гарчиг";
-Message.Label.Array["SYS_LAYOUT.WRITER_NAME"] = "Зохиогч";
-Message.Label.Array["SYS_LAYOUT.HIT_COUNT"] = "Хандалт";
 Message.Label.Array["SYS_LAYOUT.IMAGE"] = "Зураг";
 Message.Label.Array["SYS_LAYOUT.PRIORITY"] = "Чухал";

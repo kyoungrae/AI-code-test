@@ -38,6 +38,8 @@
     <script type="text/javascript" src="/common/js/common/utils/TagValidationUtils.js"></script>
     <script type="text/javascript" src="/common/js/common/utils/SliderUtils.js"></script>
     <script type="text/javascript" src="/common/js/axios/axios.js"></script>
+    <script type="text/javascript" src="/common/js/common/Common.js"></script>
+    <script type="text/javascript" src="/common/js/common/Api.js"></script>
     <script type="text/javascript" src="/common/js/messageConfig.js"></script>
     <title>Login</title>
     <!--  공통으로 묶어야 하는 부분  -->
@@ -57,7 +59,7 @@
                     <div class="gi-col-25 gi-row-100">
                         <div class="gi-input-container" data-focus-line="false">
                             <label class="gi-input-label" data-focus-label="false" data-required="true"
-                                for="email">email</label>
+                                for="email">[Page.Message].Message.Label.Array["EMAIL"]</label>
                             <input class="gi-input" data-required="true" type="text" id="email" name="email"
                                 autocomplete="off" />
                         </div>
@@ -65,7 +67,7 @@
                     <div class="gi-col-25 gi-row-100">
                         <div class="gi-input-container" data-focus-line="false">
                             <label class="gi-input-label" data-focus-label="false" data-required="true"
-                                for="password">password</label>
+                                for="password">[Page.Message].Message.Label.Array["PASSWORD"]</label>
                             <input class="gi-input" data-required="true" type="password" id="password" name="password"
                                 autocomplete="off" />
                         </div>
@@ -105,7 +107,8 @@
                 </form>
                 <div class="gi-col-20 gi-row-100">
                     <div class="gi-btn-section gi-flex gi-flex-space-around gi-col-60">
-                        <button class="gi-btn gi-row-15 gi-col-100" id="checkLogin" type="button">LOGIN</button>
+                        <button class="gi-btn gi-row-15 gi-col-100" id="checkLogin"
+                            type="button">[Page.Message].Message.Label.Array["LOGIN"]</button>
                         <!--                        <button class="gi-btn gi-row-15 gi-col-100" id="add_userInfo" type="button">쿠키등록</button>-->
                     </div>
                 </div>
