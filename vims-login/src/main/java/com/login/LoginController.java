@@ -52,7 +52,11 @@ public class LoginController {
             }
             String jwt = optionalCookie.get().getValue();
             String userEmail;
-            userEmail = jwtService.extractUsername(jwt);
+            try {
+                userEmail = jwtService.extractUsername(jwt);
+            } catch (Exception e) {
+                return "redirect:/api/v1/auth/logout";
+            }
             if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() != null) {
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 if (authentication != null && authentication.isAuthenticated()

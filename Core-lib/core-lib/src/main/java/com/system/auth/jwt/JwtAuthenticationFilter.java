@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
         final Cookie[] cookies = request.getCookies();
         final String jwt;
-        final String userEmail;
+        String userEmail;
 
         if (cookies == null) {
             filterChain.doFilter(request, response);
@@ -52,7 +52,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         jwt = optionalCookie.get().getValue();
-        userEmail = jwtService.extractUsername(jwt); // JWT에서 사용자 이메일을 추출합니다.
+        try {
+            userEmail = jwtService.extractUsername(jwt); // JWT에서 사용자 이메일을 추출합니다.
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+            Cookie cookie = new Cookie("Authorization", null);
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            filterChain.doFilter(request, response);
+            return;
+        } catch (Exception e) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
