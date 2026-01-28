@@ -1,0 +1,48 @@
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
+Message.Label.Array["SYS_MENU.TITLE_DETAIL"] = " Details";
+Message.Label.Array["SYS_MENU.TITLE_LIST"] = " Menu Settings";
+Message.Label.Array["SYS_MENU.TITLE_MODIFY"] = " Edit";
+Message.Label.Array["SYS_MENU.TITLE_REGISTER"] = " Register";
+
+Message.Label.Array["SYS_MENU.CHECK.MENU_CODE"] = "Please enter menu code";
+Message.Label.Array["SYS_MENU.CHECK.MENU_NAME_KR"] = "Please enter menu name (KO)";
+Message.Label.Array["SYS_MENU.CHECK.MENU_NAME_EN"] = "Please enter menu name (EN)";
+Message.Label.Array["SYS_MENU.CHECK.MENU_NAME_MN"] = "Please enter menu name (MN)";
+Message.Label.Array["SYS_MENU.CHECK.MENU_NUMBER"] = "Please enter menu order";
+Message.Label.Array["SYS_MENU.CHECK.MENU_LEVEL"] = "Please enter menu level";
+Message.Label.Array["SYS_MENU.CHECK.TOP_MENU_CODE"] = "Please enter parent menu code";
+Message.Label.Array["SYS_MENU.CHECK.URL"] = "Please enter URL";
+Message.Label.Array["SYS_MENU.CHECK.USE_YN"] = "Please enter usage status";
+Message.Label.Array["SYS_MENU.CHECK.SYSTEM_CREATE_DATE"] = "Please enter creation date";
+Message.Label.Array["SYS_MENU.CHECK.SYSTEM_CREATE_USERID"] = "Please enter creator ID";
+Message.Label.Array["SYS_MENU.CHECK.SYSTEM_UPDATE_DATE"] = "Please enter modification date";
+Message.Label.Array["SYS_MENU.CHECK.SYSTEM_UPDATE_USERID"] = "Please enter modifier ID";
+Message.Label.Array["SYS_MENU.CHECK.MENU_SEQUENCE"] = "Please enter menu unique number";
+Message.Label.Array["SYS_MENU.CHECK.MENU_ICON"] = "Please enter menu icon";
+Message.Label.Array["SYS_MENU.CHECK.PRGM_URL"] = "Please enter API path";
+
+
+Message.Label.Array["SYS_MENU.MENU_CODE"] = "Menu Code";
+Message.Label.Array["SYS_MENU.MENU_NAME"] = "Menu Name";
+Message.Label.Array["SYS_MENU.MENU_NAME_KR"] = "Menu Name (KO)";
+Message.Label.Array["SYS_MENU.MENU_NAME_EN"] = "Menu Name (EN)";
+Message.Label.Array["SYS_MENU.MENU_NAME_MN"] = "Menu Name (MN)";
+Message.Label.Array["SYS_MENU.MENU_NUMBER"] = "Order";
+Message.Label.Array["SYS_MENU.MENU_LEVEL"] = "Level";
+Message.Label.Array["SYS_MENU.TOP_MENU_CODE"] = "Parent Menu Code";
+Message.Label.Array["SYS_MENU.URL"] = "URL";
+Message.Label.Array["SYS_MENU.USE_YN"] = "Usage Status";
+Message.Label.Array["SYS_MENU.SYSTEM_CREATE_DATE"] = "Creation Date";
+Message.Label.Array["SYS_MENU.SYSTEM_CREATE_USERID"] = "Creator ID";
+Message.Label.Array["SYS_MENU.SYSTEM_UPDATE_DATE"] = "Modification Date";
+Message.Label.Array["SYS_MENU.SYSTEM_UPDATE_USERID"] = "Modifier ID";
+Message.Label.Array["SYS_MENU.MENU_SEQUENCE"] = "Menu Unique Number";
+Message.Label.Array["SYS_MENU.MENU_ICON"] = "Icon";
+Message.Label.Array["SYS_MENU.PRGM_URL"] = "API Path";
+
+Message.Label.Array["SYS_MENU.REGISTER_MENU_CODE"] = "Register Menu";
+Message.Label.Array["SYS_MENU.REGISTER_SUB_MENU_CODE"] = "Register Sub-menu";
+Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP"] = "Menu Access Group Management";
+Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"] = "Access Permissions";

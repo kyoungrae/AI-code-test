@@ -30,7 +30,7 @@ public class MessageService {
     public void init() {
         loadAllMessages("ko");
         loadAllMessages("en");
-        loadAllMessages("mo");
+        loadAllMessages("mn");
     }
 
     private void loadAllMessages(String locale) {
