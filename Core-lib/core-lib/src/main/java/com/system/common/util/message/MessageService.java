@@ -43,7 +43,17 @@ public class MessageService {
         }
 
         for (String baseName : jsFiles) {
-            String fileName = locale.equals("en") ? baseName + ".en.js" : baseName + ".js";
+            String fileName;
+            if (baseName.equals("Message")) {
+                fileName = locale.equals("ko") ? "Message.js" : "Message." + locale + ".js";
+            } else {
+                // locale 경로가 이미 포함되어 있으면 무시, 아니면 추가
+                if (baseName.startsWith(locale + "/")) {
+                    fileName = baseName + ".js";
+                } else {
+                    fileName = locale + "/" + baseName + ".js";
+                }
+            }
             loadMessagesFromFile(fileName, locale);
         }
     }
@@ -107,8 +117,8 @@ public class MessageService {
             Matcher matcher = pattern.matcher(content);
             while (matcher.find()) {
                 String fileName = matcher.group(1);
-                // js 확장자나 경로가 포함되어 있어도 처리 가능하게 함 (기존 로직 호환)
-                if (fileName.contains("Message")) {
+                // js 확장자나 경로가 포함되지 않은 순수 메시지 파일 키워드만 추출
+                if (fileName.contains("Message") && !fileName.contains(".") && !fileName.startsWith("/")) {
                     files.add(fileName);
                 }
             }
@@ -144,10 +154,29 @@ public class MessageService {
             System.out.println("발견된 리소스 수: " + resources.length);
 
             for (Resource resource : resources) {
-                String fileName = resource.getFilename();
-                if (fileName != null && fileName.endsWith(".js")) {
-                    jsFiles.add(fileName.replace(".js", "")); // 확장자 제거 후 추가
-                    System.out.println("  ✓ 추가: " + fileName + " (URI: " + resource.getURI() + ")");
+                try {
+                    String uri = resource.getURI().toString();
+                    String fileName = "";
+
+                    if (uri.contains("/static/common/js/message/")) {
+                        fileName = uri.substring(
+                                uri.indexOf("/static/common/js/message/") + "/static/common/js/message/".length());
+                    } else if (uri.contains("/static/common/js/common/")) {
+                        fileName = uri.substring(
+                                uri.indexOf("/static/common/js/common/") + "/static/common/js/common/".length());
+                    } else {
+                        fileName = resource.getFilename();
+                    }
+
+                    if (fileName != null && fileName.endsWith(".js")) {
+                        jsFiles.add(fileName.replace(".js", "")); // 확장자 제거 후 추가
+                        System.out.println("  ✓ 추가: " + fileName + " (URI: " + resource.getURI() + ")");
+                    }
+                } catch (Exception e) {
+                    String fileName = resource.getFilename();
+                    if (fileName != null && fileName.endsWith(".js")) {
+                        jsFiles.add(fileName.replace(".js", ""));
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
