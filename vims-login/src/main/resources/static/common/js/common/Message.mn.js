@@ -76,6 +76,7 @@ Message.Label.Array["MORE_BTN"] = "Илүү";
 Message.Label.Array["SAVE_BTN"] = "Хадгалах";
 Message.Label.Array["SELECT_BTN"] = "Сонгох";
 Message.Label.Array["SEARCH_BTN"] = "Хайх";
+Message.Label.Array["SEARCH_KEYWORD"] = "Түлхүүр үг";
 Message.Label.Array["REGISTER_BTN"] = "Бүртгэх";
 Message.Label.Array["RESET_BTN"] = "Шинэчлэх";
 Message.Label.Array["UPLOAD_BTN"] = "Хуулах";

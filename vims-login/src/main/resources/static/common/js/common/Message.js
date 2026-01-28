@@ -76,6 +76,7 @@ Message.Label.Array["MORE_BTN"] = "더보기";
 Message.Label.Array["SAVE_BTN"] = "저장";
 Message.Label.Array["SELECT_BTN"] = "선택";
 Message.Label.Array["SEARCH_BTN"] = "조회";
+Message.Label.Array["SEARCH_KEYWORD"] = "검색어";
 Message.Label.Array["REGISTER_BTN"] = "등록";
 Message.Label.Array["RESET_BTN"] = "초기화";
 Message.Label.Array["UPLOAD_BTN"] = "업로드";

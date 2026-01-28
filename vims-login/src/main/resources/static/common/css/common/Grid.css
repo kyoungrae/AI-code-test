@@ -3615,6 +3615,16 @@
     align-items: center;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* 그리드 데이터 셀의 텍스트 오버플로우 처리 */
+.gi-grid-list>li span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .gi-grid-list-header>li.hidden,

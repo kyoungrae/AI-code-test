@@ -76,6 +76,7 @@ Message.Label.Array["MORE_BTN"] = "More";
 Message.Label.Array["SAVE_BTN"] = "Save";
 Message.Label.Array["SELECT_BTN"] = "Select";
 Message.Label.Array["SEARCH_BTN"] = "Search";
+Message.Label.Array["SEARCH_KEYWORD"] = "Keyword";
 Message.Label.Array["REGISTER_BTN"] = "Register";
 Message.Label.Array["RESET_BTN"] = "Reset";
 Message.Label.Array["UPLOAD_BTN"] = "Upload";

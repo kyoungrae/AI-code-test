@@ -43,8 +43,29 @@ class loadToScript {
 
         console.log(`[messageConfig] Loading messages for language: ${lang}`);
 
-        const allScripts = [commonMessageScript, ...localizedScripts.map(s => `/common/js/message/${s}.js`)];
-        this.loadAllScripts(allScripts);
+        // 1. 공통 메시지 파일을 먼저 로드
+        // 2. 로드 완료 후 나머지 지역화 스크립트 로드
+        this.loadCommonMessageFirst(commonMessageScript, localizedScripts.map(s => `/common/js/message/${s}.js`));
+    }
+
+    loadCommonMessageFirst(commonScriptSrc, localizedScripts) {
+        const commonScript = document.createElement('script');
+        commonScript.src = commonScriptSrc;
+        commonScript.async = false;
+
+        commonScript.onload = () => {
+            console.log(`[messageConfig] Common message loaded: ${commonScriptSrc}`);
+            // 공통 메시지 로드 완료 후 나머지 스크립트 로드
+            this.loadAllScripts(localizedScripts);
+        };
+
+        commonScript.onerror = () => {
+            console.error(`[messageConfig] CRITICAL: Failed to load common message: ${commonScriptSrc}`);
+            // 공통 파일 로드 실패 시에도 나머지 스크립트 시도 (fallback)
+            this.loadAllScripts(localizedScripts);
+        };
+
+        document.head.appendChild(commonScript);
     }
 
     loadAllScripts(scripts) {
@@ -68,7 +89,7 @@ class loadToScript {
             scriptElement.src = src;
             scriptElement.async = false;
             scriptElement.onload = () => {
-                console.log(`[messageConfig] Loaded: ${src}`);
+                // console.log(`[messageConfig] Loaded: ${src}`);
                 checkDone();
             };
             scriptElement.onerror = () => {
