@@ -1,0 +1,18 @@
+//const Message = {};
+//Message.Label = {};
+//Message.Label.Array = {};
+
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.NOTICE_ID"] = " оруулна уу";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.GROUP_ID"] = " оруулна уу";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.SYSTEM_CREATE_DATE"] = " оруулна уу";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.SYSTEM_CREATE_USERID"] = " оруулна уу";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.SYSTEM_UPDATE_DATE"] = " оруулна уу";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.CHECK.SYSTEM_UPDATE_USERID"] = " оруулна уу";
+
+
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.NOTICE_ID"] = "";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.GROUP_ID"] = "";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.SYSTEM_CREATE_DATE"] = "";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.SYSTEM_CREATE_USERID"] = "";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.SYSTEM_UPDATE_DATE"] = "";
+Message.Label.Array["SITE_POPUP_NOTICE_TARGET_GROUP.SYSTEM_UPDATE_USERID"] = "";
