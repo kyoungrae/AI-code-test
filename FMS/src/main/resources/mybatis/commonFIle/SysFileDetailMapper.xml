@@ -161,8 +161,7 @@
     <delete id="DELETE">
         DELETE FROM SYS_FILE_DETAIL
         <where>
-            
-             file_id = #{file_id}
+            <if test="file_id != null and file_id != ''">AND file_id = #{file_id}</if>
             AND file_uuid = #{file_uuid}
             
             <if test="file_name != null">AND file_name = #{file_name}</if>
