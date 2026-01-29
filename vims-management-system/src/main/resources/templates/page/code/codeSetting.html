@@ -1,7 +1,7 @@
 <article class="gi-article-content gi-col-98 gi-row-100">
     <section class="gi-col-100 gi-row-100">
         <header class="gi-flex gi-flex-center gi-col-10">
-            <h1 class="gi-page-title">공통코드 설정</h1>
+            <h1 class="gi-page-title">[Page.Message].Message.Label.Array["SYS_CODE.TITLE_LIST"]</h1>
         </header>
         <article class=" gi-col-90 gi-row-100">
             <!--      그리드 영역      -->
@@ -16,7 +16,8 @@
                                     <div class="gi-row-35 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
                                         data-focus-line="false">
                                         <label for="searchDesc1" class="gi-input-label" data-focus-label="false"
-                                            data-focus-label-text-align="center" data-required="false">그룹아이디</label>
+                                            data-focus-label-text-align="center"
+                                            data-required="false">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]</label>
                                         <input class="gi-input gi-margin-1px" data-required="false" type="text"
                                             id="searchDesc1" name="searchDesc1" data-focus-input-text-align="center"
                                             autocomplete="off" />
@@ -24,7 +25,8 @@
                                     <div class="gi-row-35 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
                                         data-focus-line="false">
                                         <label for="searchDesc1-1" class="gi-input-label" data-focus-label="false"
-                                            data-focus-label-text-align="center" data-required="false">그룹명</label>
+                                            data-focus-label-text-align="center"
+                                            data-required="false">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_NAME"]</label>
                                         <input class="gi-input gi-margin-1px" data-required="false" type="text"
                                             id="searchDesc1-1" name="searchDesc1-1" data-focus-input-text-align="center"
                                             autocomplete="off" />
@@ -32,7 +34,8 @@
                                     <div class="gi-row-30 gi-col-100 gi-input-container gi-input-container-box-shadow gi-flex gi-flex-center"
                                         data-focus-line="false">
                                         <label for="searchDesc1-2" class="gi-input-label" data-focus-label="false"
-                                            data-focus-label-text-align="center" data-required="false">사용여부</label>
+                                            data-focus-label-text-align="center"
+                                            data-required="false">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.USE_YN"]</label>
                                         <input gi-selectbox data-selectbox-field="USE_YN" class="gi-input gi-margin-1px"
                                             data-required="false" type="text" id="searchDesc1-2" name="searchDesc1-2"
                                             data-focus-input-text-align="center" autocomplete="off" />
@@ -58,7 +61,7 @@
                                 <div
                                     class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
                                     <button id="register-btn1" class="gi-btn-blue" type="button"
-                                        gi-popup-open-id="gi-group_code_register-popup">그룹코드 추가</button>
+                                        gi-popup-open-id="gi-group_code_register-popup">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.ADD_BTN"]</button>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +76,8 @@
                                 <div class="gi-row-30 gi-col-100 gi-input-container gi-input-container-box-shadow  "
                                     data-focus-line="false">
                                     <label for="searchDesc2" class="gi-input-label" data-focus-label="false"
-                                        data-focus-label-text-align="center" data-required="false">사용여부</label>
+                                        data-focus-label-text-align="center"
+                                        data-required="false">[Page.Message].Message.Label.Array["SYS_CODE.USE_YN"]</label>
                                     <input gi-selectbox data-selectbox-field="USE_YN" class="gi-input  gi-margin-1px"
                                         data-required="false" type="text" id="searchDesc2" name="searchDesc2"
                                         data-focus-input-text-align="center" autocomplete="off" />
@@ -98,7 +102,8 @@
                                 <div
                                     class="gi-btn-section gi-row-20 gi-col-100 gi-flex gi-flex-justify-content-flex-end">
                                     <!-- <button id="register-btn2" class="gi-btn-blue" type="button" gi-popup-open-id="gi-code_register-popup">코드 추가</button> -->
-                                    <button id="register-btn2" class="gi-btn-blue" type="button">코드 추가</button>
+                                    <button id="register-btn2" class="gi-btn-blue"
+                                        type="button">[Page.Message].Message.Label.Array["SYS_CODE.ADD_BTN"]</button>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +117,7 @@
 <article id="gi-group_code_register-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body">
         <div class="gi-popup-header">
-            <span>공통 그룹코드 등록</span>
+            <span>[Page.Message].Message.Label.Array["SYS_CODE_GROUP.TITLE_REGISTER"]</span>
         </div>
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
@@ -124,7 +129,8 @@
                             <div
                                 class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                 <label for="group_id1" class="gi-input-label" data-focus-label="true"
-                                    data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    data-focus-label-text-align="default"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]</label>
                                 <input data-field="group_id" id="group_id1" name="group_id" class="gi-input"
                                     data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
@@ -133,7 +139,8 @@
                             <div
                                 class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                 <label for="group_name1" class="gi-input-label" data-focus-label="true"
-                                    data-focus-label-text-align="default" data-required="true">그룹명</label>
+                                    data-focus-label-text-align="default"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_NAME"]</label>
                                 <input data-field="group_name" id="group_name1" name="group_name" class="gi-input"
                                     data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
@@ -142,7 +149,8 @@
                             <div
                                 class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                 <label for="use_yn1" class="gi-input-label" data-focus-label="true"
-                                    data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    data-focus-label-text-align="default"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.USE_YN"]</label>
                                 <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn1"
                                     name="use_yn" class="gi-input" data-focus-span-text-align="default"
                                     data-required="true" autocomplete="off" />
@@ -163,7 +171,7 @@
 <article id="gi-group_code_update-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body">
         <div class="gi-popup-header">
-            <span>공통 그룹코드 수정</span>
+            <span>[Page.Message].Message.Label.Array["SYS_CODE_GROUP.TITLE_MODIFY"]</span>
         </div>
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
@@ -174,13 +182,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>그룹아이디</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_group_id1" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]</label>
                                     <input data-disabled data-field="group_id" id="update_group_id1" name="group_id"
                                         class="gi-input" data-focus-span-text-align="default" data-required="true"
                                         autocomplete="off" />
@@ -190,13 +199,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>그룹명</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_NAME"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_group_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">그룹명</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_NAME"]</label>
                                     <input data-disabled data-field="group_name" id="update_group_name"
                                         name="group_name" class="gi-input" data-focus-span-text-align="default"
                                         data-required="true" autocomplete="off" />
@@ -206,13 +216,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>사용여부</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE_GROUP.USE_YN"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_group_use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.USE_YN"]</label>
                                     <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
                                         id="update_group_use_yn" name="use_yn" class="gi-input"
                                         data-focus-span-text-align="default" data-required="true" autocomplete="off" />
@@ -227,8 +238,10 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="sysCodeGroupUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
-                <button class="gi-popup-close-btn" type="button">닫기</button>
+                <button id="sysCodeGroupUpdate-btn" class="gi-popup-update-btn"
+                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+                <button class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
             </div>
         </div>
     </div>
@@ -238,7 +251,7 @@
 <article id="gi-code_register-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body">
         <div class="gi-popup-header">
-            <span>공통코드 등록</span>
+            <span>[Page.Message].Message.Label.Array["SYS_CODE.TITLE_REGISTER"]</span>
         </div>
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
@@ -250,7 +263,8 @@
                             <div
                                 class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                 <label for="group_id2" class="gi-input-label" data-focus-label="true"
-                                    data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                    data-focus-label-text-align="default"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]</label>
                                 <input data-disabled data-field="group_id" id="group_id2" name="group_id"
                                     class="gi-input" data-focus-span-text-align="default" data-required="true"
                                     autocomplete="off" />
@@ -260,7 +274,8 @@
                             <div
                                 class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                 <label for="code_id" class="gi-input-label" data-focus-label="true"
-                                    data-focus-label-text-align="default" data-required="true">코드아이디</label>
+                                    data-focus-label-text-align="default"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_CODE.CODE_ID"]</label>
                                 <input data-field="code_id" id="code_id" name="code_id" class="gi-input"
                                     data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
@@ -269,7 +284,8 @@
                             <div
                                 class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                 <label for="code_name" class="gi-input-label" data-focus-label="true"
-                                    data-focus-label-text-align="default" data-required="true">코드명</label>
+                                    data-focus-label-text-align="default"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_CODE.CODE_NAME"]</label>
                                 <input data-field="code_name" id="code_name" name="code_name" class="gi-input"
                                     data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                             </div>
@@ -278,7 +294,8 @@
                             <div
                                 class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                 <label for="use_yn2" class="gi-input-label" data-focus-label="true"
-                                    data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                    data-focus-label-text-align="default"
+                                    data-required="true">[Page.Message].Message.Label.Array["SYS_CODE.USE_YN"]</label>
                                 <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn2"
                                     name="use_yn" class="gi-input" data-focus-span-text-align="default"
                                     data-required="true" autocomplete="off" />
@@ -296,10 +313,10 @@
         </div>
     </div>
 </article>
-<article id="gi-code_update-popup" class="gi-popup" data-popup-open="false">1
+<article id="gi-code_update-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body">
         <div class="gi-popup-header">
-            <span>공통코드 수정</span>
+            <span>[Page.Message].Message.Label.Array["SYS_CODE.TITLE_MODIFY"]</span>
         </div>
         <div class="gi-popup-contents">
             <!--      팝업내용 삽입 영역      -->
@@ -310,13 +327,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>그룹아이디</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_group_id" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">그룹아이디</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]</label>
                                     <input data-disabled data-field="group_id" id="update_group_id" name="group_id"
                                         class="gi-input" data-focus-span-text-align="default" data-required="true"
                                         autocomplete="off" />
@@ -326,13 +344,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>코드아이디</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE.CODE_ID"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_code_id" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">코드아이디</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE.CODE_ID"]</label>
                                     <input data-field="code_id" id="update_code_id" name="code_id" class="gi-input"
                                         data-focus-span-text-align="default" data-required="true" autocomplete="off" />
                                 </div>
@@ -341,13 +360,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>순서</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE.CODE_NUMBER"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_code_number" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">순서</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE.CODE_NUMBER"]</label>
                                     <input data-field="code_number" id="update_code_number" name="code_number"
                                         class="gi-input" data-focus-span-text-align="default" data-required="true"
                                         autocomplete="off" />
@@ -357,13 +377,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>코드명</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE.CODE_NAME"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_code_name" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">코드명</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE.CODE_NAME"]</label>
                                     <input data-field="code_name" id="update_code_name" name="code_name"
                                         class="gi-input" data-focus-span-text-align="default" data-required="true"
                                         autocomplete="off" />
@@ -373,13 +394,14 @@
                         <div
                             class="gi-row-60 gi-col-100 gi-grid gi-grid-template-columns-repeat-1-1fr-2fr gi-grid-rows-container">
                             <div class="gi-row-100 gi-col-100 gi-flex gi-flex-center">
-                                <span>사용여부</span>
+                                <span>[Page.Message].Message.Label.Array["SYS_CODE.USE_YN"]</span>
                             </div>
                             <div class="gi-row-100 gi-col-100">
                                 <div
                                     class="gi-row-100 gi-input-container gi-input-container-box-border-shadow gi-flex gi-flex-center ">
                                     <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
-                                        data-focus-label-text-align="default" data-required="true">사용여부</label>
+                                        data-focus-label-text-align="default"
+                                        data-required="true">[Page.Message].Message.Label.Array["SYS_CODE.USE_YN"]</label>
                                     <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn"
                                         id="update_use_yn" name="use_yn" class="gi-input"
                                         data-focus-span-text-align="default" data-required="true" autocomplete="off" />
@@ -394,8 +416,10 @@
         <div class="gi-popup-footer">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="sysCodeUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
-                <button class="gi-popup-close-btn" type="button">닫기</button>
+                <button id="sysCodeUpdate-btn" class="gi-popup-update-btn"
+                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+                <button class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
             </div>
         </div>
     </div>
@@ -507,18 +531,18 @@
                 let paging = response.data.TOTAL_PAGING[0];
                 // 그리드 헤더 설정
                 let sysCodeGroup_menuGrid_header = {
-                    title: "공통코드그룹 목록",
+                    title: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.TITLE_LIST"]',
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "그룹아이디", ID: "group_id", WIDTH: "45", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: "그룹명", ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: "생성일", ID: "system_create_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: "생성자ID", ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: "수정일", ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: "수정자ID", ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
-                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
-                        { HEADER: "수정", ID: "update_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "삭제", ID: "delete_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false }
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]', ID: "group_id", WIDTH: "45", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_NAME"]', ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.SYSTEM_CREATE_DATE"]', ID: "system_create_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.SYSTEM_CREATE_USERID"]', ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.SYSTEM_UPDATE_DATE"]', ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.SYSTEM_UPDATE_USERID"]', ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.USE_YN"]', ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["UPDATE_BTN"]', ID: "update_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: "delete_group_code_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
@@ -582,7 +606,7 @@
         }).catch(error => {
             formUtil.toast(error.response.data);
         })
-    } 1
+    }
     function sysCodeDelete(deleteParamDataList) {
         let url = "/cms/common/sysCode/remove";
         let data = deleteParamDataList;
@@ -641,22 +665,22 @@
 
                 // 그리드 헤더 설정
                 let sysCode_menuGrid_header = {
-                    title: "공통코드 목록",
+                    title: '[Page.Message].Message.Label.Array["SYS_CODE.TITLE_LIST"]',
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "순서", ID: "code_number", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "코드ID", ID: "code_id", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "그룹ID", ID: "group_id", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "그룹명", ID: "code_name", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "사용여부", ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
-                        { HEADER: "수정", ID: "update_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "삭제", ID: "delete_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.CODE_NUMBER"]', ID: "code_number", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.CODE_ID"]', ID: "code_id", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE_GROUP.GROUP_ID"]', ID: "group_id", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.CODE_NAME"]', ID: "code_name", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.USE_YN"]', ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["UPDATE_BTN"]', ID: "update_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: "delete_code_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
 
-                        { HEADER: "생성일", ID: "system_create_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "생성자ID", ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "수정일", ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "수정자ID", ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "상세", ID: "detail_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.SYSTEM_CREATE_DATE"]', ID: "system_create_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.SYSTEM_CREATE_USERID"]', ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.SYSTEM_UPDATE_DATE"]', ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_CODE.SYSTEM_UPDATE_USERID"]', ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["DETAIL_BTN"]', ID: "detail_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>

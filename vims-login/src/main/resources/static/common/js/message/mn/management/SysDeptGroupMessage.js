@@ -5,6 +5,7 @@ Message.Label.Array["SYS_DEPT_GROUP.TITLE_DETAIL"] = "Бүлэг дэлгэрэ�
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_LIST"] = "Бүлгийн жагсаалт";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_MODIFY"] = "Бүлэг засах";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_REGISTER"] = "Бүлэг бүртгэх";
+Message.Label.Array["SYS_DEPT_GROUP.TITLE_DEPTH_REGISTER"] = "Дэд бүлэг бүртгэх";
 
 Message.Label.Array["SYS_DEPT_GROUP.CHECK.GROUP_ID"] = "Бүлгийн ID-г оруулна уу";
 Message.Label.Array["SYS_DEPT_GROUP.CHECK.GROUP_NAME"] = "Бүлгийн нэрийг оруулна уу";

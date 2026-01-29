@@ -19,7 +19,7 @@ FormUtility.prototype.alertPopup = function (message) {
         + '<span>' + message + '</span>'
         + '</div>'
         + '<div class="gi-padding-10px">'
-        + '<button type="button" class="gi-btn gi-col-30px subbtn alertPopup_success_btn">확인</button>'
+        + '<button type="button" class="gi-btn gi-col-30px subbtn alertPopup_success_btn">' + Message.Label.Array["CONFIRM"] + '</button>'
         + '</div>'
         + '</div>'
         + '</div>';
@@ -49,8 +49,8 @@ FormUtility.prototype.confirm = async function (message) {
                         <span> ${message} </span>
                     </div>
                     <div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                        <button type="button" class="gi-btn-blue popup_success_btn">확인</button>
-                        <button type="button" class="gi-btn popup_cancel_btn">취소</button>
+                        <button type="button" class="gi-btn-blue popup_success_btn">${Message.Label.Array["CONFIRM"]}</button>
+                        <button type="button" class="gi-btn popup_cancel_btn">${Message.Label.Array["CANCEL"]}</button>
                     </div>
                 </div>
             </div>
@@ -87,8 +87,8 @@ FormUtility.prototype.popup = function (btnId, message, func, funcParam) {
         + '<span>' + message + '</span>'
         + '</div>'
         + '<div class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">'
-        + '<button type="button" id="' + btnId + '"' + ' class="gi-btn-blue popup_success_btn">확인</button>'
-        + '<button type="button" class="gi-btn  popup_cancel_btn">취소</button>'
+        + '<button type="button" id="' + btnId + '"' + ' class="gi-btn-blue popup_success_btn">' + Message.Label.Array["CONFIRM"] + '</button>'
+        + '<button type="button" class="gi-btn  popup_cancel_btn">' + Message.Label.Array["CANCEL"] + '</button>'
         + '</div>'
         + '</div>'
         + '</div>';
@@ -142,8 +142,8 @@ FormUtility.prototype.popupInput = function (btnId, popupInputId, message, input
         + '</div>'
         + '</div>'
         + '<div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">'
-        + '<button type="button" id="' + btnId + '"' + ' class="gi-btn-blue popup_success_btn">확인</button>'
-        + '<button type="button" class="gi-btn  popup_cancel_btn">취소</button>'
+        + '<button type="button" id="' + btnId + '"' + ' class="gi-btn-blue popup_success_btn">' + Message.Label.Array["CONFIRM"] + '</button>'
+        + '<button type="button" class="gi-btn  popup_cancel_btn">' + Message.Label.Array["CANCEL"] + '</button>'
         + '</div>'
         + '</div>'
         + '</div>';
@@ -215,8 +215,8 @@ FormUtility.prototype.popupRadio = function (btnId, popupInputId, message, radio
 
     Popup += '</div>'
         + '<div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">'
-        + '<button type="button" id="' + btnId + '" class="gi-btn-blue popup_success_btn">확인</button>'
-        + '<button type="button" class="gi-btn popup_cancel_btn">취소</button>'
+        + '<button type="button" id="' + btnId + '" class="gi-btn-blue popup_success_btn">' + Message.Label.Array["CONFIRM"] + '</button>'
+        + '<button type="button" class="gi-btn popup_cancel_btn">' + Message.Label.Array["CANCEL"] + '</button>'
         + '</div>'
         + '</div>'
         + '</div>';
@@ -293,8 +293,8 @@ FormUtility.prototype.prompt = async function (message, maxlength) {
                         </div>
                     </div>
                     <div class="gi-btn-section gi-row-30 gi-col-40px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                        <button type="button" class="gi-btn-blue popup_success_btn">확인</button>
-                        <button type="button" class="gi-btn popup_cancel_btn">취소</button>
+                        <button type="button" class="gi-btn-blue popup_success_btn">${Message.Label.Array["CONFIRM"]}</button>
+                        <button type="button" class="gi-btn popup_cancel_btn">${Message.Label.Array["CANCEL"]}</button>
                     </div>
                 </div>
             </div>

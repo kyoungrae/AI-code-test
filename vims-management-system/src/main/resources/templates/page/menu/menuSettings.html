@@ -29,6 +29,7 @@
         </article>
     </section>
 </article>
+<!--NOTE: 메뉴 등록 팝업-->
 <article id="gi-menu_register-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body gi-row-40-important">
         <div class="gi-popup-header">
@@ -49,30 +50,42 @@
                     <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
                             <label for="register_menu_name" class="gi-input-label" data-focus-label="true"
-                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME"]</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_KR"]</label>
                             <input data-field="menu_name" id="register_menu_name" name="menu_name_kr" class="gi-input"
                                 data-required="true" autocomplete="off" />
                         </div>
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="register_menu_name_en" class="gi-input-label" data-focus-label="true"
+                                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_EN"]</label>
+                            <input data-field="menu_name" id="register_menu_name_en" name="menu_name_en"
+                                class="gi-input" data-required="false" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="register_menu_name_mn" class="gi-input-label" data-focus-label="true"
+                                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_MN"]</label>
+                            <input data-field="menu_name" id="register_menu_name_mn" name="menu_name_mn"
+                                class="gi-input" data-required="false" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
                             <label for="register_menu_code" class="gi-input-label" data-focus-label="true"
                                 data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_CODE"]</label>
                             <input data-field="menu_code" id="register_menu_code" name="menu_code" class="gi-input"
                                 data-required="true" autocomplete="off" />
                         </div>
-                    </div>
-                    <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
                             <label for="register_prgm_url" class="gi-input-label" data-focus-label="true"
                                 data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.PRGM_URL"]</label>
                             <input data-field="prgm_url" id="register_prgm_url" name="prgm_url" class="gi-input"
                                 data-required="true" autocomplete="off" />
                         </div>
-                        <div class="gi-input-container gi-flex-1">
-                            <label for="register_url" class="gi-input-label" data-focus-label="true"
-                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.URL"]</label>
-                            <input data-field="url" id="register_url" name="url" class="gi-input" data-required="true"
-                                autocomplete="off" />
-                        </div>
+                    </div>
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="register_url" class="gi-input-label" data-focus-label="true"
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.URL"]</label>
+                        <input data-field="url" id="register_url" name="url" class="gi-input" data-required="true"
+                            autocomplete="off" />
                     </div>
                     <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
@@ -100,8 +113,9 @@
             <!--/      팝업내용 삽입 영역      -->
         </div>
         <div class="gi-popup-footer">
-            <button id="menuRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
-            <button class="gi-popup-close-btn" type="button">닫기</button>
+            <button id="menuRegister-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -128,11 +142,25 @@
                                 data-required="true" autocomplete="off" />
                         </div>
                     </div>
-                    <div class="gi-input-container">
-                        <label for="sub_register_menu_name" class="gi-input-label" data-focus-label="true"
-                            data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME"]</label>
-                        <input data-field="menu_name_kr" id="sub_register_menu_name" name="menu_name_kr"
-                            class="gi-input" data-required="true" autocomplete="off" />
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container">
+                            <label for="sub_register_menu_name" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_KR"]</label>
+                            <input data-field="menu_name_kr" id="sub_register_menu_name" name="menu_name_kr"
+                                class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container">
+                            <label for="sub_register_menu_name" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_EN"]</label>
+                            <input data-field="menu_name_en" id="sub_register_menu_name" name="menu_name_en"
+                                class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
+                        <div class="gi-input-container">
+                            <label for="sub_register_menu_name" class="gi-input-label" data-focus-label="true"
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_MN"]</label>
+                            <input data-field="menu_name_mn" id="sub_register_menu_name" name="menu_name_mn"
+                                class="gi-input" data-required="true" autocomplete="off" />
+                        </div>
                     </div>
                     <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
@@ -174,8 +202,9 @@
             </form>
         </div>
         <div class="gi-popup-footer">
-            <button id="menuDepthRegister-btn" class="gi-popup-update-btn" type="button">등록</button>
-            <button class="gi-popup-close-btn" type="button">닫기</button>
+            <button id="menuDepthRegister-btn" class="gi-popup-update-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -183,7 +212,7 @@
 <article id="gi-menu_update-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body" style="width: 600px;">
         <div class="gi-popup-header">
-            <span>메뉴수정</span>
+            <span>[Page.Message].Message.Label.Array["SYS_MENU.TITLE_MODIFY"]</span>
         </div>
         <div class="gi-popup-contents">
             <form id="sysMenuUpdate">
@@ -191,7 +220,7 @@
                     <div class="gi-hidden">
                         <div class="gi-input-container">
                             <label for="update_top_menu_code" class="gi-input-label" data-focus-label="true"
-                                data-required="true">상위메뉴코드</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.TOP_MENU_CODE"]</label>
                             <input data-disabled data-field="top_menu_code" id="update_top_menu_code"
                                 name="top_menu_code" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
@@ -199,40 +228,60 @@
                     <div id="menu_icon_layout" class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
                             <label for="update_menu_icon" class="gi-input-label" data-focus-label="true"
-                                data-required="false">메뉴아이콘</label>
+                                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.MENU_ICON"]</label>
                             <input data-disabled data-field="menu_icon" id="update_menu_icon" name="top_menu_code"
                                 class="gi-input" data-required="false" autocomplete="off" />
                         </div>
                         <div class="gi-flex gi-grid-gap-8px" style="margin-top: auto;">
-                            <button id="update_popup_delete_icon-btn" class="gi-btn" type="button">아이콘 삭제</button>
+                            <button id="update_popup_delete_icon-btn" class="gi-btn"
+                                type="button">[Page.Message].Message.Label.Array["SYS_MENU.DELETE_ICON"]</button>
                             <button id="update_popup_icon-btn" class="gi-btn" type="button"
-                                gi-popup-open-id="update_popup_icon_pack">아이콘 설정</button>
+                                gi-popup-open-id="update_popup_icon_pack">[Page.Message].Message.Label.Array["SYS_MENU.ICON_SETTINGS"]</button>
                         </div>
                     </div>
                     <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
-                            <label for="update_menu_name" class="gi-input-label" data-focus-label="true"
-                                data-required="true">메뉴명</label>
-                            <input data-field="menu_name_kr" id="update_menu_name" name="menu_name_kr" class="gi-input"
-                                data-required="true" autocomplete="off" />
-                        </div>
-                        <div class="gi-input-container gi-flex-1">
                             <label for="update_menu_code" class="gi-input-label" data-focus-label="true"
-                                data-required="true">메뉴코드</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_CODE"]</label>
                             <input data-disabled data-field="menu_code" id="update_menu_code" name="menu_code"
                                 class="gi-input" data-required="true" autocomplete="off" />
                         </div>
                     </div>
                     <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
+                            <label for="update_menu_name_kr" class="gi-input-label" data-focus-label="true"
+                                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_KR"]</label>
+                            <input data-field="menu_name_kr" id="update_menu_name_kr" name="menu_name_kr"
+                                class="gi-input" data-required="false" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="update_menu_name_en" class="gi-input-label" data-focus-label="true"
+                                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_EN"]</label>
+                            <input data-field="menu_name_en" id="update_menu_name_en" name="menu_name_en"
+                                class="gi-input" data-required="false" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container gi-flex-1">
+                            <label for="update_menu_name_mn" class="gi-input-label" data-focus-label="true"
+                                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NAME_MN"]</label>
+                            <input data-field="menu_name_mn" id="update_menu_name_mn" name="menu_name_mn"
+                                class="gi-input" data-required="false" autocomplete="off" />
+                        </div>
+
+                    </div>
+                    <div class="gi-flex gi-grid-gap-16px">
+                        <div class="gi-input-container gi-flex-1">
                             <label for="update_prgm_url" class="gi-input-label" data-focus-label="true"
-                                data-required="false">API 경로</label>
+                                data-required="false">[Page.Message].Message.Label.Array["SYS_MENU.PRGM_URL"]</label>
                             <input data-field="prgm_url" id="update_prgm_url" name="prgm_url" class="gi-input"
                                 data-required="false" autocomplete="off" />
                         </div>
                         <div class="gi-input-container gi-flex-1">
                             <label for="update_url" class="gi-input-label" data-focus-label="true"
-                                data-required="true">경로</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.URL"]</label>
                             <input data-field="url" id="update_url" name="url" class="gi-input" data-required="true"
                                 autocomplete="off" />
                         </div>
@@ -240,26 +289,26 @@
                     <div class="gi-flex gi-grid-gap-16px">
                         <div class="gi-input-container gi-flex-1">
                             <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
-                                data-required="true">사용여부</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.USE_YN"]</label>
                             <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="update_use_yn"
                                 name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
                         <div class="gi-input-container gi-flex-1">
                             <label for="update_menu_number" class="gi-input-label" data-focus-label="true"
-                                data-required="true">메뉴순서</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_NUMBER"]</label>
                             <input inputNumberOnly maxlength="1" data-field="menu_number" id="update_menu_number"
                                 name="menu_number" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
                         <div class="gi-input-container gi-flex-1">
                             <label for="update_menu_level" class="gi-input-label" data-focus-label="true"
-                                data-required="true">레벨</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_LEVEL"]</label>
                             <input inputNumberOnly data-disabled data-field="menu_level" id="update_menu_level"
                                 name="menu_level" class="gi-input" data-required="true" autocomplete="off"
                                 maxlength="1" />
                         </div>
                         <div class="gi-input-container gi-flex-1">
                             <label for="update_menu_sequence" class="gi-input-label" data-focus-label="true"
-                                data-required="true">메뉴시퀀스</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.MENU_SEQUENCE"]</label>
                             <input inputNumberOnly data-disabled data-field="menu_sequence" id="update_menu_sequence"
                                 name="menu_sequence" class="gi-input" data-required="true" autocomplete="off"
                                 maxlength="" />
@@ -269,8 +318,9 @@
             </form>
         </div>
         <div class="gi-popup-footer">
-            <button id="menuUpdate-btn" class="gi-popup-update-btn" type="button">수정</button>
-            <button class="gi-popup-close-btn" type="button">닫기</button>
+            <button id="menuUpdate-btn" class="gi-popup-update-btn"
+                type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -306,8 +356,10 @@
         <div class="gi-popup-footer" style="height: 10% !important;">
             <div
                 class="gi-btn-section gi-row-30 gi-col-30px gi-padding-left-right-20px gi-flex gi-flex-justify-content-center gi-flex-align-items-center">
-                <button id="btn" class="gi-popup-update-btn" type="button">수정</button>
-                <button class="gi-popup-close-btn" type="button">닫기</button>
+                <button id="btn" class="gi-popup-update-btn"
+                    type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+                <button class="gi-popup-close-btn"
+                    type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
             </div>
         </div>
     </div>
@@ -394,9 +446,11 @@
 
                 // 그리드 헤더 설정
                 let menuGrid = {
-                    title: Message.Label.Array["SYS_MENU.TITLE"],
+                    title: Message.Label.Array["SYS_MENU.TITLE_LIST"],
                     list: [
-                        { HEADER: Message.Label.Array["SYS_MENU.MENU_NAME"], ID: "menu_name_kr", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["SYS_MENU.MENU_NAME_KR"], ID: "menu_name_kr", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["SYS_MENU.MENU_NAME_MN"], ID: "menu_name_mn", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: Message.Label.Array["SYS_MENU.MENU_NAME_EN"], ID: "menu_name_en", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
                         { HEADER: Message.Label.Array["SYS_MENU.MENU_CODE"], ID: "menu_code", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
                         { HEADER: Message.Label.Array["SYS_MENU.MENU_LEVEL"], ID: "menu_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: Message.Label.Array["SYS_MENU.MENU_NUMBER"], ID: "menu_number", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
@@ -489,12 +543,12 @@
         let htmlSource =
             '<div class="gi-row-100 gi-col-100 gi-flex gi-flex-column gi-padding-10px" style="gap: 20px; overflow-y: auto;">'
             + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
-            + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_DEPT_GROUP.TITLE"] + ' ]</span>'
+            + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_DEPT_GROUP.TITLE_LIST"] + ' ]</span>'
             + '    <div id="gi-Grid2" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
             + '  </div>'
             + '  <div style="border-top: 1px dashed #cbd5e1; margin: 0 10px;"></div>'
             + '  <div class="gi-flex gi-flex-column" style="height: 350px; flex-shrink: 0;">'
-            + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE"] + ' ]</span>'
+            + '    <span class="gi-text-align-center" style="font-weight: 600; margin-bottom: 10px; color: #334155;">[ ' + Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE_LIST"] + ' ]</span>'
             + '    <div id="gi-Grid3" class="gi-Grid" style="height: calc(100% - 30px) !important;"></div>'
             + '  </div>'
             + '</div>';
@@ -522,7 +576,7 @@
                 let data = response.data;
                 // 그리드 헤더 설정
                 let sysDeptGroup_menuGrid_header = {
-                    title: Message.Label.Array["SYS_DEPT_GROUP.TITLE"],
+                    title: Message.Label.Array["SYS_DEPT_GROUP.TITLE_LIST"],
                     list: [
                         { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "30", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: Message.Label.Array["SYS_DEPT_GROUP.TOP_GROUP_ID"], ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
@@ -614,7 +668,7 @@
 
                 // 그리드 헤더 설정
                 let sysAccsGroupMenu_menuGrid_header = {
-                    title: Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE"],
+                    title: Message.Label.Array["SYS_ACCS_GROUP_MENU.TITLE_LIST"],
                     list: [
                         { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["SYS_ACCS_GROUP_MENU.MENU_CODE"], ID: 'menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
@@ -723,6 +777,8 @@
             let param = {
                 menu_code: data.menu_code,
                 menu_name_kr: data.menu_name,
+                menu_name_en: data.menu_name_en,
+                menu_name_mn: data.menu_name_mn,
                 menu_number: data.menu_number,
                 menu_level: data.menu_level,
                 top_menu_code: data.top_menu_code,
@@ -757,6 +813,8 @@
             let param = {
                 menu_code: data.menu_code,
                 menu_name_kr: data.menu_name_kr,
+                menu_name_en: data.menu_name_en,
+                menu_name_mn: data.menu_name_mn,
                 menu_number: data.menu_number,
                 menu_level: data.menu_level,
                 top_menu_code: data.top_menu_code,
@@ -790,6 +848,8 @@
             let param = {
                 menu_code: data.menu_code,
                 menu_name_kr: data.menu_name_kr,
+                menu_name_en: data.menu_name_en,
+                menu_name_mn: data.menu_name_mn,
                 menu_number: data.menu_number,
                 menu_level: data.menu_level,
                 top_menu_code: data.top_menu_code,

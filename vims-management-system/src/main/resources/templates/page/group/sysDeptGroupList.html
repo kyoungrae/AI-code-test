@@ -13,12 +13,15 @@
             <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-24px">
                 <div class="gi-flex gi-flex-align-items-center gi-grid-gap-16px">
                     <div class="gi-input-container" style="flex: 1;">
-                        <label for="searchDesc1" class="gi-input-label" data-focus-label="true">그룹이름</label>
+                        <label for="searchDesc1" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"]</label>
                         <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
                     </div>
                     <div class="gi-flex gi-grid-gap-8px">
-                        <button id="search-btn" class="gi-btn-blue" type="button">조회</button>
-                        <button id="reset-btn" class="gi-btn-reset" type="button">초기화</button>
+                        <button id="search-btn" class="gi-btn-blue"
+                            type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                        <button id="reset-btn" class="gi-btn-reset"
+                            type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
                     </div>
                 </div>
             </div>
@@ -29,9 +32,11 @@
                     <div id="gi-Grid1" class="gi-Grid" style="height: 600px;"></div>
                     <div class="gi-flex gi-flex-justify-content-flex-end gi-grid-gap-8px gi-margin-top-12px">
                         <button id="insert_group-btn" class="gi-btn-blue"
-                            gi-popup-open-id="gi-common_group_register-popup" type="button">그룹등록</button>
+                            gi-popup-open-id="gi-common_group_register-popup"
+                            type="button">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.TITLE_REGISTER"]</button>
                         <button id="insert_child_group-btn" class="gi-btn-blue gi-hidden"
-                            gi-popup-open-id="gi-common_group_register-popup" type="button">하위그룹등록</button>
+                            gi-popup-open-id="gi-common_group_register-popup"
+                            type="button">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.TITLE_DEPTH_REGISTER"]</button>
                     </div>
                 </div>
 
@@ -54,39 +59,39 @@
 <article id="gi-common_group_register-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body" style="width: 500px;">
         <div class="gi-popup-header">
-            <span>그룹등록</span>
+            <span>[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.TITLE_REGISTER"]</span>
         </div>
         <div class="gi-popup-contents">
             <form id="sysDeptGroupRegister">
                 <div class="gi-flex gi-flex-column gi-grid-gap-16px">
                     <div class="gi-input-container">
                         <label for="top_group_id" class="gi-input-label" data-focus-label="true"
-                            data-required="true">상위그룹아이디</label>
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.TOP_GROUP_ID"]</label>
                         <input data-disabled data-field="top_group_id" id="top_group_id" name="top_group_id"
                             class="gi-input" data-required="true" autocomplete="off" />
                     </div>
                     <div class="gi-input-container">
                         <label for="group_id" class="gi-input-label" data-focus-label="true"
-                            data-required="true">그룹아이디</label>
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"]</label>
                         <input data-field="group_id" id="group_id" name="group_id" class="gi-input" data-required="true"
                             autocomplete="off" />
                     </div>
                     <div class="gi-input-container">
                         <label for="group_name" class="gi-input-label" data-focus-label="true"
-                            data-required="true">그룹이름</label>
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"]</label>
                         <input data-field="group_name" id="group_name" name="group_name" class="gi-input"
                             data-required="true" autocomplete="off" />
                     </div>
                     <div class="gi-flex gi-grid-gap-10px">
                         <div class="gi-input-container" style="flex: 1;">
                             <label for="group_level" class="gi-input-label" data-focus-label="true"
-                                data-required="true">그룹레벨</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_LEVEL"]</label>
                             <input data-disabled data-field="group_level" id="group_level" name="group_level"
                                 class="gi-input" data-required="true" autocomplete="off" />
                         </div>
                         <div class="gi-input-container" style="flex: 1;">
                             <label for="use_yn" class="gi-input-label" data-focus-label="true"
-                                data-required="true">사용여부</label>
+                                data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.USE_YN"]</label>
                             <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn"
                                 name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
                         </div>
@@ -95,8 +100,9 @@
             </form>
         </div>
         <div class="gi-popup-footer">
-            <button id="sysDeptGroupRegister-btn" class="gi-popup-register-btn" type="button">등록</button>
-            <button class="gi-popup-close-btn" type="button">닫기</button>
+            <button id="sysDeptGroupRegister-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -104,26 +110,26 @@
 <article id="gi-common_group_update-popup" class="gi-popup" data-popup-open="false">
     <div class="gi-popup-body" style="width: 500px;">
         <div class="gi-popup-header">
-            <span>그룹수정</span>
+            <span>[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.TITLE_MODIFY"]</span>
         </div>
         <div class="gi-popup-contents">
             <form id="sysDeptGroupUpdate">
                 <div class="gi-flex gi-flex-column gi-grid-gap-16px">
                     <div class="gi-input-container">
                         <label for="group_id-update" class="gi-input-label" data-focus-label="true"
-                            data-required="true">그룹아이디</label>
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"]</label>
                         <input data-disabled data-field="group_id" id="group_id-update" name="group_id" class="gi-input"
                             data-required="true" autocomplete="off" />
                     </div>
                     <div class="gi-input-container">
                         <label for="group_name-update" class="gi-input-label" data-focus-label="true"
-                            data-required="true">그룹이름</label>
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"]</label>
                         <input data-field="group_name" id="group_name-update" name="group_name" class="gi-input"
                             data-required="true" autocomplete="off" />
                     </div>
                     <div class="gi-input-container">
                         <label for="use_yn-update" class="gi-input-label" data-focus-label="true"
-                            data-required="true">사용여부</label>
+                            data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.USE_YN"]</label>
                         <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn-update"
                             name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
                     </div>
@@ -131,8 +137,9 @@
             </form>
         </div>
         <div class="gi-popup-footer">
-            <button id="sysDeptGroupUpdate-btn" class="gi-popup-register-btn" type="button">수정</button>
-            <button class="gi-popup-close-btn" type="button">닫기</button>
+            <button id="sysDeptGroupUpdate-btn" class="gi-popup-register-btn"
+                type="button">[Page.Message].Message.Label.Array["UPDATE_BTN"]</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -146,19 +153,20 @@
             <form id="sysUserGroupRegister">
                 <div class="gi-flex gi-flex-align-items-center gi-grid-gap-16px gi-margin-bottom-20px">
                     <div class="gi-input-container" style="flex: 1;">
-                        <label for="user_id-search" class="gi-input-label" data-focus-label="true">사용자 아이디</label>
+                        <label for="user_id-search" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["SYS_USER_GROUP.USER_ID"]</label>
                         <input class="gi-input" type="text" id="user_id-search" name="user_id-search"
                             autocomplete="off" />
                     </div>
                     <button id="user_id-search-btn" class="gi-btn-blue" style="margin-top: auto;"
-                        type="button">조회</button>
+                        type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
                     <div data-field="group_id" name="group_id" class="gi-hidden"></div>
                 </div>
                 <div id="gi-Grid3" class="gi-Grid" style="height: 400px;"></div>
             </form>
         </div>
         <div class="gi-popup-footer">
-            <button class="gi-popup-close-btn" type="button">닫기</button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
         </div>
     </div>
 </article>
@@ -258,7 +266,7 @@
                     title: "그룹아이디 목록",
                     list: [
                         { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"]', ID: "group_name", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
-                        { HEADER: "상위그룹ID", ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.TOP_GROUP_ID"]', ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"]', ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "left", HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_LEVEL"]', ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.USE_YN"]', ID: "use_yn", WIDTH: "10", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
@@ -373,18 +381,18 @@
                     title: "사용자그룹목록",
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "5", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "그룹아이디", ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "email", ID: "user_email", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "사용자 ID", ID: "user_id", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "소속", ID: "office_name", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "삭제", ID: "userGroupDelete_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"]', ID: "group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_USER_GROUP.USER_EMAIL"]', ID: "user_email", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_USER_GROUP.USER_ID"]', ID: "user_id", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_USER.OFFICE_NAME"]', ID: "office_name", WIDTH: "25", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: '[Page.Message].Message.Label.Array["DELETE_BTN"]', ID: "userGroupDelete_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
 
-                        { HEADER: "소속코드", ID: "office_code", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_USER.OFFICE_CODE"]', ID: "office_code", WIDTH: "20", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: "ID", ID: "id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "작성일자", ID: "system_create_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "작성자ID", ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "수정일자", ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "수정자ID", ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.SYSTEM_CREATE_DATE"]', ID: "system_create_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.SYSTEM_CREATE_USERID"]', ID: "system_create_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.SYSTEM_UPDATE_DATE"]', ID: "system_update_date", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: '[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.SYSTEM_UPDATE_USERID"]', ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>
@@ -448,14 +456,14 @@
                     title: "사용자등록",
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "이메일", ID: "user_email", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "사용자 아이디", ID: "user_id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "소속코드", ID: "office_code", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "등록", ID: "register_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array['SYS_USER_GROUP.USER_EMAIL'], ID: "user_email", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array['SYS_USER.USER_ID'], ID: "user_id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array['SYS_USER.OFFICE_CODE'], ID: "office_code", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
+                        { HEADER: Message.Label.Array['REGISTER_BTN'], ID: "register_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
 
                         { HEADER: "ID", ID: "id", WIDTH: "15", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "역할", ID: "role", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
-                        { HEADER: "시퀀스 아이디", ID: "id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
+                        { HEADER: Message.Label.Array['SYS_USER.ROLE'], ID: "role", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
+                        { HEADER: Message.Label.Array['SYS_USER.ID'], ID: "id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>

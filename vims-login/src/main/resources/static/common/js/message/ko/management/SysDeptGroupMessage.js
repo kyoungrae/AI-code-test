@@ -5,6 +5,7 @@ Message.Label.Array["SYS_DEPT_GROUP.TITLE_DETAIL"] = "그룹상세";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_LIST"] = "그룹목록";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_MODIFY"] = "그룹수정";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_REGISTER"] = "그룹등록";
+Message.Label.Array["SYS_DEPT_GROUP.TITLE_DEPTH_REGISTER"] = "하위그룹등록";
 
 Message.Label.Array["SYS_DEPT_GROUP.CHECK.GROUP_ID"] = "그룹아이디(을)를 입력해 주세요";
 Message.Label.Array["SYS_DEPT_GROUP.CHECK.GROUP_NAME"] = "그룹이름(을)를 입력해 주세요";

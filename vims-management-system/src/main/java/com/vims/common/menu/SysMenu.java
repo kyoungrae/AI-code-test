@@ -48,7 +48,7 @@ public class SysMenu extends Common {
 
     /***
      * <pre>
-     *  menu_name_mn : 메뉴명_몽어
+     *  menu_name_mn : 메뉴명_몽골어
      * </pre>
      */
     private String menu_name_mn;
@@ -170,7 +170,7 @@ public class SysMenu extends Common {
 
     /***
      * <pre>
-     *  menu_name_mn : 메뉴명_몽어
+     *  menu_name_mn : 메뉴명_몽골어
      * </pre>
      */
     @Transient

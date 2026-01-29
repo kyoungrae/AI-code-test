@@ -5,7 +5,7 @@ class loadToScript {
         const scriptsToLoad = [
             "management/SysLayoutMessage",
             "management/SysEventLogMessage",
-            "login/SysMenuMessage",
+            "management/SysMenuMessage",
             "login/SysUserGroupMessage",
             "login/SysUserMessage",
             "management/SysUserGroupMessage",

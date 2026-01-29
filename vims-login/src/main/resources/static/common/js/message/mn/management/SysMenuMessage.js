@@ -46,3 +46,5 @@ Message.Label.Array["SYS_MENU.REGISTER_MENU_CODE"] = "Цэс бүртгэх";
 Message.Label.Array["SYS_MENU.REGISTER_SUB_MENU_CODE"] = "Дэд цэс бүртгэх";
 Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP"] = "Хандах эрхийн бүлгийн удирдлага";
 Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"] = "Хандах эрх";
+Message.Label.Array["SYS_MENU.DELETE_ICON"] = "Айкон устгах";
+Message.Label.Array["SYS_MENU.ICON_SETTINGS"] = "Айкон тохиргоо";

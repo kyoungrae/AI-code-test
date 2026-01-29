@@ -5,6 +5,7 @@ Message.Label.Array["SYS_DEPT_GROUP.TITLE_DETAIL"] = "Group Details";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_LIST"] = "Group List";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_MODIFY"] = "Edit Group";
 Message.Label.Array["SYS_DEPT_GROUP.TITLE_REGISTER"] = "Register Group";
+Message.Label.Array["SYS_DEPT_GROUP.TITLE_DEPTH_REGISTER"] = "Register Sub-group";
 
 Message.Label.Array["SYS_DEPT_GROUP.CHECK.GROUP_ID"] = "Please enter group ID";
 Message.Label.Array["SYS_DEPT_GROUP.CHECK.GROUP_NAME"] = "Please enter group name";
