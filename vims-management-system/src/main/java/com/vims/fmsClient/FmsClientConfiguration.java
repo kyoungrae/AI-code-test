@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * - 에러 핸들링
  */
 @Configuration
+// Recompile force
 public class FmsClientConfiguration {
 
     /**
