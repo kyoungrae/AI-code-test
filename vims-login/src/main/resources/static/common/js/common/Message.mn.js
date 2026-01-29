@@ -85,6 +85,16 @@ Message.Label.Array["RESET_PASSWORD_BTN"] = "Нууц үг шинэчлэх";
 Message.Label.Array["REDIRECT_BTN"] = "Шилжих";
 Message.Label.Array["WRITE_BTN"] = "Бичих";
 
+Message.Label.Array["TOTAL"] = "Нийт";
+Message.Label.Array["CASE"] = "шүүхийн";
+Message.Label.Array["ALL"] = "Бүх";
+Message.Label.Array["GALLERY"] = "Цомог";
+Message.Label.Array["NOTICE"] = "Мэдэгдэл";
+Message.Label.Array["SEARCH_PLACEHOLDER"] = "Хайх үгээ оруулна уу";
+Message.Label.Array["NO_TITLE"] = "Гарчиггүй";
+Message.Label.Array["UNKNOWN"] = "Мэдэхгүй";
+Message.Label.Array["NO"] = "№";
+
 Message.Label.Array["START_DATE"] = "Эхлэх огноо";
 Message.Label.Array["END_DATE"] = "Дуусах огноо";
 

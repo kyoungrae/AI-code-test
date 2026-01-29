@@ -85,6 +85,16 @@ Message.Label.Array["RESET_PASSWORD_BTN"] = "비밀번호 초기화";
 Message.Label.Array["REDIRECT_BTN"] = "이동";
 Message.Label.Array["WRITE_BTN"] = "글쓰기";
 
+Message.Label.Array["TOTAL"] = "전체";
+Message.Label.Array["CASE"] = "건";
+Message.Label.Array["ALL"] = "전체";
+Message.Label.Array["GALLERY"] = "갤러리";
+Message.Label.Array["NOTICE"] = "공지";
+Message.Label.Array["SEARCH_PLACEHOLDER"] = "검색어를 입력해 주세요";
+Message.Label.Array["NO_TITLE"] = "제목 없음";
+Message.Label.Array["UNKNOWN"] = "알 수 없음";
+Message.Label.Array["NO"] = "No";
+
 Message.Label.Array["START_DATE"] = "시작일";
 Message.Label.Array["END_DATE"] = "종료일";
 

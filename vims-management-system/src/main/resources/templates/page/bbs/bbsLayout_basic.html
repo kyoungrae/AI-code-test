@@ -3,8 +3,7 @@
 
         <!-- 페이지 헤더 -->
         <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
-            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm}">[Page.Message].Message.Label.Array["SYS_LAYOUT.TITLE"]
-            </h1>
+            <h1 id="basic-page-title" class="gi-page-title">[Page.Message].Message.Label.Array["SYS_LAYOUT.TITLE"]</h1>
             <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_LAYOUT.SUBTITLE"]</p>
         </header>
 
@@ -42,16 +41,19 @@
     </section>
 </article>
 
-<script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
+<script type="text/javascript">
     var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
     var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
-    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : [Page.Message].Message.Label.Array["SYS_BBS.TITLE"];
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : Message.Label.Array["SYS_BBS.TITLE"];
 
     init();
 
     function init() {
         new PageInit();
+
+        // 페이지 타이틀 설정
+        $("#basic-page-title").text(bbsNm);
+
         findByBoardList();
         clickEvent();
     }
@@ -83,7 +85,7 @@
         };
         let cont1 = $("#searchDesc1").val();
         if (formUtil.checkEmptyValue(cont1)) param._title = cont1;
-        console.log(param)
+
         axios.post(url, param).then(response => {
             if (response.status === 200) {
                 let data = response.data.DATA;
@@ -110,5 +112,4 @@
             }
         });
     }
-    /*]]>*/
 </script>

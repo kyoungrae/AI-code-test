@@ -85,6 +85,16 @@ Message.Label.Array["RESET_PASSWORD_BTN"] = "Reset Password";
 Message.Label.Array["REDIRECT_BTN"] = "Move";
 Message.Label.Array["WRITE_BTN"] = "Write";
 
+Message.Label.Array["TOTAL"] = "Total";
+Message.Label.Array["CASE"] = "cases";
+Message.Label.Array["ALL"] = "All";
+Message.Label.Array["GALLERY"] = "Gallery";
+Message.Label.Array["NOTICE"] = "Notice";
+Message.Label.Array["SEARCH_PLACEHOLDER"] = "Please enter search keyword";
+Message.Label.Array["NO_TITLE"] = "No title";
+Message.Label.Array["UNKNOWN"] = "Unknown";
+Message.Label.Array["NO"] = "No";
+
 Message.Label.Array["START_DATE"] = "Start Date";
 Message.Label.Array["END_DATE"] = "End Date";
 

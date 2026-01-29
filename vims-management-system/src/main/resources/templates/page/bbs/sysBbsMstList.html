@@ -3,8 +3,8 @@
 
     <!-- 페이지 헤더 -->
     <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
-      <h1 class="gi-page-title">[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE_LIST"]</h1>
-      <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_BBS_MST.SUB_TITLE_LIST"]</p>
+      <h1 class="gi-page-title" id="page-sysBbsMst-title"></h1>
+      <p class="gi-subtitle-main" id="page-sysBbsMst-subtitle"></p>
     </header>
 
     <article>
@@ -12,28 +12,23 @@
       <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
         <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
           <div class="gi-input-container gi-flex-1">
-            <label for="searchDesc1" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["SEARCH_KEYWORD"]</label>
+            <label for="searchDesc1" class="gi-input-label" data-focus-label="true" id="label-search-keyword"></label>
             <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
           </div>
 
           <div class="gi-input-container gi-flex-1">
-            <label for="from_date" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+            <label for="from_date" class="gi-input-label" data-focus-label="true" id="label-start-date"></label>
             <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off" data-datepicker />
           </div>
 
           <div class="gi-input-container gi-flex-1">
-            <label for="to_date" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+            <label for="to_date" class="gi-input-label" data-focus-label="true" id="label-end-date"></label>
             <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off" data-datepicker />
           </div>
 
           <div class="gi-flex gi-grid-gap-10px">
-            <button id="search-btn" class="gi-btn-blue"
-              type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
-            <button id="sysBbsMst-reset-btn" class="gi-btn"
-              type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+            <button id="search-btn" class="gi-btn-blue" type="button"></button>
+            <button id="sysBbsMst-reset-btn" class="gi-btn" type="button"></button>
           </div>
         </div>
       </div>
@@ -49,7 +44,7 @@
       <div class="gi-row-100">
         <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
           <button id="sysBbsMst-insert-btn" class="gi-btn-blue gi-float-right " type="button"
-            gi-popup-open-id="register_sysBbsMst_popup">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            gi-popup-open-id="register_sysBbsMst_popup"></button>
         </div>
       </div>
       <!--/     추가버튼 영역      -->
@@ -273,6 +268,17 @@
   init();
   function init() {
     input.setSelectOptionCom("#register_bbs_type", "BBS_TYPE", { code: "code_id", name: "code_name" });
+
+    // 라벨 세팅
+    $("#page-sysBbsMst-title").text(Message.Label.Array["SYS_BBS_MST.TITLE_LIST"]);
+    $("#page-sysBbsMst-subtitle").text(Message.Label.Array["SYS_BBS_MST.SUB_TITLE_LIST"]);
+    $("#label-search-keyword").text(Message.Label.Array["SEARCH_KEYWORD"]);
+    $("#label-start-date").text(Message.Label.Array["START_DATE"]);
+    $("#label-end-date").text(Message.Label.Array["END_DATE"]);
+    $("#search-btn").text(Message.Label.Array["SEARCH_BTN"]);
+    $("#sysBbsMst-reset-btn").text(Message.Label.Array["RESET_BTN"]);
+    $("#sysBbsMst-insert-btn").text(Message.Label.Array["REGISTER_BTN"]);
+
     //초기화
     resetEvent();
 
@@ -351,7 +357,7 @@
 
         // 그리드 헤더 설정
         let sysBbsMst_grid_header = {
-          title: '[Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE"]',
+          title: Message.Label.Array["SYS_BBS_MST.TITLE"],
           list: [
             { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["SYS_BBS_MST.BBS_MST_ID"], ID: 'bbs_mst_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },

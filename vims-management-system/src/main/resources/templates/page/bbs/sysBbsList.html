@@ -3,8 +3,8 @@
 
     <!-- 페이지 헤더 -->
     <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
-      <h1 class="gi-page-title" id="page-sysBbs-title">[Page.Message].Message.Label.Array["SYS_BBS.TITLE_LIST"]</h1>
-      <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_BBS.SUB_TITLE_LIST"]</p>
+      <h1 class="gi-page-title" id="page-sysBbs-title"></h1>
+      <p class="gi-subtitle-main" id="page-sysBbs-subtitle"></p>
     </header>
 
     <article>
@@ -12,28 +12,23 @@
       <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
         <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
           <div class="gi-input-container gi-flex-1">
-            <label for="searchDesc1" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["SEARCH.TITLE"]</label>
+            <label for="searchDesc1" class="gi-input-label" data-focus-label="true" id="label-search-title"></label>
             <input class="gi-input" type="text" id="searchDesc1" name="searchDesc1" autocomplete="off" />
           </div>
 
           <div class="gi-input-container gi-flex-1">
-            <label for="from_date" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["START_DATE"]</label>
+            <label for="from_date" class="gi-input-label" data-focus-label="true" id="label-start-date"></label>
             <input id="from_date" class="gi-input" type="text" name="from_date" autocomplete="off" data-datepicker />
           </div>
 
           <div class="gi-input-container gi-flex-1">
-            <label for="to_date" class="gi-input-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["END_DATE"]</label>
+            <label for="to_date" class="gi-input-label" data-focus-label="true" id="label-end-date"></label>
             <input id="to_date" class="gi-input" type="text" name="to_date" autocomplete="off" data-datepicker />
           </div>
 
           <div class="gi-flex gi-grid-gap-10px">
-            <button id="search-btn" class="gi-btn-blue"
-              type="button">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
-            <button id="sysBbs-reset-btn" class="gi-btn"
-              type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+            <button id="search-btn" class="gi-btn-blue" type="button"></button>
+            <button id="sysBbs-reset-btn" class="gi-btn" type="button"></button>
           </div>
         </div>
       </div>
@@ -49,7 +44,7 @@
       <div class="gi-row-100">
         <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
           <button id="sysBbs-insert-btn" class="gi-btn-blue gi-float-right " type="button"
-            gi-popup-open-id="register_sysBbs_popup">[Page.Message].Message.Label.Array["REGISTER_BTN"]</button>
+            gi-popup-open-id="register_sysBbs_popup"></button>
         </div>
       </div>
       <div class="gi-flex gi-flex-justify-content-center gi-grid-gap-16px gi-margin-top-40px">
@@ -336,10 +331,21 @@
       let receivedData = new Session().getItem("DATA");
       if (receivedData && receivedData.bbs_mst_id) {
         currentBbsMstId = receivedData.bbs_mst_id;
+        // 라벨 세팅
+        $("#page-sysBbs-title").text(Message.Label.Array["SYS_BBS.TITLE_LIST"]);
+        $("#page-sysBbs-subtitle").text(Message.Label.Array["SYS_BBS.SUB_TITLE_LIST"]);
+        $("#label-search-title").text(Message.Label.Array["SEARCH.TITLE"]);
+        $("#label-start-date").text(Message.Label.Array["START_DATE"]);
+        $("#label-end-date").text(Message.Label.Array["END_DATE"]);
+        $("#search-btn").text(Message.Label.Array["SEARCH_BTN"]);
+        $("#sysBbs-reset-btn").text(Message.Label.Array["RESET_BTN"]);
+        $("#sysBbs-insert-btn").text(Message.Label.Array["REGISTER_BTN"]);
+        $("#sysBbs-back-btn").text(Message.Label.Array["BACK_BTN"]);
+
         // 검색조건 등 화면 반영 (선택사항)
         if (receivedData.bbs_nm) {
-          $(".gi-page-title").text(receivedData.bbs_nm + " " + Message.Label.Array["SYS_BBS.TITLE_MANAGEMENT"]);
-          $(".gi-subtitle-main").text(receivedData.bbs_nm + " " + Message.Label.Array["SYS_BBS.TITLE_MANAGEMENT"]);
+          $("#page-sysBbs-title").text(receivedData.bbs_nm + " " + Message.Label.Array["SYS_BBS.TITLE_MANAGEMENT"]);
+          $("#page-sysBbs-subtitle").text(receivedData.bbs_nm + " " + Message.Label.Array["SYS_BBS.TITLE_MANAGEMENT"]);
         }
       }
 
@@ -447,7 +453,7 @@
 
         // 그리드 헤더 설정
         let sysBbs_grid_header = {
-          title: '[Page.Message].Message.Label.Array["SYS_BBS.TITLE"]',
+          title: Message.Label.Array["SYS_BBS.TITLE"],
           list: [
             { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["SYS_BBS.BBS_MST_ID"], ID: 'bbs_mst_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
@@ -652,10 +658,10 @@
         let activeMenus = data.filter(item => item.use_yn !== "0");
 
         let menuGrid = {
-          title: [Page.Message].Message.Label.Array["SYS_LAYOUT.MENU_LIST"],
+          title: Message.Label.Array["SYS_LAYOUT.MENU_LIST"],
           list: [
-            { HEADER: [Page.Message].Message.Label.Array["SYS_LAYOUT.MENU_NAME"], ID: "menu_name_kr", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "left" },
-            { HEADER: [Page.Message].Message.Label.Array["SYS_LAYOUT.MENU_CODE"], ID: "menu_code", WIDTH: "40", TYPE: "text", TEXT_ALIGN: "center" },
+            { HEADER: Message.Label.Array["SYS_LAYOUT.MENU_NAME"], ID: "menu_name_kr", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "left" },
+            { HEADER: Message.Label.Array["SYS_LAYOUT.MENU_CODE"], ID: "menu_code", WIDTH: "40", TYPE: "text", TEXT_ALIGN: "center" },
             { HEADER: '레벨', ID: "menu_level", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true },
             { HEADER: '상위코드', ID: "top_menu_code", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true },
             { HEADER: Message.Label.Array["SELECT_BTN"], ID: 'select_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', VISIBLE_OPTION_BTN: [{ "menu_level": "0" }, { "menu_level": "2" }], HIDDEN: false },

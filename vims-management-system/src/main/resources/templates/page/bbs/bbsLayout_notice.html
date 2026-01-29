@@ -1,17 +1,17 @@
 <article id="bbsLayoutNoticePage" class="gi-article-content gi-col-95 gi-row-100">
     <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
         <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
-            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm} + ' (' + [Page.Message].Message.Label.Array[" NOTICE"]
-                + ')'">[Page.Message].Message.Label.Array[" NOTICE"]</h1>
-                <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_LAYOUT.IMPORTANT_NEWS"]</p>
+            <h1 id="notice-page-title" class="gi-page-title">[Page.Message].Message.Label.Array["NOTICE"]</h1>
+            <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_LAYOUT.IMPORTANT_NEWS"]</p>
         </header>
         <article>
             <!-- 공지사항은 상단 고정 등이 필요할 수 있음 -->
             <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
                 <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
-                    <input class="gi-input" type="text"
+                    <input class="gi-input" type="text" id="notice-search-input"
                         placeholder='[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_SEARCH"]' />
-                    <button class="gi-btn-blue">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                    <button id="notice-search-btn"
+                        class="gi-btn-blue">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
                     <button id="bbs-notice-write-btn"
                         class="gi-btn-blue gi-margin-left-auto">[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_REGISTER"]</button>
                 </div>
@@ -22,16 +22,20 @@
         </article>
     </section>
 </article>
-<script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
+
+<script type="text/javascript">
     var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
     var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
-    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : [Page.Message].Message.Label.Array["NOTICE"];
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : Message.Label.Array["NOTICE"];
 
     init();
 
     function init() {
         new PageInit();
+
+        // 페이지 타이틀 설정
+        $("#notice-page-title").text(bbsNm);
+
         findByNoticeList();
         clickEvent();
     }
@@ -39,6 +43,16 @@
     function clickEvent() {
         $("#bbs-notice-write-btn").on("click", function () {
             formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardWrite", { bbs_id: bbsId });
+        });
+
+        $("#notice-search-btn").on("click", function () {
+            findByNoticeList();
+        });
+
+        $("#notice-search-input").on("keypress", function (e) {
+            if (e.which == 13) {
+                findByNoticeList();
+            }
         });
     }
 
@@ -53,6 +67,11 @@
             row_range: range,
             offset: (page - 1) * range
         };
+
+        let searchInput = $("#notice-search-input").val();
+        if (searchInput) {
+            param._title = searchInput;
+        }
 
         axios.post(url, param).then(response => {
             if (response.status === 200) {
@@ -73,8 +92,10 @@
                 let grid = formUtil.giGrid(grid_header, paging, page, "bbs_notice_grid");
                 grid.DataSet(data);
                 grid.pagingSet(findByNoticeList);
+                grid.rowClick(function (rowData) {
+                    formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardDetail", { board_id: rowData.board_id, bbs_id: bbsId });
+                });
             }
         });
     }
-    /*]]>*/
 </script>

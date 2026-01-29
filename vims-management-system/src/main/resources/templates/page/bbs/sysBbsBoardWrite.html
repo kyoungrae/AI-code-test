@@ -1,5 +1,33 @@
 <article id="sysBbsBoardWritePage" class="gi-article-content gi-col-95 gi-row-100 gi-overflow-scroll"
     style="background: #f8fafc; border: none; box-shadow: none;">
+    <style>
+        .gi-thumbnail-btn {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-right: 8px;
+            transition: all 0.2s;
+        }
+
+        .gi-thumbnail-btn:hover {
+            border-color: var(--background-color-btn-blue);
+            color: var(--background-color-btn-blue);
+        }
+
+        .gi-thumbnail-btn.active {
+            background: var(--background-color-btn-blue);
+            color: #fff;
+            border-color: var(--background-color-btn-blue);
+        }
+
+        .gi-file-item-card:hover .gi-thumbnail-btn {
+            opacity: 1;
+        }
+    </style>
     <div class="gi-padding-left-right-20px">
         <!-- 헤더 영역 (카드 외부) -->
         <header class="gi-margin-bottom-30px gi-padding-left-10px">
@@ -44,6 +72,7 @@
                             <div id="editor-container"></div>
                         </div>
                         <input type="hidden" data-field="content" id="board_content" name="content" />
+                        <input type="hidden" data-field="thumbnail" id="board_thumbnail" name="thumbnail" />
                     </div>
 
                     <!-- 섹션 3: 첨부 파일 -->
@@ -65,7 +94,7 @@
                         <button id="bbs-save-btn" class="gi-btn-blue gi-flex gi-flex-center gi-grid-gap-8px"
                             type="button" style="min-width: 120px; height: 42px;">
                             <img src="/common/img/save-white.png" style="width: 18px;" alt="저장">
-                            <!-- <span>[Page.Message].Message.Label.Array["SAVE_BTN"]</span> -->
+                            <span id="bbs-save-btn-text">[Page.Message].Message.Label.Array["SAVE_BTN"]</span>
                         </button>
                     </div>
                 </div>
@@ -92,7 +121,7 @@
         // 2. 페이지 헤더/타이틀 설정
         if (mode === 'modify') {
             $("#write-page-title").text(Message.Label.Array["SYS_BBS_BOARD.TITLE_UPDATE"]);
-            $("#bbs-save-btn").text(Message.Label.Array["UPDATE_BTN"]);
+            $("#bbs-save-btn-text").text(Message.Label.Array["UPDATE_BTN"]);
         }
 
         // 3. 에디터 초기화
@@ -140,6 +169,44 @@
         }
     }
 
+    /**
+     * @title 파일 렌더링 훅 (썸네일 버튼 추가)
+     */
+    fileUtil.onRenderFileItem = function (file) {
+        const extension = (file.file_extension || '').toLowerCase();
+        const isImage = ['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension);
+
+        if (!isImage) return '';
+
+        const currentThumbnailUuid = $("#board_thumbnail").val();
+        const isActive = currentThumbnailUuid === file.file_uuid;
+        const btnText = isActive ? '썸네일' : '썸네일 설정';
+        const activeClass = isActive ? 'active' : '';
+
+        return `
+            <button type="button" class="gi-thumbnail-btn ${activeClass}" 
+                data-file-uuid="${file.file_uuid}" 
+                onclick="setAsThumbnail(this, '${file.file_uuid}')">
+                ${btnText}
+            </button>
+        `;
+    };
+
+    /**
+     * @title 썸네일 설정 처리
+     */
+    window.setAsThumbnail = function (btn, uuid) {
+        const $btn = $(btn);
+
+        // 시각적 상태 업데이트
+        $(".gi-thumbnail-btn").removeClass("active").text("썸네일 설정");
+        $btn.addClass("active").text("썸네일");
+
+        // 값 바인딩
+        $("#board_thumbnail").val(uuid);
+        formUtil.toast("썸네일로 설정되었습니다.");
+    };
+
     function fetchBoardData() {
         let url = "/cms/common/sysBbsBoard/find";
         axios.post(url, { board_id: boardId }).then(response => {
@@ -148,6 +215,7 @@
                 $("#board_title").val(data.title);
                 $("#board_writer").val(data.writer_name);
                 $("#board_file_uuid").val(data.file_uuid).trigger('change');
+                $("#board_thumbnail").val(data.thumbnail);
                 commonTag.inputTagReset($(".gi-input"));
                 quill.root.innerHTML = data.content;
             }
@@ -186,7 +254,8 @@
             title: $("#board_title").val(),
             content: content,
             writer_name: $("#board_writer").val(),
-            file_uuid: $("#board_file_uuid").val()
+            file_uuid: $("#board_file_uuid").val(),
+            thumbnail: $("#board_thumbnail").val()
         };
 
         if (isUpdate) param.board_id = boardId;

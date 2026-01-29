@@ -148,7 +148,7 @@ class file {
                         </div>
                     </div>
                     <div class="gi-file-download-container">
-                        <button type="button" class="gi-file-download-btn" onclick="fileUtil.downloadFile('${file.file_id}', '${file.file_name_with_ext || file.file_name}')">
+                        <button type="button" class="gi-file-download-btn" onclick="fileUtil.downloadFile('${file.file_id}', '${(file.file_name_with_ext || file.file_name).replace(/'/g, "\\'")}')">
                             <span>↓</span>
                         </button>
                     </div>
@@ -767,8 +767,9 @@ class createFileUploadHTML {
                         </div>
                     </div>
                     <div class="gi-flex gi-flex-align-items-center gi-margin-left-auto">
+                        ${that.onRenderFileItem ? that.onRenderFileItem(file) : ''}
                         <div class="gi-file-download-container">
-                            <button type="button" class="gi-file-download-btn" onclick="fileUtil.downloadFile('${file.file_id}', '${file.file_name_with_ext || file.file_name}')">
+                            <button type="button" class="gi-file-download-btn" onclick="fileUtil.downloadFile('${file.file_id}', '${(file.file_name_with_ext || file.file_name).replace(/'/g, "\\'")}')">
                                 <span>↓</span>
                             </button>
                         </div>
