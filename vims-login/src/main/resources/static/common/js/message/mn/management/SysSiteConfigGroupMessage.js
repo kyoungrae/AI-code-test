@@ -27,3 +27,5 @@ Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_UPDATE_USERID"] = "Засса�
 
 
 Message.Label.Array["SYS_SITE_CONFIG_GROUP.REGISTER_CONFIG_GROUP_ID_BTN"] = "Бүлэг нэмэх";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.GROUP"] = "Бүлэг";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_GRID"] = "Тохиргооны бүлгийн жагсаалт";

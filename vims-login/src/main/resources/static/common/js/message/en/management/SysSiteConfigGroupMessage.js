@@ -27,3 +27,5 @@ Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_UPDATE_USERID"] = "Modifier ID
 
 
 Message.Label.Array["SYS_SITE_CONFIG_GROUP.REGISTER_CONFIG_GROUP_ID_BTN"] = "Add Group";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.GROUP"] = "Group";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_GRID"] = "Config Group List";

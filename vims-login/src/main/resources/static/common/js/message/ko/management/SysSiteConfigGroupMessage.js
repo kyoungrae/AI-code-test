@@ -27,3 +27,5 @@ Message.Label.Array["SYS_SITE_CONFIG_GROUP.SYSTEM_UPDATE_USERID"] = "수정자ID
 
 
 Message.Label.Array["SYS_SITE_CONFIG_GROUP.REGISTER_CONFIG_GROUP_ID_BTN"] = "그룹추가";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.GROUP"] = "그룹";
+Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_GRID"] = "설정그룹 목록";

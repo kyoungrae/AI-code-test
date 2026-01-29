@@ -31,3 +31,5 @@ Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_UPDATE_DATE"] = "Modification Date";
 Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_UPDATE_USERID"] = "Modifier ID";
 
 Message.Label.Array["SYS_SITE_CONFIG.REGISTER_CONFIG_KEY_BTN"] = "Add Config Key";
+Message.Label.Array["SYS_SITE_CONFIG.TITLE_GRID"] = "Config Key List";
+Message.Label.Array["SYS_SITE_CONFIG.SIDE_GRID"] = "Side Grid";

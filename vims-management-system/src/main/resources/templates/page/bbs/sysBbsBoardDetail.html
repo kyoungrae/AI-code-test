@@ -59,15 +59,18 @@
                 <div class="gi-form-actions">
                     <button id="detail-list-btn" class="gi-btn gi-flex gi-flex-center" type="button"
                         style="min-width: 120px; height: 42px;">
-                        <img src="/common/img/back-white.png" style="width: 20px;" alt="목록">
+                        <img src="/common/img/back-white.png" style="width: 20px;"
+                            th:alt='[Page.Message].Message.Label.Array["LIST_BTN"]'>
                     </button>
                     <button id="detail-update-btn" class="gi-btn-blue gi-flex gi-flex-center" type="button"
                         style="min-width: 120px; height: 42px;">
-                        <img src="/common/img/pen-white.png" style="width: 20px;" alt="수정">
+                        <img src="/common/img/pen-white.png" style="width: 20px;"
+                            th:alt='[Page.Message].Message.Label.Array["UPDATE_BTN"]'>
                     </button>
                     <button id="detail-delete-btn" class="gi-btn-red gi-flex gi-flex-center" type="button"
                         style="min-width: 120px; height: 42px;">
-                        <img src="/common/img/trash-white.png" style="width: 20px;" alt="삭제" />
+                        <img src="/common/img/trash-white.png" style="width: 20px;"
+                            th:alt='[Page.Message].Message.Label.Array["DELETE_BTN"]' />
                     </button>
                 </div>
             </div>
@@ -132,8 +135,8 @@
 
         if (response.status === 200 && response.data && response.data.length > 0) {
             let data = response.data[0];
-            $("#detail-board-title").text(data.title || "제목 없음");
-            $("#detail-writer").text(data.writer_name || "알 수 없음");
+            $("#detail-board-title").text(data.title || [Page.Message].Message.Label.Array["NO_TITLE"]);
+            $("#detail-writer").text(data.writer_name || [Page.Message].Message.Label.Array["UNKNOWN"]);
             $("#detail-date").text(data.system_create_date || "-");
             $("#detail-hit").text(data.hit_count || 0);
 

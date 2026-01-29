@@ -386,16 +386,16 @@
         //  console.log("Side Panel Data:", data);
         //  // 1. 사이드 패널 내 그리드 컨테이너 생성
         //  $("#sysBbsMst_gi-Grid-side").html('<div class="gi-padding-20px gi-row-100 gi-flex gi-flex-direction-column gi-grid-gap-10px">' +
-        //    '<h3>[' + data.no + '] 로우 상세 내역</h3>' +
+        //    '<h3>[' + data.no + '] ' + [Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE_DETAIL"] + '</h3>' +
         //    '<div id="sysBbsMstSub_gi-Grid" class="gi-Grid gi-row-100"></div>' +
         //    '</div>');
         //  // 2. 서브 그리드 헤더 설정
         //  let sysBbsMstSubGridHeader = {
-        //    title: "상세 내역 리스트",
+        //    title: [Page.Message].Message.Label.Array["SYS_BBS_MST.TITLE_DETAIL"],
         //    list: [
-        //      { HEADER: '순번', ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-        //      { HEADER: '항목명', ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
-        //      { HEADER: '내용', ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
+        //      { HEADER: [Page.Message].Message.Label.Array["NO"], ID: 'sub_no', WIDTH: '10', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
+        //      { HEADER: [Page.Message].Message.Label.Array["ITEM_NAME"], ID: 'item_name', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false },
+        //      { HEADER: [Page.Message].Message.Label.Array["CONTENT"], ID: 'item_content', WIDTH: '50', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'left', HIDDEN: false }
         //    ]
         //  };
         //  // 3. 서브 그리드 데이터 생성 (샘플)
@@ -403,8 +403,8 @@
         //  for (let i = 1; i <= 5; i++) {
         //    subData.push({
         //      sub_no: i,
-        //      item_name: "상세 항목 " + data.no + "-" + i,
-        //      item_content: "이것은 " + data.no + "번 데이터의 상세 내용입니다."
+        //      item_name: [Page.Message].Message.Label.Array["ITEM_NAME"] + " " + data.no + "-" + i,
+        //      item_content: [Page.Message].Message.Label.Array["CONTENT"] + " " + data.no + " ..."
         //    });
         //  }
         //  // 4. 서브 그리드 초기화 및 데이터 바인딩

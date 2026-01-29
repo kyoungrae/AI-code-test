@@ -56,3 +56,13 @@ Message.Label.Array["SYS_LAYOUT.WRITER_NAME"] = "작성자";
 Message.Label.Array["SYS_LAYOUT.HIT_COUNT"] = "조회수";
 Message.Label.Array["SYS_LAYOUT.IMAGE"] = "이미지";
 Message.Label.Array["SYS_LAYOUT.PRIORITY"] = "중요도";
+
+Message.Label.Array["SYS_LAYOUT.SUBTITLE"] = "게시판 안내";
+Message.Label.Array["SYS_LAYOUT.IMAGE_GALLERY_LIST"] = "이미지 갤러리 목록";
+Message.Label.Array["SYS_LAYOUT.IMPORTANT_NEWS"] = "중요 소식";
+Message.Label.Array["SYS_LAYOUT.PHOTO_REGISTER"] = "사진 등록";
+Message.Label.Array["SYS_LAYOUT.NOTICE_REGISTER"] = "공지 등록";
+Message.Label.Array["SYS_LAYOUT.NOTICE_SEARCH"] = "공지 검색";
+Message.Label.Array["SYS_LAYOUT.MENU_LIST"] = "메뉴 목록";
+Message.Label.Array["SYS_LAYOUT.MENU_NAME"] = "메뉴명";
+Message.Label.Array["SYS_LAYOUT.MENU_CODE"] = "메뉴코드";

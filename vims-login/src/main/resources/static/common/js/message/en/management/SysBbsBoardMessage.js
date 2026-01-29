@@ -56,3 +56,13 @@ Message.Label.Array["SYS_LAYOUT.WRITER_NAME"] = "Writer";
 Message.Label.Array["SYS_LAYOUT.HIT_COUNT"] = "Hits";
 Message.Label.Array["SYS_LAYOUT.IMAGE"] = "Image";
 Message.Label.Array["SYS_LAYOUT.PRIORITY"] = "Priority";
+
+Message.Label.Array["SYS_LAYOUT.SUBTITLE"] = "BBS Guide";
+Message.Label.Array["SYS_LAYOUT.IMAGE_GALLERY_LIST"] = "Image Gallery List";
+Message.Label.Array["SYS_LAYOUT.IMPORTANT_NEWS"] = "Important News";
+Message.Label.Array["SYS_LAYOUT.PHOTO_REGISTER"] = "Photo Register";
+Message.Label.Array["SYS_LAYOUT.NOTICE_REGISTER"] = "Notice Register";
+Message.Label.Array["SYS_LAYOUT.NOTICE_SEARCH"] = "Notice Search";
+Message.Label.Array["SYS_LAYOUT.MENU_LIST"] = "Menu List";
+Message.Label.Array["SYS_LAYOUT.MENU_NAME"] = "Menu Name";
+Message.Label.Array["SYS_LAYOUT.MENU_CODE"] = "Menu Code";

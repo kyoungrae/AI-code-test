@@ -12,7 +12,7 @@
                         class="gi-flex gi-flex-align-items-center gi-grid-gap-16px gi-margin-bottom-16px">
                         <div class="gi-input-container gi-flex-1">
                             <label for="search_config_group_id" class="gi-input-label"
-                                data-focus-label="true">그룹</label>
+                                data-focus-label="true">[Page.Message].Message.Label.Array["SYS_SITE_CONFIG_GROUP.GROUP"]</label>
                             <input class="gi-input" type="text" id="search_config_group_id"
                                 name="search_config_group_id" autocomplete="off" />
                         </div>
@@ -35,12 +35,14 @@
                     <div id="search-area2"
                         class="gi-flex gi-flex-align-items-center gi-grid-gap-16px gi-margin-bottom-16px gi-padding-left-10px">
                         <div class="gi-input-container gi-flex-1">
-                            <label for="search_use_yn" class="gi-input-label" data-focus-label="true">사용여부</label>
+                            <label for="search_use_yn" class="gi-input-label"
+                                data-focus-label="true">[Page.Message].Message.Label.Array["USE_YN"]</label>
                             <input gi-selectbox data-selectbox-field="USE_YN" class="gi-input" id="search_use_yn"
                                 name="search_use_yn" autocomplete="off" />
                         </div>
                         <div class="gi-input-container gi-flex-1">
-                            <label for="search_config_key" class="gi-input-label" data-focus-label="true">설정 키</label>
+                            <label for="search_config_key" class="gi-input-label"
+                                data-focus-label="true">[Page.Message].Message.Label.Array["SYS_SITE_CONFIG.CONFIG_KEY"]</label>
                             <input class="gi-input" type="text" id="search_config_key" name="search_config_key"
                                 autocomplete="off" />
                         </div>
@@ -84,7 +86,7 @@
                     </div>
                     <div class="gi-input-container">
                         <label for="use_yn" class="gi-input-label" data-focus-label="true"
-                            data-required="true">사용여부</label>
+                            data-required="true">[Page.Message].Message.Label.Array["USE_YN"]</label>
                         <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="use_yn" name="use_yn"
                             class="gi-input" data-required="true" autocomplete="off" />
                     </div>
@@ -333,7 +335,7 @@
 
                 // 그리드 헤더 설정
                 let siteConfig_menuGrid_header = {
-                    title: Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE"],
+                    title: Message.Label.Array["SYS_SITE_CONFIG_GROUP.TITLE_GRID"],
                     list: [
                         { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
                         { HEADER: Message.Label.Array["SYS_SITE_CONFIG_GROUP.CONFIG_GROUP_ID"], ID: 'config_group_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
@@ -466,7 +468,7 @@
 
                 // 그리드 헤더 설정
                 let siteConfig_menuGrid_header = {
-                    title: " 목록",
+                    title: Message.Label.Array["SYS_SITE_CONFIG.TITLE_GRID"],
                     list: [
                         { HEADER: "No", ID: "no", WIDTH: "7", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: Message.Label.Array["SYS_SITE_CONFIG.CONFIG_GROUP_ID"], ID: "config_group_id", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
@@ -480,7 +482,7 @@
                         { HEADER: Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_UPDATE_USERID"], ID: "system_update_userid", WIDTH: "40", TYPE: "text", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true },
                         { HEADER: Message.Label.Array["UPDATE_BTN"], ID: "update_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
                         { HEADER: Message.Label.Array["DELETE_BTN"], ID: "delete_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: false },
-                        { HEADER: "사이드 그리드", ID: "sideGridOpen_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
+                        { HEADER: Message.Label.Array["SYS_SITE_CONFIG.SIDE_GRID"], ID: "sideGridOpen_btn", WIDTH: "15", TYPE: "button", FONT_SIZE: "12px", TEXT_ALIGN: "center", HIDDEN: true }
                     ]
                 }
                 //그리드 생성 <div id="gi-Grid"></div>

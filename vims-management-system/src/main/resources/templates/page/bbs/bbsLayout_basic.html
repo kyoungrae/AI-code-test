@@ -46,7 +46,7 @@
     /*<![CDATA[*/
     var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
     var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
-    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : '게시판';
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : [Page.Message].Message.Label.Array["SYS_BBS.TITLE"];
 
     init();
 

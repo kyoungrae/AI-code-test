@@ -1,16 +1,19 @@
 <article id="bbsLayoutNoticePage" class="gi-article-content gi-col-95 gi-row-100">
     <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
         <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
-            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm} + ' (공지)'">공지사항</h1>
-            <p class="gi-subtitle-main">중요 소식</p>
+            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm} + ' (' + [Page.Message].Message.Label.Array[" NOTICE"]
+                + ')'">[Page.Message].Message.Label.Array[" NOTICE"]</h1>
+                <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_LAYOUT.IMPORTANT_NEWS"]</p>
         </header>
         <article>
             <!-- 공지사항은 상단 고정 등이 필요할 수 있음 -->
             <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
                 <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
-                    <input class="gi-input" type="text" placeholder="공지 검색" />
-                    <button class="gi-btn-blue">검색</button>
-                    <button id="bbs-notice-write-btn" class="gi-btn-blue gi-margin-left-auto">공지 등록</button>
+                    <input class="gi-input" type="text"
+                        placeholder='[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_SEARCH"]' />
+                    <button class="gi-btn-blue">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                    <button id="bbs-notice-write-btn"
+                        class="gi-btn-blue gi-margin-left-auto">[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_REGISTER"]</button>
                 </div>
             </div>
             <div class="gi-row-100 gi-padding-left-right-20px">
@@ -23,7 +26,7 @@
     /*<![CDATA[*/
     var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
     var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
-    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : '공지사항';
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : [Page.Message].Message.Label.Array["NOTICE"];
 
     init();
 

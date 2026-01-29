@@ -39,3 +39,4 @@ Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_USERID"] = "시스템 수정자ID";
 Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_DATE"] = "시스템 수정 일시";
 Message.Label.Array["SYS_BBS.P_MENU_CODE"] = "상위 메뉴코드";
 Message.Label.Array["SYS_BBS.ACCESS_RIGHTS_REQUIRED"] = "[접근권한 설정 필요]";
+Message.Label.Array["SYS_BBS.TITLE"] = "게시판";

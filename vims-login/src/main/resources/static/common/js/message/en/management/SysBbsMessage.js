@@ -39,3 +39,4 @@ Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_USERID"] = "System Modifier ID";
 Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_DATE"] = "System Modification Time";
 Message.Label.Array["SYS_BBS.P_MENU_CODE"] = "Parent Menu Code";
 Message.Label.Array["SYS_BBS.ACCESS_RIGHTS_REQUIRED"] = "[Access rights setting required]";
+Message.Label.Array["SYS_BBS.TITLE"] = "BBS";

@@ -1,13 +1,15 @@
 <article id="bbsLayoutGalleryPage" class="gi-article-content gi-col-95 gi-row-100">
     <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
         <header class="gi-margin-bottom-40px gi-padding-left-20px gi-padding-top-20px">
-            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm} + ' (갤러리)'">갤러리</h1>
-            <p class="gi-subtitle-main">이미지 갤러리 목록</p>
+            <h1 class="gi-page-title" th:text="${bbsInfo.bbs_nm} + ' (' + [Page.Message].Message.Label.Array[" GALLERY"]
+                + ')'">[Page.Message].Message.Label.Array[" GALLERY"]</h1>
+                <p class="gi-subtitle-main">[Page.Message].Message.Label.Array["SYS_LAYOUT.IMAGE_GALLERY_LIST"]</p>
         </header>
         <article>
             <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
                 <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
-                    <button id="bbs-gallery-write-btn" class="gi-btn-blue gi-margin-left-auto">사진 등록</button>
+                    <button id="bbs-gallery-write-btn"
+                        class="gi-btn-blue gi-margin-left-auto">[Page.Message].Message.Label.Array["SYS_LAYOUT.PHOTO_REGISTER"]</button>
                 </div>
             </div>
             <div class="gi-row-100 gi-padding-left-right-20px">
@@ -20,7 +22,7 @@
     /*<![CDATA[*/
     var bbsSessionData = JSON.parse(sessionStorage.getItem("DATA"));
     var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
-    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : '갤러리';
+    var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : [Page.Message].Message.Label.Array["GALLERY"];
 
     init();
 

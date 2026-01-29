@@ -652,10 +652,10 @@
         let activeMenus = data.filter(item => item.use_yn !== "0");
 
         let menuGrid = {
-          title: "메뉴 목록",
+          title: [Page.Message].Message.Label.Array["SYS_LAYOUT.MENU_LIST"],
           list: [
-            { HEADER: '메뉴명', ID: "menu_name_kr", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "left" },
-            { HEADER: '메뉴코드', ID: "menu_code", WIDTH: "40", TYPE: "text", TEXT_ALIGN: "center" },
+            { HEADER: [Page.Message].Message.Label.Array["SYS_LAYOUT.MENU_NAME"], ID: "menu_name_kr", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "left" },
+            { HEADER: [Page.Message].Message.Label.Array["SYS_LAYOUT.MENU_CODE"], ID: "menu_code", WIDTH: "40", TYPE: "text", TEXT_ALIGN: "center" },
             { HEADER: '레벨', ID: "menu_level", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true },
             { HEADER: '상위코드', ID: "top_menu_code", WIDTH: "10", TYPE: "text", TEXT_ALIGN: "center", HIDDEN: true },
             { HEADER: Message.Label.Array["SELECT_BTN"], ID: 'select_btn', WIDTH: '15', TYPE: 'img', FONT_SIZE: '12px', TEXT_ALIGN: 'center', VISIBLE_OPTION_BTN: [{ "menu_level": "0" }, { "menu_level": "2" }], HIDDEN: false },

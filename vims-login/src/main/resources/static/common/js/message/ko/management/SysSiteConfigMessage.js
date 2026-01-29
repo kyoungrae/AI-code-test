@@ -30,5 +30,7 @@ Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_CREATE_USERID"] = "작성자ID";
 Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_UPDATE_DATE"] = "수정일자";
 Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_UPDATE_USERID"] = "수정자ID";
 
-Message.Label.Array["SYS_SITE_CONFIG.REGISTER_CONFIG_KEY_BTN"] ="설정키 추가";
+Message.Label.Array["SYS_SITE_CONFIG.REGISTER_CONFIG_KEY_BTN"] = "설정키 추가";
+Message.Label.Array["SYS_SITE_CONFIG.TITLE_GRID"] = "설정키 목록";
+Message.Label.Array["SYS_SITE_CONFIG.SIDE_GRID"] = "사이드 그리드";
 

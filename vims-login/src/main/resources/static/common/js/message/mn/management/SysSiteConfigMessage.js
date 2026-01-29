@@ -31,3 +31,5 @@ Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_UPDATE_DATE"] = "Зассан огн
 Message.Label.Array["SYS_SITE_CONFIG.SYSTEM_UPDATE_USERID"] = "Зассан хэрэглэгчийн ID";
 
 Message.Label.Array["SYS_SITE_CONFIG.REGISTER_CONFIG_KEY_BTN"] = "Тохиргооны түлхүүр нэмэх";
+Message.Label.Array["SYS_SITE_CONFIG.TITLE_GRID"] = "Тохиргооны түлхүүрийн жагсаалт";
+Message.Label.Array["SYS_SITE_CONFIG.SIDE_GRID"] = "Хажуугийн хүснэгт";

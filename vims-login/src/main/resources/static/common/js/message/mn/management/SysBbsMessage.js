@@ -39,3 +39,4 @@ Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_USERID"] = "Системд засса
 Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_DATE"] = "Системд зассан огноо, цаг";
 Message.Label.Array["SYS_BBS.P_MENU_CODE"] = "Дээд цэсний код";
 Message.Label.Array["SYS_BBS.ACCESS_RIGHTS_REQUIRED"] = "[Хандах эрхийг тохируулах шаардлагатай]";
+Message.Label.Array["SYS_BBS.TITLE"] = "Хэлэлцүүлэг";
