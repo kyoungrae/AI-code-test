@@ -83,6 +83,7 @@ Message.Label.Array["UPLOAD_BTN"] = "업로드";
 Message.Label.Array["SIDE_BTN"] = "사이드";
 Message.Label.Array["RESET_PASSWORD_BTN"] = "비밀번호 초기화";
 Message.Label.Array["REDIRECT_BTN"] = "이동";
+Message.Label.Array["WRITE_BTN"] = "글쓰기";
 
 Message.Label.Array["START_DATE"] = "시작일";
 Message.Label.Array["END_DATE"] = "종료일";

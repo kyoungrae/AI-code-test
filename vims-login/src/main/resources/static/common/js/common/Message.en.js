@@ -83,6 +83,7 @@ Message.Label.Array["UPLOAD_BTN"] = "Upload";
 Message.Label.Array["SIDE_BTN"] = "Side";
 Message.Label.Array["RESET_PASSWORD_BTN"] = "Reset Password";
 Message.Label.Array["REDIRECT_BTN"] = "Move";
+Message.Label.Array["WRITE_BTN"] = "Write";
 
 Message.Label.Array["START_DATE"] = "Start Date";
 Message.Label.Array["END_DATE"] = "End Date";

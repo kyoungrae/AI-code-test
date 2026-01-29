@@ -83,6 +83,7 @@ Message.Label.Array["UPLOAD_BTN"] = "Хуулах";
 Message.Label.Array["SIDE_BTN"] = "Хажуу";
 Message.Label.Array["RESET_PASSWORD_BTN"] = "Нууц үг шинэчлэх";
 Message.Label.Array["REDIRECT_BTN"] = "Шилжих";
+Message.Label.Array["WRITE_BTN"] = "Бичих";
 
 Message.Label.Array["START_DATE"] = "Эхлэх огноо";
 Message.Label.Array["END_DATE"] = "Дуусах огноо";
