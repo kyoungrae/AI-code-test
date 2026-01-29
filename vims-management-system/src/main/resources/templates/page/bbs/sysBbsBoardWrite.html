@@ -134,9 +134,17 @@
                     ['image', 'link', 'code-block'],
                     [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                     ['clean']
-                ]
+                ],
+                handlers: {
+                    image: imageHandler
+                }
             }
         });
+
+        // 에디터 이미지 업로드용 hidden input 추가
+        if ($("#quill-image-input").length === 0) {
+            $("body").append('<input type="file" id="quill-image-input" style="display: none;" accept="image/*">');
+        }
 
         // 4. 데이터 로드 (수정 모드)
         if (mode === 'modify' && boardId) {
@@ -206,6 +214,82 @@
         $("#board_thumbnail").val(uuid);
         formUtil.toast("썸네일로 설정되었습니다.");
     };
+
+    /**
+     * @title 에디터에 이미지 삽입
+     */
+    window.insertImageToEditor = function (fileId) {
+        const imageUrl = `/fms/fileManager/download?fileId=${encodeURIComponent(fileId)}`;
+        const range = quill.getSelection(true);
+        quill.insertEmbed(range.index, 'image', imageUrl);
+        quill.setSelection(range.index + 1);
+    };
+
+    /**
+     * @title Quill 이미지 핸들러
+     */
+    function imageHandler() {
+        const input = document.getElementById('quill-image-input');
+        input.click();
+
+        input.onchange = async () => {
+            const file = input.files[0];
+            if (!file) return;
+
+            // 이미지가 아닌 경우 체크
+            if (!/^image\//.test(file.type)) {
+                formUtil.toast("이미지 파일만 업로드 가능합니다.", "warn");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('files', file);
+            formData.append('folder_name', 'bbs_attachments'); // 폴더명 지정
+
+            // 기존 UUID가 있으면 함께 전송
+            let currentUuid = $("#board_file_uuid").val();
+            if (currentUuid) {
+                formData.append('file_uuid', currentUuid);
+            }
+
+            try {
+                // 1. 파일 업로드
+                const uploadResponse = await axios.post('/fms/fileManager/upload', formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+
+                if (uploadResponse.status === 200 && uploadResponse.data.length > 0) {
+                    let fileList = uploadResponse.data;
+                    let fileUuid = fileList[0].file_uuid; // 업로드된 파일 그룹 UUID
+
+                    // 만약 기존 UUID가 있었다면, 서버 로직에 따라 동일하게 유지되었을 것임.
+                    // 만약 없었다면 새로 생성된 UUID를 사용.
+
+                    // 2. 파일 정보 등록 (SYS_FILE_DETAIL)
+                    // FileUtils.js의 로직에 따르면 업로드 후 register를 호출해야 파일이 정식 등록됨
+                    const registerResponse = await axios.post('/fms/common/file/sysFileDetail/register', fileList);
+
+                    if (registerResponse.status === 200) {
+                        // 3. UUID 업데이트 및 파일 목록 갱신
+                        $("#board_file_uuid").val(fileUuid); // input 값 업데이트
+                        // fileUtil이 input change 이벤트를 바인딩하고 있으므로 트리거
+                        $("#board_file_uuid").trigger('change');
+
+                        // 4. 에디터에 이미지 삽입 (새로 등록된 파일 ID 사용)
+                        // fileList[0].file_id 사용
+                        const fileId = fileList[0].file_id;
+                        insertImageToEditor(fileId);
+                    }
+                }
+            } catch (error) {
+                console.error("Image upload failed:", error);
+                formUtil.toast("이미지 업로드에 실패했습니다.", "error");
+            }
+
+            // input 초기화 (동일 파일 재선택 가능하도록)
+            input.value = '';
+        };
+    }
 
     function fetchBoardData() {
         let url = "/cms/common/sysBbsBoard/find";
