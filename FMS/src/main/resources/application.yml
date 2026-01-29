@@ -11,6 +11,10 @@ fms:
     internal:
         api-key: "your-secure-internal-api-key-here"  # management와 동일한 키 사용
 
+# Token Secret key
+secret-key: YeyKgN7Oa0dfKJCR0Xr3Sp45WdU8BCv2Zd0X6KxRTfFgfPZ3MH3xccjC3WCt90Az
+expiration-milliseconds: 36000000
+
 spring:
     profiles:
         active: local
