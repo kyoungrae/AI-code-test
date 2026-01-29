@@ -50,6 +50,12 @@ Message.Label.Array["SYS_BBS_BOARD.SECTION.BASIC"] = "기본 정보";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.CONTENT"] = "상세 내용";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"] = "첨부 파일";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.THUMBNAIL"] = "썸네일";
+Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_UPLOAD"] = "썸네일이 업로드되었습니다.";
+Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_SET"] = "썸네일로 설정되었습니다.";
+Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.ACTIVE"] = "썸네일";
+Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.SET"] = "썸네일 설정";
+Message.Label.Array["SYS_BBS_BOARD.CHECK.IMAGE_ONLY"] = "이미지 파일만 업로드 가능합니다.";
+Message.Label.Array["SYS_BBS_BOARD.FAIL.IMAGE_UPLOAD"] = "이미지 업로드에 실패했습니다.";
 
 Message.Label.Array["SYS_LAYOUT.CREATE_DATE"] = "등록 일시";
 Message.Label.Array["SYS_LAYOUT.TITLE"] = "제목";

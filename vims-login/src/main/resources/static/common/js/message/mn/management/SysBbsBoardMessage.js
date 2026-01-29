@@ -39,6 +39,12 @@ Message.Label.Array["SYS_BBS_BOARD.SYSTEM_CREATE_DATE"] = "Системд бүр
 Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_USERID"] = "Системд зассан хэрэглэгчийн ID";
 Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_DATE"] = "Системд зассан огноо, цаг";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.THUMBNAIL"] = "Зураг";
+Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_UPLOAD"] = "Жижиг зургийг амжилттай байршууллаа.";
+Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_SET"] = "Жижиг зургаар амжилттай тохирууллаа.";
+Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.ACTIVE"] = "Жижиг зураг";
+Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.SET"] = "Жижиг зураг болгох";
+Message.Label.Array["SYS_BBS_BOARD.CHECK.IMAGE_ONLY"] = "Зөвхөн зургийн файл оруулах боломжтой.";
+Message.Label.Array["SYS_BBS_BOARD.FAIL.IMAGE_UPLOAD"] = "Зураг байршуулахад алдаа гарлаа.";
 
 Message.Label.Array["SYS_BBS_BOARD.WRITE"] = "Бичлэг оруулах";
 Message.Label.Array["SYS_BBS_BOARD.DETAIL"] = "Бичлэгийн дэлгэрэнгүй";

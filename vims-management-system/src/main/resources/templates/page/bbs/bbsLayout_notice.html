@@ -8,16 +8,30 @@
             <!-- 공지사항은 상단 고정 등이 필요할 수 있음 -->
             <div id="search-area" class="gi-padding-left-right-20px gi-margin-bottom-30px">
                 <div class="gi-flex gi-flex-align-items-center gi-grid-gap-20px">
-                    <input class="gi-input" type="text" id="notice-search-input"
-                        placeholder='[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_SEARCH"]' />
-                    <button id="notice-search-btn"
-                        class="gi-btn-blue">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
-                    <button id="bbs-notice-write-btn"
-                        class="gi-btn-blue gi-margin-left-auto">[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_REGISTER"]</button>
+                    <div class="gi-input-container gi-flex-1">
+                        <label for="notice-search-input" class="gi-input-label"
+                            data-focus-label="true">[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_SEARCH"]</label>
+                        <input class="gi-input" type="text" id="notice-search-input" name="notice-search-input"
+                            autocomplete="off" />
+                    </div>
+                    <div class="gi-flex gi-grid-gap-10px">
+                        <button id="notice-search-btn"
+                            class="gi-btn-blue">[Page.Message].Message.Label.Array["SEARCH_BTN"]</button>
+                        <button id="bbsLayoutNoticePage-reset-btn" class="gi-btn"
+                            type="button">[Page.Message].Message.Label.Array["RESET_BTN"]</button>
+                    </div>
+
                 </div>
             </div>
             <div class="gi-row-100 gi-padding-left-right-20px">
                 <div id="bbs_notice_grid" class="gi-Grid gi-col-100"></div>
+            </div>
+            <!-- 등록버튼 영역 -->
+            <div class="gi-row-100">
+                <div class="gi-btn-section gi-row-30 gi-float-right gi-padding-left-right-20px">
+                    <button id="bbs-notice-write-btn"
+                        class="gi-btn-blue gi-float-right">[Page.Message].Message.Label.Array["SYS_LAYOUT.NOTICE_REGISTER"]</button>
+                </div>
             </div>
         </article>
     </section>
@@ -46,6 +60,11 @@
         });
 
         $("#notice-search-btn").on("click", function () {
+            findByNoticeList();
+        });
+
+        $("#bbsLayoutNoticePage-reset-btn").on("click", function () {
+            $("#notice-search-input").val("");
             findByNoticeList();
         });
 
@@ -82,10 +101,10 @@
                     title: bbsNm,
                     list: [
                         { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
-                        { HEADER: Message.Label.Array["SYS_LAYOUT.PRIORITY"], ID: 'priority', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center', HIDDEN: true },
-                        { HEADER: Message.Label.Array["SYS_LAYOUT.TITLE"], ID: 'title', WIDTH: '60', TYPE: 'text', TEXT_ALIGN: 'left' },
-                        { HEADER: Message.Label.Array["SYS_LAYOUT.HIT_COUNT"], ID: 'hit_count', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
-                        { HEADER: Message.Label.Array["SYS_LAYOUT.CREATE_DATE"], ID: 'system_create_date', WIDTH: '15', TYPE: 'date', TEXT_ALIGN: 'center' }
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.PRIORITY"], ID: 'priority', WIDTH: '10', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'center', HIDDEN: true },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.TITLE"], ID: 'title', WIDTH: '60', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'left' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.HIT_COUNT"], ID: 'hit_count', WIDTH: '10', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'center' },
+                        { HEADER: Message.Label.Array["SYS_LAYOUT.CREATE_DATE"], ID: 'system_create_date', WIDTH: '15', FONT_SIZE: '12px', TYPE: 'date', TEXT_ALIGN: 'center' }
                     ]
                 };
 

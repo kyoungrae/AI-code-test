@@ -50,6 +50,12 @@ Message.Label.Array["SYS_BBS_BOARD.SECTION.BASIC"] = "Basic Information";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.CONTENT"] = "Details";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"] = "Attachments";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.THUMBNAIL"] = "Thumbnail";
+Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_UPLOAD"] = "Thumbnail has been uploaded.";
+Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_SET"] = "Successfully set as thumbnail.";
+Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.ACTIVE"] = "Thumbnail";
+Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.SET"] = "Set as Thumbnail";
+Message.Label.Array["SYS_BBS_BOARD.CHECK.IMAGE_ONLY"] = "Only image files can be uploaded.";
+Message.Label.Array["SYS_BBS_BOARD.FAIL.IMAGE_UPLOAD"] = "Failed to upload image.";
 
 Message.Label.Array["SYS_LAYOUT.CREATE_DATE"] = "Registration Time";
 Message.Label.Array["SYS_LAYOUT.TITLE"] = "Title";

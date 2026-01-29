@@ -18,8 +18,8 @@
 
         .gi-gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
             padding: 0 20px 40px 20px;
         }
 
@@ -51,10 +51,6 @@
 
         .gi-gallery-img-wrapper img {
             position: absolute;
-            /* top: 25%; */
-            /* left: 35%; */
-            /* width: 30%; */
-            /* height: 45%; */
             top: 0;
             left: 0;
             width: 100%;
@@ -63,20 +59,34 @@
             transition: transform 0.5s;
         }
 
-        .gi-gallery-card:hover .gi-gallery-img-wrapper img {
+        /* noImage state */
+        .gi-gallery-img-wrapper img.no-image {
+            width: 50%;
+            height: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+        }
+
+        .gi-gallery-card:hover .gi-gallery-img-wrapper img:not(.no-image) {
             transform: scale(1.05);
         }
 
+        .gi-gallery-card:hover .gi-gallery-img-wrapper img.no-image {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
         .gi-gallery-content {
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
             flex-grow: 1;
         }
 
         .gi-gallery-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #1e293b;
             line-height: 1.4;
@@ -104,10 +114,11 @@
             margin-top: auto;
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding-top: 16px;
+            justify-content: space-between;
+            gap: 4px;
+            padding-top: 12px;
             border-top: 1px solid #f1f5f9;
-            font-size: 13px;
+            font-size: 12px;
             color: #94a3b8;
         }
 
@@ -115,12 +126,21 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+
+        .gi-gallery-footer span:first-child {
+            flex: 1;
         }
 
         .gi-gallery-footer i {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--background-color-btn-blue);
             opacity: 0.7;
+            flex-shrink: 0;
         }
 
         .gi-gallery-actions {
@@ -160,6 +180,22 @@
             color: #fff;
             border-color: var(--background-color-btn-blue);
         }
+
+        .gi-gallery-row-selector {
+            width: 100px;
+            padding: 4px 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #64748b;
+            outline: none;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .gi-gallery-row-selector:focus {
+            border-color: var(--background-color-btn-blue);
+        }
     </style>
 
     <section class="gi-col-100 gi-row-100 gi-overflow-scroll">
@@ -187,10 +223,17 @@
                 </div>
             </div>
 
-            <div class="gi-gallery-header">
+            <div class="gi-gallery-header gi-flex gi-flex-justify-content-space-between gi-flex-align-items-center">
                 <div class="gi-gallery-total">
                     [Page.Message].Message.Label.Array["TOTAL"] <b id="gallery-total-count">0</b>
                 </div>
+                <select id="gallery-row-selector" class="gi-gallery-row-selector">
+                    <option value="12">12 [Page.Message].Message.Label.Array["ROW"]</option>
+                    <option value="24">24 [Page.Message].Message.Label.Array["ROW"]</option>
+                    <option value="36">36 [Page.Message].Message.Label.Array["ROW"]</option>
+                    <option value="48">48 [Page.Message].Message.Label.Array["ROW"]</option>
+                    <option value="60">60 [Page.Message].Message.Label.Array["ROW"]</option>
+                </select>
             </div>
 
             <div id="gallery-card-container" class="gi-gallery-grid">
@@ -224,7 +267,9 @@
         // 페이지 타이틀 설정
         $("#gallery-page-title").text(bbsNm);
 
-        findByGalleryList(1);
+        // 초기 목록 조회
+        const initialRange = $("#gallery-row-selector").val() || 12;
+        findByGalleryList(1, initialRange);
         clickEvent();
     }
 
@@ -244,14 +289,20 @@
 
         $("#gallery-search-input").on("keypress", function (e) {
             if (e.which == 13) {
-                findByGalleryList(1);
+                const range = $("#gallery-row-selector").val();
+                findByGalleryList(1, range);
             }
+        });
+
+        $("#gallery-row-selector").on("change", function () {
+            const range = $(this).val();
+            findByGalleryList(1, range);
         });
     }
 
     async function findByGalleryList(page, range) {
         if (!page) page = 1;
-        if (!range) range = 9;
+        if (!range) range = $("#gallery-row-selector").val() || 12;
 
         let url = "/cms/common/sysBbsBoard/findPage";
         let param = {
@@ -270,13 +321,13 @@
             const response = await axios.post(url, param);
             if (response.status === 200) {
                 let data = response.data.DATA;
-                let totalCount = response.data.TOTAL_COUNT || (response.data.TOTAL_PAGING && response.data.TOTAL_PAGING[0] ? response.data.TOTAL_PAGING[0].TOTAL_COUNT : 0);
+                let totalCount = response.data.TOTAL_COUNT ? response.data.TOTAL_COUNT[0] : 0;
+                let totalPages = response.data.TOTAL_PAGING ? response.data.TOTAL_PAGING[0] : 0;
 
                 $("#gallery-total-count").text(totalCount);
                 renderCards(data);
-                renderPagination(totalCount, page, range);
+                renderPagination(totalPages, page, range);
 
-                // 검색어 입력 칸 디자인 활성화 상태 유지
                 commonTag.inputTagReset($(".gi-input"));
             }
         } catch (error) {
@@ -295,12 +346,14 @@
 
         data.forEach(item => {
             // thumbnail 컬럼이 있으면 우선 사용, 없으면 기본 이미지
-            let imgSrc = item.thumbnail ? '/fms/fileManager/downloadByUuid?fileUuid=' + item.thumbnail : '/common/img/noImage.png';
+            let hasThumbnail = !!item.thumbnail;
+            let imgSrc = hasThumbnail ? '/fms/fileManager/downloadByUuid?fileUuid=' + item.thumbnail : '/common/img/noImage.png';
+            let imgClass = hasThumbnail ? '' : 'no-image';
 
             const card = $(`
                 <div class="gi-gallery-card">
                     <div class="gi-gallery-img-wrapper">
-                        <img src="${imgSrc}" onerror="this.src='/common/img/noImage.png'" alt="${item.title}">
+                        <img src="${imgSrc}" class="${imgClass}" onerror="this.src='/common/img/noImage.png'; this.className='no-image';" alt="${item.title}">
                     </div>
                     <div class="gi-gallery-content">
                         <div class="gi-gallery-title">${item.title || Message.Label.Array["NO_TITLE"]}</div>
@@ -322,13 +375,12 @@
         });
     }
 
-    function renderPagination(totalCount, currentPage, range) {
+    function renderPagination(totalPages, currentPage, range) {
         const container = $("#gallery-pagination");
         container.empty();
 
-        if (totalCount <= range) return;
+        if (totalPages <= 1) return;
 
-        const totalPages = Math.ceil(totalCount / range);
         const maxVisible = 5;
         let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
         let end = Math.min(totalPages, start + maxVisible - 1);

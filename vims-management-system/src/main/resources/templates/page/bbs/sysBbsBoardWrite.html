@@ -51,7 +51,7 @@
                                 <label for="board_title" class="gi-input-label" data-focus-label="true"
                                     data-required="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.TITLE"]</label>
                                 <input data-field="title" id="board_title" name="title" class="gi-input"
-                                    data-required="true" autocomplete="off" />
+                                    data-required="true" autocomplete="off" maxlength="50" />
                             </div>
 
                             <!-- 작성자명 -->
@@ -120,7 +120,8 @@
                         </button>
                         <button id="bbs-save-btn" class="gi-btn-blue gi-flex gi-flex-center gi-grid-gap-8px"
                             type="button" style="min-width: 120px; height: 42px;">
-                            <img src="/common/img/save-white.png" style="width: 18px;" alt="저장">
+                            <img src="/common/img/save-white.png" style="width: 18px;"
+                                alt="[Page.Message].Message.Label.Array['SAVE_BTN']">
                             <span id="bbs-save-btn-text">[Page.Message].Message.Label.Array["SAVE_BTN"]</span>
                         </button>
                     </div>
@@ -270,7 +271,7 @@
 
                     // Hidden Input 설정 (DB 저장용)
                     $("#board_thumbnail").val(fileInfo.file_uuid);
-                    formUtil.toast("썸네일이 업로드되었습니다.");
+                    formUtil.toast(Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_UPLOAD"]);
                 }
             }
         } catch (error) {
@@ -296,7 +297,7 @@
 
         const currentThumbnailUuid = $("#board_thumbnail").val();
         const isActive = currentThumbnailUuid === file.file_uuid;
-        const btnText = isActive ? '썸네일' : '썸네일 설정';
+        const btnText = isActive ? Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.ACTIVE"] : Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.SET"];
         const activeClass = isActive ? 'active' : '';
 
         return `
@@ -315,12 +316,12 @@
         const $btn = $(btn);
 
         // 시각적 상태 업데이트
-        $(".gi-thumbnail-btn").removeClass("active").text("썸네일 설정");
-        $btn.addClass("active").text("썸네일");
+        $(".gi-thumbnail-btn").removeClass("active").text(Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.SET"]);
+        $btn.addClass("active").text(Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL.ACTIVE"]);
 
         // 값 바인딩
         $("#board_thumbnail").val(uuid);
-        formUtil.toast("썸네일로 설정되었습니다.");
+        formUtil.toast(Message.Label.Array["SYS_BBS_BOARD.COMPLETE.THUMBNAIL_SET"]);
     };
 
     /**
@@ -346,7 +347,7 @@
 
             // 이미지가 아닌 경우 체크
             if (!/^image\//.test(file.type)) {
-                formUtil.toast("이미지 파일만 업로드 가능합니다.", "warn");
+                formUtil.toast(Message.Label.Array["SYS_BBS_BOARD.CHECK.IMAGE_ONLY"], "warn");
                 return;
             }
 
@@ -394,7 +395,7 @@
                 if (error.response && error.response.status === 413) {
                     formUtil.toast(Message.Label.Array["FAIL.UPLOAD.SIZE_EXCEEDED"], "error");
                 } else {
-                    formUtil.toast("이미지 업로드에 실패했습니다.", "error");
+                    formUtil.toast(Message.Label.Array["SYS_BBS_BOARD.FAIL.IMAGE_UPLOAD"], "error");
                 }
             }
 

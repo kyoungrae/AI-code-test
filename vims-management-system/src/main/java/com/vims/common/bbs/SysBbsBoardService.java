@@ -5,7 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -13,6 +16,32 @@ import java.util.UUID;
 public class SysBbsBoardService extends AbstractCommonService<SysBbsBoard> {
     private final SysBbsBoardMapper sysBbsBoardMapper;
     private final com.vims.fmsClient.FmsClient fmsClient;
+
+    @Override
+    public Map<String, List<?>> findPage(SysBbsBoard request) throws Exception {
+        List<SysBbsBoard> list = new ArrayList<>();
+        Map<String, List<?>> result = new HashMap<>();
+        int pagingNum;
+        int totalCount;
+        try {
+            list = selectPage(request);
+            pagingNum = selectPagingTotalNumber(request);
+            totalCount = sysBbsBoardMapper.SELECT_TOTAL_COUNT(request);
+
+            List<Integer> pagingList = new ArrayList<>();
+            pagingList.add(pagingNum);
+
+            List<Integer> countList = new ArrayList<>();
+            countList.add(totalCount);
+
+            result.put("DATA", list);
+            result.put("TOTAL_PAGING", pagingList);
+            result.put("TOTAL_COUNT", countList);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+        return result;
+    }
 
     @Override
     protected List<SysBbsBoard> selectPage(SysBbsBoard request) throws Exception {
