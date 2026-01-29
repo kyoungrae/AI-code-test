@@ -54,6 +54,7 @@ Message.Label.Array["FAIL.SAME.PASSWORD"] = "The new password is the same as the
 Message.Label.Array["FAIL.NOT.MATCHED.PASSWORD"] = "The current password does not match";
 Message.Label.Array["FAIL.COMPARE.PASSWORD"] = "Passwords do not match.";
 Message.Label.Array["FAIL.UPLOAD"] = "Upload failed";
+Message.Label.Array["FAIL.UPLOAD.SIZE_EXCEEDED"] = "File upload capacity exceeded";
 
 Message.Label.Array["CHECK.FORMTYPE"] = "Please enter in the correct format";
 Message.Label.Array["CHECK.DATA_ATTRIBUTE"] = "Please re-check the tag attributes";

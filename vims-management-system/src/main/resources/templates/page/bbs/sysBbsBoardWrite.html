@@ -285,7 +285,11 @@
                 }
             } catch (error) {
                 console.error("Image upload failed:", error);
-                formUtil.toast("이미지 업로드에 실패했습니다.", "error");
+                if (error.response && error.response.status === 413) {
+                    formUtil.toast(Message.Label.Array["FAIL.UPLOAD.SIZE_EXCEEDED"], "error");
+                } else {
+                    formUtil.toast("이미지 업로드에 실패했습니다.", "error");
+                }
             }
 
             // input 초기화 (동일 파일 재선택 가능하도록)

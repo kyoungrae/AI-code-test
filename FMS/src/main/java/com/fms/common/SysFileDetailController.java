@@ -63,6 +63,11 @@ public class SysFileDetailController extends AbstractCommonController<SysFileDet
         return sysFileDetailService.removeByFileIdAndUuid(request);
     }
 
+    @PostMapping("/removeByFileUuid")
+    public int removeByFileUuid(@RequestBody SysFileDetail request) throws Exception {
+        return sysFileDetailService.removeByFileUuid(request);
+    }
+
     @PostMapping("/updateList")
     public int updateList(@RequestBody List<SysFileDetail> fileList) throws Exception {
         return sysFileDetailService.updateList(fileList);

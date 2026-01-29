@@ -113,6 +113,38 @@ public class SysFileDetailService extends AbstractCommonService<SysFileDetail> {
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    protected int removeByFileUuid(SysFileDetail request) throws Exception {
+        try {
+            // 1. 해당 UUID의 모든 파일 상세 정보 조회
+            List<SysFileDetail> details = sysFileDetailMapper.SELECT(request);
+            if (details == null || details.isEmpty()) {
+                return 0;
+            }
+
+            int deletedRows = 0;
+
+            // 2. 물리적 파일 삭제 및 카운트
+            for (SysFileDetail fileDetail : details) {
+                deleteFile(fileDetail);
+            }
+
+            // 3. SYS_FILE_DETAIL 데이터 삭제 (UUID 기준 전체 삭제)
+            deletedRows = sysFileDetailMapper.DELETE(request);
+
+            // 4. SYS_FILE 데이터 삭제 (UUID 기준)
+            if (deletedRows > 0) {
+                var isSysFileParam = SysFile.builder().file_uuid(request.getFile_uuid()).build();
+                sysFileMapper.SYS_FILE_DELETE(isSysFileParam);
+            }
+
+            return deletedRows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException(getMessage("EXCEPTION.REMOVE"));
+        }
+    }
+
     protected void deleteFile(SysFileDetail param) throws IOException {
         if (param.getFile_path() != null && !param.getFile_path().isEmpty()) {
             File file = new File(param.getFile_path() + param.getFile_name());

@@ -687,7 +687,11 @@ class createFileUploadHTML {
                     formUtil.toast("File Upload Error", "error");
                 }
             }).catch(error => {
-                formUtil.toast("File Upload Error", "error");
+                if (error.response && error.response.status === 413) {
+                    formUtil.toast(Message.Label.Array["FAIL.UPLOAD.SIZE_EXCEEDED"], "error");
+                } else {
+                    formUtil.toast("File Upload Error", "error");
+                }
             });
 
         }
