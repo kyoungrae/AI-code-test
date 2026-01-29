@@ -64,6 +64,33 @@
                         </div>
                     </div>
 
+                    <!-- 섹션: 썸네일 (갤러리형만 표시) -->
+                    <div id="thumbnail-section-container" class="gi-form-section gi-hidden">
+                        <h3 class="gi-form-section-title">
+                            [Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.THUMBNAIL"]</h3>
+                        <div class="gi-flex gi-flex-column gi-grid-gap-10px">
+                            <div class="gi-flex gi-grid-gap-10px gi-align-center">
+                                <div id="thumbnail-preview-area" class="gi-hidden"
+                                    style="width: 200px; height: 150px; border: 1px solid #e2e8f0; padding: 4px; background: #fff; border-radius: 4px;">
+                                    <img id="thumbnail-preview-img" src=""
+                                        style="width: 100%; height: 100%; object-fit: contain;">
+                                </div>
+                                <div class="gi-input-container" style="width: 300px;">
+                                    <label for="thumbnail_preview_name" class="gi-input-label"
+                                        data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS_BOARD.THUMBNAIL"]</label>
+                                    <input type="text" class="gi-input" id="thumbnail_preview_name" data-disabled
+                                        data-field="thumbnail_name" autocomplete="off" />
+                                </div>
+                                <button type="button" class="gi-btn"
+                                    onclick="document.getElementById('thumbnail-upload-input').click()">
+                                    [Page.Message].Message.Label.Array["FILE_REGISTER_BTN"]
+                                </button>
+                                <input type="file" id="thumbnail-upload-input" style="display: none;" accept="image/*"
+                                    onchange="uploadThumbnail(this)">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- 섹션 2: 내용 작성 -->
                     <div class="gi-form-section">
                         <h3 class="gi-form-section-title">
@@ -117,7 +144,6 @@
 
         // 1. BBS 설정 확인 (파일 첨부 가능 여부 등)
         await checkBbsConfiguration();
-
         // 2. 페이지 헤더/타이틀 설정
         if (mode === 'modify') {
             $("#write-page-title").text(Message.Label.Array["SYS_BBS_BOARD.TITLE_UPDATE"]);
@@ -162,6 +188,27 @@
         commonTag.inputTagReset($(".gi-input"));
     }
 
+    /**
+     * @title 썸네일 정보 복원
+     */
+    async function restoreThumbnail(fileUuid) {
+        if (!fileUuid) return;
+        try {
+            // FileUtils의 조회 API 활용하거나 직접 호출
+            var response = await axios.post("/fms/common/file/sysFileDetail/find", { file_uuid: fileUuid });
+            if (response.status === 200 && response.data.length > 0) {
+                var file = response.data[0];
+                $("#thumbnail_preview_name").val(file.file_name);
+                const imageUrl = `/fms/fileManager/download?fileId=${encodeURIComponent(file.file_id)}`;
+                $("#thumbnail-preview-img").attr("src", imageUrl);
+                $("#thumbnail-preview-area").removeClass("gi-hidden");
+                commonTag.inputTagReset($(".gi-input"));
+            }
+        } catch (e) {
+            console.error("Thumbnail restore failed", e);
+        }
+    }
+
     async function checkBbsConfiguration() {
         let url = "/cms/common/sysBbs/find";
         try {
@@ -173,11 +220,70 @@
                     $("#file-section-container").removeClass("gi-hidden");
                     await fileUtil.activateFileCard("file-attachment-section");
                 }
+
+                // 갤러리 게시판인 경우 썸네일 섹션 표시
+                if (bbsInfo.bbs_type === 'GALLERY') {
+                    $("#thumbnail-section-container").removeClass("gi-hidden");
+                }
             }
         } catch (e) {
             console.error("BBS Config fetch failed", e);
         }
     }
+
+    /**
+     * @title 썸네일 업로드 처리
+     */
+    window.uploadThumbnail = async function (input) {
+        const file = input.files[0];
+        if (!file) return;
+
+        if (!/^image\//.test(file.type)) {
+            formUtil.toast(Message.Label.Array["CHECK.FILE_TYPE"], "warn"); // 이미지 파일만 가능합니다.
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('files', file);
+        formData.append('folder_name', 'bbs_thumbnails');
+
+        // 기존 썸네일 UUID가 있어도, 썸네일은 단일 파일이므로 새로 업로드하고 UUID를 교체하는 방식이 단순함.
+        // 혹은 같은 그룹으로 묶고 싶다면 UUID 사용. 여기서는 독립적으로 관리.
+
+        try {
+            const uploadResponse = await axios.post('/fms/fileManager/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+
+            if (uploadResponse.status === 200 && uploadResponse.data.length > 0) {
+                const fileInfo = uploadResponse.data[0];
+
+                // 파일 등록 (SYS_FILE_DETAIL)
+                const registerResponse = await axios.post('/fms/common/file/sysFileDetail/register', uploadResponse.data);
+
+                if (registerResponse.status === 200) {
+                    // UI 업데이트
+                    $("#thumbnail_preview_name").val(fileInfo.file_name);
+                    const imageUrl = `/fms/fileManager/download?fileId=${encodeURIComponent(fileInfo.file_id)}`;
+                    $("#thumbnail-preview-img").attr("src", imageUrl);
+                    $("#thumbnail-preview-area").removeClass("gi-hidden");
+
+                    // Hidden Input 설정 (DB 저장용)
+                    $("#board_thumbnail").val(fileInfo.file_uuid);
+                    formUtil.toast("썸네일이 업로드되었습니다.");
+                }
+            }
+        } catch (error) {
+            console.error("Thumbnail upload failed:", error);
+            if (error.response && error.response.status === 413) {
+                formUtil.toast(Message.Label.Array["FAIL.UPLOAD.SIZE_EXCEEDED"], "error");
+            } else {
+                formUtil.toast(Message.Label.Array["FAIL.UPLOAD"], "error");
+            }
+        }
+
+        input.value = ''; // 초기화
+    };
 
     /**
      * @title 파일 렌더링 훅 (썸네일 버튼 추가)
@@ -305,7 +411,16 @@
                 $("#board_title").val(data.title);
                 $("#board_writer").val(data.writer_name);
                 $("#board_file_uuid").val(data.file_uuid).trigger('change');
-                $("#board_thumbnail").val(data.thumbnail);
+
+                // 썸네일 복원
+                if (data.thumbnail) {
+                    $("#board_thumbnail").val(data.thumbnail);
+                    // 썸네일 이미지 정보를 가져오기 위해 FMS 호출 필요, 하지만 UUID만으로는 파일명/ID를 바로 알기 어려울 수 있음.
+                    // 간단히 미리보기만 복원하려면 UUID로 다운로드 URL을 구성하거나, 추가 조회가 필요함.
+                    // 여기서는 썸네일 UUID를 통해 파일 상세 정보를 조회하여 미리보기를 설정하는 로직을 추가.
+                    restoreThumbnail(data.thumbnail);
+                }
+
                 commonTag.inputTagReset($(".gi-input"));
                 quill.root.innerHTML = data.content;
             }

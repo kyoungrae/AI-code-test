@@ -49,6 +49,7 @@ Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"] = "Attached files in thi
 Message.Label.Array["SYS_BBS_BOARD.SECTION.BASIC"] = "Basic Information";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.CONTENT"] = "Details";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"] = "Attachments";
+Message.Label.Array["SYS_BBS_BOARD.SECTION.THUMBNAIL"] = "Thumbnail";
 
 Message.Label.Array["SYS_LAYOUT.CREATE_DATE"] = "Registration Time";
 Message.Label.Array["SYS_LAYOUT.TITLE"] = "Title";

@@ -48,8 +48,18 @@ public class SysBbsBoardService extends AbstractCommonService<SysBbsBoard> {
                     fmsClient.removeByFileUuid(fileParam);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    // 파일 삭제 실패해도 게시글 삭제는 진행할지 여부 결정.
-                    // 일반적으로는 게시글 삭제 진행. 로그만 남김.
+                }
+            }
+
+            // 3. 썸네일이 존재하면 FMS를 통해 삭제 요청
+            String thumbnailUuid = board.getThumbnail();
+            if (thumbnailUuid != null && !thumbnailUuid.isEmpty()) {
+                try {
+                    java.util.Map<String, Object> thumbParam = new java.util.HashMap<>();
+                    thumbParam.put("file_uuid", thumbnailUuid);
+                    fmsClient.removeByFileUuid(thumbParam);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

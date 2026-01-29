@@ -20,7 +20,8 @@
                 row_number() over (ORDER BY system_create_date DESC )AS no,
                 
                 bbs_mst_id, 
-                bbs_id, 
+                bbs_id,
+                bbs_type, 
                 bbs_nm, 
                 crud_auth, 
                 file_yn, 
@@ -36,6 +37,7 @@
                 
                 <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
                 <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+                <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
                 <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
                 <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
                 <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
@@ -123,6 +125,7 @@
             
             bbs_mst_id,
             bbs_id,
+            bbs_type,
             bbs_nm,
             crud_auth,
             file_yn,
@@ -138,6 +141,7 @@
             
             <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+            <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
             <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
             <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
             <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
@@ -165,6 +169,7 @@
             
               bbs_mst_id 
             , bbs_id 
+            , bbs_type
             , bbs_nm 
             , p_menu_code 
             
@@ -180,6 +185,7 @@
             
             #{bbs_mst_id}
             , #{bbs_id}
+            , #{bbs_type}
             , #{bbs_nm}
             , #{p_menu_code}
             
@@ -216,6 +222,7 @@
         <set>
             
             <if test="bbs_mst_id != null">,bbs_mst_id = #{bbs_mst_id}</if>
+            <if test="bbs_type != null">,bbs_type = #{bbs_type}</if>
             <if test="bbs_nm != null">,bbs_nm = #{bbs_nm}</if>
             <if test="p_menu_code != null">,p_menu_code = #{p_menu_code}</if>
             <if test="crud_auth != null">,crud_auth = #{crud_auth}</if>

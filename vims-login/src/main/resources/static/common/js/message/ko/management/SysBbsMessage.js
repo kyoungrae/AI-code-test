@@ -29,6 +29,7 @@ Message.Label.Array["SYS_BBS.CHECK.P_MENU_CODE"] = "상위 메뉴코드(을)를 
 
 Message.Label.Array["SYS_BBS.BBS_MST_ID"] = "게시판 마스터 ID";
 Message.Label.Array["SYS_BBS.BBS_ID"] = "게시판 ID";
+Message.Label.Array["SYS_BBS.BBS_TYPE"] = "게시판 유형";
 Message.Label.Array["SYS_BBS.BBS_NM"] = "게시판 이름";
 Message.Label.Array["SYS_BBS.CRUD_AUTH"] = "권한";
 Message.Label.Array["SYS_BBS.FILE_YN"] = "파일첨부 가능 여부";

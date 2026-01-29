@@ -42,6 +42,12 @@ public class FileManagerController {
     public void downloadFile(@RequestParam("fileId") String fileId, HttpServletResponse response) throws Exception {
         fileManagerService.fileDownload(fileId, response);
     }
+
+    @GetMapping("/downloadByUuid")
+    public void downloadByUuid(@RequestParam("fileUuid") String fileUuid, HttpServletResponse response)
+            throws Exception {
+        fileManagerService.fileDownloadByUuid(fileUuid, response);
+    }
     // @PostMapping("/downloadZipFile")
     // public void downloadZipFile(@RequestBody List<Map<String,Object>> param ,
     // HttpServletResponse response) throws Exception{

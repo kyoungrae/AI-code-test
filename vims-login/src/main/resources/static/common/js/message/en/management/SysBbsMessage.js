@@ -29,6 +29,7 @@ Message.Label.Array["SYS_BBS.CHECK.P_MENU_CODE"] = "Please enter parent menu cod
 
 Message.Label.Array["SYS_BBS.BBS_MST_ID"] = "Board Master ID";
 Message.Label.Array["SYS_BBS.BBS_ID"] = "Board ID";
+Message.Label.Array["SYS_BBS.BBS_TYPE"] = "Board Type";
 Message.Label.Array["SYS_BBS.BBS_NM"] = "Board Name";
 Message.Label.Array["SYS_BBS.CRUD_AUTH"] = "Permissions";
 Message.Label.Array["SYS_BBS.FILE_YN"] = "File Attachments Allowed";

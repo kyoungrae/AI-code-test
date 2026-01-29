@@ -71,6 +71,13 @@
             <span data-field="bbs_mst_id" class="gi-span" data-focus-span-text-align="default"></span>
           </div>
         </div>
+        <div class="gi-flex gi-grid-gap-16px">
+          <div class="gi-span-container gi-flex-1">
+            <span class="gi-span-label"
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS.BBS_TYPE"]</span>
+            <span data-field="bbs_type" class="gi-span" data-focus-span-text-align="default"></span>
+          </div>
+        </div>
 
         <div class="gi-flex gi-grid-gap-16px">
           <div class="gi-span-container gi-flex-1">
@@ -130,7 +137,7 @@
       <form id="sysBbsRegisterForm">
         <div class="gi-flex gi-flex-column gi-grid-gap-16px">
 
-          <div class="gi-flex gi-grid-gap-16px gi-hidden">
+          <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
               <label for="register_bbs_mst_id" class="gi-input-label" data-focus-label="true"
                 data-required="true">[Page.Message].Message.Label.Array["SYS_BBS.BBS_MST_ID"]</label>
@@ -138,7 +145,14 @@
                 data-required="true" autocomplete="off" />
             </div>
           </div>
-
+          <div class="gi-flex gi-grid-gap-16px">
+            <div class="gi-input-container gi-flex-1">
+              <label for="register_bbs_type" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS.BBS_TYPE"]</label>
+              <input data-disabled data-field="bbs_type" id="register_bbs_type" name="bbs_type" class="gi-input"
+                data-required="true" autocomplete="off" />
+            </div>
+          </div>
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
               <label for="register_bbs_nm" class="gi-input-label" data-focus-label="true"
@@ -217,6 +231,14 @@
                 data-required="true">[Page.Message].Message.Label.Array["SYS_BBS.BBS_MST_ID"]</label>
               <input data-disabled data-field="bbs_mst_id" id="update_bbs_mst_id" name="update_bbs_mst_id"
                 class="gi-input" data-required="true" autocomplete="off" />
+            </div>
+          </div>
+          <div class="gi-flex gi-grid-gap-16px gi-hidden">
+            <div class="gi-input-container gi-flex-1">
+              <label for="update_bbs_type" class="gi-input-label" data-focus-label="true"
+                data-required="true">[Page.Message].Message.Label.Array["SYS_BBS.BBS_TYPE"]</label>
+              <input data-disabled data-field="bbs_type" id="update_bbs_type" name="update_bbs_type" class="gi-input"
+                data-required="true" autocomplete="off" />
             </div>
           </div>
 
@@ -319,6 +341,7 @@
   var MENU_TREE_POPUP_ID = "menu_tree_popup";
   var MENU_TREE_GRID_ID = "menu_tree_grid";
   var currentBbsMstId = ""; // To store the received bbs_id from MstList
+  var currentBbsType = ""; // To store the received bbs_type from MstList
   var targetMenuInputId = ""; // Stores which input to update (register or update)
 
   init();
@@ -331,6 +354,7 @@
       let receivedData = new Session().getItem("DATA");
       if (receivedData && receivedData.bbs_mst_id) {
         currentBbsMstId = receivedData.bbs_mst_id;
+        currentBbsType = receivedData.bbs_type;
         // 라벨 세팅
         $("#page-sysBbs-title").text(Message.Label.Array["SYS_BBS.TITLE_LIST"]);
         $("#page-sysBbs-subtitle").text(Message.Label.Array["SYS_BBS.SUB_TITLE_LIST"]);
@@ -361,6 +385,7 @@
       // 등록 팝업 열릴 때 bbs_mst_id 자동 세팅
       if (currentBbsMstId) {
         $("#register_bbs_mst_id").val(currentBbsMstId);
+        $("#register_bbs_type").val(currentBbsType);
       }
 
 
@@ -396,7 +421,6 @@
     //추가버튼 클릭 이벤트
     $("#sysBbs-insert-btn").click(function () {
       popup.open(REGISTER_POPUP_ID);
-      console.log("register_p_menu_code : " + $("#register_p_menu_code").val());
       $("#" + REGISTER_POPUP_CONFIRM_BTN).off("click.registerPopupConfirmBtnClickEventHandler")
         .on("click.registerPopupConfirmBtnClickEventHandler", registerPopupConfirmBtnClickEventHandler);
       function registerPopupConfirmBtnClickEventHandler() {
@@ -463,6 +487,7 @@
             { HEADER: Message.Label.Array["SYS_BBS.FILE_YN"], ID: 'file_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.REPLY_YN"], ID: 'reply_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.P_MENU_CODE"], ID: 'p_menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS.BBS_TYPE"], ID: 'bbs_type', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.SYSTEM_CREATE_USERID"], ID: 'system_create_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.SYSTEM_CREATE_DATE"], ID: 'system_create_date', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_USERID"], ID: 'system_update_userid', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -552,6 +577,7 @@
       //console.log(data);
       let param = {
         bbs_mst_id: currentBbsMstId, // Force use current context ID
+        bbs_type: data.bbs_type,
         bbs_nm: data.bbs_nm,
         crud_auth: data.crud_auth,
         file_yn: data.file_yn,
@@ -589,6 +615,7 @@
       //console.log(data);
       let param = {
         bbs_id: data.bbs_id,
+        bbs_type: data.bbs_type,
         bbs_nm: data.bbs_nm,
         crud_auth: data.crud_auth,
         file_yn: data.file_yn,

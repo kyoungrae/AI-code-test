@@ -28,8 +28,9 @@ Message.Label.Array["SYS_BBS.CHECK.SYSTEM_UPDATE_DATE"] = "Системд зас
 Message.Label.Array["SYS_BBS.CHECK.P_MENU_CODE"] = "Дээд цэсний кодыг оруулна уу";
 
 Message.Label.Array["SYS_BBS.BBS_MST_ID"] = "Зарлалын самбарын Мастер ID";
-Message.Label.Array["SYS_BBS.BBS_ID"] = "Зарлалын самбарын ID";
-Message.Label.Array["SYS_BBS.BBS_NM"] = "Зарлалын самбарын нэр";
+Message.Label.Array["SYS_BBS.BBS_ID"] = "Зарлалын самбар ID";
+Message.Label.Array["SYS_BBS.BBS_TYPE"] = "Зарлалын самбарын төрөл";
+Message.Label.Array["SYS_BBS.BBS_NM"] = "Зарлалын самбар нэр";
 Message.Label.Array["SYS_BBS.CRUD_AUTH"] = "Эрх";
 Message.Label.Array["SYS_BBS.FILE_YN"] = "Файл хавсаргах эсэх";
 Message.Label.Array["SYS_BBS.REPLY_YN"] = "Сэтгэгдэл бичих эсэх";

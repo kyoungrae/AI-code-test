@@ -51,10 +51,14 @@
 
         .gi-gallery-img-wrapper img {
             position: absolute;
-            top: 25%;
-            left: 35%;
-            width: 30%;
-            height: 45%;
+            /* top: 25%; */
+            /* left: 35%; */
+            /* width: 30%; */
+            /* height: 45%; */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
         }
@@ -291,7 +295,7 @@
 
         data.forEach(item => {
             // thumbnail 컬럼이 있으면 우선 사용, 없으면 기본 이미지
-            let imgSrc = item.thumbnail ? '/fms/common/file/download/' + item.thumbnail : '/common/img/noImage.png';
+            let imgSrc = item.thumbnail ? '/fms/fileManager/downloadByUuid?fileUuid=' + item.thumbnail : '/common/img/noImage.png';
 
             const card = $(`
                 <div class="gi-gallery-card">

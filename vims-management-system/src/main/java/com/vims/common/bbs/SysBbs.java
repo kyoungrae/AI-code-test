@@ -35,6 +35,7 @@ public class SysBbs extends Common {
      * </pre>
      */
     private String bbs_id;
+    private String bbs_type; // 게시판 타입 (GALLERY, NOTICE, etc.)
 
     /***
      * <pre>

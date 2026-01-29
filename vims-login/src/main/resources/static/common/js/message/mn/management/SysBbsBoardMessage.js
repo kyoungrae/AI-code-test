@@ -38,6 +38,7 @@ Message.Label.Array["SYS_BBS_BOARD.SYSTEM_CREATE_USERID"] = "Системд бү
 Message.Label.Array["SYS_BBS_BOARD.SYSTEM_CREATE_DATE"] = "Системд бүртгэсэн огноо, цаг";
 Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_USERID"] = "Системд зассан хэрэглэгчийн ID";
 Message.Label.Array["SYS_BBS_BOARD.SYSTEM_UPDATE_DATE"] = "Системд зассан огноо, цаг";
+Message.Label.Array["SYS_BBS_BOARD.SECTION.THUMBNAIL"] = "Зураг";
 
 Message.Label.Array["SYS_BBS_BOARD.WRITE"] = "Бичлэг оруулах";
 Message.Label.Array["SYS_BBS_BOARD.DETAIL"] = "Бичлэгийн дэлгэрэнгүй";

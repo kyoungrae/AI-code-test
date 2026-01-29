@@ -97,6 +97,26 @@ public class FileManagerService extends FileProcessManager {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
+
+    public void fileDownloadByUuid(String file_uuid, HttpServletResponse response) throws Exception {
+        SysFileDetail searchParam = new SysFileDetail();
+        searchParam.setFile_uuid(file_uuid);
+        List<SysFileDetail> details = sysFileDetailMapper.SELECT(searchParam);
+
+        if (details != null && !details.isEmpty()) {
+            // Get the first file if multiple exist for the UUID
+            SysFileDetail detail = details.get(0);
+            Map<String, Object> param = new HashMap<>();
+            param.put("file_path", detail.getFile_path());
+            param.put("file_id", detail.getFile_id());
+            param.put("file_name", detail.getFile_name());
+            param.put("file_extension", detail.getFile_extension());
+
+            downloadFile(param, response);
+        } else {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
     // public void zipFileDownload(List<Map<String,Object>> params,
     // HttpServletResponse response) throws Exception{
     // String zipFileName = (String) params.get(0).get("file_zip_file_name");

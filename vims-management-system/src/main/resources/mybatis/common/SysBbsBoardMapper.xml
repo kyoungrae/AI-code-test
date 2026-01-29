@@ -49,6 +49,14 @@
         </where>
     </select>
 
+    <select id="SELECT_TOTAL_COUNT" resultType="int">
+        SELECT COUNT(*) FROM SYS_BBS_BOARD
+        <where>
+            <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
+            <if test="_title != null and _title != ''">AND title LIKE CONCAT('%', #{_title}, '%')</if>
+        </where>
+    </select>
+
     <select id="SELECT" resultType="com.vims.common.bbs.SysBbsBoard">
         SELECT
             board_id, bbs_id, title, content, writer_name, hit_count, file_uuid, thumbnail,

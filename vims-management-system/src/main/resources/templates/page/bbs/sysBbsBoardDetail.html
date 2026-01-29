@@ -32,6 +32,20 @@
                         </div>
                     </div>
                 </div>
+                <!-- 섹션: 썸네일 (갤러리용) -->
+                <div id="thumbnail-section-container" class="gi-form-section gi-hidden">
+                    <h3 class="gi-form-section-title">
+                        [Page.Message].Message.Label.Array["SYS_BBS_BOARD.SECTION.THUMBNAIL"]</h3>
+                    <div class="gi-flex gi-flex-column gi-grid-gap-10px">
+                        <div class="gi-flex gi-grid-gap-10px gi-align-center">
+                            <div id="detail-thumbnail-area"
+                                style="width: 200px; height: 150px; border: 1px solid #e2e8f0; padding: 4px; background: #fff; border-radius: 4px;">
+                                <img id="detail-thumbnail-img" src="/common/img/noImage.png"
+                                    style="width: 100%; height: 100%; object-fit: contain;" alt="Thumbnail">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- 섹션 2: 상세 내용 -->
                 <div class="gi-form-section">
@@ -104,6 +118,9 @@
             const response = await axios.post(url, { bbs_id: bbsId });
             if (response.status === 200 && response.data.length > 0) {
                 let bbsInfo = response.data[0];
+                if (bbsInfo.bbs_type === 'GALLERY') {
+                    $("#thumbnail-section-container").removeClass("gi-hidden");
+                }
                 if (bbsInfo.file_yn === '1') {
                     $("#file-section-container").removeClass("gi-hidden");
                 }
@@ -149,6 +166,11 @@
             // 첨부 파일 영역: 데이터 바인딩
             if (data.file_uuid) {
                 await fileUtil.bindFileUuid("detail-file-section", data.file_uuid);
+            }
+
+            // 썸네일 노드 업데이트
+            if (data.thumbnail) {
+                $("#detail-thumbnail-img").attr("src", '/fms/fileManager/downloadByUuid?fileUuid=' + data.thumbnail);
             }
         } else {
             formUtil.toast(Message.Label.Array["FAIL.SELECT_NO_DATA"], "error");
