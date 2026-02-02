@@ -53,6 +53,7 @@ class PageInit {
         new GiMaxLengthCheck();
         new GiMaxLengthNumberCheck();
         new inputTypeCheckBoxInitSetting();
+        new GiToggle();
         new checkInputOnlyType();
         new checkPriceType();
         new OnlyNumericWithoutLeadingZero();
@@ -226,13 +227,16 @@ class DataBinding {
                             } else {
                                 $(items).attr("data-required", false);
                             }
-                        } else if ("checkbox" === items.type) {
+                        } else if ("checkbox" === items.type || "toggle" === items.type) {
                             if ("1" === data[field]) {
-                                $(items).attr("checked", true);
-                                $(items).val("1");
+                                $(items).prop("checked", true);
+                                $(items).val("1").trigger("change");
+                            } else {
+                                $(items).prop("checked", false);
+                                $(items).val("0").trigger("change");
                             }
                         } else {
-                            nodeName ? $(items).text(data[field]) : $(items).val(data[field]);
+                            nodeName ? $(items).text(data[field]) : $(items).val(data[field]).trigger("change");
                             // selectBox setting 영역
                             let $next = $(items).next();
                             let isSelectBox = $next.is("[data-selectbox-field], [data-select], [gi-selectbox]");
@@ -441,17 +445,17 @@ class DataBinding {
                     } else if (item.nodeName === "INPUT") {
                         let $input = $(item);
 
-                        // 체크박스 처리
-                        if (item.type === "checkbox") {
+                        // 체크박스 및 토글 처리
+                        if (item.type === "checkbox" || item.type === "toggle") {
                             if (value === "1" || value === 1 || value === true || value === "true") {
                                 $input.prop("checked", true);
-                                $input.val("1");
+                                $input.val("1").trigger("change");
                             } else {
                                 $input.prop("checked", false);
-                                $input.val("0");
+                                $input.val("0").trigger("change");
                             }
                         } else {
-                            $input.val(value);
+                            $input.val(value).trigger("change");
                         }
 
                         // setSelectOption/Com 으로 생성된 동적 셀렉트 박스 처리

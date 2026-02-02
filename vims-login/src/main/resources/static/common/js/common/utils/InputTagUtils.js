@@ -305,3 +305,91 @@ CommonTag.prototype.inputDisabledUpdateAble = function (tag) {
         }
     }
 }
+
+/**
+ * @title : 공통 토글 스위치 생성
+ * @see : input[gi-toggle] 또는 input[type="toggle"]
+ * @text : 활성화 시 "1", 비활성화 시 "0" 값을 가짐
+ * @writer : 이경태
+ */
+class GiToggle {
+    static defaultSelector = 'input[gi-toggle], input[type="toggle"]';
+
+    constructor() {
+        this.selector = GiToggle.defaultSelector;
+        this.initialize();
+    }
+
+    initialize() {
+        const inputs = $(this.selector);
+        inputs.each((i, input) => {
+            this.createToggleUI($(input));
+        });
+    }
+
+    createToggleUI($input) {
+        // 이미 처리된 경우 무시
+        if ($input.parent().hasClass('gi-toggle-switch')) return;
+
+        const id = $input.attr('id');
+        const name = $input.attr('name');
+        const initialValue = $input.val();
+        const isChecked = initialValue === "1";
+
+        // 기존 input 숨기기
+        $input.addClass('gi-hidden');
+
+        // 토글 UI 생성
+        const $toggleContainer = $('<label class="gi-toggle-switch"></label>');
+        const $checkbox = $('<input type="checkbox">');
+        const $slider = $('<span class="gi-toggle-slider"></span>');
+
+        $checkbox.prop('checked', isChecked);
+
+        // 원본 input 아이디와 연결 (label 클릭 시 동작 위해)
+        if (id) {
+            $checkbox.attr('id', id + '_toggle_checkbox');
+        }
+
+        $toggleContainer.append($checkbox).append($slider);
+
+        // input의 부모(container)를 찾아서 그 안에 배치하거나 input 바로 뒤에 배치
+        let $container = $input.closest('.gi-input-container');
+        if ($container.length > 0) {
+            // container 내부 스타일 조정
+            $container.css({
+                'background-color': 'transparent',
+                'border': 'none',
+                'box-shadow': 'none'
+            });
+            $input.after($toggleContainer);
+        } else {
+            $input.after($toggleContainer);
+        }
+
+        // 이벤트 연결
+        $checkbox.on('change', () => {
+            const val = $checkbox.is(':checked') ? "1" : "0";
+            $input.val(val).trigger('change');
+        });
+
+        // 원본 input의 값이 외부(dataBinding 등)에서 변경될 때 동기화
+        $input.on('change.giToggleSync', (e) => {
+            // 순환 호출 방지 (checkbox change -> input set -> input change -> checkbox set)
+            const newVal = $input.val();
+            const shouldBeChecked = newVal === "1";
+            if ($checkbox.prop('checked') !== shouldBeChecked) {
+                $checkbox.prop('checked', shouldBeChecked);
+            }
+        });
+
+        // 만약 label[for="id"] 가 있다면 이 checkbox와 연결해줌
+        if (id) {
+            $(`label[for="${id}"]`).on('click', (e) => {
+                e.preventDefault();
+                $checkbox.trigger('click');
+            });
+        }
+    }
+}
+
