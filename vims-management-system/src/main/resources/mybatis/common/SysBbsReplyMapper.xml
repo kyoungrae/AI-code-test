@@ -104,6 +104,7 @@
     </update>
 
     <delete id="DELETE">
-        DELETE FROM SYS_BBS_REPLY WHERE reply_id = #{reply_id}
+        DELETE FROM SYS_BBS_REPLY 
+        WHERE reply_id = #{reply_id} OR parent_reply_id = #{reply_id}
     </delete>
 </mapper>

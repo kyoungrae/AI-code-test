@@ -46,10 +46,10 @@ public class SysBbs extends Common {
 
     /***
      * <pre>
-     *  crud_auth : 권한
+     *  bbs_manager : 게시판 관리자
      * </pre>
      */
-    private String crud_auth;
+    private String bbs_manager;
 
     /***
      * <pre>
@@ -134,11 +134,11 @@ public class SysBbs extends Common {
 
     /***
      * <pre>
-     *  crud_auth : 권한
+     *  bbs_manager : 게시판 관리자
      * </pre>
      */
     @Transient
-    private String _crud_auth;
+    private String _bbs_manager;
 
     /***
      * <pre>

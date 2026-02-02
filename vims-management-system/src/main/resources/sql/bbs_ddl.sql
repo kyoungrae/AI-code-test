@@ -16,7 +16,7 @@ CREATE TABLE SYS_BBS (
     bbs_mst_id           VARCHAR(50)   NOT NULL COMMENT '게시판 마스터 ID (FK)',
     bbs_nm               VARCHAR(100)  NOT NULL COMMENT '게시판 이름',
     p_menu_code          VARCHAR(50)   NULL     COMMENT '상위 메뉴 코드 (매핑용)',
-    crud_auth            VARCHAR(255)  NULL     COMMENT '권한 설정 (기능 확장용)',
+    bbs_manager          VARCHAR(255)  NULL     COMMENT '게시판 관리자',
     file_yn              CHAR(1)       DEFAULT '0' COMMENT '파일 첨부 여부 (1:Y, 0:N)',
     reply_yn             CHAR(1)       DEFAULT '0' COMMENT '댓글 사용 여부 (1:Y, 0:N)',
     system_create_userid VARCHAR(50)   NULL     COMMENT '시스템 등록자 ID',

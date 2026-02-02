@@ -23,7 +23,7 @@
                 bbs_id,
                 bbs_type, 
                 bbs_nm, 
-                crud_auth, 
+                bbs_manager, 
                 file_yn, 
                 reply_yn, 
                 system_create_userid, 
@@ -39,7 +39,7 @@
                 <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
                 <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
                 <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
-                <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
+                <if test="bbs_manager != null and bbs_manager != ''">AND bbs_manager = #{bbs_manager}</if>
                 <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
                 <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
                 <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
@@ -50,7 +50,7 @@
                 <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
                 <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
                 <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
-                <if test="_crud_auth != null and _crud_auth != ''">AND crud_auth LIKE CONCAT('%', #{_crud_auth}, '%')</if>
+                <if test="_bbs_manager != null and _bbs_manager != ''">AND bbs_manager LIKE CONCAT('%', #{_bbs_manager}, '%')</if>
                 <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
                 <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
                 <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
@@ -85,7 +85,7 @@
             <if test="bbs_mst_id != null and bbs_mst_id != ''">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
             <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
-            <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
+            <if test="bbs_manager != null and bbs_manager != ''">AND bbs_manager = #{bbs_manager}</if>
             <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
             <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
@@ -96,7 +96,7 @@
             <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
             <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
             <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
-            <if test="_crud_auth != null and _crud_auth != ''">AND crud_auth LIKE CONCAT('%', #{_crud_auth}, '%')</if>
+            <if test="_bbs_manager != null and _bbs_manager != ''">AND bbs_manager LIKE CONCAT('%', #{_bbs_manager}, '%')</if>
             <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
             <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
@@ -127,7 +127,7 @@
             bbs_id,
             bbs_type,
             bbs_nm,
-            crud_auth,
+            bbs_manager,
             file_yn,
             reply_yn,
             system_create_userid,
@@ -143,7 +143,7 @@
             <if test="bbs_id != null and bbs_id != ''">AND bbs_id = #{bbs_id}</if>
             <if test="bbs_type != null and bbs_type != ''">AND bbs_type = #{bbs_type}</if>
             <if test="bbs_nm != null and bbs_nm != ''">AND bbs_nm = #{bbs_nm}</if>
-            <if test="crud_auth != null and crud_auth != ''">AND crud_auth = #{crud_auth}</if>
+            <if test="bbs_manager != null and bbs_manager != ''">AND bbs_manager = #{bbs_manager}</if>
             <if test="file_yn != null and file_yn != ''">AND file_yn = #{file_yn}</if>
             <if test="reply_yn != null and reply_yn != ''">AND reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null and system_create_userid != ''">AND system_create_userid = #{system_create_userid}</if>
@@ -154,7 +154,7 @@
             <if test="_bbs_mst_id != null and _bbs_mst_id != ''">AND bbs_mst_id LIKE CONCAT('%', #{_bbs_mst_id}, '%')</if>
             <if test="_bbs_id != null and _bbs_id != ''">AND bbs_id LIKE CONCAT('%', #{_bbs_id}, '%')</if>
             <if test="_bbs_nm != null and _bbs_nm != ''">AND bbs_nm LIKE CONCAT('%', #{_bbs_nm}, '%')</if>
-            <if test="_crud_auth != null and _crud_auth != ''">AND crud_auth LIKE CONCAT('%', #{_crud_auth}, '%')</if>
+            <if test="_bbs_manager != null and _bbs_manager != ''">AND bbs_manager LIKE CONCAT('%', #{_bbs_manager}, '%')</if>
             <if test="_file_yn != null and _file_yn != ''">AND file_yn LIKE CONCAT('%', #{_file_yn}, '%')</if>
             <if test="_reply_yn != null and _reply_yn != ''">AND reply_yn LIKE CONCAT('%', #{_reply_yn}, '%')</if>
             <if test="_system_create_userid != null and _system_create_userid != ''">AND system_create_userid LIKE CONCAT('%', #{_system_create_userid}, '%')</if>
@@ -173,7 +173,7 @@
             , bbs_nm 
             , p_menu_code 
             
-            <if test="crud_auth != null">, crud_auth</if>
+            <if test="bbs_manager != null">, bbs_manager</if>
             <if test="file_yn != null">, file_yn</if>
             <if test="reply_yn != null">, reply_yn</if>
             <if test="system_create_userid != null">, system_create_userid</if>
@@ -189,7 +189,7 @@
             , #{bbs_nm}
             , #{p_menu_code}
             
-            <if test="crud_auth != null">, #{crud_auth}</if>
+            <if test="bbs_manager != null">, #{bbs_manager}</if>
             <if test="file_yn != null">, #{file_yn}</if>
             <if test="reply_yn != null">, #{reply_yn}</if>
             <if test="system_create_userid != null">, #{system_create_userid}</if>
@@ -207,7 +207,7 @@
             
             <if test="bbs_mst_id != null">AND bbs_mst_id = #{bbs_mst_id}</if>
             <if test="bbs_nm != null">AND bbs_nm = #{bbs_nm}</if>
-            <if test="crud_auth != null">AND crud_auth = #{crud_auth}</if>
+            <if test="bbs_manager != null">AND bbs_manager = #{bbs_manager}</if>
             <if test="file_yn != null">AND file_yn = #{file_yn}</if>
             <if test="reply_yn != null">AND reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null">AND system_create_userid = #{system_create_userid}</if>
@@ -225,7 +225,7 @@
             <if test="bbs_type != null">,bbs_type = #{bbs_type}</if>
             <if test="bbs_nm != null">,bbs_nm = #{bbs_nm}</if>
             <if test="p_menu_code != null">,p_menu_code = #{p_menu_code}</if>
-            <if test="crud_auth != null">,crud_auth = #{crud_auth}</if>
+            <if test="bbs_manager != null">,bbs_manager = #{bbs_manager}</if>
             <if test="file_yn != null">,file_yn = #{file_yn}</if>
             <if test="reply_yn != null">,reply_yn = #{reply_yn}</if>
             <if test="system_create_userid != null">,system_create_userid = #{system_create_userid}</if>

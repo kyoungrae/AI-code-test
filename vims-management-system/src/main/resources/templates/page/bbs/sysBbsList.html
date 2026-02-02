@@ -98,8 +98,8 @@
         <div class="gi-flex gi-grid-gap-16px">
           <div class="gi-span-container gi-flex-1">
             <span class="gi-span-label"
-              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS.CRUD_AUTH"]</span>
-            <span data-field="crud_auth" class="gi-span" data-focus-span-text-align="default"></span>
+              data-focus-label="true">[Page.Message].Message.Label.Array["SYS_BBS.BBS_MANAGER"]</span>
+            <span data-field="bbs_manager" class="gi-span" data-focus-span-text-align="default"></span>
           </div>
         </div>
 
@@ -179,10 +179,14 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="register_crud_auth" class="gi-input-label" data-focus-label="true"
-                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS.CRUD_AUTH"]</label>
-              <input data-field="crud_auth" id="register_crud_auth" name="crud_auth" class="gi-input"
-                data-required="false" autocomplete="off" />
+              <label for="register_bbs_manager" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS.BBS_MANAGER"]</label>
+              <input data-disabled data-field="bbs_manager" id="register_bbs_manager" name="bbs_manager"
+                class="gi-input" data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-flex gi-grid-gap-5px">
+              <button type="button" class="gi-btn-blue" id="register-bbs-manager-search-btn"
+                style="min-width: 80px;">[Page.Message].Message.Label.Array["SELECT_BTN"]</button>
             </div>
           </div>
 
@@ -265,8 +269,8 @@
               <div class="gi-flex gi-grid-gap-5px">
                 <label for="update_p_menu_code" class="gi-input-label" data-focus-label="true"
                   data-required="true">[Page.Message].Message.Label.Array["SYS_MENU.TOP_MENU_CODE"]</label>
-                <input data-field="p_menu_code" id="update_p_menu_code" name="p_menu_code" class="gi-input gi-flex-1"
-                  data-required="true" readonly autocomplete="off" />
+                <input data-disabled data-field="p_menu_code" id="update_p_menu_code" name="p_menu_code"
+                  class="gi-input gi-flex-1" data-required="true" readonly autocomplete="off" />
               </div>
             </div>
             <div class="gi-flex gi-grid-gap-5px">
@@ -277,10 +281,14 @@
 
           <div class="gi-flex gi-grid-gap-16px">
             <div class="gi-input-container gi-flex-1">
-              <label for="update_crud_auth" class="gi-input-label" data-focus-label="true"
-                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS.CRUD_AUTH"]</label>
-              <input data-field="crud_auth" id="update_crud_auth" name="update_crud_auth" class="gi-input"
-                data-required="false" autocomplete="off" />
+              <label for="update_bbs_manager" class="gi-input-label" data-focus-label="true"
+                data-required="false">[Page.Message].Message.Label.Array["SYS_BBS.BBS_MANAGER"]</label>
+              <input data-disabled data-field="bbs_manager" id="update_bbs_manager" name="update_bbs_manager"
+                class="gi-input" data-required="false" autocomplete="off" />
+            </div>
+            <div class="gi-flex gi-grid-gap-5px">
+              <button type="button" class="gi-btn-blue" id="update-bbs-manager-search-btn"
+                style="min-width: 80px;">[Page.Message].Message.Label.Array["SELECT_BTN"]</button>
             </div>
           </div>
 
@@ -483,7 +491,7 @@
             { HEADER: Message.Label.Array["SYS_BBS.BBS_MST_ID"], ID: 'bbs_mst_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["SYS_BBS.BBS_ID"], ID: 'bbs_id', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
             { HEADER: Message.Label.Array["SYS_BBS.BBS_NM"], ID: 'bbs_nm', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: false },
-            { HEADER: Message.Label.Array["SYS_BBS.CRUD_AUTH"], ID: 'crud_auth', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
+            { HEADER: Message.Label.Array["SYS_BBS.BBS_MANAGER"], ID: 'bbs_manager', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.FILE_YN"], ID: 'file_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.REPLY_YN"], ID: 'reply_yn', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
             { HEADER: Message.Label.Array["SYS_BBS.P_MENU_CODE"], ID: 'p_menu_code', WIDTH: '40', TYPE: 'text', FONT_SIZE: '12px', TEXT_ALIGN: 'center', HIDDEN: true },
@@ -579,7 +587,7 @@
         bbs_mst_id: currentBbsMstId, // Force use current context ID
         bbs_type: data.bbs_type,
         bbs_nm: data.bbs_nm,
-        crud_auth: data.crud_auth,
+        bbs_manager: data.bbs_manager,
         file_yn: data.file_yn,
         reply_yn: data.reply_yn,
         p_menu_code: data.p_menu_code
@@ -617,7 +625,7 @@
         bbs_id: data.bbs_id,
         bbs_type: data.bbs_type,
         bbs_nm: data.bbs_nm,
-        crud_auth: data.crud_auth,
+        bbs_manager: data.bbs_manager,
         file_yn: data.file_yn,
         reply_yn: data.reply_yn,
         p_menu_code: data.p_menu_code
@@ -646,7 +654,7 @@
       bbs_mst_id: data.bbs_mst_id,
       bbs_id: data.bbs_id,
       bbs_nm: data.bbs_nm,
-      crud_auth: data.crud_auth,
+      bbs_manager: data.bbs_manager,
       file_yn: data.file_yn,
       reply_yn: data.reply_yn
     };
