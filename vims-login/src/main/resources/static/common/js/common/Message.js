@@ -85,6 +85,8 @@ Message.Label.Array["SIDE_BTN"] = "사이드";
 Message.Label.Array["RESET_PASSWORD_BTN"] = "비밀번호 초기화";
 Message.Label.Array["REDIRECT_BTN"] = "이동";
 Message.Label.Array["WRITE_BTN"] = "글쓰기";
+Message.Label.Array["CONFIRM_BTN"] = "확인";
+
 
 Message.Label.Array["TOTAL"] = "전체";
 Message.Label.Array["CASE"] = "건";

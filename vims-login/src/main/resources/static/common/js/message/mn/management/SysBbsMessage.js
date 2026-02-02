@@ -20,10 +20,10 @@ Message.Label.Array["SYS_BBS.CHECK.BBS_ID"] = "Зарлалын самбарын
 Message.Label.Array["SYS_BBS.CHECK.BBS_NM"] = "Зарлалын самбарын нэрийг оруулна уу";
 Message.Label.Array["SYS_BBS.CHECK.BBS_MANAGER"] = "Менежерыг оруулна уу";
 Message.Label.Array["SYS_BBS.CHECK.FILE_YN"] = "Файл хавсаргах боломжтой эсэхийг оруулна уу";
-Message.Label.Array["SYS_BBS.CHECK.REPLY_YN"] = "Сэтгэгдэл бичих боломжтой эсэхийг оруулна уу";
+Message.Label.Array["SYS_BBS.CHECK.REPLY_YN"] = "Сэтгэгдэл бичих боломжтой эсэхий그 оруулна уу";
 Message.Label.Array["SYS_BBS.CHECK.SYSTEM_CREATE_USERID"] = "Системд үүсгэсэн хэрэглэгчийн ID-г оруулна уу";
 Message.Label.Array["SYS_BBS.CHECK.SYSTEM_CREATE_DATE"] = "Системд бүртгэсэн огноо, цагийг оруулна уу";
-Message.Label.Array["SYS_BBS.CHECK.SYSTEM_UPDATE_USERID"] = "Системд зассан хэрэглэгчийн ID-г оруулна уу";
+Message.Label.Array["SYS_BBS.CHECK.SYSTEM_UPDATE_USERID"] = "Системд зассан хэрэглэгчийн ID-г оруул나 уу";
 Message.Label.Array["SYS_BBS.CHECK.SYSTEM_UPDATE_DATE"] = "Системд зассан огноо, цагийг оруулна уу";
 Message.Label.Array["SYS_BBS.CHECK.P_MENU_CODE"] = "Дээд цэсний кодыг оруулна уу";
 
@@ -41,3 +41,6 @@ Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_DATE"] = "Системд зассан
 Message.Label.Array["SYS_BBS.P_MENU_CODE"] = "Дээд цэсний код";
 Message.Label.Array["SYS_BBS.ACCESS_RIGHTS_REQUIRED"] = "[Хандах эрхийг тохируулах шаардлагатай]";
 Message.Label.Array["SYS_BBS.TITLE"] = "Хэлэлцүүлэг";
+Message.Label.Array["SYS_BBS.SELECT_BBS_MANAGER"] = "Самбарын менежер сонгох";
+Message.Label.Array["SYS_BBS.BBS_MANAGER_GROUP_LIST"] = "Самбарын менежерийн бүлгийн жагсаалт";
+

@@ -85,6 +85,8 @@ Message.Label.Array["SIDE_BTN"] = "Side";
 Message.Label.Array["RESET_PASSWORD_BTN"] = "Reset Password";
 Message.Label.Array["REDIRECT_BTN"] = "Move";
 Message.Label.Array["WRITE_BTN"] = "Write";
+Message.Label.Array["CONFIRM_BTN"] = "Confirm";
+
 
 Message.Label.Array["TOTAL"] = "Total";
 Message.Label.Array["CASE"] = "cases";

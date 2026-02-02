@@ -41,3 +41,8 @@ Message.Label.Array["SYS_BBS.SYSTEM_UPDATE_DATE"] = "시스템 수정 일시";
 Message.Label.Array["SYS_BBS.P_MENU_CODE"] = "상위 메뉴코드";
 Message.Label.Array["SYS_BBS.ACCESS_RIGHTS_REQUIRED"] = "[접근권한 설정 필요]";
 Message.Label.Array["SYS_BBS.TITLE"] = "게시판";
+Message.Label.Array["SYS_BBS.SELECT_BBS_MANAGER"] = "게시판 관리자 선택";
+Message.Label.Array["SYS_BBS.BBS_MANAGER_GROUP_LIST"] = "게시판 관리자 그룹 목록";
+
+
+

@@ -85,6 +85,8 @@ Message.Label.Array["SIDE_BTN"] = "Хажуу";
 Message.Label.Array["RESET_PASSWORD_BTN"] = "Нууц үг шинэчлэх";
 Message.Label.Array["REDIRECT_BTN"] = "Шилжих";
 Message.Label.Array["WRITE_BTN"] = "Бичих";
+Message.Label.Array["CONFIRM_BTN"] = "Баталгаажуулах";
+
 
 Message.Label.Array["TOTAL"] = "Нийт";
 Message.Label.Array["CASE"] = "шүүхийн";
