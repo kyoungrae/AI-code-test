@@ -55,6 +55,8 @@ Message.Label.Array["FAIL.NOT.MATCHED.PASSWORD"] = "기존 비밀번호가 일�
 Message.Label.Array["FAIL.COMPARE.PASSWORD"] = "비밀번호가 일치하지 않습니다.";
 Message.Label.Array["FAIL.UPLOAD"] = "업로드 실패";
 Message.Label.Array["FAIL.UPLOAD.SIZE_EXCEEDED"] = "파일 업로드 용량을 초과하였습니다";
+Message.Label.Array["FAIL.ACCESS_DENIED"] = "접근 권한이 없습니다.";
+
 
 Message.Label.Array["CHECK.FORMTYPE"] = "형식에 맞게 입력해 주세요";
 Message.Label.Array["CHECK.DATA_ATTRIBUTE"] = "태그 속성을 다시 확인해 주세요";

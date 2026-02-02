@@ -42,6 +42,7 @@
     var bbsId = bbsSessionData ? bbsSessionData.bbs_id : 'default_id';
     var bbsNm = bbsSessionData ? bbsSessionData.bbs_nm : Message.Label.Array["NOTICE"];
     var replyEnabled = false; // 댓글 기능 활성화 여부
+    var isWritePermission = true; // 작성 권한 여부 (기본 true, 설정 있을 경우에만 체크)
 
     init();
 
@@ -51,7 +52,7 @@
         // 페이지 타이틀 설정
         $("#notice-page-title").text(bbsNm);
 
-        // BBS 설정 조회 (reply_yn 확인)
+        // BBS 설정 조회 (reply_yn 확인 및 권한 체크)
         await checkBbsConfiguration();
 
         findByNoticeList();
@@ -67,14 +68,52 @@
                 if (bbsInfo.reply_yn === '1') {
                     replyEnabled = true;
                 }
+
+                // 권한 체크 로직 추가
+                await checkWritePermission(bbsInfo.bbs_manager);
             }
         } catch (e) {
             console.error("BBS Config fetch failed", e);
         }
     }
 
+    async function checkWritePermission(managers) {
+        if (!managers || managers.trim() === "") {
+            // 관리자가 지정되지 않은 경우 기본적으로 작성을 제한합니다.
+            isWritePermission = false;
+            $("#bbs-notice-write-btn").hide();
+            return;
+        }
+
+        const writeBtn = $("#bbs-notice-write-btn");
+        writeBtn.hide(); // 초기에는 숨김
+        isWritePermission = false;
+
+        let userInfo = new Session().getItem("userInfo");
+        if (!userInfo || !userInfo.email) return;
+
+        try {
+            const url = "/cms/common/sysUserGroup/find";
+            const response = await axios.post(url, { user_email: userInfo.email });
+            const userGroups = response.data || [];
+            const managerList = managers.split(",");
+
+            isWritePermission = userGroups.some(ug => managerList.includes(ug.group_id));
+
+            if (isWritePermission) {
+                writeBtn.show();
+            }
+        } catch (e) {
+            console.error("Permission check failed", e);
+        }
+    }
+
     function clickEvent() {
         $("#bbs-notice-write-btn").on("click", function () {
+            if (!isWritePermission) {
+                formUtil.toast(Message.Label.Array["FAIL.ACCESS_DENIED"] || "접근 권한이 없습니다.", "warning");
+                return;
+            }
             formUtil.apiLoadContent("cms", "/bbs/sysBbsBoardWrite", { bbs_id: bbsId });
         });
 
@@ -122,7 +161,7 @@
                         { HEADER: 'No', ID: 'no', WIDTH: '10', TYPE: 'text', TEXT_ALIGN: 'center' },
                         { HEADER: Message.Label.Array["SYS_LAYOUT.PRIORITY"], ID: 'priority', WIDTH: '10', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'center', HIDDEN: true },
                         { HEADER: Message.Label.Array["SYS_LAYOUT.TITLE"], ID: 'title', WIDTH: replyEnabled ? '50' : '60', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'left' },
-                        { HEADER: Message.Label.Array["SYS_BBS_REPLY.REPLY_COUNT"] || '댓글', ID: 'reply_count', WIDTH: '10', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'center', HIDDEN: !replyEnabled },
+                        { HEADER: Message.Label.Array["SYS_BBS_REPLY.REPLY_COUNT"], ID: 'reply_count', WIDTH: '10', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'center', HIDDEN: !replyEnabled },
                         { HEADER: Message.Label.Array["SYS_LAYOUT.HIT_COUNT"], ID: 'hit_count', WIDTH: '10', FONT_SIZE: '12px', TYPE: 'text', TEXT_ALIGN: 'center' },
                         { HEADER: Message.Label.Array["SYS_LAYOUT.CREATE_DATE"], ID: 'system_create_date', WIDTH: '15', FONT_SIZE: '12px', TYPE: 'date', TEXT_ALIGN: 'center' }
                     ]

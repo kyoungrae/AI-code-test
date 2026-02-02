@@ -55,6 +55,8 @@ Message.Label.Array["FAIL.NOT.MATCHED.PASSWORD"] = "Хуучин нууц үг �
 Message.Label.Array["FAIL.COMPARE.PASSWORD"] = "Нууц үг зөрүүтэй байна.";
 Message.Label.Array["FAIL.UPLOAD"] = "Хуулах амжилтгүй";
 Message.Label.Array["FAIL.UPLOAD.SIZE_EXCEEDED"] = "Файлын хэмжээ хэтэрсэн байна";
+Message.Label.Array["FAIL.ACCESS_DENIED"] = "Хандах эрхгүй байна.";
+
 
 Message.Label.Array["CHECK.FORMTYPE"] = "Хэлбэрт тохируулан оруулна уу";
 Message.Label.Array["CHECK.DATA_ATTRIBUTE"] = "Тагийн шинж чанарыг дахин шалгана уу";
