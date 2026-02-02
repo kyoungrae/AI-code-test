@@ -48,3 +48,4 @@ Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP"] = "접근권한그룹
 Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"] = "접근권한";
 Message.Label.Array["SYS_MENU.DELETE_ICON"] = "아이콘 삭제";
 Message.Label.Array["SYS_MENU.ICON_SETTINGS"] = "아이콘 설정";
+Message.Label.Array["SYS_MENU.BASIC_SETTINGS"] = "게시판 기본 셋팅";

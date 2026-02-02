@@ -48,3 +48,4 @@ Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP"] = "Хандах эр�
 Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"] = "Хандах эрх";
 Message.Label.Array["SYS_MENU.DELETE_ICON"] = "Айкон устгах";
 Message.Label.Array["SYS_MENU.ICON_SETTINGS"] = "Айкон тохиргоо";
+Message.Label.Array["SYS_MENU.BASIC_SETTINGS"] = "Мэдээллийн самбарын үндсэн тохиргоо";

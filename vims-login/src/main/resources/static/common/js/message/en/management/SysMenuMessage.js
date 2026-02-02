@@ -48,3 +48,4 @@ Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP"] = "Menu Access Group 
 Message.Label.Array["SYS_MENU.REGISTER_MENU_ACCESS_GROUP_BTN"] = "Access Permissions";
 Message.Label.Array["SYS_MENU.DELETE_ICON"] = "Delete Icon";
 Message.Label.Array["SYS_MENU.ICON_SETTINGS"] = "Icon Settings";
+Message.Label.Array["SYS_MENU.BASIC_SETTINGS"] = "Board Basic Settings";
