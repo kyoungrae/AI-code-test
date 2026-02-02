@@ -358,7 +358,7 @@
         // 라벨 세팅
         $("#page-sysBbs-title").text(Message.Label.Array["SYS_BBS.TITLE_LIST"]);
         $("#page-sysBbs-subtitle").text(Message.Label.Array["SYS_BBS.SUB_TITLE_LIST"]);
-        $("#label-search-title").text(Message.Label.Array["SEARCH.TITLE"]);
+        $("#label-search-title").text(Message.Label.Array["SYS_BBS.BBS_NM"]);
         $("#label-start-date").text(Message.Label.Array["START_DATE"]);
         $("#label-end-date").text(Message.Label.Array["END_DATE"]);
         $("#search-btn").text(Message.Label.Array["SEARCH_BTN"]);
@@ -461,7 +461,7 @@
     let cont1 = $("#searchDesc1").val();
     let cont2 = $("#from_date").val();
     let cont3 = $("#to_date").val();
-    if (formUtil.checkEmptyValue(cont1)) param.searchDesc1 = cont1;
+    if (formUtil.checkEmptyValue(cont1)) param.bbs_nm = cont1;
     if (formUtil.checkEmptyValue(cont2)) param.from_date = cont2;
     if (formUtil.checkEmptyValue(cont3)) param.to_date = cont3;
 
