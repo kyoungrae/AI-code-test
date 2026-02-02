@@ -424,6 +424,10 @@ option {
     cursor: pointer;
 }
 
+.gi-input-container>.gi-toggle-switch {
+    top: 10px;
+}
+
 .gi-toggle-switch input {
     opacity: 0;
     width: 0;
