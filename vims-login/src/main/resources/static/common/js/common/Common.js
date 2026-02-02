@@ -319,7 +319,7 @@ class DataBinding {
         return elementsList[0];
     }
     setDataSelectBox(ID, VALUE) {
-        console.log(ID, VALUE)
+        // console.log(ID, VALUE)
         let target = $("#" + ID);
         let target_select = $("#" + ID + "_select");
         const targetNode = target.closest("div")[0];
