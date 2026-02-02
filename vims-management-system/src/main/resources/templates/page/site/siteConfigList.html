@@ -87,8 +87,8 @@
                     <div class="gi-input-container">
                         <label for="use_yn" class="gi-input-label" data-focus-label="true"
                             data-required="true">[Page.Message].Message.Label.Array["USE_YN"]</label>
-                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="use_yn" name="use_yn"
-                            class="gi-input" data-required="true" autocomplete="off" />
+                        <input type="toggle" data-field="use_yn" id="use_yn" name="use_yn" class="gi-input"
+                            data-required="true" autocomplete="off" />
                     </div>
                 </div>
             </form>
@@ -124,8 +124,8 @@
                     <div class="gi-input-container">
                         <label for="update_group_use_yn" class="gi-input-label" data-focus-label="true"
                             data-required="true">[Page.Message].Message.Label.Array["USE_YN"]</label>
-                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="update_group_use_yn"
-                            name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                        <input type="toggle" data-field="use_yn" id="update_group_use_yn" name="use_yn" class="gi-input"
+                            data-required="true" autocomplete="off" />
                     </div>
                 </div>
             </form>
@@ -173,8 +173,8 @@
                     <div class="gi-input-container">
                         <label for="code-use_yn" class="gi-input-label" data-focus-label="true"
                             data-required="true">[Page.Message].Message.Label.Array["SYS_SITE_CONFIG.USE_YN"]</label>
-                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="code-use_yn"
-                            name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                        <input type="toggle" data-field="use_yn" id="code-use_yn" name="use_yn" class="gi-input"
+                            data-required="true" autocomplete="off" />
                     </div>
                 </div>
             </form>
@@ -222,8 +222,8 @@
                     <div class="gi-input-container">
                         <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
                             data-required="true">[Page.Message].Message.Label.Array["SYS_SITE_CONFIG.USE_YN"]</label>
-                        <input gi-selectbox data-selectbox-field="use_yn" data-field="use_yn" id="update_use_yn"
-                            name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                        <input type="toggle" data-field="use_yn" id="update_use_yn" name="use_yn" class="gi-input"
+                            data-required="true" autocomplete="off" />
                     </div>
                 </div>
             </form>
@@ -379,7 +379,6 @@
                     const formId = "siteConfigGroupUpdate_gi-popup";
                     $("#" + formId).attr("data-popup-open", "true");
                     dataBinding.setDataForm(formId, row);
-                    dataBinding.setDataSelectBox("update_group_use_yn", row.use_yn);
 
                     $(".gi-popup-update-btn").off("click.siteConfigGroupUpdateBtnClickEventHandler")
                         .on("click.siteConfigGroupUpdateBtnClickEventHandler", siteConfigGroupUpdateBtnClickEventHandler);
@@ -637,7 +636,6 @@
     function updatePopupSettings(cont) {
         $("#siteConfigUpdate_gi-popup").attr("data-popup-open", "true");
         dataBinding.setDataForm("siteConfigUpdate_gi-popup", cont);
-        dataBinding.setDataSelectBox("update_use_yn", cont.use_yn);
 
         $("#siteConfigCodeUpdate-btn").off("click.siteConfigCodeUpdateBtnClickEventHandler")
             .on("click.siteConfigCodeUpdateBtnClickEventHandler", siteConfigCodeUpdateBtnClickEventHandler);

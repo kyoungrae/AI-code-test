@@ -335,6 +335,9 @@ class GiToggle {
         const name = $input.attr('name');
         const initialValue = $input.val();
         const isChecked = initialValue === "1";
+        const disabledFlag = $input.attr("data-disabled");
+        const isDisabled = $input.prop("disabled") || (disabledFlag !== undefined && disabledFlag !== "false" && disabledFlag !== "undefined");
+        const isReadOnly = $input.prop("readonly");
 
         // 기존 input 숨기기
         $input.addClass('gi-hidden');
@@ -345,6 +348,7 @@ class GiToggle {
         const $slider = $('<span class="gi-toggle-slider"></span>');
 
         $checkbox.prop('checked', isChecked);
+        $checkbox.prop('disabled', isDisabled || isReadOnly);
 
         // 원본 input 아이디와 연결 (label 클릭 시 동작 위해)
         if (id) {
@@ -352,6 +356,11 @@ class GiToggle {
         }
 
         $toggleContainer.append($checkbox).append($slider);
+
+        if (isDisabled || isReadOnly) {
+            $toggleContainer.css('cursor', 'default');
+            $toggleContainer.find('.gi-toggle-slider').css('opacity', '0.6');
+        }
 
         // input의 부모(container)를 찾아서 그 안에 배치하거나 input 바로 뒤에 배치
         let $container = $input.closest('.gi-input-container');

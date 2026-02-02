@@ -330,7 +330,13 @@ class DataBinding {
         };
         console.log(!formUtil.checkEmptyValue(target_select))
         if (formUtil.checkEmptyValue(target_select)) {
-            if ((target_select[0].hasAttribute("gi-selectbox") || target_select[0].hasAttribute("data-select")) && target.closest("div").hasClass("gi-input-container")) {
+            // 토글 버튼인 경우 처리
+            if (target.attr("type") === "toggle" || target.is("[gi-toggle]")) {
+                target.val(VALUE).trigger("change");
+                return;
+            }
+
+            if (target_select.length > 0 && (target_select[0].hasAttribute("gi-selectbox") || target_select[0].hasAttribute("data-select")) && target.closest("div").hasClass("gi-input-container")) {
                 // MutationObserver 생성
                 const observer = new MutationObserver((mutationsList, observer) => {
                     for (let mutation of mutationsList) {
