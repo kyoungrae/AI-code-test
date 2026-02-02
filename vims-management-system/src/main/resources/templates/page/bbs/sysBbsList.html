@@ -366,6 +366,7 @@
         </div>
       </div>
     </div>
+
     <div class="gi-popup-footer">
       <button id="bbs_manager_confirm_btn" class="gi-btn-blue"
         type="button">[Page.Message].Message.Label.Array["CONFIRM_BTN"]</button>
@@ -430,7 +431,6 @@
         }
       }
 
-      initBbsManagerGrids(); // BBS 관리자 팝업 그리드 초기화
 
 
       //데이터 조회 (파라미터 확인 후 조회)
@@ -514,8 +514,7 @@
 
     // 게시판 관리자 팝업 확인 버튼
     $("#bbs_manager_confirm_btn").click(function () {
-      let ids = selectedManagers.map(m => m.group_id).join(",");
-      $("#" + targetBbsManagerInputId).val(ids).trigger("change");
+      // 데이터는 이미 입력 필드에 실시간으로 반영되고 있으므로 팝업만 닫음
       popup.close(BBS_MANAGER_POPUP_ID);
     });
   }
@@ -637,7 +636,6 @@
   }
   //FUN : 수정팝업 호출
   function sysBbsUpdatePopupOpen(cont) {
-    console.log(cont);
     dataBinding.setDataForm(UPDATE_POPUP_ID, cont);
     popup.open(UPDATE_POPUP_ID);
 
@@ -789,94 +787,106 @@
       }
     });
   }
-
-  let managerGroupGrid = null;
-  let selectedManagerGrid = null;
-
-  function initBbsManagerGrids() {
-    // 1. 그룹 목록 그리드 (왼쪽)
-    let groupGrid_header = {
-      title: Message.Label.Array["SYS_DEPT_GROUP.TITLE"],
-      list: [
-        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "left" },
-        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"], ID: "group_id", WIDTH: "30", TYPE: "text", TEXT_ALIGN: "center" },
-        { HEADER: Message.Label.Array["SELECT_BTN"], ID: "add_btn", WIDTH: "10", TYPE: "img", TEXT_ALIGN: "center" }
-      ]
-    };
-    managerGroupGrid = formUtil.giGridHierarchy(groupGrid_header, "", "", MANAGER_GROUP_LIST_GRID_ID);
-    managerGroupGrid.HierarchyOption({ level_column: "group_level", parent_depth_column: "group_id", child_depth_column: "top_group_id" });
-    managerGroupGrid.detailBtnClick(function (row) {
-      if (!selectedManagers.some(m => m.group_id === row.group_id)) {
-        selectedManagers.push({
-          group_id: row.group_id,
-          group_name: row.group_name
-        });
-        renderSelectedManagerGrid();
-      } else {
-        formUtil.toast("이미 등록된 그룹입니다.", "info");
-      }
-    }, "add_btn");
-
-    // 2. 선택된 관리자 그리드 (오른쪽)
-    let selectedGrid_header = {
-      title: Message.Label.Array["SYS_BBS.BBS_MANAGER_GROUP_LIST"],
-      list: [
-        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "left" },
-        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"], ID: "group_id", WIDTH: "30", TYPE: "text", TEXT_ALIGN: "center" },
-        { HEADER: Message.Label.Array["DELETE_BTN"], ID: "remove_btn", WIDTH: "10", TYPE: "img", TEXT_ALIGN: "center" }
-      ]
-    };
-    selectedManagerGrid = formUtil.giGrid(selectedGrid_header, "", "", SELECTED_MANAGER_GRID_ID);
-    selectedManagerGrid.detailBtnClick(function (row) {
-      selectedManagers = selectedManagers.filter(m => m.group_id !== row.group_id);
-      renderSelectedManagerGrid();
-    }, "remove_btn");
-  }
-
+  /**
+   * 게시판 관리자 선택 팝업 오픈
+   */
   function openBbsManagerPopup() {
     popup.open(BBS_MANAGER_POPUP_ID);
-
-    // 초기화: 입력 필드에 있는 ID들을 기반으로 selectedManagers 구성
-    let existingIds = $("#" + targetBbsManagerInputId).val();
-    selectedManagers = [];
-
-    findByGroupListForManagerPopup();
-    renderSelectedManagerGrid();
+    findByManagerGroupList();
   }
 
-
-  function findByGroupListForManagerPopup() {
-    let url = "/cms/common/sysDeptGroup/find"; // 전체 그룹 목록 조회
-    let param = {}; // 파라미터 없이 전성 (sysDeptGroupList.html 참고)
-
-    axios.post(url, param).then(response => {
+  /**
+   * 관리자 그룹 목록 조회 및 렌더링 통합 관리
+   */
+  function findByManagerGroupList() {
+    let url = "/cms/common/sysDeptGroup/find";
+    axios.post(url, {}).then(response => {
       if (response.status === 200) {
         let data = response.data;
-        managerGroupGrid.DataSet(data);
-
-        // 만약 초기값이 있었다면, data에서 찾아서 selectedManagers 채우기
-        let existingIds = $("#" + targetBbsManagerInputId).val();
-        if (existingIds && selectedManagers.length === 0) {
-          let idArray = existingIds.split(",");
-          idArray.forEach(id => {
-            let found = data.find(group => group.group_id === id.trim());
-            if (found) {
-              selectedManagers.push({
-                group_id: found.group_id,
-                group_name: found.group_name
-              });
-            }
-          });
-          renderSelectedManagerGrid();
-        }
+        // 상단 전체 목록 렌더링
+        renderManagerGroupTotalGrid(data);
+        // 하단 선택 목록 렌더링
+        renderManagerGroupSelectedGrid(data);
       }
+    }).catch(error => {
+      formUtil.toast("데이터 조회 중 오류가 발생했습니다.", "error");
     });
   }
 
+  /**
+   * [상단] 전체 그룹 목록 그리드 렌더링
+   */
+  function renderManagerGroupTotalGrid(data) {
+    // 그리드 헤더 설정 (ID: group_level, top_group_id 필수 - 계층형 로직용)
+    let header = {
+      title: Message.Label.Array["SYS_DEPT_GROUP.TITLE"],
+      list: [
+        { HEADER: 'No', ID: 'no', WIDTH: '7', TYPE: 'text', FONT_SIZE: '11px', TEXT_ALIGN: 'center', HIDDEN: true },
+        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"], ID: "group_name", WIDTH: "40", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "left" },
+        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.TOP_GROUP_ID"], ID: "top_group_id", WIDTH: "20", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center", HIDDEN: false },
+        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"], ID: "group_id", WIDTH: "30", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center" },
+        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.USE_YN"], ID: "use_yn", WIDTH: "20", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center", SYS_CODE_GROUP_ID: "USE_YN", HIDDEN: false },
+        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_LEVEL"], ID: "group_level", WIDTH: "5", TYPE: "text", FONT_SIZE: "11px", TEXT_ALIGN: "center", HIDDEN: true },
+        { HEADER: Message.Label.Array["REGISTER_BTN"], ID: "register_btn", WIDTH: "10", TYPE: "button", FONT_SIZE: "11px", TEXT_ALIGN: "center", VISIBLE_OPTION_BTN: { "group_level": "0" }, HIDDEN: false }
+      ]
+    };
 
-  function renderSelectedManagerGrid() {
-    selectedManagerGrid.DataSet(selectedManagers);
+    // 그리드 생성 및 계층 설정
+    let grid = formUtil.giGridHierarchy(header, "", "", MANAGER_GROUP_LIST_GRID_ID);
+    grid.HierarchyOption({ level_column: "group_level", parent_depth_column: "group_id", child_depth_column: "top_group_id" });
+
+    // 데이터 바인딩
+    grid.DataSet(data);
+    grid.gridColumResize(MANAGER_GROUP_LIST_GRID_ID);
+
+    // 이벤트: 선택 버튼 클릭 시 입력 필드 업데이트 및 하단 그리드 재렌더링
+    grid.detailBtnClick(function (row) {
+      let currentIds = $("#" + targetBbsManagerInputId).val();
+      let idArray = currentIds ? currentIds.split(",").map(id => id.trim()) : [];
+
+      if (!idArray.includes(row.group_id)) {
+        idArray.push(row.group_id);
+        $("#" + targetBbsManagerInputId).val(idArray.join(","));
+        // 렌더링 함수에 현재 들고 있는 data를 그대로 전달하여 다시 그림
+        renderManagerGroupSelectedGrid(data);
+        commonTag.inputTagReset($(".gi-input"));
+      } else {
+        formUtil.toast("", "info");
+      }
+    }, "register_btn");
   }
+
+  /**
+   * [하단] 선택된 관리자 그룹 목록 그리드 렌더링
+   */
+  function renderManagerGroupSelectedGrid(totalData) {
+    let currentIds = $("#" + targetBbsManagerInputId).val();
+    let idArray = currentIds ? currentIds.split(",").map(id => id.trim()) : [];
+    let selectedData = totalData.filter(group => idArray.includes(group.group_id));
+
+    let header = {
+      title: Message.Label.Array["SYS_BBS.BBS_MANAGER_GROUP_LIST"],
+      list: [
+        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_NAME"], ID: "group_name", FONT_SIZE: "12px", WIDTH: "60", TYPE: "text", TEXT_ALIGN: "center" },
+        { HEADER: Message.Label.Array["SYS_DEPT_GROUP.GROUP_ID"], ID: "group_id", FONT_SIZE: "12px", WIDTH: "30", TYPE: "text", TEXT_ALIGN: "center" },
+        { HEADER: Message.Label.Array["DELETE_BTN"], ID: "delete_btn", FONT_SIZE: "12px", WIDTH: "10", TYPE: "img", TEXT_ALIGN: "center" }
+      ]
+    };
+
+    let grid = formUtil.giGrid(header, "", "", SELECTED_MANAGER_GRID_ID);
+    grid.DataSet(selectedData);
+    grid.gridColumResize(SELECTED_MANAGER_GRID_ID);
+
+    // 이벤트: 삭제 버튼 클릭 시 입력 필드 업데이트 및 자신을 다시 그림
+    grid.deleteBtnClick(function (row) {
+      let updatedIds = idArray.filter(id => id !== row.group_id);
+      $("#" + targetBbsManagerInputId).val(updatedIds.join(","));
+      renderManagerGroupSelectedGrid(totalData);
+      formUtil.toast(Message.Label.Array["COMPLETE.DELETE"], "success");
+      commonTag.inputTagReset($(".gi-input"));
+    }, "delete_btn");
+  }
+
 
 
   // === 권한 설정 관련 함수 (menuSettings.html 에서 복사/수정) ===
@@ -907,7 +917,6 @@
     axios.post(url, param).then(response => {
       if (response.status === 200) {
         let data = response.data;
-        console.log(data)
         let sysDeptGroup_menuGrid_header = {
           title: Message.Label.Array["SYS_DEPT_GROUP.TITLE"],
           list: [
