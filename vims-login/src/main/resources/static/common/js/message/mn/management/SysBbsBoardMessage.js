@@ -56,6 +56,7 @@ Message.Label.Array["SYS_BBS_BOARD.ATTACHED_FILE_INFO"] = "Бичлэгт хав
 Message.Label.Array["SYS_BBS_BOARD.SECTION.BASIC"] = "Үндсэн мэдээлэл";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.CONTENT"] = "Дэлгэрэнгүй агуулга";
 Message.Label.Array["SYS_BBS_BOARD.SECTION.FILE"] = "Хавсаргасан файл";
+Message.Label.Array["SYS_BBS_BOARD.ANONYMOUS"] = "Нэргүй";
 
 Message.Label.Array["SYS_LAYOUT.CREATE_DATE"] = "Бүртгэсэн огноо";
 Message.Label.Array["SYS_LAYOUT.TITLE"] = "Гарчиг";

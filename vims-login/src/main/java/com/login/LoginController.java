@@ -142,8 +142,20 @@ public class LoginController {
         }
 
         // 리다이렉트 URL 포함
-        Map<String, String> responseBody = new HashMap<>();
+        Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("redirectUrl", "/");
+
+        // 사용자 이름 추가 (예외 처리 포함)
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication != null && authentication.getPrincipal() instanceof AuthUser) {
+                AuthUser user = (AuthUser) authentication.getPrincipal();
+                responseBody.put("userName", user.getUser_name());
+            }
+        } catch (Exception e) {
+            logger.error("Failed to retrieve user name during login", e);
+            // 사용자 이름 조회 실패해도 로그인은 성공 처리 (userName은 null 또는 없음)
+        }
 
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }

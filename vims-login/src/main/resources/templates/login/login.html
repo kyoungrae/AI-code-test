@@ -386,8 +386,10 @@
         let url = "/login";
 
         axios.post(url, cont).then(response => {
+            let userName = response.data.userName || ""; // 사용자 이름 가져오기
             new Session().setItem("userInfo", {
                 email: email,
+                userName: userName // userName 저장
             });
             new Session().setItem("recentPage", { url: '/index/index' }); //main으로 연결
             let redirectUrl = response.data.redirectUrl;

@@ -238,7 +238,7 @@
                     <div class="gi-flex gi-flex-justify-content-between gi-flex-align-items-center gi-margin-bottom-8px">
                         <div class="gi-flex gi-grid-gap-10px gi-flex-align-items-center">
                             <span style="font-weight: 600; color: #1e293b;">${reply.writer_name || (Message.Label.Array["UNKNOWN"] || '익명')}</span>
-                            <span style="font-size: 12px; color: #94a3b8;">${formatDateTime(reply.system_create_date)}</span>
+                            <span style="font-size: 12px; color: #94a3b8;">${reply.system_create_date}</span>
                         </div>
                         <div class="gi-flex gi-grid-gap-5px">
                             <button class="gi-btn-icon reply-delete-btn" style="padding:10px;" data-reply-id="${reply.reply_id}" title="${Message.Label.Array["DELETE_BTN"] || '삭제'}">
@@ -270,10 +270,11 @@
         }
 
         let url = "/cms/common/sysBbsReply/register";
+        let userInfo = new Session().getItem("userInfo");
         let param = {
             board_id: boardId,
             content: content,
-            writer_name: sessionStorage.getItem("userName") || "익명"
+            writer_name: (userInfo && userInfo.userName) ? userInfo.userName : (Message.Label.Array["SYS_BBS_BOARD.ANONYMOUS"])
         };
 
         try {
@@ -301,13 +302,7 @@
         }
     }
 
-    function formatDateTime(dateStr) {
-        if (!dateStr) return '-';
-        if (dateStr.length >= 16) {
-            return dateStr.substring(0, 16).replace('T', ' ');
-        }
-        return dateStr;
-    }
+
 
     function escapeHtml(text) {
         if (!text) return '';
