@@ -36,6 +36,10 @@ public class SysBbsBoard extends Common {
     private String system_update_userid;
     private Date system_update_date;
 
+    // 댓글 갯수 (서브쿼리로 조회)
+    @Transient
+    private int reply_count;
+
     // 검색용 필드
     @Transient
     private String _title;

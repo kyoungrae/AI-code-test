@@ -26,6 +26,7 @@
                 hit_count,
                 file_uuid,
                 thumbnail,
+                (SELECT COUNT(*) FROM SYS_BBS_REPLY WHERE SYS_BBS_REPLY.board_id = SYS_BBS_BOARD.board_id) AS reply_count,
                 system_create_userid,
                 system_create_date,
                 system_update_userid,
