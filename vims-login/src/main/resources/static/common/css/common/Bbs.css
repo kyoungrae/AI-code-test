@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+/* BBS 댓글 카드 공통 */
+.gi-reply-card {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+/* 대댓글 스타일 */
+.gi-reply-card.gi-reply-child {
+    margin-left: 60px;
+    background-color: #f8fafc;
+}
+
+/* 대댓글 연결선 (주황색) */
+.gi-reply-card.gi-reply-child::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    width: 25px;
+    height: 55px;
+    /* 높이 조정 */
+    border-left: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    border-bottom-left-radius: 8px;
+    z-index: 1;
+}
+
+/* 댓글 헤더 (작성자, 날짜, 버튼) */
+.gi-reply-header {
+    margin-bottom: 8px;
+}
+
+.gi-reply-info-icon {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.gi-reply-writer {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.gi-reply-date {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* 댓글 내용 */
+.gi-reply-content {
+    color: #475569;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.gi-reply-content.is-child {
+    padding-left: 20px;
+}
+
+/* 대댓글 입력 폼 컨테이너 */
+.gi-child-reply-form {
+    padding: 15px;
+    background-color: #f1f5f9;
+    border-radius: 8px;
+}
+
+/* 대댓글 입력 폼 라벨 */
+.gi-child-reply-label {
+    display: flex;
+    align-items: center;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* 대댓글 입력창 */
+.gi-child-reply-input {
+    width: 100%;
+    min-height: 80px;
+    background: #fff;
+    /* gi-textarea가 기본 스타일을 가지고 있겠지만, override 필요 시 추가 */
+}
+
+.gi-btn-icon {
+    cursor: pointer;
+}
+
+/* 아이콘 버튼 스타일 (기존 인라인 제거용) */
+.gi-reply-action-btn i {
+    font-size: 12px;
+}
+
+.gi-reply-action-btn.reply-toggle i {
+    color: #64748b;
+}
+
+.gi-reply-action-btn.reply-delete i {
+    color: #ef4444;
+}
+
+.gi-reply-container {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}

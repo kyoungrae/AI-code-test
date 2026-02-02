@@ -1,5 +1,6 @@
 <article id="sysBbsBoardDetailPage" class="gi-article-content gi-col-95 gi-row-100 gi-overflow-scroll"
     style="background: #f8fafc; border: none; box-shadow: none;">
+    <link href="/common/css/common/Bbs.css" rel="stylesheet">
     <div class="gi-padding-left-right-20px">
         <!-- 헤더 영역 (카드 외부) -->
         <header class="gi-margin-bottom-30px gi-padding-left-10px">
@@ -83,13 +84,12 @@
                         </div>
 
                         <!-- 댓글 작성 폼 -->
-                        <div id="reply-form" class="gi-flex gi-flex-column gi-grid-gap-10px"
-                            style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                        <div id="reply-form" class="gi-flex gi-flex-column gi-grid-gap-10px gi-reply-container">
                             <div class="gi-flex gi-grid-gap-10px">
                                 <textarea id="reply-content-input" class="gi-input" rows="3"
                                     style="flex: 1; resize: none; min-height: 80px;"></textarea>
                             </div>
-                            <div class="gi-flex gi-flex-justify-content-end">
+                            <div class="gi-flex gi-flex gi-flex-justify-content-flex-end">
                                 <button id="reply-submit-btn" class="gi-btn-blue" type="button"
                                     style="min-width: 100px;">
                                     [Page.Message].Message.Label.Array["SYS_BBS_REPLY.SUBMIT"]
@@ -205,6 +205,20 @@
                 registerReply();
             }
         });
+
+        // 답글 토글 버튼 이벤트 위임
+        $("#reply-list-container").on("click", ".reply-toggle-btn", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(this).closest('.gi-reply-card').find('.gi-child-reply-form').stop(true, true).slideToggle(200);
+        });
+
+        // 대댓글 등록 버튼 이벤트 위임
+        $("#reply-list-container").on("click", ".child-reply-submit-btn", function (e) {
+            e.preventDefault();
+            let parentId = $(this).data("parent-id");
+            registerReply(parentId);
+        });
     }
 
     async function loadReplyList() {
@@ -233,50 +247,142 @@
         let userInfo = new Session().getItem("userInfo");
         let currentUserEmail = userInfo ? userInfo.email : null;
 
-        replyList.forEach(reply => {
-            let isChildReply = reply.parent_reply_id !== null && reply.parent_reply_id !== '';
-            let isMine = currentUserEmail && (currentUserEmail === reply.system_create_userid);
+        // 1. 계층 데이터 구조화 (Grouping)
+        let groups = {};
+        replyList.forEach(r => {
+            r.children = [];
+            groups[r.reply_id] = r;
+        });
 
-            let deleteBtnHtml = '';
-            if (isMine) {
-                deleteBtnHtml = `
-                    <div class="gi-flex gi-grid-gap-5px">
-                        <button class="gi-btn-icon reply-delete-btn" style="padding:10px;" data-reply-id="${reply.reply_id}" title="${Message.Label.Array["DELETE_BTN"] || '삭제'}">
-                            <i class="fa-solid fa-trash" style="color: #ef4444; font-size: 12px;"></i>
-                        </button>
-                    </div>`;
+        let roots = [];
+        replyList.forEach(r => {
+            if (r.parent_reply_id && groups[r.parent_reply_id]) {
+                groups[r.parent_reply_id].children.push(r);
+            } else if (!r.parent_reply_id) {
+                roots.push(r);
+            }
+        });
+
+        // 2. 카드 생성 헬퍼 함수
+        function createReplyElement(reply, isChild) {
+            let isMine = currentUserEmail && (currentUserEmail === reply.system_create_userid);
+            let buttonsHtml = '<div class="gi-flex gi-grid-gap-5px-5px">';
+
+            // 답글 버튼 (대댓글이 아닐 경우에만 표시)
+            if (!isChild) {
+                buttonsHtml += `
+                    <button class="gi-btn-icon reply-toggle-btn gi-reply-action-btn reply-toggle" style="padding:10px;" data-reply-id="${reply.reply_id}" title="${Message.Label.Array["SYS_BBS_BOARD.REPLY_BTN"]}">
+                        <i class="fa-solid fa-reply"></i>
+                    </button>`;
             }
 
-            let replyCard = $(`
-                <div class="gi-reply-card ${isChildReply ? 'gi-reply-child' : ''}" data-reply-id="${reply.reply_id}" 
-                     style="background: #fff; padding: 12px 15px; border-radius: 8px; border: 1px solid #e2e8f0; ${isChildReply ? 'margin-left: 30px; border-left: 3px solid var(--background-color-btn-blue);' : ''}">
-                    <div class="gi-flex gi-flex-justify-content-between gi-flex-align-items-center gi-margin-bottom-8px">
-                        <div class="gi-flex gi-grid-gap-10px gi-flex-align-items-center">
-                            <span style="font-weight: 600; color: #1e293b;">${reply.writer_name || (Message.Label.Array["SYS_BBS_BOARD.ANONYMOUS"] || '익명')}</span>
-                            <span style="font-size: 12px; color: #94a3b8;">${reply.system_create_date}</span>
-                        </div>
-                        ${deleteBtnHtml}
-                    </div>
-                    <div style="color: #475569; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(reply.content)}</div>
-                </div>
-            `);
+            // 삭제 버튼
+            if (isMine) {
+                buttonsHtml += `
+                    <button class="gi-btn-icon reply-delete-btn gi-reply-action-btn reply-delete" style="padding:10px;" data-reply-id="${reply.reply_id}" title="${Message.Label.Array["DELETE_BTN"]}">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>`;
+            }
+            buttonsHtml += '</div>';
 
-            // 삭제 버튼 이벤트
-            replyCard.find('.reply-delete-btn').on('click', async function () {
+            let cardHtml = `
+                <div class="gi-reply-card ${isChild ? 'gi-reply-child' : ''}" data-reply-id="${reply.reply_id}">
+                    <div class="gi-reply-header gi-flex gi-flex-justify-content-between gi-flex-align-items-center">
+                        <div class="gi-flex gi-grid-gap-10px gi-flex-align-items-center">
+                            <span class="gi-reply-writer">${reply.writer_name || (Message.Label.Array["SYS_BBS_BOARD.ANONYMOUS"])}</span>
+                            <span class="gi-reply-date">${reply.system_create_date}</span>
+                        </div>
+                        ${buttonsHtml}
+                    </div>
+                    <div class="gi-reply-content ${isChild ? 'is-child' : ''}">${escapeHtml(reply.content)}</div>
+                    
+                    ${!isChild ? `
+                    <!-- 대댓글 입력 폼 -->
+                    <div id="child-reply-form-${reply.reply_id}" class="gi-child-reply-form" style="display: none; margin-top: 15px;">
+                        <div class="gi-flex gi-flex-column gi-grid-gap-10px">
+                            <div class="gi-child-reply-label gi-margin-bottom-5px">
+                                <i class="fa-solid fa-turn-up fa-rotate-90 gi-margin-right-5px"></i>
+                                <span>${Message.Label.Array["SYS_BBS_BOARD.REPLY_WRITE"]}</span>
+                            </div>
+                            <textarea class="child-reply-input gi-textarea gi-child-reply-input gi-reply-container" placeholder="${Message.Label.Array["SYS_BBS_REPLY.PLACEHOLDER"]}"></textarea>
+                             <div class="gi-flex gi-flex-justify-content-flex-end">
+                                <button class="gi-btn-blue child-reply-submit-btn" data-parent-id="${reply.reply_id}">${Message.Label.Array["SYS_BBS_BOARD.REG_BTN"]}</button>
+                             </div>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            return $(cardHtml);
+        }
+
+        // 3. 렌더링 및 로직 적용
+        roots.forEach(root => {
+            let rootEl = createReplyElement(root, false);
+
+            // Root Events
+            rootEl.find('.reply-delete-btn').on('click', async function (e) {
+                e.preventDefault();
                 let replyId = $(this).data('reply-id');
-                if (await formUtil.confirm(Message.Label.Array["CONFIRM.DELETE"] || '삭제하시겠습니까?')) {
+                if (await formUtil.confirm(Message.Label.Array["CONFIRM.DELETE"])) {
                     deleteReply(replyId);
                 }
             });
 
-            container.append(replyCard);
+            container.append(rootEl);
+
+            // 대댓글 처리
+            if (root.children && root.children.length > 0) {
+                let toggleBtn = $(`
+                    <div class="gi-text-right gi-margin-top-10px">
+                        <button class="gi-btn-text" style="padding:10px; font-size: 13px; color: #64748b; font-weight: 500; cursor: pointer;">
+                            ${Message.Label.Array["SYS_BBS_BOARD.VIEW_MORE_REPLY"]} <i class="fa-solid fa-chevron-down gi-margin-left-5px"></i>
+                        </button>
+                    </div>`);
+
+                // 버튼을 카드 내부(컨텐츠 아래)에 추가하여 'fa-reply' 버튼과 우측 정렬 라인을 맞춤
+                rootEl.find('.gi-reply-content').after(toggleBtn);
+
+                let childrenContainer = $(`<div class="gi-reply-children-container" style="display: none;"></div>`);
+
+                root.children.forEach(child => {
+                    let childEl = createReplyElement(child, true);
+
+                    // Child Events
+                    childEl.find('.reply-delete-btn').on('click', async function () {
+                        let replyId = $(this).data('reply-id');
+                        if (await formUtil.confirm(Message.Label.Array["CONFIRM.DELETE"])) {
+                            deleteReply(replyId);
+                        }
+                    });
+
+                    childrenContainer.append(childEl);
+                });
+
+                // 토글 이벤트
+                toggleBtn.find('button').click(function () {
+                    let btn = $(this);
+                    childrenContainer.slideToggle(300, function () {
+                        if ($(this).is(':visible')) {
+                            btn.html(`${Message.Label.Array["SYS_BBS_BOARD.HIDE_REPLY"]} <i class="fa-solid fa-chevron-up gi-margin-left-5px"></i>`);
+                        } else {
+                            btn.html(`${Message.Label.Array["SYS_BBS_BOARD.VIEW_MORE_REPLY"]} <i class="fa-solid fa-chevron-down gi-margin-left-5px"></i>`);
+                        }
+                    });
+                });
+
+                // container.append(toggleBtn); // 제거됨 (카드 안으로 이동)
+                container.append(childrenContainer);
+            }
         });
     }
 
-    async function registerReply() {
-        let content = $("#reply-content-input").val().trim();
+    async function registerReply(parentId = null) {
+        let contentInput = parentId ? $(`#child-reply-form-${parentId} .child-reply-input`) : $("#reply-content-input");
+        let content = contentInput.val().trim();
+
         if (!content) {
-            formUtil.toast(Message.Label.Array["SYS_BBS_REPLY.CONTENT_REQUIRED"] || '댓글 내용을 입력해주세요.', "warning");
+            formUtil.toast(Message.Label.Array["SYS_BBS_REPLY.CONTENT_REQUIRED"], "warning");
             return;
         }
 
@@ -285,18 +391,19 @@
         let param = {
             board_id: boardId,
             content: content,
+            parent_reply_id: parentId,
             writer_name: (userInfo && userInfo.userName) ? userInfo.userName : (Message.Label.Array["SYS_BBS_BOARD.ANONYMOUS"])
         };
 
         try {
             const response = await axios.post(url, param);
             if (response.status === 200) {
-                formUtil.toast(Message.Label.Array["COMPLETE.INSERT"] || '등록되었습니다.', "success");
-                $("#reply-content-input").val("");
+                formUtil.toast(Message.Label.Array["COMPLETE.INSERT"], "success");
+                contentInput.val("");
                 loadReplyList();
             }
         } catch (e) {
-            formUtil.toast(Message.Label.Array["FAIL.INSERT"] || '등록에 실패했습니다.', "error");
+            formUtil.toast(Message.Label.Array["FAIL.INSERT"], "error");
         }
     }
 
@@ -305,11 +412,11 @@
         try {
             const response = await axios.post(url, { reply_id: replyId });
             if (response.status === 200) {
-                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"] || '삭제되었습니다.', "success");
+                formUtil.toast(Message.Label.Array["COMPLETE.DELETE"], "success");
                 loadReplyList();
             }
         } catch (e) {
-            formUtil.toast(Message.Label.Array["FAIL.DELETE"] || '삭제에 실패했습니다.', "error");
+            formUtil.toast(Message.Label.Array["FAIL.DELETE"], "error");
         }
     }
 
