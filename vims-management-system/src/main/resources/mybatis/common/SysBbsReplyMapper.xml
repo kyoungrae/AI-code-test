@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vims.common.bbs.SysBbsReplyMapper">
+    <sql id="sortFilter">
+        ORDER BY
+        <choose>
+            <when test="sort_id != null and sort_order != null">
+                ${sort_id} ${sort_order}
+            </when>
+            <otherwise>
+                system_create_date ASC
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="SELECT_PAGE" resultType="com.vims.common.bbs.SysBbsReply">
+        SELECT * FROM (
+            SELECT
+                row_number() over (ORDER BY system_create_date ASC) AS no,
+                reply_id,
+                board_id,
+                parent_reply_id,
+                content,
+                writer_name,
+                system_create_userid,
+                system_create_date,
+                system_update_userid,
+                system_update_date
+            FROM SYS_BBS_REPLY
+            <where>
+                <if test="reply_id != null and reply_id != ''">AND reply_id = #{reply_id}</if>
+                <if test="board_id != null and board_id != ''">AND board_id = #{board_id}</if>
+                <if test="parent_reply_id != null and parent_reply_id != ''">AND parent_reply_id = #{parent_reply_id}</if>
+                <if test="_content != null and _content != ''">AND content LIKE CONCAT('%', #{_content}, '%')</if>
+                <if test="_writer_name != null and _writer_name != ''">AND writer_name LIKE CONCAT('%', #{_writer_name}, '%')</if>
+            </where>
+        ) AS sub
+        <include refid="sortFilter"/>
+        <if test="row_range != null and offset != null">
+            LIMIT #{row_range} OFFSET #{offset}
+        </if>
+    </select>
+
+    <select id="SELECT_PAGING_TOTAL_NUMBER" resultType="int">
+        SELECT CEIL(COUNT(*) / #{row_range}) FROM SYS_BBS_REPLY
+        <where>
+            <if test="board_id != null and board_id != ''">AND board_id = #{board_id}</if>
+            <if test="_content != null and _content != ''">AND content LIKE CONCAT('%', #{_content}, '%')</if>
+        </where>
+    </select>
+
+    <select id="SELECT" resultType="com.vims.common.bbs.SysBbsReply">
+        SELECT
+            reply_id, board_id, parent_reply_id, content, writer_name,
+            system_create_userid, system_create_date, system_update_userid, system_update_date
+        FROM SYS_BBS_REPLY
+        <where>
+            <if test="reply_id != null and reply_id != ''">AND reply_id = #{reply_id}</if>
+            <if test="board_id != null and board_id != ''">AND board_id = #{board_id}</if>
+        </where>
+    </select>
+
+    <!-- 게시물 ID로 댓글 목록 조회 (계층 구조 정렬: 부모 댓글 먼저, 그 아래 대댓글) -->
+    <select id="SELECT_BY_BOARD_ID" resultType="com.vims.common.bbs.SysBbsReply">
+        SELECT
+            reply_id, board_id, parent_reply_id, content, writer_name,
+            system_create_userid, system_create_date, system_update_userid, system_update_date
+        FROM SYS_BBS_REPLY
+        WHERE board_id = #{board_id}
+        ORDER BY 
+            COALESCE(parent_reply_id, reply_id) ASC,
+            parent_reply_id IS NOT NULL ASC,
+            system_create_date ASC
+    </select>
+
+    <!-- 게시물별 댓글 수 조회 -->
+    <select id="COUNT_BY_BOARD_ID" resultType="int">
+        SELECT COUNT(*) FROM SYS_BBS_REPLY WHERE board_id = #{board_id}
+    </select>
+
+    <insert id="INSERT">
+        INSERT INTO SYS_BBS_REPLY(
+            reply_id, board_id, parent_reply_id, content, writer_name,
+            system_create_userid, system_create_date, system_update_userid, system_update_date
+        )
+        VALUES(
+            #{reply_id}, #{board_id}, #{parent_reply_id}, #{content}, #{writer_name},
+            #{system_create_userid}, NOW(), #{system_update_userid}, NOW()
+        )
+    </insert>
+
+    <update id="UPDATE">
+        UPDATE SYS_BBS_REPLY
+        <set>
+            <if test="content != null">content = #{content},</if>
+            <if test="writer_name != null">writer_name = #{writer_name},</if>
+            system_update_userid = #{system_update_userid},
+            system_update_date = NOW()
+        </set>
+        <where>
+            AND reply_id = #{reply_id}
+        </where>
+    </update>
+
+    <delete id="DELETE">
+        DELETE FROM SYS_BBS_REPLY WHERE reply_id = #{reply_id}
+    </delete>
+</mapper>

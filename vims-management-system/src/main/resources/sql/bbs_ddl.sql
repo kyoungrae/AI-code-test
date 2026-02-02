@@ -44,3 +44,16 @@ CREATE TABLE SYS_BBS_BOARD (
     PRIMARY KEY (board_id),
     CONSTRAINT FK_SYS_BBS_ID FOREIGN KEY (bbs_id) REFERENCES SYS_BBS (bbs_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='게시판 게시물 정보';
+-- 4. 게시판 댓글 (SYS_BBS_REPLY)
+CREATE TABLE SYS_BBS_REPLY (
+                               REPLY_ID VARCHAR(50) PRIMARY KEY COMMENT '댓글 ID',
+                               BOARD_ID VARCHAR(50) NOT NULL COMMENT '게시물 ID',
+                               PARENT_REPLY_ID VARCHAR(50) DEFAULT NULL COMMENT '부모 댓글 ID',
+                               CONTENT TEXT NOT NULL COMMENT '댓글 내용',
+                               WRITER_NAME VARCHAR(100) COMMENT '작성자 이름',
+                               SYSTEM_CREATE_USERID VARCHAR(100) COMMENT '시스템 작성자ID',
+                               SYSTEM_CREATE_DATE DATETIME COMMENT '시슷템 등록 일시',
+                               SYSTEM_UPDATE_USERID VARCHAR(100) COMMENT '시스템 수정자ID',
+                               SYSTEM_UPDATE_DATE DATETIME COMMENT '시스템 수정 일시',
+                               FOREIGN KEY (BOARD_ID) REFERENCES SYS_BBS_BOARD(BOARD_ID) ON DELETE CASCADE
+);
