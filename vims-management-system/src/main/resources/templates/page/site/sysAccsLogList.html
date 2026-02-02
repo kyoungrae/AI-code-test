@@ -353,10 +353,10 @@
         sysAccsLog_grid.detailBtnClick(sysAccsLogDetailPopupOpen, "detail_btn");
 
         //그리드 내부의 수정 버튼 클릭 이벤트(수정 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
-        sysAccsLog_grid.updateBtnClick(sysAccsLogUpdatePopupOpen, "update_btn");
+        // sysAccsLog_grid.updateBtnClick(sysAccsLogUpdatePopupOpen, "update_btn");
 
         //그리드 내부의 삭제 버튼 클릭 이벤트(삭제 팝업 호출) 설정(버튼클릭시 호출될 함수, 그리드 헤더 부분에 설정한 버튼 ID)
-        sysAccsLog_grid.deleteBtnClick(sysAccsLogRemove, "delete_btn");
+        // sysAccsLog_grid.deleteBtnClick(sysAccsLogRemove, "delete_btn");
 
         //그리스 내부의 header click 정렬 이벤트 설정
         sysAccsLog_grid.sortDataSet(findBySysAccsLogList);
@@ -391,7 +391,8 @@
         formUtil.toast("response status is :" + status, "error");
       }
     }).catch(error => {
-      formUtil.toast(error.response.data, "error");
+
+      formUtil.toast(error, "error");
     })
   }
   //FUN : 상세팝업 호출
