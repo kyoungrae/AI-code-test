@@ -60,6 +60,37 @@ public class SysBbsReplyService extends AbstractCommonService<SysBbsReply> {
 
     @Override
     protected int removeImpl(SysBbsReply request) {
+        // 권한 검증: 작성자 본인 확인
+        try {
+            List<SysBbsReply> replies = sysBbsReplyMapper.SELECT(request);
+            if (replies != null && !replies.isEmpty()) {
+                SysBbsReply targetReply = replies.get(0);
+
+                // 현재 로그인한 사용자 정보 가져오기
+                org.springframework.security.core.Authentication authentication = org.springframework.security.core.context.SecurityContextHolder
+                        .getContext().getAuthentication();
+
+                if (authentication != null
+                        && authentication.getPrincipal() instanceof com.system.auth.authuser.AuthUser) {
+                    com.system.auth.authuser.AuthUser user = (com.system.auth.authuser.AuthUser) authentication
+                            .getPrincipal();
+                    String currentUserEmail = user.getEmail();
+
+                    // 관리자 권한이 있는 경우 삭제 허용 (선택 사항, 여기서는 작성자만 허용)
+                    // if (!currentUserEmail.equals(targetReply.getSystem_create_userid()) &&
+                    // !user.getRole().name().equals("ADMIN")) {
+
+                    if (!currentUserEmail.equals(targetReply.getSystem_create_userid())) {
+                        // 작성자가 아니면 삭제 불가 (0 반환)
+                        return 0;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+
         return sysBbsReplyMapper.DELETE(request);
     }
 

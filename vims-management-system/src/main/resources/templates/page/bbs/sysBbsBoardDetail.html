@@ -230,21 +230,32 @@
             return;
         }
 
+        let userInfo = new Session().getItem("userInfo");
+        let currentUserEmail = userInfo ? userInfo.email : null;
+
         replyList.forEach(reply => {
             let isChildReply = reply.parent_reply_id !== null && reply.parent_reply_id !== '';
+            let isMine = currentUserEmail && (currentUserEmail === reply.system_create_userid);
+
+            let deleteBtnHtml = '';
+            if (isMine) {
+                deleteBtnHtml = `
+                    <div class="gi-flex gi-grid-gap-5px">
+                        <button class="gi-btn-icon reply-delete-btn" style="padding:10px;" data-reply-id="${reply.reply_id}" title="${Message.Label.Array["DELETE_BTN"] || '삭제'}">
+                            <i class="fa-solid fa-trash" style="color: #ef4444; font-size: 12px;"></i>
+                        </button>
+                    </div>`;
+            }
+
             let replyCard = $(`
                 <div class="gi-reply-card ${isChildReply ? 'gi-reply-child' : ''}" data-reply-id="${reply.reply_id}" 
                      style="background: #fff; padding: 12px 15px; border-radius: 8px; border: 1px solid #e2e8f0; ${isChildReply ? 'margin-left: 30px; border-left: 3px solid var(--background-color-btn-blue);' : ''}">
                     <div class="gi-flex gi-flex-justify-content-between gi-flex-align-items-center gi-margin-bottom-8px">
                         <div class="gi-flex gi-grid-gap-10px gi-flex-align-items-center">
-                            <span style="font-weight: 600; color: #1e293b;">${reply.writer_name || (Message.Label.Array["UNKNOWN"] || '익명')}</span>
+                            <span style="font-weight: 600; color: #1e293b;">${reply.writer_name || (Message.Label.Array["SYS_BBS_BOARD.ANONYMOUS"] || '익명')}</span>
                             <span style="font-size: 12px; color: #94a3b8;">${reply.system_create_date}</span>
                         </div>
-                        <div class="gi-flex gi-grid-gap-5px">
-                            <button class="gi-btn-icon reply-delete-btn" style="padding:10px;" data-reply-id="${reply.reply_id}" title="${Message.Label.Array["DELETE_BTN"] || '삭제'}">
-                                <i class="fa-solid fa-trash" style="color: #ef4444; font-size: 12px;"></i>
-                            </button>
-                        </div>
+                        ${deleteBtnHtml}
                     </div>
                     <div style="color: #475569; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(reply.content)}</div>
                 </div>
