@@ -128,10 +128,10 @@
                             data-required="true" autocomplete="off" />
                     </div>
                     <div class="gi-input-container">
-                        <label for="use_yn-update" class="gi-input-label" data-focus-label="true"
+                        <label for="update_use_yn" class="gi-input-label" data-focus-label="true"
                             data-required="true">[Page.Message].Message.Label.Array["SYS_DEPT_GROUP.USE_YN"]</label>
-                        <input gi-selectbox data-selectbox-field="USE_YN" data-field="use_yn" id="use_yn-update"
-                            name="use_yn" class="gi-input" data-required="true" autocomplete="off" />
+                        <input type="toggle" data-field="use_yn" id="update_use_yn" name="use_yn" class="gi-input"
+                            data-required="true" autocomplete="off" />
                     </div>
                 </div>
             </form>
@@ -549,7 +549,7 @@
     function updatePopupSysDeptGroup(data) {
         $("#" + SYS_DEPT_GROUP_UPDATE_PRGMID).attr("data-popup-open", true);
         dataBinding.setDataForm("sysDeptGroupUpdate", data);
-        dataBinding.setDataSelectBox("use_yn-update", data.use_yn);
+        dataBinding.setDataSelectBox("update_use_yn", data.use_yn);
         $("#sysDeptGroupUpdate-btn").off("click.updateSysDeptGroup").on("click.updateSysDeptGroup", function () {
             let param = dataBinding.getData(SYS_DEPT_GROUP_UPDATE_PRGMID);
             updateSysDeptGroup(param);
