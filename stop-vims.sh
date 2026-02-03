@@ -10,6 +10,7 @@ APPS=(
     "vims-management-ROOT.jar"
     "FMS-ROOT.jar"
     "vims-gateway-ROOT.jar"
+    "vims-web-app-ROOT.jar"
 )
 
 # 사용자 친화적인 이름 매핑
@@ -18,6 +19,7 @@ NAMES=(
     "CMS (vims-management-system)"
     "FMS (FMS)"
     "Gateway (vims-gateway)"
+    "WebApp (vims-web-app)"
 )
 
 for i in "${!APPS[@]}"; do

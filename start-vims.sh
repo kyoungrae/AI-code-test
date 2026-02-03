@@ -8,6 +8,7 @@ LOGIN_JAR="vims-login/target/vims-login-ROOT.jar"
 CMS_JAR="vims-management-system/target/vims-management-ROOT.jar"
 FMS_JAR="FMS/target/FMS-ROOT.jar"
 GATEWAY_JAR="vims-gateway/target/vims-gateway-ROOT.jar"
+WEB_APP_JAR="vims-web-app/target/vims-web-app-ROOT.jar"
 
 # 로그 디렉토리 생성
 LOG_DIR="logs"
@@ -61,6 +62,7 @@ start_app() {
 start_app "Login" "$LOGIN_JAR"
 start_app "CMS" "$CMS_JAR"
 start_app "FMS" "$FMS_JAR"
+start_app "WebApp" "$WEB_APP_JAR"
 start_app "Gateway" "$GATEWAY_JAR"
 
 echo "=== 🎉 모든 애플리케이션 시작 프로세스 요청 완료! ==="

@@ -63,6 +63,7 @@ PROJECTS_NEEDING_LIB=(
     "vims-management-system"
     "vims-login"
     "FMS"
+    "vims-web-app"
 )
 
 for PROJ in "${PROJECTS_NEEDING_LIB[@]}"; do
@@ -80,6 +81,7 @@ APPS=(
     "vims-management-system"
     "vims-gateway"
     "FMS"
+    "vims-web-app"
 )
 
 for APP in "${APPS[@]}"; do
