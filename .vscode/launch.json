@@ -9,6 +9,13 @@
             "name": "VimsWebApplication",
             "request": "launch",
             "mainClass": "com.giwebapp.VimsWebApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "VimsWebApplication",
+            "request": "launch",
+            "mainClass": "com.giwebapp.VimsWebApplication",
             "projectName": "vims-web-app"
         },
         {

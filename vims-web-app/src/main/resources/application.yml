@@ -6,8 +6,11 @@ spring:
     name: vims-web-app
   thymeleaf:
     cache: false
-    prefix: classpath:/templates/
+    prefix: file:src/main/resources/templates/
     suffix: .html
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
   mvc:
     static-path-pattern: /static/**
   data:
