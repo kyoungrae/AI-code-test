@@ -1,2 +1,13 @@
 .DS_Store
 app.log
+target/
+bin/
+.idea/
+*.class
+*.jar
+*.war
+*.ear
+.settings/
+.project
+.classpath
+.factorypath
