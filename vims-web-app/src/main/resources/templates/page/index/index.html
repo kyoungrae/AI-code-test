@@ -563,25 +563,9 @@
         // loadToScript is defined in Common.js
         new loadToScript();
         new PageInit();
-        initLanguageSelector();
         clickEvent();
+        initLanguageSelector();
     }
-
-    function clickEvent() {
-        // Login Tab switching logic
-        $('.login-card .tab-link').on('click', function () {
-            const tabId = $(this).data('tab');
-
-            // Update active tab
-            $('.login-card .tab-link').removeClass('active');
-            $(this).addClass('active');
-
-            // Show corresponding panel
-            $('.login-card .tab-panel').hide();
-            $('#tab-' + tabId).show();
-        });
-    }
-
     function initLanguageSelector() {
         const $options = $(".gi-language-option");
         const $slider = $("#languageSlider");
@@ -627,4 +611,19 @@
             $currentLangCode.text(langCodeMap[lang] || "KO");
         }
     }
+    function clickEvent() {
+        // Login Tab switching logic
+        $('.login-card .tab-link').on('click', function () {
+            const tabId = $(this).data('tab');
+
+            // Update active tab
+            $('.login-card .tab-link').removeClass('active');
+            $(this).addClass('active');
+
+            // Show corresponding panel
+            $('.login-card .tab-panel').hide();
+            $('#tab-' + tabId).show();
+        });
+    }
+
 </script>

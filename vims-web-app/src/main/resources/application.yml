@@ -42,11 +42,7 @@ spring:
         database: mysql
         database-platform: org.hibernate.dialect.MariaDB103Dialect
     
-    thymeleaf:
-        cache: false
-        check-template-location: true
-        prefix: classpath:/templates/
-        suffix: .html
+
     
     devtools:
         livereload:

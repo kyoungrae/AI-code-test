@@ -388,57 +388,7 @@
         var changedHomeType = true;
         var common_session = new Session();
         var input = new InputUtility();
-        layoutInit();
 
-        function layoutInit() {
-            initLanguageSelector();
-        }
-
-        function initLanguageSelector() {
-            const $options = $(".gi-language-option");
-            const $slider = $("#languageSlider");
-            const $currentLangCode = $("#currentLangCode");
-
-            const langCodeMap = {
-                ko: "KO",
-                mn: "MN",
-                en: "EN"
-            };
-
-            const savedLang = localStorage.getItem("selectedLanguage") || "ko";
-            setActiveLanguage(savedLang);
-
-            $options.on("click", function () {
-                const lang = $(this).data("lang");
-                setActiveLanguage(lang);
-                localStorage.setItem("selectedLanguage", lang);
-                setTimeout(() => location.reload(), 300);
-            });
-
-            $("#languageTrigger").on("click", function (e) {
-                e.stopPropagation();
-                $(".gi-home-setting-article").toggleClass("lang-panel-closed");
-            });
-
-            $(document).on("click", function (e) {
-                if (!$(e.target).closest("#languageTrigger, .gi-home-setting-article").length) {
-                    $(".gi-home-setting-article").addClass("lang-panel-closed");
-                }
-            });
-
-            function setActiveLanguage(lang) {
-                const $targetOption = $options.filter(`[data-lang="${lang}"]`);
-                const index = $options.index($targetOption);
-
-                $options.removeClass("active");
-                $targetOption.addClass("active");
-
-                $slider.removeClass("position-0 position-1 position-2");
-                $slider.addClass(`position-${index}`);
-
-                $currentLangCode.text(langCodeMap[lang] || "KO");
-            }
-        }
         $(document).ready(function () {
             // Tab switching logic for the hero card (if applicable)
             $(document).on('click', '.tab-link', function () {
