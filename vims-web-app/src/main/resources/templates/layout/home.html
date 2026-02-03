@@ -10,25 +10,36 @@
     <link rel="stylesheet" th:href="@{/static/common/css/style.css}">
     <!-- JS -->
     <script th:src="@{/static/assets/excel/xlsx.full.min.js}"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Common Utilities (Served from vims-login via Gateway) -->
-    <script src="/common/js/common/Message.js"></script>
-    <script src="/common/js/message/ko/webapp/WebAppMessage.js"></script>
-    <script src="/common/js/common/CommonTag.js"></script>
-    <script src="/common/js/common/FormUtility.js"></script>
-    <script src="/common/js/common/utils/CommonUtils.js"></script>
-    <script src="/common/js/common/utils/InputTagUtils.js"></script>
-    <script src="/common/js/common/utils/TagValidationUtils.js"></script>
-    <script src="/common/js/common/utils/DateTagUtils.js"></script>
-    <script src="/common/js/common/utils/SelectTagUtils.js"></script>
-    <script src="/common/js/common/utils/AddressTagUtils.js"></script>
-    <script src="/common/js/common/utils/InputMaskUtils.js"></script>
-    <script src="/common/js/common/utils/ValidationUtils.js"></script>
-    <script src="/common/js/common/utils/PageUtils.js"></script>
-    <script src="/common/js/common/utils/PopupUtils.js"></script>
-    <!-- Main Common Script -->
-    <script src="/common/js/common/Common.js"></script> <!-- Load via Gateway -->
-    <th:block th:replace="${extra_head} ?: ~{}"></th:block>
+    <script type="text/javascript" src="/common/js/jquery/jquery3.6.0.js"></script>
+    <script type="text/javascript" src="/common/js/common/FormUtility.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/GridSortManager.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/GridUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/CommonUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/ValidationUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/PopupUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/FormatUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/FileUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/PageUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/CalendarUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/ChartUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/TabUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/KeyPadUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/DocumentsForm.js"></script>
+    <script type="text/javascript" src="/common/js/common/Common.js"></script>
+    <script type="text/javascript" src="/common/js/common/Api.js"></script>
+    <script type="text/javascript" src="/common/js/common/CommonTag.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/InputTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/InputMaskUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/DateTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/SelectTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/AddressTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/TagValidationUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/SliderUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/JwtUtils.js"></script>
+    <script type="text/javascript" src="/common/js/axios/axios.js"></script>
+    <script type="text/javascript" src="/common/js/common/AxiosConfig.js"></script>
+    <script type="text/javascript" src="/common/js/common/InputUtility.js"></script>
+    <script type="text/javascript" src="/common/js/messageConfig.js"></script>
 </head>
 
 <body>
@@ -369,14 +380,66 @@
     </footer>
 
     <script>
-        $(document).ready(function () {
-            console.log("VIMS Web App initialized");
+        new loadToScript();
+        let formUtil = new FormUtility();
+        var commonTag = new CommonTag();
+        var dataBinding = new DataBinding();
+        var popup = new Popup();
+        var changedHomeType = true;
+        var common_session = new Session();
+        var input = new InputUtility();
+        layoutInit();
 
-            // Initialize Common JS logic (including LanguageSelector)
-            if (typeof PageInit !== 'undefined') {
-                new PageInit();
+        function layoutInit() {
+            initLanguageSelector();
+        }
+
+        function initLanguageSelector() {
+            const $options = $(".gi-language-option");
+            const $slider = $("#languageSlider");
+            const $currentLangCode = $("#currentLangCode");
+
+            const langCodeMap = {
+                ko: "KO",
+                mn: "MN",
+                en: "EN"
+            };
+
+            const savedLang = localStorage.getItem("selectedLanguage") || "ko";
+            setActiveLanguage(savedLang);
+
+            $options.on("click", function () {
+                const lang = $(this).data("lang");
+                setActiveLanguage(lang);
+                localStorage.setItem("selectedLanguage", lang);
+                setTimeout(() => location.reload(), 300);
+            });
+
+            $("#languageTrigger").on("click", function (e) {
+                e.stopPropagation();
+                $(".gi-home-setting-article").toggleClass("lang-panel-closed");
+            });
+
+            $(document).on("click", function (e) {
+                if (!$(e.target).closest("#languageTrigger, .gi-home-setting-article").length) {
+                    $(".gi-home-setting-article").addClass("lang-panel-closed");
+                }
+            });
+
+            function setActiveLanguage(lang) {
+                const $targetOption = $options.filter(`[data-lang="${lang}"]`);
+                const index = $options.index($targetOption);
+
+                $options.removeClass("active");
+                $targetOption.addClass("active");
+
+                $slider.removeClass("position-0 position-1 position-2");
+                $slider.addClass(`position-${index}`);
+
+                $currentLangCode.text(langCodeMap[lang] || "KO");
             }
-
+        }
+        $(document).ready(function () {
             // Tab switching logic for the hero card (if applicable)
             $(document).on('click', '.tab-link', function () {
                 $('.tab-link').removeClass('active');
