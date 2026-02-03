@@ -72,6 +72,7 @@ fi
 mkdir -p vims-management-system/src/lib
 mkdir -p vims-login/src/lib
 mkdir -p FMS/src/lib
+mkdir -p vims-web-app/src/lib
 
 # JAR 파일 복사
 echo "📦 vims-management-system에 배포 중..."
@@ -83,6 +84,9 @@ cp "$JAR_PATH" vims-login/src/lib/
 echo "📦 FMS에 배포 중..."
 cp "$JAR_PATH" FMS/src/lib/
 
+echo "📦 vims-web-app에 배포 중..."
+cp "$JAR_PATH" vims-web-app/src/lib/
+
 # 결과 확인
 echo ""
 echo "=== 배포 완료! ==="
@@ -91,6 +95,7 @@ echo "배포된 파일:"
 ls -lh vims-management-system/src/lib/core-lib-1.0.jar
 ls -lh vims-login/src/lib/core-lib-1.0.jar
 ls -lh FMS/src/lib/core-lib-1.0.jar
+ls -lh vims-web-app/src/lib/core-lib-1.0.jar
 
 echo ""
 echo "✅ 이제 각 애플리케이션을 재시작하세요!"
@@ -165,6 +170,24 @@ if [ $? -ne 0 ]; then
     fi
 fi
 echo "✅ FMS 빌드 성공!"
+cd ..
+
+echo ""
+echo "=== 7. vims-web-app 프로젝트 빌드 시작 ==="
+cd vims-web-app
+echo "🚀 vims-web-app 빌드 실행..."
+"$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+if [ $? -ne 0 ]; then
+    echo "⚠️ 첫 번째 시도 실패 (파일 잠금 문제일 수 있음)"
+    echo "🔄 1초 후 재시도합니다..."
+    sleep 1
+    "$MVN_CMD" clean package -DskipTests -Dmaven.javadoc.skip=true
+    if [ $? -ne 0 ]; then
+        echo "❌ vims-web-app 빌드 실패"
+        exit 1
+    fi
+fi
+echo "✅ vims-web-app 빌드 성공!"
 cd ..
 
 echo ""
