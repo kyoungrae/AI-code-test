@@ -33,7 +33,8 @@ class loadToScript {
             "management/SitePopupNoticeTargetGroupMessage",
             "management/SiteScheduledMailMessage",
             "management/SiteScheduledMailTargetGroupMessage",
-            "management/SiteSentMailManagementMessage"
+            "management/SiteSentMailManagementMessage",
+            "webapp/WebAppMessage"
         ];
 
         // Build the list with prefixes
