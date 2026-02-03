@@ -74,29 +74,19 @@ spring:
                 rewrite-uri: http://localhost:8080/
                 strip-version: NEVER_STRIP
 
-#        # 등록 서비스 라우팅
-#        - id: vims-registration_route
-#          uri: http://localhost:8082 # 등록 모듈이 실행되는 주소
-#          predicates:
-#            - Path=/api/register/**
-#          filters:
-#            - StripPrefix=1
-#
-#        # 검사 서비스 라우팅
-#        - id: vims-inspection_route
-#          uri: lb://API-SERVICE # Eureka 같은 서비스 디스커버리에 등록된 서비스명
-#          predicates:
-#            - Path=/api/**
-#          filters:
-#            - RewritePath=/api/(?<segment>.*), /${segment} # /api/v1/users -> /v1/users
-#
-#        # 통계 서비스 라우팅
-#        - id: vims-statistics_route
-#          uri: http://localhost:8083 # 검색 모듈이 실행되는 주소
-#          predicates:
-#            - Path=/api/search/**
-#          filters:
-#            - StripPrefix=1
+        # NOTE: 대국민 웹 서비스 라우팅 (vims-web-app)
+        - id: vims-web-app_route
+          uri: http://localhost:8084
+          predicates:
+            - Path=/web/**
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+            - name: RewriteLocationResponseHeader
+              args:
+                name: Location
+                rewrite-uri: http://localhost:8080/
+                strip-version: NEVER_STRIP
+            - RewritePath=/web/(?<segment>.*), /${segment}
 
 token:
   secret: YeyKgN7Oa0dfKJCR0Xr3Sp45WdU8BCv2Zd0X6KxRTfFgfPZ3MH3xccjC3WCt90Az # Login 서비스와 동일한 키 값 사용

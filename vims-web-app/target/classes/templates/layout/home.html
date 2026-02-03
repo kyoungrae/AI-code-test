@@ -4,27 +4,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VIMS 대국민 홈페이지</title>
+    <title>VIMS 대국민 서비스</title>
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/static/assets/fontawesome/css/all.min.css}">
     <link rel="stylesheet" th:href="@{/static/common/css/style.css}">
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
-        rel="stylesheet">
+    <!-- JS -->
+    <script th:src="@{/static/assets/excel/xlsx.full.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script th:src="@{/static/common/js/Common.js}"></script>
     <th:block th:replace="${extra_head} ?: ~{}"></th:block>
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <div class="container">
-            <nav>
-                <a href="/" class="logo">VIMS Web</a>
-                <ul class="nav-links">
-                    <li><a href="#">사업안내</a></li>
-                    <li><a href="#">민원신청</a></li>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">로그인</a></li>
-                </ul>
+            <a href="/" class="logo">VIMS<span>.net</span></a>
+
+            <!-- Desktop Navigation -->
+            <nav class="nav-web">
+                <!-- Automobile Registration -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">자동차 등록</a>
+                    <div class="mega-menu">
+                        <div class="container">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <span class="mega-title">자동차 등록</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">등록절차안내</a></li>
+                                        <li>
+                                            <a href="#" class="mega-link">등록신청</a>
+                                            <ul class="mega-sublist">
+                                                <li><a href="#" class="mega-sublink">신규등록</a></li>
+                                                <li><a href="#" class="mega-sublink">이전등록</a></li>
+                                                <li><a href="#" class="mega-sublink">말소등록</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">서비스 업무 신청</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">차량번호 변경</a></li>
+                                        <li><a href="#" class="mega-link">번호판 재발급</a></li>
+                                        <li><a href="#" class="mega-link">등록증 재발급</a></li>
+                                        <li><a href="#" class="mega-link">등록증 교체</a></li>
+                                        <li><a href="#" class="mega-link">번호보관 등록</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">자동차</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">자동차 번호 선택</a></li>
+                                        <li><a href="#" class="mega-link">자동차 번호예약</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automobile Inspection -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">자동차 검사</a>
+                    <div class="mega-menu">
+                        <div class="container">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <span class="mega-title">검사안내</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">검사절차 안내</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">검사예약</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">신규검사 신청</a></li>
+                                        <li><a href="#" class="mega-link">정기검사 신청</a></li>
+                                        <li><a href="#" class="mega-link">기타검사신청</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">승인/표기</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">튜닝승인 신청</a></li>
+                                        <li>
+                                            <a href="#" class="mega-link">차대번호 표기 신청</a>
+                                            <ul class="mega-sublist">
+                                                <li><a href="#" class="mega-sublink">차대번호 신규 표기 신청</a></li>
+                                                <li><a href="#" class="mega-sublink">차대번호 재표기 신청</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automobile Info Registration -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">자동차 정보 등록</a>
+                    <div class="mega-menu">
+                        <div class="container">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <span class="mega-title">수입차량</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">수입절차 및 준비사항 안내</a></li>
+                                        <li><a href="#" class="mega-link">수입차량 정보 등록</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">제작차량</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">제작차량정보 등록 안내</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Search -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">정보 조회</a>
+                    <div class="mega-menu">
+                        <div class="container">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <span class="mega-title">NRTC 조회</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">차량소유 확인</a></li>
+                                        <li><a href="#" class="mega-link">차량등록 확인</a></li>
+                                        <li><a href="#" class="mega-link">자동차검사 결과표</a></li>
+                                        <li><a href="#" class="mega-link">내차량 정보 조회</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">타기관 조회</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">통행료 미납조회</a></li>
+                                        <li><a href="#" class="mega-link">벌금 미납 조회</a></li>
+                                        <li><a href="#" class="mega-link">세금 미납 조회</a></li>
+                                        <li><a href="#" class="mega-link">보험가입 현황 조회</a></li>
+                                        <li><a href="#" class="mega-link">세관정보 조회</a></li>
+                                        <li><a href="#" class="mega-link">서비스비용 납부 조회</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MY-PAGE -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">MY-PAGE</a>
+                    <div class="mega-menu">
+                        <div class="container">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <span class="mega-title">기본정보</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">개인정보 수정</a></li>
+                                        <li><a href="#" class="mega-link">진행상황 조회</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">수수료</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">수수료 납부</a></li>
+                                        <li><a href="#" class="mega-link">환불신청</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">관리자</a>
+                    <div class="mega-menu">
+                        <div class="container">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <span class="mega-title">게시판</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">공지사항</a></li>
+                                        <li><a href="#" class="mega-link">자유게시판</a></li>
+                                        <li><a href="#" class="mega-link">자료실</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-column">
+                                    <span class="mega-title">관리기능</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">메뉴관리</a></li>
+                                        <li><a href="#" class="mega-link">권한관리</a></li>
+                                        <li><a href="#" class="mega-link">연계정보관리</a></li>
+                                        <li><a href="#" class="mega-link">로그관리</a></li>
+                                        <li><a href="#" class="mega-link">문자발송관리</a></li>
+                                        <li><a href="#" class="mega-link">알림관리(내외부)</a></li>
+                                        <li><a href="#" class="mega-link">POP-UP 관리</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">사용자</a>
+                    <div class="mega-menu">
+                        <div class="container">
+                            <div class="mega-content">
+                                <div class="mega-column">
+                                    <span class="mega-title">계정/약관</span>
+                                    <ul class="mega-list">
+                                        <li><a href="#" class="mega-link">로그인/로그아웃</a></li>
+                                        <li><a href="#" class="mega-link">개인정보보호방침</a></li>
+                                        <li><a href="#" class="mega-link">사이트맵</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
+
+            <button class="mobile-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -33,12 +244,18 @@
     </main>
 
     <footer>
-        <div class="container" style="padding: 2rem 0; text-align: center; color: #777;">
-            <p>&copy; 2026 VIMS. All rights reserved.</p>
+        <div class="container"
+            style="padding: 3rem 0; border-top: 1px solid #eee; margin-top: 80px; text-align: center; color: #999;">
+            <p>&copy; 2026 VIMS Administration. All rights reserved.</p>
         </div>
     </footer>
 
-    <script th:src="@{/static/common/js/Common.js}"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("VIMS Web App initialized");
+            // Mobile toggle logic can be added here
+        });
+    </script>
 </body>
 
 </html>
