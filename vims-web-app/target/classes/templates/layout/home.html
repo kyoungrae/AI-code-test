@@ -11,44 +11,26 @@
     <!-- JS -->
     <script th:src="@{/static/assets/excel/xlsx.full.min.js}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Common Utilities (Served from vims-login via Gateway) -->
+    <script src="/common/js/common/CommonTag.js"></script>
+    <script src="/common/js/common/FormUtility.js"></script>
+    <script src="/common/js/common/utils/CommonUtils.js"></script>
+    <script src="/common/js/common/utils/InputTagUtils.js"></script>
+    <script src="/common/js/common/utils/TagValidationUtils.js"></script>
+    <script src="/common/js/common/utils/DateTagUtils.js"></script>
+    <script src="/common/js/common/utils/SelectTagUtils.js"></script>
+    <script src="/common/js/common/utils/AddressTagUtils.js"></script>
+    <script src="/common/js/common/utils/InputMaskUtils.js"></script>
+    <script src="/common/js/common/utils/ValidationUtils.js"></script>
+    <script src="/common/js/common/utils/PageUtils.js"></script>
+    <script src="/common/js/common/utils/PopupUtils.js"></script>
+    <!-- Main Common Script -->
     <script src="/common/js/common/Common.js"></script> <!-- Load via Gateway -->
     <th:block th:replace="${extra_head} ?: ~{}"></th:block>
 </head>
 
 <body>
-    <!-- Top Utility Bar -->
-    <div class="top-utility">
-        <div class="container">
 
-            <!-- Language Selector -->
-            <div class="lang-selector">
-                <button class="lang-btn">
-                    <i class="fa-solid fa-globe"></i>
-                    <span class="current-lang">KO</span>
-                </button>
-                <div class="lang-dropdown">
-                    <div class="lang-header">
-                        <i class="fa-solid fa-globe"></i> LANGUAGE
-                    </div>
-                    <div class="lang-options">
-                        <a href="#" class="lang-opt active" data-lang="ko">
-                            <!-- Use Emoji or FontAwesome for flags if images are not available -->
-                            <span class="lang-flag">🇰🇷</span>
-                            <span class="lang-name">한국어</span>
-                        </a>
-                        <a href="#" class="lang-opt" data-lang="mn">
-                            <span class="lang-flag">🇲🇳</span>
-                            <span class="lang-name">Монгол</span>
-                        </a>
-                        <a href="#" class="lang-opt" data-lang="en">
-                            <span class="lang-flag">🇺🇸</span>
-                            <span class="lang-name">English</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <header class="header">
         <div class="container">
@@ -239,6 +221,35 @@
             <div style="display: flex; gap: 20px; align-items: center;">
                 <a href="#" style="font-size: 20px; color: var(--text-main);"><i
                         class="fa-solid fa-magnifying-glass"></i></a>
+
+                <!-- Language Selector -->
+                <div class="lang-selector" style="margin-left: 0;">
+                    <button class="lang-btn">
+                        <i class="fa-solid fa-globe"></i>
+                        <span class="current-lang">KO</span>
+                    </button>
+                    <div class="lang-dropdown">
+                        <div class="lang-header">
+                            <i class="fa-solid fa-globe"></i> LANGUAGE
+                        </div>
+                        <div class="lang-options">
+                            <a href="#" class="lang-opt active" data-lang="ko">
+                                <!-- Use Emoji or FontAwesome for flags if images are not available -->
+                                <span class="lang-flag">🇰🇷</span>
+                                <span class="lang-name">한국어</span>
+                            </a>
+                            <a href="#" class="lang-opt" data-lang="mn">
+                                <span class="lang-flag">🇲🇳</span>
+                                <span class="lang-name">Монгол</span>
+                            </a>
+                            <a href="#" class="lang-opt" data-lang="en">
+                                <span class="lang-flag">🇺🇸</span>
+                                <span class="lang-name">English</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <button class="mobile-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
                     <i class="fa-solid fa-bars"></i>
                 </button>
