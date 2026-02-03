@@ -1,39 +1,354 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/home :: html(
-    content=~{:: section},
-    extra_head=~{:: script}
-)}" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 
 <head>
-    <script>
-        $(document).ready(function () {
-            // Login Tab switching logic
-            $('.login-card .tab-link').on('click', function () {
-                const tabId = $(this).data('tab');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MVIMS | 자동차 통합 관리 서비스</title>
+    <link rel="shortcut icon" href="#">
 
-                // Update active tab
-                $('.login-card .tab-link').removeClass('active');
-                $(this).addClass('active');
+    <!-- CSS (via Gateway) -->
+    <link rel="stylesheet" href="/common/css/common/FormUtility.css">
+    <link rel="stylesheet" href="/common/css/common/index.css">
+    <link rel="stylesheet" href="/static/common/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-                // Show corresponding panel
-                $('.login-card .tab-panel').hide();
-                $('#tab-' + tabId).show();
-            });
-        });
-    </script>
+    <!-- JS (via Gateway) -->
+    <script type="text/javascript" src="/common/js/jquery/jquery3.6.0.js"></script>
+    <script type="text/javascript" src="/common/js/common/FormUtility.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/CommonUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/InputTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/InputMaskUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/DateTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/SelectTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/AddressTagUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/TagValidationUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/ValidationUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/PageUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/utils/PopupUtils.js"></script>
+    <script type="text/javascript" src="/common/js/common/CommonTag.js"></script>
+    <script type="text/javascript" src="/common/js/common/Common.js"></script>
+    <script type="text/javascript" src="/common/js/messageConfig.js"></script>
 </head>
 
 <body>
-    <section>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">MVIMS</a>
+
+            <!-- Desktop Navigation -->
+            <nav class="nav-web">
+                <!-- 메인 -->
+                <div class="nav-item">
+                    <a href="/" class="nav-link">[Page.Message].Message.Label.Array["NAV.MAIN"]</a>
+                </div>
+
+                <!-- 자동차 등록 -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.CAR_REG"]</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.REG_INFO"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REG_PROC_INFO"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.REG_APPLY"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.NEW_REG"]</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TRANSFER_REG"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CANCEL_REG"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.SVC_APPLY"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHANGE_CAR_NUM"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REISSUE_PLATE"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REISSUE_CERT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REPLACE_CERT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.KEEP_NUM_REG"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.CAR"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.SELECT_CAR_NUM"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.RESERVE_CAR_NUM"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 자동차 검사 -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.CAR_INSPECT"]</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.INSPECT_INFO"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.INSPECT_PROC_INFO"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span
+                                    class="mega-title">[Page.Message].Message.Label.Array["NAV.INSPECT_RESERVE"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.NEW_INSPECT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REGULAR_INSPECT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.OTHER_INSPECT"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MGMT_SVC"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TUNING_APPLY"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.CHASSIS_APPLY"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.NEW_CHASSIS"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.RE_CHASSIS"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 자동차 정보 등록 -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.CAR_INFO_REG"]</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.IMPORT_CAR_REG"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.IMPORT_PROC_INFO"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.IMPORT_REG"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MAKE_CAR"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.MAKE_CAR_REG_INFO"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 정보 조회 -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.INFO_SEARCH"]</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.NRTC_SEARCH"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_OWNER"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_REG"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.INSPECT_RESULT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.MY_CAR_INFO"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span
+                                    class="mega-title">[Page.Message].Message.Label.Array["NAV.OTHER_ORG_SEARCH"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TOLL_UNPAID"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.FINE_UNPAID"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TAX_UNPAID"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.INSURANCE_STATUS"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CUSTOMS_INFO"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.SVC_COST_PAY"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MY-PAGE -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.MY_PAGE"]</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.FEE_MGMT"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.PAY_FEE"]</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REFUND_APPLY"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MY_INFO_MGMT"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.EDIT_PRIV_INFO"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_PROGRESS"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 관리자/사용자 -->
+                <div class="nav-item">
+                    <a href="#" class="nav-link"
+                        style="opacity: 0.5;">[Page.Message].Message.Label.Array["NAV.SETTINGS"]</a>
+                    <div class="mega-menu">
+                        <div class="mega-content">
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.ADMIN"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.BBS_MGMT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.AUTH_SYS_MGMT"]</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.USER"]</span>
+                                <ul class="mega-list">
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.LOGIN_LOGOUT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.PRIVACY_POLICY"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.SITEMAP"]</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <a href="#" style="font-size: 20px; color: var(--text-main);"><i
+                        class="fa-solid fa-magnifying-glass"></i></a>
+
+                <!-- Language Selector -->
+                <div class="gi-language-trigger" id="languageTrigger">
+                    <i class="fa-solid fa-globe"></i>
+                    <span class="gi-current-lang" id="currentLangCode">KO</span>
+                    <article class="gi-home-setting-article lang-panel-closed" style="right: 0; left: auto;">
+                        <div class="gi-language-selector">
+                            <div class="gi-language-label">
+                                <i class="fa-solid fa-earth-asia"></i>
+                                <span>Language</span>
+                            </div>
+                            <div class="gi-language-toggle" id="languageToggle">
+                                <div class="gi-language-slider" id="languageSlider"></div>
+                                <button type="button" class="gi-language-option active" data-lang="ko">
+                                    <span class="gi-lang-flag">🇰🇷</span>
+                                    <span class="gi-lang-text">한국어</span>
+                                </button>
+                                <button type="button" class="gi-language-option" data-lang="mn">
+                                    <span class="gi-lang-flag">🇲🇳</span>
+                                    <span class="gi-lang-text">Монгол</span>
+                                </button>
+                                <button type="button" class="gi-language-option" data-lang="en">
+                                    <span class="gi-lang-flag">🇺🇸</span>
+                                    <span class="gi-lang-text">English</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <button class="mobile-toggle" style="font-size: 20px; background: none; border: none; cursor: pointer;">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
         <!-- Hero Section -->
         <div class="hero-wrapper">
             <div class="container">
                 <div class="hero-grid">
                     <!-- Banner -->
                     <div class="hero-banner">
-                        <img th:src="@{/static/assets/images/vims_banner_orange.png}" class="banner-img-bg"
+                        <img src="/web/static/assets/images/vims_banner_orange.png" class="banner-img-bg"
                             alt="Banner Image">
-                        <p style="color: white; opacity: 0.9;">자동차 등록부터 정기 검사까지<br>MVIMS으로 한번에 해결하세요.</p>
+                        <p style="color: white; opacity: 0.9;">[Page.Message].Message.Label.Array["MAIN.BANNER_TEXT"]
+                        </p>
 
                         <div style="display: flex; gap: 8px; margin-top: auto; position: relative; z-index: 1;">
                             <span
@@ -49,9 +364,10 @@
                     <!-- Interaction Card -->
                     <div class="login-card">
                         <div class="tab-nav">
-                            <div class="tab-link" data-tab="dan">DAN</div>
-                            <div class="tab-link active" data-tab="id">아이디</div>
-                            <div class="tab-link" data-tab="vehicle">차량번호</div>
+                            <div class="tab-link" data-tab="dan">[Page.Message].Message.Label.Array["LOGIN.TAB.DAN"]
+                            </div>
+                            <div class="tab-link active" data-tab="id">
+                                [Page.Message].Message.Label.Array["LOGIN.TAB.ID"]</div>
                         </div>
 
                         <div class="login-body">
@@ -60,78 +376,63 @@
                                 <div style="text-align: center; padding: 20px 0;">
                                     <i class="fa-solid fa-mobile-screen-button"
                                         style="font-size: 40px; color: var(--text-main); margin-bottom: 16px;"></i>
-                                    <p style="font-weight: 700;">모바일 앱의<br>QR코드로 간편하게 로그인 하세요.</p>
+                                    <p style="font-weight: 700;">[Page.Message].Message.Label.Array["LOGIN.DAN.DESC"]
+                                    </p>
                                 </div>
-                                <a href="#" class="login-btn">DAN 앱 열기</a>
+                                <a href="#"
+                                    class="login-btn">[Page.Message].Message.Label.Array["LOGIN.BTN.OPEN_APP"]</a>
                             </div>
 
                             <!-- ID/Password Login Panel -->
                             <div class="tab-panel" id="tab-id">
                                 <div class="login-form">
                                     <div class="form-group">
-                                        <label for="login-id">아이디</label>
-                                        <input type="text" id="login-id" placeholder="아이디를 입력하세요">
+                                        <label
+                                            for="login-id">[Page.Message].Message.Label.Array["LOGIN.LABEL.ID"]</label>
+                                        <input type="text" id="login-id"
+                                            placeholder="[Page.Message].Message.Label.Array[&quot;LOGIN.PLACEHOLDER.ID&quot;]">
                                     </div>
                                     <div class="form-group">
-                                        <label for="login-pw">비밀번호</label>
-                                        <input type="password" id="login-pw" placeholder="비밀번호를 입력하세요">
+                                        <label
+                                            for="login-pw">[Page.Message].Message.Label.Array["LOGIN.LABEL.PW"]</label>
+                                        <input type="password" id="login-pw"
+                                            placeholder="[Page.Message].Message.Label.Array[&quot;LOGIN.PLACEHOLDER.PW&quot;]">
                                     </div>
                                     <div class="login-options">
                                         <label class="checkbox-label">
-                                            <input type="checkbox" id="remember-id"> 아이디 저장
+                                            <input type="checkbox" id="remember-id">
+                                            [Page.Message].Message.Label.Array["LOGIN.CHECK.SAVE_ID"]
                                         </label>
                                         <div class="login-links">
-                                            <a href="#">아이디 찾기</a>
+                                            <a href="#">[Page.Message].Message.Label.Array["LOGIN.LINK.JOIN"]</a>
                                             <span>|</span>
-                                            <a href="#">비밀번호 찾기</a>
+                                            <a href="#">[Page.Message].Message.Label.Array["LOGIN.LINK.FIND_ID"]</a>
+                                            <span>|</span>
+                                            <a href="#">[Page.Message].Message.Label.Array["LOGIN.LINK.FIND_PW"]</a>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="login-btn">로그인</a>
+                                <a href="#" class="login-btn">[Page.Message].Message.Label.Array["LOGIN.BTN.LOGIN"]</a>
                             </div>
 
-                            <!-- Vehicle Number Login Panel -->
-                            <div class="tab-panel" id="tab-vehicle" style="display: none;">
-                                <div class="login-form">
-                                    <div class="form-group">
-                                        <label for="vehicle-number">차량번호</label>
-                                        <input type="text" id="vehicle-number" placeholder="예: 12가3456">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="owner-name">소유자명</label>
-                                        <input type="text" id="owner-name" placeholder="소유자 이름을 입력하세요">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="owner-phone">휴대폰 번호</label>
-                                        <input type="tel" id="owner-phone" placeholder="010-0000-0000">
-                                    </div>
-                                </div>
-                                <a href="#" class="login-btn">차량번호로 로그인</a>
-                            </div>
                         </div>
 
-                        <div
-                            style="display: flex; justify-content: center; font-size: 13px; color: var(--text-muted); margin-top: 10px;">
-                            <a href="#">회원가입</a>
-                        </div>
-
-                        <div class="quick-menu-grid"
-                            style="margin-top: 40px; border-top: 1px solid #f0f0f0; padding-top: 24px;">
+                        <div class="quick-menu-grid" style=" border-top: 1px solid #f0f0f0;">
                             <div class="quick-item">
                                 <div class="quick-icon"><i class="fa-solid fa-file-invoice"></i></div>
-                                <span>명세서</span>
+                                <span>[Page.Message].Message.Label.Array["QUICK.STMT"]</span>
                             </div>
                             <div class="quick-item">
                                 <div class="quick-icon"><i class="fa-solid fa-list-ul"></i></div>
-                                <span>이용내역</span>
+                                <span>[Page.Message].Message.Label.Array["QUICK.HISTORY"]</span>
                             </div>
                             <div class="quick-item">
                                 <div class="quick-icon"><i class="fa-solid fa-credit-card"></i></div>
-                                <span>즉시결제</span>
+                                <span>[Page.Message].Message.Label.Array["QUICK.PAYMENT"]</span>
                             </div>
                             <div class="quick-item">
                                 <div class="quick-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                                <span>검사예약</span>
+                                <span>[Page.Message].Message.Label.Array["QUICK.RESERVE"]</span>
                             </div>
                         </div>
                     </div>
@@ -145,7 +446,7 @@
                 <div class="notice-grid">
                     <div class="notice-card">
                         <div class="notice-header">
-                            <h4>공지사항</h4>
+                            <h4>[Page.Message].Message.Label.Array["MAIN.NOTICE.TITLE"]</h4>
                             <a href="#" class="notice-more"><i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                         <ul class="notice-list">
@@ -161,7 +462,7 @@
                     </div>
                     <div class="notice-card">
                         <div class="notice-header">
-                            <h4>이벤트</h4>
+                            <h4>[Page.Message].Message.Label.Array["MAIN.EVENT.TITLE"]</h4>
                             <a href="#" class="notice-more"><i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                         <ul class="notice-list">
@@ -179,31 +480,140 @@
         <div class="service-section">
             <div class="container">
                 <div class="section-header">
-                    <h3>주요 서비스</h3>
-                    <a href="#" style="color: var(--text-muted); font-weight: 600;">전체보기 <i
-                            class="fa-solid fa-chevron-right" style="font-size: 12px;"></i></a>
+                    <h3>[Page.Message].Message.Label.Array["MAIN.SERVICE.TITLE"]</h3>
+                    <a href="#"
+                        style="color: var(--text-muted); font-weight: 600;">[Page.Message].Message.Label.Array["MAIN.SERVICE.VIEW_ALL"]
+                        <i class="fa-solid fa-chevron-right" style="font-size: 12px;"></i></a>
                 </div>
 
                 <div class="service-grid">
                     <div class="service-card">
                         <i class="fa-solid fa-car-side"></i>
-                        <h4>자동차 등록</h4>
-                        <p>신규, 이전, 말소 등록 및 제증명 재발급 신청을 온라인으로 간편하게 처리하세요.</p>
+                        <h4>[Page.Message].Message.Label.Array["MAIN.SVC.REG.TITLE"]</h4>
+                        <p>[Page.Message].Message.Label.Array["MAIN.SVC.REG.DESC"]</p>
                     </div>
                     <div class="service-card">
                         <i class="fa-solid fa-microscope"></i>
-                        <h4>자동차 검사</h4>
-                        <p>정기검사 및 기타 검사 예약과 튜닝 승인 신청 서비스를 제공합니다.</p>
+                        <h4>[Page.Message].Message.Label.Array["MAIN.SVC.INSPECT.TITLE"]</h4>
+                        <p>[Page.Message].Message.Label.Array["MAIN.SVC.INSPECT.DESC"]</p>
                     </div>
                     <div class="service-card">
                         <i class="fa-solid fa-magnifying-glass-chart"></i>
-                        <h4>정보 조회</h4>
-                        <p>차량 등록 정보, 검사 결과 및 각종 미납금 정보를 통합하여 조회할 수 있습니다.</p>
+                        <h4>[Page.Message].Message.Label.Array["MAIN.SVC.INFO.TITLE"]</h4>
+                        <p>[Page.Message].Message.Label.Array["MAIN.SVC.INFO.DESC"]</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="logo" style="margin-bottom: 20px;">MVIMS</div>
+                    <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                        <a href="#">[Page.Message].Message.Label.Array["FOOTER.COMPANY_INTRO"]</a>
+                        <a href="#"
+                            style="font-weight: 700;">[Page.Message].Message.Label.Array["FOOTER.PRIVACY_POLICY"]</a>
+                        <a href="#">[Page.Message].Message.Label.Array["FOOTER.TERMS"]</a>
+                        <a href="#">[Page.Message].Message.Label.Array["FOOTER.SITEMAP"]</a>
+                    </div>
+                    <p style="opacity: 0.6; line-height: 2;">
+                        [Page.Message].Message.Label.Array["FOOTER.COPYRIGHT"]
+                    </p>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">
+                        1588-1234</div>
+                    <p>[Page.Message].Message.Label.Array["FOOTER.CS_CENTER"]</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Common Tags -->
+    <article id="commonTag">
+        <div class="confirm"></div>
+        <div class="alertPopupBody"></div>
+        <div class="showMessage"></div>
+        <div id="loadingScreenBody" class="">
+            <div id="screenBody" class=""></div>
+        </div>
+    </article>
+
 </body>
 
 </html>
+<script>
+    init();
+
+    function init() {
+        // loadToScript is defined in Common.js
+        new loadToScript();
+        new PageInit();
+        initLanguageSelector();
+        clickEvent();
+    }
+
+    function clickEvent() {
+        // Login Tab switching logic
+        $('.login-card .tab-link').on('click', function () {
+            const tabId = $(this).data('tab');
+
+            // Update active tab
+            $('.login-card .tab-link').removeClass('active');
+            $(this).addClass('active');
+
+            // Show corresponding panel
+            $('.login-card .tab-panel').hide();
+            $('#tab-' + tabId).show();
+        });
+    }
+
+    function initLanguageSelector() {
+        const $options = $(".gi-language-option");
+        const $slider = $("#languageSlider");
+        const $currentLangCode = $("#currentLangCode");
+
+        const langCodeMap = {
+            ko: "KO",
+            mn: "MN",
+            en: "EN"
+        };
+
+        const savedLang = localStorage.getItem("selectedLanguage") || "ko";
+        setActiveLanguage(savedLang);
+
+        $options.on("click", function () {
+            const lang = $(this).data("lang");
+            setActiveLanguage(lang);
+            localStorage.setItem("selectedLanguage", lang);
+            setTimeout(() => location.reload(), 300);
+        });
+
+        $("#languageTrigger").on("click", function (e) {
+            e.stopPropagation();
+            $(".gi-home-setting-article").toggleClass("lang-panel-closed");
+        });
+
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest("#languageTrigger, .gi-home-setting-article").length) {
+                $(".gi-home-setting-article").addClass("lang-panel-closed");
+            }
+        });
+
+        function setActiveLanguage(lang) {
+            const $targetOption = $options.filter(`[data-lang="${lang}"]`);
+            const index = $options.index($targetOption);
+
+            $options.removeClass("active");
+            $targetOption.addClass("active");
+
+            $slider.removeClass("position-0 position-1 position-2");
+            $slider.addClass(`position-${index}`);
+
+            $currentLangCode.text(langCodeMap[lang] || "KO");
+        }
+    }
+</script>

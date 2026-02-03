@@ -267,7 +267,7 @@ a {
 /* Scroll wrapper for login content */
 .login-body {
     flex: 1;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     /* Hide scrollbar for cleaner look */
     -ms-overflow-style: none;
     /* IE and Edge */
@@ -319,7 +319,7 @@ a {
     text-align: center;
     font-weight: 700;
     font-size: 18px;
-    margin: 20px 0 10px 0;
+    /* margin: 20px 0 10px 0; */
     box-sizing: border-box;
 }
 
@@ -332,7 +332,8 @@ a {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-top: auto;
+    /* margin-top: auto; */
+    padding-top: 5px;
 }
 
 .quick-item {

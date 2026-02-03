@@ -12,6 +12,8 @@
     <script th:src="@{/static/assets/excel/xlsx.full.min.js}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Common Utilities (Served from vims-login via Gateway) -->
+    <script src="/common/js/common/Message.js"></script>
+    <script src="/common/js/message/ko/webapp/WebAppMessage.js"></script>
     <script src="/common/js/common/CommonTag.js"></script>
     <script src="/common/js/common/FormUtility.js"></script>
     <script src="/common/js/common/utils/CommonUtils.js"></script>
@@ -40,43 +42,64 @@
             <nav class="nav-web">
                 <!-- 메인 -->
                 <div class="nav-item">
-                    <a href="/" class="nav-link">메인</a>
+                    <a href="/" class="nav-link">[Page.Message].Message.Label.Array["NAV.MAIN"]</a>
                 </div>
 
                 <!-- 자동차 등록 -->
                 <div class="nav-item">
-                    <a href="#" class="nav-link">자동차 등록</a>
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.CAR_REG"]</a>
                     <div class="mega-menu">
                         <div class="mega-content">
                             <div>
-                                <span class="mega-title">등록안내</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.REG_INFO"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">등록절차안내</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REG_PROC_INFO"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">등록신청</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.REG_APPLY"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">신규등록</a></li>
-                                    <li><a href="#" class="mega-link">이전등록</a></li>
-                                    <li><a href="#" class="mega-link">말소등록</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.NEW_REG"]</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TRANSFER_REG"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CANCEL_REG"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">서비스 업무 신청</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.SVC_APPLY"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">차량번호 변경</a></li>
-                                    <li><a href="#" class="mega-link">번호판 재발급</a></li>
-                                    <li><a href="#" class="mega-link">등록증 재발급</a></li>
-                                    <li><a href="#" class="mega-link">등록증 교체</a></li>
-                                    <li><a href="#" class="mega-link">번호보관 등록</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHANGE_CAR_NUM"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REISSUE_PLATE"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REISSUE_CERT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REPLACE_CERT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.KEEP_NUM_REG"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">자동차</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.CAR"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">자동차 번호 선택</a></li>
-                                    <li><a href="#" class="mega-link">자동차 번호예약</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.SELECT_CAR_NUM"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.RESERVE_CAR_NUM"]</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -85,34 +108,49 @@
 
                 <!-- 자동차 검사 -->
                 <div class="nav-item">
-                    <a href="#" class="nav-link">자동차 검사</a>
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.CAR_INSPECT"]</a>
                     <div class="mega-menu">
                         <div class="mega-content">
                             <div>
-                                <span class="mega-title">검사안내</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.INSPECT_INFO"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">검사절차 안내</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.INSPECT_PROC_INFO"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">검사예약</span>
+                                <span
+                                    class="mega-title">[Page.Message].Message.Label.Array["NAV.INSPECT_RESERVE"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">신규검사 신청</a></li>
-                                    <li><a href="#" class="mega-link">정기검사 신청</a></li>
-                                    <li><a href="#" class="mega-link">기타검사신청</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.NEW_INSPECT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REGULAR_INSPECT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.OTHER_INSPECT"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">관리서비스</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MGMT_SVC"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">튜닝승인 신청</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TUNING_APPLY"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">차대번호 표기 신청</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.CHASSIS_APPLY"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">차대번호 신규 표기 신청</a></li>
-                                    <li><a href="#" class="mega-link">차대번호 재표기 신청</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.NEW_CHASSIS"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.RE_CHASSIS"]</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -121,20 +159,26 @@
 
                 <!-- 자동차 정보 등록 -->
                 <div class="nav-item">
-                    <a href="#" class="nav-link">자동차 정보 등록</a>
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.CAR_INFO_REG"]</a>
                     <div class="mega-menu">
                         <div class="mega-content">
                             <div>
-                                <span class="mega-title">수입차량 정보 등록</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.IMPORT_CAR_REG"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">수입절차 및 준비사항 안내</a></li>
-                                    <li><a href="#" class="mega-link">수입차량 정보 등록</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.IMPORT_PROC_INFO"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.IMPORT_REG"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">제작차량</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MAKE_CAR"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">제작차량정보 등록 안내</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.MAKE_CAR_REG_INFO"]</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -143,27 +187,48 @@
 
                 <!-- 정보 조회 -->
                 <div class="nav-item">
-                    <a href="#" class="nav-link">정보 조회</a>
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.INFO_SEARCH"]</a>
                     <div class="mega-menu">
                         <div class="mega-content">
                             <div>
-                                <span class="mega-title">NRTC 조회</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.NRTC_SEARCH"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">차량소유 확인</a></li>
-                                    <li><a href="#" class="mega-link">차량등록 확인</a></li>
-                                    <li><a href="#" class="mega-link">자동차검사 결과표</a></li>
-                                    <li><a href="#" class="mega-link">내차량 정보 조회</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_OWNER"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_REG"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.INSPECT_RESULT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.MY_CAR_INFO"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">타기관 조회</span>
+                                <span
+                                    class="mega-title">[Page.Message].Message.Label.Array["NAV.OTHER_ORG_SEARCH"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">통행료 미납조회</a></li>
-                                    <li><a href="#" class="mega-link">벌금 미납 조회</a></li>
-                                    <li><a href="#" class="mega-link">세금 미납 조회</a></li>
-                                    <li><a href="#" class="mega-link">보험가입 현황 조회</a></li>
-                                    <li><a href="#" class="mega-link">세관정보 조회</a></li>
-                                    <li><a href="#" class="mega-link">서비스비용 납부 조회</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TOLL_UNPAID"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.FINE_UNPAID"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.TAX_UNPAID"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.INSURANCE_STATUS"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CUSTOMS_INFO"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.SVC_COST_PAY"]</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -172,21 +237,28 @@
 
                 <!-- MY-PAGE -->
                 <div class="nav-item">
-                    <a href="#" class="nav-link">MY-PAGE</a>
+                    <a href="#" class="nav-link">[Page.Message].Message.Label.Array["NAV.MY_PAGE"]</a>
                     <div class="mega-menu">
                         <div class="mega-content">
                             <div>
-                                <span class="mega-title">수수료 관리</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.FEE_MGMT"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">수수료 납부</a></li>
-                                    <li><a href="#" class="mega-link">환불신청</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.PAY_FEE"]</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.REFUND_APPLY"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">내 정보 관리</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MY_INFO_MGMT"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">개인정보 수정</a></li>
-                                    <li><a href="#" class="mega-link">진행상황 조회</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.EDIT_PRIV_INFO"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_PROGRESS"]</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -195,22 +267,32 @@
 
                 <!-- 관리자/사용자 (Quick Access) -->
                 <div class="nav-item">
-                    <a href="#" class="nav-link" style="opacity: 0.5;">설정</a>
+                    <a href="#" class="nav-link"
+                        style="opacity: 0.5;">[Page.Message].Message.Label.Array["NAV.SETTINGS"]</a>
                     <div class="mega-menu">
                         <div class="mega-content">
                             <div>
-                                <span class="mega-title">관리자</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.ADMIN"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">게시판 관리</a></li>
-                                    <li><a href="#" class="mega-link">권한/시스템 관리</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.BBS_MGMT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.AUTH_SYS_MGMT"]</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div>
-                                <span class="mega-title">사용자</span>
+                                <span class="mega-title">[Page.Message].Message.Label.Array["NAV.USER"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#" class="mega-link">로그인/로그아웃</a></li>
-                                    <li><a href="#" class="mega-link">개인정보보호방침</a></li>
-                                    <li><a href="#" class="mega-link">사이트맵</a></li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.LOGIN_LOGOUT"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.PRIVACY_POLICY"]</a>
+                                    </li>
+                                    <li><a href="#"
+                                            class="mega-link">[Page.Message].Message.Label.Array["NAV.SITEMAP"]</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -267,20 +349,20 @@
                 <div>
                     <div class="logo" style="margin-bottom: 20px;">MVIMS</div>
                     <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-                        <a href="#">회사소개</a>
-                        <a href="#" style="font-weight: 700;">개인정보처리방침</a>
-                        <a href="#">이용약관</a>
-                        <a href="#">사이트맵</a>
+                        <a href="#">[Page.Message].Message.Label.Array["FOOTER.COMPANY_INTRO"]</a>
+                        <a href="#"
+                            style="font-weight: 700;">[Page.Message].Message.Label.Array["FOOTER.PRIVACY_POLICY"]</a>
+                        <a href="#">[Page.Message].Message.Label.Array["FOOTER.TERMS"]</a>
+                        <a href="#">[Page.Message].Message.Label.Array["FOOTER.SITEMAP"]</a>
                     </div>
                     <p style="opacity: 0.6; line-height: 2;">
-                        NRTC | 대표이사 홍길동 | 사업자등록번호 123-45-67890<br>
-                        COPYRIGHT © MRT. ALL RIGHTS RESERVED.
+                        [Page.Message].Message.Label.Array["FOOTER.COPYRIGHT"]
                     </p>
                 </div>
                 <div style="text-align: right;">
                     <div style="font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">
                         1588-1234</div>
-                    <p>고객지원센터 (평일 09:00 ~ 18:00)</p>
+                    <p>[Page.Message].Message.Label.Array["FOOTER.CS_CENTER"]</p>
                 </div>
             </div>
         </div>
