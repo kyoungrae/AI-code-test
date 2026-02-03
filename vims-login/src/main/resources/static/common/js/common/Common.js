@@ -58,6 +58,7 @@ class PageInit {
         new checkPriceType();
         new OnlyNumericWithoutLeadingZero();
         new ValidDecimalInput();
+        new LanguageSelector(); // 다국어 선택 초기화
     }
     messageLabelSettings() {
         // Message 객체가 로드되지 않았으면 실행하지 않음
@@ -867,5 +868,73 @@ class giPrint {
             // 재적용이 필요한 스크립트가 있다면 이곳에서 재호출합니다.
             // location.reload();  // 페이지를 새로고침하여 초기 상태로 되돌립니다.
         });
+    }
+}
+
+/**
+ * @title : 다국어 선택
+ * @text : 언어 선택 드롭다운 제어
+ */
+class LanguageSelector {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+        this.setInitialLanguage();
+    }
+
+    bindEvents() {
+        // Use document delegation to handle dynamic elements if needed, 
+        // but direct binding is fine if elements exist.
+        // We use delegation for close event.
+
+        const $btn = $('.lang-btn');
+        const $dropdown = $('.lang-dropdown');
+        const $options = $('.lang-opt');
+
+        // Toggle dropdown
+        // Using delegation in case of issues, but direct binding is simpler
+        $(document).on('click', '.lang-btn', function (e) {
+            e.stopPropagation();
+            $('.lang-dropdown').toggleClass('show');
+        });
+
+        // Close when clicking outside
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.lang-selector').length) {
+                $('.lang-dropdown').removeClass('show');
+            }
+        });
+
+        // Select option
+        $(document).on('click', '.lang-opt', function (e) {
+            e.preventDefault();
+            const lang = $(this).data('lang');
+            const langName = $(this).find('.lang-name').text();
+
+            // Update UI
+            $('.lang-opt').removeClass('active');
+            $(this).addClass('active');
+            $('.current-lang').text(lang.toUpperCase());
+
+            // Close dropdown
+            $('.lang-dropdown').removeClass('show');
+
+            // Log selection (placeholder for actual i18n logic)
+            console.log('Language selected:', lang, langName);
+
+            // TODO: Implement actual language switching logic
+            // e.g., location.href = location.pathname + '?lang=' + lang;
+        });
+    }
+
+    setInitialLanguage() {
+        // Set initial state based on current lang (default to KO)
+        const currentLang = $('html').attr('lang') || 'ko';
+        $('.current-lang').text(currentLang.toUpperCase());
+        $('.lang-opt').removeClass('active');
+        $(`.lang-opt[data-lang="${currentLang}"]`).addClass('active');
     }
 }
