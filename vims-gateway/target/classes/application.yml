@@ -84,7 +84,7 @@ spring:
             - name: RewriteLocationResponseHeader
               args:
                 name: Location
-                rewrite-uri: http://localhost:8080/
+                rewrite-uri: http://localhost:8084/
                 strip-version: NEVER_STRIP
             - RewritePath=/web/(?<segment>.*), /${segment}
 

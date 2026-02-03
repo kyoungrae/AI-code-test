@@ -1,0 +1,95 @@
+server:
+  port: 8080 # 게이트웨이가 실행될 포트
+
+spring:
+  application:
+    name: vims-gateway
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Seoul
+  cloud:
+    gateway:
+      default-filters :
+        - AuthorizationHeader
+      routes:
+        # NOTE: 정적 파일 라우팅 (common, assets)
+        - id: vims-login-static-common
+          uri: http://localhost:8081
+          predicates:
+            - Path=/common/**
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+
+        - id: vims-login-static-assets
+          uri: http://localhost:8081
+          predicates:
+            - Path=/assets/**
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+
+        # NOTE: 로그인 서비스의 기본 페이지
+        - id: vims-login_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+
+        # NOTE: 로그인 서비스의 API 라우팅
+        - id: vims-login_api_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/login/**, /api/v1/auth/**
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+            - name: RewriteLocationResponseHeader
+              args:
+                  name: Location
+                  rewrite-uri: http://localhost:8080/
+                  strip-version: NEVER_STRIP
+        # NOTE: 파일관리시스템 서비스의 API 라우팅
+        - id: vims-file_management_system_api_route
+          uri: http://localhost:8082
+          predicates:
+            - Path=/fms/**, /api/v1/auth/**
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+            - name: RewriteLocationResponseHeader
+              args:
+                name: Location
+                rewrite-uri: http://localhost:8080/
+                strip-version: NEVER_STRIP
+
+
+#        # NOTE: 시스템관리 서비스 라우팅 (cms)
+        - id: vims-management_route
+          uri: http://localhost:8083 # 포트 번호가 누락되어 8083으로 되어 있습니다. 올바른 포트 번호로 수정하세요.
+          predicates:
+            - Path=/cms/**
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+            - name: RewriteLocationResponseHeader
+              args:
+                name: Location
+                rewrite-uri: http://localhost:8080/
+                strip-version: NEVER_STRIP
+
+        # NOTE: 대국민 웹 서비스 라우팅 (vims-web-app)
+        - id: vims-web-app_route
+          uri: http://localhost:8084
+          predicates:
+            - Path=/web/**
+          filters:
+            - AddRequestHeader=X-Source, Gateway
+            - name: RewriteLocationResponseHeader
+              args:
+                name: Location
+                rewrite-uri: http://localhost:8080/
+                strip-version: NEVER_STRIP
+            - RewritePath=/web/(?<segment>.*), /${segment}
+
+token:
+  secret: YeyKgN7Oa0dfKJCR0Xr3Sp45WdU8BCv2Zd0X6KxRTfFgfPZ3MH3xccjC3WCt90Az # Login 서비스와 동일한 키 값 사용
+
+gateway:
+  api-key: vims-internal-secret-key-1234 # 시스템 간 통신용 API KEY (운영 시 변경 필수)
