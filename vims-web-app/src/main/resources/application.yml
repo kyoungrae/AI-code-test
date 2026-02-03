@@ -4,18 +4,21 @@ server:
 spring:
   application:
     name: vims-web-app
-    thymeleaf:
-        cache: false
-        check-template-location: true
-        prefix: classpath:/templates/
-        suffix: .html
-    devtools:
-        livereload:
-            enabled: true
-        restart:
-            enabled: true
-    mvc:
-        static-path-pattern: /static/**
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  mvc:
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: classpath:/static/
   data:
     jpa:
       hibernate:

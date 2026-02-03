@@ -98,21 +98,20 @@ a {
 }
 
 .nav-item {
-    position: relative;
-    height: 100%;
+    padding: 0 20px;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .nav-link {
-    font-size: 16px;
-    font-weight: 600;
     color: var(--text-main);
-    opacity: 0.8;
+    font-size: 15px;
+    transition: var(--transition-base);
 }
 
 .nav-item:hover .nav-link {
-    opacity: 1;
     color: var(--primary-color);
 }
 
@@ -130,6 +129,7 @@ a {
     padding: 60px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 .nav-item:hover .mega-menu {
