@@ -18,6 +18,12 @@
     <script type="text/javascript" src="/common/js/common/FormUtility.js"></script>
     <script type="text/javascript" src="/common/js/common/utils/CommonUtils.js"></script>
     <script type="text/javascript" src="/common/js/common/CommonTag.js"></script> <!-- Moved up -->
+    <script>
+        // Ensure commonTag is instantiated
+        if (typeof CommonTag === 'function') {
+            window.commonTag = new CommonTag();
+        }
+    </script>
     <script type="text/javascript" src="/common/js/common/utils/InputTagUtils.js"></script>
     <script type="text/javascript" src="/common/js/common/utils/InputMaskUtils.js"></script>
     <script type="text/javascript" src="/common/js/common/utils/DateTagUtils.js"></script>
