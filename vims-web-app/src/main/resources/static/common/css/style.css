@@ -260,6 +260,24 @@ a {
     padding: 40px;
     display: flex;
     flex-direction: column;
+    height: 560px;
+    /* Fixed height based on DAN tab content + aesthetics */
+}
+
+/* Scroll wrapper for login content */
+.login-body {
+    flex: 1;
+    overflow-y: auto;
+    /* Hide scrollbar for cleaner look */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.login-body::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .tab-nav {
@@ -292,6 +310,8 @@ a {
 }
 
 .login-btn {
+    display: block;
+    width: 100%;
     background: var(--primary-color);
     color: white;
     padding: 18px;
@@ -299,7 +319,8 @@ a {
     text-align: center;
     font-weight: 700;
     font-size: 18px;
-    margin: 20px 0;
+    margin: 20px 0 10px 0;
+    box-sizing: border-box;
 }
 
 .login-btn:hover {
@@ -421,4 +442,304 @@ a {
 
 .top-link:hover {
     color: var(--text-main);
+}
+
+/* Notice Section */
+.notice-section {
+    padding: 40px 0;
+}
+
+.notice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.notice-card {
+    background: var(--bg-main);
+    border-radius: var(--border-radius-md);
+    padding: 28px 32px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: var(--shadow-sm);
+}
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.notice-header h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.notice-more {
+    width: 28px;
+    height: 28px;
+    background: var(--bg-soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    transition: var(--transition-base);
+}
+
+.notice-more:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.notice-list {
+    list-style: none;
+}
+
+.notice-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.notice-list li:last-child {
+    border-bottom: none;
+}
+
+.notice-list li a {
+    font-size: 15px;
+    color: var(--text-main);
+    font-weight: 500;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 16px;
+}
+
+.notice-list li a:hover {
+    color: var(--primary-color);
+}
+
+.notice-date {
+    font-size: 13px;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* Login Form Styles */
+.login-form {
+    padding: 10px 0 20px 0;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius-sm);
+    font-size: 15px;
+    transition: var(--transition-base);
+    background: var(--bg-soft);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: var(--bg-main);
+    box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.1);
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.login-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.login-links a {
+    color: var(--text-muted);
+}
+
+.login-links a:hover {
+    color: var(--primary-color);
+}
+
+.login-links span {
+    color: #ddd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .notice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-card {
+        height: auto;
+        /* Reset fixed height on mobile */
+    }
+}
+
+/* Language Selector Styles */
+.lang-selector {
+    position: relative;
+    margin-left: 20px;
+    z-index: 2001;
+    /* Higher than header */
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #333344;
+    /* Dark background like screenshot */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: var(--transition-base);
+}
+
+.lang-btn:hover {
+    background: #444455;
+}
+
+.lang-btn .current-lang {
+    background: #6655EE;
+    /* Purple accent */
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    width: 280px;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition-base);
+}
+
+.lang-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Speech bubble arrow */
+.lang-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 16px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+}
+
+.lang-header {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lang-options {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.lang-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: var(--border-radius-sm);
+    background: var(--bg-soft);
+    flex: 1;
+    transition: var(--transition-base);
+    border: 2px solid transparent;
+}
+
+.lang-opt:hover {
+    background: #EEF2FF;
+    /* Light purple hover */
+}
+
+.lang-opt.active {
+    background: #6655EE;
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 85, 238, 0.3);
+}
+
+.lang-flag {
+    font-size: 20px;
+}
+
+.lang-name {
+    font-size: 12px;
+    font-weight: 600;
 }

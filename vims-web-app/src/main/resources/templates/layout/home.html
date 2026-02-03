@@ -19,13 +19,34 @@
     <!-- Top Utility Bar -->
     <div class="top-utility">
         <div class="container">
-            <a href="#" class="top-link">개인사업자</a>
-            <a href="#" class="top-link">법인</a>
-            <a href="#" class="top-link">가맹점</a>
-            <a href="#" class="top-link">금융소비자보호</a>
-            <span style="margin-left: auto;"></span>
-            <a href="#" class="top-link">로그인</a>
-            <a href="#" class="top-link">회원가입</a>
+
+            <!-- Language Selector -->
+            <div class="lang-selector">
+                <button class="lang-btn">
+                    <i class="fa-solid fa-globe"></i>
+                    <span class="current-lang">KO</span>
+                </button>
+                <div class="lang-dropdown">
+                    <div class="lang-header">
+                        <i class="fa-solid fa-globe"></i> LANGUAGE
+                    </div>
+                    <div class="lang-options">
+                        <a href="#" class="lang-opt active" data-lang="ko">
+                            <!-- Use Emoji or FontAwesome for flags if images are not available -->
+                            <span class="lang-flag">🇰🇷</span>
+                            <span class="lang-name">한국어</span>
+                        </a>
+                        <a href="#" class="lang-opt" data-lang="mn">
+                            <span class="lang-flag">🇲🇳</span>
+                            <span class="lang-name">Монгол</span>
+                        </a>
+                        <a href="#" class="lang-opt" data-lang="en">
+                            <span class="lang-flag">🇺🇸</span>
+                            <span class="lang-name">English</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -257,6 +278,11 @@
     <script>
         $(document).ready(function () {
             console.log("VIMS Web App initialized");
+
+            // Initialize Common JS logic (including LanguageSelector)
+            if (typeof PageInit !== 'undefined') {
+                new PageInit();
+            }
 
             // Tab switching logic for the hero card (if applicable)
             $(document).on('click', '.tab-link', function () {
