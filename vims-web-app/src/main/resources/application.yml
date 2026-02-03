@@ -1,35 +1,94 @@
 server:
-  port: 8084
-  servlet:
-    context-path: /web
+    port: 8084
+    servlet:
+        context-path: /web
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
 
 spring:
-  application:
-    name: vims-web-app
-  thymeleaf:
-    cache: false
-    check-template-location: true
-    prefix: classpath:/templates/
-    suffix: .html
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: true
-  mvc:
-    static-path-pattern: /static/**
-  web:
-    resources:
-      static-locations: classpath:/static/
-  data:
-    jpa:
-      hibernate:
-        ddl-auto: none
-      show-sql: true
+    application:
+        name: vims-web-app
+    profiles:
+        active: local
+    jackson:
+        property-naming-strategy: LOWER_CAMEL_CASE
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: Asia/Seoul
+    
+    datasource:
+        url: jdbc:mariadb://192.168.0.232:3306/MVIMS?autoReconnect=true&tcpKeepAlive=true
+        username: mvims
+        password: 1234
+        driver-class-name: org.mariadb.jdbc.Driver
+        hikari:
+            maximum-pool-size: 10
+            minimum-idle: 5
+            idle-timeout: 600000
+            max-lifetime: 1800000
+            connection-timeout: 30000
+            keepalive-time: 30000
+            connection-test-query: SELECT 1
 
-# Security configuration (disabled for initial setup)
-# This will be configured properly later
+    jpa:
+        show-sql: false
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: none
+                format_sql: true
+                use_sql_comments: false
+        database: mysql
+        database-platform: org.hibernate.dialect.MariaDB103Dialect
+    
+    thymeleaf:
+        cache: false
+        check-template-location: true
+        prefix: classpath:/templates/
+        suffix: .html
+    
+    devtools:
+        livereload:
+            enabled: true
+        restart:
+            enabled: true
+
+    mvc:
+        static-path-pattern: /static/**
+    web:
+        resources:
+            static-locations: classpath:/static/
+
+message:
+    gateway:
+        url: http://localhost:8080
+
+fms:
+    service:
+        url: http://localhost:8082
+    internal:
+        api-key: "your-secure-internal-api-key-here"
+
+db:
+  partition:
+    maintenance:
+      enabled: false
+
+mybatis:
+    config-location: classpath:/mybatis-config.xml
+    mapper-locations: classpath*:/mybatis*/**/*.xml
+
 logging:
-  level:
-    root: INFO
-    com.giwebapp: DEBUG
+    level:
+        root: INFO
+        com: DEBUG
+        com.zaxxer.hikari: ERROR
+        org.apache.ibatis: WARN
+        java.sql: WARN
+        org.springframework.jdbc: WARN
+        jdbc.sqlonly: INFO
+        jdbc.sqltiming: OFF
+        jdbc.audit: OFF
+        jdbc.resultset: OFF
+        jdbc.connection: OFF
