@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="/web/static/common/css/style.css">
     <link rel="stylesheet" href="/common/css/common/Popup.css">
+    <link rel="stylesheet" href="/common/css/common/FormUtility.css">
     <!-- JS -->
     <script src="/web/static/assets/excel/xlsx.full.min.js"></script>
     <script type="text/javascript" src="/common/js/jquery/jquery3.6.0.js"></script>
@@ -278,9 +279,11 @@
                             <div>
                                 <span class="mega-title">[Page.Message].Message.Label.Array["NAV.FEE_MGMT"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#"
+                                    <li><a href="javascript:void(0);"
+                                            onclick="formUtil.apiLoadContent('/web', '/searchInfo/feePayList', {});"
                                             class="mega-link">[Page.Message].Message.Label.Array["NAV.PAY_FEE"]</a></li>
-                                    <li><a href="#"
+                                    <li><a href="javascript:void(0);"
+                                            onclick="formUtil.apiLoadContent('/web', '/searchInfo/feeRfndList', {});"
                                             class="mega-link">[Page.Message].Message.Label.Array["NAV.REFUND_APPLY"]</a>
                                     </li>
                                 </ul>
@@ -289,11 +292,11 @@
                                 <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MY_INFO_MGMT"]</span>
                                 <ul class="mega-list">
                                     <li><a href="javascript:void(0);"
-                                            onclick="formUtil.apiLoadContent('/web', '/myinfo/myinfo', {});"
+                                            onclick="formUtil.apiLoadContent('/web', '/myPage/myinfo', {});"
                                             class="mega-link">[Page.Message].Message.Label.Array["NAV.EDIT_PRIV_INFO"]</a>
                                     </li>
                                     <li><a href="javascript:void(0);"
-                                            onclick="formUtil.apiLoadContent('/web', '/myinfo/svcPrgrsList', {});"
+                                            onclick="formUtil.apiLoadContent('/web', '/myPage/svcPrgrsList', {});"
                                             class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_PROGRESS"]</a>
                                     </li>
                                 </ul>
@@ -405,6 +408,9 @@
             </div>
         </div>
     </footer>
+
+    <div class="PopupBody"></div>
+    <div class="alertPopupBody"></div>
 
     <script>
         new loadToScript();

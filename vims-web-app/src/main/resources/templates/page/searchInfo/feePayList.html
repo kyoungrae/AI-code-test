@@ -1,0 +1,637 @@
+<style>
+    .fee-pay-wrapper {
+        background: var(--bg-soft);
+        padding: 80px 0 100px 0;
+        margin-top: var(--header-height);
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        animation: fadeInDown 0.6s ease-out;
+    }
+
+    .page-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+        color: var(--text-muted);
+    }
+
+    .filter-section {
+        margin-bottom: 32px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .search-box {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 20px 14px 50px;
+        border-radius: var(--border-radius-md);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        background: white;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        font-size: 15px;
+    }
+
+    .search-box input:focus {
+        outline: none;
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-color);
+    }
+
+    .payment-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .service-badge {
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 800;
+        width: 130px;
+        /* 고정 너비로 정렬 유지 */
+        flex-shrink: 0;
+        text-align: center;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .service-badge.car-reg {
+        background: #ecf5ff;
+        color: #0076FF;
+        border: 1px solid #d0e7ff;
+    }
+
+    .service-badge.change-num {
+        background: #fff9db;
+        color: #f08c00;
+        border: 1px solid #fff3bf;
+    }
+
+    .service-badge.inspect {
+        background: #ebfbee;
+        color: #40c057;
+        border: 1px solid #d3f9d8;
+    }
+
+    /* Slim Card Layout (Horizontal) */
+    .payment-card.slim {
+        background: white;
+        border-radius: 12px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+        box-shadow: var(--shadow-sm);
+        gap: 15px;
+    }
+
+    .payment-card.slim:hover {
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .card-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1.2;
+        min-width: 320px;
+    }
+
+    .pay-main-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .payment-no {
+        font-weight: 700;
+        color: #1e293b;
+        font-size: 16px;
+        letter-spacing: -0.3px;
+        white-space: nowrap;
+    }
+
+    .detail-value.date {
+        color: #94a3b8;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .detail-value.date i {
+        font-size: 12px;
+        color: #cbd5e1;
+    }
+
+    .card-center {
+        flex: 1.4;
+        padding: 0 30px;
+        border-left: 1px solid #f1f5f9;
+        border-right: 1px solid #f1f5f9;
+        margin: 0 10px;
+    }
+
+    .pay-sub-info {
+        display: flex;
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        min-width: 130px;
+    }
+
+    .info-label {
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 600;
+    }
+
+    .info-value {
+        font-size: 15px;
+        color: #334155;
+        font-weight: 700;
+    }
+
+    .card-right {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .payment-amount {
+        text-align: right;
+    }
+
+    .amount-value {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    .amount-unit {
+        font-size: 13px;
+        color: #64748b;
+        font-weight: 600;
+        margin-left: 2px;
+    }
+
+    .pay-detail-btn-slim {
+        padding: 8px 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        color: #475569;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+
+    .pay-detail-btn-slim:hover {
+        background: var(--primary-light);
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* Pagination Styles */
+    .pagination-container {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    .pagination-info {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .pagination-info span {
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .pagination-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .page-link,
+    .page-btn {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid #e2e8f0;
+        background: white;
+        color: #64748b;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .page-link:hover,
+    .page-btn:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        background: var(--primary-light);
+    }
+
+    .page-link.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 10px rgba(0, 118, 255, 0.2);
+    }
+
+    .page-btn.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: #f8fafc;
+    }
+
+    @media (max-width: 1024px) {
+        .payment-card.slim {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+        }
+
+        .card-center {
+            padding: 16px 0;
+            border: none;
+            border-top: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+            margin: 0;
+        }
+
+        .card-right {
+            justify-content: space-between;
+        }
+    }
+
+    /* Receipt Inside Styles */
+    .receipt-box {
+        border: 1px solid #1e293b;
+        padding: 24px;
+        background: white;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+
+    .receipt-title-inner {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 800;
+        margin-bottom: 24px;
+        border-bottom: 2px double #1e293b;
+        padding-bottom: 12px;
+        color: #0f172a;
+    }
+
+    .receipt-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 24px;
+        table-layout: fixed;
+        /* 표 너비 고정 */
+    }
+
+    .receipt-table th,
+    .receipt-table td {
+        border: 1px solid #e2e8f0;
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 14px;
+        word-break: break-all;
+    }
+
+    .receipt-table th {
+        background: #f8fafc;
+        width: 35%;
+        color: #475569;
+        font-weight: 700;
+    }
+
+    .receipt-table td {
+        color: #000;
+        font-weight: 600;
+        background: #fff;
+    }
+
+    .receipt-footer-inner {
+        text-align: center;
+        margin-top: 40px;
+        border-top: 1px dashed #e2e8f0;
+        padding-top: 30px;
+    }
+
+    .receipt-stamp-container {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .receipt-stamp {
+        width: 80px;
+        height: 80px;
+        border: 4px solid #dc2626;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dc2626;
+        font-weight: 900;
+        font-size: 18px;
+        transform: rotate(-15deg);
+        background: rgba(220, 38, 38, 0.05);
+    }
+</style>
+<!-- Fee Payment List Page -->
+<div class="fee-pay-wrapper">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2 class="page-title">[Page.Message].Message.Label.Array["FEEPAY.PAGE_TITLE"]</h2>
+            <p class="page-subtitle">[Page.Message].Message.Label.Array["FEEPAY.PAGE_SUBTITLE"]</p>
+        </div>
+
+        <!-- Filter & Search Section -->
+        <div class="filter-section">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="paySearchInput"
+                    placeholder='[Page.Message].Message.Label.Array["FEEPAY.SEARCH_PLACEHOLDER"]'>
+            </div>
+        </div>
+
+        <!-- Payment List -->
+        <div class="payment-list" id="paymentList">
+            <!-- Sample Item 1 -->
+            <div class="payment-card slim">
+                <div class="card-left">
+                    <span
+                        class="service-badge car-reg">[Page.Message].Message.Label.Array["SVCPRGRS.ITEM.NEW_REG"]</span>
+                    <div class="pay-main-info">
+                        <span class="payment-no">No. PAY-20260204-8821</span>
+                        <span class="detail-value date"><i class="fa-regular fa-clock"></i> 2026-02-04 10:25:32</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="pay-sub-info">
+                        <div class="info-item">
+                            <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.BANK"]</span>
+                            <span class="info-value">신한은행</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</span>
+                            <span class="info-value">홍길동</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="payment-amount">
+                        <span class="amount-value">25,000</span>
+                        <span class="amount-unit">[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span>
+                    </div>
+                    <button type="button" class="pay-detail-btn-slim" onclick="viewReceipt('PAY-20260204-8821')">
+                        [Page.Message].Message.Label.Array["FEEPAY.BTN.RECEIPT"]
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sample Item 2 -->
+            <div class="payment-card slim">
+                <div class="card-left">
+                    <span
+                        class="service-badge change-num">[Page.Message].Message.Label.Array["SVCPRGRS.ITEM.CHANGE_NUM"]</span>
+                    <div class="pay-main-info">
+                        <span class="payment-no">No. PAY-20260128-1102</span>
+                        <span class="detail-value date"><i class="fa-regular fa-clock"></i> 2026-01-28 14:12:05</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="pay-sub-info">
+                        <div class="info-item">
+                            <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.BANK"]</span>
+                            <span class="info-value">우리은행</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</span>
+                            <span class="info-value">홍길동</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="payment-amount">
+                        <span class="amount-value">15,000</span>
+                        <span class="amount-unit">[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span>
+                    </div>
+                    <button type="button" class="pay-detail-btn-slim" onclick="viewReceipt('PAY-20260128-1102')">
+                        [Page.Message].Message.Label.Array["FEEPAY.BTN.RECEIPT"]
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sample Item 3 -->
+            <div class="payment-card slim">
+                <div class="card-left">
+                    <span
+                        class="service-badge inspect">[Page.Message].Message.Label.Array["SVCPRGRS.ITEM.REGULAR_INSPECT"]</span>
+                    <div class="pay-main-info">
+                        <span class="payment-no">No. PAY-20260115-4490</span>
+                        <span class="detail-value date"><i class="fa-regular fa-clock"></i> 2026-01-15 09:30:11</span>
+                    </div>
+                </div>
+                <div class="card-center">
+                    <div class="pay-sub-info">
+                        <div class="info-item">
+                            <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.BANK"]</span>
+                            <span class="info-value">KB국민은행</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</span>
+                            <span class="info-value">홍길동</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <div class="payment-amount">
+                        <span class="amount-value">45,000</span>
+                        <span class="amount-unit">[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span>
+                    </div>
+                    <button type="button" class="pay-detail-btn-slim" onclick="viewReceipt('PAY-20260115-4490')">
+                        [Page.Message].Message.Label.Array["FEEPAY.BTN.RECEIPT"]
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="pagination-container">
+            <div class="pagination-info">
+                [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] <span>3</span>
+                [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"]
+            </div>
+            <div class="pagination-nav">
+                <button type="button" class="page-btn prev disabled"><i class="fa-solid fa-chevron-left"></i></button>
+                <button type="button" class="page-link active">1</button>
+                <button type="button" class="page-link">2</button>
+                <button type="button" class="page-link">3</button>
+                <button type="button" class="page-btn next"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 수수료 납부 명세서 팝업 영역 (Management Style) -->
+<article id="fee_receipt_popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="width: 700px; margin-top : 5%;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["FEEPAY.RECEIPT.TITLE"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <div class="receipt-box">
+                <div class="receipt-title-inner">[Page.Message].Message.Label.Array["FEEPAY.RECEIPT.TITLE"]</div>
+                <table class="receipt-table">
+                    <tr>
+                        <th>[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAY_NO"]</th>
+                        <td><span data-field="receipt_pay_no"></span></td>
+                    </tr>
+                    <tr>
+                        <th>[Page.Message].Message.Label.Array["FEEPAY.LABEL.SERVICE"]</th>
+                        <td><span data-field="receipt_service"></span></td>
+                    </tr>
+                    <tr>
+                        <th>[Page.Message].Message.Label.Array["FEEPAY.LABEL.AMOUNT"]</th>
+                        <td><span data-field="receipt_amount"></span></td>
+                    </tr>
+                    <tr>
+                        <th>[Page.Message].Message.Label.Array["FEEPAY.LABEL.DATE"]</th>
+                        <td><span data-field="receipt_date"></span></td>
+                    </tr>
+                    <tr>
+                        <th>[Page.Message].Message.Label.Array["FEEPAY.LABEL.BANK"]</th>
+                        <td><span data-field="receipt_bank"></span></td>
+                    </tr>
+                    <tr>
+                        <th>[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</th>
+                        <td><span data-field="receipt_payer"></span></td>
+                    </tr>
+                </table>
+                <div class="receipt-footer-inner">
+                    <div class="receipt-stamp-container">
+                        <div class="receipt-stamp">Q-PAY</div>
+                    </div>
+                    <p style="font-weight: 800; font-size: 20px; color: #1e293b; margin: 0;">
+                        [Page.Message].Message.Label.Array["FEEPAY.RECEIPT.FOOTER_TEAM"]</p>
+                    <p
+                        style="color: #64748b; font-size: 14px; margin-top: 15px; word-break: keep-all; text-align: center;">
+                        [Page.Message].Message.Label.Array["FEEPAY.RECEIPT.FOOTER_DESC"]</p>
+                </div>
+            </div>
+        </div>
+        <div class="gi-popup-footer">
+            <button id="popup-receipt-print-btn" class="gi-btn-blue gi-popup-register-btn" type="button"
+                onclick="printReceipt()">
+                [Page.Message].Message.Label.Array["FEEPAY.BTN.RECEIPT"]
+            </button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+        </div>
+    </div>
+</article>
+
+
+<script>
+    $(document).ready(function () {
+        // 동적 로드된 팝업 버튼 이벤트를 위해 팝업 엔진 재초기화
+        new Popup();
+
+        // Search functionality
+        $('#paySearchInput').on('keyup', function () {
+            const value = $(this).val().toLowerCase();
+            $('.payment-card').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    function viewReceipt(payNo) {
+        // Find the data from the card
+        const $card = $(`.payment-no:contains('${payNo}')`).closest('.payment-card');
+        const serviceName = $card.find('.service-badge').text();
+        const amount = $card.find('.amount-value').text();
+        const payDate = $card.find('.detail-value.date').text().trim();
+        const bank = $card.find('.info-value').eq(0).text().trim();
+        const payer = $card.find('.info-value').eq(1).text().trim();
+
+        // Data to bind
+        const receiptData = {
+            receipt_pay_no: payNo,
+            receipt_service: serviceName,
+            receipt_amount: amount + " " + Message.Label.Array["FEEPAY.UNIT.WON"],
+            receipt_date: payDate,
+            receipt_bank: bank,
+            receipt_payer: payer
+        };
+
+        // Bind data to popup fields
+        dataBinding.setDataForm("fee_receipt_popup", receiptData);
+
+        // Open the management-style popup
+        popup.open("fee_receipt_popup");
+    }
+
+    function printReceipt() {
+        formUtil.toast('명세서 출력 기능이 준비 중입니다.', 'info');
+    }
+</script>

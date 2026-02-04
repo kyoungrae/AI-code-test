@@ -1004,9 +1004,12 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        min-width: 120px;
-        /* Fixed width for alignment */
-        padding: 6px 12px;
+        min-width: 130px;
+        /* 120px에서 상향 */
+        width: auto;
+        /* 고정 너비 해제 */
+        padding: 6px 16px;
+        /* 좌우 여백 확대 */
         border-radius: 6px;
         font-size: 12px;
         font-weight: 700;
@@ -1118,14 +1121,17 @@
     .mini-step {
         display: flex;
         align-items: center;
-        justify-content: center;
-        /* Center content within fixed width */
-        gap: 6px;
+        justify-content: flex-start;
+        /* 아이콘 위치를 왼쪽에 고정하여 수직 정렬 보장 */
+        gap: 8px;
         color: var(--text-muted);
         font-size: 13px;
         position: relative;
-        width: 100px;
-        /* Fixed width for alignment */
+        width: 140px;
+        /* 몽골어 대응을 위한 충분한 고정 너비 */
+        flex-shrink: 0;
+        white-space: nowrap;
+        /* 줄바꿈 방지 */
     }
 
     /* Separator dots for all except last step */
@@ -1133,8 +1139,8 @@
         content: '•••';
         color: #e5e7eb;
         position: absolute;
-        right: -10px;
-        /* Position dots between steps */
+        right: 20px;
+        /* 고정 너비 내에서 우측 적정 위치에 배치 */
         font-size: 8px;
         letter-spacing: 1px;
     }
@@ -1172,10 +1178,41 @@
         background: var(--primary-color);
         color: white;
         border-color: var(--primary-color);
+        box-shadow: 0 0 0 rgba(0, 118, 255, 0.4);
+        animation: activePulse 2s infinite;
+        /* 반짝거리는 애니메이션 추가 */
     }
 
     .mini-step.active .step-name {
         font-weight: 700;
+        animation: textSoftBlink 2s infinite;
+        /* 텍스트도 부드럽게 강조 */
+    }
+
+    @keyframes activePulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 118, 255, 0.4);
+        }
+
+        70% {
+            box-shadow: 0 0 0 8px rgba(0, 118, 255, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(0, 118, 255, 0);
+        }
+    }
+
+    @keyframes textSoftBlink {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.8;
+        }
     }
 
     /* Completed Step */
@@ -1419,7 +1456,8 @@
     }
 
     function viewReason(btn) {
-        // TODO: Show rejection reason popup
-        formUtil.toast('Rejection Reason: [Sample] Document verification failed', 'error');
+        // [수정] 반려 사유 팝업 표시
+        // formUtil.alertPopup을 사용하여 반려 사유를 사용자에게 알림 (확인 버튼 제공)
+        formUtil.alertPopup('반려 사유 : 제출된 서류(차대번호 사진) 식별 불가로 인해 반려되었습니다.<br><br>재촬영 후 다시 신청해 주세요.');
     }
 </script>

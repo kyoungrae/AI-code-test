@@ -1,0 +1,713 @@
+<style>
+    .fee-rfnd-wrapper {
+        background: var(--bg-soft);
+        padding: 80px 0 100px 0;
+        margin-top: var(--header-height);
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        animation: fadeInDown 0.6s ease-out;
+    }
+
+    .page-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+        color: var(--text-muted);
+    }
+
+    .filter-section {
+        margin-bottom: 32px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .search-box {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 14px 20px 14px 50px;
+        border-radius: var(--border-radius-md);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        background: white;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        font-size: 15px;
+    }
+
+    .search-box input:focus {
+        outline: none;
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-color);
+    }
+
+    .payment-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .service-badge {
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 800;
+        width: 130px;
+        flex-shrink: 0;
+        text-align: center;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .service-badge.car-reg {
+        background: #ecf5ff;
+        color: #0076FF;
+        border: 1px solid #d0e7ff;
+    }
+
+    .service-badge.change-num {
+        background: #fff9db;
+        color: #f08c00;
+        border: 1px solid #fff3bf;
+    }
+
+    .service-badge.inspect {
+        background: #ebfbee;
+        color: #40c057;
+        border: 1px solid #d3f9d8;
+    }
+
+    .payment-card.slim {
+        background: white;
+        border-radius: 12px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+        box-shadow: var(--shadow-sm);
+        gap: 15px;
+    }
+
+    .payment-card.slim:hover {
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .card-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1.2;
+        min-width: 320px;
+    }
+
+    .pay-main-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .payment-no {
+        font-weight: 700;
+        color: #1e293b;
+        font-size: 16px;
+        letter-spacing: -0.3px;
+        white-space: nowrap;
+        /* 줄바꿈 방지 */
+    }
+
+    .detail-value.date {
+        color: #94a3b8;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .detail-value.date i {
+        font-size: 12px;
+        color: #cbd5e1;
+    }
+
+    .card-center {
+        flex: 1.4;
+        padding: 0 30px;
+        border-left: 1px solid #f1f5f9;
+        border-right: 1px solid #f1f5f9;
+        margin: 0 10px;
+    }
+
+    .pay-sub-info {
+        display: flex;
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        min-width: 130px;
+    }
+
+    .info-label {
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 600;
+    }
+
+    .info-value {
+        font-size: 15px;
+        color: #334155;
+        font-weight: 700;
+    }
+
+    .card-right {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .payment-amount {
+        text-align: right;
+    }
+
+    .amount-value {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--primary-color);
+    }
+
+    .amount-unit {
+        font-size: 13px;
+        color: #64748b;
+        font-weight: 600;
+        margin-left: 2px;
+    }
+
+    .rfnd-apply-btn-slim {
+        padding: 8px 16px;
+        background: #fff1f0;
+        border: 1px solid #ffa39e;
+        border-radius: 8px;
+        color: #cf1322;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+
+    .rfnd-apply-btn-slim:hover {
+        background: #cf1322;
+        color: white;
+        border-color: #cf1322;
+    }
+
+    /* Tab Styles */
+    .rfnd-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 32px;
+        background: white;
+        padding: 6px;
+        border-radius: 12px;
+        box-shadow: var(--shadow-sm);
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .rfnd-tab-btn {
+        padding: 12px 30px;
+        border: none;
+        background: none;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-muted);
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+
+    .rfnd-tab-btn.active {
+        background: var(--primary-color);
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 118, 255, 0.2);
+    }
+
+    /* Status Badges */
+    .status-badge {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .status-requested {
+        background: #e7f5ff;
+        color: #1971c2;
+    }
+
+    .status-processing {
+        background: #fff4e6;
+        color: #f76707;
+    }
+
+    .status-completed {
+        background: #ebfbee;
+        color: #37b24d;
+    }
+
+    .status-rejected {
+        background: #fff5f5;
+        color: #f03e3e;
+    }
+
+    .tab-content {
+        display: none;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* Pagination Styles */
+    .pagination-container {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    .pagination-info {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .pagination-info span {
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .pagination-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .page-link,
+    .page-btn {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid #e2e8f0;
+        background: white;
+        color: #64748b;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .page-link:hover,
+    .page-btn:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        background: var(--primary-light);
+    }
+
+    .page-link.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 10px rgba(0, 118, 255, 0.2);
+    }
+
+    .page-btn.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: #f8fafc;
+    }
+
+    @media (max-width: 1024px) {
+        .payment-card.slim {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+        }
+
+        .card-center {
+            padding: 16px 0;
+            border: none;
+            border-top: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+            margin: 0;
+        }
+
+        .card-right {
+            justify-content: space-between;
+        }
+    }
+</style>
+
+<!-- Fee Refund Application Page -->
+<div class="fee-rfnd-wrapper">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2 class="page-title">[Page.Message].Message.Label.Array["FEERFND.PAGE_TITLE"]</h2>
+            <p class="page-subtitle">[Page.Message].Message.Label.Array["FEERFND.PAGE_SUBTITLE"]</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="rfnd-tabs">
+            <button type="button" class="rfnd-tab-btn active" data-tab="available">
+                [Page.Message].Message.Label.Array["FEERFND.TAB.AVAILABLE"]
+            </button>
+            <button type="button" class="rfnd-tab-btn" data-tab="history">
+                [Page.Message].Message.Label.Array["FEERFND.TAB.HISTORY"]
+            </button>
+        </div>
+
+        <!-- Filter & Search Section -->
+        <div class="filter-section">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="rfndSearchInput"
+                    placeholder='[Page.Message].Message.Label.Array["FEERFND.SEARCH_PLACEHOLDER"]'>
+            </div>
+        </div>
+
+        <!-- Tab 1: Available for Refund -->
+        <div id="tab-available" class="tab-content active">
+            <div class="payment-list">
+
+                <!-- Sample Item 1 -->
+                <div class="payment-card slim">
+                    <div class="card-left">
+                        <span
+                            class="service-badge car-reg">[Page.Message].Message.Label.Array["SVCPRGRS.ITEM.NEW_REG"]</span>
+                        <div class="pay-main-info">
+                            <span class="payment-no">No. PAY-20260204-8821</span>
+                            <span class="detail-value date"><i class="fa-regular fa-clock"></i> 2026-02-04
+                                10:25:32</span>
+                        </div>
+                    </div>
+                    <div class="card-center">
+                        <div class="pay-sub-info">
+                            <div class="info-item">
+                                <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.BANK"]</span>
+                                <span class="info-value">신한은행</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</span>
+                                <span class="info-value">홍길동</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <div class="payment-amount">
+                            <span class="amount-value">25,000</span>
+                            <span class="amount-unit">[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span>
+                        </div>
+                        <button type="button" class="rfnd-apply-btn-slim"
+                            onclick="openRefundConfirm('PAY-20260204-8821')">
+                            [Page.Message].Message.Label.Array["FEERFND.BTN.APPLY"]
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sample Item 2 -->
+                <div class="payment-card slim">
+                    <div class="card-left">
+                        <span
+                            class="service-badge change-num">[Page.Message].Message.Label.Array["SVCPRGRS.ITEM.CHANGE_NUM"]</span>
+                        <div class="pay-main-info">
+                            <span class="payment-no">No. PAY-20260128-1102</span>
+                            <span class="detail-value date"><i class="fa-regular fa-clock"></i> 2026-01-28
+                                14:12:05</span>
+                        </div>
+                    </div>
+                    <div class="card-center">
+                        <div class="pay-sub-info">
+                            <div class="info-item">
+                                <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.BANK"]</span>
+                                <span class="info-value">우리은행</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</span>
+                                <span class="info-value">홍길동</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <div class="payment-amount">
+                            <span class="amount-value">15,000</span>
+                            <span class="amount-unit">[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span>
+                        </div>
+                        <button type="button" class="rfnd-apply-btn-slim"
+                            onclick="openRefundConfirm('PAY-20260128-1102')">
+                            [Page.Message].Message.Label.Array["FEERFND.BTN.APPLY"]
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination Section -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] <span>2</span>
+                    [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"]
+                </div>
+                <div class="pagination-nav">
+                    <button type="button" class="page-btn prev disabled"><i
+                            class="fa-solid fa-chevron-left"></i></button>
+                    <button type="button" class="page-link active">1</button>
+                    <button type="button" class="page-btn next disabled"><i
+                            class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Refund History -->
+        <div id="tab-history" class="tab-content">
+            <div class="payment-list">
+                <!-- Refund History Item Sample 1 -->
+                <div class="payment-card slim">
+                    <div class="card-left">
+                        <span
+                            class="service-badge inspect">[Page.Message].Message.Label.Array["SVCPRGRS.ITEM.REGULAR_INSPECT"]</span>
+                        <div class="pay-main-info">
+                            <span class="payment-no">No. PAY-20260110-5520</span>
+                            <span class="detail-value date"><i class="fa-regular fa-clock"></i> 2026-01-10
+                                11:40:00</span>
+                        </div>
+                    </div>
+                    <div class="card-center">
+                        <div class="pay-sub-info">
+                            <div class="info-item">
+                                <span
+                                    class="info-label">[Page.Message].Message.Label.Array["FEERFND.LABEL.STATUS"]</span>
+                                <span class="info-value">
+                                    <span
+                                        class="status-badge status-completed">[Page.Message].Message.Label.Array["FEERFND.STATUS.COMPLETED"]</span>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</span>
+                                <span class="info-value">홍길동</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <div class="payment-amount">
+                            <span class="amount-value">45,000</span>
+                            <span class="amount-unit">[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refund History Item Sample 2 -->
+                <div class="payment-card slim">
+                    <div class="card-left">
+                        <span
+                            class="service-badge car-reg">[Page.Message].Message.Label.Array["SVCPRGRS.ITEM.TRANSFER_REG"]</span>
+                        <div class="pay-main-info">
+                            <span class="payment-no">No. PAY-20260105-2241</span>
+                            <span class="detail-value date"><i class="fa-regular fa-clock"></i> 2026-01-05
+                                16:20:15</span>
+                        </div>
+                    </div>
+                    <div class="card-center">
+                        <div class="pay-sub-info">
+                            <div class="info-item">
+                                <span
+                                    class="info-label">[Page.Message].Message.Label.Array["FEERFND.LABEL.STATUS"]</span>
+                                <span class="info-value">
+                                    <span
+                                        class="status-badge status-requested">[Page.Message].Message.Label.Array["FEERFND.STATUS.REQUESTED"]</span>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">[Page.Message].Message.Label.Array["FEEPAY.LABEL.PAYER"]</span>
+                                <span class="info-value">홍길동</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <div class="payment-amount">
+                            <span class="amount-value">30,000</span>
+                            <span class="amount-unit">[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination for History -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] <span>2</span>
+                    [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"]
+                </div>
+                <div class="pagination-nav">
+                    <button type="button" class="page-btn prev disabled"><i
+                            class="fa-solid fa-chevron-left"></i></button>
+                    <button type="button" class="page-link active">1</button>
+                    <button type="button" class="page-btn next disabled"><i
+                            class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Refund Application Confirmation Popup -->
+<article id="fee_rfnd_popup" class="gi-popup" data-popup-open="false">
+    <div class="gi-popup-body" style="width: 600px;">
+        <div class="gi-popup-header">
+            <span>[Page.Message].Message.Label.Array["FEERFND.POPUP.TITLE"]</span>
+        </div>
+        <div class="gi-popup-contents">
+            <div style="padding: 10px;">
+                <p style="font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 20px; text-align: center;">
+                    [Page.Message].Message.Label.Array["FEERFND.MSG.CONFIRM_APPLY"]
+                </p>
+                <table class="receipt-table" style="width: 100%; border-collapse: collapse; border: 1px solid #e2e8f0;">
+                    <tr>
+                        <th
+                            style="background: #f8fafc; padding: 12px; border: 1px solid #e2e8f0; text-align: left; width: 35%;">
+                            [Page.Message].Message.Label.Array["FEEPAY.LABEL.PAY_NO"]</th>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><span data-field="rfnd_pay_no"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="background: #f8fafc; padding: 12px; border: 1px solid #e2e8f0; text-align: left;">
+                            [Page.Message].Message.Label.Array["FEEPAY.LABEL.SERVICE"]</th>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><span data-field="rfnd_service"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="background: #f8fafc; padding: 12px; border: 1px solid #e2e8f0; text-align: left;">
+                            [Page.Message].Message.Label.Array["FEEPAY.LABEL.AMOUNT"]</th>
+                        <td
+                            style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 700; color: var(--primary-color);">
+                            <span data-field="rfnd_amount"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="gi-popup-footer">
+            <button class="gi-btn-red gi-popup-update-btn" type="button" onclick="applyRefund()">
+                [Page.Message].Message.Label.Array["FEERFND.BTN.APPLY"]
+            </button>
+            <button class="gi-popup-close-btn" type="button">[Page.Message].Message.Label.Array["CLOSE_BTN"]</button>
+        </div>
+    </div>
+</article>
+
+<script>
+    $(document).ready(function () {
+        new Popup();
+
+        // Search functionality
+        $('#rfndSearchInput').on('keyup', function () {
+            const value = $(this).val().toLowerCase();
+            $('.tab-content.active .payment-card').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        // Tab Switching
+        $('.rfnd-tab-btn').on('click', function () {
+            $('.rfnd-tab-btn').removeClass('active');
+            $(this).addClass('active');
+
+            const tabId = $(this).data('tab');
+            $('.tab-content').removeClass('active');
+            $(`#tab-${tabId}`).addClass('active');
+
+            // Clear search when switching tabs
+            $('#rfndSearchInput').val('');
+            $('.payment-card').show();
+        });
+    });
+
+    let currentRefundPayNo = '';
+
+    function openRefundConfirm(payNo) {
+        currentRefundPayNo = payNo;
+        const $card = $(`.payment-no:contains('${payNo}')`).closest('.payment-card');
+        const serviceName = $card.find('.service-badge').text().trim();
+        const amount = $card.find('.amount-value').text().trim();
+
+        const rfndData = {
+            rfnd_pay_no: payNo,
+            rfnd_service: serviceName,
+            rfnd_amount: amount + " " + (Message.Label.Array["FEEPAY.UNIT.WON"] || "WON")
+        };
+
+        dataBinding.setDataForm("fee_rfnd_popup", rfndData);
+        popup.open("fee_rfnd_popup");
+    }
+
+    async function applyRefund() {
+        // Mocking the behavior for now
+        popup.close("fee_rfnd_popup");
+        formUtil.toast(Message.Label.Array["FEERFND.MSG.APPLY_SUCCESS"], "success");
+
+        // Optionally, remove or mark the item as 'Applied'
+        // $(`.payment-no:contains('${currentRefundPayNo}')`).closest('.payment-card').fadeOut();
+    }
+</script>

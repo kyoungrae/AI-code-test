@@ -205,3 +205,41 @@ Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "Илгээх үү? Илг�
 Message.Label.Array["SVCPRGRS.LABEL.APP_NO"] = "Өргөдлийн дугаар";
 Message.Label.Array["SVCPRGRS.ITEM.STRUCTURE_CHANGE"] = "Бүтцийн өөрчлөлт";
 Message.Label.Array["SVCPRGRS.ITEM.CERT_ISSUE"] = "Лавлагаа олгох";
+
+// Fee Payment List Page
+Message.Label.Array["FEEPAY.PAGE_TITLE"] = "Төлбөр төлөлтийн түүх";
+Message.Label.Array["FEEPAY.PAGE_SUBTITLE"] = "Таны хүсэлт гаргасан үйлчилгээний төлбөр төлөлтийн түүхийг шалгах боломжтой.";
+Message.Label.Array["FEEPAY.LABEL.SERVICE"] = "Үйлчилгээ";
+Message.Label.Array["FEEPAY.LABEL.AMOUNT"] = "Төлбөрийн дүн";
+Message.Label.Array["FEEPAY.LABEL.DATE"] = "Төлсөн огноо";
+Message.Label.Array["FEEPAY.LABEL.PAY_NO"] = "Гүйлгээний дугаар";
+Message.Label.Array["FEEPAY.LABEL.BANK"] = "Банк";
+Message.Label.Array["FEEPAY.LABEL.PAYER"] = "Төлөгч";
+Message.Label.Array["FEEPAY.BTN.RECEIPT"] = "Дэлгэрэнгүй";
+Message.Label.Array["FEEPAY.RECEIPT.TITLE"] = "Төлбөр төлөлтийн хуулга";
+Message.Label.Array["FEEPAY.SEARCH_PLACEHOLDER"] = "Үйлчилгээ, дугаараар хайх";
+Message.Label.Array["FEEPAY.UNIT.WON"] = "Төгрөг";
+Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] = "Нийт ";
+Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"] = " шүүлт";
+Message.Label.Array["FEEPAY.RECEIPT.FOOTER_TEAM"] = "MVIMS Үйл ажиллагааг дэмжих баг";
+Message.Label.Array["FEEPAY.RECEIPT.FOOTER_DESC"] = "Энэхүү баримт нь төлбөр төлөлтийн зуучлалын үйлчилгээгээр дамжуулан төлбөр амжилттай хийгдсэнийг гэрчилнэ.";
+
+// Fee Refund List Page
+Message.Label.Array["FEERFND.PAGE_TITLE"] = "Төлбөр буцаан олгох хүсэлт";
+Message.Label.Array["FEERFND.PAGE_SUBTITLE"] = "Төлсөн төлбөрөө буцаан авах хүсэлт гаргах боломжтой.";
+Message.Label.Array["FEERFND.BTN.APPLY"] = "Буцаалт хүсэх";
+Message.Label.Array["FEERFND.MSG.CONFIRM_APPLY"] = "Төлбөр буцаан олгох хүсэлт гаргах уу?";
+Message.Label.Array["FEERFND.MSG.APPLY_SUCCESS"] = "Буцаан олгох хүсэлт амжилттай бүртгэгдлээ.";
+Message.Label.Array["FEERFND.POPUP.TITLE"] = "Буцаалтын хүсэлтийн дэлгэрэнгүй";
+Message.Label.Array["FEERFND.SEARCH_PLACEHOLDER"] = "Үйлчилгээ, дугаараар хайх";
+Message.Label.Array["FEERFND.TAB.AVAILABLE"] = "Буцаах боломжтой";
+Message.Label.Array["FEERFND.TAB.HISTORY"] = "Буцаалтын төлөв";
+Message.Label.Array["FEERFND.LABEL.STATUS"] = "Төлөв";
+Message.Label.Array["FEERFND.STATUS.REQUESTED"] = "Хүсэлт гаргасан";
+Message.Label.Array["FEERFND.STATUS.PROCESSING"] = "Шийдвэрлэж байна";
+Message.Label.Array["FEERFND.STATUS.COMPLETED"] = "Буцаагдсан";
+Message.Label.Array["FEERFND.STATUS.REJECTED"] = "Татгалзсан";
+
+
+
+

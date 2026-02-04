@@ -205,3 +205,41 @@ Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "Submit this application? Y
 Message.Label.Array["SVCPRGRS.LABEL.APP_NO"] = "Application No.";
 Message.Label.Array["SVCPRGRS.ITEM.STRUCTURE_CHANGE"] = "Structure Change";
 Message.Label.Array["SVCPRGRS.ITEM.CERT_ISSUE"] = "Certificate Issuance";
+
+// Fee Payment List Page
+Message.Label.Array["FEEPAY.PAGE_TITLE"] = "Fee Payment History";
+Message.Label.Array["FEEPAY.PAGE_SUBTITLE"] = "You can check the fee payment history for the services you applied for.";
+Message.Label.Array["FEEPAY.LABEL.SERVICE"] = "Service";
+Message.Label.Array["FEEPAY.LABEL.AMOUNT"] = "Amount";
+Message.Label.Array["FEEPAY.LABEL.DATE"] = "Payment Date";
+Message.Label.Array["FEEPAY.LABEL.PAY_NO"] = "Payment No.";
+Message.Label.Array["FEEPAY.LABEL.BANK"] = "Bank";
+Message.Label.Array["FEEPAY.LABEL.PAYER"] = "Payer";
+Message.Label.Array["FEEPAY.BTN.RECEIPT"] = "Detail";
+Message.Label.Array["FEEPAY.RECEIPT.TITLE"] = "Fee Payment Statement";
+Message.Label.Array["FEEPAY.SEARCH_PLACEHOLDER"] = "Search service, payment no.";
+Message.Label.Array["FEEPAY.UNIT.WON"] = "WON";
+Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] = "Total ";
+Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"] = " items";
+Message.Label.Array["FEEPAY.RECEIPT.FOOTER_TEAM"] = "MVIMS Operation Team";
+Message.Label.Array["FEEPAY.RECEIPT.FOOTER_DESC"] = "This certificate proves that the payment has been successfully made through the online payment service.";
+
+// Fee Refund List Page
+Message.Label.Array["FEERFND.PAGE_TITLE"] = "Fee Refund Application";
+Message.Label.Array["FEERFND.PAGE_SUBTITLE"] = "You can apply for a refund for the fees you have paid.";
+Message.Label.Array["FEERFND.BTN.APPLY"] = "Apply Refund";
+Message.Label.Array["FEERFND.MSG.CONFIRM_APPLY"] = "Do you want to apply for a fee refund?";
+Message.Label.Array["FEERFND.MSG.APPLY_SUCCESS"] = "Refund application has been submitted successfully.";
+Message.Label.Array["FEERFND.POPUP.TITLE"] = "Refund Application Details";
+Message.Label.Array["FEERFND.SEARCH_PLACEHOLDER"] = "Search service, payment no.";
+Message.Label.Array["FEERFND.TAB.AVAILABLE"] = "Available for Refund";
+Message.Label.Array["FEERFND.TAB.HISTORY"] = "Refund Status";
+Message.Label.Array["FEERFND.LABEL.STATUS"] = "Status";
+Message.Label.Array["FEERFND.STATUS.REQUESTED"] = "Requested";
+Message.Label.Array["FEERFND.STATUS.PROCESSING"] = "Processing";
+Message.Label.Array["FEERFND.STATUS.COMPLETED"] = "Completed";
+Message.Label.Array["FEERFND.STATUS.REJECTED"] = "Rejected";
+
+
+
+

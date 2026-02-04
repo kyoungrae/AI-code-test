@@ -205,3 +205,41 @@ Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "접수하시겠습니까? 
 Message.Label.Array["SVCPRGRS.LABEL.APP_NO"] = "신청번호";
 Message.Label.Array["SVCPRGRS.ITEM.STRUCTURE_CHANGE"] = "구조변경 신청";
 Message.Label.Array["SVCPRGRS.ITEM.CERT_ISSUE"] = "등록원부 발급";
+
+// Fee Payment List Page
+Message.Label.Array["FEEPAY.PAGE_TITLE"] = "수수료 납부 내역";
+Message.Label.Array["FEEPAY.PAGE_SUBTITLE"] = "신청하신 업무에 대한 수수료 납부 이력을 확인할 수 있습니다.";
+Message.Label.Array["FEEPAY.LABEL.SERVICE"] = "업무";
+Message.Label.Array["FEEPAY.LABEL.AMOUNT"] = "납부 금액";
+Message.Label.Array["FEEPAY.LABEL.DATE"] = "납부 일시";
+Message.Label.Array["FEEPAY.LABEL.PAY_NO"] = "납부 번호";
+Message.Label.Array["FEEPAY.LABEL.BANK"] = "납부 은행";
+Message.Label.Array["FEEPAY.LABEL.PAYER"] = "납부자";
+Message.Label.Array["FEEPAY.BTN.RECEIPT"] = "상세";
+Message.Label.Array["FEEPAY.RECEIPT.TITLE"] = "수수료 납부 명세서";
+Message.Label.Array["FEEPAY.SEARCH_PLACEHOLDER"] = "업무명, 납부번호 검색";
+Message.Label.Array["FEEPAY.UNIT.WON"] = "원";
+Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] = "총 ";
+Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"] = "건";
+Message.Label.Array["FEEPAY.RECEIPT.FOOTER_TEAM"] = "MVIMS 운영지원팀";
+Message.Label.Array["FEEPAY.RECEIPT.FOOTER_DESC"] = "본 확인서는 온라인 납부 대행 서비스를 통해 정상 납부되었음을 증명합니다.";
+
+// Fee Refund List Page
+Message.Label.Array["FEERFND.PAGE_TITLE"] = "수수료 환불 신청";
+Message.Label.Array["FEERFND.PAGE_SUBTITLE"] = "납부한 수수료에 대해 환불을 신청할 수 있습니다.";
+Message.Label.Array["FEERFND.BTN.APPLY"] = "환불 신청";
+Message.Label.Array["FEERFND.MSG.CONFIRM_APPLY"] = "수수료 환불 신청 하시겠습니까?";
+Message.Label.Array["FEERFND.MSG.APPLY_SUCCESS"] = "환불 신청이 정상적으로 접수되었습니다.";
+Message.Label.Array["FEERFND.POPUP.TITLE"] = "환불 신청 상세 확인";
+Message.Label.Array["FEERFND.SEARCH_PLACEHOLDER"] = "업무명, 납부번호 검색";
+Message.Label.Array["FEERFND.TAB.AVAILABLE"] = "환불 가능 내역";
+Message.Label.Array["FEERFND.TAB.HISTORY"] = "환불 신청 현황";
+Message.Label.Array["FEERFND.LABEL.STATUS"] = "진행 상태";
+Message.Label.Array["FEERFND.STATUS.REQUESTED"] = "신청완료";
+Message.Label.Array["FEERFND.STATUS.PROCESSING"] = "처리중";
+Message.Label.Array["FEERFND.STATUS.COMPLETED"] = "환불완료";
+Message.Label.Array["FEERFND.STATUS.REJECTED"] = "반려";
+
+
+
+
