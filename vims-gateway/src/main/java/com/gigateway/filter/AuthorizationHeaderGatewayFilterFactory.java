@@ -49,6 +49,7 @@ public class AuthorizationHeaderGatewayFilterFactory
                         path.startsWith("/common") ||
                         path.startsWith("/assets") || // 정적 리소스 추가
                         path.startsWith("/login") || // 로그인 페이지 추가
+                        path.startsWith("/web") || // 대국민 홈페이지 추가 (로그인 없이 접근 가능)
                         path.startsWith("/error") ||
                         path.equals("/") ||
                         path.endsWith(".html") ||
