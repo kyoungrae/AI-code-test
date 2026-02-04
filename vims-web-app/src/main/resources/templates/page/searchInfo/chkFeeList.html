@@ -1,0 +1,382 @@
+<style>
+    .search-wrapper {
+        background: var(--bg-soft);
+        padding: 80px 0 100px 0;
+        margin-top: var(--header-height);
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        animation: fadeInDown 0.6s ease-out;
+    }
+
+    .page-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+        color: var(--text-muted);
+    }
+
+    /* Summary Stats */
+    .summary-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 32px;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 24px;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+    .stat-icon.count {
+        background: #fff9db;
+        color: #f08c00;
+    }
+
+    .stat-icon.amount {
+        background: #f0f7ff;
+        color: #0076FF;
+    }
+
+    .stat-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    .stat-value {
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+    }
+
+    .stat-value span {
+        font-size: 16px;
+        font-weight: 600;
+        margin-left: 4px;
+        color: #94a3b8;
+    }
+
+    /* Search Box */
+    .search-section {
+        background: white;
+        padding: 30px;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 32px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .search-form-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 15px;
+    }
+
+    .search-input-group {
+        position: relative;
+    }
+
+    .search-input-group i {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+
+    .search-input-group input {
+        width: 100%;
+        padding: 16px 20px 16px 52px;
+        border-radius: var(--border-radius-md);
+        border: 1px solid #e2e8f0;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .search-input-group input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(0, 118, 255, 0.1);
+    }
+
+    .btn-search {
+        padding: 0 40px;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-md);
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-search:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 118, 255, 0.3);
+    }
+
+    /* List Section */
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .item-card {
+        background: white;
+        border-radius: var(--border-radius-md);
+        padding: 20px 24px;
+        display: grid;
+        grid-template-columns: 2fr 1.5fr 1fr 100px 150px;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+        gap: 20px;
+    }
+
+    .item-card:hover {
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-md);
+        transform: scale(1.005);
+    }
+
+    .primary-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .info-icon {
+        width: 44px;
+        height: 44px;
+        background: #f8fafc;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        font-size: 18px;
+    }
+
+    .info-text-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .info-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--text-main);
+    }
+
+    .info-sub {
+        font-size: 13px;
+        color: #94a3b8;
+    }
+
+    .middle-info {
+        font-weight: 700;
+        color: #475569;
+        font-size: 15px;
+    }
+
+    .amount-info {
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--text-main);
+        text-align: right;
+    }
+
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .status-badge.unpaid {
+        background: #fff9db;
+        color: #f08c00;
+    }
+
+    .status-badge.paid {
+        background: #ebfbee;
+        color: #40c057;
+    }
+
+    .btn-action-small {
+        padding: 8px 16px;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-action-small:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+    }
+
+    /* Pagination */
+    .pagination-container {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    .pagination-info {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .pagination-info span {
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 992px) {
+        .item-card {
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .primary-info {
+            grid-column: span 2;
+        }
+
+        .btn-action-small {
+            width: 100%;
+            grid-column: span 2;
+        }
+    }
+</style>
+
+<div class="search-wrapper">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2 class="page-title">[Page.Message].Message.Label.Array["FEE.PAGE_TITLE"]</h2>
+            <p class="page-subtitle">[Page.Message].Message.Label.Array["FEE.PAGE_SUBTITLE"]</p>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="summary-stats">
+            <div class="stat-card">
+                <div class="stat-icon count"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">[Page.Message].Message.Label.Array["FEE.SUMMARY.COUNT"]</span>
+                    <span class="stat-value">1 <span>건</span></span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon amount"><i class="fa-solid fa-money-bill-wave"></i></div>
+                <div class="stat-info">
+                    <span class="stat-label">[Page.Message].Message.Label.Array["FEE.SUMMARY.AMOUNT"]</span>
+                    <span class="stat-value">25,000
+                        <span>[Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-section">
+            <div class="search-form-grid">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <input type="text" id="feeSearchInput" placeholder='신청번호 또는 납부자명 입력' value="APP-2026-N001">
+                </div>
+                <button type="button" class="btn-search" onclick="searchFee()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    [Page.Message].Message.Label.Array["MYINFO.BTN.SEARCH"]
+                </button>
+            </div>
+        </div>
+
+        <!-- List Section -->
+        <div class="list-container" id="feeListBody">
+            <div class="item-card">
+                <div class="primary-info">
+                    <div class="info-icon"><i class="fa-solid fa-file-contract"></i></div>
+                    <div class="info-text-wrap">
+                        <span class="info-title">자동차 이전 등록 수수료 (Transfer Fee)</span>
+                        <span class="info-sub">APP-2026-N001 | 2026-02-02</span>
+                    </div>
+                </div>
+                <div class="middle-info">Administrative Service</div>
+                <div class="amount-info">25,000 [Page.Message].Message.Label.Array["FEEPAY.UNIT.WON"]</div>
+                <div><span class="status-badge unpaid">[Page.Message].Message.Label.Array["TOLL.STATUS.UNPAID"]</span>
+                </div>
+                <button type="button" class="btn-action-small" onclick="payItem('FEE-001')">
+                    [Page.Message].Message.Label.Array["QUICK.PAYMENT"]
+                </button>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <div class="pagination-info">
+                [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] <span>1</span>
+                [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"]
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function searchFee() { formUtil.toast('조회되었습니다.', 'info'); }
+    function payItem(id) {
+        formUtil.confirm("납부하시겠습니까?").then(confirmed => {
+            if (confirmed) formUtil.toast('결제 페이지로 이동합니다.', 'success');
+        });
+    }
+</script>

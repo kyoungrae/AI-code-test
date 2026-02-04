@@ -239,7 +239,63 @@ Message.Label.Array["FEERFND.STATUS.REQUESTED"] = "Requested";
 Message.Label.Array["FEERFND.STATUS.PROCESSING"] = "Processing";
 Message.Label.Array["FEERFND.STATUS.COMPLETED"] = "Completed";
 Message.Label.Array["FEERFND.STATUS.REJECTED"] = "Rejected";
+// Toll Fee Inquiry Page
+Message.Label.Array["TOLL.PAGE_TITLE"] = "Toll Fee Inquiry";
+Message.Label.Array["TOLL.PAGE_SUBTITLE"] = "You can check the toll fee payment history and unpaid tolls from tollgates.";
+Message.Label.Array["TOLL.SEARCH_PLACEHOLDER"] = "Enter vehicle number (e.g., 12A3456)";
+Message.Label.Array["TOLL.LABEL.GATE_NAME"] = "Tollgate";
+Message.Label.Array["TOLL.LABEL.PASS_DATE"] = "Passing Time";
+Message.Label.Array["TOLL.LABEL.VEHICLE_NO"] = "Vehicle No.";
+Message.Label.Array["TOLL.LABEL.AMOUNT"] = "Toll Fee";
+Message.Label.Array["TOLL.LABEL.STATUS"] = "Payment Status";
+Message.Label.Array["TOLL.STATUS.PAID"] = "Paid";
+Message.Label.Array["TOLL.STATUS.UNPAID"] = "Unpaid";
+Message.Label.Array["TOLL.BTN.PAY"] = "Pay Unpaid Fees";
+Message.Label.Array["TOLL.SUMMARY.TOTAL_UNPAID"] = "Total Unpaid";
+Message.Label.Array["TOLL.SUMMARY.UNPAID_COUNT"] = "Unpaid Count";
+Message.Label.Array["TOLL.MSG.NO_DATA"] = "No toll fee history found.";
 
+// Fine inquiry Page
+Message.Label.Array["FINE.PAGE_TITLE"] = "Unpaid Fine Inquiry";
+Message.Label.Array["FINE.PAGE_SUBTITLE"] = "You can check and pay for unpaid fines such as traffic violations.";
+Message.Label.Array["FINE.LABEL.TYPE"] = "Violation Type";
+Message.Label.Array["FINE.LABEL.DATE"] = "Violation Date";
+Message.Label.Array["FINE.LABEL.PLACE"] = "Violation Place";
+Message.Label.Array["FINE.SUMMARY.COUNT"] = "Unpaid Fines";
+Message.Label.Array["FINE.SUMMARY.AMOUNT"] = "Total Fine";
 
+// Tax inquiry Page
+Message.Label.Array["TAX.PAGE_TITLE"] = "Unpaid Tax Inquiry";
+Message.Label.Array["TAX.PAGE_SUBTITLE"] = "You can inquire about unpaid tax history such as vehicle and local taxes.";
+Message.Label.Array["TAX.LABEL.YEAR"] = "Tax Year";
+Message.Label.Array["TAX.LABEL.TYPE"] = "Tax Item";
+Message.Label.Array["TAX.SUMMARY.COUNT"] = "Total Arrears";
+Message.Label.Array["TAX.SUMMARY.AMOUNT"] = "Total Unpaid Tax";
 
+// Insurance inquiry Page
+Message.Label.Array["INSRNC.PAGE_TITLE"] = "Insurance Status Inquiry";
+Message.Label.Array["INSRNC.PAGE_SUBTITLE"] = "You can check your vehicle insurance status and details.";
+Message.Label.Array["INSRNC.LABEL.COMPANY"] = "Company";
+Message.Label.Array["INSRNC.LABEL.PERIOD"] = "Coverage Period";
+Message.Label.Array["INSRNC.LABEL.TYPE"] = "Policy Type";
+Message.Label.Array["INSRNC.LABEL.STATUS"] = "Status";
+Message.Label.Array["INSRNC.STATUS.ACTIVE"] = "Active";
+Message.Label.Array["INSRNC.STATUS.EXPIRED"] = "Expired";
 
+// Customs inquiry Page
+Message.Label.Array["CSTM.PAGE_TITLE"] = "Customs Information Inquiry";
+Message.Label.Array["CSTM.PAGE_SUBTITLE"] = "View customs clearance info and declaration status for imported vehicles.";
+Message.Label.Array["CSTM.LABEL.REPORT_NO"] = "Declaration No.";
+Message.Label.Array["CSTM.LABEL.IMPORT_DATE"] = "Import/Entry Date";
+Message.Label.Array["CSTM.LABEL.OFFICE"] = "Customs Office";
+Message.Label.Array["CSTM.LABEL.STATUS"] = "Clearance Status";
+Message.Label.Array["CSTM.STATUS.PENDING"] = "Inspecting";
+Message.Label.Array["CSTM.STATUS.CLEARED"] = "Cleared";
+
+// Service Fee inquiry Page
+Message.Label.Array["FEE.PAGE_TITLE"] = "Service Fee Payment Inquiry";
+Message.Label.Array["FEE.PAGE_SUBTITLE"] = "Payment status of fees and stamps for administrative services.";
+Message.Label.Array["FEE.LABEL.APP_NO"] = "Application No.";
+Message.Label.Array["FEE.LABEL.FEE_TYPE"] = "Fee Item";
+Message.Label.Array["FEE.SUMMARY.COUNT"] = "Pending Payments";
+Message.Label.Array["FEE.SUMMARY.AMOUNT"] = "Total Pending Balance";

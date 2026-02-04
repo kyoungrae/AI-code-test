@@ -239,7 +239,63 @@ Message.Label.Array["FEERFND.STATUS.REQUESTED"] = "신청완료";
 Message.Label.Array["FEERFND.STATUS.PROCESSING"] = "처리중";
 Message.Label.Array["FEERFND.STATUS.COMPLETED"] = "환불완료";
 Message.Label.Array["FEERFND.STATUS.REJECTED"] = "반려";
+// Toll Fee Inquiry Page
+Message.Label.Array["TOLL.PAGE_TITLE"] = "통행료 납부 및 미납 조회";
+Message.Label.Array["TOLL.PAGE_SUBTITLE"] = "고속도로 및 톨게이트 이용에 따른 통행료 수납 내역을 확인할 수 있습니다.";
+Message.Label.Array["TOLL.SEARCH_PLACEHOLDER"] = "차량번호를 입력하세요 (예: 12가3456)";
+Message.Label.Array["TOLL.LABEL.GATE_NAME"] = "톨게이트명";
+Message.Label.Array["TOLL.LABEL.PASS_DATE"] = "통과 일시";
+Message.Label.Array["TOLL.LABEL.VEHICLE_NO"] = "차량번호";
+Message.Label.Array["TOLL.LABEL.AMOUNT"] = "통행료";
+Message.Label.Array["TOLL.LABEL.STATUS"] = "납부 상태";
+Message.Label.Array["TOLL.STATUS.PAID"] = "납부완료";
+Message.Label.Array["TOLL.STATUS.UNPAID"] = "미납";
+Message.Label.Array["TOLL.BTN.PAY"] = "미납금 납부";
+Message.Label.Array["TOLL.SUMMARY.TOTAL_UNPAID"] = "총 미납 금액";
+Message.Label.Array["TOLL.SUMMARY.UNPAID_COUNT"] = "미납 건수";
+Message.Label.Array["TOLL.MSG.NO_DATA"] = "조회된 통행료 내역이 없습니다.";
 
+// Fine inquiry Page
+Message.Label.Array["FINE.PAGE_TITLE"] = "벌금 미납 조회";
+Message.Label.Array["FINE.PAGE_SUBTITLE"] = "교통법규 위반 등 미납된 벌금 내역을 확인하고 납부할 수 있습니다.";
+Message.Label.Array["FINE.LABEL.TYPE"] = "위반 종류";
+Message.Label.Array["FINE.LABEL.DATE"] = "위반 일시";
+Message.Label.Array["FINE.LABEL.PLACE"] = "위반 장소";
+Message.Label.Array["FINE.SUMMARY.COUNT"] = "미납 벌금";
+Message.Label.Array["FINE.SUMMARY.AMOUNT"] = "총 벌금액";
 
+// Tax inquiry Page
+Message.Label.Array["TAX.PAGE_TITLE"] = "세금 미납 조회";
+Message.Label.Array["TAX.PAGE_SUBTITLE"] = "자동차세 및 지방세 등 미납된 세금 내역을 조회할 수 있습니다.";
+Message.Label.Array["TAX.LABEL.YEAR"] = "과세 연도";
+Message.Label.Array["TAX.LABEL.TYPE"] = "세목";
+Message.Label.Array["TAX.SUMMARY.COUNT"] = "미납 건수";
+Message.Label.Array["TAX.SUMMARY.AMOUNT"] = "총 체납액";
 
+// Insurance inquiry Page
+Message.Label.Array["INSRNC.PAGE_TITLE"] = "보험 가입 현황 조회";
+Message.Label.Array["INSRNC.PAGE_SUBTITLE"] = "사용자님의 차량 보험 가입 상태 및 상세 정보를 확인할 수 있습니다.";
+Message.Label.Array["INSRNC.LABEL.COMPANY"] = "보험사";
+Message.Label.Array["INSRNC.LABEL.PERIOD"] = "가입 기간";
+Message.Label.Array["INSRNC.LABEL.TYPE"] = "가입 종류";
+Message.Label.Array["INSRNC.LABEL.STATUS"] = "상태";
+Message.Label.Array["INSRNC.STATUS.ACTIVE"] = "유효";
+Message.Label.Array["INSRNC.STATUS.EXPIRED"] = "만료";
 
+// Customs inquiry Page
+Message.Label.Array["CSTM.PAGE_TITLE"] = "세관 정보 조회";
+Message.Label.Array["CSTM.PAGE_SUBTITLE"] = "수입 차량의 통관 정보 및 관련 세관 신고 현황을 조회할 수 있습니다.";
+Message.Label.Array["CSTM.LABEL.REPORT_NO"] = "신고번호";
+Message.Label.Array["CSTM.LABEL.IMPORT_DATE"] = "반입 일자";
+Message.Label.Array["CSTM.LABEL.OFFICE"] = "관할 세관";
+Message.Label.Array["CSTM.LABEL.STATUS"] = "통관 상태";
+Message.Label.Array["CSTM.STATUS.PENDING"] = "검사중";
+Message.Label.Array["CSTM.STATUS.CLEARED"] = "수리완료";
+
+// Service Fee inquiry Page
+Message.Label.Array["FEE.PAGE_TITLE"] = "서비스 비용 납부 조회";
+Message.Label.Array["FEE.PAGE_SUBTITLE"] = "진행 중인 모든 행정 서비스의 수수료 및 수입 인지 대금 납부 현황입니다.";
+Message.Label.Array["FEE.LABEL.APP_NO"] = "신청번호";
+Message.Label.Array["FEE.LABEL.FEE_TYPE"] = "비용 항목";
+Message.Label.Array["FEE.SUMMARY.COUNT"] = "미결제 내역";
+Message.Label.Array["FEE.SUMMARY.AMOUNT"] = "총 미결제액";

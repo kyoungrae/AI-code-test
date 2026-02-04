@@ -1,0 +1,287 @@
+<style>
+    .search-wrapper {
+        background: var(--bg-soft);
+        padding: 80px 0 100px 0;
+        margin-top: var(--header-height);
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+        animation: fadeInDown 0.6s ease-out;
+    }
+
+    .page-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text-main);
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+        color: var(--text-muted);
+    }
+
+    /* Search Box */
+    .search-section {
+        background: white;
+        padding: 30px;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 32px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .search-form-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 15px;
+    }
+
+    .search-input-group {
+        position: relative;
+    }
+
+    .search-input-group i {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+
+    .search-input-group input {
+        width: 100%;
+        padding: 16px 20px 16px 52px;
+        border-radius: var(--border-radius-md);
+        border: 1px solid #e2e8f0;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .search-input-group input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(0, 118, 255, 0.1);
+    }
+
+    .btn-search {
+        padding: 0 40px;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-md);
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-search:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 118, 255, 0.3);
+    }
+
+    /* List Section */
+    .list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .item-card {
+        background: white;
+        border-radius: var(--border-radius-md);
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr auto;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+        gap: 24px;
+    }
+
+    .item-card:hover {
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-md);
+        transform: scale(1.005);
+    }
+
+    .primary-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .info-icon {
+        width: 52px;
+        height: 52px;
+        background: #fdf2f2;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #e03131;
+        font-size: 24px;
+    }
+
+    .info-text-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .info-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--text-main);
+    }
+
+    .info-sub {
+        font-size: 14px;
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    .middle-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .label {
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .value {
+        font-size: 15px;
+        color: #475569;
+        font-weight: 700;
+    }
+
+    .status-badge {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .status-badge.cleared {
+        background: #ebfbee;
+        color: #40c057;
+    }
+
+    .status-badge.pending {
+        background: #fff9db;
+        color: #f08c00;
+    }
+
+    /* Pagination */
+    .pagination-container {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 40px;
+    }
+
+    .pagination-info {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .pagination-info span {
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 992px) {
+        .item-card {
+            grid-template-columns: 1fr;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .primary-info {
+            flex-direction: column;
+        }
+
+        .middle-info {
+            align-items: center;
+        }
+    }
+</style>
+
+<div class="search-wrapper">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2 class="page-title">[Page.Message].Message.Label.Array["CSTM.PAGE_TITLE"]</h2>
+            <p class="page-subtitle">[Page.Message].Message.Label.Array["CSTM.PAGE_SUBTITLE"]</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-section">
+            <div class="search-form-grid">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-ship"></i>
+                    <input type="text" id="cstmSearchInput" placeholder='신고번호 또는 아산번호 입력' value="CSTM-2026-X129">
+                </div>
+                <button type="button" class="btn-search" onclick="searchCstm()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    [Page.Message].Message.Label.Array["MYINFO.BTN.SEARCH"]
+                </button>
+            </div>
+        </div>
+
+        <!-- List Section -->
+        <div class="list-container" id="cstmListBody">
+            <div class="item-card">
+                <div class="primary-info">
+                    <div class="info-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="info-text-wrap">
+                        <span class="info-title">TOYOTA PRIUS (2024 MODEL)</span>
+                        <span class="info-sub">No. CSTM-MN-99210-A</span>
+                    </div>
+                </div>
+                <div class="middle-info">
+                    <span class="label">반입 일자 (Entry Date)</span>
+                    <span class="value">2026.01.25</span>
+                </div>
+                <div class="middle-info">
+                    <span class="label">관할 세관 (Office)</span>
+                    <span class="value">Ulaanbaatar Customs Office</span>
+                </div>
+                <div>
+                    <span class="status-badge cleared">[Page.Message].Message.Label.Array["CSTM.STATUS.CLEARED"]</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <div class="pagination-info">
+                [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_PREFIX"] <span>1</span>
+                [Page.Message].Message.Label.Array["FEEPAY.PAGINATION.INFO_SUFFIX"]
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function searchCstm() { formUtil.toast('조회되었습니다.', 'info'); }
+</script>

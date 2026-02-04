@@ -239,7 +239,63 @@ Message.Label.Array["FEERFND.STATUS.REQUESTED"] = "Хүсэлт гаргасан
 Message.Label.Array["FEERFND.STATUS.PROCESSING"] = "Шийдвэрлэж байна";
 Message.Label.Array["FEERFND.STATUS.COMPLETED"] = "Буцаагдсан";
 Message.Label.Array["FEERFND.STATUS.REJECTED"] = "Татгалзсан";
+// Toll Fee Inquiry Page
+Message.Label.Array["TOLL.PAGE_TITLE"] = "Зам ашигласны төлбөр шалгах";
+Message.Label.Array["TOLL.PAGE_SUBTITLE"] = "Хурдны зам болон төлбөр авах цэгээр нэвтэрсэн төлбөрийн түүх, дутуу төлөлтийг шалгах боломжтой.";
+Message.Label.Array["TOLL.SEARCH_PLACEHOLDER"] = "Автомашины дугаар оруулна уу (Жишээ: 1234 УБА)";
+Message.Label.Array["TOLL.LABEL.GATE_NAME"] = "Төлбөр авах цэг";
+Message.Label.Array["TOLL.LABEL.PASS_DATE"] = "Нэвтэрсэн огноо";
+Message.Label.Array["TOLL.LABEL.VEHICLE_NO"] = "Улсын дугаар";
+Message.Label.Array["TOLL.LABEL.AMOUNT"] = "Төлбөр";
+Message.Label.Array["TOLL.LABEL.STATUS"] = "Төлбөрийн төлөв";
+Message.Label.Array["TOLL.STATUS.PAID"] = "Төлөгдсөн";
+Message.Label.Array["TOLL.STATUS.UNPAID"] = "Төлөгдөөгүй";
+Message.Label.Array["TOLL.BTN.PAY"] = "Төлбөр төлөх";
+Message.Label.Array["TOLL.SUMMARY.TOTAL_UNPAID"] = "Нийт төлөгдөөгүй";
+Message.Label.Array["TOLL.SUMMARY.UNPAID_COUNT"] = "Нийт 건수";
+Message.Label.Array["TOLL.MSG.NO_DATA"] = "Төлбөрийн түүх олдсонгүй.";
 
+// Fine inquiry Page
+Message.Label.Array["FINE.PAGE_TITLE"] = "Торгууль шалгах";
+Message.Label.Array["FINE.PAGE_SUBTITLE"] = "Замын хөдөлгөөний дүрэм зөрчсөн болон бусад төлөгдөөгүй торгуулийг шалгах боломжтой.";
+Message.Label.Array["FINE.LABEL.TYPE"] = "Зөрчлийн төрөл";
+Message.Label.Array["FINE.LABEL.DATE"] = "Зөрчил гаргасан огноо";
+Message.Label.Array["FINE.LABEL.PLACE"] = "Зөрчил гаргасан газар";
+Message.Label.Array["FINE.SUMMARY.COUNT"] = "Нийт торгууль";
+Message.Label.Array["FINE.SUMMARY.AMOUNT"] = "Нийт торгуулийн дүн";
 
+// Tax inquiry Page
+Message.Label.Array["TAX.PAGE_TITLE"] = "Татварын үлдэгдэл шалгах";
+Message.Label.Array["TAX.PAGE_SUBTITLE"] = "Авто тээврийн хэрэгслийн болон бусад төлөгдөөгүй татварын түүхийг шалгах боломжтой.";
+Message.Label.Array["TAX.LABEL.YEAR"] = "Татварын жил";
+Message.Label.Array["TAX.LABEL.TYPE"] = "Татварын төрөл";
+Message.Label.Array["TAX.SUMMARY.COUNT"] = "Төлөгдөөгүй 건수";
+Message.Label.Array["TAX.SUMMARY.AMOUNT"] = "Нийт татварын дүн";
 
+// Insurance inquiry Page
+Message.Label.Array["INSRNC.PAGE_TITLE"] = "Даатгалын төлөв шалгах";
+Message.Label.Array["INSRNC.PAGE_SUBTITLE"] = "Таны автомашины даатгалын мэдээлэл болон баталгаажилтыг шалгах боломжтой.";
+Message.Label.Array["INSRNC.LABEL.COMPANY"] = "Даатгалын компани";
+Message.Label.Array["INSRNC.LABEL.PERIOD"] = "Даатгалын хугацаа";
+Message.Label.Array["INSRNC.LABEL.TYPE"] = "Даатгалын төрөл";
+Message.Label.Array["INSRNC.LABEL.STATUS"] = "Төлөв";
+Message.Label.Array["INSRNC.STATUS.ACTIVE"] = "Хүчинтэй";
+Message.Label.Array["INSRNC.STATUS.EXPIRED"] = "Хугацаа дууссан";
 
+// Customs inquiry Page
+Message.Label.Array["CSTM.PAGE_TITLE"] = "Гаалийн мэдээлэл шалгах";
+Message.Label.Array["CSTM.PAGE_SUBTITLE"] = "Импортын автомашины гаалийн бүрдүүлэлт болон мэдүүлгийн явцыг шалгах боломжтой.";
+Message.Label.Array["CSTM.LABEL.REPORT_NO"] = "Мэдүүлгийн дугаар";
+Message.Label.Array["CSTM.LABEL.IMPORT_DATE"] = "Орсон огноо";
+Message.Label.Array["CSTM.LABEL.OFFICE"] = "Харьяа гааль";
+Message.Label.Array["CSTM.LABEL.STATUS"] = "Гаалийн төлөв";
+Message.Label.Array["CSTM.STATUS.PENDING"] = "Шалгаж байна";
+Message.Label.Array["CSTM.STATUS.CLEARED"] = "Бүрдүүлэлт дууссан";
+
+// Service Fee inquiry Page
+Message.Label.Array["FEE.PAGE_TITLE"] = "Үйлчилгээний төлбөр шалгах";
+Message.Label.Array["FEE.PAGE_SUBTITLE"] = "Төрийн үйлчилгээний хураамж болон тамганы тэмдэгтийн төлбөрийн явцыг шалгах боломжтой.";
+Message.Label.Array["FEE.LABEL.APP_NO"] = "Хүсэлтийн дугаар";
+Message.Label.Array["FEE.LABEL.FEE_TYPE"] = "Төлбөрийн нэр";
+Message.Label.Array["FEE.SUMMARY.COUNT"] = "Төлөгдөөгүй 건수";
+Message.Label.Array["FEE.SUMMARY.AMOUNT"] = "Нийт төлөх дүн";
