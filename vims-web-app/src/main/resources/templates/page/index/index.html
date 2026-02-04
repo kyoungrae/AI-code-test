@@ -2,17 +2,47 @@
 <div class="hero-wrapper">
     <div class="container">
         <div class="hero-grid">
-            <!-- Banner -->
+            <!-- Banner Slider -->
             <div class="hero-banner">
-                <img src="/web/static/assets/images/vims_banner_orange.png" class="banner-img-bg" alt="Banner Image">
-                <p style="color: white; opacity: 0.9;">[Page.Message].Message.Label.Array["MAIN.BANNER_TEXT"]
-                </p>
+                <div class="banner-slider">
+                    <!-- Banner 1: Registration & Inspection -->
+                    <div class="banner-item active">
+                        <img src="/web/static/assets/images/vims_banner_orange.png" class="banner-img-bg"
+                            alt="Banner 1">
+                        <h2>[Page.Message].Message.Label.Array["MAIN.BANNER1.TITLE"]</h2>
+                        <p>[Page.Message].Message.Label.Array["MAIN.BANNER1.DESC"]</p>
+                    </div>
 
-                <div style="display: flex; gap: 8px; margin-top: auto; position: relative; z-index: 1;">
-                    <span style="width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.4;"></span>
-                    <span style="width: 24px; height: 8px; background: white; border-radius: 4px;"></span>
-                    <span style="width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.4;"></span>
-                    <span style="width: 8px; height: 8px; background: white; border-radius: 50%; opacity: 0.4;"></span>
+                    <!-- Banner 2: Toll Fee -->
+                    <div class="banner-item" style="background: linear-gradient(135deg, #4A90E2, #1E3A5F);">
+                        <img src="/web/static/assets/images/vims_banner_blue.png" class="banner-img-bg" alt="Banner 2"
+                            style="opacity: 0.8;">
+                        <h2>[Page.Message].Message.Label.Array["MAIN.BANNER2.TITLE"]</h2>
+                        <p>[Page.Message].Message.Label.Array["MAIN.BANNER2.DESC"]</p>
+                    </div>
+
+                    <!-- Banner 3: Fines & Taxes -->
+                    <div class="banner-item" style="background: linear-gradient(135deg, #673AB7, #311B92);">
+                        <img src="/web/static/assets/images/vims_banner_purple.png" class="banner-img-bg" alt="Banner 3"
+                            style="opacity: 0.8;">
+                        <h2>[Page.Message].Message.Label.Array["MAIN.BANNER3.TITLE"]</h2>
+                        <p>[Page.Message].Message.Label.Array["MAIN.BANNER3.DESC"]</p>
+                    </div>
+                </div>
+
+                <!-- Slider Indicators -->
+                <div class="banner-controls">
+                    <span class="banner-dot active" data-index="0"></span>
+                    <span class="banner-dot" data-index="1"></span>
+                    <span class="banner-dot" data-index="2"></span>
+                </div>
+
+                <!-- Slider Arrows -->
+                <div class="banner-arrows">
+                    <button type="button" class="banner-arrow prev" id="bannerPrev"><i
+                            class="fa-solid fa-chevron-left"></i></button>
+                    <button type="button" class="banner-arrow next" id="bannerNext"><i
+                            class="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
 
@@ -159,6 +189,7 @@
 </div>
 
 <script>
+    // Tab switching
     $(document).on('click', '.tab-link', function () {
         $('.tab-link').removeClass('active');
         $(this).addClass('active');
@@ -171,6 +202,56 @@
             $("#tab-id").css("display", "none");
             $("#tab-dan").css("display", "block");
         }
-
     });
+
+    // Banner Slider Logic
+    let currentBanner = 0;
+    const bannerItems = $('.banner-item');
+    const bannerDots = $('.banner-dot');
+    const totalBanners = bannerItems.length;
+
+    function showBanner(index) {
+        bannerItems.removeClass('active');
+        bannerDots.removeClass('active');
+
+        bannerItems.eq(index).addClass('active');
+        bannerDots.eq(index).addClass('active');
+        currentBanner = index;
+    }
+
+    // Auto Slide every 5 seconds
+    let bannerInterval = setInterval(() => {
+        let next = (currentBanner + 1) % totalBanners;
+        showBanner(next);
+    }, 5000);
+
+    // Manual Dot click
+    $('.banner-dot').on('click', function () {
+        clearInterval(bannerInterval);
+        showBanner($(this).data('index'));
+        resetAutoSlide();
+    });
+
+    // Arrow navigation
+    $('#bannerPrev').on('click', function () {
+        clearInterval(bannerInterval);
+        let prev = (currentBanner - 1 + totalBanners) % totalBanners;
+        showBanner(prev);
+        resetAutoSlide();
+    });
+
+    $('#bannerNext').on('click', function () {
+        clearInterval(bannerInterval);
+        let next = (currentBanner + 1) % totalBanners;
+        showBanner(next);
+        resetAutoSlide();
+    });
+
+    function resetAutoSlide() {
+        clearInterval(bannerInterval);
+        bannerInterval = setInterval(() => {
+            let next = (currentBanner + 1) % totalBanners;
+            showBanner(next);
+        }, 5000);
+    }
 </script>

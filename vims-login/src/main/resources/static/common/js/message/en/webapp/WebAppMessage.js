@@ -255,6 +255,14 @@ Message.Label.Array["TOLL.SUMMARY.TOTAL_UNPAID"] = "Total Unpaid";
 Message.Label.Array["TOLL.SUMMARY.UNPAID_COUNT"] = "Unpaid Count";
 Message.Label.Array["TOLL.MSG.NO_DATA"] = "No toll fee history found.";
 
+// Main Banners
+Message.Label.Array["MAIN.BANNER1.TITLE"] = "From Registration to Inspection";
+Message.Label.Array["MAIN.BANNER1.DESC"] = "Solve everything easily at once with MVIMS.";
+Message.Label.Array["MAIN.BANNER2.TITLE"] = "Unpaid Toll Inquiry";
+Message.Label.Array["MAIN.BANNER2.DESC"] = "Check and pay forgotten unpaid tolls right now.";
+Message.Label.Array["MAIN.BANNER3.TITLE"] = "Unified Fine & Tax Inquiry";
+Message.Label.Array["MAIN.BANNER3.DESC"] = "Integrated search for all payments related to your vehicle.";
+
 // Fine inquiry Page
 Message.Label.Array["FINE.PAGE_TITLE"] = "Unpaid Fine Inquiry";
 Message.Label.Array["FINE.PAGE_SUBTITLE"] = "You can check and pay for unpaid fines such as traffic violations.";

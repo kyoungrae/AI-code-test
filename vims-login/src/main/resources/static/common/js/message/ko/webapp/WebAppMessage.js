@@ -255,6 +255,14 @@ Message.Label.Array["TOLL.SUMMARY.TOTAL_UNPAID"] = "총 미납 금액";
 Message.Label.Array["TOLL.SUMMARY.UNPAID_COUNT"] = "미납 건수";
 Message.Label.Array["TOLL.MSG.NO_DATA"] = "조회된 통행료 내역이 없습니다.";
 
+// Main Banners
+Message.Label.Array["MAIN.BANNER1.TITLE"] = "자동차 등록부터 정기 검사까지";
+Message.Label.Array["MAIN.BANNER1.DESC"] = "MVIMS으로 한 번에 편리하게 해결하세요.";
+Message.Label.Array["MAIN.BANNER2.TITLE"] = "고속도로 통행료 미납 조회";
+Message.Label.Array["MAIN.BANNER2.DESC"] = "잊고 계셨던 미납 통행료, 지금 바로 확인하고 납부하세요.";
+Message.Label.Array["MAIN.BANNER3.TITLE"] = "벌금 및 세금 통합 조회";
+Message.Label.Array["MAIN.BANNER3.DESC"] = "자동차와 관련된 모든 납부 내역을 통합 조회할 수 있습니다.";
+
 // Fine inquiry Page
 Message.Label.Array["FINE.PAGE_TITLE"] = "벌금 미납 조회";
 Message.Label.Array["FINE.PAGE_SUBTITLE"] = "교통법규 위반 등 미납된 벌금 내역을 확인하고 납부할 수 있습니다.";

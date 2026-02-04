@@ -255,6 +255,14 @@ Message.Label.Array["TOLL.SUMMARY.TOTAL_UNPAID"] = "Нийт төлөгдөөг�
 Message.Label.Array["TOLL.SUMMARY.UNPAID_COUNT"] = "Нийт 건수";
 Message.Label.Array["TOLL.MSG.NO_DATA"] = "Төлбөрийн түүх олдсонгүй.";
 
+// Main Banners
+Message.Label.Array["MAIN.BANNER1.TITLE"] = "Бүртгэлээс эхлээд үзлэг хүртэл";
+Message.Label.Array["MAIN.BANNER1.DESC"] = "MVIMS-ээр нэг дор хялбар шийдээрэй.";
+Message.Label.Array["MAIN.BANNER2.TITLE"] = "Төлбөр шалгах";
+Message.Label.Array["MAIN.BANNER2.DESC"] = "Дутуу төлсөн төлбөрөө яг одоо шалгаж төлөөрэй.";
+Message.Label.Array["MAIN.BANNER3.TITLE"] = "Торгууль, татварын нэгдсэн хайлт";
+Message.Label.Array["MAIN.BANNER3.DESC"] = "Автомашинтай холбоотой бүх төлбөрийг нэг дороос харах боломжтой.";
+
 // Fine inquiry Page
 Message.Label.Array["FINE.PAGE_TITLE"] = "Торгууль шалгах";
 Message.Label.Array["FINE.PAGE_SUBTITLE"] = "Замын хөдөлгөөний дүрэм зөрчсөн болон бусад төлөгдөөгүй торгуулийг шалгах боломжтой.";
