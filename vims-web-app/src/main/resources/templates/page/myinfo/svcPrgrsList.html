@@ -405,7 +405,7 @@
 
     .flow-steps {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
         gap: 12px;
         flex-wrap: wrap;
@@ -415,13 +415,9 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        flex: 1;
-        min-width: 150px;
     }
 
-    .flow-step.final {
-        flex: 2;
-    }
+
 
     .step-icon {
         width: 48px;
@@ -475,6 +471,8 @@
         font-size: 12px;
         color: var(--text-muted);
         margin: 0;
+        white-space: nowrap;
+        word-break: keep-all;
     }
 
     .flow-arrow {
@@ -978,8 +976,8 @@
         });
     }
 
-    function cancelRequest(btn) {
-        if (confirm('[Page.Message].Message.Label.Array["SVCPRGRS.MSG.CONFIRM_CANCEL"]')) {
+    async function cancelRequest(btn) {
+        if (await formUtil.confirm('[Page.Message].Message.Label.Array["SVCPRGRS.MSG.CONFIRM_CANCEL"]')) {
             // TODO: Call cancel API
             $(btn).closest('.progress-item').fadeOut(300, function () {
                 $(this).remove();
@@ -993,8 +991,8 @@
         formUtil.toast('Edit page will be opened', 'info');
     }
 
-    function submitRequest(btn) {
-        if (confirm('[Page.Message].Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"]')) {
+    async function submitRequest(btn) {
+        if (await formUtil.confirm('[Page.Message].Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"]')) {
             // TODO: Call submit API
             const $item = $(btn).closest('.progress-item');
             $item.attr('data-status', 'submitted');
@@ -1003,6 +1001,7 @@
             $item.find('.action-btn.edit, .action-btn.submit').remove();
             $item.find('.item-right').append('<button type="button" class="action-btn cancel" onclick="cancelRequest(this)">[Page.Message].Message.Label.Array["SVCPRGRS.BTN.CANCEL"]</button>');
             updateCounts();
+            formUtil.toast('[Page.Message].Message.Label.Array["MYINFO.MSG.SAVE_SUCCESS"]', 'success');
         }
     }
 

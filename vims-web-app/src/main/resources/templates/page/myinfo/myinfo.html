@@ -623,9 +623,9 @@
         formUtil.toast('Address search will be implemented', 'info');
     }
 
-    function cancelEdit() {
+    async function cancelEdit() {
         // Reload or go back
-        if (confirm('[Page.Message].Message.Label.Array["MYINFO.MSG.CONFIRM_CANCEL"]')) {
+        if (await formUtil.confirm('[Page.Message].Message.Label.Array["MYINFO.MSG.CONFIRM_CANCEL"]')) {
             location.reload();
         }
     }
