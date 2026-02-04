@@ -421,8 +421,8 @@
             // prefixUrl: "/web", reqUrl: "/index/index", data: {}
             formUtil.apiLoadContent("/web", "/index/index", {});
 
-            // [FIX] Body animation cleanup
-            // prevent body from becoming a containing block for fixed elements due to active animation
+            // [수정] Body 애니메이션 초기화
+            // 애니메이션 속성으로 인해 position:fixed가 뷰포트가 아닌 body 기준으로 잡히는 문제 해결
             setTimeout(function () {
                 $("body").css({ "animation": "none", "opacity": "1" });
             }, 600);

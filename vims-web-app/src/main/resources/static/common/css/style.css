@@ -841,11 +841,11 @@ a {
     transform: translateX(200%);
 }
 
-/* Toast Container Positioning Override for WebApp */
+/* 웹앱용 토스트 컨테이너 위치 강제 설정 */
 #gi-toast-container {
     position: fixed !important;
     bottom: 30px !important;
     right: 24px !important;
-    /* Adjusted for better visibility */
+    /* 시인성을 위해 우측 여백 조정 */
     z-index: 11000 !important;
 }
