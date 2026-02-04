@@ -201,3 +201,7 @@ Message.Label.Array["SVCPRGRS.BTN.VIEW_REASON"] = "Шалтгаан";
 Message.Label.Array["SVCPRGRS.MSG.NO_ITEMS"] = "Хүсэлт байхгүй байна.";
 Message.Label.Array["SVCPRGRS.MSG.CONFIRM_CANCEL"] = "Хүсэлтийг цуцлах уу?";
 Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "Илгээх үү? Илгээсний дараа зөвхөн цуцлах боломжтой.";
+
+Message.Label.Array["SVCPRGRS.LABEL.APP_NO"] = "Өргөдлийн дугаар";
+Message.Label.Array["SVCPRGRS.ITEM.STRUCTURE_CHANGE"] = "Бүтцийн өөрчлөлт";
+Message.Label.Array["SVCPRGRS.ITEM.CERT_ISSUE"] = "Лавлагаа олгох";

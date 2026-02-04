@@ -840,3 +840,12 @@ a {
 .gi-language-slider.position-2 {
     transform: translateX(200%);
 }
+
+/* Toast Container Positioning Override for WebApp */
+#gi-toast-container {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 24px !important;
+    /* Adjusted for better visibility */
+    z-index: 11000 !important;
+}

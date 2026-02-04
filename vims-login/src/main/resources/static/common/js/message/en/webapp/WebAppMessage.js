@@ -201,3 +201,7 @@ Message.Label.Array["SVCPRGRS.BTN.VIEW_REASON"] = "Reason";
 Message.Label.Array["SVCPRGRS.MSG.NO_ITEMS"] = "No applications found.";
 Message.Label.Array["SVCPRGRS.MSG.CONFIRM_CANCEL"] = "Are you sure to cancel this application?";
 Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "Submit this application? You can only cancel after submission.";
+
+Message.Label.Array["SVCPRGRS.LABEL.APP_NO"] = "Application No.";
+Message.Label.Array["SVCPRGRS.ITEM.STRUCTURE_CHANGE"] = "Structure Change";
+Message.Label.Array["SVCPRGRS.ITEM.CERT_ISSUE"] = "Certificate Issuance";

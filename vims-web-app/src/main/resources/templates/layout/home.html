@@ -8,6 +8,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="/web/static/common/css/style.css">
+    <link rel="stylesheet" href="/common/css/common/Popup.css">
     <!-- JS -->
     <script src="/web/static/assets/excel/xlsx.full.min.js"></script>
     <script type="text/javascript" src="/common/js/jquery/jquery3.6.0.js"></script>
@@ -419,6 +420,12 @@
             // [수정] 표준 apiLoadContent 함수 사용 (Management 시스템과 동일)
             // prefixUrl: "/web", reqUrl: "/index/index", data: {}
             formUtil.apiLoadContent("/web", "/index/index", {});
+
+            // [FIX] Body animation cleanup
+            // prevent body from becoming a containing block for fixed elements due to active animation
+            setTimeout(function () {
+                $("body").css({ "animation": "none", "opacity": "1" });
+            }, 600);
 
             initLanguageSelector();
         });

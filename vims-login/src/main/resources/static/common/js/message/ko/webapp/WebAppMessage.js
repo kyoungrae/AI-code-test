@@ -201,3 +201,7 @@ Message.Label.Array["SVCPRGRS.BTN.VIEW_REASON"] = "사유확인";
 Message.Label.Array["SVCPRGRS.MSG.NO_ITEMS"] = "신청 내역이 없습니다.";
 Message.Label.Array["SVCPRGRS.MSG.CONFIRM_CANCEL"] = "신청을 취소하시겠습니까?";
 Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "접수하시겠습니까? 접수 후에는 취소만 가능합니다.";
+
+Message.Label.Array["SVCPRGRS.LABEL.APP_NO"] = "신청번호";
+Message.Label.Array["SVCPRGRS.ITEM.STRUCTURE_CHANGE"] = "구조변경 신청";
+Message.Label.Array["SVCPRGRS.ITEM.CERT_ISSUE"] = "등록원부 발급";
