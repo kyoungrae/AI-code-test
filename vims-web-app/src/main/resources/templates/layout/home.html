@@ -42,7 +42,31 @@
     <script type="text/javascript" src="/common/js/messageConfig.js"></script>
 </head>
 
-<body>
+<body style="opacity: 0; animation: fadeIn 0.4s ease-out forwards;">
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .gi-home-setting-article::after {
+            content: "";
+            position: absolute;
+            top: -196px;
+            border-top: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-right: 8px solid #ffffff;
+            border-bottom: 8px solid transparent;
+            filter: drop-shadow(-2px 0 2px rgba(0, 0, 0, 0.05));
+            transform: rotate(90deg);
+            right: -143px;
+        }
+    </style>
 
     <header class="header">
         <div class="container">
@@ -263,10 +287,12 @@
                             <div>
                                 <span class="mega-title">[Page.Message].Message.Label.Array["NAV.MY_INFO_MGMT"]</span>
                                 <ul class="mega-list">
-                                    <li><a href="#"
+                                    <li><a href="javascript:void(0);"
+                                            onclick="formUtil.apiLoadContent('/web', '/myinfo/myinfo', {});"
                                             class="mega-link">[Page.Message].Message.Label.Array["NAV.EDIT_PRIV_INFO"]</a>
                                     </li>
-                                    <li><a href="#"
+                                    <li><a href="javascript:void(0);"
+                                            onclick="formUtil.apiLoadContent('/web', '/myinfo/svcPrgrsList', {});"
                                             class="mega-link">[Page.Message].Message.Label.Array["NAV.CHECK_PROGRESS"]</a>
                                     </li>
                                 </ul>
@@ -318,7 +344,7 @@
                 <div class="gi-language-trigger" id="languageTrigger">
                     <i class="fa-solid fa-globe"></i>
                     <span class="gi-current-lang" id="currentLangCode">KO</span>
-                    <article class="gi-home-setting-article lang-panel-closed" style="right: 0; left: auto;">
+                    <article class="gi-home-setting-article lang-panel-closed" style="right: 0; left: auto; top:50px;">
                         <div class="gi-language-selector">
                             <div class="gi-language-label">
                                 <i class="fa-solid fa-earth-asia"></i>
@@ -394,11 +420,6 @@
             // prefixUrl: "/web", reqUrl: "/index/index", data: {}
             formUtil.apiLoadContent("/web", "/index/index", {});
 
-            // Tab switching logic for the hero card (if applicable)
-            $(document).on('click', '.tab-link', function () {
-                $('.tab-link').removeClass('active');
-                $(this).addClass('active');
-            });
             initLanguageSelector();
         });
 
@@ -418,11 +439,30 @@
 
             $options.on("click", function () {
                 const lang = $(this).data("lang");
+                const currentLang = localStorage.getItem("selectedLanguage") || "ko";
+
+                // 같은 언어면 무시
+                if (lang === currentLang) return;
+
                 setActiveLanguage(lang);
                 localStorage.setItem("selectedLanguage", lang);
                 // Set cookie for server-side
                 document.cookie = "lang=" + lang + "; path=/";
-                setTimeout(() => location.reload(), 300);
+
+                // 언어 패널 닫기
+                $(".gi-home-setting-article").addClass("lang-panel-closed");
+
+                // 전체 페이지 부드러운 페이드 아웃 → 새로고침
+                $("body").css({
+                    "opacity": "0",
+                    "transition": "opacity 0.3s ease-out",
+                    "pointer-events": "none"
+                });
+
+                // 페이드 아웃 완료 후 새로고침
+                setTimeout(function () {
+                    location.reload();
+                }, 100);
             });
 
             $("#languageTrigger").on("click", function (e) {

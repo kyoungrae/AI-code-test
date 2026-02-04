@@ -108,3 +108,96 @@ Message.Label.Array["MAIN.SVC.INSPECT.TITLE"] = "Автомашины үзлэг
 Message.Label.Array["MAIN.SVC.INSPECT.DESC"] = "Техникийн хяналт, үзлэг болон бусад үйлчилгээг авах боломжтой.";
 Message.Label.Array["MAIN.SVC.INFO.TITLE"] = "Мэдээлэл хайх";
 Message.Label.Array["MAIN.SVC.INFO.DESC"] = "Тээврийн хэрэгслийн мэдээлэл, үзлэгийн дүн, татвар торгуулийг шалгах боломжтой.";
+
+// My Info Page
+Message.Label.Array["MYINFO.PAGE_TITLE"] = "Хувийн мэдээлэл засах";
+Message.Label.Array["MYINFO.PAGE_SUBTITLE"] = "Хувийн мэдээлэл болон бүртгэлтэй автомашинаа шалгаж, засах боломжтой.";
+
+Message.Label.Array["MYINFO.SECTION.PERSONAL"] = "Хувийн мэдээлэл";
+Message.Label.Array["MYINFO.SECTION.VEHICLE"] = "Миний автомашин";
+
+Message.Label.Array["MYINFO.LABEL.NAME"] = "Нэр";
+Message.Label.Array["MYINFO.LABEL.GENDER"] = "Хүйс";
+Message.Label.Array["MYINFO.LABEL.PHONE"] = "Утасны дугаар";
+Message.Label.Array["MYINFO.LABEL.ADDRESS"] = "Хаяг";
+Message.Label.Array["MYINFO.LABEL.LAST_INSPECT"] = "Сүүлийн үзлэг";
+Message.Label.Array["MYINFO.LABEL.NEXT_INSPECT"] = "Дараагийн үзлэг";
+
+Message.Label.Array["MYINFO.GENDER.MALE"] = "Эрэгтэй";
+Message.Label.Array["MYINFO.GENDER.FEMALE"] = "Эмэгтэй";
+
+Message.Label.Array["MYINFO.PLACEHOLDER.POSTCODE"] = "Зип код";
+Message.Label.Array["MYINFO.PLACEHOLDER.ADDRESS"] = "Хаяг";
+Message.Label.Array["MYINFO.PLACEHOLDER.ADDRESS_DETAIL"] = "Дэлгэрэнгүй хаяг оруулна уу";
+
+Message.Label.Array["MYINFO.BTN.SEARCH"] = "Хайх";
+Message.Label.Array["MYINFO.BTN.SAVE"] = "Хадгалах";
+Message.Label.Array["MYINFO.BTN.CANCEL"] = "Цуцлах";
+
+Message.Label.Array["MYINFO.STATUS.VALID"] = "Хүчинтэй";
+Message.Label.Array["MYINFO.STATUS.UPCOMING"] = "Удахгүй";
+Message.Label.Array["MYINFO.STATUS.EXPIRED"] = "Хугацаа дууссан";
+
+Message.Label.Array["MYINFO.MSG.NO_VEHICLE"] = "Бүртгэлтэй автомашин байхгүй байна.";
+Message.Label.Array["MYINFO.MSG.CONFIRM_CANCEL"] = "Өөрчлөлтийг цуцлах уу?";
+Message.Label.Array["MYINFO.MSG.SAVE_SUCCESS"] = "Амжилттай хадгалагдлаа.";
+
+// Service Progress List Page
+Message.Label.Array["SVCPRGRS.PAGE_TITLE"] = "Явц шалгах";
+Message.Label.Array["SVCPRGRS.PAGE_SUBTITLE"] = "Илгээсэн хүсэлтийнхээ явцыг шалгах боломжтой.";
+
+Message.Label.Array["SVCPRGRS.FLOW.GUIDE_TITLE"] = "Хүсэлт шийдвэрлэх үйл явц";
+Message.Label.Array["SVCPRGRS.FLOW.DRAFT_DESC"] = "Ноорог, засах/устгах боломжтой";
+Message.Label.Array["SVCPRGRS.FLOW.SUBMITTED_DESC"] = "Илгээсэн, цуцлах боломжтой";
+Message.Label.Array["SVCPRGRS.FLOW.REVIEW_DESC"] = "Админ шалгаж байна";
+Message.Label.Array["SVCPRGRS.FLOW.APPROVED_DESC"] = "Зөвшөөрөгдсөн";
+Message.Label.Array["SVCPRGRS.FLOW.REJECTED_DESC"] = "Татгалзсан, шалтгаан харах";
+
+Message.Label.Array["SVCPRGRS.STATUS.DRAFT"] = "Ноорог";
+Message.Label.Array["SVCPRGRS.STATUS.SUBMITTED"] = "Илгээсэн";
+Message.Label.Array["SVCPRGRS.STATUS.REVIEW"] = "Шалгаж байна";
+Message.Label.Array["SVCPRGRS.STATUS.APPROVED"] = "Зөвшөөрсөн";
+Message.Label.Array["SVCPRGRS.STATUS.REJECTED"] = "Татгалзсан";
+
+Message.Label.Array["SVCPRGRS.FILTER.ALL"] = "Бүгд";
+Message.Label.Array["SVCPRGRS.SEARCH_PLACEHOLDER"] = "Дугаар, хүсэлтийн ID хайх";
+
+Message.Label.Array["SVCPRGRS.CAT.CAR_REG"] = "Автомашины бүртгэл";
+Message.Label.Array["SVCPRGRS.CAT.CAR_INSPECT"] = "Техникийн хяналт";
+Message.Label.Array["SVCPRGRS.CAT.CAR_INFO_REG"] = "Автомашины мэдээлэл бүртгэл";
+
+Message.Label.Array["SVCPRGRS.SUB.REG_APPLY"] = "Бүртгэлийн хүсэлт";
+Message.Label.Array["SVCPRGRS.SUB.SVC_APPLY"] = "Үйлчилгээний хүсэлт";
+Message.Label.Array["SVCPRGRS.SUB.CAR"] = "Автомашин";
+Message.Label.Array["SVCPRGRS.SUB.INSPECT_RESERVE"] = "Үзлэг захиалга";
+Message.Label.Array["SVCPRGRS.SUB.TUNING_APPLY"] = "Тюнинг зөвшөөрөл";
+Message.Label.Array["SVCPRGRS.SUB.CHASSIS_APPLY"] = "Арлын дугаар дарах";
+Message.Label.Array["SVCPRGRS.SUB.IMPORT_REG"] = "Импортын машин бүртгэх";
+
+Message.Label.Array["SVCPRGRS.ITEM.NEW_REG"] = "Шинэ бүртгэл";
+Message.Label.Array["SVCPRGRS.ITEM.TRANSFER_REG"] = "Шилжүүлэг";
+Message.Label.Array["SVCPRGRS.ITEM.CANCEL_REG"] = "Хасалт";
+Message.Label.Array["SVCPRGRS.ITEM.CHANGE_NUM"] = "Дугаар солих";
+Message.Label.Array["SVCPRGRS.ITEM.REISSUE_PLATE"] = "Дугаар дахин авах";
+Message.Label.Array["SVCPRGRS.ITEM.REISSUE_CERT"] = "Гэрчилгээ дахин";
+Message.Label.Array["SVCPRGRS.ITEM.REPLACE_CERT"] = "Гэрчилгээ солих";
+Message.Label.Array["SVCPRGRS.ITEM.KEEP_NUM"] = "Дугаар хадгалах";
+Message.Label.Array["SVCPRGRS.ITEM.SELECT_NUM"] = "Дугаар сонгох";
+Message.Label.Array["SVCPRGRS.ITEM.RESERVE_NUM"] = "Дугаар захиалах";
+Message.Label.Array["SVCPRGRS.ITEM.NEW_INSPECT"] = "Шинэ үзлэг";
+Message.Label.Array["SVCPRGRS.ITEM.REGULAR_INSPECT"] = "Тогтмол";
+Message.Label.Array["SVCPRGRS.ITEM.OTHER_INSPECT"] = "Бусад";
+Message.Label.Array["SVCPRGRS.ITEM.TUNING"] = "Тюнинг";
+Message.Label.Array["SVCPRGRS.ITEM.NEW_CHASSIS"] = "Шинэ дарах";
+Message.Label.Array["SVCPRGRS.ITEM.RE_CHASSIS"] = "Дахин дарах";
+Message.Label.Array["SVCPRGRS.ITEM.IMPORT_REG"] = "Импорт";
+
+Message.Label.Array["SVCPRGRS.BTN.CANCEL"] = "Цуцлах";
+Message.Label.Array["SVCPRGRS.BTN.EDIT"] = "Засах";
+Message.Label.Array["SVCPRGRS.BTN.SUBMIT"] = "Илгээх";
+Message.Label.Array["SVCPRGRS.BTN.VIEW"] = "Харах";
+Message.Label.Array["SVCPRGRS.BTN.VIEW_REASON"] = "Шалтгаан";
+
+Message.Label.Array["SVCPRGRS.MSG.NO_ITEMS"] = "Хүсэлт байхгүй байна.";
+Message.Label.Array["SVCPRGRS.MSG.CONFIRM_CANCEL"] = "Хүсэлтийг цуцлах уу?";
+Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "Илгээх үү? Илгээсний дараа зөвхөн цуцлах боломжтой.";

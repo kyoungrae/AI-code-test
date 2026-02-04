@@ -108,3 +108,96 @@ Message.Label.Array["MAIN.SVC.INSPECT.TITLE"] = "Vehicle Inspection";
 Message.Label.Array["MAIN.SVC.INSPECT.DESC"] = "We provide services for regular and other inspection reservations and tuning approval applications.";
 Message.Label.Array["MAIN.SVC.INFO.TITLE"] = "Info Search";
 Message.Label.Array["MAIN.SVC.INFO.DESC"] = "You can integrate and view vehicle registration info, inspection results, and various unpaid fees.";
+
+// My Info Page
+Message.Label.Array["MYINFO.PAGE_TITLE"] = "Edit Personal Info";
+Message.Label.Array["MYINFO.PAGE_SUBTITLE"] = "You can view and edit your personal information and registered vehicles.";
+
+Message.Label.Array["MYINFO.SECTION.PERSONAL"] = "Personal Info";
+Message.Label.Array["MYINFO.SECTION.VEHICLE"] = "My Vehicles";
+
+Message.Label.Array["MYINFO.LABEL.NAME"] = "Name";
+Message.Label.Array["MYINFO.LABEL.GENDER"] = "Gender";
+Message.Label.Array["MYINFO.LABEL.PHONE"] = "Phone Number";
+Message.Label.Array["MYINFO.LABEL.ADDRESS"] = "Address";
+Message.Label.Array["MYINFO.LABEL.LAST_INSPECT"] = "Last Inspection";
+Message.Label.Array["MYINFO.LABEL.NEXT_INSPECT"] = "Next Inspection Due";
+
+Message.Label.Array["MYINFO.GENDER.MALE"] = "Male";
+Message.Label.Array["MYINFO.GENDER.FEMALE"] = "Female";
+
+Message.Label.Array["MYINFO.PLACEHOLDER.POSTCODE"] = "Postal Code";
+Message.Label.Array["MYINFO.PLACEHOLDER.ADDRESS"] = "Address";
+Message.Label.Array["MYINFO.PLACEHOLDER.ADDRESS_DETAIL"] = "Enter detailed address";
+
+Message.Label.Array["MYINFO.BTN.SEARCH"] = "Search";
+Message.Label.Array["MYINFO.BTN.SAVE"] = "Save";
+Message.Label.Array["MYINFO.BTN.CANCEL"] = "Cancel";
+
+Message.Label.Array["MYINFO.STATUS.VALID"] = "Valid";
+Message.Label.Array["MYINFO.STATUS.UPCOMING"] = "Upcoming";
+Message.Label.Array["MYINFO.STATUS.EXPIRED"] = "Expired";
+
+Message.Label.Array["MYINFO.MSG.NO_VEHICLE"] = "No registered vehicles.";
+Message.Label.Array["MYINFO.MSG.CONFIRM_CANCEL"] = "Are you sure to cancel changes?";
+Message.Label.Array["MYINFO.MSG.SAVE_SUCCESS"] = "Saved successfully.";
+
+// Service Progress List Page
+Message.Label.Array["SVCPRGRS.PAGE_TITLE"] = "Check Progress";
+Message.Label.Array["SVCPRGRS.PAGE_SUBTITLE"] = "Check the progress of your submitted applications.";
+
+Message.Label.Array["SVCPRGRS.FLOW.GUIDE_TITLE"] = "Application Process Guide";
+Message.Label.Array["SVCPRGRS.FLOW.DRAFT_DESC"] = "Draft status, can edit/delete";
+Message.Label.Array["SVCPRGRS.FLOW.SUBMITTED_DESC"] = "Submitted, can cancel";
+Message.Label.Array["SVCPRGRS.FLOW.REVIEW_DESC"] = "Under admin review";
+Message.Label.Array["SVCPRGRS.FLOW.APPROVED_DESC"] = "Approved";
+Message.Label.Array["SVCPRGRS.FLOW.REJECTED_DESC"] = "Rejected, can view reason";
+
+Message.Label.Array["SVCPRGRS.STATUS.DRAFT"] = "Draft";
+Message.Label.Array["SVCPRGRS.STATUS.SUBMITTED"] = "Submitted";
+Message.Label.Array["SVCPRGRS.STATUS.REVIEW"] = "Review";
+Message.Label.Array["SVCPRGRS.STATUS.APPROVED"] = "Approved";
+Message.Label.Array["SVCPRGRS.STATUS.REJECTED"] = "Rejected";
+
+Message.Label.Array["SVCPRGRS.FILTER.ALL"] = "All";
+Message.Label.Array["SVCPRGRS.SEARCH_PLACEHOLDER"] = "Search vehicle number, application ID";
+
+Message.Label.Array["SVCPRGRS.CAT.CAR_REG"] = "Vehicle Registration";
+Message.Label.Array["SVCPRGRS.CAT.CAR_INSPECT"] = "Vehicle Inspection";
+Message.Label.Array["SVCPRGRS.CAT.CAR_INFO_REG"] = "Vehicle Info Registration";
+
+Message.Label.Array["SVCPRGRS.SUB.REG_APPLY"] = "Registration Application";
+Message.Label.Array["SVCPRGRS.SUB.SVC_APPLY"] = "Service Application";
+Message.Label.Array["SVCPRGRS.SUB.CAR"] = "Vehicle";
+Message.Label.Array["SVCPRGRS.SUB.INSPECT_RESERVE"] = "Inspection Reservation";
+Message.Label.Array["SVCPRGRS.SUB.TUNING_APPLY"] = "Tuning Approval";
+Message.Label.Array["SVCPRGRS.SUB.CHASSIS_APPLY"] = "Chassis Number Marking";
+Message.Label.Array["SVCPRGRS.SUB.IMPORT_REG"] = "Import Vehicle Registration";
+
+Message.Label.Array["SVCPRGRS.ITEM.NEW_REG"] = "New Reg.";
+Message.Label.Array["SVCPRGRS.ITEM.TRANSFER_REG"] = "Transfer";
+Message.Label.Array["SVCPRGRS.ITEM.CANCEL_REG"] = "Cancel Reg.";
+Message.Label.Array["SVCPRGRS.ITEM.CHANGE_NUM"] = "Change No.";
+Message.Label.Array["SVCPRGRS.ITEM.REISSUE_PLATE"] = "Reissue Plate";
+Message.Label.Array["SVCPRGRS.ITEM.REISSUE_CERT"] = "Reissue Cert.";
+Message.Label.Array["SVCPRGRS.ITEM.REPLACE_CERT"] = "Replace Cert.";
+Message.Label.Array["SVCPRGRS.ITEM.KEEP_NUM"] = "Keep No.";
+Message.Label.Array["SVCPRGRS.ITEM.SELECT_NUM"] = "Select No.";
+Message.Label.Array["SVCPRGRS.ITEM.RESERVE_NUM"] = "Reserve No.";
+Message.Label.Array["SVCPRGRS.ITEM.NEW_INSPECT"] = "New Inspect";
+Message.Label.Array["SVCPRGRS.ITEM.REGULAR_INSPECT"] = "Regular";
+Message.Label.Array["SVCPRGRS.ITEM.OTHER_INSPECT"] = "Other";
+Message.Label.Array["SVCPRGRS.ITEM.TUNING"] = "Tuning";
+Message.Label.Array["SVCPRGRS.ITEM.NEW_CHASSIS"] = "New Mark";
+Message.Label.Array["SVCPRGRS.ITEM.RE_CHASSIS"] = "Re-mark";
+Message.Label.Array["SVCPRGRS.ITEM.IMPORT_REG"] = "Import";
+
+Message.Label.Array["SVCPRGRS.BTN.CANCEL"] = "Cancel";
+Message.Label.Array["SVCPRGRS.BTN.EDIT"] = "Edit";
+Message.Label.Array["SVCPRGRS.BTN.SUBMIT"] = "Submit";
+Message.Label.Array["SVCPRGRS.BTN.VIEW"] = "View";
+Message.Label.Array["SVCPRGRS.BTN.VIEW_REASON"] = "Reason";
+
+Message.Label.Array["SVCPRGRS.MSG.NO_ITEMS"] = "No applications found.";
+Message.Label.Array["SVCPRGRS.MSG.CONFIRM_CANCEL"] = "Are you sure to cancel this application?";
+Message.Label.Array["SVCPRGRS.MSG.CONFIRM_SUBMIT"] = "Submit this application? You can only cancel after submission.";

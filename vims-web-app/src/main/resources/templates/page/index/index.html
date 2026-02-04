@@ -157,3 +157,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).on('click', '.tab-link', function () {
+        $('.tab-link').removeClass('active');
+        $(this).addClass('active');
+
+        let tabId = $(this).data("tab");
+        if (tabId === "id") {
+            $("#tab-id").css("display", "block");
+            $("#tab-dan").css("display", "none");
+        } else {
+            $("#tab-id").css("display", "none");
+            $("#tab-dan").css("display", "block");
+        }
+
+    });
+</script>
