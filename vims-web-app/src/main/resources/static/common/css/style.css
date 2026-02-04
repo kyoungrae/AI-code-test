@@ -940,13 +940,55 @@ a {
     --gi-card-shadow-modern: var(--shadow-lg);
 }
 
+#alertPopup,
+#popup,
+.prompt {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 10001 !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    backdrop-filter: blur(4px) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 .alertPopup_content,
 .popup_content {
     background-color: var(--bg-main) !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     padding: 32px !important;
-    min-width: 320px !important;
-    max-width: 400px !important;
+    min-width: 400px !important;
+    max-width: 550px !important;
+    border-radius: var(--border-radius-lg) !important;
+    box-shadow: var(--shadow-xl) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    animation: popupFadeIn 0.3s ease-out !important;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.alertPopup_text span,
+.popup_text span {
+    word-break: keep-all !important;
+    line-height: 1.6 !important;
+    display: block !important;
+    text-align: center !important;
 }
 
 .alertPopup_text,
