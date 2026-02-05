@@ -16,8 +16,7 @@ secret-key: YeyKgN7Oa0dfKJCR0Xr3Sp45WdU8BCv2Zd0X6KxRTfFgfPZ3MH3xccjC3WCt90Az
 expiration-milliseconds: 36000000
 
 spring:
-    profiles:
-        active: podman
+
     jackson:
         property-naming-strategy: LOWER_CAMEL_CASE
         date-format: yyyy-MM-dd HH:mm:ss

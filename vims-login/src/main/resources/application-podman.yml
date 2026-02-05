@@ -11,8 +11,7 @@ gateway:
     url: http://host.containers.internal:9000
 
 spring:
-    profiles:
-        active: podman
+
     jackson:
         property-naming-strategy: LOWER_CAMEL_CASE
         date-format: yyyy-MM-dd HH:mm:ss

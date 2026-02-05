@@ -10,8 +10,7 @@ server:
 spring:
     application:
         name: vims-web-app
-    profiles:
-        active: podman
+
     jackson:
         property-naming-strategy: LOWER_CAMEL_CASE
         date-format: yyyy-MM-dd HH:mm:ss
