@@ -1,0 +1,68 @@
+server:
+    port: 8081
+    servlet:
+        context-path: /
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+
+gateway:
+    url: http://host.containers.internal:8080
+
+spring:
+    profiles:
+        active: podman
+    jackson:
+        property-naming-strategy: LOWER_CAMEL_CASE
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: Asia/Seoul
+    datasource:
+        # MariaDB JDBC URL - Podman 컨테이너 환경
+        url: jdbc:mariadb://host.containers.internal:3306/MVIMS?autoReconnect=true&tcpKeepAlive=true
+        username: mvims
+        password: 1234
+        driver-class-name: org.mariadb.jdbc.Driver
+
+        hikari:
+            maximum-pool-size: 10
+            idle-timeout: 120000         # 2분 (max-lifetime보다 작게 설정)
+            max-lifetime: 180000         # 3분
+            connection-timeout: 30000
+            keepalive-time: 60000        # 1분 (커넥션 유효성 주기적 체크)
+
+    jpa:
+        show-sql: false
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: none
+                format_sql: true
+                use_sql_comments: false
+        database: mysql
+        database-platform: org.hibernate.dialect.MariaDB103Dialect
+    thymeleaf:
+        cache: true
+        check-template-location: true
+        prefix: classpath:/templates/
+        suffix: .html
+    devtools:
+        livereload:
+            enabled: false
+        restart:
+            enabled: false
+    messages:
+        basename : exceptionMessage
+        encoding : UTF-8
+
+mybatis:
+    config-location: classpath:/mybatis-config.xml
+    mapper-locations: classpath*:/mybatis*/**/*.xml
+
+logging:
+    level:
+        root: INFO
+        com.system: INFO
+        org.apache.ibatis: WARN
+        java.sql: WARN
+        org.springframework.jdbc: WARN

@@ -1,0 +1,90 @@
+server:
+    port: 8082
+    servlet:
+        context-path: /
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+
+# Message Gateway 설정 - vims-login의 메시지 파일을 gateway를 통해 로드
+message:
+    gateway:
+        url: http://host.containers.internal:8080
+
+# FMS (File Management System) 서비스 연동 설정
+fms:
+    service:
+        url: http://host.containers.internal:8083  # FMS 서비스 주소 (Podman 환경)
+    internal:
+        api-key: "your-secure-internal-api-key-here"
+
+spring:
+    profiles:
+        active: podman
+    jackson:
+        property-naming-strategy: LOWER_CAMEL_CASE
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: Asia/Seoul
+    datasource:
+        # MariaDB JDBC URL - Podman 컨테이너 환경
+        url: jdbc:mariadb://host.containers.internal:3306/MVIMS?autoReconnect=true&tcpKeepAlive=true
+        username: mvims
+        password: 1234
+        driver-class-name: org.mariadb.jdbc.Driver
+
+        hikari:
+            maximum-pool-size: 10
+            minimum-idle: 5
+            idle-timeout: 600000         # 10분 (유휴 커넥션 폐기 시간)
+            max-lifetime: 1800000        # 30분 (커넥션 최대 유지 시간)
+            connection-timeout: 30000
+            keepalive-time: 30000        # 30초마다 DB에 생존 신호(SELECT 1)를 보냄
+            connection-test-query: SELECT 1
+
+    jpa:
+        show-sql: false
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: none
+                format_sql: true
+                use_sql_comments: false
+        database: mysql
+        database-platform: org.hibernate.dialect.MariaDB103Dialect
+    thymeleaf:
+        cache: true
+        check-template-location: true
+        prefix: classpath:/templates/
+        suffix: .html
+    devtools:
+        livereload:
+            enabled: false
+        restart:
+            enabled: false
+    messages:
+        basename : exceptionMessage
+        encoding : UTF-8
+
+db:
+    partition:
+        maintenance:
+            enabled: true  # DB파티너닝을 management system 에서만 동작 하도록 하기위함
+
+mybatis:
+    config-location: classpath:/mybatis-config.xml
+    mapper-locations: classpath*:/mybatis*/**/*.xml
+
+logging:
+    level:
+        root: INFO
+        com: INFO
+        com.zaxxer.hikari: ERROR
+        org.apache.ibatis: WARN
+        java.sql: WARN
+        org.springframework.jdbc: WARN
+        jdbc.sqlonly: OFF
+        jdbc.sqltiming: OFF
+        jdbc.audit: OFF
+        jdbc.resultset: OFF
+        jdbc.connection: OFF

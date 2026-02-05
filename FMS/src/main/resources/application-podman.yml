@@ -1,0 +1,75 @@
+server:
+    port: 8083
+    servlet:
+        context-path: /
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+
+fms:
+    internal:
+        api-key: "your-secure-internal-api-key-here"  # management와 동일한 키 사용
+
+# Token Secret key
+secret-key: YeyKgN7Oa0dfKJCR0Xr3Sp45WdU8BCv2Zd0X6KxRTfFgfPZ3MH3xccjC3WCt90Az
+expiration-milliseconds: 36000000
+
+spring:
+    profiles:
+        active: podman
+    jackson:
+        property-naming-strategy: LOWER_CAMEL_CASE
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: Asia/Seoul
+    datasource:
+        # MariaDB JDBC URL - Podman 컨테이너 환경
+        url: jdbc:mariadb://host.containers.internal:3306/MVIMS
+        username: mvims
+        password: 1234
+        driver-class-name: org.mariadb.jdbc.Driver
+
+        hikari:
+            maximum-pool-size: 10
+            minimum-idle: 5
+            idle-timeout: 600000
+            max-lifetime: 1800000
+            connection-timeout: 30000
+            keepalive-time: 300000
+
+    jpa:
+        show-sql: false
+        properties:
+            hibernate:
+                hbm2ddl:
+                    auto: none
+                format_sql: true
+                use_sql_comments: false
+        database: mysql
+        database-platform: org.hibernate.dialect.MariaDB103Dialect
+    thymeleaf:
+        cache: true
+        check-template-location: true
+        prefix: classpath:/templates/
+        suffix: .html
+    devtools:
+        livereload:
+            enabled: false
+        restart:
+            enabled: false
+    servlet:
+        multipart:
+            max-file-size: 200MB
+            max-request-size: 200MB
+
+mybatis:
+    config-location: classpath:/mybatis-config.xml
+    mapper-locations: classpath*:/mybatis*/**/*.xml
+
+logging:
+    level:
+        root: INFO
+        com: INFO
+        org.apache.ibatis: WARN
+        java.sql: WARN
+        org.springframework.jdbc: WARN
