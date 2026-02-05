@@ -12,25 +12,25 @@ spring:
       default-filters :
         - AuthorizationHeader
       routes:
-        # 1. 로그인 서비스 (포트 8081)
+        # 1. 로그인 서비스 (호스트 매핑 포트 9081)
         - id: vims-login-route-group
-          uri: http://host.containers.internal:8081
+          uri: http://host.containers.internal:9081
           predicates:
             - Path=/common/**, /assets/**, /, /login/**, /api/v1/auth/**
           filters:
             - AddRequestHeader=X-Source, Gateway
 
-        # 2. 파일관리시스템(FMS) 서비스 (포트 8083으로 추정, 기존 코드 8082 확인 필요)
+        # 2. 파일관리시스템(FMS) 서비스 (호스트 매핑 포트 9083)
         - id: vims-fms-api-route
-          uri: http://host.containers.internal:8083
+          uri: http://host.containers.internal:9083
           predicates:
             - Path=/fms/**
           filters:
             - AddRequestHeader=X-Source, Gateway
 
-        # 3. 시스템관리(Management) 서비스 (포트 8082) - CMS 관련
+        # 3. 시스템관리(Management) 서비스 (호스트 매핑 포트 9082) - CMS 관련
         - id: vims-management-route
-          uri: http://host.containers.internal:8082
+          uri: http://host.containers.internal:9082
           predicates:
             - Path=/cms/**
           filters:
@@ -38,11 +38,11 @@ spring:
             - name: RewriteLocationResponseHeader
               args:
                 name: Location
-                rewrite-uri: http://210.92.92.18:2000/ # 외부 접속 주소로 리다이렉트 유도
+                rewrite-uri: http://210.168.92.92:2000/
 
-        # 4. 대국민 웹 서비스 (포트 8084)
+        # 4. 대국민 웹 서비스 (호스트 매핑 포트 9084)
         - id: vims-web-app-route
-          uri: http://host.containers.internal:8084
+          uri: http://host.containers.internal:9084
           predicates:
             - Path=/web/**
           filters:

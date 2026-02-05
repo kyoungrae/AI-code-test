@@ -10,12 +10,12 @@ server:
 # Message Gateway 설정 - vims-login의 메시지 파일을 gateway를 통해 로드
 message:
     gateway:
-        url: http://host.containers.internal:8080
+        url: http://host.containers.internal:9000
 
 # FMS (File Management System) 서비스 연동 설정
 fms:
     service:
-        url: http://host.containers.internal:8083  # FMS 서비스 주소 (Podman 환경)
+        url: http://host.containers.internal:9083  # FMS 서비스 주소 (호스트 매핑 포트)
     internal:
         api-key: "your-secure-internal-api-key-here"
 

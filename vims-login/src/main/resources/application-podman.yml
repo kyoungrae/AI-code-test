@@ -8,7 +8,7 @@ server:
             force: true
 
 gateway:
-    url: http://host.containers.internal:8080
+    url: http://host.containers.internal:9000
 
 spring:
     profiles:
