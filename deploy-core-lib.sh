@@ -144,6 +144,7 @@ build_project_dual() {
         echo "   → application-podman.yml을 기본 설정으로 적용"
         
         # application-podman.yml을 application.yml로 복사
+        rm -f "$RESOURCES_DIR/application.yml"
         cp "$RESOURCES_DIR/application-podman.yml" "$RESOURCES_DIR/application.yml"
         
         # 빌드

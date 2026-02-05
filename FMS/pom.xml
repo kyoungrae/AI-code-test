@@ -176,62 +176,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-prod-resources</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/resources</directory>
-									<includes>
-										<include>application.prod.properties</include>
-										<include>application.prod.yml</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
-					<execution>
-						<phase>process-resources</phase>
-						<configuration>
-							<target>
-								<delete file="${project.build.directory}/classes/application.properties"/>
-								<delete file="${project.build.directory}/classes/application.yml"/>
-
-								<copy file="${project.build.directory}/application.prod.properties"
-									  tofile="${project.build.directory}/classes/application.properties"/>
-
-								<copy file="${project.build.directory}/application.prod.yml"
-									  tofile="${project.build.directory}/classes/application.yml"/>
-
-								<delete file="${project.build.directory}/application.prod.properties"/>
-								<delete file="${project.build.directory}/application.prod.yml"/>
-								<delete file="${project.build.directory}/classes/application.prod.properties"/>
-								<delete file="${project.build.directory}/classes/application.prod.yml"/>
-
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 </project>
